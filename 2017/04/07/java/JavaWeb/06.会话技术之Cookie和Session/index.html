@@ -6,17 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
-  <title>Archives: 2016 | 且听风吟的博客</title>
+  <title>会话技术之 Cookie 和 Session | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="会点皮毛技术,立志于往深处扎根。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="且听风吟的博客">
-<meta property="og:url" content="https://marklogzhu.github.io/archives/2016/index.html">
+  <meta name="description" content="一、会话会话是什么？会话可简单理解为：用户开一个浏览器，点击多个超链接，访问服务器多个web资源，然后关闭浏览器，整个过程称之为一个会话。
+有状态会话：一个同学来过教室，下次再来教室，我们会知道这个同学曾经来过，这称之为有状态会话。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="会话技术之 Cookie 和 Session">
+<meta property="og:url" content="https://marklogzhu.github.io/2017/04/07/java/JavaWeb/06.会话技术之Cookie和Session/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="会点皮毛技术,立志于往深处扎根。">
+<meta property="og:description" content="一、会话会话是什么？会话可简单理解为：用户开一个浏览器，点击多个超链接，访问服务器多个web资源，然后关闭浏览器，整个过程称之为一个会话。
+有状态会话：一个同学来过教室，下次再来教室，我们会知道这个同学曾经来过，这称之为有状态会话。">
+<meta property="og:image" content="http://oajxivjud.bkt.clouddn.com/CookieDemo01.png">
+<meta property="og:image" content="http://oajxivjud.bkt.clouddn.com/CookieDemo02.png">
+<meta property="og:image" content="http://oajxivjud.bkt.clouddn.com/SessionDemo01.png">
+<meta property="og:image" content="http://oajxivjud.bkt.clouddn.com/SessionDemo02.png">
+<meta property="og:updated_time" content="2017-05-24T11:40:29.831Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="且听风吟的博客">
-<meta name="twitter:description" content="会点皮毛技术,立志于往深处扎根。">
+<meta name="twitter:title" content="会话技术之 Cookie 和 Session">
+<meta name="twitter:description" content="一、会话会话是什么？会话可简单理解为：用户开一个浏览器，点击多个超链接，访问服务器多个web资源，然后关闭浏览器，整个过程称之为一个会话。
+有状态会话：一个同学来过教室，下次再来教室，我们会知道这个同学曾经来过，这称之为有状态会话。">
+<meta name="twitter:image" content="http://oajxivjud.bkt.clouddn.com/CookieDemo01.png">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -148,60 +157,299 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-java/JavaWeb/06.会话技术之Cookie和Session" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/29/net/条码生成与打印/" class="archive-article-date">
-  	<time datetime="2016-08-29T12:11:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/29/net/条码生成与打印/">条码的生成与打印输出</a>
+    <h1 class="article-title" itemprop="name">
+      会话技术之 Cookie 和 Session
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/04/07/java/JavaWeb/06.会话技术之Cookie和Session/" class="archive-article-date">
+  	<time datetime="2017-04-07T13:34:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、会话"><a href="#一、会话" class="headerlink" title="一、会话"></a>一、会话</h2><h4 id="会话是什么？"><a href="#会话是什么？" class="headerlink" title="会话是什么？"></a>会话是什么？</h4><p>会话可简单理解为：用户开一个浏览器，点击多个超链接，访问服务器多个web资源，然后关闭浏览器，整个过程称之为一个会话。</p>
+<p>有状态会话：一个同学来过教室，下次再来教室，我们会知道这个同学曾经来过，这称之为有状态会话。</p>
+<a id="more"></a>
+<h4 id="会话用来干什么？"><a href="#会话用来干什么？" class="headerlink" title="会话用来干什么？"></a>会话用来干什么？</h4><p>保存浏览器与服务器通信时产生的数据</p>
+<h4 id="有哪些会话技术？"><a href="#有哪些会话技术？" class="headerlink" title="有哪些会话技术？"></a>有哪些会话技术？</h4><ul>
+<li><p>Cookie</p>
+<pre><code>Cookie 是客户端技术，程序把每个用户的数据以 cookie 的形式写给用户各自的浏览器。当用户使用浏览器再去访问服务器中的web资源时，就会带着各自的数据去。这样，web资源处理的就是用户各自的数据了。
+</code></pre></li>
+<li><p>Session</p>
+<pre><code>Session 是服务器端技术，利用这个技术，服务器在运行时可以为每一个用户的浏览器创建一个其独享的 session 对象，由于 session 为用户浏览器独享，所以用户在访问服务器的web资源时，可以把各自的数据放在各自的 session 中，当用户再去访问服务器中的其它web资源时，其它web资源再从用户各自的 session 中取出数据为用户服务。
+</code></pre></li>
+</ul>
+<h4 id="Cookie-与-Session的区别"><a href="#Cookie-与-Session的区别" class="headerlink" title="Cookie 与 Session的区别"></a>Cookie 与 Session的区别</h4><ul>
+<li>Cookie 是把数据写给浏览器。</li>
+<li>Session 把数据写到每一个浏览器对应的独占 session 中。</li>
+<li>Session 对象由服务器创建，开发人员可以调用 request 对象的 getSession 方法得到session对象。</li>
+</ul>
+<h2 id="二、常用方法"><a href="#二、常用方法" class="headerlink" title="二、常用方法"></a>二、常用方法</h2><h3 id="Cookie-常用方法"><a href="#Cookie-常用方法" class="headerlink" title="Cookie 常用方法"></a>Cookie 常用方法</h3><hr>
+<ul>
+<li>Cookie(String name, String value)<pre><code>构造带指定名称和值的 cookie,cookie 的名称在创建之后不得更改。
+</code></pre></li>
+<li>void setComment(String purpose)<pre><code>指定一个 cookie 用途的注释。
+</code></pre></li>
+<li>String getComment()<pre><code>返回描述此 cookie 用途的注释；如果该 cookie 没有注释，则返回 null。
+</code></pre></li>
+<li>setDomain(String pattern)<pre><code>指定应在其中显示此 cookie 的域。
+</code></pre></li>
+<li>String getDomain()<pre><code>返回为此 cookie 设置的域名。
+</code></pre></li>
+<li>void setMaxAge(int expiry)<pre><code>设置 cookie 的最大生存时间，以秒为单位。0 值会导致删除 cookie。
+</code></pre></li>
+<li>int getMaxAge()<pre><code>返回以秒为单位指定的 cookie 的最大生存时间，默认情况下，-1 指示该 cookie 将保留到浏览器关闭为止。
+</code></pre></li>
+<li>setPath(String uri)<pre><code>设置cookie 的路径。
+</code></pre></li>
+<li>String getPath()<pre><code>返回浏览器将此 cookie 返回到的服务器上的路径。
+</code></pre></li>
+<li>void setSecure(boolean flag)<pre><code>指示浏览器是否只能使用安全协议（如 HTTPS 或 SSL）发送 cookie。 
+</code></pre></li>
+<li>boolean getSecure()<pre><code>如果浏览器仅通过安全协议发送 cookie，则返回 true；如果浏览器可以使用任何协议发送 cookie，则返回 false。
+</code></pre></li>
+<li>String getName()<pre><code>返回 cookie 的名称。名称在创建之后不得更改。 
+</code></pre></li>
+<li>void setValue(String newValue)<pre><code>在创建 cookie 之后将新值分配给 cookie
+</code></pre></li>
+<li>String getValue()<pre><code>返回 cookie 的值。
+</code></pre></li>
+<li>int getVersion()<pre><code>返回此 cookie 遵守的协议版本。
+</code></pre></li>
+<li>void setVersion(int v)<pre><code>设置此 cookie 遵守的 cookie 协议版本。
+</code></pre></li>
+<li>clone()<pre><code>重写标准 java.lang.Object.clone 方法以返回此 cookie 的副本。
+</code></pre></li>
+</ul>
+<hr>
+<h3 id="Session-常用方法"><a href="#Session-常用方法" class="headerlink" title="Session 常用方法"></a>Session 常用方法</h3><hr>
+<ul>
+<li>long getCreationTime()<pre><code>返回创建此会话的时间
+</code></pre></li>
+<li>String getId()<pre><code>返回包含分配给此会话的唯一标识符的字符串
+</code></pre></li>
+<li>long getLastAccessedTime()<pre><code>返回客户端上一次发送与此会话关联的请求的时间
+</code></pre></li>
+<li>ServletContext getServletContext()<pre><code>返回此会话所属的 ServletContext
+</code></pre></li>
+<li>void setMaxInactiveInterval(int interval)<pre><code>指定在 servlet 容器使此会话失效之前客户端请求之间的时间间隔，以秒为单位。负数时间指示会话永远不会超时。
+</code></pre></li>
+<li>int getMaxInactiveInterval()<pre><code>返回 servlet 容器在客户端访问之间将使此会话保持打开状态的最大时间间隔，以秒为单位。
+</code></pre></li>
+<li>Object getAttribute(String name)<pre><code>返回与此会话中的指定名称绑定在一起的对象，如果没有对象绑定在该名称下，则返回 null。
+</code></pre></li>
+<li>java.util.Enumeration<e> getAttributeNames()<pre><code>返回包含绑定到此会话的所有对象的名称的 String 对象的 Enumeration。
+</code></pre></e></li>
+<li>void setAttribute(String name, Object value)<pre><code>使用指定名称将对象绑定到此会话。如果具有同样名称的对象已经绑定到该会话，则替换该对象。
+</code></pre></li>
+<li>void removeAttribute(String name)<pre><code>从此会话中移除与指定名称绑定在一起的对象。如果会话没有与指定名称绑定在一起的对象，则此方法不执行任何操作。
+</code></pre></li>
+<li>void invalidate()<pre><code>使此会话无效，然后取消对任何绑定到它的对象的绑定。
+</code></pre></li>
+<li>boolean isNew()<pre><code>如果客户端还不知道该会话，或者客户端选择不加入该会话，则返回 true。例如，如果服务器仅使用基于 cookie 的会话，而客户端已经禁止了 cookie 的使用，则每个请求上的会话都将是新会话。
+</code></pre></li>
+</ul>
+<hr>
+<h2 id="三、编码实践"><a href="#三、编码实践" class="headerlink" title="三、编码实践"></a>三、编码实践</h2><ul>
+<li><p>获取上一次访问时间</p>
+  <figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">private static final <span class="keyword">String</span> LAST_ACCESS_TIME = <span class="string">"lastAccessTime"</span>;</div><div class="line"></div><div class="line">protected void doGet(HttpServletRequest request, HttpServletResponse response)</div><div class="line">        throws ServletException, IOException &#123;</div><div class="line">    <span class="comment">// 设置输出字符集</span></div><div class="line">    response.setCharacterEncoding(<span class="string">"utf-8"</span>);</div><div class="line">    <span class="comment">// 获取输出流</span></div><div class="line">    PrintWriter <span class="built_in">writer</span> = response.getWriter();</div><div class="line">    <span class="comment">// 获取Cookie数组</span></div><div class="line">    Cookie[] cookies = request.getCookies();</div><div class="line">    <span class="keyword">if</span> (cookies == <span class="built_in">null</span>) &#123;</div><div class="line">        <span class="built_in">writer</span>.write(<span class="string">"第一次访问..."</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">writer</span>.write(<span class="string">"上次访问时间为："</span>);</div><div class="line">        <span class="keyword">for</span> (Cookie cookie : cookies) &#123;</div><div class="line">            <span class="keyword">if</span> (LAST_ACCESS_TIME.equals(cookie.<span class="built_in">getName</span>())) &#123;</div><div class="line">                Long lastAccessTime = Long.parseLong(cookie.getValue());</div><div class="line">                <span class="built_in">Date</span> <span class="built_in">date</span> = <span class="keyword">new</span> <span class="built_in">Date</span>(lastAccessTime);</div><div class="line">                java.text.DateFormat format1 =</div><div class="line">                        <span class="keyword">new</span> java.text.SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</div><div class="line">                <span class="built_in">writer</span>.write(format1.<span class="keyword">format</span>(<span class="built_in">date</span>));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    Cookie cookie = <span class="keyword">new</span> Cookie(LAST_ACCESS_TIME, <span class="string">""</span> + <span class="keyword">System</span>.currentTimeMillis());</div><div class="line">    response.addCookie(cookie);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  ####结果：<br>   第一次访问：<br>  <img src="http://oajxivjud.bkt.clouddn.com/CookieDemo01.png" alt=""><br>第二次访问：<br>  <img src="http://oajxivjud.bkt.clouddn.com/CookieDemo02.png" alt=""></p>
+</li>
+<li><p>cookie中存取中文</p>
+  <figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Cookie cookie = <span class="keyword">new</span> <span class="type">Cookie</span>(<span class="string">"userName"</span>, URLEncoder.encode(<span class="string">"且听风吟"</span>, <span class="string">"UTF-8"</span>));</div><div class="line">response.addCookie(cookie);</div></pre></td></tr></table></figure>
+</li>
+<li><p>cookie中获取中文</p>
+  <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">URLDecoder</span><span class="selector-class">.decode</span>(<span class="selector-tag">cookie</span><span class="selector-class">.getValue</span>(), "<span class="selector-tag">UTF-8</span>")</div></pre></td></tr></table></figure>
+</li>
+<li><p>session 基本使用</p>
+  <figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">服务器创建 session 出来后，会把 session 的<span class="built_in">id</span>号，以 cookie 的形式回写给客户机，这样，只要客户机的浏览器不关，再去访问服务器时，都会带着 session 的 <span class="built_in">id</span> 号去，服务器发现客户机浏览器带 session <span class="built_in">id</span> 过来了，就会使用内存中与之对应的 session 为之服务。</div></pre></td></tr></table></figure>
+   <figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">protected void doGet(HttpServletRequest request, HttpServletResponse response)</div><div class="line">        throws ServletException, IOException &#123;</div><div class="line">    <span class="comment">// 设置编码格式</span></div><div class="line">    response.setCharacterEncoding(<span class="string">"UTF-8"</span>);</div><div class="line">    <span class="comment">// 获取输出流</span></div><div class="line">    PrintWriter <span class="built_in">writer</span> = response.getWriter();</div><div class="line">    <span class="comment">// 获取Session,若没有则新建</span></div><div class="line">    HttpSession session = request.getSession();</div><div class="line">    <span class="comment">// 设置值</span></div><div class="line">    session.setAttribute(<span class="string">"name"</span>, <span class="string">"且听风吟"</span>);</div><div class="line">    <span class="comment">// 获取SessionId</span></div><div class="line">    <span class="keyword">String</span> sessionId = session.getId();</div><div class="line">    <span class="comment">// 判断是否第一次创建Session</span></div><div class="line">    <span class="keyword">if</span> (session.isNew()) &#123;</div><div class="line">        <span class="built_in">writer</span>.<span class="keyword">print</span>(<span class="string">"第一次创建Session，id为:"</span> + sessionId);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">writer</span>.<span class="keyword">print</span>(<span class="string">"已存在Session，id为:"</span> + sessionId);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>结果：<br><img src="http://oajxivjud.bkt.clouddn.com/SessionDemo01.png" alt=""><br><img src="http://oajxivjud.bkt.clouddn.com/SessionDemo02.png" alt=""></p>
+<h2 id="四、注意"><a href="#四、注意" class="headerlink" title="四、注意"></a>四、注意</h2><h4 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4><hr>
+<ul>
+<li>在读取Cookie，然后操作时，除了getName(),getValue()外，不要妄图得到其他信息，其他方法不会得到值的</li>
+<li>一个Cookie只能标识一种信息，它至少含有一个标识该信息的名称（NAME）和设置值（VALUE）。</li>
+<li>一个WEB站点可以给一个WEB浏览器发送多个Cookie，一个WEB浏览器也可以存储多个WEB站点提供的Cookie。</li>
+<li>浏览器一般只允许存放300个Cookie，每个站点最多存放20个Cookie，每个Cookie的大小限制为4KB。</li>
+<li>如果创建了一个cookie，并将他发送到浏览器，默认情况下它是一个会话级别的cookie（即存储在浏览器的内存中），用户退出浏览器之后即被删除。若希望浏览器将该cookie存储在磁盘上，则需要使用maxAge，并给出一个以秒为单位的时间。将最大时效设为0则是命令浏览器删除该cookie。</li>
+</ul>
+<hr>
+<h4 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h4><hr>
+<h5 id="session对象的创建时机"><a href="#session对象的创建时机" class="headerlink" title="session对象的创建时机"></a>session对象的创建时机</h5><p>在程序中第一次调用request.getSession()方法时就会创建一个新的Session，可以用isNew()方法来判断Session是不是新创建的</p>
+<h5 id="session对象的销毁时机"><a href="#session对象的销毁时机" class="headerlink" title="session对象的销毁时机"></a>session对象的销毁时机</h5><p>session对象默认30分钟没有使用，则服务器会自动销毁session，在web.xml文件中可以手工配置session的失效时间.如：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 设置Session的有效时间:以分钟为单位--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">session-config</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>15<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>当需要在程序中手动设置Session失效时，可以手工调用session.invalidate方法，摧毁session。<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">HttpSession session = request.getSession()<span class="comment">;</span></div><div class="line">// 手工调用session.invalidate方法，摧毁session</div><div class="line">session.invalidate()<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<hr>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>欣赏此文？求鼓励，求支持！<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C#</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JAVA WEB</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/04/07/java/JavaWeb/06.会话技术之Cookie和Session/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/04/07/java/Hibernate/01.Hibernate/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Hibernate 框架
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/03/31/java/JavaWeb/05.Servlet之response/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Servlet之response</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="java/JavaWeb/06.会话技术之Cookie和Session" data-title="会话技术之 Cookie 和 Session" data-url="https://marklogzhu.github.io/2017/04/07/java/JavaWeb/06.会话技术之Cookie和Session/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"marklogzhu"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
+
 
 
           </div>
@@ -224,8 +472,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

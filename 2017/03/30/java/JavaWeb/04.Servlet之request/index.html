@@ -6,17 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
-  <title>Archives: 2016 | 且听风吟的博客</title>
+  <title>Servlet之request | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="会点皮毛技术,立志于往深处扎根。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="且听风吟的博客">
-<meta property="og:url" content="https://marklogzhu.github.io/archives/2016/index.html">
+  <meta name="description" content="一、Request简介Request是什么？Request代表着一个HTTP请求对象，里面存放着请求参数和属性。
+什么时候被创建？当调用 Servlet 的 service() 方法时创建
+谁创建？由Servlet容器创建，这个对象自动封装了请求方式及参数等信息">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Servlet之request">
+<meta property="og:url" content="https://marklogzhu.github.io/2017/03/30/java/JavaWeb/04.Servlet之request/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="会点皮毛技术,立志于往深处扎根。">
+<meta property="og:description" content="一、Request简介Request是什么？Request代表着一个HTTP请求对象，里面存放着请求参数和属性。
+什么时候被创建？当调用 Servlet 的 service() 方法时创建
+谁创建？由Servlet容器创建，这个对象自动封装了请求方式及参数等信息">
+<meta property="og:updated_time" content="2017-05-24T11:42:33.513Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="且听风吟的博客">
-<meta name="twitter:description" content="会点皮毛技术,立志于往深处扎根。">
+<meta name="twitter:title" content="Servlet之request">
+<meta name="twitter:description" content="一、Request简介Request是什么？Request代表着一个HTTP请求对象，里面存放着请求参数和属性。
+什么时候被创建？当调用 Servlet 的 service() 方法时创建
+谁创建？由Servlet容器创建，这个对象自动封装了请求方式及参数等信息">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -148,60 +155,270 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-java/JavaWeb/04.Servlet之request" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/29/net/条码生成与打印/" class="archive-article-date">
-  	<time datetime="2016-08-29T12:11:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/29/net/条码生成与打印/">条码的生成与打印输出</a>
+    <h1 class="article-title" itemprop="name">
+      Servlet之request
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/03/30/java/JavaWeb/04.Servlet之request/" class="archive-article-date">
+  	<time datetime="2017-03-30T13:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、Request简介"><a href="#一、Request简介" class="headerlink" title="一、Request简介"></a>一、Request简介</h2><h4 id="Request是什么？"><a href="#Request是什么？" class="headerlink" title="Request是什么？"></a>Request是什么？</h4><p>Request代表着一个HTTP请求对象，里面存放着请求参数和属性。</p>
+<h4 id="什么时候被创建？"><a href="#什么时候被创建？" class="headerlink" title="什么时候被创建？"></a>什么时候被创建？</h4><p>当调用 Servlet 的 service() 方法时创建</p>
+<h4 id="谁创建？"><a href="#谁创建？" class="headerlink" title="谁创建？"></a>谁创建？</h4><p>由Servlet容器创建，这个对象自动封装了请求方式及参数等信息</p>
+<a id="more"></a>
+<h4 id="能干什么"><a href="#能干什么" class="headerlink" title="能干什么"></a>能干什么</h4><p>可以找到请求从哪里发出，请求什么资源，带什么参数，获取Session对象和客户端的Cookie</p>
+<h4 id="ServletRequest的层次结构"><a href="#ServletRequest的层次结构" class="headerlink" title="ServletRequest的层次结构"></a>ServletRequest的层次结构</h4><pre><code>-- javax.servlet.ServletRequest
+    -- javax.servlet.http.HttpServletRequest
+</code></pre><h2 id="二、常用方法"><a href="#二、常用方法" class="headerlink" title="二、常用方法"></a>二、常用方法</h2><ul>
+<li>void setAttribute(String name,Object o)<pre><code>以 KEY-VLUE 的形式设置属性
+</code></pre></li>
+<li>Object getAttribute(String name)<pre><code>以 Object 形式返回指定属性的值，如果不存在给定名称的属性，则返回 null。
+</code></pre></li>
+<li>void removeAttribute(String name)<pre><code>移除指定属性
+</code></pre></li>
+<li>Enumeration<string> getAttributeNames()<pre><code>返回包含此请求可用属性的名称的 Enumeration。如果该请求没有可用的属性，则此方法返回一个空的 Enumeration
+</code></pre></string></li>
+<li>void setCharacterEncoding(String env)<pre><code>设置请求正文编码字符集
+</code></pre></li>
+<li>String getCharacterEncoding()<pre><code>获取请求正文编码字符集
+</code></pre></li>
+<li>String getContentType()<pre><code>获取返回请求主体的MIME类型
+</code></pre></li>
+<li>String getParameter(String name)<pre><code>以 String 形式返回请求参数的值，如果该参数不存在，则返回 null
+</code></pre></li>
+<li>String[] getParameterValues(String name)<pre><code>返回包含给定请求参数拥有的所有值的 String 对象数组，如果该参数不存在，则返回 null
+</code></pre></li>
+</ul>
+<hr>
+<ul>
+<li>String getMethod()<pre><code>获取请求的 HTTP 方法的名称，例如GET，POST或PUT
+</code></pre></li>
+<li>String getRequestURI()<pre><code>获取请求URI,获取的是 从项目名到参数之前的内容
+</code></pre></li>
+<li>StringBuffer getRequestURL()<pre><code>获取请求URL,获取的带协议的完整路径
+</code></pre></li>
+<li>String getQueryString()<pre><code>get请求的所有参数
+</code></pre></li>
+<li>String getProtocol()<pre><code>获取协议和版本
+</code></pre></li>
+</ul>
+<hr>
+<ul>
+<li>String getScheme()<pre><code>获取请求方案名称，如 http、https 或 ftp
+</code></pre></li>
+<li>String getServerName()<pre><code>获取包含服务器名称的 String，如 IP 地址
+</code></pre></li>
+<li>int getServerPort()<pre><code>获取服务器端口号
+</code></pre></li>
+<li>String getRemoteAddr()<pre><code>获取客户端IP地址
+</code></pre></li>
+<li>java.util.Locale getLocale()<pre><code>基于 Accept-Language 头，返回客户端将用来接受内容的首选 Locale
+</code></pre></li>
+<li>boolean isSecure()<pre><code>返回一个 boolean 值，指示此请求是否是使用安全通道（比如 HTTPS）发出的
+</code></pre></li>
+</ul>
+<h2 id="三、编码实践"><a href="#三、编码实践" class="headerlink" title="三、编码实践"></a>三、编码实践</h2><ul>
+<li><p>属性设置、获取、移除</p>
+  <figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="literal">void</span> doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</div><div class="line">		<span class="built_in">String</span> <span class="built_in">tag</span> = <span class="string">"name"</span>;</div><div class="line">		request.setAttribute(<span class="built_in">tag</span>, <span class="string">"张三"</span>);</div><div class="line">		System.out.println(<span class="built_in">tag</span> + request.getAttribute(<span class="built_in">tag</span>));</div><div class="line">		request.removeAttribute(<span class="built_in">tag</span>);</div><div class="line">            System.out.println(<span class="built_in">tag</span> + request.getAttribute(<span class="built_in">tag</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  结果：</p>
+  <figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">name:</span>张三</div><div class="line"><span class="string">name:</span><span class="literal">null</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>字符集的获取与设置</p>
+  <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span>(<span class="params">HttpServletRequest request, HttpServletResponse response</span>) throws ServletException, IOException </span>&#123;</div><div class="line">		System.<span class="keyword">out</span>.println(<span class="string">"正文编码字符集："</span> + request.getCharacterEncoding());</div><div class="line">		request.setCharacterEncoding(<span class="string">"utf-8"</span>);</div><div class="line">		System.<span class="keyword">out</span>.println(<span class="string">"正文编码字符集："</span> + request.getCharacterEncoding());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  结果：</p>
+  <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">正文编码字符集：<span class="literal">null</span></div><div class="line">正文编码字符集：utf<span class="number">-8</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>获取客户端信息</p>
+  <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span>(<span class="params">HttpServletRequest request, HttpServletResponse response</span>) throws ServletException, IOException </span>&#123;</div><div class="line">		System.<span class="keyword">out</span>.println(<span class="string">"客户端IP地址："</span> + request.getRemoteAddr());</div><div class="line">        System.<span class="keyword">out</span>.println(<span class="string">"请求方式："</span> + request.getScheme());</div><div class="line">        System.<span class="keyword">out</span>.println(<span class="string">"是否是HTTPS请求："</span> + request.isSecure());</div><div class="line">        System.<span class="keyword">out</span>.println(<span class="string">"请求方式："</span> + request.getMethod());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>结果：</p>
+<pre><code><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">客户端<span class="selector-tag">IP</span>地址：0<span class="selector-pseudo">:0</span><span class="selector-pseudo">:0</span><span class="selector-pseudo">:0</span><span class="selector-pseudo">:0</span><span class="selector-pseudo">:0</span><span class="selector-pseudo">:0</span><span class="selector-pseudo">:1</span></div><div class="line">请求方式：<span class="selector-tag">http</span></div><div class="line">是否是<span class="selector-tag">HTTPS</span>请求：<span class="selector-tag">false</span></div><div class="line">请求方式：<span class="selector-tag">GET</span></div></pre></td></tr></table></figure>
+</code></pre><ul>
+<li><p>获取服务端信息</p>
+  <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span>(<span class="params">HttpServletRequest request, HttpServletResponse response</span>)</span></div><div class="line">                throws ServletException, IOException &#123;</div><div class="line">            System.<span class="keyword">out</span>.println(<span class="string">"服务器端口号："</span> + request.getServerPort());</div><div class="line">            System.<span class="keyword">out</span>.println(<span class="string">"服务器名称："</span> + request.getServerName());</div><div class="line">            System.<span class="keyword">out</span>.println(<span class="string">"项目名称："</span> + request.getContextPath());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>结果：</p>
+<pre><code><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">服务器端口号：<span class="number">8888</span></div><div class="line">服务器名称：localhost</div><div class="line">项目名称：/day01_Servlet</div></pre></td></tr></table></figure>
+</code></pre><ul>
+<li>获取请求消息<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span>(<span class="params">HttpServletRequest request, HttpServletResponse response</span>)</span></div><div class="line">        throws ServletException, IOException &#123;</div><div class="line">    System.<span class="keyword">out</span>.println(<span class="string">"不带协议路径："</span> + request.getRequestURI());</div><div class="line">    System.<span class="keyword">out</span>.println(<span class="string">"带协议路径："</span> + request.getRequestURL());</div><div class="line">    System.<span class="keyword">out</span>.println(<span class="string">"请求方式："</span> + request.getMethod());</div><div class="line">    System.<span class="keyword">out</span>.println(<span class="string">"get请求的所有参数:"</span> + request.getQueryString());</div><div class="line">    System.<span class="keyword">out</span>.println(<span class="string">"协议和版本："</span> + request.getProtocol());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>结果：</p>
+<pre><code><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">不带协议路径：<span class="regexp">/day01_Servlet/</span>request</div><div class="line">带协议路径：<span class="string">http:</span><span class="comment">//localhost:8888/day01_Servlet/request</span></div><div class="line">请求方式：GET</div><div class="line">get请求的所有参数:<span class="literal">null</span></div><div class="line">协议和版本：HTTP/<span class="number">1.1</span></div></pre></td></tr></table></figure>
+</code></pre>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>欣赏此文？求鼓励，求支持！<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C#</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JAVA WEB</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/03/30/java/JavaWeb/04.Servlet之request/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/03/31/java/JavaWeb/05.Servlet之response/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Servlet之response
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/03/19/java/JavaWeb/03.Servlet之ServletConfig和ServletContext对象/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Servlet之ServletConfig与ServletContext对象</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="java/JavaWeb/04.Servlet之request" data-title="Servlet之request" data-url="https://marklogzhu.github.io/2017/03/30/java/JavaWeb/04.Servlet之request/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"marklogzhu"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
+
 
 
           </div>
@@ -224,8 +441,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

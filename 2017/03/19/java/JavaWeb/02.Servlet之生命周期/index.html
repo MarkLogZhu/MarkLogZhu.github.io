@@ -6,17 +6,35 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
-  <title>Archives: 2016 | 且听风吟的博客</title>
+  <title>Servlet之生命周期 | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="会点皮毛技术,立志于往深处扎根。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="且听风吟的博客">
-<meta property="og:url" content="https://marklogzhu.github.io/archives/2016/index.html">
+  <meta name="description" content="一、Servlet简介JavaServlet 是用 Java 语言编写的服务端程序。其主要功能是接收和响应客户端的请求。
+二、Servlet结构-- Servlet 接口
+    -- GenericServlet    抽象类
+        -- HttpServlet        抽象类
+            -- 自定义业务Servlet    业务类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Servlet之生命周期">
+<meta property="og:url" content="https://marklogzhu.github.io/2017/03/19/java/JavaWeb/02.Servlet之生命周期/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="会点皮毛技术,立志于往深处扎根。">
+<meta property="og:description" content="一、Servlet简介JavaServlet 是用 Java 语言编写的服务端程序。其主要功能是接收和响应客户端的请求。
+二、Servlet结构-- Servlet 接口
+    -- GenericServlet    抽象类
+        -- HttpServlet        抽象类
+            -- 自定义业务Servlet    业务类">
+<meta property="og:image" content="http://oajxivjud.bkt.clouddn.com/servlet%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9FDemo01.png">
+<meta property="og:image" content="http://oajxivjud.bkt.clouddn.com/Servlet%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9FDemo02.png">
+<meta property="og:image" content="http://oajxivjud.bkt.clouddn.com/Servlet%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9FDemo03.png">
+<meta property="og:image" content="http://oajxivjud.bkt.clouddn.com/Servlet%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9FDemo04.png">
+<meta property="og:updated_time" content="2017-03-19T10:10:52.624Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="且听风吟的博客">
-<meta name="twitter:description" content="会点皮毛技术,立志于往深处扎根。">
+<meta name="twitter:title" content="Servlet之生命周期">
+<meta name="twitter:description" content="一、Servlet简介JavaServlet 是用 Java 语言编写的服务端程序。其主要功能是接收和响应客户端的请求。
+二、Servlet结构-- Servlet 接口
+    -- GenericServlet    抽象类
+        -- HttpServlet        抽象类
+            -- 自定义业务Servlet    业务类">
+<meta name="twitter:image" content="http://oajxivjud.bkt.clouddn.com/servlet%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9FDemo01.png">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -148,60 +166,238 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-java/JavaWeb/02.Servlet之生命周期" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/29/net/条码生成与打印/" class="archive-article-date">
-  	<time datetime="2016-08-29T12:11:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/29/net/条码生成与打印/">条码的生成与打印输出</a>
+    <h1 class="article-title" itemprop="name">
+      Servlet之生命周期
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/03/19/java/JavaWeb/02.Servlet之生命周期/" class="archive-article-date">
+  	<time datetime="2017-03-19T10:10:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、Servlet简介"><a href="#一、Servlet简介" class="headerlink" title="一、Servlet简介"></a>一、Servlet简介</h2><p>JavaServlet 是用 Java 语言编写的服务端程序。其主要功能是接收和响应客户端的请求。</p>
+<h2 id="二、Servlet结构"><a href="#二、Servlet结构" class="headerlink" title="二、Servlet结构"></a>二、Servlet结构</h2><pre><code>-- Servlet 接口
+    -- GenericServlet    抽象类
+        -- HttpServlet        抽象类
+            -- 自定义业务Servlet    业务类
+</code></pre><a id="more"></a>
+<h2 id="三、Servlet接口方法"><a href="#三、Servlet接口方法" class="headerlink" title="三、Servlet接口方法"></a>三、Servlet接口方法</h2><pre><code>=======================生命周期方法开始======================================
+* void init(ServletConfig config)
+        作用：初始化方法
+        调用者：服务器
+        调用时机：默认第一次访问的时候或load-on-startup中设置正整数值时(值越大优先级越低)
+        调用次数：一次
+* void service(ServletRequest req, ServletResponse res)
+        作用：处理业务逻辑方法
+        调用者：服务器
+        调用时机：请求来的时候
+        调用次数：请求来一次调用一次
+* void destroy()
+        作用：初始化方法
+        调用者：服务器
+        调用时机：Service被移除或服务器正常关闭时
+        调用次数：一次
+=======================生命周期方法结束======================================
+* ServletConfig getServletConfig()
+    作用：获得任何初始化和启动参数信息
+* String getServletInfo() 
+    作用：获取有关其自身的基本信息，比如作者、版本和版权
+</code></pre><h2 id="四、编码实践Servlet生命周期"><a href="#四、编码实践Servlet生命周期" class="headerlink" title="四、编码实践Servlet生命周期"></a>四、编码实践Servlet生命周期</h2><ul>
+<li><p>1.编写类</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> javax.servlet.Servlet;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletConfig;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletException;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletResponse;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LifeServlet</span> <span class="keyword">implements</span> <span class="title">Servlet</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(ServletConfig config)</span> <span class="keyword">throws</span> ServletException </span>&#123;</div><div class="line"></div><div class="line">        System.out.println(<span class="string">"init()调用"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> ServletConfig <span class="title">getServletConfig</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(ServletRequest req, ServletResponse res)</span></span></div><div class="line">            <span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">        System.out.println(<span class="string">"service()调用"</span>);</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getServletInfo</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"destroy()调用"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>2.配置web.xml文件(若new类为Servlet，IDE默认已配置，可跳过此步)</p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span><span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">display-name</span>&gt;</span>LifeServlet<span class="tag">&lt;/<span class="name">display-name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>LifeServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>com.mark.day01.LifeServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>LifeServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/life<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>3.启动Tomcat</p>
+</li>
+</ul>
+<ul>
+<li><p>4.按步骤操作对照结果</p>
+<ul>
+<li><p>4.1 在浏览器中输入项目地址(<a href="http://localhost:8888/day01_Servlet/life" target="_blank" rel="external">http://localhost:8888/day01_Servlet/life</a>)</p>
+<p>  注1：因笔者电脑中先安装了 IIS，后安装 Tomcat，所以为了解决端口冲突所以将端口设为8888<br>  注2：每个人的项目名称和包名不同，请按自己的实际项目修改web.xml跟浏览器地址</p>
+</li>
+<li><p>4.2 查看控制器输出<br><img src="http://oajxivjud.bkt.clouddn.com/servlet%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9FDemo01.png" alt=""></p>
+</li>
+<li><p>4.3 在浏览器中刷新页面，然后查看控制器输出<br><img src="http://oajxivjud.bkt.clouddn.com/Servlet%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9FDemo02.png" alt=""><br>  可以发现service方法又一次被调用了，而init()方法只在第一次访问时调用</p>
+</li>
+<li><p>4.4 关闭Tomcat,查看控制器输出<br><img src="http://oajxivjud.bkt.clouddn.com/Servlet%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9FDemo03.png" alt=""><br>  注：<br><img src="http://oajxivjud.bkt.clouddn.com/Servlet%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9FDemo04.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><pre><code>serlvet是一个单实例多线程对象，默认第一次访问的时候,服务器创建servlet,并调用init实现初始化操作.并调用一次service方法。每当请求来的时候,服务器创建一个线程,调用service方法执行自己的业务逻辑。当serlvet被移除的时候服务器正常关闭的时候,服务器调用servlet的destroy方法实现销毁操作.
+</code></pre>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>欣赏此文？求鼓励，求支持！<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C#</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JAVA WEB</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/03/19/java/JavaWeb/02.Servlet之生命周期/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/03/19/java/JavaWeb/03.Servlet之ServletConfig和ServletContext对象/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Servlet之ServletConfig与ServletContext对象
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/03/19/java/JavaWeb/01.web,xml/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">web.xml</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="java/JavaWeb/02.Servlet之生命周期" data-title="Servlet之生命周期" data-url="https://marklogzhu.github.io/2017/03/19/java/JavaWeb/02.Servlet之生命周期/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"marklogzhu"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
+
 
 
           </div>
@@ -224,8 +420,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

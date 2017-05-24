@@ -6,17 +6,33 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
-  <title>Archives: 2016 | 且听风吟的博客</title>
+  <title>Hibernate 框架 | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="会点皮毛技术,立志于往深处扎根。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="且听风吟的博客">
-<meta property="og:url" content="https://marklogzhu.github.io/archives/2016/index.html">
+  <meta name="description" content="一、Hibernate 简介在了解 Hibernate 之前，我们先了解下什么是 ORM 。
+1.1 ORM 概述ORM 全称为 Object Relational Mapping，翻译过来就是对象关系映射
+* O：面向对象领域的 Object（JavaBean对象）
+* R：关系数据库领域的 Relational（表的结构）
+* M：映射 Mapping（XML的配置文件）
+1.2 什么是 Hi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hibernate 框架">
+<meta property="og:url" content="https://marklogzhu.github.io/2017/04/07/java/Hibernate/01.Hibernate/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="会点皮毛技术,立志于往深处扎根。">
+<meta property="og:description" content="一、Hibernate 简介在了解 Hibernate 之前，我们先了解下什么是 ORM 。
+1.1 ORM 概述ORM 全称为 Object Relational Mapping，翻译过来就是对象关系映射
+* O：面向对象领域的 Object（JavaBean对象）
+* R：关系数据库领域的 Relational（表的结构）
+* M：映射 Mapping（XML的配置文件）
+1.2 什么是 Hi">
+<meta property="og:updated_time" content="2017-05-24T11:43:34.344Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="且听风吟的博客">
-<meta name="twitter:description" content="会点皮毛技术,立志于往深处扎根。">
+<meta name="twitter:title" content="Hibernate 框架">
+<meta name="twitter:description" content="一、Hibernate 简介在了解 Hibernate 之前，我们先了解下什么是 ORM 。
+1.1 ORM 概述ORM 全称为 Object Relational Mapping，翻译过来就是对象关系映射
+* O：面向对象领域的 Object（JavaBean对象）
+* R：关系数据库领域的 Relational（表的结构）
+* M：映射 Mapping（XML的配置文件）
+1.2 什么是 Hi">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -148,60 +164,204 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-java/Hibernate/01.Hibernate" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/29/net/条码生成与打印/" class="archive-article-date">
-  	<time datetime="2016-08-29T12:11:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/29/net/条码生成与打印/">条码的生成与打印输出</a>
+    <h1 class="article-title" itemprop="name">
+      Hibernate 框架
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/04/07/java/Hibernate/01.Hibernate/" class="archive-article-date">
+  	<time datetime="2017-04-07T13:34:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、Hibernate-简介"><a href="#一、Hibernate-简介" class="headerlink" title="一、Hibernate 简介"></a>一、Hibernate 简介</h2><p>在了解 Hibernate 之前，我们先了解下什么是 ORM 。</p>
+<h3 id="1-1-ORM-概述"><a href="#1-1-ORM-概述" class="headerlink" title="1.1 ORM 概述"></a>1.1 ORM 概述</h3><p>ORM 全称为 Object Relational Mapping，翻译过来就是对象关系映射</p>
+<pre><code>* O：面向对象领域的 Object（JavaBean对象）
+* R：关系数据库领域的 Relational（表的结构）
+* M：映射 Mapping（XML的配置文件）
+</code></pre><h3 id="1-2-什么是-Hibernate"><a href="#1-2-什么是-Hibernate" class="headerlink" title="1.2 什么是 Hibernate"></a>1.2 什么是 Hibernate</h3><p>Hibernate 是一个开放源代码的对象关系映射框架。它对 JDBC 进行了非常轻量级的对象封装，它将 POJO 与数据库表建立映射关系，是一个全自动的 ORM 框架。</p>
+<h3 id="1-3-Hibernate-能干什么"><a href="#1-3-Hibernate-能干什么" class="headerlink" title="1.3 Hibernate 能干什么"></a>1.3 Hibernate 能干什么</h3><ul>
+<li>自动生成 SQL 语句并执行</li>
+<li>数据持久化</li>
+</ul>
+<a id="more"></a>
+<h3 id="1-4-Hibernate-优点"><a href="#1-4-Hibernate-优点" class="headerlink" title="1.4 Hibernate 优点"></a>1.4 Hibernate 优点</h3><ul>
+<li>Hibernate 对 JDBC 访问数据库的代码做了封装，大大简化了数据访问层繁琐的重复性代码</li>
+<li>Hibernate是一个基于 JDBC 的主流持久化框架，是一个优秀的 ORM 实现，它很大程度的简化了 DAO 层编码工作</li>
+<li>Hibernate 的性能非常好，因为它是一个轻量级框架。映射的灵活性很出色。它支持很多关系型数据库，从一对一到多对多的各种复杂关系</li>
+</ul>
+<p><strong>简单来说，Hibernate 框架就是使我们可以通过操作对象的方式操作数据库。</strong></p>
+<h2 id="二、Hibernate-环境搭建"><a href="#二、Hibernate-环境搭建" class="headerlink" title="二、Hibernate 环境搭建"></a>二、Hibernate 环境搭建</h2><h3 id="1-1-下载-Hibernate-开发包"><a href="#1-1-下载-Hibernate-开发包" class="headerlink" title="1.1 下载 Hibernate 开发包"></a>1.1 下载 Hibernate 开发包</h3><p><a href="https://sourceforge.net/projects/hibernate/files/hibernate-orm/" target="_blank" rel="external">Hibernate开发包</a></p>
+<h3 id="1-2-Hibernate-包结构说明"><a href="#1-2-Hibernate-包结构说明" class="headerlink" title="1.2 Hibernate 包结构说明"></a>1.2 Hibernate 包结构说明</h3><h3 id="1-2-eclipse-搭建"><a href="#1-2-eclipse-搭建" class="headerlink" title="1.2 eclipse 搭建"></a>1.2 eclipse 搭建</h3><p>将</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>欣赏此文？求鼓励，求支持！<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C#</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/04/07/java/Hibernate/01.Hibernate/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/04/08/java/JavaWeb/07.JSP/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          JSP
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/04/07/java/JavaWeb/06.会话技术之Cookie和Session/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">会话技术之 Cookie 和 Session</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="java/Hibernate/01.Hibernate" data-title="Hibernate 框架" data-url="https://marklogzhu.github.io/2017/04/07/java/Hibernate/01.Hibernate/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"marklogzhu"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
+
 
 
           </div>
@@ -224,8 +384,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -6,17 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
-  <title>Archives: 2016 | 且听风吟的博客</title>
+  <title>Servlet之response | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="会点皮毛技术,立志于往深处扎根。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="且听风吟的博客">
-<meta property="og:url" content="https://marklogzhu.github.io/archives/2016/index.html">
+  <meta name="description" content="一、Response简介Response是什么？Request代表着一个 HTTP 响应对象，里面存放着 HTTP 的响应消息
+什么时候被创建？当调用 Servlet 的 service() 方法时创建
+谁创建？由Servlet容器创建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Servlet之response">
+<meta property="og:url" content="https://marklogzhu.github.io/2017/03/31/java/JavaWeb/05.Servlet之response/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="会点皮毛技术,立志于往深处扎根。">
+<meta property="og:description" content="一、Response简介Response是什么？Request代表着一个 HTTP 响应对象，里面存放着 HTTP 的响应消息
+什么时候被创建？当调用 Servlet 的 service() 方法时创建
+谁创建？由Servlet容器创建">
+<meta property="og:image" content="http://oajxivjud.bkt.clouddn.com/responseDemo01.png">
+<meta property="og:image" content="http://oajxivjud.bkt.clouddn.com/responseDemo02.png">
+<meta property="og:updated_time" content="2017-05-24T11:42:37.806Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="且听风吟的博客">
-<meta name="twitter:description" content="会点皮毛技术,立志于往深处扎根。">
+<meta name="twitter:title" content="Servlet之response">
+<meta name="twitter:description" content="一、Response简介Response是什么？Request代表着一个 HTTP 响应对象，里面存放着 HTTP 的响应消息
+什么时候被创建？当调用 Servlet 的 service() 方法时创建
+谁创建？由Servlet容器创建">
+<meta name="twitter:image" content="http://oajxivjud.bkt.clouddn.com/responseDemo01.png">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -148,60 +158,299 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-java/JavaWeb/05.Servlet之response" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/29/net/条码生成与打印/" class="archive-article-date">
-  	<time datetime="2016-08-29T12:11:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/29/net/条码生成与打印/">条码的生成与打印输出</a>
+    <h1 class="article-title" itemprop="name">
+      Servlet之response
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/03/31/java/JavaWeb/05.Servlet之response/" class="archive-article-date">
+  	<time datetime="2017-03-31T13:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、Response简介"><a href="#一、Response简介" class="headerlink" title="一、Response简介"></a>一、Response简介</h2><h4 id="Response是什么？"><a href="#Response是什么？" class="headerlink" title="Response是什么？"></a>Response是什么？</h4><p>Request代表着一个 HTTP 响应对象，里面存放着 HTTP 的响应消息</p>
+<h4 id="什么时候被创建？"><a href="#什么时候被创建？" class="headerlink" title="什么时候被创建？"></a>什么时候被创建？</h4><p>当调用 Servlet 的 service() 方法时创建</p>
+<h4 id="谁创建？"><a href="#谁创建？" class="headerlink" title="谁创建？"></a>谁创建？</h4><p>由Servlet容器创建</p>
+<a id="more"></a>
+<h4 id="能干什么"><a href="#能干什么" class="headerlink" title="能干什么"></a>能干什么</h4><p>向客户端输出数据</p>
+<h4 id="Response的层次结构"><a href="#Response的层次结构" class="headerlink" title="Response的层次结构"></a>Response的层次结构</h4><pre><code>-- javax.servlet.ServletResponse
+    -- javax.servlet.http.HttpServletResponse
+</code></pre><h2 id="二、常用方法"><a href="#二、常用方法" class="headerlink" title="二、常用方法"></a>二、常用方法</h2><ul>
+<li><p>负责向客户端(浏览器)发送数据的相关方法</p>
+<ul>
+<li>ServletOutputStream getOutputStream()<pre><code>返回适用于在响应中编写二进制数据的 ServletOutputStream
+</code></pre></li>
+<li>PrintWriter getWriter()<pre><code>返回可将字符文本发送到客户端的 PrintWriter 对象,默认字符集为 ISO-8859-1
+</code></pre></li>
+</ul>
+</li>
+<li><p>负责向客户端(浏览器)发送响应头的相关方法</p>
+<ul>
+<li>void addCookie(Cookie cookie)<pre><code>添加 Cookie 对象，同名的 Cookie 会覆盖
+</code></pre></li>
+<li>void addDateHeader(String name, long date)<pre><code>以 KEY_VALUE 的形式添加日期响应头
+</code></pre></li>
+<li>void addHeader(String name, String value)<pre><code>以 KEY_VALUE 的形式添加响应头
+</code></pre></li>
+</ul>
+</li>
+<li><p>负责向客户端(浏览器)发送响应状态码的相关方法</p>
+<ul>
+<li>void setStatus(int sc)<pre><code>设置响应状态码
+</code></pre></li>
+<li><p>响应状态码的常量</p>
+<ul>
+<li><p>int SC_OK</p>
+<pre><code>200:正常响应
+</code></pre></li>
+<li><p>int SC_NOT_FOUND</p>
+<pre><code>404:用户操作错误
+</code></pre></li>
+<li>int SC_METHOD_NOT_ALLOWED<pre><code>405:访问的方法不存在
+</code></pre></li>
+<li>int SC_INTERNAL_SERVER_ERROR<pre><code>500:内部错误
+</code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="三、编码实践"><a href="#三、编码实践" class="headerlink" title="三、编码实践"></a>三、编码实践</h2><ul>
+<li><p>使用 getWriter() 向页面输出汉字</p>
+  <figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">protected void doGet(HttpServletRequest request, HttpServletResponse response)</div><div class="line">        throws ServletException, IOException &#123;</div><div class="line">    response.setCharacterEncoding(<span class="string">"utf-8"</span>);</div><div class="line">    PrintWriter <span class="built_in">writer</span> = response.getWriter();</div><div class="line">    <span class="built_in">writer</span>.<span class="keyword">print</span>(<span class="string">"且听风吟,且待琴终。"</span>);</div><div class="line">    <span class="built_in">writer</span>.<span class="built_in">close</span>();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  结果：</p>
+<p>  <img src="http://oajxivjud.bkt.clouddn.com/responseDemo01.png" alt=""></p>
+</li>
+<li><p>使用 getOutputStream() 向页面输出汉字</p>
+  <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span>(<span class="params">HttpServletRequest request, HttpServletResponse response</span>)</span></div><div class="line">        throws ServletException, IOException &#123;</div><div class="line">    String data = <span class="string">"且听风吟,且待琴终。"</span>;</div><div class="line">    <span class="comment">// 通过设置响应头控制浏览器以UTF-8的编码显示数据</span></div><div class="line">    response.setHeader(<span class="string">"content-type"</span>, <span class="string">"text/html;charset=UTF-8"</span>);</div><div class="line">    ServletOutputStream <span class="keyword">out</span> = response.getOutputStream();</div><div class="line">    <span class="keyword">out</span>.write(data.getBytes(<span class="string">"UTF-8"</span>));</div><div class="line">    <span class="keyword">out</span>.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>结果：</p>
+<pre><code>![](http://oajxivjud.bkt.clouddn.com/responseDemo01.png)
+</code></pre><ul>
+<li><p>文件下载</p>
+  <figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="keyword">void</span> doGet(HttpServletRequest request, HttpServletResponse response)</div><div class="line">        throws ServletException, IOException &#123;</div><div class="line">    <span class="comment">// 1.获取要下载的文件的绝对路径</span></div><div class="line">    <span class="keyword">String</span> realPath = <span class="keyword">this</span>.getServletContext().getRealPath(<span class="string">"/download/中文文件名.TXT"</span>);</div><div class="line">    <span class="comment">// 2.获取要下载的文件名</span></div><div class="line">    <span class="keyword">String</span> fileName = realPath.substring(realPath.lastIndexOf(<span class="string">"\\"</span>) + <span class="number">1</span>);</div><div class="line">    <span class="comment">// 3.设置content-disposition响应头控制浏览器以下载的形式打开文件,注意中文文件名要转码</span></div><div class="line">    response.setHeader(<span class="string">"content-disposition"</span>,</div><div class="line">            <span class="string">"attachment;filename="</span> + URLEncoder.encode(fileName, <span class="string">"UTF-8"</span>));</div><div class="line">    <span class="comment">// 4.获取要下载的文件输入流</span></div><div class="line">    InputStream in = <span class="keyword">new</span> FileInputStream(realPath);</div><div class="line">    <span class="keyword">int</span> len = <span class="number">0</span>;</div><div class="line">    <span class="comment">// 5.创建数据缓冲区</span></div><div class="line">    <span class="keyword">byte</span>[] <span class="built_in">buffer</span> = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">    <span class="comment">// 6.通过response对象获取OutputStream流</span></div><div class="line">    OutputStream out = response.getOutputStream();</div><div class="line">    <span class="comment">// 7.将FileInputStream流写入到buffer缓冲区</span></div><div class="line">    <span class="built_in">while</span> ((len = in.<span class="built_in">read</span>(<span class="built_in">buffer</span>)) &gt; <span class="number">0</span>) &#123;</div><div class="line">    	<span class="comment">// 8.使用OutputStream将缓冲区的数据输出到客户端浏览器</span></div><div class="line">    	out.<span class="built_in">write</span>(<span class="built_in">buffer</span>, <span class="number">0</span>, len);</div><div class="line">    &#125;</div><div class="line">    in.<span class="built_in">close</span>();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  结果：</p>
+<p>  <img src="http://oajxivjud.bkt.clouddn.com/responseDemo02.png" alt=""></p>
+<p>  注：下载文件时避免使用 PrintWriter 流，因为 PrintWriter 流是字符流，只能处理字符数据，会导致数据丢失。而 OutputStream 流是字节流，可以处理任何数据，所以下载文件要使用 OutputStream 流。</p>
+</li>
+<li><p>生成随机数字验证码</p>
+<pre><code>protected void doGet(HttpServletRequest request, HttpServletResponse response)
+          throws ServletException, IOException {
+      response.setHeader(&quot;refresh&quot;, &quot;5&quot;);// 设置refresh响应头控制浏览器每隔5秒钟刷新一次
+      // 1.在内存中创建一张图片
+      BufferedImage image = new BufferedImage(80, 20, BufferedImage.TYPE_INT_RGB);
+      // 2.得到图片
+      Graphics2D g = (Graphics2D) image.getGraphics();
+      g.setColor(Color.WHITE);// 设置图片的背景色
+      g.fillRect(0, 0, 80, 20);// 填充背景色
+      // 3.向图片上写数据
+      g.setColor(Color.BLUE);// 设置图片上字体的颜色
+      g.setFont(new Font(null, Font.BOLD, 20));
+      g.drawString(getRandomCode(), 0, 20);
+      // 4.设置响应头控制浏览器浏览器以图片的方式打开
+      response.setContentType(&quot;image/jpeg&quot;);
+      // 等同于response.setHeader(&quot;Content-Type&quot;,&quot;image/jpeg&quot;);
+      // 5.设置响应头控制浏览器不缓存图片数据
+      response.setDateHeader(&quot;expries&quot;, -1);
+      response.setHeader(&quot;Cache-Control&quot;, &quot;no-cache&quot;);
+      response.setHeader(&quot;Pragma&quot;, &quot;no-cache&quot;);
+      // 6.将图片写给浏览器
+      ImageIO.write(image, &quot;jpg&quot;, response.getOutputStream());
+  }
+</code></pre>  <figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">private <span class="built_in">String</span> getRandomCode() &#123;</div><div class="line">    Random ran = <span class="keyword">new</span> Random();</div><div class="line">    <span class="built_in">String</span> <span class="built_in">num</span> = (ran.nextInt(<span class="number">8999999</span>) + <span class="number">1000000</span>) + <span class="string">""</span>;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">num</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>结果：</p>
+<pre><code>![](http://oajxivjud.bkt.clouddn.com/RandomCode.gif)
+</code></pre><ul>
+<li><p>设置响应头控制浏览器的行为</p>
+<ul>
+<li><p>设置http响应头控制浏览器禁止缓存当前文档内容</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">   response.setDateHeader("expries", -1);</div><div class="line">response.setHeader("<span class="keyword">Cache</span>-Control<span class="string">", "</span><span class="keyword">no</span>-<span class="keyword">cache</span><span class="string">");</span></div><div class="line">response.setHeader("<span class="keyword">Pragma</span><span class="string">", "</span><span class="keyword">no</span>-<span class="keyword">cache</span><span class="string">");</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>设置http响应头控制浏览器定时刷新网页(refresh)</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置refresh响应头控制浏览器每隔5秒钟刷新一次</span></div><div class="line"><span class="selector-tag">response</span><span class="selector-class">.setHeader</span>(<span class="string">"refresh"</span>, <span class="string">"5"</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>通过response实现请求重定向</p>
+<pre><code>请求重定向指：一个web资源收到客户端请求后，通知客户端去访问另外一个web资源，这称之为请求重定向。
+应用场景：用户登陆，用户首先访问登录页面，登录成功后，就会跳转到某个页面，这个过程就是一个请求重定向的过程
+实现方式：response.sendRedirect(String location)，即调用 response 对象的 sendRedirect 方法实现请求重定向
+sendRedirect内部的实现原理：使用 response 设置 302 状态码和设置location响应头实现重定向
+</code></pre><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span></span></div><div class="line">        <span class="keyword">throws</span> ServletException, IOException &#123;</div><div class="line">    response.sendRedirect(<span class="string">"/day01_Servlet/hello.html"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>欣赏此文？求鼓励，求支持！<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C#</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JAVA WEB</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/03/31/java/JavaWeb/05.Servlet之response/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/04/07/java/JavaWeb/06.会话技术之Cookie和Session/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          会话技术之 Cookie 和 Session
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/03/30/java/JavaWeb/04.Servlet之request/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Servlet之request</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="java/JavaWeb/05.Servlet之response" data-title="Servlet之response" data-url="https://marklogzhu.github.io/2017/03/31/java/JavaWeb/05.Servlet之response/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"marklogzhu"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
+
 
 
           </div>
@@ -224,8 +473,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

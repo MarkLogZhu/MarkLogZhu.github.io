@@ -6,24 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
-  <title>SQL小技巧之统计SQL执行时间 | 且听风吟的博客</title>
+  <title>SQLServer 多表筛选数据 | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.计算执行SQL语句所需时间衡量SQL语句写的怎么样，除了性能方面的考虑，SQL的执行时间也常常可以体现。
-通过 SQL的内置函数 GETDATE() 就可以很方便的获取SQL执行时间了">
+  <meta name="description" content="概述 在项目中常常出现多表数据对比的需求，今天我们就来完成下这个需求。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL小技巧之统计SQL执行时间">
-<meta property="og:url" content="https://marklogzhu.github.io/2017/06/27/SQL/SQL小技巧之统计SQL执行时间/index.html">
+<meta property="og:title" content="SQLServer 多表筛选数据">
+<meta property="og:url" content="https://marklogzhu.github.io/2017/07/13/SQL/SQLServer多表筛选数据/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="1.计算执行SQL语句所需时间衡量SQL语句写的怎么样，除了性能方面的考虑，SQL的执行时间也常常可以体现。
-通过 SQL的内置函数 GETDATE() 就可以很方便的获取SQL执行时间了">
-<meta property="og:image" content="http://oajxivjud.bkt.clouddn.com/SQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E6%89%80%E9%9C%80%E6%97%B6%E9%97%B4%E7%BB%93%E6%9E%9C.png">
-<meta property="og:image" content="http://oajxivjud.bkt.clouddn.com/%E6%89%A7%E8%A1%8C%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E6%89%80%E9%9C%80%E8%A6%81%E7%9A%84%E6%97%B6%E9%97%B4.png">
-<meta property="og:updated_time" content="2017-06-27T13:52:15.209Z">
+<meta property="og:description" content="概述 在项目中常常出现多表数据对比的需求，今天我们就来完成下这个需求。">
+<meta property="og:image" content="http://i.imgur.com/3AsEH4B.png">
+<meta property="og:image" content="http://i.imgur.com/3PFVvDR.png">
+<meta property="og:updated_time" content="2017-07-13T05:11:30.147Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL小技巧之统计SQL执行时间">
-<meta name="twitter:description" content="1.计算执行SQL语句所需时间衡量SQL语句写的怎么样，除了性能方面的考虑，SQL的执行时间也常常可以体现。
-通过 SQL的内置函数 GETDATE() 就可以很方便的获取SQL执行时间了">
-<meta name="twitter:image" content="http://oajxivjud.bkt.clouddn.com/SQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E6%89%80%E9%9C%80%E6%97%B6%E9%97%B4%E7%BB%93%E6%9E%9C.png">
+<meta name="twitter:title" content="SQLServer 多表筛选数据">
+<meta name="twitter:description" content="概述 在项目中常常出现多表数据对比的需求，今天我们就来完成下这个需求。">
+<meta name="twitter:image" content="http://i.imgur.com/3AsEH4B.png">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -155,37 +152,41 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-SQL/SQL小技巧之统计SQL执行时间" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-SQL/SQLServer多表筛选数据" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      SQL小技巧之统计SQL执行时间
+      SQLServer 多表筛选数据
     </h1>
   
 
         
-        <a href="/2017/06/27/SQL/SQL小技巧之统计SQL执行时间/" class="archive-article-date">
-  	<time datetime="2017-06-27T13:25:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-27</time>
+        <a href="/2017/07/13/SQL/SQLServer多表筛选数据/" class="archive-article-date">
+  	<time datetime="2017-07-13T02:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-13</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-计算执行SQL语句所需时间"><a href="#1-计算执行SQL语句所需时间" class="headerlink" title="1.计算执行SQL语句所需时间"></a>1.计算执行SQL语句所需时间</h3><p>衡量SQL语句写的怎么样，除了性能方面的考虑，SQL的执行时间也常常可以体现。</p>
-<p>通过 SQL的内置函数 <strong>GETDATE()</strong> 就可以很方便的获取SQL执行时间了</p>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p> 在项目中常常出现多表数据对比的需求，今天我们就来完成下这个需求。</p>
 <a id="more"></a>
-<p>例如：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DECLARE</span> @runTime DATETIME</div><div class="line"><span class="keyword">SET</span> @runTime = <span class="keyword">GETDATE</span>()</div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> SysUser</div><div class="line"><span class="keyword">SELECT</span>  <span class="keyword">DATEDIFF</span>(MS,@runTime,<span class="keyword">GETDATE</span>())	<span class="keyword">as</span> 毫秒</div></pre></td></tr></table></figure>
-<p>结果：</p>
-<p><img src="http://oajxivjud.bkt.clouddn.com/SQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E6%89%80%E9%9C%80%E6%97%B6%E9%97%B4%E7%BB%93%E6%9E%9C.png" alt=""></p>
-<h3 id="2-计算执行SQL存储过程所需时间"><a href="#2-计算执行SQL存储过程所需时间" class="headerlink" title="2.计算执行SQL存储过程所需时间"></a>2.计算执行SQL存储过程所需时间</h3><p>同理,我们也可以统计执行一个存储过程所需时间</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">declare</span> @runTime datetime</div><div class="line"><span class="keyword">set</span> @runTime = <span class="keyword">GETDATE</span>()</div><div class="line">EXEC [dbo].[proc_test]</div><div class="line"><span class="keyword">SELECT</span>  <span class="keyword">DATEDIFF</span>(MS,@runTime,<span class="keyword">GETDATE</span>())	<span class="keyword">as</span> 毫秒</div></pre></td></tr></table></figure>
-<p>结果：</p>
-<p><img src="http://oajxivjud.bkt.clouddn.com/%E6%89%A7%E8%A1%8C%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E6%89%80%E9%9C%80%E8%A6%81%E7%9A%84%E6%97%B6%E9%97%B4.png" alt=""></p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>某小学一年级有 A、B 两个班，实现如下需求<br>1.查出两个班相同名字和年龄的学生<br>2.查出两个班不同名字和年龄的学生</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>首先我们来生成下测试数据。</p>
+<h3 id="测试数据"><a href="#测试数据" class="headerlink" title="测试数据"></a>测试数据</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- A 班</span></div><div class="line"><span class="keyword">SELECT</span> <span class="string">'张三'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'18'</span> <span class="keyword">AS</span> age <span class="keyword">INTO</span> #TEMP_A </div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'李四'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'28'</span> <span class="keyword">AS</span> age</div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'王五'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'38'</span> <span class="keyword">AS</span> age</div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'赵六'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'48'</span> <span class="keyword">AS</span> age</div><div class="line"></div><div class="line"> <span class="comment">-- B 班</span></div><div class="line"><span class="keyword">SELECT</span> <span class="string">'田七'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'18'</span> <span class="keyword">AS</span> age <span class="keyword">INTO</span> #TEMP_B </div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'老刘'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'28'</span> <span class="keyword">AS</span> age</div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'张三'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'18'</span> <span class="keyword">AS</span> age</div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'赵六'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'48'</span> <span class="keyword">AS</span> age</div></pre></td></tr></table></figure>
+<h3 id="查出两个班相同名字和年龄的学生"><a href="#查出两个班相同名字和年龄的学生" class="headerlink" title="查出两个班相同名字和年龄的学生"></a>查出两个班相同名字和年龄的学生</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>,age <span class="keyword">FROM</span>  #TEMP_A </div><div class="line"><span class="keyword">INTERSECT</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>,age <span class="keyword">FROM</span>  #TEMP_B</div></pre></td></tr></table></figure>
+<p><img src="http://i.imgur.com/3AsEH4B.png" alt=""></p>
+<h3 id="查出两个班不同名字和年龄的学生"><a href="#查出两个班不同名字和年龄的学生" class="headerlink" title="查出两个班不同名字和年龄的学生"></a>查出两个班不同名字和年龄的学生</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>,age <span class="keyword">FROM</span>  #TEMP_A</div><div class="line"><span class="keyword">EXCEPT</span> </div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>,age <span class="keyword">FROM</span>  #TEMP_B</div></pre></td></tr></table></figure>
+<p><img src="http://i.imgur.com/3PFVvDR.png" alt=""></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上的示例主要运用了以下两个运算符</p>
+<ul>
+<li>INTERSECT：返回由INTERSECT运算符左侧和右侧的查询都返回的所有非重复值。</li>
+<li>EXCEPT：返回由EXCEPT运算符左侧的查询返回、而又不包含在右侧查询所返回的值中的所有非重复值。</li>
+</ul>
+<p>注：这两个运算符需要在 SQL SERVER 2005以后才能使用</p>
 
       
 
@@ -231,6 +232,10 @@
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">SQLServer</a>
         		</li>
       		
 		</ul>
@@ -286,7 +291,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/06/27/SQL/SQL小技巧之统计SQL执行时间/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/07/13/SQL/SQLServer多表筛选数据/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -300,18 +305,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/06/28/net/批量插数据库数据/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          批量插入数据库记录
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/05/24/hexo/hexo/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">hexo</div>
+    <a href="/2017/06/30/tool/常用工具/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">常用小工具</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -325,7 +321,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="SQL/SQL小技巧之统计SQL执行时间" data-title="SQL小技巧之统计SQL执行时间" data-url="https://marklogzhu.github.io/2017/06/27/SQL/SQL小技巧之统计SQL执行时间/"></div>
+	<div class="ds-thread" data-thread-key="SQL/SQLServer多表筛选数据" data-title="SQLServer 多表筛选数据" data-url="https://marklogzhu.github.io/2017/07/13/SQL/SQLServer多表筛选数据/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

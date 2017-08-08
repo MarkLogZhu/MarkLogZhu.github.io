@@ -20,7 +20,7 @@
 谁创建？由Servlet容器创建">
 <meta property="og:image" content="http://oajxivjud.bkt.clouddn.com/responseDemo01.png">
 <meta property="og:image" content="http://oajxivjud.bkt.clouddn.com/responseDemo02.png">
-<meta property="og:updated_time" content="2017-05-24T11:42:37.806Z">
+<meta property="og:updated_time" content="2017-08-05T06:31:33.666Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Servlet之response">
 <meta name="twitter:description" content="一、Response简介Response是什么？Request代表着一个 HTTP 响应对象，里面存放着 HTTP 的响应消息
@@ -186,6 +186,19 @@
 <h4 id="Response的层次结构"><a href="#Response的层次结构" class="headerlink" title="Response的层次结构"></a>Response的层次结构</h4><pre><code>-- javax.servlet.ServletResponse
     -- javax.servlet.http.HttpServletResponse
 </code></pre><h2 id="二、常用方法"><a href="#二、常用方法" class="headerlink" title="二、常用方法"></a>二、常用方法</h2><ul>
+<li><p>设置响应编码格式</p>
+<ul>
+<li><p>setCharacterEncoding(“UTF-8”)</p>
+<pre><code>只能设置输出流中字符的编码格式，优先级最高，可以覆盖其他方法的设置
+</code></pre></li>
+<li><p>setContentType(“text/html;charset=UTF-8”)</p>
+<pre><code>设置输出流字符的编码格式的同时也可以设置浏览器的解码格式，优先级其次，只能覆盖比他优先级低的方法
+</code></pre></li>
+<li><p>setLocale(new java.util.Locale(“zh”,”CN”))</p>
+<pre><code>只能设置输出流中字符的编码格式 ，优先级最低
+</code></pre></li>
+</ul>
+</li>
 <li><p>负责向客户端(浏览器)发送数据的相关方法</p>
 <ul>
 <li>ServletOutputStream getOutputStream()<pre><code>返回适用于在响应中编写二进制数据的 ServletOutputStream
@@ -406,11 +419,11 @@ sendRedirect内部的实现原理：使用 response 设置 302 状态码和设�
   
 <nav id="article-nav">
   
-    <a href="/2017/04/07/java/Hibernate/01.Hibernate/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/04/07/java/JavaWeb/06.会话技术之Cookie和Session/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Hibernate 框架
+          会话技术之 Cookie 和 Session
         
       </div>
     </a>
@@ -565,6 +578,14 @@ var _hmt = _hmt || [];
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
@@ -573,15 +594,19 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuest</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -589,7 +614,7 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+                <a href="javascript:void(0)" class="js-tag color3">C#</a>
               </li>
              
               <li class="article-tag-list-item">

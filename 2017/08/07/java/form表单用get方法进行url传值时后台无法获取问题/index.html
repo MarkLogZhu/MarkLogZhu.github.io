@@ -6,17 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
-  <title>Tag: C# | 且听风吟的博客</title>
+  <title>form表单用 GET 方法进行 URL 传值时后台无法获取问题 | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="会点皮毛技术,立志于往深处扎根。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="且听风吟的博客">
-<meta property="og:url" content="https://marklogzhu.github.io/tags/C/index.html">
+  <meta name="description" content="问题描述&amp;lt;a href=&amp;quot;${pageContext.request.contextPath}/client?method=add&amp;quot;&amp;gt;点我&amp;lt;/a&amp;gt;
+
+&amp;lt;form action=&amp;quot;${pageContext.request.contextPath }/client?method=add&amp;quot; method=&amp;quot;get&amp;quot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="form表单用 GET 方法进行 URL 传值时后台无法获取问题">
+<meta property="og:url" content="https://marklogzhu.github.io/2017/08/07/java/form表单用get方法进行url传值时后台无法获取问题/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="会点皮毛技术,立志于往深处扎根。">
+<meta property="og:description" content="问题描述&amp;lt;a href=&amp;quot;${pageContext.request.contextPath}/client?method=add&amp;quot;&amp;gt;点我&amp;lt;/a&amp;gt;
+
+&amp;lt;form action=&amp;quot;${pageContext.request.contextPath }/client?method=add&amp;quot; method=&amp;quot;get&amp;quot">
+<meta property="og:updated_time" content="2017-08-08T01:14:52.577Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="且听风吟的博客">
-<meta name="twitter:description" content="会点皮毛技术,立志于往深处扎根。">
+<meta name="twitter:title" content="form表单用 GET 方法进行 URL 传值时后台无法获取问题">
+<meta name="twitter:description" content="问题描述&amp;lt;a href=&amp;quot;${pageContext.request.contextPath}/client?method=add&amp;quot;&amp;gt;点我&amp;lt;/a&amp;gt;
+
+&amp;lt;form action=&amp;quot;${pageContext.request.contextPath }/client?method=add&amp;quot; method=&amp;quot;get&amp;quot">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -148,60 +155,190 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-java/form表单用get方法进行url传值时后台无法获取问题" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/29/net/条码生成与打印/" class="archive-article-date">
-  	<time datetime="2016-08-29T12:11:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/29/net/条码生成与打印/">条码的生成与打印输出</a>
+    <h1 class="article-title" itemprop="name">
+      form表单用 GET 方法进行 URL 传值时后台无法获取问题
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/08/07/java/form表单用get方法进行url传值时后台无法获取问题/" class="archive-article-date">
+  	<time datetime="2017-08-07T14:03:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><pre><code>&lt;a href=&quot;${pageContext.request.contextPath}/client?method=add&quot;&gt;点我&lt;/a&gt;
+
+&lt;form action=&quot;${pageContext.request.contextPath }/client?method=add&quot; method=&quot;get&quot;&gt;
+    &lt;p&gt;First name: &lt;input type=&quot;text&quot; name=&quot;fname&quot; /&gt;&lt;/p&gt;
+    &lt;p&gt;Last name: &lt;input type=&quot;text&quot; name=&quot;lname&quot; /&gt;&lt;/p&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+&lt;/form&gt;
+</code></pre><p>form 表单使用 GET 方式提交数据，后台打印不出来参数 method 的值，在浏览器地址栏中也不显示值，地址栏显示如下：</p>
+<pre><code>http://localhost:8888/CRM/client?fname=1&amp;lname=1
+</code></pre><p>使用 POST 方式地址栏就能显示参数 method</p>
+<pre><code>http://localhost:8888/CRM/client?method=addUser
+</code></pre><a id="more"></a>
+<h2 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h2><p>表单提交时 GET 是把参数数据队列加到提交表单的 ACTION 属性所指的 URL 中，值和表单内各个字段一一对应，在URL中可以看到。自己添加的参数会被清除掉。如果需要添加参数的话，可以用一个隐藏的字段来添加，如：</p>
+<pre><code>&lt;input type=&quot;hidden&quot; name=&quot;method&quot; value=&quot;add&quot;&gt;
+</code></pre>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>欣赏此文？求鼓励，求支持！<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C#</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JAVA WEB</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/08/07/java/form表单用get方法进行url传值时后台无法获取问题/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/07/27/前端/ajax/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ajax 使用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="java/form表单用get方法进行url传值时后台无法获取问题" data-title="form表单用 GET 方法进行 URL 传值时后台无法获取问题" data-url="https://marklogzhu.github.io/2017/08/07/java/form表单用get方法进行url传值时后台无法获取问题/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"marklogzhu"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
+
 
 
           </div>
@@ -224,9 +361,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",

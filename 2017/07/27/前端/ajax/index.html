@@ -6,17 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
-  <title>Tag: C# | 且听风吟的博客</title>
+  <title>ajax 使用 | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="会点皮毛技术,立志于往深处扎根。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="且听风吟的博客">
-<meta property="og:url" content="https://marklogzhu.github.io/tags/C/index.html">
+  <meta name="description" content="ajax 是一种在无需重新加载整个网页的情况下，能够更新部分网页的技术。
+
+原生 ajax 步骤： 
+123456789101112131415161718// 1.创建一个核心对象 XMLHttpRequestxmlhttp = null;if(window.XMLHttpRequest)&amp;#123;	xmlhttp = new XMLHttpRequest();&amp;#125;else if(w">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ajax 使用">
+<meta property="og:url" content="https://marklogzhu.github.io/2017/07/27/前端/ajax/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="会点皮毛技术,立志于往深处扎根。">
+<meta property="og:description" content="ajax 是一种在无需重新加载整个网页的情况下，能够更新部分网页的技术。
+
+原生 ajax 步骤： 
+123456789101112131415161718// 1.创建一个核心对象 XMLHttpRequestxmlhttp = null;if(window.XMLHttpRequest)&amp;#123;	xmlhttp = new XMLHttpRequest();&amp;#125;else if(w">
+<meta property="og:updated_time" content="2017-07-27T13:44:19.497Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="且听风吟的博客">
-<meta name="twitter:description" content="会点皮毛技术,立志于往深处扎根。">
+<meta name="twitter:title" content="ajax 使用">
+<meta name="twitter:description" content="ajax 是一种在无需重新加载整个网页的情况下，能够更新部分网页的技术。
+
+原生 ajax 步骤： 
+123456789101112131415161718// 1.创建一个核心对象 XMLHttpRequestxmlhttp = null;if(window.XMLHttpRequest)&amp;#123;	xmlhttp = new XMLHttpRequest();&amp;#125;else if(w">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -148,60 +158,198 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-前端/ajax" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/08/29/net/条码生成与打印/" class="archive-article-date">
-  	<time datetime="2016-08-29T12:11:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/29/net/条码生成与打印/">条码的生成与打印输出</a>
+    <h1 class="article-title" itemprop="name">
+      ajax 使用
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/07/27/前端/ajax/" class="archive-article-date">
+  	<time datetime="2017-07-27T12:39:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>ajax 是一种在无需重新加载整个网页的情况下，能够更新部分网页的技术。</p>
+</blockquote>
+<h2 id="原生-ajax"><a href="#原生-ajax" class="headerlink" title="原生 ajax"></a>原生 ajax</h2><p><strong> 步骤： </strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1.创建一个核心对象 XMLHttpRequest</span></div><div class="line">xmlhttp = <span class="literal">null</span>;</div><div class="line"><span class="keyword">if</span>(<span class="built_in">window</span>.XMLHttpRequest)&#123;</div><div class="line">	xmlhttp = <span class="keyword">new</span> XMLHttpRequest();</div><div class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">window</span>.ActiveXObject)&#123;</div><div class="line">	xmlhttp = <span class="keyword">new</span> ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">// 2.编写一个回调函数</span></div><div class="line">xmlhttp.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(xmlhttp.readyState == <span class="number">4</span> &amp;&amp; xmlhttp.status == <span class="number">200</span>)&#123;</div><div class="line">		<span class="comment">//接受服务器回送过来的数据</span></div><div class="line">		alert(xmlhttp.responseText);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 3.编写请求方式及请求路径</span></div><div class="line">xmlhttp.open(<span class="string">"get"</span>.<span class="string">"$&#123;pageContext.request.contextPath&#125;/ajax1"</span>)</div><div class="line"><span class="comment">// 4.发送请求</span></div><div class="line">xmlhttp.send();</div></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>欣赏此文？求鼓励，求支持！<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C#</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">jQuest</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/07/27/前端/ajax/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/08/07/java/form表单用get方法进行url传值时后台无法获取问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          form表单用 GET 方法进行 URL 传值时后台无法获取问题
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/07/13/SQL/SQLServer多表筛选数据/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SQLServer 多表筛选数据</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="前端/ajax" data-title="ajax 使用" data-url="https://marklogzhu.github.io/2017/07/27/前端/ajax/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"marklogzhu"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-    
+
 
 
           </div>
@@ -224,9 +372,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",

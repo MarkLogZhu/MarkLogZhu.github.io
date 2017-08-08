@@ -150,19 +150,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-java/JavaWeb/06.会话技术之Cookie和Session" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-java/Hibernate/01.Hibernate" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/07/java/JavaWeb/06.会话技术之Cookie和Session/">会话技术之 Cookie 和 Session</a>
+      <a class="article-title" href="/2017/04/07/java/Hibernate/01.Hibernate/">Hibernate 框架</a>
     </h1>
   
 
         
-        <a href="/2017/04/07/java/JavaWeb/06.会话技术之Cookie和Session/" class="archive-article-date">
+        <a href="/2017/04/07/java/Hibernate/01.Hibernate/" class="archive-article-date">
   	<time datetime="2017-04-07T13:34:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-07</time>
 </a>
         
@@ -170,10 +170,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、会话"><a href="#一、会话" class="headerlink" title="一、会话"></a>一、会话</h2><h4 id="会话是什么？"><a href="#会话是什么？" class="headerlink" title="会话是什么？"></a>会话是什么？</h4><p>会话可简单理解为：用户开一个浏览器，点击多个超链接，访问服务器多个web资源，然后关闭浏览器，整个过程称之为一个会话。</p>
-<p>有状态会话：一个同学来过教室，下次再来教室，我们会知道这个同学曾经来过，这称之为有状态会话。</p>
+        <h2 id="一、Hibernate-简介"><a href="#一、Hibernate-简介" class="headerlink" title="一、Hibernate 简介"></a>一、Hibernate 简介</h2><p>在了解 Hibernate 之前，我们先了解下什么是 ORM 。</p>
+<h3 id="1-1-ORM-概述"><a href="#1-1-ORM-概述" class="headerlink" title="1.1 ORM 概述"></a>1.1 ORM 概述</h3><p>ORM 全称为 Object Relational Mapping，翻译过来就是对象关系映射</p>
+<pre><code>* O：面向对象领域的 Object（JavaBean对象）
+* R：关系数据库领域的 Relational（表的结构）
+* M：映射 Mapping（XML的配置文件）
+</code></pre><h3 id="1-2-什么是-Hibernate"><a href="#1-2-什么是-Hibernate" class="headerlink" title="1.2 什么是 Hibernate"></a>1.2 什么是 Hibernate</h3><p>Hibernate 是一个开放源代码的对象关系映射框架。它对 JDBC 进行了非常轻量级的对象封装，它将 POJO 与数据库表建立映射关系，是一个全自动的 ORM 框架。</p>
+<h3 id="1-3-Hibernate-能干什么"><a href="#1-3-Hibernate-能干什么" class="headerlink" title="1.3 Hibernate 能干什么"></a>1.3 Hibernate 能干什么</h3><ul>
+<li>自动生成 SQL 语句并执行</li>
+<li>数据持久化</li>
+</ul>
         
-          <a class="article-more-a" href="/2017/04/07/java/JavaWeb/06.会话技术之Cookie和Session/#more">more >></a>
+          <a class="article-more-a" href="/2017/04/07/java/Hibernate/01.Hibernate/#more">more >></a>
         
       
 
@@ -187,7 +195,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JAVA WEB</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">JAVA</a>
         		</li>
       		
 		</ul>
@@ -197,7 +205,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/07/java/JavaWeb/06.会话技术之Cookie和Session/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/04/07/java/Hibernate/01.Hibernate/">展开全文 >></a>
         </p>
       
 
@@ -748,14 +756,6 @@ var _hmt = _hmt || [];
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
@@ -764,7 +764,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -780,7 +788,7 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">

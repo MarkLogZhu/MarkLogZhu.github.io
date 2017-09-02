@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+  <title>CSS小结 | 且听风吟的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="HTML+CSS基础课程汇总知识，地址为：http://www.imooc.com/learn/9
+
+一、CSS 概念描述1.1 什么是 CSSCSS 全称为“层叠样式表 (Cascading Style Sheets)”，它主要是用于定义HTML内容在浏览器内的显示样式，如文字大小、颜色、字体加粗等。
+1.2 CSS样式的优势使用CSS样式的一个好处是通过定义某个样式，可以让不同网页位置的文字">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS小结">
+<meta property="og:url" content="https://marklogzhu.github.io/2017/09/02/JavaEE学习/2.CSS/CSS小结/index.html">
+<meta property="og:site_name" content="且听风吟的博客">
+<meta property="og:description" content="HTML+CSS基础课程汇总知识，地址为：http://www.imooc.com/learn/9
+
+一、CSS 概念描述1.1 什么是 CSSCSS 全称为“层叠样式表 (Cascading Style Sheets)”，它主要是用于定义HTML内容在浏览器内的显示样式，如文字大小、颜色、字体加粗等。
+1.2 CSS样式的优势使用CSS样式的一个好处是通过定义某个样式，可以让不同网页位置的文字">
+<meta property="og:image" content="http://static.mukewang.com/img/540e62c60001c56a06760417.jpg">
+<meta property="og:image" content="http://static.mukewang.com/img/540e632b0001f5f506760417.jpg">
+<meta property="og:image" content="http://static.mukewang.com/img/540e63b50001f6a206760417.jpg">
+<meta property="og:image" content="http://static.mukewang.com/img/53a00b130001e86707360547.jpg">
+<meta property="og:image" content="http://static.mukewang.com/img/53a00d2b00015c4b06190509.jpg">
+<meta property="og:image" content="http://static.mukewang.com/img/541a4bfc0001abef05940489.jpg">
+<meta property="og:image" content="http://static.mukewang.com/img/54c5b4120001f20808000902.jpg">
+<meta property="og:updated_time" content="2017-09-02T08:42:06.084Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS小结">
+<meta name="twitter:description" content="HTML+CSS基础课程汇总知识，地址为：http://www.imooc.com/learn/9
+
+一、CSS 概念描述1.1 什么是 CSSCSS 全称为“层叠样式表 (Cascading Style Sheets)”，它主要是用于定义HTML内容在浏览器内的显示样式，如文字大小、颜色、字体加粗等。
+1.2 CSS样式的优势使用CSS样式的一个好处是通过定义某个样式，可以让不同网页位置的文字">
+<meta name="twitter:image" content="http://static.mukewang.com/img/540e62c60001c56a06760417.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/assets/img/favicon.ico">
+  
+  <link rel="stylesheet" type="text/css" href="/main.d221b8.css">
+  <style type="text/css">
+  
+    #container.show {
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+    }
+  </style>
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      
+<div class="overlay" style="background: #4d4d4d"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/assets/img/UserAvatar.png" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">且听风吟</a></h1>
+		</hgroup>
+		
+		<p class="header-subtitle">且听风吟,且待琴终。</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/随笔/">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/MarkLogZhu" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:marklogzhu@163.com" title="mail"><i class="icon-mail"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+	<div class="btnctn js-mobile-btnctn">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/img/UserAvatar.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author">且听风吟</h1>
+			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>且听风吟,且待琴终。<i class="icon icon-quo-right"></i></p>
+			
+			
+			
+				
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/MarkLogZhu" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:marklogzhu@163.com" title="mail"><i class="icon-mail"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 50%">
+				
+				
+					<li style="width: 50%"><a href="/">主页</a></li>
+		        
+					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-JavaEE学习/2.CSS/CSS小结" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSS小结
+    </h1>
+  
+
+        
+        <a href="/2017/09/02/JavaEE学习/2.CSS/CSS小结/" class="archive-article-date">
+  	<time datetime="2017-09-02T09:03:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>HTML+CSS基础课程汇总知识，地址为：<a href="http://www.imooc.com/learn/9" target="_blank" rel="external">http://www.imooc.com/learn/9</a></p>
+</blockquote>
+<h2 id="一、CSS-概念描述"><a href="#一、CSS-概念描述" class="headerlink" title="一、CSS 概念描述"></a>一、CSS 概念描述</h2><h3 id="1-1-什么是-CSS"><a href="#1-1-什么是-CSS" class="headerlink" title="1.1 什么是 CSS"></a>1.1 什么是 CSS</h3><p>CSS 全称为“层叠样式表 (Cascading Style Sheets)”，它主要是用于定义HTML内容在浏览器内的显示样式，如文字大小、颜色、字体加粗等。</p>
+<h3 id="1-2-CSS样式的优势"><a href="#1-2-CSS样式的优势" class="headerlink" title="1.2 CSS样式的优势"></a>1.2 CSS样式的优势</h3><p>使用CSS样式的一个好处是通过定义某个样式，可以让不同网页位置的文字有着统一的字体、字号或者颜色等。</p>
+<a id="more"></a>
+<h3 id="1-3-CSS-语法"><a href="#1-3-CSS-语法" class="headerlink" title="1.3 CSS 语法"></a>1.3 CSS 语法</h3><p>css 样式由选择符和声明组成，而声明又由属性和值组成，如下所示：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>&#123;</div><div class="line">   <span class="attribute">font-size</span>:<span class="number">12px</span>   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>p 是选择器，font-size 是属性，12px 就是属性值</p>
+<p>选择符：又称选择器，指明网页中要应用样式规则的元素，如上面的例子是将网页中所有的段（p）的文字将变成蓝色，而其他的元素不会受到影响。</p>
+<p>声明：在英文大括号“｛｝”中的的就是声明，属性和值之间用英文冒号“：”分隔。当有多条声明时，中间可以英文分号“;”分隔，如下所示：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>&#123;</div><div class="line">	<span class="attribute">font-size</span>:<span class="number">12px</span>;</div><div class="line">	<span class="attribute">color</span>:red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="1-4-CSS-注释代码"><a href="#1-4-CSS-注释代码" class="headerlink" title="1.4 CSS 注释代码"></a>1.4 CSS 注释代码</h3><p>在 CSS 中注释用  <code>/*注释语句*/</code> 来表明</p>
+<h2 id="二、CSS-代码存放位置"><a href="#二、CSS-代码存放位置" class="headerlink" title="二、CSS 代码存放位置"></a>二、CSS 代码存放位置</h2><p>CSS有以下三种形式：<br>    1.内联式<br>    2.嵌入式<br>    3.外部式</p>
+<h3 id="2-1-内联式"><a href="#2-1-内联式" class="headerlink" title="2.1 内联式"></a>2.1 内联式</h3><p>内联式 css 样式表就是把 css 代码直接写在现有的 HTML 标签中，如下面代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"color:red"</span>&gt;</span>这里文字是红色。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>并且 css 样式代码要写在 style=””双引号中，如果有多条 css 样式代码设置可以写在一起，中间用分号隔开。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"color:red;font-size:12px"</span>&gt;</span>这里文字是红色。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="2-2-嵌入式"><a href="#2-2-嵌入式" class="headerlink" title="2.2 嵌入式"></a>2.2 嵌入式</h3><p>嵌入式css样式，就是可以把css样式代码写在<style type="text/css"></style>标签之间。如下面代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="css"></span></div><div class="line"><span class="selector-tag">span</span>&#123;</div><div class="line">   <span class="attribute">color</span>:red;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>嵌入式css样式必须写在 <code>&lt;style&gt;&lt;/style&gt;</code> 之间，并且一般情况下嵌入式css样式写在 <code>&lt;head&gt;&lt;/head&gt;</code> 之间。</p>
+<h3 id="2-3-外部式"><a href="#2-3-外部式" class="headerlink" title="2.3 外部式"></a>2.3 外部式</h3><p>外部式css样式(也可称为外联式)就是把css代码写一个单独的外部文件中，这个css样式文件以“.css”为扩展名，在 <code>&lt;head&gt;</code> 内（不是在 <code>&lt;style&gt;</code> 标签内）使用 <code>&lt;link&gt;</code> 标签将css样式文件链接到HTML文件内，如下面代码：<br><figure class="highlight flix"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;link href=<span class="string">"base.css"</span> <span class="keyword">rel</span>=<span class="string">"stylesheet"</span> <span class="keyword">type</span>=<span class="string">"text/css"</span> /&gt;</div></pre></td></tr></table></figure></p>
+<p>注意：</p>
+<p>1、css样式文件名称以有意义的英文字母命名，如 main.css。</p>
+<p>2、rel=”stylesheet” type=”text/css” 是固定写法不可修改。</p>
+<p>3、<code>&lt;link&gt;</code> 标签位置一般写在 <code>&lt;head&gt;</code> 标签之内。</p>
+<h3 id="2-4-三种方法的优先级"><a href="#2-4-三种方法的优先级" class="headerlink" title="2.4 三种方法的优先级"></a>2.4 三种方法的优先级</h3><p> 根据就近原则（离被设置元素越近优先级别越高）来说，应该是 <code>内联式 &gt; 嵌入式 &gt; 外部式</code></p>
+<h2 id="三、CSS-选择器"><a href="#三、CSS-选择器" class="headerlink" title="三、CSS 选择器"></a>三、CSS 选择器</h2><h3 id="3-1-什么是选择器"><a href="#3-1-什么是选择器" class="headerlink" title="3.1 什么是选择器"></a>3.1 什么是选择器</h3><p>每一条css样式声明（定义）由两部分组成，形式如下：<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">选择器&#123;</div><div class="line">    样式<span class="comment">;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>“选择器”指明了{}中的“样式”的作用对象，也就是“样式”作用于网页中的哪些元素。</p>
+<h3 id="3-2-标签选择器"><a href="#3-2-标签选择器" class="headerlink" title="3.2 标签选择器"></a>3.2 标签选择器</h3><p>标签选择器其实就是html代码中的标签。如 <code>&lt;html&gt;、&lt;body&gt;、&lt;h1&gt;、&lt;p&gt;、&lt;img&gt;</code>。</p>
+<h3 id="3-3-类选择器"><a href="#3-3-类选择器" class="headerlink" title="3.3 类选择器"></a>3.3 类选择器</h3><p>语法：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.类选器名称&#123;css样式代码;&#125;</div><div class="line"></div><div class="line">注意</div><div class="line"><span class="number">1</span>、以英文圆点开头</div><div class="line"><span class="number">2</span>、其中类选器名称可以任意起名（但不要起中文噢）</div></pre></td></tr></table></figure>
+<h3 id="3-4-id-选择器"><a href="#3-4-id-选择器" class="headerlink" title="3.4 id 选择器"></a>3.4 id 选择器</h3><p>在很多方面，ID选择器都类似于类选择符，但也有一些重要的区别：</p>
+<ul>
+<li><p>为标签设置id=”ID名称”，而不是class=”类名称”。</p>
+</li>
+<li><p>ID选择符的前面是井号（#）号，而不是英文圆点（.）。</p>
+</li>
+</ul>
+<h3 id="3-5-类和ID选择器的区别"><a href="#3-5-类和ID选择器的区别" class="headerlink" title="3.5 类和ID选择器的区别"></a>3.5 类和ID选择器的区别</h3><p>相同点：可以应用于任何元素<br>不同点：</p>
+<p>1、ID选择器只能在文档中使用一次。与类选择器不同，在一个HTML文档中，ID选择器只能使用一次，而且仅一次。而类选择器可以使用多次。<br>2、可以使用类选择器词列表方法为一个元素同时设置多个样式。我们可以为一个元素同时设多个样式，但只可以用类选择器的方法实现，ID选择器是不可以的（不能使用 ID 词列表）。</p>
+<h3 id="3-6-子选择器"><a href="#3-6-子选择器" class="headerlink" title="3.6 子选择器"></a>3.6 子选择器</h3><p>还有一个比较有用的选择器子选择器，即大于符号(&gt;),用于选择指定标签元素的第一代子元素。如：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.food</span>&gt;<span class="selector-tag">li</span>&#123;<span class="attribute">border</span>:<span class="number">1px</span> solid red;&#125;</div></pre></td></tr></table></figure></p>
+<p>这行代码会使class名为food下的子元素 li 加入红色实线边框。</p>
+<h3 id="3-7-包含-后代-选择器"><a href="#3-7-包含-后代-选择器" class="headerlink" title="3.7 包含(后代)选择器"></a>3.7 包含(后代)选择器</h3><p>包含选择器，即加入空格,用于选择指定标签元素下的后辈元素。如：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.first</span>  <span class="selector-tag">span</span>&#123;<span class="attribute">color</span>:red;&#125;</div></pre></td></tr></table></figure></p>
+<p>这行代码会使字体颜色变为红色。</p>
+<p>请注意这个选择器与子选择器的区别，子选择器（child selector）仅是指它的直接后代，或者你可以理解为作用于子元素的第一代后代。而后代选择器是作用于所有子后代元素。后代选择器通过空格来进行选择，而子选择器是通过“&gt;”进行选择。</p>
+<p>总结：&gt;作用于元素的第一代后代，空格作用于元素的所有后代。</p>
+<h3 id="3-8-通用选择器"><a href="#3-8-通用选择器" class="headerlink" title="3.8 通用选择器"></a>3.8 通用选择器</h3><p>通用选择器是功能最强大的选择器，它使用一个（*）号指定，它的作用是匹配html中所有标签元素，如下使用下面代码使用html中任意标签元素字体颜色全部设置为红色：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* &#123;<span class="attribute">color</span>:red;&#125;</div></pre></td></tr></table></figure>
+<h3 id="3-9-伪类选择符"><a href="#3-9-伪类选择符" class="headerlink" title="3.9 伪类选择符"></a>3.9 伪类选择符</h3><p>更有趣的是伪类选择符，为什么叫做伪类选择符，它允许给html不存在的标签（标签的某种状态）设置样式，比如说我们给html中一个标签元素的鼠标滑过的状态来设置字体颜色：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>&#123;<span class="attribute">color</span>:red;&#125;</div></pre></td></tr></table></figure></p>
+<p>上面一行代码就是为 a 标签鼠标滑过的状态设置字体颜色变红。这样就会使a标签的文字加入鼠标滑过字体颜色变为红色特效。</p>
+<p>关于伪选择符：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">关于伪类选择符，到目前为止，可以兼容所有浏鉴器的“伪类选择符”就是 <span class="selector-tag">a</span> 标签上使用 :hover 了（其实伪类选择符还有很多，尤其是 css3 中，但是因为不能兼容所有浏览器，这里只是讲了这一种最常用的）。</div><div class="line">其实 :hover 可以放在任意的标签上，比如说 <span class="selector-tag">p</span>:hover，但是它们的兼容性也是很不好的，所以现在比较常用的还是 <span class="selector-tag">a</span>:hover 的组合。</div></pre></td></tr></table></figure></p>
+<h3 id="3-10-分组选择符"><a href="#3-10-分组选择符" class="headerlink" title="3.10 分组选择符"></a>3.10 分组选择符</h3><p>当你想为 html 中多个标签元素设置同一个样式时，可以使用分组选择符（，），如下代码为 h1、span标签同时设置字体颜色为红色：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">h1</span>,<span class="selector-tag">span</span>&#123;<span class="attribute">color</span>:red;&#125;</div></pre></td></tr></table></figure>
+<p>它相当于下面两行代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">h1</span>&#123;<span class="attribute">color</span>:red;&#125;</div><div class="line"><span class="selector-tag">span</span>&#123;<span class="attribute">color</span>:red;&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="四、CSS-的继承、层叠和特殊性"><a href="#四、CSS-的继承、层叠和特殊性" class="headerlink" title="四、CSS 的继承、层叠和特殊性"></a>四、CSS 的继承、层叠和特殊性</h2><h3 id="4-1-继承"><a href="#4-1-继承" class="headerlink" title="4.1 继承"></a>4.1 继承</h3><p>CSS的某些样式是具有继承性的，那么什么是继承呢？继承是一种规则，它允许样式不仅应用于某个特定html标签元素，而且应用于其后代。比如下面代码：如某种颜色应用于p标签，这个颜色设置不仅应用p标签，还应用于p标签中的所有子元素文本，这里子元素为span标签。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">p&#123;color:red;&#125;</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>三年级时，我还是一个<span class="tag">&lt;<span class="name">span</span>&gt;</span>胆小如鼠<span class="tag">&lt;/<span class="name">span</span>&gt;</span>的小女孩。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>执行上面的代码发现p中的文本与span中的文本都设置为了红色。但注意有一些css样式是不具有继承性的。如border:1px solid red;<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">p&#123;border:1px solid red;&#125;</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>三年级时，我还是一个<span class="tag">&lt;<span class="name">span</span>&gt;</span>胆小如鼠<span class="tag">&lt;/<span class="name">span</span>&gt;</span>的小女孩。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>在上面例子中它代码的作用只是给p标签设置了边框为1像素、红色、实心边框线，而对于子元素span是没用起到作用的。</p>
+<h3 id="4-2-特殊性"><a href="#4-2-特殊性" class="headerlink" title="4.2 特殊性"></a>4.2 特殊性</h3><p>有的时候我们为同一个元素设置了不同的CSS样式代码，那么元素会启用哪一个CSS样式呢?我们来看一下面的代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">p&#123;color:red;&#125;</div><div class="line">.first&#123;color:green;&#125;</div><div class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"first"</span>&gt;</span>三年级时，我还是一个<span class="tag">&lt;<span class="name">span</span>&gt;</span>胆小如鼠<span class="tag">&lt;/<span class="name">span</span>&gt;</span>的小女孩。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>p和.first都匹配到了p这个标签上，那么会显示哪种颜色呢？green是正确的颜色，那么为什么呢？是因为浏览器是根据权值来判断使用哪种css样式的，权值高的就使用哪种css样式。</p>
+<p>下面是权值的规则：</p>
+<p>标签的权值为1，类选择符的权值为10，ID选择符的权值最高为100。例如下面的代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>&#123;<span class="attribute">color</span>:red;&#125; <span class="comment">/*权值为1*/</span></div><div class="line"><span class="selector-tag">p</span> <span class="selector-tag">span</span>&#123;<span class="attribute">color</span>:green;&#125; <span class="comment">/*权值为1+1=2*/</span></div><div class="line"><span class="selector-class">.warning</span>&#123;<span class="attribute">color</span>:white;&#125; <span class="comment">/*权值为10*/</span></div><div class="line"><span class="selector-tag">p</span> <span class="selector-tag">span</span><span class="selector-class">.warning</span>&#123;<span class="attribute">color</span>:purple;&#125; <span class="comment">/*权值为1+1+10=12*/</span></div><div class="line"><span class="selector-id">#footer</span> <span class="selector-class">.note</span> <span class="selector-tag">p</span>&#123;<span class="attribute">color</span>:yellow;&#125; <span class="comment">/*权值为100+10+1=111*/</span></div></pre></td></tr></table></figure></p>
+<p>注意：还有一个权值比较特殊–继承也有权值但很低，有的文献提出它只有0.1，所以可以理解为继承的权值最低。</p>
+<h3 id="4-3-层叠"><a href="#4-3-层叠" class="headerlink" title="4.3 层叠"></a>4.3 层叠</h3><p>我们来思考一个问题：如果在html文件中对于同一个元素可以有多个css样式存在并且这多个css样式具有相同权重值怎么办？</p>
+<p>层叠就是在html文件中对于同一个元素可以有多个css样式存在，当有相同权重的样式存在时，会根据这些css样式的前后顺序来决定，处于最后面的css样式会被应用。</p>
+<p>如下面代码:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">p&#123;color:red;&#125;</div><div class="line">p&#123;color:green;&#125;</div><div class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"first"</span>&gt;</span>三年级时，我还是一个<span class="tag">&lt;<span class="name">span</span>&gt;</span>胆小如鼠<span class="tag">&lt;/<span class="name">span</span>&gt;</span>的小女孩。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>最后 p 中的文本会设置为green，这个层叠很好理解，理解为后面的样式会覆盖前面的样式。</p>
+<p>所以前面的css样式优先级就不难理解了：内联样式表（标签内部）&gt; 嵌入样式表（当前文件中）&gt; 外部样式表（外部文件中）。</p>
+<h3 id="4-4-重要性"><a href="#4-4-重要性" class="headerlink" title="4.4 重要性"></a>4.4 重要性</h3><p>我们在做网页代码的时，有些特殊的情况需要为某些样式设置具有最高权值，怎么办？这时候我们可以使用!important来解决。</p>
+<p>如下代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">p&#123;color:red!important;&#125;</div><div class="line">p&#123;color:green;&#125;</div><div class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"first"</span>&gt;</span>三年级时，我还是一个<span class="tag">&lt;<span class="name">span</span>&gt;</span>胆小如鼠<span class="tag">&lt;/<span class="name">span</span>&gt;</span>的小女孩。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这时 p 段落中的文本会显示的red红色。</p>
+<p>注意：!important要写在分号的前面</p>
+<p>这里注意当网页制作者不设置css样式时，浏览器会按照自己的一套样式来显示网页。并且用户也可以在浏览器中设置自己习惯的样式，比如有的用户习惯把字号设置为大一些，使其查看网页的文本更加清楚。这时注意样式优先级为：浏览器默认的样式 &lt; 网页制作者样式 &lt; 用户自己设置的样式，但记住!important优先级样式是个例外，权值高于用户自己设置的样式。</p>
+<h2 id="五、CSS-格式化排版"><a href="#五、CSS-格式化排版" class="headerlink" title="五、CSS 格式化排版"></a>五、CSS 格式化排版</h2><h3 id="5-1-文字排版–字体"><a href="#5-1-文字排版–字体" class="headerlink" title="5.1 文字排版–字体"></a>5.1 文字排版–字体</h3><p>我们可以使用css样式为网页中的文字设置字体、字号、颜色等样式属性。下面我们来看一个例子，下面代码实现：为网页中的文字设置字体为宋体。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">font-family</span>:<span class="string">"宋体"</span>;&#125;</div></pre></td></tr></table></figure></p>
+<p>这里注意不要设置不常用的字体，因为如果用户本地电脑上如果没有安装你设置的字体，就会显示浏览器默认的字体。（因为用户是否可以看到你设置的字体样式取决于用户本地电脑上是否安装你设置的字体。）<br>现在一般网页喜欢设置“微软雅黑”，因为这种字体即美观又可以在客户端安全的显示出来（用户本地一般都是默认安装的）。如下代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">font-family</span>:<span class="string">"Microsoft Yahei"</span>;&#125;</div></pre></td></tr></table></figure></p>
+<p>或<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">font-family</span>:<span class="string">"微软雅黑"</span>;&#125;</div></pre></td></tr></table></figure></p>
+<p>注意：第一种方法比第二种方法兼容性更好一些。</p>
+<h3 id="5-2-文字排版–字号、颜色"><a href="#5-2-文字排版–字号、颜色" class="headerlink" title="5.2 文字排版–字号、颜色"></a>5.2 文字排版–字号、颜色</h3><p>可以使用下面代码设置网页中文字的字号为12像素，并把字体颜色设置为#666(灰色)：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span>&#123;</div><div class="line">	<span class="attribute">font-size</span>:<span class="number">12px</span>;<span class="attribute">color</span>:<span class="number">#666</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="5-3-文字排版–粗体"><a href="#5-3-文字排版–粗体" class="headerlink" title="5.3 文字排版–粗体"></a>5.3 文字排版–粗体</h3><p>我们还可以使用css样式来改变文字的样式：粗体、斜体、下划线、删除线，可以使用下面代码实现设置文字以粗体样式显示出来。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">font-weight</span>:bold;&#125;</div></pre></td></tr></table></figure></p>
+<p>在这里也可以看到，如果想为文字设置粗体是有单独的css样式来实现的，再不用为了实现粗体样式而使用h1-h6或strong标签了。</p>
+<h3 id="5-4-文字排版–斜体"><a href="#5-4-文字排版–斜体" class="headerlink" title="5.4 文字排版–斜体"></a>5.4 文字排版–斜体</h3><p>以下代码可以实现文字以斜体样式在浏览器中显示：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">p a&#123;font-style:italic;&#125;</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>三年级时，我还是一个<span class="tag">&lt;<span class="name">a</span>&gt;</span>胆小如鼠<span class="tag">&lt;/<span class="name">a</span>&gt;</span>的小女孩。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="5-5-文字排版–下划线"><a href="#5-5-文字排版–下划线" class="headerlink" title="5.5 文字排版–下划线"></a>5.5 文字排版–下划线</h3><p>有些情况下想为文字设置为下划线样式，这样可以在视觉上强调文字，可以使用下面代码来实现：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">p a&#123;text-decoration:underline;&#125;</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>三年级时，我还是一个<span class="tag">&lt;<span class="name">a</span>&gt;</span>胆小如鼠<span class="tag">&lt;/<span class="name">a</span>&gt;</span>的小女孩。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="5-6-文字排版–删除线"><a href="#5-6-文字排版–删除线" class="headerlink" title="5.6 文字排版–删除线"></a>5.6 文字排版–删除线</h3><p>如果想在网页上设置删除线怎么办，这种场景中电商网站上常会见到</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">text-decoration</span>:line-through;&#125;</div></pre></td></tr></table></figure>
+<h3 id="5-7-段落排版–缩进"><a href="#5-7-段落排版–缩进" class="headerlink" title="5.7 段落排版–缩进"></a>5.7 段落排版–缩进</h3><p>中文文字中的段前习惯空两个文字的空白，这个特殊的样式可以用下面代码来实现：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>&#123;<span class="attribute">text-indent</span>:<span class="number">2em</span>;&#125;</div></pre></td></tr></table></figure>
+<p>注意：2em的意思就是文字的2倍大小</p>
+<h3 id="5-8-段落排版–行间距（行高）"><a href="#5-8-段落排版–行间距（行高）" class="headerlink" title="5.8 段落排版–行间距（行高）"></a>5.8 段落排版–行间距（行高）</h3><p>我们来学习一下另一个在段落排版中起重要作用的行间距（行高）属性（line-height），如下代码实现设置段落行间距为1.5倍。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>&#123;<span class="attribute">line-height</span>:<span class="number">1.5em</span>;&#125;</div></pre></td></tr></table></figure>
+<h3 id="5-9-段落排版–中文字间距、字母间距"><a href="#5-9-段落排版–中文字间距、字母间距" class="headerlink" title="5.9 段落排版–中文字间距、字母间距"></a>5.9 段落排版–中文字间距、字母间距</h3><p>中文字间隔、字母间隔设置：</p>
+<p>如果想在网页排版中设置文字间隔或者字母间隔就可以使用    letter-spacing 来实现，如下面代码：<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">h1&#123;</div><div class="line">    letter-spacing:<span class="number">50</span>px;</div><div class="line">&#125;</div><div class="line">......</div><div class="line">&lt;h1&gt;了不起的盖茨比&lt;/h1&gt;</div><div class="line">注意：这个样式使用在英文单词时，是设置字母与字母之间的间距。</div></pre></td></tr></table></figure></p>
+<p>单词间距设置：</p>
+<p>如果我想设置英文单词之间的间距呢？可以使用 word-spacing 来实现。如下代码：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">h1&#123;</div><div class="line">    <span class="built_in">word</span>-spacing:<span class="number">50</span>px;</div><div class="line">&#125;</div><div class="line">...</div><div class="line">&lt;h1&gt;welcome <span class="keyword">to</span> imooc!&lt;/h1&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="5-10-段落排版–对齐"><a href="#5-10-段落排版–对齐" class="headerlink" title="5.10 段落排版–对齐"></a>5.10 段落排版–对齐</h3><p>想为块状元素中的文本、图片设置居中样式吗？可以使用text-align样式代码。<br>如下代码可实现文本居中显示<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">h1&#123;</div><div class="line">    text-align:center;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>了不起的盖茨比<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>同样可以设置居左：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">h1&#123;</div><div class="line">    text-align:left;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>了不起的盖茨比<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>还可以设置居右：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">h1&#123;</div><div class="line">    text-align:right;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>了不起的盖茨比<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="六、-CSS-盒模型"><a href="#六、-CSS-盒模型" class="headerlink" title="六、 CSS 盒模型"></a>六、 CSS 盒模型</h2><h3 id="6-1-元素分类"><a href="#6-1-元素分类" class="headerlink" title="6.1 元素分类"></a>6.1 元素分类</h3><p>在讲解CSS布局之前，我们需要提前知道一些知识，在CSS中，html中的标签元素大体被分为三种不同的类型：块状元素、内联元素(又叫行内元素)和内联块状元素。</p>
+<p>常用的块状元素有：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>、<span class="tag">&lt;<span class="name">p</span>&gt;</span>、<span class="tag">&lt;<span class="name">h1</span>&gt;</span>...<span class="tag">&lt;<span class="name">h6</span>&gt;</span>、<span class="tag">&lt;<span class="name">ol</span>&gt;</span>、<span class="tag">&lt;<span class="name">ul</span>&gt;</span>、<span class="tag">&lt;<span class="name">dl</span>&gt;</span>、<span class="tag">&lt;<span class="name">table</span>&gt;</span>、<span class="tag">&lt;<span class="name">address</span>&gt;</span>、<span class="tag">&lt;<span class="name">blockquote</span>&gt;</span> 、<span class="tag">&lt;<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>常用的内联元素有：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span>&gt;</span>、<span class="tag">&lt;<span class="name">span</span>&gt;</span>、<span class="tag">&lt;<span class="name">br</span>&gt;</span>、<span class="tag">&lt;<span class="name">i</span>&gt;</span>、<span class="tag">&lt;<span class="name">em</span>&gt;</span>、<span class="tag">&lt;<span class="name">strong</span>&gt;</span>、<span class="tag">&lt;<span class="name">label</span>&gt;</span>、<span class="tag">&lt;<span class="name">q</span>&gt;</span>、<span class="tag">&lt;<span class="name">var</span>&gt;</span>、<span class="tag">&lt;<span class="name">cite</span>&gt;</span>、<span class="tag">&lt;<span class="name">code</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>常用的内联块状元素有：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">img</span>&gt;</span>、<span class="tag">&lt;<span class="name">input</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="6-2-元素分类–块级元素"><a href="#6-2-元素分类–块级元素" class="headerlink" title="6.2 元素分类–块级元素"></a>6.2 元素分类–块级元素</h3><p>什么是块级元素？在html中 <code>&lt;div&gt;、 &lt;p&gt;、&lt;h1&gt;、&lt;form&gt;、&lt;ul&gt;</code> 和  <code>&lt;li&gt;</code> 就是块级元素。设置display:block就是将元素显示为块级元素。如下代码就是将内联元素a转换为块状元素，从而使a元素具有块状元素特点。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">a</span>&#123;<span class="attribute">display</span>:block;&#125;</div></pre></td></tr></table></figure></p>
+<p>块级元素特点：</p>
+<p>1、每个块级元素都从新的一行开始，并且其后的元素也另起一行。（真霸道，一个块级元素独占一行）<br>2、元素的高度、宽度、行高以及顶和底边距都可设置。<br>3、元素宽度在不设置的情况下，是它本身父容器的100%（和父元素的宽度一致），除非设定一个宽度。</p>
+<h3 id="6-3-元素分类–内联元素"><a href="#6-3-元素分类–内联元素" class="headerlink" title="6.3 元素分类–内联元素"></a>6.3 元素分类–内联元素</h3><p>在html中， <code>&lt;span&gt;、&lt;a&gt;、&lt;label&gt;、 &lt;strong&gt;</code> 和 <code>&lt;em&gt;</code> 就是典型的内联元素（行内元素）（inline）元素。当然块状元素也可以通过代码display:inline将元素设置为内联元素。如下代码就是将块状元素div转换为内联元素，从而使 div 元素具有内联元素特点。<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> div&#123;</div><div class="line">     display:<span class="keyword">inline</span>;</div><div class="line"> &#125;</div><div class="line">......</div><div class="line">&lt;div&gt;我要变成内联元素&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>内联元素特点：</p>
+<p>1、和其他元素都在一行上；<br>2、元素的高度、宽度及顶部和底部边距不可设置；<br>3、元素的宽度就是它包含的文字或图片的宽度，不可改变。</p>
+<h3 id="6-4-元素分类–内联块状元素"><a href="#6-4-元素分类–内联块状元素" class="headerlink" title="6.4 元素分类–内联块状元素"></a>6.4 元素分类–内联块状元素</h3><p>内联块状元素（inline-block）就是同时具备内联元素、块状元素的特点，代码display:inline-block就是将元素设置为内联块状元素。(css2.1新增)， <code>&lt;img&gt;、&lt;input&gt;</code> 标签就是这种内联块状标签。</p>
+<p>inline-block 元素特点：<br>1、和其他元素都在一行上；<br>2、元素的高度、宽度、行高以及顶和底边距都可设置。</p>
+<h3 id="6-5-盒模型–边框"><a href="#6-5-盒模型–边框" class="headerlink" title="6.5 盒模型–边框"></a>6.5 盒模型–边框</h3><p>盒子模型的边框就是围绕着内容及补白的线，这条线你可以设置它的粗细、样式和颜色(边框三个属性)。</p>
+<p>如下面代码为 div 来设置边框粗细为 2px、样式为实心的、颜色为红色的边框：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span>&#123;</div><div class="line">    <span class="attribute">border</span>:<span class="number">2px</span>  solid  red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面是 border 代码的缩写形式，可以分开写：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span>&#123;</div><div class="line">    <span class="attribute">border-width</span>:<span class="number">2px</span>;</div><div class="line">    <span class="attribute">border-style</span>:solid;</div><div class="line">    <span class="attribute">border-color</span>:red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>注意：</p>
+<p>1、border-style（边框样式）常见样式有：</p>
+<pre><code>* dashed（虚线）
+* dotted（点线）
+* solid（实线）
+</code></pre><p>2、border-color（边框颜色）中的颜色可设置为十六进制颜色，如:<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">border-color</span>:<span class="number">#888</span>;<span class="comment">//前面的井号不要忘掉。</span></div></pre></td></tr></table></figure></p>
+<p>3、border-width（边框宽度）中的宽度也可以设置为：</p>
+<pre><code>* thin
+* medium 
+* thick（但不是很常用）
+* 最常还是用象素（px）
+</code></pre><p>现在有一个问题，如果有想为 p 标签单独设置下边框，而其它三边都不设置边框样式怎么办呢？css 样式中允许只为一个方向的边框设置样式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">border-bottom</span>:<span class="number">1px</span> solid red;&#125;</div></pre></td></tr></table></figure></p>
+<p>同样可以使用下面代码实现其它三边(上、右、左)边框的设置：<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">border-<span class="built_in">top</span>:<span class="number">1</span>px solid <span class="built_in">red</span>;</div><div class="line">border-<span class="built_in">right</span>:<span class="number">1</span>px solid <span class="built_in">red</span>; </div><div class="line">border-<span class="built_in">left</span>:<span class="number">1</span>px solid <span class="built_in">red</span>;</div></pre></td></tr></table></figure></p>
+<h3 id="6-6-盒模型–宽度和高度"><a href="#6-6-盒模型–宽度和高度" class="headerlink" title="6.6 盒模型–宽度和高度"></a>6.6 盒模型–宽度和高度</h3><p>盒模型宽度和高度和我们平常所说的物体的宽度和高度理解是不一样的，css内定义的宽（width）和高（height），指的是填充以里的内容范围。<br>因此一个元素实际宽度（盒子的宽度）=左边界+左边框+左填充+内容宽度+右填充+右边框+右边界。<br>元素的高度也是同理。<br>css代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span>&#123;</div><div class="line">    <span class="attribute">width</span>:<span class="number">200px</span>;</div><div class="line">    <span class="attribute">padding</span>:<span class="number">20px</span>;</div><div class="line">    <span class="attribute">border</span>:<span class="number">1px</span> solid red;</div><div class="line">    <span class="attribute">margin</span>:<span class="number">10px</span>;    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>html代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">div</span>&gt;</span>文本内容<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>元素的实际长度为：10px+1px+20px+200px+20px+1px+10px=262px。</p>
+<h3 id="6-7-盒模型–填充"><a href="#6-7-盒模型–填充" class="headerlink" title="6.7 盒模型–填充"></a>6.7 盒模型–填充</h3><p>元素内容与边框之间是可以设置距离的，称之为“填充”。填充也可分为上、右、下、左(顺时针)。如下代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">padding</span>:<span class="number">20px</span> <span class="number">10px</span> <span class="number">15px</span> <span class="number">30px</span>;&#125;</div></pre></td></tr></table></figure></p>
+<p>顺序一定不要搞混。可以分开写上面代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span>&#123;</div><div class="line">   <span class="attribute">padding-top</span>:<span class="number">20px</span>;</div><div class="line">   <span class="attribute">padding-right</span>:<span class="number">10px</span>;</div><div class="line">   <span class="attribute">padding-bottom</span>:<span class="number">15px</span>;</div><div class="line">   <span class="attribute">padding-left</span>:<span class="number">30px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果上、右、下、左的填充都为10px;可以这么写<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">padding</span>:<span class="number">10px</span>;&#125;</div></pre></td></tr></table></figure></p>
+<p>如果上下填充一样为10px，左右一样为20px，可以这么写：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">padding</span>:<span class="number">10px</span> <span class="number">20px</span>;&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="6-8-盒模型–边界"><a href="#6-8-盒模型–边界" class="headerlink" title="6.8 盒模型–边界"></a>6.8 盒模型–边界</h3><p>元素与其它元素之间的距离可以使用边界（margin）来设置。边界也是可分为上、右、下、左。如下代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span>&#123;<span class="attribute">margin</span>:<span class="number">20px</span> <span class="number">10px</span> <span class="number">15px</span> <span class="number">30px</span>;&#125;</div></pre></td></tr></table></figure></p>
+<p>也可以分开写：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span>&#123;</div><div class="line">   <span class="attribute">margin-top</span>:<span class="number">20px</span>;</div><div class="line">   <span class="attribute">margin-right</span>:<span class="number">10px</span>;</div><div class="line">   <span class="attribute">margin-bottom</span>:<span class="number">15px</span>;</div><div class="line">   <span class="attribute">margin-left</span>:<span class="number">30px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>如果上右下左的边界都为10px;可以这么写：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span>&#123; <span class="attribute">margin</span>:<span class="number">10px</span>;&#125;</div></pre></td></tr></table></figure></p>
+<p>如果上下边界一样为10px，左右一样为20px，可以这么写：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span>&#123; <span class="attribute">margin</span>:<span class="number">10px</span> <span class="number">20px</span>;&#125;</div></pre></td></tr></table></figure></p>
+<p>总结一下：padding和margin的区别，padding在边框里，margin在边框外。</p>
+<h2 id="七、CSS布局模型"><a href="#七、CSS布局模型" class="headerlink" title="七、CSS布局模型"></a>七、CSS布局模型</h2><h3 id="7-1-css布局模型"><a href="#7-1-css布局模型" class="headerlink" title="7.1 css布局模型"></a>7.1 css布局模型</h3><p>清楚了CSS 盒模型的基本概念、 盒模型类型， 我们就可以深入探讨网页布局的基本模型了。布局模型与盒模型一样都是 CSS 最基本、 最核心的概念。 但布局模型是建立在盒模型基础之上，又不同于我们常说的 CSS 布局样式或 CSS 布局模板。如果说布局模型是本，那么 CSS 布局模板就是末了，是外在的表现形式。</p>
+<p>CSS包含3种基本的布局模型，用英文概括为：Flow、Layer 和 Float。</p>
+<p>在网页中，元素有三种布局模型：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>、流动模型（Flow）</div><div class="line"><span class="number">2</span>、浮动模型 (Float)</div><div class="line"><span class="number">3</span>、层模型（Layer）</div></pre></td></tr></table></figure></p>
+<h3 id="7-2-流动模型"><a href="#7-2-流动模型" class="headerlink" title="7.2 流动模型"></a>7.2 流动模型</h3><p>先来说一说流动模型，流动（Flow）是默认的网页布局模式。也就是说网页在默认状态下的 HTML 网页元素都是根据流动模型来分布网页内容的。</p>
+<p>流动布局模型具有2个比较典型的特征：</p>
+<p>第一点，块状元素都会在所处的包含元素内自上而下按顺序垂直延伸分布，因为在默认状态下，块状元素的宽度都为100%。实际上，块状元素都会以行的形式占据位置。如右侧代码编辑器中三个块状元素标签(div，h1，p)宽度显示为100%。<br>第二点，在流动模型下，内联元素都会在所处的包含元素内从左到右水平分布显示。（内联元素可不像块状元素这么霸道独占一行）</p>
+<h3 id="7-3-浮动模型"><a href="#7-3-浮动模型" class="headerlink" title="7.3 浮动模型"></a>7.3 浮动模型</h3><p>块状元素这么霸道都是独占一行，如果现在我们想让两个块状元素并排显示，怎么办呢？不要着急，设置元素浮动就可以实现这一愿望。</p>
+<p>任何元素在默认情况下是不能浮动的，但可以用 CSS 定义为浮动，如 div、p、table、img 等元素都可以被定义为浮动。如下代码可以实现两个 div 元素一行显示。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">div&#123;</div><div class="line">    <span class="attribute">width</span>:<span class="number">200px</span>;</div><div class="line">    <span class="attribute">height</span>:<span class="number">200px</span>;</div><div class="line">    <span class="attribute">border</span>:<span class="number">2px</span> red solid;</div><div class="line">    <span class="attribute">float</span>:left;</div><div class="line">&#125;</div><div class="line">&lt;<span class="selector-tag">div</span> id=<span class="string">"div1"</span>&gt;&lt;/div&gt;</div><div class="line">&lt;<span class="selector-tag">div</span> id=<span class="string">"div2"</span>&gt;&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>效果图</p>
+<p><img src="http://static.mukewang.com/img/540e62c60001c56a06760417.jpg" alt=""></p>
+<p>当然你也可以同时设置两个元素右浮动也可以实现一行显示。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span>&#123;</div><div class="line">    <span class="attribute">width</span>:<span class="number">200px</span>;</div><div class="line">    <span class="attribute">height</span>:<span class="number">200px</span>;</div><div class="line">    <span class="attribute">border</span>:<span class="number">2px</span> red solid;</div><div class="line">    <span class="attribute">float</span>:right;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>效果图</p>
+<p><img src="http://static.mukewang.com/img/540e632b0001f5f506760417.jpg" alt=""></p>
+<p>又有小伙伴问了，设置两个元素一左一右可以实现一行显示吗？当然可以：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">div</span>&#123;</div><div class="line">    <span class="attribute">width</span>:<span class="number">200px</span>;</div><div class="line">    <span class="attribute">height</span>:<span class="number">200px</span>;</div><div class="line">    <span class="attribute">border</span>:<span class="number">2px</span> red solid;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#div1</span>&#123;<span class="attribute">float</span>:left;&#125;</div><div class="line"><span class="selector-id">#div2</span>&#123;<span class="attribute">float</span>:right;&#125;</div></pre></td></tr></table></figure></p>
+<p>效果图</p>
+<p><img src="http://static.mukewang.com/img/540e63b50001f6a206760417.jpg" alt=""></p>
+<h3 id="7-4-什么是层模型？"><a href="#7-4-什么是层模型？" class="headerlink" title="7.4 什么是层模型？"></a>7.4 什么是层模型？</h3><p>什么是层布局模型？层布局模型就像是图像软件PhotoShop中非常流行的图层编辑功能一样，每个图层能够精确定位操作，但在网页设计领域，由于网页大小的活动性，层布局没能受到热捧。但是在网页上局部使用层布局还是有其方便之处的。下面我们来学习一下html中的层布局。</p>
+<p>如何让html元素在网页中精确定位，就像图像软件PhotoShop中的图层一样可以对每个图层能够精确定位操作。CSS定义了一组定位（positioning）属性来支持层布局模型。</p>
+<p>层模型有三种形式：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">1</span>、绝对定位(<span class="attribute">position</span>: absolute)</div><div class="line"><span class="selector-tag">2</span>、相对定位(<span class="attribute">position</span>: relative)</div><div class="line"><span class="selector-tag">3</span>、固定定位(<span class="attribute">position</span>: fixed)</div></pre></td></tr></table></figure></p>
+<h3 id="7-5-层模型–绝对定位"><a href="#7-5-层模型–绝对定位" class="headerlink" title="7.5 层模型–绝对定位"></a>7.5 层模型–绝对定位</h3><p>如果想为元素设置层模型中的绝对定位，需要设置position:absolute(表示绝对定位)，这条语句的作用将元素从文档流中拖出来，然后使用left、right、top、bottom属性相对于其最接近的一个具有定位属性的父包含块进行绝对定位。如果不存在这样的包含块，则相对于body元素，即相对于浏览器窗口。</p>
+<p>如下面代码可以实现div元素相对于浏览器窗口向右移动100px，向下移动50px。</p>
+<p>div{<br>    width:200px;<br>    height:200px;<br>    border:2px red solid;<br>    position:absolute;<br>    left:100px;<br>    top:50px;<br>}</p>
+<p><div id="div1"></div><br>效果如下：</p>
+<p><img src="http://static.mukewang.com/img/53a00b130001e86707360547.jpg" alt=""></p>
+<h3 id="7-6-层模型–相对定位"><a href="#7-6-层模型–相对定位" class="headerlink" title="7.6 层模型–相对定位"></a>7.6 层模型–相对定位</h3><p>如果想为元素设置层模型中的相对定位，需要设置position:relative（表示相对定位），它通过left、right、top、bottom属性确定元素在正常文档流中的偏移位置。相对定位完成的过程是首先按static(float)方式生成一个元素(并且元素像层一样浮动了起来)，然后相对于以前的位置移动，移动的方向和幅度由left、right、top、bottom属性确定，偏移前的位置保留不动。</p>
+<p>如下代码实现相对于以前位置向下移动50px，向右移动100px;<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#div1&#123;</span></div><div class="line"><span class="symbol">    width:</span><span class="number">200</span>px;</div><div class="line"><span class="symbol">    height:</span><span class="number">200</span>px;</div><div class="line"><span class="symbol">    border:</span><span class="number">2</span>px red solid;</div><div class="line"><span class="symbol">    position:</span>relative;</div><div class="line"><span class="symbol">    left:</span><span class="number">100</span>px;</div><div class="line"><span class="symbol">    top:</span><span class="number">50</span>px;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="params">&lt;div id="div1"&gt;</span><span class="params">&lt;/div&gt;</span></div></pre></td></tr></table></figure></p>
+<p>效果图：</p>
+<p><img src="http://static.mukewang.com/img/53a00d2b00015c4b06190509.jpg" alt=""></p>
+<p>什么叫做“偏移前的位置保留不动”呢？</p>
+<p>大家可以做一个实验，如下代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>偏移前的位置还保留不动，覆盖不了前面的div没有偏移前的位置<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>效果图：</p>
+<p><img src="http://static.mukewang.com/img/541a4bfc0001abef05940489.jpg" alt=""></p>
+<p>从效果图中可以明显的看出，虽然div元素相对于以前的位置产生了偏移，但是div元素以前的位置还是保留着，所以后面的span元素是显示在了div元素以前位置的后面。</p>
+<h3 id="7-7-层模型–固定定位"><a href="#7-7-层模型–固定定位" class="headerlink" title="7.7 层模型–固定定位"></a>7.7 层模型–固定定位</h3><p>fixed：表示固定定位，与absolute定位类型类似，但它的相对移动的坐标是视图（屏幕内的网页窗口）本身。由于视图本身是固定的，它不会随浏览器窗口的滚动条滚动而变化，除非你在屏幕中移动浏览器窗口的屏幕位置，或改变浏览器窗口的显示大小，因此固定定位的元素会始终位于浏览器窗口内视图的某个位置，不会受文档流动影响，这与background-attachment:fixed;属性功能相同。以下代码可以实现相对于浏览器视图向右移动100px，向下移动50px。并且拖动滚动条时位置固定不变。<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#div1&#123;</span></div><div class="line"><span class="symbol">    width:</span><span class="number">200</span>px;</div><div class="line"><span class="symbol">    height:</span><span class="number">200</span>px;</div><div class="line"><span class="symbol">    border:</span><span class="number">2</span>px red solid;</div><div class="line"><span class="symbol">    position:</span>fixed;</div><div class="line"><span class="symbol">    left:</span><span class="number">100</span>px;</div><div class="line"><span class="symbol">    top:</span><span class="number">50</span>px;</div><div class="line">&#125;</div><div class="line"><span class="params">&lt;p&gt;</span>文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本。<span class="params">&lt;/p&gt;</span></div><div class="line">....</div></pre></td></tr></table></figure></p>
+<h3 id="7-8-Relative与Absolute组合使用"><a href="#7-8-Relative与Absolute组合使用" class="headerlink" title="7.8 Relative与Absolute组合使用"></a>7.8 Relative与Absolute组合使用</h3><p>小伙伴们学习了绝对定位的方法：使用position:absolute可以实现被设置元素相对于浏览器（body）设置定位以后，大家有没有想过可不可以相对于其它元素进行定位呢？答案是肯定的，当然可以。使用position:relative来帮忙，但是必须遵守下面规范：</p>
+<p>1、参照定位的元素必须是相对定位元素的前辈元素：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box1"</span>&gt;</span><span class="comment">&lt;!--参照定位的元素--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box2"</span>&gt;</span>相对参照元素进行定位<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="comment">&lt;!--相对定位元素--&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>从上面代码可以看出box1是box2的父元素（父元素当然也是前辈元素了）。</p>
+<p>2、参照定位的元素必须加入position:relative;<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#box1</span>&#123;</div><div class="line">    <span class="attribute">width</span>:<span class="number">200px</span>;</div><div class="line">    <span class="attribute">height</span>:<span class="number">200px</span>;</div><div class="line">    <span class="attribute">position</span>:relative;        </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>3、定位元素加入position:absolute，便可以使用top、bottom、left、right来进行偏移定位了。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#box2</span>&#123;</div><div class="line">    <span class="attribute">position</span>:absolute;</div><div class="line">    <span class="attribute">top</span>:<span class="number">20px</span>;</div><div class="line">    <span class="attribute">left</span>:<span class="number">30px</span>;         </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样box2就可以相对于父元素box1定位了（这里注意参照物就可以不是浏览器了，而可以自由设置了）。</p>
+<h2 id="八、-CSS-代码缩写，占用更少的带宽"><a href="#八、-CSS-代码缩写，占用更少的带宽" class="headerlink" title="八、 CSS 代码缩写，占用更少的带宽"></a>八、 CSS 代码缩写，占用更少的带宽</h2><h3 id="8-1-盒模型代码简写"><a href="#8-1-盒模型代码简写" class="headerlink" title="8.1 盒模型代码简写"></a>8.1 盒模型代码简写</h3><p>还记得在讲盒模型时外边距(margin)、内边距(padding)和边框(border)设置上下左右四个方向的边距是按照顺时针方向设置的：上右下左。具体应用在margin和padding的例子如下：<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">margin</span>:<span class="number">10px</span> <span class="number">15px</span> <span class="number">12px</span> <span class="number">14px</span>;<span class="comment">/*上设置为10px、右设置为15px、下设置为12px、左设置为14px*/</span></div></pre></td></tr></table></figure></p>
+<p>通常有下面三种缩写方法:</p>
+<p>1、如果top、right、bottom、left的值相同，如下面代码：<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">margin</span>:<span class="number">10px</span> <span class="number">10px</span> <span class="number">10px</span> <span class="number">10px</span>;</div></pre></td></tr></table></figure></p>
+<p>可缩写为：<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">margin</span>:<span class="number">10px</span>;</div></pre></td></tr></table></figure></p>
+<p>2、如果top和bottom值相同、left和 right的值相同，如下面代码：<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">margin</span>:<span class="number">10px</span> <span class="number">20px</span> <span class="number">10px</span> <span class="number">20px</span>;</div></pre></td></tr></table></figure></p>
+<p>可缩写为：<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">margin</span>:<span class="number">10px</span> <span class="number">20px</span>;</div></pre></td></tr></table></figure></p>
+<p>3、如果left和right的值相同，如下面代码：<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">margin</span>:<span class="number">10px</span> <span class="number">20px</span> <span class="number">30px</span> <span class="number">20px</span>;</div></pre></td></tr></table></figure></p>
+<p>可缩写为：<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">margin</span>:<span class="number">10px</span> <span class="number">20px</span> <span class="number">30px</span>;</div></pre></td></tr></table></figure></p>
+<p>注意：padding、border的缩写方法和margin是一致的。</p>
+<h3 id="8-2-颜色值缩写"><a href="#8-2-颜色值缩写" class="headerlink" title="8.2 颜色值缩写"></a>8.2 颜色值缩写</h3><p>关于颜色的css样式也是可以缩写的，当你设置的颜色是16进制的色彩值时，如果每两位的值相同，可以缩写一半。</p>
+<p>例子1：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>&#123;<span class="attribute">color</span>:<span class="number">#000000</span>;&#125;</div></pre></td></tr></table></figure></p>
+<p>可以缩写为：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>&#123;<span class="attribute">color</span>: <span class="number">#000</span>;&#125;</div></pre></td></tr></table></figure></p>
+<p>例子2：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>&#123;<span class="attribute">color</span>: <span class="number">#336699</span>;&#125;</div></pre></td></tr></table></figure></p>
+<p>可以缩写为：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>&#123;<span class="attribute">color</span>: <span class="number">#369</span>;&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="8-3-字体缩写"><a href="#8-3-字体缩写" class="headerlink" title="8.3 字体缩写"></a>8.3 字体缩写</h3><p>网页中的字体css样式代码也有他自己的缩写方式，下面是给网页设置字体的代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span>&#123;</div><div class="line">    <span class="attribute">font-style</span>:italic;</div><div class="line">    <span class="attribute">font-variant</span>:small-caps; </div><div class="line">    <span class="attribute">font-weight</span>:bold; </div><div class="line">    <span class="attribute">font-size</span>:<span class="number">12px</span>; </div><div class="line">    <span class="attribute">line-height</span>:<span class="number">1.5em</span>; </div><div class="line">    <span class="attribute">font-family</span>:<span class="string">"宋体"</span>,sans-serif;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这么多行的代码其实可以缩写为一句：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span>&#123;</div><div class="line">    <span class="attribute">font</span>:italic  small-caps  bold  <span class="number">12px</span>/<span class="number">1.5em</span>  <span class="string">"宋体"</span>,sans-serif;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>注意：</p>
+<p>1、使用这一简写方式你至少要指定 font-size 和 font-family 属性，其他的属性(如 font-weight、font-style、font-variant、line-height)如未指定将自动使用默认值。</p>
+<p>2、在缩写时 font-size 与 line-height 中间要加入“/”斜扛。</p>
+<p>一般情况下因为对于中文网站，英文还是比较少的，所以下面缩写代码比较常用：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span>&#123;</div><div class="line">    <span class="attribute">font</span>:<span class="number">12px</span>/<span class="number">1.5em</span>  <span class="string">"宋体"</span>,sans-serif;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>只是有字号、行间距、中文字体、英文字体设置。</p>
+<h2 id="九、单位和值"><a href="#九、单位和值" class="headerlink" title="九、单位和值"></a>九、单位和值</h2><h3 id="9-1-颜色值"><a href="#9-1-颜色值" class="headerlink" title="9.1 颜色值"></a>9.1 颜色值</h3><p>在网页中的颜色设置是非常重要，有字体颜色（color）、背景颜色（background-color）、边框颜色（border）等，设置颜色的方法也有很多种：</p>
+<p>1、英文命令颜色</p>
+<p>前面几个小节中经常用到的就是这种设置方法：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>&#123;<span class="attribute">color</span>:red;&#125;</div></pre></td></tr></table></figure></p>
+<p>2、RGB颜色</p>
+<p>这个与 photoshop 中的 RGB 颜色是一致的，由 R(red)、G(green)、B(blue) 三种颜色的比例来配色。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>&#123;<span class="attribute">color</span>:<span class="built_in">rgb</span>(133,45,200);&#125;</div></pre></td></tr></table></figure></p>
+<p>每一项的值可以是 0~255 之间的整数，也可以是 0%~100% 的百分数。如：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>&#123;<span class="attribute">color</span>:<span class="built_in">rgb</span>(20%,33%,25%);&#125;</div></pre></td></tr></table></figure></p>
+<p>3、十六进制颜色</p>
+<p>这种颜色设置方法是现在比较普遍使用的方法，其原理其实也是 RGB 设置，但是其每一项的值由 0-255 变成了十六进制 00-ff。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>&#123;<span class="attribute">color</span>:<span class="number">#00ffff</span>;&#125;</div></pre></td></tr></table></figure></p>
+<p>配色表：</p>
+<p><img src="http://static.mukewang.com/img/54c5b4120001f20808000902.jpg" alt=""></p>
+<h3 id="9-2-长度值"><a href="#9-2-长度值" class="headerlink" title="9.2 长度值"></a>9.2 长度值</h3><p>长度单位总结一下，目前比较常用到px（像素）、em、% 百分比，要注意其实这三种单位都是相对单位。</p>
+<p>1、像素</p>
+<p>像素为什么是相对单位呢？因为像素指的是显示器上的小点（CSS规范中假设“90像素=1英寸”）。实际情况是浏览器会使用显示器的实际像素值有关，在目前大多数的设计者都倾向于使用像素（px）作为单位。</p>
+<p>2、em</p>
+<p>就是本元素给定字体的 font-size 值，如果元素的 font-size 为 14px ，那么 1em = 14px；如果 font-size 为 18px，那么 1em = 18px。如下代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>&#123;<span class="attribute">font-size</span>:<span class="number">12px</span>;<span class="attribute">text-indent</span>:<span class="number">2em</span>;&#125;</div></pre></td></tr></table></figure></p>
+<p>上面代码就是可以实现段落首行缩进 24px（也就是两个字体大小的距离）。</p>
+<p>下面注意一个特殊情况：</p>
+<p>但当给 font-size 设置单位为 em 时，此时计算的标准以 p 的父元素的 font-size 为基础。如下代码：</p>
+<p>html:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>以这个<span class="tag">&lt;<span class="name">span</span>&gt;</span>例子<span class="tag">&lt;/<span class="name">span</span>&gt;</span>为例。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>css:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>&#123;<span class="attribute">font-size</span>:<span class="number">14px</span>&#125;</div><div class="line"><span class="selector-tag">span</span>&#123;<span class="attribute">font-size</span>:<span class="number">0.8em</span>;&#125;</div></pre></td></tr></table></figure></p>
+<p>结果 span 中的字体“例子”字体大小就为 11.2px（14 * 0.8 = 11.2px）。</p>
+<p>3、百分比<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">p</span>&#123;<span class="attribute">font-size</span>:<span class="number">12px</span>;<span class="attribute">line-height</span>:<span class="number">130%</span>&#125;</div></pre></td></tr></table></figure></p>
+<p>设置行高（行间距）为字体的130%（12 * 1.3 = 15.6px）。</p>
+<h2 id="十、css样式设置小技巧"><a href="#十、css样式设置小技巧" class="headerlink" title="十、css样式设置小技巧"></a>十、css样式设置小技巧</h2><h3 id="10-1-水平居中设置-行内元素"><a href="#10-1-水平居中设置-行内元素" class="headerlink" title="10.1 水平居中设置-行内元素"></a>10.1 水平居中设置-行内元素</h3><p>我们在实际工作中常会遇到需要设置水平居中的场景，比如为了美观，文章的标题一般都是水平居中显示的。</p>
+<p>这里我们又得分两种情况：行内元素 还是 块状元素 ，块状元素里面又分为定宽块状元素，以及不定宽块状元素。今天我们先来了解一下行内元素怎么进行水平居中？</p>
+<p>如果被设置元素为文本、图片等行内元素时，水平居中是通过给父元素设置 text-align:center 来实现的。(父元素和子元素：如下面的html代码中，div是“我想要在父容器中水平居中显示”这个文本的父元素。反之这个文本是div的子元素 )如下代码：</p>
+<p>html代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"txtCenter"</span>&gt;</span>我想要在父容器中水平居中显示。<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>css代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></div><div class="line">  <span class="selector-class">.txtCenter</span>&#123;</div><div class="line">    <span class="attribute">text-align</span>:center;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="10-2-水平居中设置-定宽块状元素"><a href="#10-2-水平居中设置-定宽块状元素" class="headerlink" title="10.2 水平居中设置-定宽块状元素"></a>10.2 水平居中设置-定宽块状元素</h3><p>当被设置元素为 块状元素 时用 text-align：center 就不起作用了，这时也分两种情况：定宽块状元素和不定宽块状元素。</p>
+<p>这一小节我们先来讲一讲定宽块状元素。(定宽块状元素：块状元素的宽度width为固定值。)</p>
+<p>满足定宽和块状两个条件的元素是可以通过设置“左右margin”值为“auto”来实现居中的。我们来看个例子就是设置 div 这个块状元素水平居中：</p>
+<p>html代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>我是定宽块状元素，哈哈，我要水平居中显示。<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>css代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></div><div class="line"><span class="selector-tag">div</span>&#123;</div><div class="line">    <span class="attribute">border</span>:<span class="number">1px</span> solid red;<span class="comment">/*为了显示居中效果明显为 div 设置了边框*/</span></div><div class="line">    </div><div class="line">    <span class="attribute">width</span>:<span class="number">200px</span>;<span class="comment">/*定宽*/</span></div><div class="line">    <span class="attribute">margin</span>:<span class="number">20px</span> auto;<span class="comment">/* margin-left 与 margin-right 设置为 auto */</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>也可以写成：<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">margin-<span class="built_in">left</span>:<span class="built_in">auto</span>;</div><div class="line">margin-<span class="built_in">right</span>:<span class="built_in">auto</span>;</div></pre></td></tr></table></figure></p>
+<p>注意：元素的“上下 margin” 是可以随意设置的。</p>
+<h3 id="10-3-水平居中总结-不定宽块状元素方法"><a href="#10-3-水平居中总结-不定宽块状元素方法" class="headerlink" title="10.3 水平居中总结-不定宽块状元素方法"></a>10.3 水平居中总结-不定宽块状元素方法</h3><p>在实际工作中我们会遇到需要为“不定宽度的块状元素”设置居中，比如网页上的分页导航，因为分页的数量是不确定的，所以我们不能通过设置宽度来限制它的弹性。(不定宽块状元素：块状元素的宽度width不固定。)</p>
+<p>不定宽度的块状元素有三种方法居中（这三种方法目前使用的都很多）：</p>
+<pre><code>1.加入 table 标签
+2.设置 display: inline 方法：与第一种类似，显示类型设为 行内元素，进行不定宽元素的属性设置
+3.设置 position:relative 和 left:50%：利用 相对定位 的方式，将元素向左偏移 50% ，即达到居中的目的
+</code></pre><h4 id="加入-table-标签"><a href="#加入-table-标签" class="headerlink" title="加入 table 标签"></a>加入 table 标签</h4><p>为什么选择方法一加入table标签? 是利用table标签的长度自适应性—即不定义其长度也不默认父元素body的长度（table其长度根据其内文本长度决定），因此可以看做一个定宽度块元素，然后再利用定宽度块状居中的margin的方法，使其水平居中。</p>
+<p>第一步：为需要设置的居中的元素外面加入一个 table 标签 ( 包括 <tbody>、<tr>、<td> )。</td></tr></tbody></p>
+<p>第二步：为这个 table 设置“左右 margin 居中”（这个和定宽块状元素的方法一样）。</p>
+<p>举例如下：</p>
+<p>html代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">table</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>我是第一行文本<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>我是第二行文本<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>我是第三行文本<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">table</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>css代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></div><div class="line"><span class="selector-tag">table</span>&#123;</div><div class="line">    <span class="attribute">border</span>:<span class="number">1px</span> solid;</div><div class="line">    <span class="attribute">margin</span>:<span class="number">0</span> auto;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h4 id="设置-display-inline-方法"><a href="#设置-display-inline-方法" class="headerlink" title="设置 display: inline 方法"></a>设置 display: inline 方法</h4><p>改变块级元素的 display 为 inline 类型（设置为 行内元素 显示），然后使用 text-align:center 来实现居中效果。如下例子：</p>
+<p>html代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>css代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></div><div class="line"><span class="selector-class">.container</span>&#123;</div><div class="line">    <span class="attribute">text-align</span>:center;</div><div class="line">&#125;</div><div class="line"><span class="comment">/* margin:0;padding:0（消除文本与div边框之间的间隙）*/</span></div><div class="line"><span class="selector-class">.container</span> <span class="selector-tag">ul</span>&#123;</div><div class="line">    <span class="attribute">list-style</span>:none;</div><div class="line">    <span class="attribute">margin</span>:<span class="number">0</span>;</div><div class="line">    <span class="attribute">padding</span>:<span class="number">0</span>;</div><div class="line">    <span class="attribute">display</span>:inline;</div><div class="line">&#125;</div><div class="line"><span class="comment">/* margin-right:8px（设置li文本之间的间隔）*/</span></div><div class="line"><span class="selector-class">.container</span> <span class="selector-tag">li</span>&#123;</div><div class="line">    <span class="attribute">margin-right</span>:<span class="number">8px</span>;</div><div class="line">    <span class="attribute">display</span>:inline;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这种方法相比第一种方法的优势是不用增加无语义标签，但也存在着一些问题：它将块状元素的 display 类型改为 inline，变成了行内元素，所以少了一些功能，比如设定长度值。</p>
+<h4 id="设置浮动和相对定位来实现"><a href="#设置浮动和相对定位来实现" class="headerlink" title="设置浮动和相对定位来实现"></a>设置浮动和相对定位来实现</h4><p>方法三：通过给父元素设置 float，然后给父元素设置 position:relative 和 left:50%，子元素设置 position:relative 和 left: -50% 来实现水平居中。</p>
+<p>我们可以这样理解：假想ul层的父层（即下面例子中的div层）中间有条平分线将ul层的父层（div层）平均分为两份，ul层的css代码是将ul层的最左端与ul层的父层（div层）的平分线对齐；而li层的css代码则是将li层的平分线与ul层的最左端（也是div层的平分线）对齐，从而实现li层的居中。</p>
+<p>代码如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>css代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></div><div class="line"><span class="selector-class">.container</span>&#123;</div><div class="line">    <span class="attribute">float</span>:left;</div><div class="line">    <span class="attribute">position</span>:relative;</div><div class="line">    <span class="attribute">left</span>:<span class="number">50%</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.container</span> <span class="selector-tag">ul</span>&#123;</div><div class="line">    <span class="attribute">list-style</span>:none;</div><div class="line">    <span class="attribute">margin</span>:<span class="number">0</span>;</div><div class="line">    <span class="attribute">padding</span>:<span class="number">0</span>;</div><div class="line">    </div><div class="line">    <span class="attribute">position</span>:relative;</div><div class="line">    <span class="attribute">left</span>:-<span class="number">50%</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.container</span> <span class="selector-tag">li</span>&#123;<span class="attribute">float</span>:left;<span class="attribute">display</span>:inline;<span class="attribute">margin-right</span>:<span class="number">8px</span>;&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这三种方法使用得都非常广泛，各有优缺点，具体选用哪种方法，可以视具体情况而定。</p>
+<h3 id="10-4-垂直居中-父元素高度确定的单行文本"><a href="#10-4-垂直居中-父元素高度确定的单行文本" class="headerlink" title="10.4 垂直居中-父元素高度确定的单行文本"></a>10.4 垂直居中-父元素高度确定的单行文本</h3><p>我们在实际工作中也会遇到需要设置垂直居中的场景，比如好多报纸的文章标题在左右一侧时，常常会设置为垂直居中，为了用户体验性好。</p>
+<p>这里我们又得分两种情况：父元素高度确定的单行文本，以及父元素高度确定的多行文本。</p>
+<p>本节我们先来看第一种父元素高度确定的单行文本, 怎么设置它为垂直居中呢？</p>
+<p>父元素高度确定的单行文本的竖直居中的方法是通过设置父元素的 height 和 line-height 高度一致来实现的。(height: 该元素的高度，line-height: 顾名思义，行高（行间距），指在文本中，行与行之间的 基线间的距离 )。</p>
+<p>line-height 与 font-size 的计算值之差，在 CSS 中成为“行间距”。分为两半，分别加到一个文本行内容的顶部和底部。</p>
+<p>这种文字行高与块高一致带来了一个弊端：当文字内容的长度大于块的宽时，就有内容脱离了块。</p>
+<p>如下代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"container"</span>&gt;</div><div class="line">    hi,imooc!</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></div></pre></td></tr></table></figure></p>
+<p>css代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></div><div class="line"><span class="selector-class">.container</span>&#123;</div><div class="line">    <span class="attribute">height</span>:<span class="number">100px</span>;</div><div class="line">    <span class="attribute">line-height</span>:<span class="number">100px</span>;</div><div class="line">    <span class="attribute">background</span>:<span class="number">#999</span>;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="10-5-垂直居中-父元素高度确定的多行文本"><a href="#10-5-垂直居中-父元素高度确定的多行文本" class="headerlink" title="10.5 垂直居中-父元素高度确定的多行文本"></a>10.5 垂直居中-父元素高度确定的多行文本</h3><p>父元素高度确定的多行文本、图片等的竖直居中的方法有两种：</p>
+<h4 id="方法一：使用插入-table-包括tbody、tr、td-标签，同时设置-vertical-align：middle。"><a href="#方法一：使用插入-table-包括tbody、tr、td-标签，同时设置-vertical-align：middle。" class="headerlink" title="方法一：使用插入 table  (包括tbody、tr、td)标签，同时设置 vertical-align：middle。"></a>方法一：使用插入 table  (包括tbody、tr、td)标签，同时设置 vertical-align：middle。</h4><p>css 中有一个用于竖直居中的属性 vertical-align，在父元素设置此样式时，会对inline-block类型的子元素都有用。下面看一下例子：</p>
+<p>html代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span><span class="tag">&lt;<span class="name">tbody</span>&gt;</span><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span> <span class="attr">class</span>=<span class="string">"wrap"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>看我是否可以居中。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span><span class="tag">&lt;/<span class="name">tbody</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>css代码：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">table</span> <span class="selector-tag">td</span>&#123;<span class="attribute">height</span>:<span class="number">500px</span>;<span class="attribute">background</span>:<span class="number">#ccc</span>&#125;</div></pre></td></tr></table></figure></p>
+<p>因为 td 标签默认情况下就默认设置了 vertical-align 为 middle，所以我们不需要显式地设置了。</p>
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>这种方法兼容性比较差，只是提供大家学习参考。</p>
+<p>在 chrome、firefox 及 IE8 以上的浏览器下可以设置块级元素的 display 为 table-cell（设置为表格单元显示），激活 vertical-align 属性，但注意 IE6、7 并不支持这个样式, 兼容性比较差。</p>
+<p>html代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"container"</span>&gt;</div><div class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>看我是否可以居中。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>看我是否可以居中。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>看我是否可以居中。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">&lt;<span class="regexp">/div&gt;</span></div></pre></td></tr></table></figure></p>
+<p>css代码：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></div><div class="line"><span class="selector-class">.container</span>&#123;</div><div class="line">    <span class="attribute">height</span>:<span class="number">300px</span>;</div><div class="line">    <span class="attribute">background</span>:<span class="number">#ccc</span>;</div><div class="line">    <span class="attribute">display</span>:table-cell;<span class="comment">/*IE8以上及Chrome、Firefox*/</span></div><div class="line">    <span class="attribute">vertical-align</span>:middle;<span class="comment">/*IE8以上及Chrome、Firefox*/</span></div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这种方法的好处是不用添加多余的无意义的标签，但缺点也很明显，它的兼容性不是很好，不兼容 IE6、7而且这样修改display的block变成了table-cell，破坏了原有的块状元素的性质。</p>
+<h3 id="10-6-隐性改变display类型"><a href="#10-6-隐性改变display类型" class="headerlink" title="10.6 隐性改变display类型"></a>10.6 隐性改变display类型</h3><p>有一个有趣的现象就是当为元素（不论之前是什么类型元素，display:none 除外）设置以下 2 个句之一：<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span> <span class="built_in">position</span> : absolute </div><div class="line"><span class="number">2.</span> <span class="keyword">float</span> : left 或 <span class="keyword">float</span>:right</div></pre></td></tr></table></figure></p>
+<p>简单来说，只要html代码中出现以上两句之一，元素的display显示类型就会自动变为以 display:inline-block（块状元素）的方式显示，当然就可以设置元素的 width 和 height 了，且默认宽度不占满父元素。</p>
+<p>如下面的代码，小伙伴们都知道 a 标签是 行内元素 ，所以设置它的 width 是 没有效果的，但是设置为 position:absolute 以后，就可以了。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">title</span>=<span class="string">""</span>&gt;</span>进入课程请单击这里<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">``</div><div class="line">css代码</div></pre></td></tr></table></figure></p>
+<p><style><br>.container a{<br>    position:absolute;<br>    width:200px;<br>    background:#ccc;<br>}<br></style><br>```</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>欣赏此文？求鼓励，求支持！<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端基础</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/09/02/JavaEE学习/2.CSS/CSS小结/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/08/29/JavaEE学习/1.HTML/HTML小结/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HTML小结</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="JavaEE学习/2.CSS/CSS小结" data-title="CSS小结" data-url="https://marklogzhu.github.io/2017/09/02/JavaEE学习/2.CSS/CSS小结/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"marklogzhu"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 且听风吟
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true,
+		showTags: false
+	}
+</script>
+
+<script>
+!function(t){function n(r){if(e[r])return e[r].exports;var o=e[r]={exports:{},id:r,loaded:!1};return t[r].call(o.exports,o,o.exports,n),o.loaded=!0,o.exports}var e={};return n.m=t,n.c=e,n.p="/",n(0)}([function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}function o(t,n){var e=/\/|index.html/g;return t.replace(e,"")===n.replace(e,"")}function i(){for(var t=document.querySelectorAll(".js-header-menu li a"),n=window.location.pathname,e=0,r=t.length;e<r;e++){var i=t[e];o(n,i.getAttribute("href"))&&(0,d.default)(i,"active")}}function u(t){for(var n=t.offsetLeft,e=t.offsetParent;null!==e;)n+=e.offsetLeft,e=e.offsetParent;return n}function f(t){for(var n=t.offsetTop,e=t.offsetParent;null!==e;)n+=e.offsetTop,e=e.offsetParent;return n}function c(t,n,e,r,o){var i=u(t),c=f(t)-n;if(c-e<=o){var a=t.$newDom;a||(a=t.cloneNode(!0),(0,h.default)(t,a),t.$newDom=a,a.style.position="fixed",a.style.top=(e||c)+"px",a.style.left=i+"px",a.style.zIndex=r||2,a.style.width="100%",a.style.color="#fff"),a.style.visibility="visible",t.style.visibility="hidden"}else{t.style.visibility="visible";var s=t.$newDom;s&&(s.style.visibility="hidden")}}function a(){var t=document.querySelector(".js-overlay"),n=document.querySelector(".js-header-menu");c(t,document.body.scrollTop,-63,2,0),c(n,document.body.scrollTop,1,3,0)}function s(){document.querySelector("#container").addEventListener("scroll",function(t){a()}),window.addEventListener("scroll",function(t){a()}),a()}function l(){x.default.versions.mobile&&window.screen.width<800&&(i(),s())}var p=e(71),d=r(p),v=e(72),y=(r(v),e(84)),h=r(y),b=e(69),x=r(b),m=e(75),g=r(m),w=e(70);l(),(0,w.addLoadEvent)(function(){g.default.init()}),t.exports={}},function(t,n){var e=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=e)},function(t,n){var e={}.hasOwnProperty;t.exports=function(t,n){return e.call(t,n)}},function(t,n,e){var r=e(49),o=e(15);t.exports=function(t){return r(o(t))}},function(t,n,e){t.exports=!e(8)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(t,n,e){var r=e(6),o=e(12);t.exports=e(4)?function(t,n,e){return r.f(t,n,o(1,e))}:function(t,n,e){return t[n]=e,t}},function(t,n,e){var r=e(10),o=e(30),i=e(24),u=Object.defineProperty;n.f=e(4)?Object.defineProperty:function(t,n,e){if(r(t),n=i(n,!0),r(e),o)try{return u(t,n,e)}catch(t){}if("get"in e||"set"in e)throw TypeError("Accessors not supported!");return"value"in e&&(t[n]=e.value),t}},function(t,n,e){var r=e(22)("wks"),o=e(13),i=e(1).Symbol,u="function"==typeof i,f=t.exports=function(t){return r[t]||(r[t]=u&&i[t]||(u?i:o)("Symbol."+t))};f.store=r},function(t,n){t.exports=function(t){try{return!!t()}catch(t){return!0}}},function(t,n,e){var r=e(35),o=e(16);t.exports=Object.keys||function(t){return r(t,o)}},function(t,n,e){var r=e(11);t.exports=function(t){if(!r(t))throw TypeError(t+" is not an object!");return t}},function(t,n){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,n){t.exports=function(t,n){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:n}}},function(t,n){var e=0,r=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++e+r).toString(36))}},function(t,n){var e=t.exports={version:"2.4.0"};"number"==typeof __e&&(__e=e)},function(t,n){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},function(t,n){t.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},function(t,n){t.exports={}},function(t,n){t.exports=!0},function(t,n){n.f={}.propertyIsEnumerable},function(t,n,e){var r=e(6).f,o=e(2),i=e(7)("toStringTag");t.exports=function(t,n,e){t&&!o(t=e?t:t.prototype,i)&&r(t,i,{configurable:!0,value:n})}},function(t,n,e){var r=e(22)("keys"),o=e(13);t.exports=function(t){return r[t]||(r[t]=o(t))}},function(t,n,e){var r=e(1),o="__core-js_shared__",i=r[o]||(r[o]={});t.exports=function(t){return i[t]||(i[t]={})}},function(t,n){var e=Math.ceil,r=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?r:e)(t)}},function(t,n,e){var r=e(11);t.exports=function(t,n){if(!r(t))return t;var e,o;if(n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;if("function"==typeof(e=t.valueOf)&&!r(o=e.call(t)))return o;if(!n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;throw TypeError("Can't convert object to primitive value")}},function(t,n,e){var r=e(1),o=e(14),i=e(18),u=e(26),f=e(6).f;t.exports=function(t){var n=o.Symbol||(o.Symbol=i?{}:r.Symbol||{});"_"==t.charAt(0)||t in n||f(n,t,{value:u.f(t)})}},function(t,n,e){n.f=e(7)},function(t,n,e){var r=e(1),o=e(14),i=e(46),u=e(5),f="prototype",c=function(t,n,e){var a,s,l,p=t&c.F,d=t&c.G,v=t&c.S,y=t&c.P,h=t&c.B,b=t&c.W,x=d?o:o[n]||(o[n]={}),m=x[f],g=d?r:v?r[n]:(r[n]||{})[f];d&&(e=n);for(a in e)s=!p&&g&&void 0!==g[a],s&&a in x||(l=s?g[a]:e[a],x[a]=d&&"function"!=typeof g[a]?e[a]:h&&s?i(l,r):b&&g[a]==l?function(t){var n=function(n,e,r){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(n);case 2:return new t(n,e)}return new t(n,e,r)}return t.apply(this,arguments)};return n[f]=t[f],n}(l):y&&"function"==typeof l?i(Function.call,l):l,y&&((x.virtual||(x.virtual={}))[a]=l,t&c.R&&m&&!m[a]&&u(m,a,l)))};c.F=1,c.G=2,c.S=4,c.P=8,c.B=16,c.W=32,c.U=64,c.R=128,t.exports=c},function(t,n){var e={}.toString;t.exports=function(t){return e.call(t).slice(8,-1)}},function(t,n,e){var r=e(11),o=e(1).document,i=r(o)&&r(o.createElement);t.exports=function(t){return i?o.createElement(t):{}}},function(t,n,e){t.exports=!e(4)&&!e(8)(function(){return 7!=Object.defineProperty(e(29)("div"),"a",{get:function(){return 7}}).a})},function(t,n,e){"use strict";var r=e(18),o=e(27),i=e(36),u=e(5),f=e(2),c=e(17),a=e(51),s=e(20),l=e(58),p=e(7)("iterator"),d=!([].keys&&"next"in[].keys()),v="@@iterator",y="keys",h="values",b=function(){return this};t.exports=function(t,n,e,x,m,g,w){a(e,n,x);var O,S,_,j=function(t){if(!d&&t in A)return A[t];switch(t){case y:return function(){return new e(this,t)};case h:return function(){return new e(this,t)}}return function(){return new e(this,t)}},P=n+" Iterator",E=m==h,M=!1,A=t.prototype,T=A[p]||A[v]||m&&A[m],L=T||j(m),N=m?E?j("entries"):L:void 0,C="Array"==n?A.entries||T:T;if(C&&(_=l(C.call(new t)),_!==Object.prototype&&(s(_,P,!0),r||f(_,p)||u(_,p,b))),E&&T&&T.name!==h&&(M=!0,L=function(){return T.call(this)}),r&&!w||!d&&!M&&A[p]||u(A,p,L),c[n]=L,c[P]=b,m)if(O={values:E?L:j(h),keys:g?L:j(y),entries:N},w)for(S in O)S in A||i(A,S,O[S]);else o(o.P+o.F*(d||M),n,O);return O}},function(t,n,e){var r=e(10),o=e(55),i=e(16),u=e(21)("IE_PROTO"),f=function(){},c="prototype",a=function(){var t,n=e(29)("iframe"),r=i.length,o="<",u=">";for(n.style.display="none",e(48).appendChild(n),n.src="javascript:",t=n.contentWindow.document,t.open(),t.write(o+"script"+u+"document.F=Object"+o+"/script"+u),t.close(),a=t.F;r--;)delete a[c][i[r]];return a()};t.exports=Object.create||function(t,n){var e;return null!==t?(f[c]=r(t),e=new f,f[c]=null,e[u]=t):e=a(),void 0===n?e:o(e,n)}},function(t,n,e){var r=e(35),o=e(16).concat("length","prototype");n.f=Object.getOwnPropertyNames||function(t){return r(t,o)}},function(t,n){n.f=Object.getOwnPropertySymbols},function(t,n,e){var r=e(2),o=e(3),i=e(45)(!1),u=e(21)("IE_PROTO");t.exports=function(t,n){var e,f=o(t),c=0,a=[];for(e in f)e!=u&&r(f,e)&&a.push(e);for(;n.length>c;)r(f,e=n[c++])&&(~i(a,e)||a.push(e));return a}},function(t,n,e){t.exports=e(5)},function(t,n,e){var r=e(15);t.exports=function(t){return Object(r(t))}},function(t,n,e){t.exports={default:e(41),__esModule:!0}},function(t,n,e){t.exports={default:e(42),__esModule:!0}},function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}n.__esModule=!0;var o=e(39),i=r(o),u=e(38),f=r(u),c="function"==typeof f.default&&"symbol"==typeof i.default?function(t){return typeof t}:function(t){return t&&"function"==typeof f.default&&t.constructor===f.default&&t!==f.default.prototype?"symbol":typeof t};n.default="function"==typeof f.default&&"symbol"===c(i.default)?function(t){return"undefined"==typeof t?"undefined":c(t)}:function(t){return t&&"function"==typeof f.default&&t.constructor===f.default&&t!==f.default.prototype?"symbol":"undefined"==typeof t?"undefined":c(t)}},function(t,n,e){e(65),e(63),e(66),e(67),t.exports=e(14).Symbol},function(t,n,e){e(64),e(68),t.exports=e(26).f("iterator")},function(t,n){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},function(t,n){t.exports=function(){}},function(t,n,e){var r=e(3),o=e(61),i=e(60);t.exports=function(t){return function(n,e,u){var f,c=r(n),a=o(c.length),s=i(u,a);if(t&&e!=e){for(;a>s;)if(f=c[s++],f!=f)return!0}else for(;a>s;s++)if((t||s in c)&&c[s]===e)return t||s||0;return!t&&-1}}},function(t,n,e){var r=e(43);t.exports=function(t,n,e){if(r(t),void 0===n)return t;switch(e){case 1:return function(e){return t.call(n,e)};case 2:return function(e,r){return t.call(n,e,r)};case 3:return function(e,r,o){return t.call(n,e,r,o)}}return function(){return t.apply(n,arguments)}}},function(t,n,e){var r=e(9),o=e(34),i=e(19);t.exports=function(t){var n=r(t),e=o.f;if(e)for(var u,f=e(t),c=i.f,a=0;f.length>a;)c.call(t,u=f[a++])&&n.push(u);return n}},function(t,n,e){t.exports=e(1).document&&document.documentElement},function(t,n,e){var r=e(28);t.exports=Object("z").propertyIsEnumerable(0)?Object:function(t){return"String"==r(t)?t.split(""):Object(t)}},function(t,n,e){var r=e(28);t.exports=Array.isArray||function(t){return"Array"==r(t)}},function(t,n,e){"use strict";var r=e(32),o=e(12),i=e(20),u={};e(5)(u,e(7)("iterator"),function(){return this}),t.exports=function(t,n,e){t.prototype=r(u,{next:o(1,e)}),i(t,n+" Iterator")}},function(t,n){t.exports=function(t,n){return{value:n,done:!!t}}},function(t,n,e){var r=e(9),o=e(3);t.exports=function(t,n){for(var e,i=o(t),u=r(i),f=u.length,c=0;f>c;)if(i[e=u[c++]]===n)return e}},function(t,n,e){var r=e(13)("meta"),o=e(11),i=e(2),u=e(6).f,f=0,c=Object.isExtensible||function(){return!0},a=!e(8)(function(){return c(Object.preventExtensions({}))}),s=function(t){u(t,r,{value:{i:"O"+ ++f,w:{}}})},l=function(t,n){if(!o(t))return"symbol"==typeof t?t:("string"==typeof t?"S":"P")+t;if(!i(t,r)){if(!c(t))return"F";if(!n)return"E";s(t)}return t[r].i},p=function(t,n){if(!i(t,r)){if(!c(t))return!0;if(!n)return!1;s(t)}return t[r].w},d=function(t){return a&&v.NEED&&c(t)&&!i(t,r)&&s(t),t},v=t.exports={KEY:r,NEED:!1,fastKey:l,getWeak:p,onFreeze:d}},function(t,n,e){var r=e(6),o=e(10),i=e(9);t.exports=e(4)?Object.defineProperties:function(t,n){o(t);for(var e,u=i(n),f=u.length,c=0;f>c;)r.f(t,e=u[c++],n[e]);return t}},function(t,n,e){var r=e(19),o=e(12),i=e(3),u=e(24),f=e(2),c=e(30),a=Object.getOwnPropertyDescriptor;n.f=e(4)?a:function(t,n){if(t=i(t),n=u(n,!0),c)try{return a(t,n)}catch(t){}if(f(t,n))return o(!r.f.call(t,n),t[n])}},function(t,n,e){var r=e(3),o=e(33).f,i={}.toString,u="object"==typeof window&&window&&Object.getOwnPropertyNames?Object.getOwnPropertyNames(window):[],f=function(t){try{return o(t)}catch(t){return u.slice()}};t.exports.f=function(t){return u&&"[object Window]"==i.call(t)?f(t):o(r(t))}},function(t,n,e){var r=e(2),o=e(37),i=e(21)("IE_PROTO"),u=Object.prototype;t.exports=Object.getPrototypeOf||function(t){return t=o(t),r(t,i)?t[i]:"function"==typeof t.constructor&&t instanceof t.constructor?t.constructor.prototype:t instanceof Object?u:null}},function(t,n,e){var r=e(23),o=e(15);t.exports=function(t){return function(n,e){var i,u,f=String(o(n)),c=r(e),a=f.length;return c<0||c>=a?t?"":void 0:(i=f.charCodeAt(c),i<55296||i>56319||c+1===a||(u=f.charCodeAt(c+1))<56320||u>57343?t?f.charAt(c):i:t?f.slice(c,c+2):(i-55296<<10)+(u-56320)+65536)}}},function(t,n,e){var r=e(23),o=Math.max,i=Math.min;t.exports=function(t,n){return t=r(t),t<0?o(t+n,0):i(t,n)}},function(t,n,e){var r=e(23),o=Math.min;t.exports=function(t){return t>0?o(r(t),9007199254740991):0}},function(t,n,e){"use strict";var r=e(44),o=e(52),i=e(17),u=e(3);t.exports=e(31)(Array,"Array",function(t,n){this._t=u(t),this._i=0,this._k=n},function(){var t=this._t,n=this._k,e=this._i++;return!t||e>=t.length?(this._t=void 0,o(1)):"keys"==n?o(0,e):"values"==n?o(0,t[e]):o(0,[e,t[e]])},"values"),i.Arguments=i.Array,r("keys"),r("values"),r("entries")},function(t,n){},function(t,n,e){"use strict";var r=e(59)(!0);e(31)(String,"String",function(t){this._t=String(t),this._i=0},function(){var t,n=this._t,e=this._i;return e>=n.length?{value:void 0,done:!0}:(t=r(n,e),this._i+=t.length,{value:t,done:!1})})},function(t,n,e){"use strict";var r=e(1),o=e(2),i=e(4),u=e(27),f=e(36),c=e(54).KEY,a=e(8),s=e(22),l=e(20),p=e(13),d=e(7),v=e(26),y=e(25),h=e(53),b=e(47),x=e(50),m=e(10),g=e(3),w=e(24),O=e(12),S=e(32),_=e(57),j=e(56),P=e(6),E=e(9),M=j.f,A=P.f,T=_.f,L=r.Symbol,N=r.JSON,C=N&&N.stringify,k="prototype",F=d("_hidden"),q=d("toPrimitive"),I={}.propertyIsEnumerable,B=s("symbol-registry"),D=s("symbols"),W=s("op-symbols"),H=Object[k],K="function"==typeof L,R=r.QObject,J=!R||!R[k]||!R[k].findChild,U=i&&a(function(){return 7!=S(A({},"a",{get:function(){return A(this,"a",{value:7}).a}})).a})?function(t,n,e){var r=M(H,n);r&&delete H[n],A(t,n,e),r&&t!==H&&A(H,n,r)}:A,G=function(t){var n=D[t]=S(L[k]);return n._k=t,n},$=K&&"symbol"==typeof L.iterator?function(t){return"symbol"==typeof t}:function(t){return t instanceof L},z=function(t,n,e){return t===H&&z(W,n,e),m(t),n=w(n,!0),m(e),o(D,n)?(e.enumerable?(o(t,F)&&t[F][n]&&(t[F][n]=!1),e=S(e,{enumerable:O(0,!1)})):(o(t,F)||A(t,F,O(1,{})),t[F][n]=!0),U(t,n,e)):A(t,n,e)},Y=function(t,n){m(t);for(var e,r=b(n=g(n)),o=0,i=r.length;i>o;)z(t,e=r[o++],n[e]);return t},Q=function(t,n){return void 0===n?S(t):Y(S(t),n)},X=function(t){var n=I.call(this,t=w(t,!0));return!(this===H&&o(D,t)&&!o(W,t))&&(!(n||!o(this,t)||!o(D,t)||o(this,F)&&this[F][t])||n)},V=function(t,n){if(t=g(t),n=w(n,!0),t!==H||!o(D,n)||o(W,n)){var e=M(t,n);return!e||!o(D,n)||o(t,F)&&t[F][n]||(e.enumerable=!0),e}},Z=function(t){for(var n,e=T(g(t)),r=[],i=0;e.length>i;)o(D,n=e[i++])||n==F||n==c||r.push(n);return r},tt=function(t){for(var n,e=t===H,r=T(e?W:g(t)),i=[],u=0;r.length>u;)!o(D,n=r[u++])||e&&!o(H,n)||i.push(D[n]);return i};K||(L=function(){if(this instanceof L)throw TypeError("Symbol is not a constructor!");var t=p(arguments.length>0?arguments[0]:void 0),n=function(e){this===H&&n.call(W,e),o(this,F)&&o(this[F],t)&&(this[F][t]=!1),U(this,t,O(1,e))};return i&&J&&U(H,t,{configurable:!0,set:n}),G(t)},f(L[k],"toString",function(){return this._k}),j.f=V,P.f=z,e(33).f=_.f=Z,e(19).f=X,e(34).f=tt,i&&!e(18)&&f(H,"propertyIsEnumerable",X,!0),v.f=function(t){return G(d(t))}),u(u.G+u.W+u.F*!K,{Symbol:L});for(var nt="hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","),et=0;nt.length>et;)d(nt[et++]);for(var nt=E(d.store),et=0;nt.length>et;)y(nt[et++]);u(u.S+u.F*!K,"Symbol",{for:function(t){return o(B,t+="")?B[t]:B[t]=L(t)},keyFor:function(t){if($(t))return h(B,t);throw TypeError(t+" is not a symbol!")},useSetter:function(){J=!0},useSimple:function(){J=!1}}),u(u.S+u.F*!K,"Object",{create:Q,defineProperty:z,defineProperties:Y,getOwnPropertyDescriptor:V,getOwnPropertyNames:Z,getOwnPropertySymbols:tt}),N&&u(u.S+u.F*(!K||a(function(){var t=L();return"[null]"!=C([t])||"{}"!=C({a:t})||"{}"!=C(Object(t))})),"JSON",{stringify:function(t){if(void 0!==t&&!$(t)){for(var n,e,r=[t],o=1;arguments.length>o;)r.push(arguments[o++]);return n=r[1],"function"==typeof n&&(e=n),!e&&x(n)||(n=function(t,n){if(e&&(n=e.call(this,t,n)),!$(n))return n}),r[1]=n,C.apply(N,r)}}}),L[k][q]||e(5)(L[k],q,L[k].valueOf),l(L,"Symbol"),l(Math,"Math",!0),l(r.JSON,"JSON",!0)},function(t,n,e){e(25)("asyncIterator")},function(t,n,e){e(25)("observable")},function(t,n,e){e(62);for(var r=e(1),o=e(5),i=e(17),u=e(7)("toStringTag"),f=["NodeList","DOMTokenList","MediaList","StyleSheetList","CSSRuleList"],c=0;c<5;c++){var a=f[c],s=r[a],l=s&&s.prototype;l&&!l[u]&&o(l,u,a),i[a]=i.Array}},function(t,n){"use strict";var e={versions:function(){var t=window.navigator.userAgent;return{trident:t.indexOf("Trident")>-1,presto:t.indexOf("Presto")>-1,webKit:t.indexOf("AppleWebKit")>-1,gecko:t.indexOf("Gecko")>-1&&t.indexOf("KHTML")==-1,mobile:!!t.match(/AppleWebKit.*Mobile.*/),ios:!!t.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),android:t.indexOf("Android")>-1||t.indexOf("Linux")>-1,iPhone:t.indexOf("iPhone")>-1||t.indexOf("Mac")>-1,iPad:t.indexOf("iPad")>-1,webApp:t.indexOf("Safari")==-1,weixin:t.indexOf("MicroMessenger")==-1}}()};t.exports=e},function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}var o=e(40),i=r(o),u=function(){function t(t,n,e){return n||e?String.fromCharCode(n||e):o[t]||t}function n(t){return l[t]}var e=/&quot;|&lt;|&gt;|&amp;|&nbsp;|&apos;|&#(\d+);|&#(\d+)/g,r=/['<> "&]/g,o={"&quot;":'"',"&lt;":"<","&gt;":">","&amp;":"&","&nbsp;":" "},f=/\u00a0/g,c=/<br\s*\/?>/gi,a=/\r?\n/g,s=/\s/g,l={};for(var p in o)l[o[p]]=p;return o["&apos;"]="'",l["'"]="&#39;",{encode:function(t){return t?(""+t).replace(r,n).replace(a,"<br/>").replace(s,"&nbsp;"):""},decode:function(n){return n?(""+n).replace(c,"\n").replace(e,t).replace(f," "):""},encodeBase16:function(t){if(!t)return t;t+="";for(var n=[],e=0,r=t.length;r>e;e++)n.push(t.charCodeAt(e).toString(16).toUpperCase());return n.join("")},encodeBase16forJSON:function(t){if(!t)return t;t=t.replace(/[\u4E00-\u9FBF]/gi,function(t){return escape(t).replace("%u","\\u")});for(var n=[],e=0,r=t.length;r>e;e++)n.push(t.charCodeAt(e).toString(16).toUpperCase());return n.join("")},decodeBase16:function(t){if(!t)return t;t+="";for(var n=[],e=0,r=t.length;r>e;e+=2)n.push(String.fromCharCode("0x"+t.slice(e,e+2)));return n.join("")},encodeObject:function(t){if(t instanceof Array)for(var n=0,e=t.length;e>n;n++)t[n]=u.encodeObject(t[n]);else if("object"==("undefined"==typeof t?"undefined":(0,i.default)(t)))for(var r in t)t[r]=u.encodeObject(t[r]);else if("string"==typeof t)return u.encode(t);return t},loadScript:function(t){var n=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(n),n.setAttribute("src",t)},addLoadEvent:function(t){var n=window.onload;"function"!=typeof window.onload?window.onload=t:window.onload=function(){n(),t()}}}}();t.exports=u},function(t,n){function e(t,n){t.classList?t.classList.add(n):t.className+=" "+n}t.exports=e},function(t,n){function e(t,n){if(t.classList)t.classList.remove(n);else{var e=new RegExp("(^|\\b)"+n.split(" ").join("|")+"(\\b|$)","gi");t.className=t.className.replace(e," ")}}t.exports=e},,,function(t,n){"use strict";function e(){var t=document.querySelector("#page-nav");if(t&&!document.querySelector("#page-nav .extend.prev")&&(t.innerHTML='<a class="extend prev disabled" rel="prev">&laquo; Prev</a>'+t.innerHTML),t&&!document.querySelector("#page-nav .extend.next")&&(t.innerHTML=t.innerHTML+'<a class="extend next disabled" rel="next">Next &raquo;</a>'),yiliaConfig&&yiliaConfig.open_in_new){var n=document.querySelectorAll(".article-entry a:not(.article-more-a)");n.forEach(function(t){t.setAttribute("target","_blank")})}var e=document.querySelector("#js-aboutme");e&&0!==e.length&&(e.innerHTML=e.innerText)}t.exports={init:e}},,,,,,,,,function(t,n){function e(t,n){if("string"==typeof n)return t.insertAdjacentHTML("afterend",n);var e=t.nextSibling;return e?t.parentNode.insertBefore(n,e):t.parentNode.appendChild(n)}t.exports=e}]);
+</script>
+<script src="/main.d221b8.js"></script>
+<script>
+(function() {
+	var loadScript = function(path) {
+	    var $script = document.createElement('script')
+	    document.getElementsByTagName('body')[0].appendChild($script)
+	    $script.setAttribute('src', path)
+	}
+	loadScript("/slider.59dfdc.js")
+})();
+</script>
+
+
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?cd91612347b83cb297934e724126bf91";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+      
+      
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuest</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">C#</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">前端基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">会点皮毛技术,立志于往深处扎根。</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

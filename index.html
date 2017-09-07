@@ -173,116 +173,11 @@
         <blockquote>
 <p><strong>JaScript</strong> 的语法借鉴了很多编译型语言的语法，如 <strong>Java</strong> (谁叫博主就只会JAVA呢，其他的也不好列举出来)。所以熟悉 <strong>Java</strong> 的人对于 <strong>JavaScript</strong> 语法应该是游刃有余的，但是 <strong>JavaScript</strong> 比  <strong>Java</strong> 更显宽松，有些地方还是需要注意两者的区别。</p>
 </blockquote>
-<h2 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h2><p><strong>JavaScript</strong> 采用 <strong>Unicode</strong> 字符集编写，有关字符集的区别的问题，小伙伴们可以自己 <a href="http://www.baidu.com" title="百度" target="_blank" rel="external">百度</a>下，这里就不详细介绍了。</p>
+<h2 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h2><p><strong>JavaScript</strong> 采用 <strong>Unicode</strong> 字符集编写，有关字符集的区别的问题，小伙伴们可以自己 <a href="http://www.baidu.com" title="百度">百度</a>下，这里就不详细介绍了。</p>
 <h2 id="区分大小写"><a href="#区分大小写" class="headerlink" title="区分大小写"></a>区分大小写</h2><p><strong>JavaScript</strong> 跟 <strong>Java</strong> 一样是区分大小写，因为他跟 <strong>HTML</strong> 联系紧密，会给人造成一种不区分大小写的错觉。因此这里要强调下，<strong>JavaScript</strong> 区分大小写，并且 <strong>HTML</strong> 中的标签跟属性，在 <strong>JavaScript</strong> 中必须是小写的，例如 onclick 属性可以在 <strong>HTML</strong> 中写成 onClick，但在 <strong>JavaScript</strong> 代码中，必须使用小写的 onclick。</p>
-<h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><h3 id="1-语句"><a href="#1-语句" class="headerlink" title="1. 语句"></a>1. 语句</h3><p>用 <strong>JavaScript</strong> 编写的脚本，跟其他语言编写出来的脚本是一样的，都由一系列指令组成，这些指令就叫做语句。</p>
-<p><strong>JavaScript</strong> 语句不像 <strong>Java</strong> 一样严格，必须以“<code>;</code>”号结尾。但是为了阅读习惯，同时也是一种好的编程习惯，强烈要求必须在语句末尾加上“ <code>;</code> ”号。</p>
-<h3 id="2-注释"><a href="#2-注释" class="headerlink" title="2.注释"></a>2.注释</h3><p>不是所有的 <strong>JavaScript</strong> 代码都需要 <strong>JavaScript</strong> 解释器去解释并执行。有时一些代码，你不想让程序执行的话，就可以使用//（单行注释）或者 /**/（多行注释）来注释掉。例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="comment">//  console.log("这是单行注释，你是无法看到的");</span></div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"Hello,JavaScript!"</span>);</div><div class="line">       <span class="comment">/**</span></div><div class="line">	* console.log("这是多行注释，你也是无法看到的");</div><div class="line">	** /</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="3-常量与变量"><a href="#3-常量与变量" class="headerlink" title="3.常量与变量"></a>3.常量与变量</h3><blockquote>
-<p>在日常生活中，有些东西是固定不变的,有些东西则会发生变化。例如，人的生日是不会变化的，而人的年龄是会随着时间变化而变化，人们将那些会发生变化的东西成为变量</p>
-</blockquote>
-<p>以上关于变量定义的说明来自于《JavaScript DOM 编程艺术》，从上面我们也可以看出，一般来说，固定不动的数据我们称为 <strong>常量</strong> ，而可以改变的数据我们称为 <strong>变量</strong>。</p>
-<p>把值存入常量或变量的操作就叫做 <strong>赋值</strong>。<br>例如：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 将18赋值给age</div><div class="line">  age = 18;</div><div class="line">// 弹出对话框，显示age的值</div><div class="line">  alert(age);</div></pre></td></tr></table></figure></p>
-<p>了解 <strong>Java</strong> 语法的人，应该知道在 <strong>Java</strong> 中必须先声明变量类型再赋值，但是 <strong>JavaScript</strong> 可以不事先声明就直接赋值。但是提前申明是一种良好的编程习惯，而且也可以区分是全局变量，还是局部变量。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 声明变量 age，并且将18赋值给age</div><div class="line">var age = 18;</div><div class="line">// 弹出对话框，显示age的值</div><div class="line">alert(age);</div></pre></td></tr></table></figure>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">var age = 200; // 全局变量</div><div class="line">test();</div><div class="line">console.log(age);   // 猜猜是200还是18</div><div class="line"></div><div class="line">function test()&#123;</div><div class="line">    var age = 18;  // 局部变量</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="4-基础数据类型"><a href="#4-基础数据类型" class="headerlink" title="4.基础数据类型"></a>4.基础数据类型</h3><p>在 <strong>Java</strong> 语言中，声明变量的同时必须同时声明变量的数据类型，这种做法叫做 <strong>类型声明</strong>。而这种需要同时声明变量的数据类型的语言叫做强类型语言，而 <strong>JavaScript</strong> 是一种弱类型语言，这意味着可以在任何时候修改数据的类型。例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var age =18;</div><div class="line">age="18";</div></pre></td></tr></table></figure>
-<p>在 <strong>Java</strong> 中这是非法的，但是 <strong>JavaScript</strong> 中并没有任何问题， <strong>JavaScript</strong> 并不在意变量 <strong>age</strong> 是一个数字还是字符串。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var age = "18"; // String</div><div class="line">var age</div></pre></td></tr></table></figure>
-<h3 id="Undefined-类型"><a href="#Undefined-类型" class="headerlink" title="Undefined 类型"></a><code>Undefined</code> 类型</h3><p><code>Undefined</code> 类型只有1个值，即 <code>undefined</code>。使用 <code>var</code> 声明变量但未对其加以初始化时，这个变量的值就是 <code>undefined</code>，直接使用未声明的变量会产生错误。对未声明或已声明但未初始化的变量执行 <code>typeof</code> 运算符会返回 <code>&quot;undefined&quot;</code> 值，例如：<br>(<code>typeof</code> 运算符会在下面讲到)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> message;    <span class="comment">// 这个变量声明之后默认取得了 undefined 值</span></div><div class="line"><span class="comment">// var age      // 这个变量并没有声明</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(message);           <span class="comment">// "undefined"</span></div><div class="line"><span class="built_in">console</span>.log(age);               <span class="comment">// 产生错误</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> message);    <span class="comment">// "undefined"</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> age);        <span class="comment">// "undefined"</span></div></pre></td></tr></table></figure>
-<h3 id="Null-类型"><a href="#Null-类型" class="headerlink" title="Null 类型"></a><code>Null</code> 类型</h3><p><code>Null</code> 类型也只有1个值，即 <code>null</code>。它用来表示值的空缺。你可以认为 <code>undefined</code> 是表示系统级的、出乎意料的或类似错误的值的空缺，而 <code>null</code> 是表示程序级的、正常的或在意料之中的值的空缺。在下列场景中应当使用 <code>null</code>。</p>
-<ul>
-<li>用来初始化一个变量，这个变量可能赋值为一个对象。</li>
-<li>用来和一个已经初始化的变量比较，这个变量可以是也可以不是一个对象。</li>
-<li>当函数的参数期望是对象时，作用参数传入。</li>
-<li>当函数的返回值期望是对象时，作用返回值传出。</li>
-</ul>
-<p>在下列场景中不应当使用 <code>null</code>。</p>
-<ul>
-<li>不要使用 <code>null</code> 来检测是否传入了某个参数。</li>
-<li>不要使用 <code>null</code> 来检测一个未初始化的变量。</li>
-</ul>
-<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>字符串由零个或多个字符组成，字符包括（但不限于）字母、数字、标点符号和空格。字符串必须包在引号里，单引号或双引号都可以。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var weather = '晴天';</div><div class="line">var weather = "晴天";</div></pre></td></tr></table></figure>
-<p>你可以随意选择引号，但是最好根据字符串所包含的字符来选择。比如，字符串里有单引号，就应该选择双引号来包含。反之，就应该选择单引号。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var weather = '今天是个"晴天"';</div><div class="line">var weather = "今天是个'晴天'";</div></pre></td></tr></table></figure></p>
-<p>当然也可以跟 <strong>Java</strong> 类似，选择转义符 <code>\</code> 来转义。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var weather = '今天是个\'晴天"\'';</div><div class="line">var weather = "今天是个\"晴天\"";</div></pre></td></tr></table></figure></p>
-<h4 id="数值"><a href="#数值" class="headerlink" title="数值"></a>数值</h4><p><strong>JavaScript</strong> 支持正负浮点数跟整型</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var age = 1;</div><div class="line">var age = -1;</div><div class="line">var age = 100.1;</div><div class="line">var age = -100.1;</div></pre></td></tr></table></figure>
-<h4 id="布尔型"><a href="#布尔型" class="headerlink" title="布尔型"></a>布尔型</h4><p>布尔类型（boolean）的值有两种,true和false.在非此即彼的场景下，往往使用布尔类型会更简单。</p>
-<h3 id="5-数组"><a href="#5-数组" class="headerlink" title="5.数组"></a>5.数组</h3><p>字符串、数值跟布尔型，只能用来表示一个值，如果需要存储一组值，<strong>数组(array)</strong> 就要粉墨登场了。</p>
-<p>数组是指用一个变量表示一个值的集合,集合中的每个值都是这个数组的一个元素. 在 <strong>JavaScript</strong> 中用关键字 <strong> Array</strong> 来声明数组。</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">var teams</span> =  Array();</div><div class="line"><span class="attribute">var teams</span> =  Array(4);</div><div class="line"><span class="attribute">var teams</span> = &#123;<span class="string">"足球队"</span>,<span class="string">"篮球队"</span>,<span class="string">"排球队"</span>,<span class="string">"网球队"</span>&#125;;</div></pre></td></tr></table></figure>
-<p>数组赋值方式：</p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var teams = Array()<span class="comment">;</span></div><div class="line">teams[<span class="number">0</span>] = <span class="string">"足球队"</span><span class="comment">;</span></div><div class="line">teams[<span class="number">0</span>] = <span class="string">"篮球队"</span><span class="comment">;</span></div></pre></td></tr></table></figure>
-<p>在 <strong>Java</strong> 语言中数组里面的元素必须是同一类型的，但是在 <strong>JavaScript</strong> 中就没有这样的限制，数组内的元素可以是不同类型的，设置可以是一个对象或者数组。</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> teams1 = &#123;<span class="string">"足球队"</span>,<span class="number">10</span>, <span class="literal">false</span>&#125;;</div><div class="line"><span class="keyword">var</span> teams2 = &#123;<span class="string">"篮球队"</span>,teams1&#125;;</div></pre></td></tr></table></figure>
-<h3 id="6-对象"><a href="#6-对象" class="headerlink" title="6.对象"></a>6.对象</h3><p>与数组类似，对象也是使用一个名字表示一组值。对象的每个值都是它的属性，例如<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var student = Object<span class="comment">;</span></div><div class="line">student.name=<span class="string">"张三"</span><span class="comment">;</span></div><div class="line">student.age = <span class="number">18</span><span class="comment">;</span></div><div class="line">student.hobby = &#123;<span class="string">"篮球"</span>，“跑步”，“编程”&#125;<span class="comment">;</span></div></pre></td></tr></table></figure></p>
-<p>创建对象有一种更简洁的语法：<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> student = &#123;<span class="string">"name"</span>:<span class="type"></span>"张三<span class="string">","</span>age<span class="string">":18,"</span>hobby<span class="string">":"</span>&#123;<span class="string">'篮球'</span>，<span class="string">'跑步'</span>，<span class="string">'编程'</span>&#125;<span class="string">"&#125;;</span></div></pre></td></tr></table></figure></p>
-<h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><h3 id="算术操作符"><a href="#算术操作符" class="headerlink" title="算术操作符"></a>算术操作符</h3><p>加 (+)、减(-)、乘(*)、除(/) 就是算术操作符。</p>
-<h2 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h2><h3 id="IF-语句"><a href="#IF-语句" class="headerlink" title="IF 语句"></a>IF 语句</h3><p>在做判断的时候就用到了 <strong>IF</strong> 语句，它的语法如下：</p>
-<figure class="highlight xquery"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(条件)&#123;</div><div class="line">  alert(<span class="string">"满足条件时执行"</span>)；</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">  alert(<span class="string">"不满足条件时执行"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>条件的结果永远是布尔型，这意味着你可以根据设置的条件实现不同的操作。</p>
-<h3 id="毕竟操作符"><a href="#毕竟操作符" class="headerlink" title="毕竟操作符"></a>毕竟操作符</h3><ul>
-<li><blockquote>
-<p>: 大于操作符</p>
-</blockquote>
-</li>
-<li>&lt; ：小于操作符</li>
-<li><blockquote>
-<p>=  : 大于等于操作符</p>
-</blockquote>
-</li>
-<li>&lt;=  : 大于等于操作符</li>
-<li>==  : 等于操作符</li>
-<li>!=  : 不等于操作符</li>
-<li>=== : 全等于操作符，不仅比较值，还要比较是否为同一类型</li>
-<li>!== : 全不等于操作符，不仅比较值，还要比较是否为同一类型</li>
-</ul>
-<h3 id="逻辑操作符"><a href="#逻辑操作符" class="headerlink" title="逻辑操作符"></a>逻辑操作符</h3><ul>
-<li>&amp;&amp; ：逻辑与 ，两个条件同时等于true，它的值才是true</li>
-<li>|| ：逻辑或 ，有一个条件同时等于true，它的值就是true</li>
-<li>!  : 逻辑非，取相反值，如果条件值为true，它的值就是false</li>
-</ul>
-<h3 id="typeof-运算符"><a href="#typeof-运算符" class="headerlink" title="typeof 运算符"></a><code>typeof</code> 运算符</h3><p>鉴于 JavaScript 是松散类型的，因此需要有一种手段来检测给定变量的数据类型，<code>typeof</code> 就是负责提供这方面信息的运算符。对一个值使用 <code>typeof</code> 运算符可能返回下列某个字符串：</p>
-<ul>
-<li><code>&quot;undefined&quot;</code>，如果这个值未声明或已声明但未初始化。</li>
-<li><code>&quot;boolean&quot;</code>，如果这个值是布尔值。</li>
-<li><code>&quot;string&quot;</code>，如果这个值是字符串。</li>
-<li><code>&quot;number&quot;</code>，如果这个值是数值。</li>
-<li><code>&quot;object&quot;</code>，如果这个值是对象或 <code>null</code>。</li>
-<li><code>&quot;function&quot;</code>，如果这个值是函数。</li>
-</ul>
-<p>下面是几个使用 <code>typeof</code> 运算符的例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> message = <span class="string">"some string"</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> message);     <span class="comment">// "string"</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(message));    <span class="comment">// "string"</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="number">95</span>);          <span class="comment">// "number"</span></div></pre></td></tr></table></figure>
-<p>从以上例子可以看出，<code>typeof</code> 运算符既可以对变量使用，又可以对字面量使用。由于 <code>typeof</code> 是一个运算符而不是函数，因此例子中的圆括号尽管可以使用，但并不提倡。</p>
-<p><code>typeof null</code> 结果是 <code>&quot;object&quot;</code> 是历史遗留 Bug，在 ECMAScript 6 中，曾经有提案为历史平反, 将 <code>typeof null</code> 的值纠正为 <code>&quot;null&quot;</code>，但最后该提案被拒。理由是历史遗留代码太多，不如继续将错就错。</p>
-<p>从技术角度讲，函数在 JavaScript 中是对象，不是一种数据类型。然而，函数也确实有一些特殊的属性，因此通过 <code>typeof</code> 运算符来区分函数和其他对象是有必要的。</p>
-<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><p>要想完成重复性的操作，必然要使用到循环语句了。循环语句有如下三种：</p>
-<ul>
-<li>while 循环</li>
-<li>do…while 循环</li>
-<li>for 循环</li>
-</ul>
-<h3 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a>while 循环</h3><p><strong>while</strong> 循环 与 <strong>IF</strong>语法很相似：<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span><span class="comment">(条件)</span>&#123;</div><div class="line">  alert<span class="comment">("满足条件显示的值")</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h4 id="do…while-循环"><a href="#do…while-循环" class="headerlink" title="do…while 循环"></a>do…while 循环</h4><p>像 <strong>while</strong> 循环是必须满足条件才会执行，有一种需求是不管满不满足条件都要执行一次，这种场景下，<strong>do…while </strong> 循环就派上用场了，它的语法如下：<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">do</span>&#123;</div><div class="line">    alert<span class="comment">("不管条件成立与否，都至少执行一次")</span>;</div><div class="line">&#125; <span class="keyword">while</span><span class="comment">(条件)</span>;</div></pre></td></tr></table></figure></p>
-<h3 id="for-循环"><a href="#for-循环" class="headerlink" title="for 循环"></a>for 循环</h3><p>与 <strong>while </strong> 循环和 <strong>do…while</strong> 循环 不知道执行次数的情况不同，<strong>for</strong> 循环需要明确知道循环的次数，它的语法如下：</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(var <span class="built_in">i</span>=<span class="number">0</span>;<span class="built_in">i</span>&lt;循环次数;<span class="built_in">i</span>++)&#123;</div><div class="line">  alert("满足条件显示的值");</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>如果需要多次使用同一段代码的话，可以把它们封装成一个函数。函数(function)就是一组允许在你的代码里随时调用的语句，每个函数实际上就是一个短小的脚本。作为良好的编程习惯，应该先定义好函数再调用它。</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">show</span><span class="params">(showText)</span></span>&#123;</div><div class="line">  alert(showText);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如上面示例，我们把传给函数的值叫做参数。</p>
-<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>在上面我们简单的介绍了对象的声明，在这里我们在详细来了解下对象。</p>
-<p>对象是自包含的数据集合，包含在对象里的数据可以通过两种形式来访问– 属性和方法。</p>
-<ul>
-<li>属性是隶属于某个特定对象的变量</li>
-<li>方法是只有某个特定对象的才能调用的函数</li>
-</ul>
-<p>对象就是由一些属性和方法组合在一起的而构成的一个数据实体。在 <strong>JavaScript</strong> 中，属性和方法都是通过点来访问的，例如：<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">Object</span>.<span class="keyword">name</span>;</div><div class="line"><span class="keyword">Object</span>.showName();</div></pre></td></tr></table></figure></p>
-<h3 id="内建对象"><a href="#内建对象" class="headerlink" title="内建对象"></a>内建对象</h3><p><strong>JavaScript</strong> 提供了一系列预先定义好的对象，这些可以拿来就用的对象称为内建对象。数组对象就是一种内建对象。</p>
-<h4 id="2-宿主对象"><a href="#2-宿主对象" class="headerlink" title="2.宿主对象"></a>2.宿主对象</h4><p>除了内建对象外，还可以在 <strong>JavaScript</strong> 脚本中使用一些已经预先定义好的对象，这些对象不是由 <strong>JavaScript</strong> 本身产生的，而是由它的运行环境产生的，如浏览器。<br>宿主对象包括Form、Image、Element等，我们可以通过这些对象获得关于表单、图片和其他元素的信息。</p>
-
+        
+          <a class="article-more-a" href="/2017/09/07/JavaEE学习/3.JavaScript/3.JavaScript语法/#more">more >></a>
+        
       
 
       
@@ -310,92 +205,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/09/07/JavaEE学习/3.JavaScript/3.JavaScript语法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-JavaEE学习/3.JavaScript/2.JavaScript使用方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/07/JavaEE学习/3.JavaScript/2.JavaScript使用方式/">2.JavaScript使用方式</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/07/JavaEE学习/3.JavaScript/2.JavaScript使用方式/" class="archive-article-date">
-  	<time datetime="2017-09-07T02:57:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>在 <strong>HTML</strong> 中以元素 <code>&lt;script&gt;</code>来嵌入 <strong>JavaScript</strong> 代码，当浏览器加载 <strong>HTML</strong> 文件时会从上至下依次执行 <strong>JavaScript</strong> 代码。</p>
-</blockquote>
-<h2 id="lt-script-gt-有如下两种使用方式"><a href="#lt-script-gt-有如下两种使用方式" class="headerlink" title="&lt;script&gt; 有如下两种使用方式"></a><code>&lt;script&gt;</code> 有如下两种使用方式</h2><ul>
-<li>直接在 <strong>HTML</strong> 页面中嵌入</li>
-<li>写在外部 <strong>.JS</strong> 文件中，然后在 HTML 中引入</li>
-</ul>
-<h3 id="1-直接在-HTML-页面中嵌入"><a href="#1-直接在-HTML-页面中嵌入" class="headerlink" title="1.直接在 HTML 页面中嵌入"></a>1.直接在 <strong>HTML</strong> 页面中嵌入</h3><p>使用  <code>&lt;script&gt;</code> 元素嵌入 JavaScript 代码时，只需为 <code>&lt;script&gt;</code> 指定 <code>type</code> 属性。然后，像下面这样把 JavaScript 代码直接放在元素内部即可：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"Hello,JavaScript!"</span>);</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>注：在 HTML5 规范中，<code>&lt;script&gt;</code> 的 <code>type</code> 属性默认是 <code>&quot;text/javascript&quot;</code>，所以可以省略；但是在 HTML 4.01 和 XHTML 1.0 规范中，<code>type</code> 属性是必须的。</p>
-<h3 id="2-引用外部-JS-文件"><a href="#2-引用外部-JS-文件" class="headerlink" title="2.引用外部 .JS 文件"></a>2.引用外部 <strong>.JS</strong> 文件</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"HelloJavaScript.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>如上所示，引用外部 <strong>.JS</strong> 文件需要用到 <code>src</code> 属性。除了引用本地 <strong>.JS</strong> 文件外，也可以引用网络 <strong>.JS</strong> 文件。例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>当使用了 <code>src</code> 属性后，不应该在 <code>&lt;script&gt;</code> 和 <code>&lt;/script&gt;</code> 元素之间再包含额外的 JavaScript 代码。如果包含了嵌入的代码，则只会下载并执行外部脚本文件，嵌入的代码会被忽略。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"HelloJavaScript.js"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"Hello,JavaScript!"</span>);  <span class="comment">//永不执行</span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="3-两种方式比较"><a href="#3-两种方式比较" class="headerlink" title="3.两种方式比较"></a>3.两种方式比较</h3><p>相比较直接在HTML 中侵入 <strong>JavaScript</strong> 代码，引用外部文件的方式更值得推荐。</p>
-<h2 id="JavaScript-存放位置"><a href="#JavaScript-存放位置" class="headerlink" title="JavaScript 存放位置"></a>JavaScript 存放位置</h2><p>一般来说，所有的 <script> 元素都应该放在页面的 <code>&lt;head&gt;</code> 元素中，例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    ......</div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"HelloJavaScript.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 这里放内容 --&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>可是这种做法意味着必须等到全部 <strong>JavaScript</strong> 代码都被下载、解析和执行完成之后，才能开始呈现页面的内容（浏览器在遇到 <code>&lt;body&gt;</code> 元素时才开始呈现内容）。对于那些需要加载很多 <strong>JavaScript</strong> 代码的页面来说，会导致页面出现明显的延迟（浏览器窗口一片空白）。为了避免这个问题，最好的做法是把 <code>&lt;script&gt;</code> 元素放到 <strong>HTML</strong> 文档的最后面，<code>&lt;/body&gt;</code> 元素之前，例如：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    ......</div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 这里放内容 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"HelloJavaScript.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>存放的位置，根据使用场景可以自己选择。</p>
-</script></p>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/07/JavaEE学习/3.JavaScript/2.JavaScript使用方式/">展开全文 >></a>
         </p>
       
 
@@ -472,6 +281,80 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/09/07/JavaEE学习/3.JavaScript/1.JavaSscript纲要/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-JavaEE学习/3.JavaScript/2.JavaScript使用方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/07/JavaEE学习/3.JavaScript/2.JavaScript使用方式/">2.JavaScript使用方式</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/07/JavaEE学习/3.JavaScript/2.JavaScript使用方式/" class="archive-article-date">
+  	<time datetime="2017-09-07T02:57:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>在 <strong>HTML</strong> 中以元素 <code>&lt;script&gt;</code>来嵌入 <strong>JavaScript</strong> 代码，当浏览器加载 <strong>HTML</strong> 文件时会从上至下依次执行 <strong>JavaScript</strong> 代码。</p>
+</blockquote>
+<h2 id="lt-script-gt-有如下两种使用方式"><a href="#lt-script-gt-有如下两种使用方式" class="headerlink" title="&lt;script&gt; 有如下两种使用方式"></a><code>&lt;script&gt;</code> 有如下两种使用方式</h2><ul>
+<li>直接在 <strong>HTML</strong> 页面中嵌入</li>
+<li>写在外部 <strong>.JS</strong> 文件中，然后在 HTML 中引入</li>
+</ul>
+        
+          <a class="article-more-a" href="/2017/09/07/JavaEE学习/3.JavaScript/2.JavaScript使用方式/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/07/JavaEE学习/3.JavaScript/2.JavaScript使用方式/">展开全文 >></a>
         </p>
       
 
@@ -1051,19 +934,19 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+                <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1079,15 +962,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">C#</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -6,21 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
-  <title>批量插入数据库记录 | 且听风吟的博客</title>
+  <title>Tag: BOM | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、场景描述在生活中，我们经常看到快递员拿着特制的移动终端，扫描着多个快递面单实现快递单的运输记录。
-当没有网络的情况下，移动终端会将数据存储在本地，等有网络的情况下，会将数据统一提交到后台。而这个也就是我们今天要做的将批量数据插入到数据库中去。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="批量插入数据库记录">
-<meta property="og:url" content="https://marklogzhu.github.io/2017/06/28/net/批量插数据库数据/index.html">
+  <meta name="description" content="会点皮毛技术,立志于往深处扎根。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="且听风吟的博客">
+<meta property="og:url" content="https://marklogzhu.github.io/tags/BOM/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="一、场景描述在生活中，我们经常看到快递员拿着特制的移动终端，扫描着多个快递面单实现快递单的运输记录。
-当没有网络的情况下，移动终端会将数据存储在本地，等有网络的情况下，会将数据统一提交到后台。而这个也就是我们今天要做的将批量数据插入到数据库中去。">
-<meta property="og:updated_time" content="2017-06-28T13:53:03.486Z">
+<meta property="og:description" content="会点皮毛技术,立志于往深处扎根。">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="批量插入数据库记录">
-<meta name="twitter:description" content="一、场景描述在生活中，我们经常看到快递员拿着特制的移动终端，扫描着多个快递面单实现快递单的运输记录。
-当没有网络的情况下，移动终端会将数据存储在本地，等有网络的情况下，会将数据统一提交到后台。而这个也就是我们今天要做的将批量数据插入到数据库中去。">
+<meta name="twitter:title" content="且听风吟的博客">
+<meta name="twitter:description" content="会点皮毛技术,立志于往深处扎根。">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -152,242 +148,68 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-net/批量插数据库数据" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      批量插入数据库记录
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/09/16/JavaEE学习/3.JavaScript/JavaScript 之 BOM 的使用/" class="archive-article-date">
+  	<time datetime="2017-09-16T07:59:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-16</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/09/16/JavaEE学习/3.JavaScript/JavaScript 之 BOM 的使用/">JavaScript 之 BOM 的使用</a>
     </h1>
   
 
-        
-        <a href="/2017/06/28/net/批量插数据库数据/" class="archive-article-date">
-  	<time datetime="2017-06-28T13:45:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一、场景描述"><a href="#一、场景描述" class="headerlink" title="一、场景描述"></a>一、场景描述</h3><pre><code>在生活中，我们经常看到快递员拿着特制的移动终端，扫描着多个快递面单实现快递单的运输记录。
-当没有网络的情况下，移动终端会将数据存储在本地，等有网络的情况下，会将数据统一提交到后台。而这个也就是我们今天要做的将批量数据插入到数据库中去。
-</code></pre><a id="more"></a>
-<h3 id="二、ScanLog表结构"><a href="#二、ScanLog表结构" class="headerlink" title="二、ScanLog表结构"></a>二、ScanLog表结构</h3><table>
-<thead>
-<tr>
-<th>字段名</th>
-<th>字段类型</th>
-<th>字段含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>rowId</td>
-<td>INT</td>
-<td>自增主键</td>
-</tr>
-<tr>
-<td>barcode</td>
-<td>NVACHAR(30)</td>
-<td>快递单号</td>
-</tr>
-<tr>
-<td>jobNumer</td>
-<td>NVACHAR(20)</td>
-<td>操作人员编号</td>
-</tr>
-<tr>
-<td>state</td>
-<td>INT</td>
-<td>单据状态</td>
-</tr>
-<tr>
-<td>doTime</td>
-<td>DATATIME</td>
-<td>操作时间</td>
-</tr>
-<tr>
-<td>doPlace</td>
-<td>NVACHAR(10)</td>
-<td>所在网点编号</td>
-</tr>
-<tr>
-<td>Tel</td>
-<td>NVACHAR(15)</td>
-<td>联系电话</td>
-</tr>
-</tbody>
-</table>
-<h3 id="三、注意点"><a href="#三、注意点" class="headerlink" title="三、注意点"></a>三、注意点</h3><pre><code>1.数据不是单条记录，而是批量操作
-2.表中可能已存在相同快递单号的记录
-3.本次提交数据中可能存在重复记录
-4.执行效率，移动终端不可能长时间等待后台的返回，所以要在几秒内就能将响应结果返回至终端去
-</code></pre><h3 id="四、实现逻辑"><a href="#四、实现逻辑" class="headerlink" title="四、实现逻辑"></a>四、实现逻辑</h3><pre><code>1.先将数据通过for循环拼接插入临时表中去
-2.将临时表与ScanLog表连接，将非重复数据插入表中
-3.将结果返回给终端
-</code></pre><h3 id="五、实现代码"><a href="#五、实现代码" class="headerlink" title="五、实现代码"></a>五、实现代码</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">region</span> 添加扫描记录</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> 添加扫描记录</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name="scanList"&gt;</span><span class="doctag">&lt;/param&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">bool</span> <span class="title">addRecord</span>(<span class="params">List&lt;ScanRecordModel&gt; scanList</span>) </span>&#123;</div><div class="line">	<span class="keyword">bool</span> flag = <span class="literal">false</span>;</div><div class="line">	StringBuilder strSql = <span class="keyword">new</span> StringBuilder();</div><div class="line">	StringBuilder sql = <span class="keyword">new</span> StringBuilder();</div><div class="line">	String s = String.Empty;</div><div class="line">	String DoTime = DateTime.Now.ToString();</div><div class="line">	strSql.Append(<span class="string">" SELECT * INTO #temp FROM ( "</span>);</div><div class="line">	<span class="keyword">foreach</span> (ScanRecordModel scan <span class="keyword">in</span> scanList) &#123;</div><div class="line">		s = <span class="string">" SELECT '&#123;0&#125;'as barcode ,'&#123;1&#125;' as jobnumer,'&#123;2&#125;' as doTime,'&#123;3&#125;' as doPlace,'&#123;4&#125;' as Tel  UNION ALL "</span>;</div><div class="line">		strSql.Append(String.Format(s, scan.barcode, scan.user.jobNumber, DoTime, scan.netPoint.rowId,scan.tel));</div><div class="line">	&#125;</div><div class="line">	sql.Append(StringUtils.removeLastChar(strSql.ToString(), <span class="string">"UNION ALL"</span>));</div><div class="line">	sql.Append(<span class="string">" )a "</span>);</div><div class="line">	sql.Append(<span class="string">" INSERT INTO ScanRecord(Barcode,JobNumer,DoTime,DoPlace,tel)  "</span>);</div><div class="line">	sql.Append(<span class="string">" SELECT DISTINCT * FROM #temp WHERE  NOT EXISTS (SELECT 1 FROM ScanRecord where ScanRecord.Barcode=#temp.Barcode) "</span>);</div><div class="line">	flag = SqlHelper.ExecCmd(sql.ToString()) &gt; <span class="number">0</span>;</div><div class="line">	<span class="keyword">return</span> flag;</div><div class="line">&#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">endregion</span></span></div></pre></td></tr></table></figure>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>欣赏此文？求鼓励，求支持！<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/img/alipay.jpg">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/img/weixin.jpg">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C#，SQL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端基础</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BOM</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/06/28/net/批量插数据库数据/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2017/06/30/tool/常用工具/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          常用小工具
-        
-      </div>
-    </a>
   
   
-    <a href="/2017/06/27/SQL/SQL小技巧之统计SQL执行时间/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">SQL小技巧之统计SQL执行时间</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
-
-  
-  <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="net/批量插数据库数据" data-title="批量插入数据库记录" data-url="https://marklogzhu.github.io/2017/06/28/net/批量插数据库数据/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"marklogzhu"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
+    </div></section>
   
 
-
+    
 
 
           </div>
@@ -410,9 +232,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",

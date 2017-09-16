@@ -6,21 +6,35 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
-  <title>批量插入数据库记录 | 且听风吟的博客</title>
+  <title>JavaScript 之 BOM 的使用 | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、场景描述在生活中，我们经常看到快递员拿着特制的移动终端，扫描着多个快递面单实现快递单的运输记录。
-当没有网络的情况下，移动终端会将数据存储在本地，等有网络的情况下，会将数据统一提交到后台。而这个也就是我们今天要做的将批量数据插入到数据库中去。">
+  <meta name="description" content="一、什么是 BOMBOM 是浏览器对象模型，将浏览器当作一个对象来操作。
+二、它能干什么BOM 使 JavaScript 有能力与浏览器“对话”。
+三、BOM 对象BOM 有如下六种对象：
+* 1. window 对象 ，是JS的最顶层对象，其他的 BOM 对象都是 window 对象的属性；
+* 2. document 对象，文档对象；
+* 3. location 对象，浏览器当前URL信息；">
 <meta property="og:type" content="article">
-<meta property="og:title" content="批量插入数据库记录">
-<meta property="og:url" content="https://marklogzhu.github.io/2017/06/28/net/批量插数据库数据/index.html">
+<meta property="og:title" content="JavaScript 之 BOM 的使用">
+<meta property="og:url" content="https://marklogzhu.github.io/2017/09/16/JavaEE学习/3.JavaScript/JavaScript 之 BOM 的使用/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="一、场景描述在生活中，我们经常看到快递员拿着特制的移动终端，扫描着多个快递面单实现快递单的运输记录。
-当没有网络的情况下，移动终端会将数据存储在本地，等有网络的情况下，会将数据统一提交到后台。而这个也就是我们今天要做的将批量数据插入到数据库中去。">
-<meta property="og:updated_time" content="2017-06-28T13:53:03.486Z">
+<meta property="og:description" content="一、什么是 BOMBOM 是浏览器对象模型，将浏览器当作一个对象来操作。
+二、它能干什么BOM 使 JavaScript 有能力与浏览器“对话”。
+三、BOM 对象BOM 有如下六种对象：
+* 1. window 对象 ，是JS的最顶层对象，其他的 BOM 对象都是 window 对象的属性；
+* 2. document 对象，文档对象；
+* 3. location 对象，浏览器当前URL信息；">
+<meta property="og:image" content="https://marklogzhu.github.io/JavaScript 之 DOM 的使用.md">
+<meta property="og:updated_time" content="2017-09-16T08:00:30.416Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="批量插入数据库记录">
-<meta name="twitter:description" content="一、场景描述在生活中，我们经常看到快递员拿着特制的移动终端，扫描着多个快递面单实现快递单的运输记录。
-当没有网络的情况下，移动终端会将数据存储在本地，等有网络的情况下，会将数据统一提交到后台。而这个也就是我们今天要做的将批量数据插入到数据库中去。">
+<meta name="twitter:title" content="JavaScript 之 BOM 的使用">
+<meta name="twitter:description" content="一、什么是 BOMBOM 是浏览器对象模型，将浏览器当作一个对象来操作。
+二、它能干什么BOM 使 JavaScript 有能力与浏览器“对话”。
+三、BOM 对象BOM 有如下六种对象：
+* 1. window 对象 ，是JS的最顶层对象，其他的 BOM 对象都是 window 对象的属性；
+* 2. document 对象，文档对象；
+* 3. location 对象，浏览器当前URL信息；">
+<meta name="twitter:image" content="https://marklogzhu.github.io/JavaScript 之 DOM 的使用.md">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -152,84 +166,284 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-net/批量插数据库数据" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-JavaEE学习/3.JavaScript/JavaScript 之 BOM 的使用" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      批量插入数据库记录
+      JavaScript 之 BOM 的使用
     </h1>
   
 
         
-        <a href="/2017/06/28/net/批量插数据库数据/" class="archive-article-date">
-  	<time datetime="2017-06-28T13:45:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-28</time>
+        <a href="/2017/09/16/JavaEE学习/3.JavaScript/JavaScript 之 BOM 的使用/" class="archive-article-date">
+  	<time datetime="2017-09-16T07:59:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="一、场景描述"><a href="#一、场景描述" class="headerlink" title="一、场景描述"></a>一、场景描述</h3><pre><code>在生活中，我们经常看到快递员拿着特制的移动终端，扫描着多个快递面单实现快递单的运输记录。
-当没有网络的情况下，移动终端会将数据存储在本地，等有网络的情况下，会将数据统一提交到后台。而这个也就是我们今天要做的将批量数据插入到数据库中去。
-</code></pre><a id="more"></a>
-<h3 id="二、ScanLog表结构"><a href="#二、ScanLog表结构" class="headerlink" title="二、ScanLog表结构"></a>二、ScanLog表结构</h3><table>
+        <h2 id="一、什么是-BOM"><a href="#一、什么是-BOM" class="headerlink" title="一、什么是 BOM"></a>一、什么是 BOM</h2><p>BOM 是浏览器对象模型，将浏览器当作一个对象来操作。</p>
+<h2 id="二、它能干什么"><a href="#二、它能干什么" class="headerlink" title="二、它能干什么"></a>二、它能干什么</h2><p><strong>BOM</strong> 使 <strong>JavaScript</strong> 有能力与浏览器“对话”。</p>
+<h2 id="三、BOM-对象"><a href="#三、BOM-对象" class="headerlink" title="三、BOM 对象"></a>三、BOM 对象</h2><p><strong>BOM</strong> 有如下六种对象：</p>
+<pre><code>* 1. window 对象 ，是JS的最顶层对象，其他的 BOM 对象都是 window 对象的属性；
+* 2. document 对象，文档对象；
+* 3. location 对象，浏览器当前URL信息；
+* 4. navigator 对象，浏览器本身信息；
+* 5. screen 对象，客户端屏幕信息；
+* 6. history 对象，浏览器访问历史信息；
+</code></pre><h3 id="3-1-window-对象"><a href="#3-1-window-对象" class="headerlink" title="3.1 window 对象"></a>3.1 window 对象</h3><p>所有浏览器都支持 <strong>window</strong> 对象。它表示浏览器窗口。</p>
+<p>所有 <strong>JavaScript</strong> 全局对象、函数以及变量均自动成为 <strong>window</strong> 对象的成员。</p>
+<p>全局变量是 <strong>window</strong> 对象的属性。</p>
+<p>全局函数是 <strong>window</strong> 对象的方法。</p>
+<p>甚至 <strong>HTML DOM</strong> 的 <strong>document</strong> 也是 <strong>window</strong> 对象的属性之一：<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.<span class="built_in">document</span>.getElementById(<span class="string">"header"</span>);</div></pre></td></tr></table></figure></p>
+<p>与此相同：<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.getElementById(<span class="string">"header"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><h5 id="消息框"><a href="#消息框" class="headerlink" title="消息框"></a>消息框</h5><pre><code>* 警告框：alert(&quot;....&quot;):
+* 确认框：confirm(&quot;你确定要删除吗?&quot;): 返回值:boolean
+* 输入框：prompt(&quot;请输入您的姓名&quot;): 返回值:你输入的内容
+</code></pre><h5 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h5><pre><code>设置定时器
+setInterval(code,毫秒数):周期执行
+setTimeout(code,毫秒数):延迟多长事件后 只执行一次.
+
+例如:
+    setInterval(showAd,4000);
+    serInterval(&quot;showAd()&quot;,4000);
+
+清除定时器
+    clearInterval(id):
+    clearTimeout(id):
+</code></pre><h5 id="打开和关闭窗口"><a href="#打开和关闭窗口" class="headerlink" title="打开和关闭窗口"></a>打开和关闭窗口</h5><pre><code>open(url):打开
+close():关闭
+</code></pre><h3 id="3-2-document-对象"><a href="#3-2-document-对象" class="headerlink" title="3.2 document 对象"></a>3.2 document 对象</h3><p><strong>document</strong> 对象 详见  <img src="/JavaScript 之 DOM 的使用.md" alt="JavaScript 之 DOM 的使用">;</p>
+<h3 id="3-3-location-对象"><a href="#3-3-location-对象" class="headerlink" title="3.3 location 对象"></a>3.3 location 对象</h3><p><strong>location</strong> 属性获取浏览器当前URL信息，这个在企业内外网使用不同 IP 的场景下可用。</p>
+<h4 id="location-对象属性"><a href="#location-对象属性" class="headerlink" title="location 对象属性"></a><strong>location</strong> 对象属性</h4><table>
 <thead>
 <tr>
-<th>字段名</th>
-<th>字段类型</th>
-<th>字段含义</th>
+<th>属性</th>
+<th>描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>rowId</td>
-<td>INT</td>
-<td>自增主键</td>
+<td>hash</td>
+<td>设置或返回从井号 (#) 开始的 URL（锚）。</td>
 </tr>
 <tr>
-<td>barcode</td>
-<td>NVACHAR(30)</td>
-<td>快递单号</td>
+<td>host</td>
+<td>设置或返回主机名和当前 URL 的端口号。</td>
 </tr>
 <tr>
-<td>jobNumer</td>
-<td>NVACHAR(20)</td>
-<td>操作人员编号</td>
+<td>hostname</td>
+<td>设置或返回当前 URL 的主机名。</td>
 </tr>
 <tr>
-<td>state</td>
-<td>INT</td>
-<td>单据状态</td>
+<td>href</td>
+<td>设置或返回完整的 URL。</td>
 </tr>
 <tr>
-<td>doTime</td>
-<td>DATATIME</td>
-<td>操作时间</td>
+<td>pathname</td>
+<td>设置或返回当前 URL 的路径部分。</td>
 </tr>
 <tr>
-<td>doPlace</td>
-<td>NVACHAR(10)</td>
-<td>所在网点编号</td>
+<td>port</td>
+<td>设置或返回当前 URL 的端口号。</td>
 </tr>
 <tr>
-<td>Tel</td>
-<td>NVACHAR(15)</td>
-<td>联系电话</td>
+<td>protocol</td>
+<td>设置或返回当前 URL 的协议。</td>
+</tr>
+<tr>
+<td>search</td>
+<td>设置或返回从问号 (?) 开始的 URL（查询部分）。</td>
 </tr>
 </tbody>
 </table>
-<h3 id="三、注意点"><a href="#三、注意点" class="headerlink" title="三、注意点"></a>三、注意点</h3><pre><code>1.数据不是单条记录，而是批量操作
-2.表中可能已存在相同快递单号的记录
-3.本次提交数据中可能存在重复记录
-4.执行效率，移动终端不可能长时间等待后台的返回，所以要在几秒内就能将响应结果返回至终端去
-</code></pre><h3 id="四、实现逻辑"><a href="#四、实现逻辑" class="headerlink" title="四、实现逻辑"></a>四、实现逻辑</h3><pre><code>1.先将数据通过for循环拼接插入临时表中去
-2.将临时表与ScanLog表连接，将非重复数据插入表中
-3.将结果返回给终端
-</code></pre><h3 id="五、实现代码"><a href="#五、实现代码" class="headerlink" title="五、实现代码"></a>五、实现代码</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">region</span> 添加扫描记录</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> 添加扫描记录</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name="scanList"&gt;</span><span class="doctag">&lt;/param&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">bool</span> <span class="title">addRecord</span>(<span class="params">List&lt;ScanRecordModel&gt; scanList</span>) </span>&#123;</div><div class="line">	<span class="keyword">bool</span> flag = <span class="literal">false</span>;</div><div class="line">	StringBuilder strSql = <span class="keyword">new</span> StringBuilder();</div><div class="line">	StringBuilder sql = <span class="keyword">new</span> StringBuilder();</div><div class="line">	String s = String.Empty;</div><div class="line">	String DoTime = DateTime.Now.ToString();</div><div class="line">	strSql.Append(<span class="string">" SELECT * INTO #temp FROM ( "</span>);</div><div class="line">	<span class="keyword">foreach</span> (ScanRecordModel scan <span class="keyword">in</span> scanList) &#123;</div><div class="line">		s = <span class="string">" SELECT '&#123;0&#125;'as barcode ,'&#123;1&#125;' as jobnumer,'&#123;2&#125;' as doTime,'&#123;3&#125;' as doPlace,'&#123;4&#125;' as Tel  UNION ALL "</span>;</div><div class="line">		strSql.Append(String.Format(s, scan.barcode, scan.user.jobNumber, DoTime, scan.netPoint.rowId,scan.tel));</div><div class="line">	&#125;</div><div class="line">	sql.Append(StringUtils.removeLastChar(strSql.ToString(), <span class="string">"UNION ALL"</span>));</div><div class="line">	sql.Append(<span class="string">" )a "</span>);</div><div class="line">	sql.Append(<span class="string">" INSERT INTO ScanRecord(Barcode,JobNumer,DoTime,DoPlace,tel)  "</span>);</div><div class="line">	sql.Append(<span class="string">" SELECT DISTINCT * FROM #temp WHERE  NOT EXISTS (SELECT 1 FROM ScanRecord where ScanRecord.Barcode=#temp.Barcode) "</span>);</div><div class="line">	flag = SqlHelper.ExecCmd(sql.ToString()) &gt; <span class="number">0</span>;</div><div class="line">	<span class="keyword">return</span> flag;</div><div class="line">&#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">endregion</span></span></div></pre></td></tr></table></figure>
-
+<h4 id="location-对象方法"><a href="#location-对象方法" class="headerlink" title="location 对象方法"></a><strong>location</strong> 对象方法</h4><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>assign()</td>
+<td>加载新的文档。</td>
+</tr>
+<tr>
+<td>reload()</td>
+<td>重新加载当前文档。</td>
+</tr>
+<tr>
+<td>replace()</td>
+<td>用新的文档替换当前文档。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-4-navigator-对象"><a href="#3-4-navigator-对象" class="headerlink" title="3.4 navigator 对象"></a>3.4 navigator 对象</h3><p><strong>Navigator</strong> 对象包含的属性描述了正在使用的浏览器。可以使用这些属性进行平台专用的配置。</p>
+<h4 id="Navigator-对象属性"><a href="#Navigator-对象属性" class="headerlink" title="Navigator 对象属性"></a><strong>Navigator</strong> 对象属性</h4><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>appCodeName</td>
+<td>返回浏览器的代码名。</td>
+</tr>
+<tr>
+<td>appMinorVersion</td>
+<td>返回浏览器的次级版本。</td>
+</tr>
+<tr>
+<td>appName</td>
+<td>返回浏览器的名称。</td>
+</tr>
+<tr>
+<td>appVersion</td>
+<td>返回浏览器的平台和版本信息。</td>
+</tr>
+<tr>
+<td>browserLanguage</td>
+<td>返回当前浏览器的语言。</td>
+</tr>
+<tr>
+<td>cookieEnabled</td>
+<td>返回指明浏览器中是否启用 cookie 的布尔值。</td>
+</tr>
+<tr>
+<td>cpuClass</td>
+<td>返回浏览器系统的 CPU 等级。</td>
+</tr>
+<tr>
+<td>onLine</td>
+<td>返回指明系统是否处于脱机模式的布尔值。</td>
+</tr>
+<tr>
+<td>platform</td>
+<td>返回运行浏览器的操作系统平台。</td>
+</tr>
+<tr>
+<td>systemLanguage</td>
+<td>返回 OS 使用的默认语言。</td>
+</tr>
+<tr>
+<td>userAgent</td>
+<td>返回由客户机发送服务器的 user-agent 头部的值。</td>
+</tr>
+<tr>
+<td>userLanguage</td>
+<td>返回 OS 的自然语言设置。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>javaEnabled()</td>
+<td>规定浏览器是否启用 Java。</td>
+</tr>
+<tr>
+<td>taintEnabled()</td>
+<td>规定浏览器是否启用数据污点 (data tainting)。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-5-screen-对象"><a href="#3-5-screen-对象" class="headerlink" title="3.5 screen 对象"></a>3.5 screen 对象</h3><p><strong>Screen</strong> 对象包含有关客户端显示屏幕的信息。</p>
+<h4 id="Screen-对象属性"><a href="#Screen-对象属性" class="headerlink" title="Screen 对象属性"></a><strong>Screen</strong> 对象属性</h4><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>availHeight</td>
+<td>返回显示屏幕的高度 (除 Windows 任务栏之外)。</td>
+</tr>
+<tr>
+<td>availWidth</td>
+<td>返回显示屏幕的宽度 (除 Windows 任务栏之外)。</td>
+</tr>
+<tr>
+<td>bufferDepth</td>
+<td>设置或返回调色板的比特深度。</td>
+</tr>
+<tr>
+<td>colorDepth</td>
+<td>返回目标设备或缓冲器上的调色板的比特深度。</td>
+</tr>
+<tr>
+<td>deviceXDPI</td>
+<td>返回显示屏幕的每英寸水平点数。</td>
+</tr>
+<tr>
+<td>deviceYDPI</td>
+<td>返回显示屏幕的每英寸垂直点数。</td>
+</tr>
+<tr>
+<td>fontSmoothingEnabled</td>
+<td>返回用户是否在显示控制面板中启用了字体平滑。</td>
+</tr>
+<tr>
+<td>height</td>
+<td>返回显示屏幕的高度。</td>
+</tr>
+<tr>
+<td>logicalXDPI</td>
+<td>返回显示屏幕每英寸的水平方向的常规点数。</td>
+</tr>
+<tr>
+<td>logicalYDPI</td>
+<td>返回显示屏幕每英寸的垂直方向的常规点数。</td>
+</tr>
+<tr>
+<td>pixelDepth</td>
+<td>返回显示屏幕的颜色分辨率（比特每像素）。</td>
+</tr>
+<tr>
+<td>updateInterval</td>
+<td>设置或返回屏幕的刷新率。</td>
+</tr>
+<tr>
+<td>width</td>
+<td>返回显示器屏幕的宽度。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-6-history-对象"><a href="#3-6-history-对象" class="headerlink" title="3.6 history 对象"></a>3.6 history 对象</h3><p><strong>history</strong> 对象获取浏览器的历史浏览记录。</p>
+<h4 id="history-对象属性"><a href="#history-对象属性" class="headerlink" title="history 对象属性"></a><strong>history</strong> 对象属性</h4><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>length</td>
+<td>返回浏览器历史列表中的 URL 数量。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="history-对象常用方法"><a href="#history-对象常用方法" class="headerlink" title="history 对象常用方法"></a><strong>history</strong> 对象常用方法</h4><pre><code>back();后退
+forward():向前
+go(int)
+    go(-1) 相当于 back()
+    go(1) 相当于 forward()
+</code></pre>
       
 
       
@@ -273,7 +487,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C#，SQL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端基础</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BOM</a>
         		</li>
       		
 		</ul>
@@ -329,7 +551,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/06/28/net/批量插数据库数据/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/09/16/JavaEE学习/3.JavaScript/JavaScript 之 BOM 的使用/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -343,18 +565,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/06/30/tool/常用工具/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          常用小工具
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/06/27/SQL/SQL小技巧之统计SQL执行时间/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">SQL小技巧之统计SQL执行时间</div>
+    <a href="/2017/09/16/JavaEE学习/3.JavaScript/4.JavaScript之DOM的使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript 之 DOM 的使用</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -368,7 +581,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="net/批量插数据库数据" data-title="批量插入数据库记录" data-url="https://marklogzhu.github.io/2017/06/28/net/批量插数据库数据/"></div>
+	<div class="ds-thread" data-thread-key="JavaEE学习/3.JavaScript/JavaScript 之 BOM 的使用" data-title="JavaScript 之 BOM 的使用" data-url="https://marklogzhu.github.io/2017/09/16/JavaEE学习/3.JavaScript/JavaScript 之 BOM 的使用/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

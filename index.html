@@ -150,19 +150,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-JavaEE学习/3.JavaScript/JavaScript 之 BOM 的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-JavaEE学习/3.JavaScript/5.JavaScript 之 BOM 的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/16/JavaEE学习/3.JavaScript/JavaScript 之 BOM 的使用/">JavaScript 之 BOM 的使用</a>
+      <a class="article-title" href="/2017/09/16/JavaEE学习/3.JavaScript/5.JavaScript 之 BOM 的使用/">JavaScript 之 BOM 的使用</a>
     </h1>
   
 
         
-        <a href="/2017/09/16/JavaEE学习/3.JavaScript/JavaScript 之 BOM 的使用/" class="archive-article-date">
+        <a href="/2017/09/16/JavaEE学习/3.JavaScript/5.JavaScript 之 BOM 的使用/" class="archive-article-date">
   	<time datetime="2017-09-16T07:59:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-16</time>
 </a>
         
@@ -172,262 +172,9 @@
       
         <h2 id="一、什么是-BOM"><a href="#一、什么是-BOM" class="headerlink" title="一、什么是 BOM"></a>一、什么是 BOM</h2><p>BOM 是浏览器对象模型，将浏览器当作一个对象来操作。</p>
 <h2 id="二、它能干什么"><a href="#二、它能干什么" class="headerlink" title="二、它能干什么"></a>二、它能干什么</h2><p><strong>BOM</strong> 使 <strong>JavaScript</strong> 有能力与浏览器“对话”。</p>
-<h2 id="三、BOM-对象"><a href="#三、BOM-对象" class="headerlink" title="三、BOM 对象"></a>三、BOM 对象</h2><p><strong>BOM</strong> 有如下六种对象：</p>
-<pre><code>* 1. window 对象 ，是JS的最顶层对象，其他的 BOM 对象都是 window 对象的属性；
-* 2. document 对象，文档对象；
-* 3. location 对象，浏览器当前URL信息；
-* 4. navigator 对象，浏览器本身信息；
-* 5. screen 对象，客户端屏幕信息；
-* 6. history 对象，浏览器访问历史信息；
-</code></pre><h3 id="3-1-window-对象"><a href="#3-1-window-对象" class="headerlink" title="3.1 window 对象"></a>3.1 window 对象</h3><p>所有浏览器都支持 <strong>window</strong> 对象。它表示浏览器窗口。</p>
-<p>所有 <strong>JavaScript</strong> 全局对象、函数以及变量均自动成为 <strong>window</strong> 对象的成员。</p>
-<p>全局变量是 <strong>window</strong> 对象的属性。</p>
-<p>全局函数是 <strong>window</strong> 对象的方法。</p>
-<p>甚至 <strong>HTML DOM</strong> 的 <strong>document</strong> 也是 <strong>window</strong> 对象的属性之一：<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.<span class="built_in">document</span>.getElementById(<span class="string">"header"</span>);</div></pre></td></tr></table></figure></p>
-<p>与此相同：<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.getElementById(<span class="string">"header"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
-<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><h5 id="消息框"><a href="#消息框" class="headerlink" title="消息框"></a>消息框</h5><pre><code>* 警告框：alert(&quot;....&quot;):
-* 确认框：confirm(&quot;你确定要删除吗?&quot;): 返回值:boolean
-* 输入框：prompt(&quot;请输入您的姓名&quot;): 返回值:你输入的内容
-</code></pre><h5 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h5><pre><code>设置定时器
-setInterval(code,毫秒数):周期执行
-setTimeout(code,毫秒数):延迟多长事件后 只执行一次.
-
-例如:
-    setInterval(showAd,4000);
-    serInterval(&quot;showAd()&quot;,4000);
-
-清除定时器
-    clearInterval(id):
-    clearTimeout(id):
-</code></pre><h5 id="打开和关闭窗口"><a href="#打开和关闭窗口" class="headerlink" title="打开和关闭窗口"></a>打开和关闭窗口</h5><pre><code>open(url):打开
-close():关闭
-</code></pre><h3 id="3-2-document-对象"><a href="#3-2-document-对象" class="headerlink" title="3.2 document 对象"></a>3.2 document 对象</h3><p><strong>document</strong> 对象 详见  <img src="/JavaScript 之 DOM 的使用.md" alt="JavaScript 之 DOM 的使用">;</p>
-<h3 id="3-3-location-对象"><a href="#3-3-location-对象" class="headerlink" title="3.3 location 对象"></a>3.3 location 对象</h3><p><strong>location</strong> 属性获取浏览器当前URL信息，这个在企业内外网使用不同 IP 的场景下可用。</p>
-<h4 id="location-对象属性"><a href="#location-对象属性" class="headerlink" title="location 对象属性"></a><strong>location</strong> 对象属性</h4><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>hash</td>
-<td>设置或返回从井号 (#) 开始的 URL（锚）。</td>
-</tr>
-<tr>
-<td>host</td>
-<td>设置或返回主机名和当前 URL 的端口号。</td>
-</tr>
-<tr>
-<td>hostname</td>
-<td>设置或返回当前 URL 的主机名。</td>
-</tr>
-<tr>
-<td>href</td>
-<td>设置或返回完整的 URL。</td>
-</tr>
-<tr>
-<td>pathname</td>
-<td>设置或返回当前 URL 的路径部分。</td>
-</tr>
-<tr>
-<td>port</td>
-<td>设置或返回当前 URL 的端口号。</td>
-</tr>
-<tr>
-<td>protocol</td>
-<td>设置或返回当前 URL 的协议。</td>
-</tr>
-<tr>
-<td>search</td>
-<td>设置或返回从问号 (?) 开始的 URL（查询部分）。</td>
-</tr>
-</tbody>
-</table>
-<h4 id="location-对象方法"><a href="#location-对象方法" class="headerlink" title="location 对象方法"></a><strong>location</strong> 对象方法</h4><table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>assign()</td>
-<td>加载新的文档。</td>
-</tr>
-<tr>
-<td>reload()</td>
-<td>重新加载当前文档。</td>
-</tr>
-<tr>
-<td>replace()</td>
-<td>用新的文档替换当前文档。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="3-4-navigator-对象"><a href="#3-4-navigator-对象" class="headerlink" title="3.4 navigator 对象"></a>3.4 navigator 对象</h3><p><strong>Navigator</strong> 对象包含的属性描述了正在使用的浏览器。可以使用这些属性进行平台专用的配置。</p>
-<h4 id="Navigator-对象属性"><a href="#Navigator-对象属性" class="headerlink" title="Navigator 对象属性"></a><strong>Navigator</strong> 对象属性</h4><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>appCodeName</td>
-<td>返回浏览器的代码名。</td>
-</tr>
-<tr>
-<td>appMinorVersion</td>
-<td>返回浏览器的次级版本。</td>
-</tr>
-<tr>
-<td>appName</td>
-<td>返回浏览器的名称。</td>
-</tr>
-<tr>
-<td>appVersion</td>
-<td>返回浏览器的平台和版本信息。</td>
-</tr>
-<tr>
-<td>browserLanguage</td>
-<td>返回当前浏览器的语言。</td>
-</tr>
-<tr>
-<td>cookieEnabled</td>
-<td>返回指明浏览器中是否启用 cookie 的布尔值。</td>
-</tr>
-<tr>
-<td>cpuClass</td>
-<td>返回浏览器系统的 CPU 等级。</td>
-</tr>
-<tr>
-<td>onLine</td>
-<td>返回指明系统是否处于脱机模式的布尔值。</td>
-</tr>
-<tr>
-<td>platform</td>
-<td>返回运行浏览器的操作系统平台。</td>
-</tr>
-<tr>
-<td>systemLanguage</td>
-<td>返回 OS 使用的默认语言。</td>
-</tr>
-<tr>
-<td>userAgent</td>
-<td>返回由客户机发送服务器的 user-agent 头部的值。</td>
-</tr>
-<tr>
-<td>userLanguage</td>
-<td>返回 OS 的自然语言设置。</td>
-</tr>
-</tbody>
-</table>
-<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>javaEnabled()</td>
-<td>规定浏览器是否启用 Java。</td>
-</tr>
-<tr>
-<td>taintEnabled()</td>
-<td>规定浏览器是否启用数据污点 (data tainting)。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="3-5-screen-对象"><a href="#3-5-screen-对象" class="headerlink" title="3.5 screen 对象"></a>3.5 screen 对象</h3><p><strong>Screen</strong> 对象包含有关客户端显示屏幕的信息。</p>
-<h4 id="Screen-对象属性"><a href="#Screen-对象属性" class="headerlink" title="Screen 对象属性"></a><strong>Screen</strong> 对象属性</h4><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>availHeight</td>
-<td>返回显示屏幕的高度 (除 Windows 任务栏之外)。</td>
-</tr>
-<tr>
-<td>availWidth</td>
-<td>返回显示屏幕的宽度 (除 Windows 任务栏之外)。</td>
-</tr>
-<tr>
-<td>bufferDepth</td>
-<td>设置或返回调色板的比特深度。</td>
-</tr>
-<tr>
-<td>colorDepth</td>
-<td>返回目标设备或缓冲器上的调色板的比特深度。</td>
-</tr>
-<tr>
-<td>deviceXDPI</td>
-<td>返回显示屏幕的每英寸水平点数。</td>
-</tr>
-<tr>
-<td>deviceYDPI</td>
-<td>返回显示屏幕的每英寸垂直点数。</td>
-</tr>
-<tr>
-<td>fontSmoothingEnabled</td>
-<td>返回用户是否在显示控制面板中启用了字体平滑。</td>
-</tr>
-<tr>
-<td>height</td>
-<td>返回显示屏幕的高度。</td>
-</tr>
-<tr>
-<td>logicalXDPI</td>
-<td>返回显示屏幕每英寸的水平方向的常规点数。</td>
-</tr>
-<tr>
-<td>logicalYDPI</td>
-<td>返回显示屏幕每英寸的垂直方向的常规点数。</td>
-</tr>
-<tr>
-<td>pixelDepth</td>
-<td>返回显示屏幕的颜色分辨率（比特每像素）。</td>
-</tr>
-<tr>
-<td>updateInterval</td>
-<td>设置或返回屏幕的刷新率。</td>
-</tr>
-<tr>
-<td>width</td>
-<td>返回显示器屏幕的宽度。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="3-6-history-对象"><a href="#3-6-history-对象" class="headerlink" title="3.6 history 对象"></a>3.6 history 对象</h3><p><strong>history</strong> 对象获取浏览器的历史浏览记录。</p>
-<h4 id="history-对象属性"><a href="#history-对象属性" class="headerlink" title="history 对象属性"></a><strong>history</strong> 对象属性</h4><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>length</td>
-<td>返回浏览器历史列表中的 URL 数量。</td>
-</tr>
-</tbody>
-</table>
-<h4 id="history-对象常用方法"><a href="#history-对象常用方法" class="headerlink" title="history 对象常用方法"></a><strong>history</strong> 对象常用方法</h4><pre><code>back();后退
-forward():向前
-go(int)
-    go(-1) 相当于 back()
-    go(1) 相当于 forward()
-</code></pre>
+        
+          <a class="article-more-a" href="/2017/09/16/JavaEE学习/3.JavaScript/5.JavaScript 之 BOM 的使用/#more">more >></a>
+        
       
 
       
@@ -458,7 +205,7 @@ go(int)
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/16/JavaEE学习/3.JavaScript/JavaScript 之 BOM 的使用/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/09/16/JavaEE学习/3.JavaScript/5.JavaScript 之 BOM 的使用/">展开全文 >></a>
         </p>
       
 
@@ -501,43 +248,9 @@ go(int)
 </blockquote>
 <p>dom 是一个文档对象，他将html文件按节点生成一个文档对象</p>
 <h2 id="二、它能干什么"><a href="#二、它能干什么" class="headerlink" title="二、它能干什么"></a>二、它能干什么</h2><p>它可以让我们操作对象一样的操作文档，来进行增删改操作。</p>
-<h2 id="三、节点"><a href="#三、节点" class="headerlink" title="三、节点"></a>三、节点</h2><p>DOM 有节点组成，是同一个集合对象，它有如下三种节点：</p>
-<ul>
-<li>元素节点</li>
-<li>文本节点</li>
-<li>属性节点</li>
-</ul>
-<h3 id="3-1-元素节点"><a href="#3-1-元素节点" class="headerlink" title="3.1 元素节点"></a>3.1 元素节点</h3><p><strong>HTML</strong> 中的标签就是元素节点,如 <code>&lt;a&gt;</code>、<code>&lt;p&gt;</code> 标签等。</p>
-<h3 id="3-2-文本节点"><a href="#3-2-文本节点" class="headerlink" title="3.2 文本节点"></a>3.2 文本节点</h3><p>文本节点是指如被 <code>&lt;a&gt;</code> 标签包含的文字内容，元素不一定都包含文本节点，如<code>&lt;ul&gt;</code>。</p>
-<h3 id="3-3-属性节点"><a href="#3-3-属性节点" class="headerlink" title="3.3 属性节点"></a>3.3 属性节点</h3><p>属性节点上被元素节点包含的，如 <strong>title</strong> 属性。</p>
-<h3 id="3-4-获取元素"><a href="#3-4-获取元素" class="headerlink" title="3.4 获取元素"></a>3.4 获取元素</h3><p>获取节点对象有如下三种方式</p>
-<pre><code>// 获取指定Id元素
-document.getElementById(&quot;id值&quot;);
-// 获取指定元素，返回数组对象
-document.getElementsByTagName(&quot;元素名称&quot;);
-// 获取指定类，返回数组对象
-document.getElementsByClassName(&quot;类名称&quot;);
-</code></pre><h2 id="四、节点属性"><a href="#四、节点属性" class="headerlink" title="四、节点属性"></a>四、节点属性</h2><h3 id="4-1-childNodes-属性"><a href="#4-1-childNodes-属性" class="headerlink" title="4.1 childNodes 属性"></a>4.1 childNodes 属性</h3><p>通过 <strong>childNodes</strong> 属性可以获取一个元素下所包含的所有子元素，返回的是一个数组对象。</p>
-<pre><code>var body = document.getElementsByTagName(&quot;body&quot;)[0];
-var array = body.childNodes;
-</code></pre><h3 id="4-2-nodeType-属性"><a href="#4-2-nodeType-属性" class="headerlink" title="4.2 nodeType 属性"></a>4.2 nodeType 属性</h3><p>每个节点都有 <strong>nodeType</strong> 属性，可以让我们区分节点类型。它返回的值是数字，含义如下：</p>
-<pre><code>* 元素节点：1
-* 属性节点：2
-* 文本节点：3
-</code></pre><h3 id="4-3-nodeValue-属性"><a href="#4-3-nodeValue-属性" class="headerlink" title="4.3 nodeValue 属性"></a>4.3 nodeValue 属性</h3><p><strong>nodeValue</strong> 属性可以让我们获得或者设置一个文本节点的内容，如：</p>
-<figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取文本内容对象</span></div><div class="line"><span class="keyword">var</span> textView = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>)[<span class="number">0</span>];</div><div class="line"><span class="comment">// 获取文本节点内容</span></div><div class="line"><span class="keyword">var</span> values = textView.nodeValue;</div><div class="line"><span class="comment">// 设置文本节点内容</span></div><div class="line">textView.nodeValue = <span class="string">"hello nodeValue"</span>;</div></pre></td></tr></table></figure>
-<h3 id="4-4-firstChild-属性"><a href="#4-4-firstChild-属性" class="headerlink" title="4.4 firstChild 属性"></a>4.4 firstChild 属性</h3><blockquote>
-<p>first 英文翻译过来就是第一</p>
-</blockquote>
-<p>我们知道 <strong>childNodes</strong> 属性返回的是一个数组对象，如果要获取他的第一个对象的话，除了根据数组下标来取之外，也可以通过 <strong>firstChild</strong> 属性来获取。</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 数组下标</div><div class="line"><span class="keyword">node</span>.<span class="title">childNodes</span>[<span class="number">0</span>];</div><div class="line">// firstChild 属性</div><div class="line"><span class="keyword">node</span>.<span class="title">firstChild</span>;</div></pre></td></tr></table></figure>
-<h3 id="4-5-lastChild-属性"><a href="#4-5-lastChild-属性" class="headerlink" title="4.5 lastChild 属性"></a>4.5 lastChild 属性</h3><p>与 <strong>firstChild</strong> 属性相对应的就是 <strong>lastChild</strong> 属性,它表示最后一个对象。</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 数组下标</div><div class="line"><span class="keyword">node</span>.<span class="title">childNodes</span>[<span class="keyword">node</span>.<span class="title">childNodes</span>.length-<span class="number">1</span>];</div><div class="line">// lastChild 属性</div><div class="line"><span class="keyword">node</span>.<span class="title">lastChild</span>;</div></pre></td></tr></table></figure>
-<h2 id="五、设置-获取-元素节点属性"><a href="#五、设置-获取-元素节点属性" class="headerlink" title="五、设置/获取 元素节点属性"></a>五、设置/获取 元素节点属性</h2><h3 id="5-1-获取属性"><a href="#5-1-获取属性" class="headerlink" title="5.1 获取属性"></a>5.1 获取属性</h3><pre><code>// 获取属性值
-getAttribute(&quot;属性名称&quot;);
-</code></pre><h3 id="5-2-设置属性"><a href="#5-2-设置属性" class="headerlink" title="5.2 设置属性"></a>5.2 设置属性</h3><pre><code>// 设置属性值
-setAttribute(&quot;属性名称&quot;,值);
-</code></pre>
+        
+          <a class="article-more-a" href="/2017/09/16/JavaEE学习/3.JavaScript/4.JavaScript之DOM的使用/#more">more >></a>
+        
       
 
       
@@ -1223,11 +936,31 @@ var _hmt = _hmt || [];
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">C#</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1243,27 +976,7 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1275,7 +988,7 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1283,7 +996,7 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -6,24 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
-  <title>Servlet之request | 且听风吟的博客</title>
+  <title>JavaScript 之 BOM 的使用 | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、Request简介Request是什么？Request代表着一个HTTP请求对象，里面存放着请求参数和属性。
-什么时候被创建？当调用 Servlet 的 service() 方法时创建
-谁创建？由Servlet容器创建，这个对象自动封装了请求方式及参数等信息">
+  <meta name="description" content="一、什么是 BOMBOM 是浏览器对象模型，将浏览器当作一个对象来操作。
+二、它能干什么BOM 使 JavaScript 有能力与浏览器“对话”。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Servlet之request">
-<meta property="og:url" content="https://marklogzhu.github.io/2017/03/30/java/JavaWeb/04.Servlet之request/index.html">
+<meta property="og:title" content="JavaScript 之 BOM 的使用">
+<meta property="og:url" content="https://marklogzhu.github.io/2017/09/16/JavaEE学习/3.JavaScript/5.JavaScript 之 BOM 的使用/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="一、Request简介Request是什么？Request代表着一个HTTP请求对象，里面存放着请求参数和属性。
-什么时候被创建？当调用 Servlet 的 service() 方法时创建
-谁创建？由Servlet容器创建，这个对象自动封装了请求方式及参数等信息">
-<meta property="og:updated_time" content="2017-05-24T11:42:33.513Z">
+<meta property="og:description" content="一、什么是 BOMBOM 是浏览器对象模型，将浏览器当作一个对象来操作。
+二、它能干什么BOM 使 JavaScript 有能力与浏览器“对话”。">
+<meta property="og:updated_time" content="2017-09-16T08:06:16.774Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Servlet之request">
-<meta name="twitter:description" content="一、Request简介Request是什么？Request代表着一个HTTP请求对象，里面存放着请求参数和属性。
-什么时候被创建？当调用 Servlet 的 service() 方法时创建
-谁创建？由Servlet容器创建，这个对象自动封装了请求方式及参数等信息">
+<meta name="twitter:title" content="JavaScript 之 BOM 的使用">
+<meta name="twitter:description" content="一、什么是 BOMBOM 是浏览器对象模型，将浏览器当作一个对象来操作。
+二、它能干什么BOM 使 JavaScript 有能力与浏览器“对话”。">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -155,111 +152,284 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-java/JavaWeb/04.Servlet之request" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-JavaEE学习/3.JavaScript/5.JavaScript 之 BOM 的使用" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Servlet之request
+      JavaScript 之 BOM 的使用
     </h1>
   
 
         
-        <a href="/2017/03/30/java/JavaWeb/04.Servlet之request/" class="archive-article-date">
-  	<time datetime="2017-03-30T13:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-30</time>
+        <a href="/2017/09/16/JavaEE学习/3.JavaScript/5.JavaScript 之 BOM 的使用/" class="archive-article-date">
+  	<time datetime="2017-09-16T07:59:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、Request简介"><a href="#一、Request简介" class="headerlink" title="一、Request简介"></a>一、Request简介</h2><h4 id="Request是什么？"><a href="#Request是什么？" class="headerlink" title="Request是什么？"></a>Request是什么？</h4><p>Request代表着一个HTTP请求对象，里面存放着请求参数和属性。</p>
-<h4 id="什么时候被创建？"><a href="#什么时候被创建？" class="headerlink" title="什么时候被创建？"></a>什么时候被创建？</h4><p>当调用 Servlet 的 service() 方法时创建</p>
-<h4 id="谁创建？"><a href="#谁创建？" class="headerlink" title="谁创建？"></a>谁创建？</h4><p>由Servlet容器创建，这个对象自动封装了请求方式及参数等信息</p>
+        <h2 id="一、什么是-BOM"><a href="#一、什么是-BOM" class="headerlink" title="一、什么是 BOM"></a>一、什么是 BOM</h2><p>BOM 是浏览器对象模型，将浏览器当作一个对象来操作。</p>
+<h2 id="二、它能干什么"><a href="#二、它能干什么" class="headerlink" title="二、它能干什么"></a>二、它能干什么</h2><p><strong>BOM</strong> 使 <strong>JavaScript</strong> 有能力与浏览器“对话”。</p>
 <a id="more"></a>
-<h4 id="能干什么"><a href="#能干什么" class="headerlink" title="能干什么"></a>能干什么</h4><p>可以找到请求从哪里发出，请求什么资源，带什么参数，获取Session对象和客户端的Cookie</p>
-<h4 id="ServletRequest的层次结构"><a href="#ServletRequest的层次结构" class="headerlink" title="ServletRequest的层次结构"></a>ServletRequest的层次结构</h4><pre><code>-- javax.servlet.ServletRequest
-    -- javax.servlet.http.HttpServletRequest
-</code></pre><h2 id="二、常用方法"><a href="#二、常用方法" class="headerlink" title="二、常用方法"></a>二、常用方法</h2><ul>
-<li>void setAttribute(String name,Object o)<pre><code>以 KEY-VLUE 的形式设置属性
-</code></pre></li>
-<li>Object getAttribute(String name)<pre><code>以 Object 形式返回指定属性的值，如果不存在给定名称的属性，则返回 null。
-</code></pre></li>
-<li>void removeAttribute(String name)<pre><code>移除指定属性
-</code></pre></li>
-<li>Enumeration<string> getAttributeNames()<pre><code>返回包含此请求可用属性的名称的 Enumeration。如果该请求没有可用的属性，则此方法返回一个空的 Enumeration
-</code></pre></string></li>
-<li>void setCharacterEncoding(String env)<pre><code>设置请求正文编码字符集
-</code></pre></li>
-<li>String getCharacterEncoding()<pre><code>获取请求正文编码字符集
-</code></pre></li>
-<li>String getContentType()<pre><code>获取返回请求主体的MIME类型
-</code></pre></li>
-<li>String getParameter(String name)<pre><code>以 String 形式返回请求参数的值，如果该参数不存在，则返回 null
-</code></pre></li>
-<li>String[] getParameterValues(String name)<pre><code>返回包含给定请求参数拥有的所有值的 String 对象数组，如果该参数不存在，则返回 null
-</code></pre></li>
-</ul>
-<hr>
-<ul>
-<li>String getMethod()<pre><code>获取请求的 HTTP 方法的名称，例如GET，POST或PUT
-</code></pre></li>
-<li>String getRequestURI()<pre><code>获取请求URI,获取的是 从项目名到参数之前的内容
-</code></pre></li>
-<li>StringBuffer getRequestURL()<pre><code>获取请求URL,获取的带协议的完整路径
-</code></pre></li>
-<li>String getQueryString()<pre><code>get请求的所有参数
-</code></pre></li>
-<li>String getProtocol()<pre><code>获取协议和版本
-</code></pre></li>
-</ul>
-<hr>
-<ul>
-<li>String getScheme()<pre><code>获取请求方案名称，如 http、https 或 ftp
-</code></pre></li>
-<li>String getServerName()<pre><code>获取包含服务器名称的 String，如 IP 地址
-</code></pre></li>
-<li>int getServerPort()<pre><code>获取服务器端口号
-</code></pre></li>
-<li>String getRemoteAddr()<pre><code>获取客户端IP地址
-</code></pre></li>
-<li>java.util.Locale getLocale()<pre><code>基于 Accept-Language 头，返回客户端将用来接受内容的首选 Locale
-</code></pre></li>
-<li>boolean isSecure()<pre><code>返回一个 boolean 值，指示此请求是否是使用安全通道（比如 HTTPS）发出的
-</code></pre></li>
-</ul>
-<h2 id="三、编码实践"><a href="#三、编码实践" class="headerlink" title="三、编码实践"></a>三、编码实践</h2><ul>
-<li><p>属性设置、获取、移除</p>
-  <figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="literal">void</span> doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</div><div class="line">		<span class="built_in">String</span> <span class="built_in">tag</span> = <span class="string">"name"</span>;</div><div class="line">		request.setAttribute(<span class="built_in">tag</span>, <span class="string">"张三"</span>);</div><div class="line">		System.out.println(<span class="built_in">tag</span> + request.getAttribute(<span class="built_in">tag</span>));</div><div class="line">		request.removeAttribute(<span class="built_in">tag</span>);</div><div class="line">            System.out.println(<span class="built_in">tag</span> + request.getAttribute(<span class="built_in">tag</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>  结果：</p>
-  <figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">name:</span>张三</div><div class="line"><span class="string">name:</span><span class="literal">null</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>字符集的获取与设置</p>
-  <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span>(<span class="params">HttpServletRequest request, HttpServletResponse response</span>) throws ServletException, IOException </span>&#123;</div><div class="line">		System.<span class="keyword">out</span>.println(<span class="string">"正文编码字符集："</span> + request.getCharacterEncoding());</div><div class="line">		request.setCharacterEncoding(<span class="string">"utf-8"</span>);</div><div class="line">		System.<span class="keyword">out</span>.println(<span class="string">"正文编码字符集："</span> + request.getCharacterEncoding());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>  结果：</p>
-  <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">正文编码字符集：<span class="literal">null</span></div><div class="line">正文编码字符集：utf<span class="number">-8</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>获取客户端信息</p>
-  <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span>(<span class="params">HttpServletRequest request, HttpServletResponse response</span>) throws ServletException, IOException </span>&#123;</div><div class="line">		System.<span class="keyword">out</span>.println(<span class="string">"客户端IP地址："</span> + request.getRemoteAddr());</div><div class="line">        System.<span class="keyword">out</span>.println(<span class="string">"请求方式："</span> + request.getScheme());</div><div class="line">        System.<span class="keyword">out</span>.println(<span class="string">"是否是HTTPS请求："</span> + request.isSecure());</div><div class="line">        System.<span class="keyword">out</span>.println(<span class="string">"请求方式："</span> + request.getMethod());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>结果：</p>
-<pre><code><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">客户端<span class="selector-tag">IP</span>地址：0<span class="selector-pseudo">:0</span><span class="selector-pseudo">:0</span><span class="selector-pseudo">:0</span><span class="selector-pseudo">:0</span><span class="selector-pseudo">:0</span><span class="selector-pseudo">:0</span><span class="selector-pseudo">:1</span></div><div class="line">请求方式：<span class="selector-tag">http</span></div><div class="line">是否是<span class="selector-tag">HTTPS</span>请求：<span class="selector-tag">false</span></div><div class="line">请求方式：<span class="selector-tag">GET</span></div></pre></td></tr></table></figure>
-</code></pre><ul>
-<li><p>获取服务端信息</p>
-  <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span>(<span class="params">HttpServletRequest request, HttpServletResponse response</span>)</span></div><div class="line">                throws ServletException, IOException &#123;</div><div class="line">            System.<span class="keyword">out</span>.println(<span class="string">"服务器端口号："</span> + request.getServerPort());</div><div class="line">            System.<span class="keyword">out</span>.println(<span class="string">"服务器名称："</span> + request.getServerName());</div><div class="line">            System.<span class="keyword">out</span>.println(<span class="string">"项目名称："</span> + request.getContextPath());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>结果：</p>
-<pre><code><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">服务器端口号：<span class="number">8888</span></div><div class="line">服务器名称：localhost</div><div class="line">项目名称：/day01_Servlet</div></pre></td></tr></table></figure>
-</code></pre><ul>
-<li>获取请求消息<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span>(<span class="params">HttpServletRequest request, HttpServletResponse response</span>)</span></div><div class="line">        throws ServletException, IOException &#123;</div><div class="line">    System.<span class="keyword">out</span>.println(<span class="string">"不带协议路径："</span> + request.getRequestURI());</div><div class="line">    System.<span class="keyword">out</span>.println(<span class="string">"带协议路径："</span> + request.getRequestURL());</div><div class="line">    System.<span class="keyword">out</span>.println(<span class="string">"请求方式："</span> + request.getMethod());</div><div class="line">    System.<span class="keyword">out</span>.println(<span class="string">"get请求的所有参数:"</span> + request.getQueryString());</div><div class="line">    System.<span class="keyword">out</span>.println(<span class="string">"协议和版本："</span> + request.getProtocol());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>结果：</p>
-<pre><code><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">不带协议路径：<span class="regexp">/day01_Servlet/</span>request</div><div class="line">带协议路径：<span class="string">http:</span><span class="comment">//localhost:8888/day01_Servlet/request</span></div><div class="line">请求方式：GET</div><div class="line">get请求的所有参数:<span class="literal">null</span></div><div class="line">协议和版本：HTTP/<span class="number">1.1</span></div></pre></td></tr></table></figure>
+<h2 id="三、BOM-对象"><a href="#三、BOM-对象" class="headerlink" title="三、BOM 对象"></a>三、BOM 对象</h2><p><strong>BOM</strong> 有如下六种对象：</p>
+<pre><code>* 1. window 对象 ，是JS的最顶层对象，其他的 BOM 对象都是 window 对象的属性；
+* 2. document 对象，文档对象；
+* 3. location 对象，浏览器当前URL信息；
+* 4. navigator 对象，浏览器本身信息；
+* 5. screen 对象，客户端屏幕信息；
+* 6. history 对象，浏览器访问历史信息；
+</code></pre><h3 id="3-1-window-对象"><a href="#3-1-window-对象" class="headerlink" title="3.1 window 对象"></a>3.1 window 对象</h3><p>所有浏览器都支持 <strong>window</strong> 对象。它表示浏览器窗口。</p>
+<p>所有 <strong>JavaScript</strong> 全局对象、函数以及变量均自动成为 <strong>window</strong> 对象的成员。</p>
+<p>全局变量是 <strong>window</strong> 对象的属性。</p>
+<p>全局函数是 <strong>window</strong> 对象的方法。</p>
+<p>甚至 <strong>HTML DOM</strong> 的 <strong>document</strong> 也是 <strong>window</strong> 对象的属性之一：<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.<span class="built_in">document</span>.getElementById(<span class="string">"header"</span>);</div></pre></td></tr></table></figure></p>
+<p>与此相同：<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.getElementById(<span class="string">"header"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><h5 id="消息框"><a href="#消息框" class="headerlink" title="消息框"></a>消息框</h5><pre><code>* 警告框：alert(&quot;....&quot;):
+* 确认框：confirm(&quot;你确定要删除吗?&quot;): 返回值:boolean
+* 输入框：prompt(&quot;请输入您的姓名&quot;): 返回值:你输入的内容
+</code></pre><h5 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h5><pre><code>设置定时器
+setInterval(code,毫秒数):周期执行
+setTimeout(code,毫秒数):延迟多长事件后 只执行一次.
+
+例如:
+    setInterval(showAd,4000);
+    serInterval(&quot;showAd()&quot;,4000);
+
+清除定时器
+    clearInterval(id):
+    clearTimeout(id):
+</code></pre><h5 id="打开和关闭窗口"><a href="#打开和关闭窗口" class="headerlink" title="打开和关闭窗口"></a>打开和关闭窗口</h5><pre><code>open(url):打开
+close():关闭
+</code></pre><h3 id="3-2-document-对象"><a href="#3-2-document-对象" class="headerlink" title="3.2 document 对象"></a>3.2 document 对象</h3><p><strong>document</strong> 对象 详见 <a href="./4.JavaScript之DOM的使用.md">JavaScript 之 DOM 的使用</a></p>
+<h3 id="3-3-location-对象"><a href="#3-3-location-对象" class="headerlink" title="3.3 location 对象"></a>3.3 location 对象</h3><p><strong>location</strong> 属性获取浏览器当前URL信息，这个在企业内外网使用不同 IP 的场景下可用。</p>
+<h4 id="location-对象属性"><a href="#location-对象属性" class="headerlink" title="location 对象属性"></a><strong>location</strong> 对象属性</h4><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hash</td>
+<td>设置或返回从井号 (#) 开始的 URL（锚）。</td>
+</tr>
+<tr>
+<td>host</td>
+<td>设置或返回主机名和当前 URL 的端口号。</td>
+</tr>
+<tr>
+<td>hostname</td>
+<td>设置或返回当前 URL 的主机名。</td>
+</tr>
+<tr>
+<td>href</td>
+<td>设置或返回完整的 URL。</td>
+</tr>
+<tr>
+<td>pathname</td>
+<td>设置或返回当前 URL 的路径部分。</td>
+</tr>
+<tr>
+<td>port</td>
+<td>设置或返回当前 URL 的端口号。</td>
+</tr>
+<tr>
+<td>protocol</td>
+<td>设置或返回当前 URL 的协议。</td>
+</tr>
+<tr>
+<td>search</td>
+<td>设置或返回从问号 (?) 开始的 URL（查询部分）。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="location-对象方法"><a href="#location-对象方法" class="headerlink" title="location 对象方法"></a><strong>location</strong> 对象方法</h4><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>assign()</td>
+<td>加载新的文档。</td>
+</tr>
+<tr>
+<td>reload()</td>
+<td>重新加载当前文档。</td>
+</tr>
+<tr>
+<td>replace()</td>
+<td>用新的文档替换当前文档。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-4-navigator-对象"><a href="#3-4-navigator-对象" class="headerlink" title="3.4 navigator 对象"></a>3.4 navigator 对象</h3><p><strong>Navigator</strong> 对象包含的属性描述了正在使用的浏览器。可以使用这些属性进行平台专用的配置。</p>
+<h4 id="Navigator-对象属性"><a href="#Navigator-对象属性" class="headerlink" title="Navigator 对象属性"></a><strong>Navigator</strong> 对象属性</h4><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>appCodeName</td>
+<td>返回浏览器的代码名。</td>
+</tr>
+<tr>
+<td>appMinorVersion</td>
+<td>返回浏览器的次级版本。</td>
+</tr>
+<tr>
+<td>appName</td>
+<td>返回浏览器的名称。</td>
+</tr>
+<tr>
+<td>appVersion</td>
+<td>返回浏览器的平台和版本信息。</td>
+</tr>
+<tr>
+<td>browserLanguage</td>
+<td>返回当前浏览器的语言。</td>
+</tr>
+<tr>
+<td>cookieEnabled</td>
+<td>返回指明浏览器中是否启用 cookie 的布尔值。</td>
+</tr>
+<tr>
+<td>cpuClass</td>
+<td>返回浏览器系统的 CPU 等级。</td>
+</tr>
+<tr>
+<td>onLine</td>
+<td>返回指明系统是否处于脱机模式的布尔值。</td>
+</tr>
+<tr>
+<td>platform</td>
+<td>返回运行浏览器的操作系统平台。</td>
+</tr>
+<tr>
+<td>systemLanguage</td>
+<td>返回 OS 使用的默认语言。</td>
+</tr>
+<tr>
+<td>userAgent</td>
+<td>返回由客户机发送服务器的 user-agent 头部的值。</td>
+</tr>
+<tr>
+<td>userLanguage</td>
+<td>返回 OS 的自然语言设置。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>javaEnabled()</td>
+<td>规定浏览器是否启用 Java。</td>
+</tr>
+<tr>
+<td>taintEnabled()</td>
+<td>规定浏览器是否启用数据污点 (data tainting)。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-5-screen-对象"><a href="#3-5-screen-对象" class="headerlink" title="3.5 screen 对象"></a>3.5 screen 对象</h3><p><strong>Screen</strong> 对象包含有关客户端显示屏幕的信息。</p>
+<h4 id="Screen-对象属性"><a href="#Screen-对象属性" class="headerlink" title="Screen 对象属性"></a><strong>Screen</strong> 对象属性</h4><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>availHeight</td>
+<td>返回显示屏幕的高度 (除 Windows 任务栏之外)。</td>
+</tr>
+<tr>
+<td>availWidth</td>
+<td>返回显示屏幕的宽度 (除 Windows 任务栏之外)。</td>
+</tr>
+<tr>
+<td>bufferDepth</td>
+<td>设置或返回调色板的比特深度。</td>
+</tr>
+<tr>
+<td>colorDepth</td>
+<td>返回目标设备或缓冲器上的调色板的比特深度。</td>
+</tr>
+<tr>
+<td>deviceXDPI</td>
+<td>返回显示屏幕的每英寸水平点数。</td>
+</tr>
+<tr>
+<td>deviceYDPI</td>
+<td>返回显示屏幕的每英寸垂直点数。</td>
+</tr>
+<tr>
+<td>fontSmoothingEnabled</td>
+<td>返回用户是否在显示控制面板中启用了字体平滑。</td>
+</tr>
+<tr>
+<td>height</td>
+<td>返回显示屏幕的高度。</td>
+</tr>
+<tr>
+<td>logicalXDPI</td>
+<td>返回显示屏幕每英寸的水平方向的常规点数。</td>
+</tr>
+<tr>
+<td>logicalYDPI</td>
+<td>返回显示屏幕每英寸的垂直方向的常规点数。</td>
+</tr>
+<tr>
+<td>pixelDepth</td>
+<td>返回显示屏幕的颜色分辨率（比特每像素）。</td>
+</tr>
+<tr>
+<td>updateInterval</td>
+<td>设置或返回屏幕的刷新率。</td>
+</tr>
+<tr>
+<td>width</td>
+<td>返回显示器屏幕的宽度。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-6-history-对象"><a href="#3-6-history-对象" class="headerlink" title="3.6 history 对象"></a>3.6 history 对象</h3><p><strong>history</strong> 对象获取浏览器的历史浏览记录。</p>
+<h4 id="history-对象属性"><a href="#history-对象属性" class="headerlink" title="history 对象属性"></a><strong>history</strong> 对象属性</h4><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>length</td>
+<td>返回浏览器历史列表中的 URL 数量。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="history-对象常用方法"><a href="#history-对象常用方法" class="headerlink" title="history 对象常用方法"></a><strong>history</strong> 对象常用方法</h4><pre><code>back();后退
+forward():向前
+go(int)
+    go(-1) 相当于 back()
+    go(1) 相当于 forward()
 </code></pre>
       
 
@@ -304,7 +474,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JAVA WEB</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端基础</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">BOM</a>
         		</li>
       		
 		</ul>
@@ -360,7 +538,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/03/30/java/JavaWeb/04.Servlet之request/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/09/16/JavaEE学习/3.JavaScript/5.JavaScript 之 BOM 的使用/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -374,18 +552,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/03/31/java/JavaWeb/05.Servlet之response/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Servlet之response
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/19/java/JavaWeb/03.Servlet之ServletConfig和ServletContext对象/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Servlet之ServletConfig与ServletContext对象</div>
+    <a href="/2017/09/16/JavaEE学习/3.JavaScript/4.JavaScript之DOM的使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript 之 DOM 的使用</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -399,7 +568,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="java/JavaWeb/04.Servlet之request" data-title="Servlet之request" data-url="https://marklogzhu.github.io/2017/03/30/java/JavaWeb/04.Servlet之request/"></div>
+	<div class="ds-thread" data-thread-key="JavaEE学习/3.JavaScript/5.JavaScript 之 BOM 的使用" data-title="JavaScript 之 BOM 的使用" data-url="https://marklogzhu.github.io/2017/09/16/JavaEE学习/3.JavaScript/5.JavaScript 之 BOM 的使用/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

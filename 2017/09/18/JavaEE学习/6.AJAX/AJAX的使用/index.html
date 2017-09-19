@@ -6,21 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
-  <title>SQLServer 多表筛选数据 | 且听风吟的博客</title>
+  <title>ajax 的使用 | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="概述 在项目中常常出现多表数据对比的需求，今天我们就来完成下这个需求。">
+  <meta name="description" content="一、什么是 AJAXAJAX 全称为 Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）.AJAX 不是新的编程语言，而是一种使用现有标准的新方法。
+通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。
+传统的网页（不使用 AJAX）如果需要更新内容，必需重载">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQLServer 多表筛选数据">
-<meta property="og:url" content="https://marklogzhu.github.io/2017/07/13/SQL/SQLServer多表筛选数据/index.html">
+<meta property="og:title" content="ajax 的使用">
+<meta property="og:url" content="https://marklogzhu.github.io/2017/09/18/JavaEE学习/6.AJAX/AJAX的使用/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="概述 在项目中常常出现多表数据对比的需求，今天我们就来完成下这个需求。">
-<meta property="og:image" content="http://i.imgur.com/3AsEH4B.png">
-<meta property="og:image" content="http://i.imgur.com/3PFVvDR.png">
-<meta property="og:updated_time" content="2017-07-13T05:22:08.291Z">
+<meta property="og:description" content="一、什么是 AJAXAJAX 全称为 Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）.AJAX 不是新的编程语言，而是一种使用现有标准的新方法。
+通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。
+传统的网页（不使用 AJAX）如果需要更新内容，必需重载">
+<meta property="og:updated_time" content="2017-09-19T00:41:33.653Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQLServer 多表筛选数据">
-<meta name="twitter:description" content="概述 在项目中常常出现多表数据对比的需求，今天我们就来完成下这个需求。">
-<meta name="twitter:image" content="http://i.imgur.com/3AsEH4B.png">
+<meta name="twitter:title" content="ajax 的使用">
+<meta name="twitter:description" content="一、什么是 AJAXAJAX 全称为 Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）.AJAX 不是新的编程语言，而是一种使用现有标准的新方法。
+通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。
+传统的网页（不使用 AJAX）如果需要更新内容，必需重载">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -152,41 +155,40 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-SQL/SQLServer多表筛选数据" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-JavaEE学习/6.AJAX/AJAX的使用" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      SQLServer 多表筛选数据
+      ajax 的使用
     </h1>
   
 
         
-        <a href="/2017/07/13/SQL/SQLServer多表筛选数据/" class="archive-article-date">
-  	<time datetime="2017-07-13T02:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-13</time>
+        <a href="/2017/09/18/JavaEE学习/6.AJAX/AJAX的使用/" class="archive-article-date">
+  	<time datetime="2017-09-18T11:41:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p> 在项目中常常出现多表数据对比的需求，今天我们就来完成下这个需求。</p>
+        <h2 id="一、什么是-AJAX"><a href="#一、什么是-AJAX" class="headerlink" title="一、什么是 AJAX"></a>一、什么是 AJAX</h2><p><strong>AJAX</strong> 全称为 <strong>Asynchronous JavaScript and XML</strong>（异步的 JavaScript 和 XML）.<strong>AJAX 不是新的编程语言，而是一种使用现有标准的新方法。</strong></p>
+<p>通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</p>
+<p>传统的网页（不使用 AJAX）如果需要更新内容，必需重载整个网页面。</p>
+<p>有很多使用 AJAX 的应用程序案例：新浪微博、Google 地图、开心网等等。</p>
 <a id="more"></a>
-<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>某小学一年级有 A、B 两个班，实现如下需求<br>1.查出两个班相同名字和年龄的学生<br>2.查出两个班不同名字和年龄的学生</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>首先我们来生成下测试数据。</p>
-<h3 id="测试数据"><a href="#测试数据" class="headerlink" title="测试数据"></a>测试数据</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- A 班</span></div><div class="line"><span class="keyword">SELECT</span> <span class="string">'张三'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'18'</span> <span class="keyword">AS</span> age <span class="keyword">INTO</span> #TEMP_A </div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'李四'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'28'</span> <span class="keyword">AS</span> age</div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'王五'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'38'</span> <span class="keyword">AS</span> age</div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'赵六'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'48'</span> <span class="keyword">AS</span> age</div><div class="line"></div><div class="line"> <span class="comment">-- B 班</span></div><div class="line"><span class="keyword">SELECT</span> <span class="string">'田七'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'18'</span> <span class="keyword">AS</span> age <span class="keyword">INTO</span> #TEMP_B </div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'老刘'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'28'</span> <span class="keyword">AS</span> age</div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'张三'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'18'</span> <span class="keyword">AS</span> age</div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'赵六'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'48'</span> <span class="keyword">AS</span> age</div></pre></td></tr></table></figure>
-<h3 id="查出两个班相同名字和年龄的学生"><a href="#查出两个班相同名字和年龄的学生" class="headerlink" title="查出两个班相同名字和年龄的学生"></a>查出两个班相同名字和年龄的学生</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>,age <span class="keyword">FROM</span>  #TEMP_A</div><div class="line"><span class="keyword">INTERSECT</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>,age <span class="keyword">FROM</span>  #TEMP_B</div></pre></td></tr></table></figure>
-<p><img src="http://i.imgur.com/3AsEH4B.png" alt=""></p>
-<h3 id="查出两个班不同名字和年龄的学生"><a href="#查出两个班不同名字和年龄的学生" class="headerlink" title="查出两个班不同名字和年龄的学生"></a>查出两个班不同名字和年龄的学生</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>,age <span class="keyword">FROM</span>  #TEMP_A</div><div class="line"><span class="keyword">EXCEPT</span> </div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>,age <span class="keyword">FROM</span>  #TEMP_B</div></pre></td></tr></table></figure>
-<p><img src="http://i.imgur.com/3PFVvDR.png" alt=""></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上的示例主要运用了以下两个运算符</p>
-<ul>
-<li>INTERSECT：返回由 INTERSECT 运算符左侧和右侧的查询都返回的所有非重复值。</li>
-<li>EXCEPT：返回由 EXCEPT 运算符左侧的查询返回、而又不包含在右侧查询所返回的值中的所有非重复值。</li>
-</ul>
-<p>注：这两个运算符需要在 SQL SERVER 2005 版本之后（包括 2005 版）才能使用</p>
+<h2 id="二、XMLHttpRequest-对象"><a href="#二、XMLHttpRequest-对象" class="headerlink" title="二、XMLHttpRequest 对象"></a>二、XMLHttpRequest 对象</h2><p><strong>XMLHttpRequest</strong> 对象是 <strong>AJAX</strong> 的基础,它用于在后台与服务器交换数据。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</p>
+<h3 id="2-1-创建-XMLHttpRequest-对象"><a href="#2-1-创建-XMLHttpRequest-对象" class="headerlink" title="2.1 创建 XMLHttpRequest 对象"></a>2.1 创建 XMLHttpRequest 对象</h3><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xmlhttp;</div><div class="line"><span class="keyword">if</span> (window.XMLHttpRequest) &#123;<span class="comment">// code for IE7+, Firefox, Chrome, Opera, Safari</span></div><div class="line">  xmlhttp=<span class="keyword">new</span> <span class="type">XMLHttpRequest</span>();</div><div class="line">&#125; <span class="keyword">else</span> &#123;<span class="comment">// code for IE6, IE5</span></div><div class="line">  xmlhttp=<span class="keyword">new</span> <span class="type">ActiveXObject</span>(<span class="string">"Microsoft.XMLHTTP"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-2-注册回调函数"><a href="#2-2-注册回调函数" class="headerlink" title="2.2 注册回调函数"></a>2.2 注册回调函数</h3><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">xmlhttp.onreadystatechange = callback;</div><div class="line">```  </div><div class="line"></div><div class="line">### <span class="number">2.3</span> 设置和服务器端交互的基本信息</div></pre></td></tr></table></figure>
+<p>xmlhttp.open(“GET”,”test1.txt”,true);</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">open(<span class="function"><span class="keyword">method</span>,<span class="title">url</span>,<span class="title">async</span>):</span> 规定请求的类型、URL 以及是否异步处理请求。</div><div class="line">	* <span class="function"><span class="keyword">method</span>：请求的类型；<span class="title">GET</span> 或 <span class="title">POST</span></span></div><div class="line">	* <span class="title">url</span>：文件在服务器上的位置</div><div class="line">	* <span class="title">async</span>：<span class="title">true</span>（异步）或 <span class="title">false</span>（同步）</div><div class="line">	*</div><div class="line">#### <span class="title">GET</span> 还是 <span class="title">POST</span>？</div><div class="line">与 <span class="title">POST</span> 相比，<span class="title">GET</span> 更简单也更快，并且在大部分情况下都能用。</div><div class="line">然而，在以下情况中，请使用 <span class="title">POST</span> 请求：</div><div class="line">* 无法使用缓存文件（更新服务器上的文件或数据库）</div><div class="line">* 向服务器发送大量数据（<span class="title">POST</span> 没有数据量限制）</div><div class="line">* 发送包含未知字符的用户输入时，<span class="title">POST</span> 比 <span class="title">GET</span> 更稳定也更可靠</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">### 2.4 向服务器发送请求</div></pre></td></tr></table></figure>
+<p>xmlhttp.send();<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">如果需要像 <span class="selector-tag">HTML</span> 表单那样 <span class="selector-tag">POST</span> 数据，请使用 <span class="selector-tag">setRequestHeader</span>() 来添加 <span class="selector-tag">HTTP</span> 头。然后在 <span class="selector-tag">send</span>() 方法中规定您希望发送的数据：</div></pre></td></tr></table></figure></p>
+<p>xmlhttp.open(“POST”,”ajax_test.asp”,true);<br>xmlhttp.setRequestHeader(“Content-type”,”application/x-www-form-urlencoded”);<br>xmlhttp.send(“fname=Bill&amp;lname=Gates”);<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">### 2.5 处理回调函数</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#### 获取服务器响应</span></div><div class="line"></div><div class="line">如需获得来自服务器的响应，需要使用 <span class="symbol">*</span><span class="symbol">*</span>XMLHttpRequest<span class="symbol">*</span><span class="symbol">*</span> 对象的 <span class="symbol">*</span><span class="symbol">*</span>responseText<span class="symbol">*</span><span class="symbol">*</span> 或 <span class="symbol">*</span><span class="symbol">*</span>responseXML<span class="symbol">*</span><span class="symbol">*</span> 属性。</div><div class="line"></div><div class="line">|<span class="string">属性</span>|<span class="string">描述</span>|</div><div class="line">|<span class="string">--</span>|<span class="string">--</span>|</div><div class="line">|<span class="string">responseText	</span>|<span class="string">获得字符串形式的响应数据。</span>|</div><div class="line">|<span class="string">responseXML	</span>|<span class="string">获得 XML 形式的响应数据。</span>|</div></pre></td></tr></table></figure></p>
+<p>var xmlDoc  = xmlhttp.responseXML;<br>var textDoc = xmlhttp.responseText;<br><figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"><span class="gherkin"><span class="comment">#### onreadystatechange 事件</span></span></div><div class="line"></div><div class="line"></div><div class="line">当请求被发送到服务器时，我们需要执行一些基于响应的任务。</div><div class="line">每当 readyState 改变时，就会触发 onreadystatechange 事件。</div><div class="line">readyState 属性存有 XMLHttpRequest 的状态信息。</div><div class="line">下面是 XMLHttpRequest 对象的三个重要的属性：</div><div class="line"></div><div class="line">|<span class="string">属性</span>|<span class="string">	描述</span>|</div><div class="line">|<span class="string">--</span>|<span class="string">--</span>|</div><div class="line">|<span class="string">onreadystatechange</span>|<span class="string">	存储函数（或函数名），每当 readyState 属性改变时，就会调用该函数。</span>|</div><div class="line">|<span class="string">readyState	</span>|<span class="string">存有 XMLHttpRequest 的状态。从 0 到 4 发生变化。&lt;br&gt;  0: 请求未初始化 &lt;br&gt;  1: 服务器连接已建立&lt;br&gt; *2: 请求已接收&lt;br&gt; * 3: 请求处理中&lt;br&gt;  4: 请求已完成，且响应已就绪 </span>|</div><div class="line">|<span class="string">status	</span>|<span class="string">200: "OK" &lt;br&gt;404: 未找到页面</span>|</div></pre></td></tr></table></figure></p>
+<p>xmlhttp.onreadystatechange=function() {<br>  if (xmlhttp.readyState==4 &amp;&amp; xmlhttp.status==200) {<br>    document.getElementById(“myDiv”).innerHTML=xmlhttp.responseText;<br>   }<br>}<br>```</p>
 
       
 
@@ -231,11 +233,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">SQLServer</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AJAX</a>
         		</li>
       		
 		</ul>
@@ -291,7 +293,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/07/13/SQL/SQLServer多表筛选数据/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/09/18/JavaEE学习/6.AJAX/AJAX的使用/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -305,18 +307,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/07/27/前端/ajax/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          ajax 使用
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/06/30/tool/常用工具/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">常用小工具</div>
+    <a href="/2017/09/16/JavaEE学习/3.JavaScript/5.JavaScript 之 BOM 的使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript 之 BOM 的使用</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -330,7 +323,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="SQL/SQLServer多表筛选数据" data-title="SQLServer 多表筛选数据" data-url="https://marklogzhu.github.io/2017/07/13/SQL/SQLServer多表筛选数据/"></div>
+	<div class="ds-thread" data-thread-key="JavaEE学习/6.AJAX/AJAX的使用" data-title="ajax 的使用" data-url="https://marklogzhu.github.io/2017/09/18/JavaEE学习/6.AJAX/AJAX的使用/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

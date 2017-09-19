@@ -6,21 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
-  <title>SQLServer 多表筛选数据 | 且听风吟的博客</title>
+  <title>Tag: AJAX | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="概述 在项目中常常出现多表数据对比的需求，今天我们就来完成下这个需求。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="SQLServer 多表筛选数据">
-<meta property="og:url" content="https://marklogzhu.github.io/2017/07/13/SQL/SQLServer多表筛选数据/index.html">
+  <meta name="description" content="会点皮毛技术,立志于往深处扎根。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="且听风吟的博客">
+<meta property="og:url" content="https://marklogzhu.github.io/tags/AJAX/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="概述 在项目中常常出现多表数据对比的需求，今天我们就来完成下这个需求。">
-<meta property="og:image" content="http://i.imgur.com/3AsEH4B.png">
-<meta property="og:image" content="http://i.imgur.com/3PFVvDR.png">
-<meta property="og:updated_time" content="2017-07-13T05:22:08.291Z">
+<meta property="og:description" content="会点皮毛技术,立志于往深处扎根。">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQLServer 多表筛选数据">
-<meta name="twitter:description" content="概述 在项目中常常出现多表数据对比的需求，今天我们就来完成下这个需求。">
-<meta name="twitter:image" content="http://i.imgur.com/3AsEH4B.png">
+<meta name="twitter:title" content="且听风吟的博客">
+<meta name="twitter:description" content="会点皮毛技术,立志于往深处扎根。">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -152,204 +148,64 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-SQL/SQLServer多表筛选数据" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      SQLServer 多表筛选数据
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/09/18/JavaEE学习/6.AJAX/AJAX的使用/" class="archive-article-date">
+  	<time datetime="2017-09-18T11:41:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-18</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/09/18/JavaEE学习/6.AJAX/AJAX的使用/">ajax 的使用</a>
     </h1>
   
 
-        
-        <a href="/2017/07/13/SQL/SQLServer多表筛选数据/" class="archive-article-date">
-  	<time datetime="2017-07-13T02:22:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p> 在项目中常常出现多表数据对比的需求，今天我们就来完成下这个需求。</p>
-<a id="more"></a>
-<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>某小学一年级有 A、B 两个班，实现如下需求<br>1.查出两个班相同名字和年龄的学生<br>2.查出两个班不同名字和年龄的学生</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>首先我们来生成下测试数据。</p>
-<h3 id="测试数据"><a href="#测试数据" class="headerlink" title="测试数据"></a>测试数据</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- A 班</span></div><div class="line"><span class="keyword">SELECT</span> <span class="string">'张三'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'18'</span> <span class="keyword">AS</span> age <span class="keyword">INTO</span> #TEMP_A </div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'李四'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'28'</span> <span class="keyword">AS</span> age</div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'王五'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'38'</span> <span class="keyword">AS</span> age</div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'赵六'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'48'</span> <span class="keyword">AS</span> age</div><div class="line"></div><div class="line"> <span class="comment">-- B 班</span></div><div class="line"><span class="keyword">SELECT</span> <span class="string">'田七'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'18'</span> <span class="keyword">AS</span> age <span class="keyword">INTO</span> #TEMP_B </div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'老刘'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'28'</span> <span class="keyword">AS</span> age</div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'张三'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'18'</span> <span class="keyword">AS</span> age</div><div class="line"><span class="keyword">UNION</span> ALL</div><div class="line"><span class="keyword">SELECT</span> <span class="string">'赵六'</span> <span class="keyword">AS</span> <span class="keyword">name</span>,<span class="string">'48'</span> <span class="keyword">AS</span> age</div></pre></td></tr></table></figure>
-<h3 id="查出两个班相同名字和年龄的学生"><a href="#查出两个班相同名字和年龄的学生" class="headerlink" title="查出两个班相同名字和年龄的学生"></a>查出两个班相同名字和年龄的学生</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>,age <span class="keyword">FROM</span>  #TEMP_A</div><div class="line"><span class="keyword">INTERSECT</span></div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>,age <span class="keyword">FROM</span>  #TEMP_B</div></pre></td></tr></table></figure>
-<p><img src="http://i.imgur.com/3AsEH4B.png" alt=""></p>
-<h3 id="查出两个班不同名字和年龄的学生"><a href="#查出两个班不同名字和年龄的学生" class="headerlink" title="查出两个班不同名字和年龄的学生"></a>查出两个班不同名字和年龄的学生</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>,age <span class="keyword">FROM</span>  #TEMP_A</div><div class="line"><span class="keyword">EXCEPT</span> </div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">name</span>,age <span class="keyword">FROM</span>  #TEMP_B</div></pre></td></tr></table></figure>
-<p><img src="http://i.imgur.com/3PFVvDR.png" alt=""></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上的示例主要运用了以下两个运算符</p>
-<ul>
-<li>INTERSECT：返回由 INTERSECT 运算符左侧和右侧的查询都返回的所有非重复值。</li>
-<li>EXCEPT：返回由 EXCEPT 运算符左侧的查询返回、而又不包含在右侧查询所返回的值中的所有非重复值。</li>
-</ul>
-<p>注：这两个运算符需要在 SQL SERVER 2005 版本之后（包括 2005 版）才能使用</p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>欣赏此文？求鼓励，求支持！<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/img/alipay.jpg">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/img/weixin.jpg">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">SQLServer</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">AJAX</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/07/13/SQL/SQLServer多表筛选数据/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2017/07/27/前端/ajax/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          ajax 使用
-        
-      </div>
-    </a>
   
   
-    <a href="/2017/06/30/tool/常用工具/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">常用小工具</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
-
-  
-  <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="SQL/SQLServer多表筛选数据" data-title="SQLServer 多表筛选数据" data-url="https://marklogzhu.github.io/2017/07/13/SQL/SQLServer多表筛选数据/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"marklogzhu"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
+    </div></section>
   
 
-
+    
 
 
           </div>
@@ -372,9 +228,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",

@@ -22,7 +22,7 @@ DOM 全称是 Document Object Model，也就是文档对象模型。
 
 dom 是一个文档对象，他将html文件按节点生成一个文档对象
 二、它能干什么它可以让我们操作对象一样的操作文档，来进行增删改操作。">
-<meta property="og:updated_time" content="2017-09-16T08:06:12.649Z">
+<meta property="og:updated_time" content="2017-09-19T11:38:01.365Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 之 DOM 的使用">
 <meta name="twitter:description" content="一、什么是 DOM
@@ -196,14 +196,7 @@ dom 是一个文档对象，他将html文件按节点生成一个文档对象
 <h3 id="3-1-元素节点"><a href="#3-1-元素节点" class="headerlink" title="3.1 元素节点"></a>3.1 元素节点</h3><p><strong>HTML</strong> 中的标签就是元素节点,如 <code>&lt;a&gt;</code>、<code>&lt;p&gt;</code> 标签等。</p>
 <h3 id="3-2-文本节点"><a href="#3-2-文本节点" class="headerlink" title="3.2 文本节点"></a>3.2 文本节点</h3><p>文本节点是指如被 <code>&lt;a&gt;</code> 标签包含的文字内容，元素不一定都包含文本节点，如<code>&lt;ul&gt;</code>。</p>
 <h3 id="3-3-属性节点"><a href="#3-3-属性节点" class="headerlink" title="3.3 属性节点"></a>3.3 属性节点</h3><p>属性节点上被元素节点包含的，如 <strong>title</strong> 属性。</p>
-<h3 id="3-4-获取元素"><a href="#3-4-获取元素" class="headerlink" title="3.4 获取元素"></a>3.4 获取元素</h3><p>获取节点对象有如下三种方式</p>
-<pre><code>// 获取指定Id元素
-document.getElementById(&quot;id值&quot;);
-// 获取指定元素，返回数组对象
-document.getElementsByTagName(&quot;元素名称&quot;);
-// 获取指定类，返回数组对象
-document.getElementsByClassName(&quot;类名称&quot;);
-</code></pre><h2 id="四、节点属性"><a href="#四、节点属性" class="headerlink" title="四、节点属性"></a>四、节点属性</h2><h3 id="4-1-childNodes-属性"><a href="#4-1-childNodes-属性" class="headerlink" title="4.1 childNodes 属性"></a>4.1 childNodes 属性</h3><p>通过 <strong>childNodes</strong> 属性可以获取一个元素下所包含的所有子元素，返回的是一个数组对象。</p>
+<h2 id="四、节点属性"><a href="#四、节点属性" class="headerlink" title="四、节点属性"></a>四、节点属性</h2><h3 id="4-1-childNodes-属性"><a href="#4-1-childNodes-属性" class="headerlink" title="4.1 childNodes 属性"></a>4.1 childNodes 属性</h3><p>通过 <strong>childNodes</strong> 属性可以获取一个元素下所包含的所有子元素，返回的是一个数组对象。</p>
 <pre><code>var body = document.getElementsByTagName(&quot;body&quot;)[0];
 var array = body.childNodes;
 </code></pre><h3 id="4-2-nodeType-属性"><a href="#4-2-nodeType-属性" class="headerlink" title="4.2 nodeType 属性"></a>4.2 nodeType 属性</h3><p>每个节点都有 <strong>nodeType</strong> 属性，可以让我们区分节点类型。它返回的值是数字，含义如下：</p>
@@ -223,6 +216,33 @@ var array = body.childNodes;
 getAttribute(&quot;属性名称&quot;);
 </code></pre><h3 id="5-2-设置属性"><a href="#5-2-设置属性" class="headerlink" title="5.2 设置属性"></a>5.2 设置属性</h3><pre><code>// 设置属性值
 setAttribute(&quot;属性名称&quot;,值);
+</code></pre><h2 id="六、操作节点"><a href="#六、操作节点" class="headerlink" title="六、操作节点"></a>六、操作节点</h2><h3 id="6-1-获取节点"><a href="#6-1-获取节点" class="headerlink" title="6.1 获取节点"></a>6.1 获取节点</h3><p>获取节点对象有如下三种方式<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取指定Id元素</span></div><div class="line"><span class="selector-tag">document</span><span class="selector-class">.getElementById</span>(<span class="string">"id值"</span>);</div><div class="line"><span class="comment">// 获取指定标签元素，返回数组对象</span></div><div class="line"><span class="selector-tag">document</span><span class="selector-class">.getElementsByTagName</span>(<span class="string">"元素名称"</span>);</div><div class="line"><span class="comment">// 获取指定类，返回数组对象</span></div><div class="line"><span class="selector-tag">document</span><span class="selector-class">.getElementsByClassName</span>(<span class="string">"类名称"</span>);</div><div class="line"><span class="comment">// 获取属性节点</span></div><div class="line"><span class="selector-tag">document</span><span class="selector-class">.getElementById</span>(<span class="string">"id值"</span>)<span class="selector-class">.getAttributeNode</span>(<span class="string">"属性"</span>);</div></pre></td></tr></table></figure></p>
+<h3 id="6-2-改变节点"><a href="#6-2-改变节点" class="headerlink" title="6.2 改变节点"></a>6.2 改变节点</h3><h4 id="6-2-1-改变节点文本值"><a href="#6-2-1-改变节点文本值" class="headerlink" title="6.2.1 改变节点文本值"></a>6.2.1 改变节点文本值</h4><figure class="highlight q"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取元素节点</span></div><div class="line"><span class="built_in">var</span> <span class="built_in">view</span> = document.getElementById(<span class="string">"id值"</span>);</div><div class="line"><span class="comment">// 设置属性值</span></div><div class="line"><span class="built_in">view</span>.nodeValue = <span class="string">"新值"</span>;</div></pre></td></tr></table></figure>
+<h4 id="6-2-2-改变节点属性值"><a href="#6-2-2-改变节点属性值" class="headerlink" title="6.2.2 改变节点属性值"></a>6.2.2 改变节点属性值</h4><p>方式一：</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取元素节点</span></div><div class="line"><span class="built_in">var</span> <span class="built_in">view</span> = document.getElementById(<span class="string">"id值"</span>);</div><div class="line"><span class="comment">// 设置属性值</span></div><div class="line"><span class="built_in">view</span>.setAttribute(<span class="string">"属性名称"</span>,值);</div></pre></td></tr></table></figure>
+<p>方式二：</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取元素节点</span></div><div class="line"><span class="built_in">var</span> <span class="built_in">view</span> = document.getElementById(<span class="string">"id值"</span>);</div><div class="line"><span class="comment">// 获取属性节点</span></div><div class="line"><span class="built_in">var</span> attributes =  <span class="built_in">view</span>.getAttributeNode(<span class="string">"属性"</span>);</div><div class="line"><span class="comment">// 设置属性值</span></div><div class="line">attributes.nodeValue = <span class="string">"新值"</span>;</div></pre></td></tr></table></figure>
+<h3 id="6-3-删除节点"><a href="#6-3-删除节点" class="headerlink" title="6.3 删除节点"></a>6.3 删除节点</h3><h4 id="6-3-1-删除节点–-删除包含的节点"><a href="#6-3-1-删除节点–-删除包含的节点" class="headerlink" title="6.3.1 删除节点– 删除包含的节点"></a>6.3.1 删除节点– 删除包含的节点</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取 body 元素</span></div><div class="line"><span class="keyword">var</span> body = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"body"</span>)[<span class="number">0</span>];</div><div class="line"><span class="comment">// 获取 body 下第一个p元素</span></div><div class="line"><span class="keyword">var</span> p = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"p"</span>)[<span class="number">0</span>];</div><div class="line"><span class="comment">// 删除 body 下第一个 p 元素</span></div><div class="line">body.removeChild(p);</div></pre></td></tr></table></figure>
+<h4 id="6-3-2-删除节点–-删除自身"><a href="#6-3-2-删除节点–-删除自身" class="headerlink" title="6.3.2 删除节点– 删除自身"></a>6.3.2 删除节点– 删除自身</h4><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">// 获取 <span class="keyword">body</span> 元素</div><div class="line">var <span class="keyword">body</span> = document.getElementsByTagName(<span class="string">"body"</span>)[<span class="number">0</span>];</div><div class="line">// 获取 <span class="keyword">body</span> 的父元素</div><div class="line">var father = <span class="keyword">body</span>.parentNode;</div><div class="line">// 删除 <span class="keyword">body</span> 元素</div><div class="line">father.removeChild(<span class="keyword">body</span>);</div></pre></td></tr></table></figure>
+<h4 id="6-3-3-删除指定属性–根据名称"><a href="#6-3-3-删除指定属性–根据名称" class="headerlink" title="6.3.3 删除指定属性–根据名称"></a>6.3.3 删除指定属性–根据名称</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取 a 标签</span></div><div class="line"><span class="keyword">var</span> a = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>)[<span class="number">0</span>];</div><div class="line"><span class="comment">// 删除指定属性</span></div><div class="line">a.removeAttribute(<span class="string">"属性名称"</span>)；</div></pre></td></tr></table></figure>
+<h4 id="6-3-4-删除指定属性–根据属性节点对象"><a href="#6-3-4-删除指定属性–根据属性节点对象" class="headerlink" title="6.3.4 删除指定属性–根据属性节点对象"></a>6.3.4 删除指定属性–根据属性节点对象</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取 a 标签</span></div><div class="line"><span class="keyword">var</span> a = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>)[<span class="number">0</span>];</div><div class="line"><span class="comment">// 获取指定属性节点对象</span></div><div class="line"><span class="keyword">var</span> attributes =  a.getAttributeNode(<span class="string">"属性"</span>);</div><div class="line"><span class="comment">// 删除属性</span></div><div class="line">a.removeAttributeNode(attributes);</div></pre></td></tr></table></figure>
+<h4 id="6-4-创建节点"><a href="#6-4-创建节点" class="headerlink" title="6.4 创建节点"></a>6.4 创建节点</h4><h4 id="6-4-1-创建元素节点"><a href="#6-4-1-创建元素节点" class="headerlink" title="6.4.1 创建元素节点"></a>6.4.1 创建元素节点</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取 body 元素</span></div><div class="line"><span class="keyword">var</span> body = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"body"</span>)[<span class="number">0</span>];</div><div class="line"><span class="comment">// 创建元素节点</span></div><div class="line"><span class="keyword">var</span> a = <span class="built_in">document</span>.createElement(<span class="string">"标签名"</span>);</div><div class="line"><span class="comment">// 添加元素节点（添加节点，目前只使用此种方式，其他在添加节点详细说明）</span></div><div class="line">body.appendChild(a);</div></pre></td></tr></table></figure>
+<h4 id="6-4-2-创建属性节点"><a href="#6-4-2-创建属性节点" class="headerlink" title="6.4.2 创建属性节点"></a>6.4.2 创建属性节点</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取待添加属性的元素节点</span></div><div class="line"><span class="keyword">var</span> a = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>)[<span class="number">0</span>];</div><div class="line"><span class="comment">// 创建属性节点</span></div><div class="line"><span class="keyword">var</span> attributes = <span class="built_in">document</span>.createAttribute(<span class="string">"属性名称"</span>);</div><div class="line"><span class="comment">// 设置属性节点值</span></div><div class="line">attributes.nodeValue = <span class="string">"属性值"</span>;</div><div class="line"><span class="comment">// 添加属性节点</span></div><div class="line">a.setAttributeNode(attributes);</div></pre></td></tr></table></figure>
+<h4 id="6-4-3-创建文本节点"><a href="#6-4-3-创建文本节点" class="headerlink" title="6.4.3 创建文本节点"></a>6.4.3 创建文本节点</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取待添加文本的元素节点</span></div><div class="line"><span class="keyword">var</span> a = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>)[<span class="number">0</span>];</div><div class="line"><span class="comment">// 创建文本节点</span></div><div class="line"><span class="keyword">var</span> text = <span class="built_in">document</span>.createTextNode(<span class="string">"文本值"</span>);</div><div class="line"><span class="comment">// 添加文本节点</span></div><div class="line">a.appendChild(text);</div></pre></td></tr></table></figure>
+<h3 id="6-5-替换节点"><a href="#6-5-替换节点" class="headerlink" title="6.5 替换节点"></a>6.5 替换节点</h3><h4 id="6-5-1-替换节点"><a href="#6-5-1-替换节点" class="headerlink" title="6.5.1 替换节点"></a>6.5.1 替换节点</h4><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取父节点对象</span></div><div class="line"><span class="keyword">var</span> body  document.getElementsByTagName(<span class="string">"by"</span>)[<span class="number">0</span>];</div><div class="line"><span class="comment">// 新建 p 节点对象</span></div><div class="line"><span class="keyword">var</span> p = document.createElement(<span class="string">"p"</span>);</div><div class="line"><span class="comment">// 新建 a 节点对象</span></div><div class="line"><span class="keyword">var</span> a = document.createElement(<span class="string">"a"</span>);</div><div class="line"><span class="comment">// 新建文本对象</span></div><div class="line"><span class="keyword">var</span> <span class="keyword">new</span><span class="type">Text</span> = document.createTextNode(<span class="string">"Hello World"</span>);</div><div class="line"><span class="comment">// 设置值</span></div><div class="line">p.appendChild(<span class="keyword">new</span><span class="type">Text</span>);</div><div class="line">a.appendChild(<span class="keyword">new</span><span class="type">Text</span>);</div><div class="line"><span class="comment">// 添加</span></div><div class="line">body.appendChild(p);</div><div class="line"><span class="comment">// 替换节点</span></div><div class="line">body.replaceChild(a,p);</div></pre></td></tr></table></figure>
+<h4 id="6-5-2-替换节点文本内容"><a href="#6-5-2-替换节点文本内容" class="headerlink" title="6.5.2 替换节点文本内容"></a>6.5.2 替换节点文本内容</h4><p>replaceData(offset,length,string) 方法用于替换文本节点中的数据。</p>
+<pre><code>offset - 在何处开始替换字符。Offset 值以 0 开始。
+length - 要替换多少字符
+string - 要插入的字符串
+</code></pre><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取标题元素节点</span></div><div class="line">var x=document.getElementsByTagName(<span class="string">"title"</span>)[<span class="number">0</span>].childchildNodesNodes[<span class="number">0</span>];</div><div class="line"><span class="comment">// 替换节点文本内容</span></div><div class="line">x.replaceData(<span class="number">0</span>,<span class="number">8</span>,<span class="string">"hello"</span>);</div></pre></td></tr></table></figure>
+<p>nodeValue 属性 也可以实现完全替换文本数据。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取文本内容对象</span></div><div class="line"><span class="keyword">var</span> textView = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>)[<span class="number">0</span>];</div><div class="line"><span class="comment">// 设置文本节点内容</span></div><div class="line">textView.nodeValue = <span class="string">"hello nodeValue"</span>;</div></pre></td></tr></table></figure>
+<h4 id="6-6-添加节点内容"><a href="#6-6-添加节点内容" class="headerlink" title="6.6 添加节点内容"></a>6.6 添加节点内容</h4><h5 id="6-6-1-追加节点内容"><a href="#6-6-1-追加节点内容" class="headerlink" title="6.6.1 追加节点内容"></a>6.6.1 追加节点内容</h5><p>appendChild() 方法向已存在的节点添加子节点，新节点会添加（追加）到任何已存在的子节点之后。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取待添加文本的元素节点</span></div><div class="line"><span class="keyword">var</span> a = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"a"</span>)[<span class="number">0</span>];</div><div class="line"><span class="comment">// 创建文本节点</span></div><div class="line"><span class="keyword">var</span> text = <span class="built_in">document</span>.createTextNode(<span class="string">"文本值"</span>);</div><div class="line"><span class="comment">// 添加文本节点</span></div><div class="line">a.appendChild(text);</div></pre></td></tr></table></figure></p>
+<h5 id="6-6-2-插入节点"><a href="#6-6-2-插入节点" class="headerlink" title="6.6.2 插入节点"></a>6.6.2 插入节点</h5><p>insertBefore() 方法用于在指定的子节点之前插入节点。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"myList"</span>&gt;</span><span class="tag">&lt;<span class="name">li</span>&gt;</span>Coffee<span class="tag">&lt;/<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">li</span>&gt;</span>Tea<span class="tag">&lt;/<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span>请点击按钮向列表插入一个项目。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"myFunction()"</span>&gt;</span>试一下<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> newItem=<span class="built_in">document</span>.createElement(<span class="string">"LI"</span>)</div><div class="line">	<span class="keyword">var</span> textnode=<span class="built_in">document</span>.createTextNode(<span class="string">"Water"</span>)</div><div class="line">	newItem.appendChild(textnode)</div><div class="line"></div><div class="line">	<span class="keyword">var</span> list=<span class="built_in">document</span>.getElementById(<span class="string">"myList"</span>)</div><div class="line">	list.insertBefore(newItem,list.childNodes[<span class="number">0</span>]);</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h5 id="6-6-3-向文本节点添加文本"><a href="#6-6-3-向文本节点添加文本" class="headerlink" title="6.6.3 向文本节点添加文本"></a>6.6.3 向文本节点添加文本</h5><p>insertData(offset,string)方法将数据插入已有的文本节点中。</p>
+<pre><code>offset - 在何处开始插入字符（以 0 开始）
+string - 要插入的字符串
 </code></pre>
       
 
@@ -504,23 +524,15 @@ var _hmt = _hmt || [];
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -532,7 +544,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -548,6 +564,18 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">C#</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">工作中遇到的问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">打印机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">前端基础</a>
               </li>
              
@@ -560,15 +588,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CSS</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DOM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
               </li>
              
               <li class="article-tag-list-item">

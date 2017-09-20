@@ -150,6 +150,74 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-工作中遇到的问题/通过脚本安装打印机" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/20/工作中遇到的问题/通过脚本安装打印机/">通过脚本安装打印机</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/20/工作中遇到的问题/通过脚本安装打印机/" class="archive-article-date">
+  	<time datetime="2017-09-20T03:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>财务电脑登录 VPN 后就无法使用打印机打印，必须重新添加下打印机，退出 VPN 后也要重新添加打印机，为了节省时间，从网上找了个 <a href="http://www.jb51.net/article/59074.htm" target="_blank" rel="external">脚本</a> 实现自动安装打印机操作，这里做下记录。</p>
+</blockquote>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@<span class="built_in">echo</span> off</div><div class="line"><span class="built_in">echo</span> 清除连接</div><div class="line"><span class="built_in">net</span> use * /<span class="built_in">del</span> /y</div><div class="line"><span class="built_in">echo</span> 添加网络打印机中......</div><div class="line"></div><div class="line">sc config spooler <span class="built_in">start</span>= auto</div><div class="line"><span class="built_in">net</span> stop spooler &amp; <span class="built_in">net</span> <span class="built_in">start</span> spooler</div><div class="line"><span class="comment">rem 只需替换以下ip、打印机名、帐号、密码为具体名称即可</span></div><div class="line"><span class="built_in">net</span> use \\<span class="number">10</span>.<span class="number">10</span>.<span class="number">60</span>.<span class="number">2</span>\IPC$ "密码" /user:"用户名"</div><div class="line">rundll32 printui.dll,PrintUIEntry /<span class="keyword">in</span> /n "\\<span class="number">10</span>.<span class="number">10</span>.<span class="number">60</span>.<span class="number">2</span>\打印机共享名称"</div><div class="line"><span class="built_in">echo</span> 连接成功</div><div class="line"><span class="built_in">pause</span></div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">工作中遇到的问题</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">打印机</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/20/工作中遇到的问题/通过脚本安装打印机/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-JavaEE学习/6.AJAX/AJAX的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -738,75 +806,6 @@
 
 
   
-    <article id="post-JavaEE学习/1.HTML/HTML小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/29/JavaEE学习/1.HTML/HTML小结/">HTML小结</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/29/JavaEE学习/1.HTML/HTML小结/" class="archive-article-date">
-  	<time datetime="2017-08-29T09:03:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、HTML概念描述"><a href="#一、HTML概念描述" class="headerlink" title="一、HTML概念描述"></a>一、HTML概念描述</h2><h3 id="1-什么是-HTML"><a href="#1-什么是-HTML" class="headerlink" title="1.什么是 HTML"></a>1.什么是 HTML</h3><p><strong>HTML</strong> 是英文 Hyper Text Mark-up Language( <strong>超文本标记语言</strong> )的缩写，它规定了自己的语法规则，用来表示比“文本”更丰富的意义，比如图片，表格，链接等。</p>
-<p>简单来说 <strong>HTML</strong> 就是给文本加上各种表明文本含义的标签，让人和程序对文本有更直观的认识。</p>
-        
-          <a class="article-more-a" href="/2017/08/29/JavaEE学习/1.HTML/HTML小结/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端基础</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">HTML</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/29/JavaEE学习/1.HTML/HTML小结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -926,23 +925,15 @@ var _hmt = _hmt || [];
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -954,7 +945,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -970,6 +965,18 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">C#</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">工作中遇到的问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">打印机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">前端基础</a>
               </li>
              
@@ -982,15 +989,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CSS</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">DOM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
               </li>
              
               <li class="article-tag-list-item">

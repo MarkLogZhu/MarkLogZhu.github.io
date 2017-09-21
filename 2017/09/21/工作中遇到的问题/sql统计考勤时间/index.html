@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://i.imgur.com/nosqjSg.png">
 <meta property="og:image" content="https://i.imgur.com/bswCP1T.png">
 <meta property="og:image" content="https://i.imgur.com/7CbysJN.png">
-<meta property="og:updated_time" content="2017-09-21T12:40:01.806Z">
+<meta property="og:updated_time" content="2017-09-21T12:49:39.249Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="通过 SQL 统计考勤">
 <meta name="twitter:description" content="外面买来的考勤机软件出现问题,无法汇总考勤记录。需要我根据开门记录来统计考勤信息，这里做下记录。
@@ -187,7 +187,7 @@
 <a id="more"></a>
 <h4 id="获取每天最早跟最晚的一笔记录"><a href="#获取每天最早跟最晚的一笔记录" class="headerlink" title="获取每天最早跟最晚的一笔记录"></a>获取每天最早跟最晚的一笔记录</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> userName,<span class="keyword">CONVERT</span>(<span class="built_in">VARCHAR</span>,tb.doData,<span class="number">102</span>) <span class="keyword">AS</span> 日期,<span class="keyword">MIN</span>(doData) <span class="keyword">AS</span> 最早时间,<span class="keyword">MAX</span>(doData) <span class="keyword">AS</span> 最后时间 <span class="keyword">FROM</span> tb </div><div class="line">	<span class="keyword">GROUP</span> <span class="keyword">BY</span>  userName,<span class="keyword">CONVERT</span>(<span class="built_in">VARCHAR</span>,tb.doData,<span class="number">102</span>)</div></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/bswCP1T.png" alt=""></p>
-<h4 id="是否准点"><a href="#是否准点" class="headerlink" title="是否准点"></a>是否准点</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> </div><div class="line">		t.userName,</div><div class="line">		t.CheckDay <span class="keyword">AS</span> <span class="string">'日期'</span>,</div><div class="line">		<span class="keyword">MAX</span>(<span class="keyword">CASE</span> <span class="keyword">WHEN</span> t.CheckInd=<span class="number">1</span> <span class="keyword">THEN</span> <span class="keyword">CASE</span> <span class="keyword">WHEN</span> MinuteOfDay&gt;<span class="number">8</span>*<span class="number">60</span>+<span class="number">30</span><span class="comment">/*8点零一分*/</span> <span class="keyword">THEN</span> N<span class="string">'迟到'</span> <span class="keyword">ELSE</span> N<span class="string">'准时'</span> <span class="keyword">END</span>  <span class="keyword">ELSE</span> <span class="literal">NULL</span> <span class="keyword">END</span>)  <span class="keyword">AS</span> <span class="string">'签到'</span>,</div><div class="line">		<span class="keyword">MAX</span>(<span class="keyword">CASE</span> <span class="keyword">WHEN</span> t.CheckInd=t.checkcount <span class="keyword">THEN</span> <span class="keyword">CASE</span> <span class="keyword">WHEN</span> MinuteOfDay&lt;<span class="number">17</span>*<span class="number">60</span> <span class="keyword">THEN</span> N<span class="string">'早退'</span> <span class="keyword">ELSE</span> N<span class="string">'准时'</span> <span class="keyword">END</span>  <span class="keyword">ELSE</span> <span class="literal">NULL</span> <span class="keyword">END</span> ) <span class="keyword">AS</span> <span class="string">'签退'</span></div><div class="line"><span class="keyword">FROM</span> (</div><div class="line">	<span class="keyword">SELECT</span> *,</div><div class="line">			<span class="keyword">CONVERT</span>(<span class="built_in">VARCHAR</span>,tb.doData,<span class="number">102</span>) <span class="keyword">AS</span> CheckDay,</div><div class="line">			<span class="keyword">DATEPART</span>(<span class="keyword">HOUR</span>,tb.doData)*<span class="number">60</span>+<span class="keyword">DATEPART</span>(<span class="keyword">MINUTE</span>,tb.doData) <span class="keyword">AS</span> MinuteOfDay,</div><div class="line">			ROW_NUMBER()<span class="keyword">OVER</span>(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> tb.userName ,<span class="keyword">CONVERT</span>(<span class="built_in">VARCHAR</span>,tb.doData,<span class="number">110</span>) <span class="keyword">ORDER</span> <span class="keyword">BY</span> tb.doData) <span class="keyword">AS</span> CheckInd,</div><div class="line">			<span class="keyword">COUNT</span>(<span class="number">0</span>)<span class="keyword">OVER</span>(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> tb.userName, <span class="keyword">CONVERT</span>(<span class="built_in">VARCHAR</span>,tb.doData,<span class="number">110</span>)) checkcount </div><div class="line">     <span class="keyword">FROM</span> tb</div><div class="line">) <span class="keyword">AS</span> t <span class="keyword">GROUP</span> <span class="keyword">BY</span> t.userName,t.CheckDay</div></pre></td></tr></table></figure>
+<h4 id="是否准点"><a href="#是否准点" class="headerlink" title="是否准点"></a>是否准点</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> </div><div class="line">		t.userName,</div><div class="line">		t.CheckDay <span class="keyword">AS</span> <span class="string">'日期'</span>,</div><div class="line">		<span class="keyword">MAX</span>(<span class="keyword">CASE</span> <span class="keyword">WHEN</span> t.CheckInd=<span class="number">1</span> <span class="keyword">THEN</span> <span class="keyword">CASE</span> <span class="keyword">WHEN</span> MinuteOfDay&gt;<span class="number">8</span>*<span class="number">60</span>+<span class="number">30</span><span class="comment">/*8点30分*/</span> <span class="keyword">THEN</span> N<span class="string">'迟到'</span> <span class="keyword">ELSE</span> N<span class="string">'准时'</span> <span class="keyword">END</span>  <span class="keyword">ELSE</span> <span class="literal">NULL</span> <span class="keyword">END</span>)  <span class="keyword">AS</span> <span class="string">'签到'</span>,</div><div class="line">		<span class="keyword">MAX</span>(<span class="keyword">CASE</span> <span class="keyword">WHEN</span> t.CheckInd=t.checkcount <span class="keyword">THEN</span> <span class="keyword">CASE</span> <span class="keyword">WHEN</span> MinuteOfDay&lt;<span class="number">17</span>*<span class="number">60</span> <span class="keyword">THEN</span> N<span class="string">'早退'</span> <span class="keyword">ELSE</span> N<span class="string">'准时'</span> <span class="keyword">END</span>  <span class="keyword">ELSE</span> <span class="literal">NULL</span> <span class="keyword">END</span> ) <span class="keyword">AS</span> <span class="string">'签退'</span></div><div class="line"><span class="keyword">FROM</span> (</div><div class="line">	<span class="keyword">SELECT</span> *,</div><div class="line">			<span class="keyword">CONVERT</span>(<span class="built_in">VARCHAR</span>,tb.doData,<span class="number">102</span>) <span class="keyword">AS</span> CheckDay,</div><div class="line">			<span class="keyword">DATEPART</span>(<span class="keyword">HOUR</span>,tb.doData)*<span class="number">60</span>+<span class="keyword">DATEPART</span>(<span class="keyword">MINUTE</span>,tb.doData) <span class="keyword">AS</span> MinuteOfDay,</div><div class="line">			ROW_NUMBER()<span class="keyword">OVER</span>(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> tb.userName ,<span class="keyword">CONVERT</span>(<span class="built_in">VARCHAR</span>,tb.doData,<span class="number">110</span>) <span class="keyword">ORDER</span> <span class="keyword">BY</span> tb.doData) <span class="keyword">AS</span> CheckInd,</div><div class="line">			<span class="keyword">COUNT</span>(<span class="number">0</span>)<span class="keyword">OVER</span>(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> tb.userName, <span class="keyword">CONVERT</span>(<span class="built_in">VARCHAR</span>,tb.doData,<span class="number">110</span>)) checkcount </div><div class="line">     <span class="keyword">FROM</span> tb</div><div class="line">) <span class="keyword">AS</span> t <span class="keyword">GROUP</span> <span class="keyword">BY</span> t.userName,t.CheckDay</div></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/7CbysJN.png" alt=""></p>
 <p>以上只是最基本的根据时间来考勤，未加其他业务逻辑。</p>
 <h4 id="END"><a href="#END" class="headerlink" title="END"></a>END</h4>
@@ -234,15 +234,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">工作中遇到的问题</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">考勤统计</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
         		</li>
       		
 		</ul>
@@ -466,7 +466,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -474,27 +482,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">工作中遇到的问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">考勤统计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">打印机</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">C#</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -510,11 +506,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
+                <a href="javascript:void(0)" class="js-tag color4">工作中遇到的问题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
+                <a href="javascript:void(0)" class="js-tag color4">打印机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">考勤统计</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -523,10 +523,6 @@ var _hmt = _hmt || [];
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">HTML</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -539,6 +535,10 @@ var _hmt = _hmt || [];
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">BOM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
               </li>
              
               <li class="article-tag-list-item">

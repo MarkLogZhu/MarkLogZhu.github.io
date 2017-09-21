@@ -150,6 +150,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-工作中遇到的问题/sql统计考勤时间" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/21/工作中遇到的问题/sql统计考勤时间/">通过 SQL 统计考勤</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/21/工作中遇到的问题/sql统计考勤时间/" class="archive-article-date">
+  	<time datetime="2017-09-21T12:39:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>外面买来的考勤机软件出现问题,无法汇总考勤记录。需要我根据开门记录来统计考勤信息，这里做下记录。</p>
+</blockquote>
+<h4 id="开门数据"><a href="#开门数据" class="headerlink" title="开门数据"></a>开门数据</h4><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">WITH</span> tb(userName,doData)<span class="keyword">AS</span>(</div><div class="line">	<span class="keyword">select</span> N<span class="string">'张三'</span>,CONVERT(DATETIME,<span class="string">'2016-12-26 8:30:59'</span>) <span class="keyword">UNION</span> ALL  </div><div class="line">	<span class="keyword">select</span> N<span class="string">'张三'</span>,<span class="string">'2016-12-26 13:59:14'</span> <span class="keyword">UNION</span> ALL  </div><div class="line">	<span class="keyword">select</span> N<span class="string">'张三'</span>,<span class="string">'2016-12-26 17:00:00'</span> <span class="keyword">UNION</span> ALL    </div><div class="line">	<span class="keyword">select</span> N<span class="string">'张三'</span>,<span class="string">'2016-12-27 15:59:14'</span> <span class="keyword">UNION</span> ALL  </div><div class="line">	<span class="keyword">select</span> N<span class="string">'张三'</span>,<span class="string">'2016-12-27 17:10:00'</span>              </div><div class="line">)</div></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/nosqjSg.png" alt=""></p>
+        
+          <a class="article-more-a" href="/2017/09/21/工作中遇到的问题/sql统计考勤时间/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">工作中遇到的问题</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">考勤统计</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/21/工作中遇到的问题/sql统计考勤时间/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-工作中遇到的问题/通过脚本安装打印机" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -734,81 +810,9 @@
 
 
   
-    <article id="post-JavaEE学习/2.CSS/CSS小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/02/JavaEE学习/2.CSS/CSS小结/">CSS小结</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/02/JavaEE学习/2.CSS/CSS小结/" class="archive-article-date">
-  	<time datetime="2017-09-02T09:03:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>HTML+CSS基础课程汇总知识，地址为：<a href="http://www.imooc.com/learn/9">http://www.imooc.com/learn/9</a></p>
-</blockquote>
-<h2 id="一、CSS-概念描述"><a href="#一、CSS-概念描述" class="headerlink" title="一、CSS 概念描述"></a>一、CSS 概念描述</h2><h3 id="1-1-什么是-CSS"><a href="#1-1-什么是-CSS" class="headerlink" title="1.1 什么是 CSS"></a>1.1 什么是 CSS</h3><p>CSS 全称为“层叠样式表 (Cascading Style Sheets)”，它主要是用于定义HTML内容在浏览器内的显示样式，如文字大小、颜色、字体加粗等。</p>
-<h3 id="1-2-CSS样式的优势"><a href="#1-2-CSS样式的优势" class="headerlink" title="1.2 CSS样式的优势"></a>1.2 CSS样式的优势</h3><p>使用CSS样式的一个好处是通过定义某个样式，可以让不同网页位置的文字有着统一的字体、字号或者颜色等。</p>
-        
-          <a class="article-more-a" href="/2017/09/02/JavaEE学习/2.CSS/CSS小结/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">前端基础</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/02/JavaEE学习/2.CSS/CSS小结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -925,19 +929,11 @@ var _hmt = _hmt || [];
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
+                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -945,11 +941,27 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">工作中遇到的问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">考勤统计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">打印机</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">tool</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+                <a href="javascript:void(0)" class="js-tag color3">C#</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -965,15 +977,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">工作中遇到的问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">打印机</a>
+                <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -989,10 +997,6 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CSS</a>
               </li>
              
@@ -1002,6 +1006,10 @@ var _hmt = _hmt || [];
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">BOM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
               </li>
             
             <div class="clearfix"></div>

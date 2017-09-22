@@ -18,7 +18,7 @@
 <meta property="og:description" content="一、什么是 AJAXAJAX 全称为 Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）.AJAX 不是新的编程语言，而是一种使用现有标准的新方法。
 通过在后台与服务器进行少量数据交换，AJAX 可以使网页实现异步更新。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。
 传统的网页（不使用 AJAX）如果需要更新内容，必需重载">
-<meta property="og:updated_time" content="2017-09-21T13:04:14.186Z">
+<meta property="og:updated_time" content="2017-09-22T01:32:17.221Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ajax 的使用">
 <meta name="twitter:description" content="一、什么是 AJAXAJAX 全称为 Asynchronous JavaScript and XML（异步的 JavaScript 和 XML）.AJAX 不是新的编程语言，而是一种使用现有标准的新方法。
@@ -182,12 +182,65 @@
 <a id="more"></a>
 <h2 id="二、XMLHttpRequest-对象"><a href="#二、XMLHttpRequest-对象" class="headerlink" title="二、XMLHttpRequest 对象"></a>二、XMLHttpRequest 对象</h2><p><strong>XMLHttpRequest</strong> 对象是 <strong>AJAX</strong> 的基础,它用于在后台与服务器交换数据。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。</p>
 <h3 id="2-1-创建-XMLHttpRequest-对象"><a href="#2-1-创建-XMLHttpRequest-对象" class="headerlink" title="2.1 创建 XMLHttpRequest 对象"></a>2.1 创建 XMLHttpRequest 对象</h3><figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> xmlhttp;</div><div class="line"><span class="keyword">if</span> (window.XMLHttpRequest) &#123;<span class="comment">// code for IE7+, Firefox, Chrome, Opera, Safari</span></div><div class="line">  xmlhttp=<span class="keyword">new</span> <span class="type">XMLHttpRequest</span>();</div><div class="line">&#125; <span class="keyword">else</span> &#123;<span class="comment">// code for IE6, IE5</span></div><div class="line">  xmlhttp=<span class="keyword">new</span> <span class="type">ActiveXObject</span>(<span class="string">"Microsoft.XMLHTTP"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="2-2-注册回调函数"><a href="#2-2-注册回调函数" class="headerlink" title="2.2 注册回调函数"></a>2.2 注册回调函数</h3><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">xmlhttp.onreadystatechange = callback;</div><div class="line">```  </div><div class="line"></div><div class="line">### <span class="number">2.3</span> 设置和服务器端交互的基本信息</div></pre></td></tr></table></figure>
-<p>xmlhttp.open(“GET”,”test1.txt”,true);<br><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">open(<span class="function"><span class="keyword">method</span>,<span class="title">url</span>,<span class="title">async</span>):</span> 规定请求的类型、URL 以及是否异步处理请求。</div><div class="line">	* <span class="function"><span class="keyword">method</span>：请求的类型；<span class="title">GET</span> 或 <span class="title">POST</span></span></div><div class="line">	* <span class="title">url</span>：文件在服务器上的位置</div><div class="line">	* <span class="title">async</span>：<span class="title">true</span>（异步）或 <span class="title">false</span>（同步）</div><div class="line"></div><div class="line">#### <span class="title">GET</span> 还是 <span class="title">POST</span>？</div><div class="line">与 <span class="title">POST</span> 相比，<span class="title">GET</span> 更简单也更快，并且在大部分情况下都能用。</div><div class="line">然而，在以下情况中，请使用 <span class="title">POST</span> 请求：</div><div class="line">* 无法使用缓存文件（更新服务器上的文件或数据库）</div><div class="line">* 向服务器发送大量数据（<span class="title">POST</span> 没有数据量限制）</div><div class="line">* 发送包含未知字符的用户输入时，<span class="title">POST</span> 比 <span class="title">GET</span> 更稳定也更可靠</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">### 2.4 向服务器发送请求</div></pre></td></tr></table></figure></p>
-<p>xmlhttp.send();<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">如果需要像 <span class="selector-tag">HTML</span> 表单那样 <span class="selector-tag">POST</span> 数据，请使用 <span class="selector-tag">setRequestHeader</span>() 来添加 <span class="selector-tag">HTTP</span> 头。然后在 <span class="selector-tag">send</span>() 方法中规定您希望发送的数据：</div></pre></td></tr></table></figure></p>
-<p>xmlhttp.open(“POST”,”ajax_test.asp”,true);<br>xmlhttp.setRequestHeader(“Content-type”,”application/x-www-form-urlencoded”);<br>xmlhttp.send(“fname=Bill&amp;lname=Gates”);<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">### 2.5 处理回调函数</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#### 获取服务器响应</span></div><div class="line"></div><div class="line">如需获得来自服务器的响应，需要使用 <span class="symbol">*</span><span class="symbol">*</span>XMLHttpRequest<span class="symbol">*</span><span class="symbol">*</span> 对象的 <span class="symbol">*</span><span class="symbol">*</span>responseText<span class="symbol">*</span><span class="symbol">*</span> 或 <span class="symbol">*</span><span class="symbol">*</span>responseXML<span class="symbol">*</span><span class="symbol">*</span> 属性。</div><div class="line"></div><div class="line">|<span class="string">属性</span>|<span class="string">描述</span>|</div><div class="line">|<span class="string">--</span>|<span class="string">--</span>|</div><div class="line">|<span class="string">responseText	</span>|<span class="string">获得字符串形式的响应数据。</span>|</div><div class="line">|<span class="string">responseXML	</span>|<span class="string">获得 XML 形式的响应数据。</span>|</div></pre></td></tr></table></figure></p>
-<p>var xmlDoc  = xmlhttp.responseXML;<br>var textDoc = xmlhttp.responseText;<br><figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"><span class="gherkin"><span class="comment">#### onreadystatechange 事件</span></span></div><div class="line"></div><div class="line"></div><div class="line">当请求被发送到服务器时，我们需要执行一些基于响应的任务。</div><div class="line">每当 readyState 改变时，就会触发 onreadystatechange 事件。</div><div class="line">readyState 属性存有 XMLHttpRequest 的状态信息。</div><div class="line">下面是 XMLHttpRequest 对象的三个重要的属性：</div><div class="line"></div><div class="line">|<span class="string">属性</span>|<span class="string">	描述</span>|</div><div class="line">|<span class="string">--</span>|<span class="string">--</span>|</div><div class="line">|<span class="string">onreadystatechange</span>|<span class="string">	存储函数（或函数名），每当 readyState 属性改变时，就会调用该函数。</span>|</div><div class="line">|<span class="string">readyState	</span>|<span class="string">存有 XMLHttpRequest 的状态。从 0 到 4 发生变化。&lt;br&gt;  0: 请求未初始化 &lt;br&gt;  1: 服务器连接已建立&lt;br&gt; *2: 请求已接收&lt;br&gt; * 3: 请求处理中&lt;br&gt;  4: 请求已完成，且响应已就绪 </span>|</div><div class="line">|<span class="string">status	</span>|<span class="string">200: "OK" &lt;br&gt;404: 未找到页面</span>|</div></pre></td></tr></table></figure></p>
-<p>xmlhttp.onreadystatechange=function() {<br>  if (xmlhttp.readyState==4 &amp;&amp; xmlhttp.status==200) {<br>    document.getElementById(“myDiv”).innerHTML=xmlhttp.responseText;<br>   }<br>}<br>```</p>
+<h3 id="2-2-注册回调函数"><a href="#2-2-注册回调函数" class="headerlink" title="2.2 注册回调函数"></a>2.2 注册回调函数</h3><figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xmlhttp.onreadystatechange = callback<span class="comment">;</span></div></pre></td></tr></table></figure>
+<h3 id="2-3-设置和服务器端交互的基本信息"><a href="#2-3-设置和服务器端交互的基本信息" class="headerlink" title="2.3 设置和服务器端交互的基本信息"></a>2.3 设置和服务器端交互的基本信息</h3><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xmlhttp.open(<span class="string">"<span class="keyword">GET</span>"</span>,<span class="string">"test1.txt"</span>,true);</div></pre></td></tr></table></figure>
+<p>open(method,url,async): 规定请求的类型、URL 以及是否异步处理请求。</p>
+<pre><code>* method：请求的类型；GET 或 POST
+* url：文件在服务器上的位置
+* async：true（异步）或 false（同步）
+</code></pre><h4 id="GET-还是-POST？"><a href="#GET-还是-POST？" class="headerlink" title="GET 还是 POST？"></a>GET 还是 POST？</h4><p>与 POST 相比，GET 更简单也更快，并且在大部分情况下都能用。<br>然而，在以下情况中，请使用 POST 请求：</p>
+<ul>
+<li>无法使用缓存文件（更新服务器上的文件或数据库）</li>
+<li>向服务器发送大量数据（POST 没有数据量限制）</li>
+<li>发送包含未知字符的用户输入时，POST 比 GET 更稳定也更可靠</li>
+</ul>
+<h3 id="2-4-向服务器发送请求"><a href="#2-4-向服务器发送请求" class="headerlink" title="2.4 向服务器发送请求"></a>2.4 向服务器发送请求</h3><figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xmlhttp.send()<span class="comment">;</span></div></pre></td></tr></table></figure>
+<p>如果需要像 HTML 表单那样 POST 数据，请使用 setRequestHeader() 来添加 HTTP 头。然后在 send() 方法中规定您希望发送的数据：</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xmlhttp.open(<span class="string">"<span class="keyword">POST</span>"</span>,<span class="string">"ajax_test.asp"</span>,true);</div><div class="line">xmlhttp.setRequestHeader(<span class="string">"Content-type"</span>,<span class="string">"application/x-www-form-urlencoded"</span>);</div><div class="line">xmlhttp.send(<span class="string">"fname=Bill&amp;lname=Gates"</span>);</div></pre></td></tr></table></figure>
+<h3 id="2-5-处理回调函数"><a href="#2-5-处理回调函数" class="headerlink" title="2.5 处理回调函数"></a>2.5 处理回调函数</h3><h4 id="获取服务器响应"><a href="#获取服务器响应" class="headerlink" title="获取服务器响应"></a>获取服务器响应</h4><p>如需获得来自服务器的响应，需要使用 <strong>XMLHttpRequest</strong> 对象的 <strong>responseText</strong> 或 <strong>responseXML</strong> 属性。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>responseText</td>
+<td>获得字符串形式的响应数据。</td>
+</tr>
+<tr>
+<td>responseXML</td>
+<td>获得 XML 形式的响应数据。</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">var xmlDoc</span>  = xmlhttp.responseXML;</div><div class="line"><span class="attribute">var textDoc</span> = xmlhttp.responseText;</div></pre></td></tr></table></figure>
+<h4 id="onreadystatechange-事件"><a href="#onreadystatechange-事件" class="headerlink" title="onreadystatechange 事件"></a>onreadystatechange 事件</h4><p>当请求被发送到服务器时，我们需要执行一些基于响应的任务。<br>每当 readyState 改变时，就会触发 onreadystatechange 事件。<br>readyState 属性存有 XMLHttpRequest 的状态信息。<br>下面是 XMLHttpRequest 对象的三个重要的属性：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>onreadystatechange</td>
+<td>存储函数（或函数名），每当 readyState 属性改变时，就会调用该函数。</td>
+</tr>
+<tr>
+<td>readyState</td>
+<td>存有 XMLHttpRequest 的状态。从 0 到 4 发生变化。<br>  0: 请求未初始化 <br>  1: 服务器连接已建立<br> <em>2: 请求已接收<br> </em> 3: 请求处理中<br>  4: 请求已完成，且响应已就绪</td>
+</tr>
+<tr>
+<td>status</td>
+<td>200: “OK” <br>404: 未找到页面</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">xmlhttp.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (xmlhttp.readyState==<span class="number">4</span> &amp;&amp; xmlhttp.status==<span class="number">200</span>) &#123;</div><div class="line">    <span class="built_in">document</span>.getElementById(<span class="string">"myDiv"</span>).innerHTML=xmlhttp.responseText;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
 
@@ -465,23 +518,11 @@ var _hmt = _hmt || [];
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
+                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -501,11 +542,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">工作中遇到的问题</a>
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">考勤统计</a>
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">工作中遇到的问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -513,11 +558,19 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">考勤统计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">C#</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -529,11 +582,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
+                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
+                <a href="javascript:void(0)" class="js-tag color5">HTML</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -541,11 +594,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
+                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
               </li>
             
             <div class="clearfix"></div>

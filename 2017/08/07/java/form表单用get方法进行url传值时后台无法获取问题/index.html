@@ -8,22 +8,22 @@
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
   <title>form表单用 GET 方法进行 URL 传值时后台无法获取问题 | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问题描述&amp;lt;a href=&amp;quot;${pageContext.request.contextPath}/client?method=add&amp;quot;&amp;gt;点我&amp;lt;/a&amp;gt;
+  <meta name="description" content="&amp;#x95EE;&amp;#x9898;&amp;#x63CF;&amp;#x8FF0;&amp;lt;a href=&amp;quot;${pageContext.request.contextPath}/client?method=add&amp;quot;&amp;gt;&amp;#x70B9;&amp;#x6211;&amp;lt;/a&amp;gt;
 
-&amp;lt;form action=&amp;quot;${pageContext.request.contextPath }/client?method=add&amp;quot; method=&amp;quot;get&amp;quot">
+&amp;lt;form action=&amp;quot;${pageContext.request.contextPath }/cli">
 <meta property="og:type" content="article">
 <meta property="og:title" content="form表单用 GET 方法进行 URL 传值时后台无法获取问题">
 <meta property="og:url" content="https://marklogzhu.github.io/2017/08/07/java/form表单用get方法进行url传值时后台无法获取问题/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="问题描述&amp;lt;a href=&amp;quot;${pageContext.request.contextPath}/client?method=add&amp;quot;&amp;gt;点我&amp;lt;/a&amp;gt;
+<meta property="og:description" content="&amp;#x95EE;&amp;#x9898;&amp;#x63CF;&amp;#x8FF0;&amp;lt;a href=&amp;quot;${pageContext.request.contextPath}/client?method=add&amp;quot;&amp;gt;&amp;#x70B9;&amp;#x6211;&amp;lt;/a&amp;gt;
 
-&amp;lt;form action=&amp;quot;${pageContext.request.contextPath }/client?method=add&amp;quot; method=&amp;quot;get&amp;quot">
+&amp;lt;form action=&amp;quot;${pageContext.request.contextPath }/cli">
 <meta property="og:updated_time" content="2017-08-08T01:14:52.577Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="form表单用 GET 方法进行 URL 传值时后台无法获取问题">
-<meta name="twitter:description" content="问题描述&amp;lt;a href=&amp;quot;${pageContext.request.contextPath}/client?method=add&amp;quot;&amp;gt;点我&amp;lt;/a&amp;gt;
+<meta name="twitter:description" content="&amp;#x95EE;&amp;#x9898;&amp;#x63CF;&amp;#x8FF0;&amp;lt;a href=&amp;quot;${pageContext.request.contextPath}/client?method=add&amp;quot;&amp;gt;&amp;#x70B9;&amp;#x6211;&amp;lt;/a&amp;gt;
 
-&amp;lt;form action=&amp;quot;${pageContext.request.contextPath }/client?method=add&amp;quot; method=&amp;quot;get&amp;quot">
+&amp;lt;form action=&amp;quot;${pageContext.request.contextPath }/cli">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -175,19 +175,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><pre><code>&lt;a href=&quot;${pageContext.request.contextPath}/client?method=add&quot;&gt;点我&lt;/a&gt;
+        <h2 id="&#x95EE;&#x9898;&#x63CF;&#x8FF0;"><a href="#&#x95EE;&#x9898;&#x63CF;&#x8FF0;" class="headerlink" title="&#x95EE;&#x9898;&#x63CF;&#x8FF0;"></a>&#x95EE;&#x9898;&#x63CF;&#x8FF0;</h2><pre><code>&lt;a href=&quot;${pageContext.request.contextPath}/client?method=add&quot;&gt;&#x70B9;&#x6211;&lt;/a&gt;
 
 &lt;form action=&quot;${pageContext.request.contextPath }/client?method=add&quot; method=&quot;get&quot;&gt;
     &lt;p&gt;First name: &lt;input type=&quot;text&quot; name=&quot;fname&quot; /&gt;&lt;/p&gt;
     &lt;p&gt;Last name: &lt;input type=&quot;text&quot; name=&quot;lname&quot; /&gt;&lt;/p&gt;
     &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
 &lt;/form&gt;
-</code></pre><p>form 表单使用 GET 方式提交数据，后台打印不出来参数 method 的值，在浏览器地址栏中也不显示值，地址栏显示如下：</p>
+</code></pre><p>form &#x8868;&#x5355;&#x4F7F;&#x7528; GET &#x65B9;&#x5F0F;&#x63D0;&#x4EA4;&#x6570;&#x636E;&#xFF0C;&#x540E;&#x53F0;&#x6253;&#x5370;&#x4E0D;&#x51FA;&#x6765;&#x53C2;&#x6570; method &#x7684;&#x503C;&#xFF0C;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x5730;&#x5740;&#x680F;&#x4E2D;&#x4E5F;&#x4E0D;&#x663E;&#x793A;&#x503C;&#xFF0C;&#x5730;&#x5740;&#x680F;&#x663E;&#x793A;&#x5982;&#x4E0B;&#xFF1A;</p>
 <pre><code>http://localhost:8888/CRM/client?fname=1&amp;lname=1
-</code></pre><p>使用 POST 方式地址栏就能显示参数 method</p>
+</code></pre><p>&#x4F7F;&#x7528; POST &#x65B9;&#x5F0F;&#x5730;&#x5740;&#x680F;&#x5C31;&#x80FD;&#x663E;&#x793A;&#x53C2;&#x6570; method</p>
 <pre><code>http://localhost:8888/CRM/client?method=addUser
 </code></pre><a id="more"></a>
-<h2 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h2><p>表单提交时 GET 是把参数数据队列加到提交表单的 ACTION 属性所指的 URL 中，值和表单内各个字段一一对应，在URL中可以看到。自己添加的参数会被清除掉。如果需要添加参数的话，可以用一个隐藏的字段来添加，如：</p>
+<h2 id="&#x95EE;&#x9898;&#x539F;&#x56E0;"><a href="#&#x95EE;&#x9898;&#x539F;&#x56E0;" class="headerlink" title="&#x95EE;&#x9898;&#x539F;&#x56E0;"></a>&#x95EE;&#x9898;&#x539F;&#x56E0;</h2><p>&#x8868;&#x5355;&#x63D0;&#x4EA4;&#x65F6; GET &#x662F;&#x628A;&#x53C2;&#x6570;&#x6570;&#x636E;&#x961F;&#x5217;&#x52A0;&#x5230;&#x63D0;&#x4EA4;&#x8868;&#x5355;&#x7684; ACTION &#x5C5E;&#x6027;&#x6240;&#x6307;&#x7684; URL &#x4E2D;&#xFF0C;&#x503C;&#x548C;&#x8868;&#x5355;&#x5185;&#x5404;&#x4E2A;&#x5B57;&#x6BB5;&#x4E00;&#x4E00;&#x5BF9;&#x5E94;&#xFF0C;&#x5728;URL&#x4E2D;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x3002;&#x81EA;&#x5DF1;&#x6DFB;&#x52A0;&#x7684;&#x53C2;&#x6570;&#x4F1A;&#x88AB;&#x6E05;&#x9664;&#x6389;&#x3002;&#x5982;&#x679C;&#x9700;&#x8981;&#x6DFB;&#x52A0;&#x53C2;&#x6570;&#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x4E00;&#x4E2A;&#x9690;&#x85CF;&#x7684;&#x5B57;&#x6BB5;&#x6765;&#x6DFB;&#x52A0;&#xFF0C;&#x5982;&#xFF1A;</p>
 <pre><code>&lt;input type=&quot;hidden&quot; name=&quot;method&quot; value=&quot;add&quot;&gt;
 </code></pre>
       
@@ -466,14 +466,6 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
@@ -486,7 +478,31 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">C#</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -498,23 +514,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">打印机</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,19 +534,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">BOM</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
               </li>
             
             <div class="clearfix"></div>

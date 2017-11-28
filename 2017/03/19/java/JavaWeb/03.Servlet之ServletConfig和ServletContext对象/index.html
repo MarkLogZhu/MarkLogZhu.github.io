@@ -8,23 +8,17 @@
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
   <title>Servlet之ServletConfig与ServletContext对象 | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在 Servlet之生命周期 中我们除了提到三个生命周期方法之外，还提到了二个方法 getServletConfig()和getServletInfo()，他返回的对象分别是ServletConfig和ServletContext对象，今天就让我们来学习下这两个对象
-
-一、ServletConfig简介官方定义：A servlet configuration object used by a s">
+  <meta name="description" content="&amp;#x5728; Servlet&amp;#x4E4B;&amp;#x751F;&amp;#x547D;&amp;#x5468;&amp;#x671F; &amp;#x4E2D;&amp;#x6211;&amp;#x4EEC;&amp;#x9664;&amp;#x4E86;&amp;#x63D0;&amp;#x5230;&amp;#x4E09;&amp;#x4E2A;&amp;#x751F;&amp;#x547D;&amp;#x5468;&amp;#x671F;&amp;#x65B9;&amp;#x6CD5;&amp;#x4E4B;&amp;#x5916;&amp;#xFF0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Servlet之ServletConfig与ServletContext对象">
 <meta property="og:url" content="https://marklogzhu.github.io/2017/03/19/java/JavaWeb/03.Servlet之ServletConfig和ServletContext对象/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="在 Servlet之生命周期 中我们除了提到三个生命周期方法之外，还提到了二个方法 getServletConfig()和getServletInfo()，他返回的对象分别是ServletConfig和ServletContext对象，今天就让我们来学习下这两个对象
-
-一、ServletConfig简介官方定义：A servlet configuration object used by a s">
+<meta property="og:description" content="&amp;#x5728; Servlet&amp;#x4E4B;&amp;#x751F;&amp;#x547D;&amp;#x5468;&amp;#x671F; &amp;#x4E2D;&amp;#x6211;&amp;#x4EEC;&amp;#x9664;&amp;#x4E86;&amp;#x63D0;&amp;#x5230;&amp;#x4E09;&amp;#x4E2A;&amp;#x751F;&amp;#x547D;&amp;#x5468;&amp;#x671F;&amp;#x65B9;&amp;#x6CD5;&amp;#x4E4B;&amp;#x5916;&amp;#xFF0">
 <meta property="og:image" content="http://oajxivjud.bkt.clouddn.com/ServletConfigDemo.png">
 <meta property="og:updated_time" content="2017-03-19T13:06:25.563Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Servlet之ServletConfig与ServletContext对象">
-<meta name="twitter:description" content="在 Servlet之生命周期 中我们除了提到三个生命周期方法之外，还提到了二个方法 getServletConfig()和getServletInfo()，他返回的对象分别是ServletConfig和ServletContext对象，今天就让我们来学习下这两个对象
-
-一、ServletConfig简介官方定义：A servlet configuration object used by a s">
+<meta name="twitter:description" content="&amp;#x5728; Servlet&amp;#x4E4B;&amp;#x751F;&amp;#x547D;&amp;#x5468;&amp;#x671F; &amp;#x4E2D;&amp;#x6211;&amp;#x4EEC;&amp;#x9664;&amp;#x4E86;&amp;#x63D0;&amp;#x5230;&amp;#x4E09;&amp;#x4E2A;&amp;#x751F;&amp;#x547D;&amp;#x5468;&amp;#x671F;&amp;#x65B9;&amp;#x6CD5;&amp;#x4E4B;&amp;#x5916;&amp;#xFF0">
 <meta name="twitter:image" content="http://oajxivjud.bkt.clouddn.com/ServletConfigDemo.png">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
@@ -178,82 +172,82 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>在 <a href="https://marklogzhu.github.io/2017/03/19/JavaWeb/Servlet%E4%B9%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">Servlet之生命周期</a> 中我们除了提到三个生命周期方法之外，还提到了二个方法 getServletConfig()和getServletInfo()，他返回的对象分别是ServletConfig和ServletContext对象，今天就让我们来学习下这两个对象</p>
+<p>&#x5728; <a href="https://marklogzhu.github.io/2017/03/19/JavaWeb/Servlet%E4%B9%8B%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">Servlet&#x4E4B;&#x751F;&#x547D;&#x5468;&#x671F;</a> &#x4E2D;&#x6211;&#x4EEC;&#x9664;&#x4E86;&#x63D0;&#x5230;&#x4E09;&#x4E2A;&#x751F;&#x547D;&#x5468;&#x671F;&#x65B9;&#x6CD5;&#x4E4B;&#x5916;&#xFF0C;&#x8FD8;&#x63D0;&#x5230;&#x4E86;&#x4E8C;&#x4E2A;&#x65B9;&#x6CD5; getServletConfig()&#x548C;getServletInfo()&#xFF0C;&#x4ED6;&#x8FD4;&#x56DE;&#x7684;&#x5BF9;&#x8C61;&#x5206;&#x522B;&#x662F;ServletConfig&#x548C;ServletContext&#x5BF9;&#x8C61;&#xFF0C;&#x4ECA;&#x5929;&#x5C31;&#x8BA9;&#x6211;&#x4EEC;&#x6765;&#x5B66;&#x4E60;&#x4E0B;&#x8FD9;&#x4E24;&#x4E2A;&#x5BF9;&#x8C61;</p>
 </blockquote>
-<h2 id="一、ServletConfig简介"><a href="#一、ServletConfig简介" class="headerlink" title="一、ServletConfig简介"></a>一、ServletConfig简介</h2><p>官方定义：A servlet configuration object used by a servlet container to pass information to a servlet during initialization.<br>中文翻译：一个servlet的配置对象，用来给servlet容器传递信息到servlet，在Servlet初始化的时候。</p>
-<p>简单来说 ServletConfig 就是一个配置对象，通过它可以很方便的获取 web.xml 中配置的信息</p>
+<h2 id="&#x4E00;&#x3001;ServletConfig&#x7B80;&#x4ECB;"><a href="#&#x4E00;&#x3001;ServletConfig&#x7B80;&#x4ECB;" class="headerlink" title="&#x4E00;&#x3001;ServletConfig&#x7B80;&#x4ECB;"></a>&#x4E00;&#x3001;ServletConfig&#x7B80;&#x4ECB;</h2><p>&#x5B98;&#x65B9;&#x5B9A;&#x4E49;&#xFF1A;A servlet configuration object used by a servlet container to pass information to a servlet during initialization.<br>&#x4E2D;&#x6587;&#x7FFB;&#x8BD1;&#xFF1A;&#x4E00;&#x4E2A;servlet&#x7684;&#x914D;&#x7F6E;&#x5BF9;&#x8C61;&#xFF0C;&#x7528;&#x6765;&#x7ED9;servlet&#x5BB9;&#x5668;&#x4F20;&#x9012;&#x4FE1;&#x606F;&#x5230;servlet&#xFF0C;&#x5728;Servlet&#x521D;&#x59CB;&#x5316;&#x7684;&#x65F6;&#x5019;&#x3002;</p>
+<p>&#x7B80;&#x5355;&#x6765;&#x8BF4; ServletConfig &#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x914D;&#x7F6E;&#x5BF9;&#x8C61;&#xFF0C;&#x901A;&#x8FC7;&#x5B83;&#x53EF;&#x4EE5;&#x5F88;&#x65B9;&#x4FBF;&#x7684;&#x83B7;&#x53D6; web.xml &#x4E2D;&#x914D;&#x7F6E;&#x7684;&#x4FE1;&#x606F;</p>
 <a id="more"></a>
-<h2 id="二、ServletConfig常用方法"><a href="#二、ServletConfig常用方法" class="headerlink" title="二、ServletConfig常用方法"></a>二、ServletConfig常用方法</h2><pre><code>* String getInitParameter(java.lang.String name)
-    作用：返回一个包含指定初始化参数值的字符串，如果参数不存在，则返回null。
+<h2 id="&#x4E8C;&#x3001;ServletConfig&#x5E38;&#x7528;&#x65B9;&#x6CD5;"><a href="#&#x4E8C;&#x3001;ServletConfig&#x5E38;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="&#x4E8C;&#x3001;ServletConfig&#x5E38;&#x7528;&#x65B9;&#x6CD5;"></a>&#x4E8C;&#x3001;ServletConfig&#x5E38;&#x7528;&#x65B9;&#x6CD5;</h2><pre><code>* String getInitParameter(java.lang.String name)
+    &#x4F5C;&#x7528;&#xFF1A;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x6307;&#x5B9A;&#x521D;&#x59CB;&#x5316;&#x53C2;&#x6570;&#x503C;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5982;&#x679C;&#x53C2;&#x6570;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;null&#x3002;
 
 * Enumeration&lt;String&gt; getInitParameterNames()
-    作用： 返回servlet的初始化参数的名称作为String对象的枚举，如果servlet没有初始化参数，则返回空枚举。
+    &#x4F5C;&#x7528;&#xFF1A; &#x8FD4;&#x56DE;servlet&#x7684;&#x521D;&#x59CB;&#x5316;&#x53C2;&#x6570;&#x7684;&#x540D;&#x79F0;&#x4F5C;&#x4E3A;String&#x5BF9;&#x8C61;&#x7684;&#x679A;&#x4E3E;&#xFF0C;&#x5982;&#x679C;servlet&#x6CA1;&#x6709;&#x521D;&#x59CB;&#x5316;&#x53C2;&#x6570;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x7A7A;&#x679A;&#x4E3E;&#x3002;
 
 * ServletContext getServletContext()
-    作用：返回对调用者正在执行的ServletContext的引用。
+    &#x4F5C;&#x7528;&#xFF1A;&#x8FD4;&#x56DE;&#x5BF9;&#x8C03;&#x7528;&#x8005;&#x6B63;&#x5728;&#x6267;&#x884C;&#x7684;ServletContext&#x7684;&#x5F15;&#x7528;&#x3002;
 
 * String getServletName()
-    作用：获取servlet实例的名称
-</code></pre><h2 id="三、编码实践"><a href="#三、编码实践" class="headerlink" title="三、编码实践"></a>三、编码实践</h2><ul>
-<li><p>1.编写Servlet类</p>
-  <figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.util.Enumeration;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletConfig;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletException;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> ServletConfigDemo extends HttpServlet &#123;</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;</div><div class="line">        <span class="comment">// 1.getServletConfig()</span></div><div class="line">        ServletConfig <span class="built_in">config</span> = <span class="keyword">this</span>.getServletConfig();</div><div class="line">        <span class="comment">// 2.getServletName()</span></div><div class="line">        System.out.<span class="built_in">println</span>(<span class="string">"ServletName:"</span> + <span class="built_in">config</span>.getServletName());</div><div class="line">        <span class="comment">// 3.getInitParameter()</span></div><div class="line">        System.out.<span class="built_in">println</span>(<span class="string">"大写KEY值:"</span> + <span class="built_in">config</span>.getInitParameter(<span class="string">"NAME"</span>));</div><div class="line">        System.out.<span class="built_in">println</span>(<span class="string">"小写KEY值:"</span> + <span class="built_in">config</span>.getInitParameter(<span class="string">"name"</span>));</div><div class="line">        <span class="comment">// 4.getInitParameterNames()</span></div><div class="line">        Enumeration&lt;<span class="keyword">String</span>&gt; enumeration = <span class="built_in">config</span>.getInitParameterNames();</div><div class="line">        <span class="built_in">while</span> (enumeration.hasMoreElements()) &#123;</div><div class="line">            <span class="keyword">String</span> name = enumeration.nextElement();</div><div class="line">            <span class="keyword">String</span> value = <span class="built_in">config</span>.getInitParameter(name);</div><div class="line">            System.out.<span class="built_in">println</span>(<span class="string">"name-----------&gt;"</span> + name);</div><div class="line">            System.out.<span class="built_in">println</span>(<span class="string">"value-----------&gt;"</span> + value);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+    &#x4F5C;&#x7528;&#xFF1A;&#x83B7;&#x53D6;servlet&#x5B9E;&#x4F8B;&#x7684;&#x540D;&#x79F0;
+</code></pre><h2 id="&#x4E09;&#x3001;&#x7F16;&#x7801;&#x5B9E;&#x8DF5;"><a href="#&#x4E09;&#x3001;&#x7F16;&#x7801;&#x5B9E;&#x8DF5;" class="headerlink" title="&#x4E09;&#x3001;&#x7F16;&#x7801;&#x5B9E;&#x8DF5;"></a>&#x4E09;&#x3001;&#x7F16;&#x7801;&#x5B9E;&#x8DF5;</h2><ul>
+<li><p>1.&#x7F16;&#x5199;Servlet&#x7C7B;</p>
+  <figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.util.Enumeration;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletConfig;</div><div class="line"><span class="keyword">import</span> javax.servlet.ServletException;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</div><div class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> ServletConfigDemo extends HttpServlet {</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {</div><div class="line">        <span class="comment">// 1.getServletConfig()</span></div><div class="line">        ServletConfig <span class="built_in">config</span> = <span class="keyword">this</span>.getServletConfig();</div><div class="line">        <span class="comment">// 2.getServletName()</span></div><div class="line">        System.out.<span class="built_in">println</span>(<span class="string">&quot;ServletName:&quot;</span> + <span class="built_in">config</span>.getServletName());</div><div class="line">        <span class="comment">// 3.getInitParameter()</span></div><div class="line">        System.out.<span class="built_in">println</span>(<span class="string">&quot;&#x5927;&#x5199;KEY&#x503C;:&quot;</span> + <span class="built_in">config</span>.getInitParameter(<span class="string">&quot;NAME&quot;</span>));</div><div class="line">        System.out.<span class="built_in">println</span>(<span class="string">&quot;&#x5C0F;&#x5199;KEY&#x503C;:&quot;</span> + <span class="built_in">config</span>.getInitParameter(<span class="string">&quot;name&quot;</span>));</div><div class="line">        <span class="comment">// 4.getInitParameterNames()</span></div><div class="line">        Enumeration&lt;<span class="keyword">String</span>&gt; enumeration = <span class="built_in">config</span>.getInitParameterNames();</div><div class="line">        <span class="built_in">while</span> (enumeration.hasMoreElements()) {</div><div class="line">            <span class="keyword">String</span> name = enumeration.nextElement();</div><div class="line">            <span class="keyword">String</span> value = <span class="built_in">config</span>.getInitParameter(name);</div><div class="line">            System.out.<span class="built_in">println</span>(<span class="string">&quot;name-----------&gt;&quot;</span> + name);</div><div class="line">            System.out.<span class="built_in">println</span>(<span class="string">&quot;value-----------&gt;&quot;</span> + value);</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
 </li>
-<li><p>2.编写web.xml配置</p>
+<li><p>2.&#x7F16;&#x5199;web.xml&#x914D;&#x7F6E;</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span><span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">display-name</span>&gt;</span>ServletConfigDemo<span class="tag">&lt;/<span class="name">display-name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>ServletConfigDemo<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>com.mark.day01.ServletConfigDemo<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>name<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>markLogZhu<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>ServletConfigDemo<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/servletConfig<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>3.运行，查看结果<br><img src="http://oajxivjud.bkt.clouddn.com/ServletConfigDemo.png" alt=""></p>
+<li><p>3.&#x8FD0;&#x884C;&#xFF0C;&#x67E5;&#x770B;&#x7ED3;&#x679C;<br><img src="http://oajxivjud.bkt.clouddn.com/ServletConfigDemo.png" alt=""></p>
 </li>
-<li><p>4.注</p>
-<p>  例子中 getInitParameter() 方法的 key 参数为大写，而 web.xml 中 key 为小写，可以看到返回的值为null，证明参数区分大小写</p>
+<li><p>4.&#x6CE8;</p>
+<p>  &#x4F8B;&#x5B50;&#x4E2D; getInitParameter() &#x65B9;&#x6CD5;&#x7684; key &#x53C2;&#x6570;&#x4E3A;&#x5927;&#x5199;&#xFF0C;&#x800C; web.xml &#x4E2D; key &#x4E3A;&#x5C0F;&#x5199;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x8FD4;&#x56DE;&#x7684;&#x503C;&#x4E3A;null&#xFF0C;&#x8BC1;&#x660E;&#x53C2;&#x6570;&#x533A;&#x5206;&#x5927;&#x5C0F;&#x5199;</p>
 </li>
 </ul>
-<h2 id="四、ServletContext简介"><a href="#四、ServletContext简介" class="headerlink" title="四、ServletContext简介"></a>四、ServletContext简介</h2><p>在整个web应用中，只有一个ServletContext，WEB容器在启动时，它会为每个WEB应用程序都创建一个对应的ServletContext对象，它代表当前web应用。当项目被移除的时候或者服务器关闭的时候servletcontext也同时被销毁</p>
-<h2 id="五、ServletContext的常用方法"><a href="#五、ServletContext的常用方法" class="headerlink" title="五、ServletContext的常用方法"></a>五、ServletContext的常用方法</h2><ul>
-<li><p>1.获取ServletContext实例</p>
+<h2 id="&#x56DB;&#x3001;ServletContext&#x7B80;&#x4ECB;"><a href="#&#x56DB;&#x3001;ServletContext&#x7B80;&#x4ECB;" class="headerlink" title="&#x56DB;&#x3001;ServletContext&#x7B80;&#x4ECB;"></a>&#x56DB;&#x3001;ServletContext&#x7B80;&#x4ECB;</h2><p>&#x5728;&#x6574;&#x4E2A;web&#x5E94;&#x7528;&#x4E2D;&#xFF0C;&#x53EA;&#x6709;&#x4E00;&#x4E2A;ServletContext&#xFF0C;WEB&#x5BB9;&#x5668;&#x5728;&#x542F;&#x52A8;&#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x4E3A;&#x6BCF;&#x4E2A;WEB&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x90FD;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5BF9;&#x5E94;&#x7684;ServletContext&#x5BF9;&#x8C61;&#xFF0C;&#x5B83;&#x4EE3;&#x8868;&#x5F53;&#x524D;web&#x5E94;&#x7528;&#x3002;&#x5F53;&#x9879;&#x76EE;&#x88AB;&#x79FB;&#x9664;&#x7684;&#x65F6;&#x5019;&#x6216;&#x8005;&#x670D;&#x52A1;&#x5668;&#x5173;&#x95ED;&#x7684;&#x65F6;&#x5019;servletcontext&#x4E5F;&#x540C;&#x65F6;&#x88AB;&#x9500;&#x6BC1;</p>
+<h2 id="&#x4E94;&#x3001;ServletContext&#x7684;&#x5E38;&#x7528;&#x65B9;&#x6CD5;"><a href="#&#x4E94;&#x3001;ServletContext&#x7684;&#x5E38;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="&#x4E94;&#x3001;ServletContext&#x7684;&#x5E38;&#x7528;&#x65B9;&#x6CD5;"></a>&#x4E94;&#x3001;ServletContext&#x7684;&#x5E38;&#x7528;&#x65B9;&#x6CD5;</h2><ul>
+<li><p>1.&#x83B7;&#x53D6;ServletContext&#x5B9E;&#x4F8B;</p>
 <ul>
-<li><p>方式一：</p>
+<li><p>&#x65B9;&#x5F0F;&#x4E00;&#xFF1A;</p>
   <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">ServletContext servletContext</span> = this.getServletContext();</div></pre></td></tr></table></figure>
 </li>
-<li><p>方式二：</p>
+<li><p>&#x65B9;&#x5F0F;&#x4E8C;&#xFF1A;</p>
   <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">ServletContext servletContext</span> = this.getServletConfig().getServletContext();</div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
-<li><p>2.利用ServletContext实现数据共享</p>
+<li><p>2.&#x5229;&#x7528;ServletContext&#x5B9E;&#x73B0;&#x6570;&#x636E;&#x5171;&#x4EAB;</p>
 <ul>
-<li><p>写数据</p>
-  <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ServletContext servletContext = <span class="built_in">config</span>.getServletContext()<span class="comment">;</span></div><div class="line">servletContext.setAttribute(<span class="string">"name"</span>, <span class="string">"markLogZhu"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
+<li><p>&#x5199;&#x6570;&#x636E;</p>
+  <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ServletContext servletContext = <span class="built_in">config</span>.getServletContext()<span class="comment">;</span></div><div class="line">servletContext.setAttribute(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;markLogZhu&quot;</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>读数据</p>
-  <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ServletContext servletContext = getServletConfig().getServletContext()<span class="comment">;</span></div><div class="line">	System.out.println(<span class="string">"value:"</span>+servletContext.getAttribute(<span class="string">"name"</span>))<span class="comment">;</span></div></pre></td></tr></table></figure>
+<li><p>&#x8BFB;&#x6570;&#x636E;</p>
+  <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ServletContext servletContext = getServletConfig().getServletContext()<span class="comment">;</span></div><div class="line">	System.out.println(<span class="string">&quot;value:&quot;</span>+servletContext.getAttribute(<span class="string">&quot;name&quot;</span>))<span class="comment">;</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
-<li><p>3.获取 web.xml 配置信息(跟 ServletConfig 对象的 getInitParameterNames()方法一样)</p>
+<li><p>3.&#x83B7;&#x53D6; web.xml &#x914D;&#x7F6E;&#x4FE1;&#x606F;(&#x8DDF; ServletConfig &#x5BF9;&#x8C61;&#x7684; getInitParameterNames()&#x65B9;&#x6CD5;&#x4E00;&#x6837;)</p>
 <ul>
-<li><p>web.xml配置</p>
+<li><p>web.xml&#x914D;&#x7F6E;</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span><span class="tag">&lt;/<span class="name">description</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">display-name</span>&gt;</span>ServletConfigDemo<span class="tag">&lt;/<span class="name">display-name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>ServletConfigDemo<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>com.mark.day01.ServletConfigDemo<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>name<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>markLogZhu<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>ServletConfigDemo<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/servletConfig<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>获取配置信息</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ServletContext <span class="built_in">context</span> = this.getServletContext()<span class="comment">;</span></div><div class="line">Enumeration enumeration = <span class="built_in">context</span>.getInitParameterNames()<span class="comment">;</span></div><div class="line">while(enumeration.hasMoreElements())&#123;</div><div class="line">	String name = (String) enumeration.nextElement()<span class="comment">;</span></div><div class="line">	String value = (String) <span class="built_in">context</span>.getInitParameter(name)<span class="comment">;</span></div><div class="line">	System.out.println(<span class="string">"name："</span>+name)<span class="comment">;</span></div><div class="line">	System.out.println(<span class="string">"value："</span>+value.toString())<span class="comment">;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li><p>&#x83B7;&#x53D6;&#x914D;&#x7F6E;&#x4FE1;&#x606F;</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ServletContext <span class="built_in">context</span> = this.getServletContext()<span class="comment">;</span></div><div class="line">Enumeration enumeration = <span class="built_in">context</span>.getInitParameterNames()<span class="comment">;</span></div><div class="line">while(enumeration.hasMoreElements()){</div><div class="line">	String name = (String) enumeration.nextElement()<span class="comment">;</span></div><div class="line">	String value = (String) <span class="built_in">context</span>.getInitParameter(name)<span class="comment">;</span></div><div class="line">	System.out.println(<span class="string">&quot;name&#xFF1A;&quot;</span>+name)<span class="comment">;</span></div><div class="line">	System.out.println(<span class="string">&quot;value&#xFF1A;&quot;</span>+value.toString())<span class="comment">;</span></div><div class="line">}</div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
-<li><p>4.Servlet的转发</p>
+<li><p>4.Servlet&#x7684;&#x8F6C;&#x53D1;</p>
 <ul>
-<li><p>Servlet类</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">   ServletContext <span class="keyword">context</span> = <span class="keyword">this</span><span class="variable">.getServletContext</span>();</div><div class="line">   <span class="comment">//在request设置参数，然后在jsp界面中获取。</span></div><div class="line">   req<span class="variable">.setAttribute</span>(<span class="string">"name"</span>, <span class="string">"value"</span>);</div><div class="line">RequestDispatcher requestDispatcher = <span class="keyword">context</span><span class="variable">.getRequestDispatcher</span>(<span class="string">"/index.jsp"</span>);</div><div class="line">requestDispatcher<span class="variable">.forward</span>(req,resp);</div></pre></td></tr></table></figure>
+<li><p>Servlet&#x7C7B;</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">   ServletContext <span class="keyword">context</span> = <span class="keyword">this</span><span class="variable">.getServletContext</span>();</div><div class="line">   <span class="comment">//&#x5728;request&#x8BBE;&#x7F6E;&#x53C2;&#x6570;&#xFF0C;&#x7136;&#x540E;&#x5728;jsp&#x754C;&#x9762;&#x4E2D;&#x83B7;&#x53D6;&#x3002;</span></div><div class="line">   req<span class="variable">.setAttribute</span>(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;value&quot;</span>);</div><div class="line">RequestDispatcher requestDispatcher = <span class="keyword">context</span><span class="variable">.getRequestDispatcher</span>(<span class="string">&quot;/index.jsp&quot;</span>);</div><div class="line">requestDispatcher<span class="variable">.forward</span>(req,resp);</div></pre></td></tr></table></figure>
 </li>
-<li><p>jsp界面获取数据：</p>
-<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="xml"></span><span class="vbscript">&lt;%</span></div><div class="line">	<span class="built_in">String</span> value = (<span class="built_in">String</span>)<span class="built_in">request</span>.getAttribute(<span class="string">"name"</span>);</div><div class="line">	System.out.println(<span class="string">"value："</span>+value);</div><div class="line">%&gt;<span class="xml"></span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>5.读取资源的配置文件</p>
-  <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">ServletContext <span class="built_in">context</span> = this.getServletContext()<span class="comment">;</span></div><div class="line">InputStream inputStream = <span class="built_in">context</span>.getResourceAsStream(<span class="string">"/db.properties"</span>)<span class="comment">;</span></div><div class="line"><span class="keyword">ByteArrayOutputStream </span>outStream = new <span class="keyword">ByteArrayOutputStream();</span></div><div class="line"><span class="keyword">byte[] </span><span class="keyword">by </span>= new <span class="keyword">byte[1024];</span></div><div class="line">int len = <span class="number">0</span><span class="comment">;</span></div><div class="line">while((len = inputStream.read(<span class="keyword">by))!= </span>-<span class="number">1</span>)&#123;</div><div class="line">    outStream.write(<span class="keyword">by, </span><span class="number">0</span>, len)<span class="comment">;</span></div><div class="line">&#125;</div><div class="line">String content = new String(outStream.toByteArray())<span class="comment">;</span></div><div class="line">System.out.println(<span class="string">"content："</span>+content)<span class="comment">;</span></div><div class="line">outStream.<span class="keyword">close();</span></div><div class="line">inputStream.<span class="keyword">close();</span></div></pre></td></tr></table></figure>
+<li><p>jsp&#x754C;&#x9762;&#x83B7;&#x53D6;&#x6570;&#x636E;&#xFF1A;</p>
+<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="xml"></span><span class="vbscript">&lt;%</span></div><div class="line">	<span class="built_in">String</span> value = (<span class="built_in">String</span>)<span class="built_in">request</span>.getAttribute(<span class="string">&quot;name&quot;</span>);</div><div class="line">	System.out.println(<span class="string">&quot;value&#xFF1A;&quot;</span>+value);</div><div class="line">%&gt;<span class="xml"></span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="六、参考："><a href="#六、参考：" class="headerlink" title="六、参考："></a>六、参考：</h2><p><a href="http://blog.csdn.net/zhouguosen_always/article/details/10740017" target="_blank" rel="external">java_web学习第二天(ServletConfig和ServletContext对象的作用和使用)</a></p>
+</li>
+<li><p>5.&#x8BFB;&#x53D6;&#x8D44;&#x6E90;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</p>
+  <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">ServletContext <span class="built_in">context</span> = this.getServletContext()<span class="comment">;</span></div><div class="line">InputStream inputStream = <span class="built_in">context</span>.getResourceAsStream(<span class="string">&quot;/db.properties&quot;</span>)<span class="comment">;</span></div><div class="line"><span class="keyword">ByteArrayOutputStream </span>outStream = new <span class="keyword">ByteArrayOutputStream();</span></div><div class="line"><span class="keyword">byte[] </span><span class="keyword">by </span>= new <span class="keyword">byte[1024];</span></div><div class="line">int len = <span class="number">0</span><span class="comment">;</span></div><div class="line">while((len = inputStream.read(<span class="keyword">by))!= </span>-<span class="number">1</span>){</div><div class="line">    outStream.write(<span class="keyword">by, </span><span class="number">0</span>, len)<span class="comment">;</span></div><div class="line">}</div><div class="line">String content = new String(outStream.toByteArray())<span class="comment">;</span></div><div class="line">System.out.println(<span class="string">&quot;content&#xFF1A;&quot;</span>+content)<span class="comment">;</span></div><div class="line">outStream.<span class="keyword">close();</span></div><div class="line">inputStream.<span class="keyword">close();</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="&#x516D;&#x3001;&#x53C2;&#x8003;&#xFF1A;"><a href="#&#x516D;&#x3001;&#x53C2;&#x8003;&#xFF1A;" class="headerlink" title="&#x516D;&#x3001;&#x53C2;&#x8003;&#xFF1A;"></a>&#x516D;&#x3001;&#x53C2;&#x8003;&#xFF1A;</h2><p><a href="http://blog.csdn.net/zhouguosen_always/article/details/10740017" target="_blank" rel="external">java_web&#x5B66;&#x4E60;&#x7B2C;&#x4E8C;&#x5929;(ServletConfig&#x548C;ServletContext&#x5BF9;&#x8C61;&#x7684;&#x4F5C;&#x7528;&#x548C;&#x4F7F;&#x7528;)</a></p>
 
       
 
@@ -531,14 +525,6 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
@@ -551,7 +537,31 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">C#</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -563,23 +573,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">打印机</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -595,19 +593,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">BOM</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
               </li>
             
             <div class="clearfix"></div>

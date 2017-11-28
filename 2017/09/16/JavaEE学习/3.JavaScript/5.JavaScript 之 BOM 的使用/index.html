@@ -8,19 +8,16 @@
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
   <title>JavaScript 之 BOM 的使用 | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、什么是 BOMBOM 是浏览器对象模型，将浏览器当作一个对象来操作。
-二、它能干什么BOM 使 JavaScript 有能力与浏览器“对话”。">
+  <meta name="description" content="&amp;#x4E00;&amp;#x3001;&amp;#x4EC0;&amp;#x4E48;&amp;#x662F; BOMBOM &amp;#x662F;&amp;#x6D4F;&amp;#x89C8;&amp;#x5668;&amp;#x5BF9;&amp;#x8C61;&amp;#x6A21;&amp;#x578B;&amp;#xFF0C;&amp;#x5C06;&amp;#x6D4F;&amp;#x89C8;&amp;#x5668;&amp;#x5F53;&amp;#x4F5C;&amp;#x4E00;&amp;#x4E2A;&amp;#x5BF9;&amp;#x8C61;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript 之 BOM 的使用">
 <meta property="og:url" content="https://marklogzhu.github.io/2017/09/16/JavaEE学习/3.JavaScript/5.JavaScript 之 BOM 的使用/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="一、什么是 BOMBOM 是浏览器对象模型，将浏览器当作一个对象来操作。
-二、它能干什么BOM 使 JavaScript 有能力与浏览器“对话”。">
+<meta property="og:description" content="&amp;#x4E00;&amp;#x3001;&amp;#x4EC0;&amp;#x4E48;&amp;#x662F; BOMBOM &amp;#x662F;&amp;#x6D4F;&amp;#x89C8;&amp;#x5668;&amp;#x5BF9;&amp;#x8C61;&amp;#x6A21;&amp;#x578B;&amp;#xFF0C;&amp;#x5C06;&amp;#x6D4F;&amp;#x89C8;&amp;#x5668;&amp;#x5F53;&amp;#x4F5C;&amp;#x4E00;&amp;#x4E2A;&amp;#x5BF9;&amp;#x8C61;">
 <meta property="og:updated_time" content="2017-09-16T08:14:42.654Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript 之 BOM 的使用">
-<meta name="twitter:description" content="一、什么是 BOMBOM 是浏览器对象模型，将浏览器当作一个对象来操作。
-二、它能干什么BOM 使 JavaScript 有能力与浏览器“对话”。">
+<meta name="twitter:description" content="&amp;#x4E00;&amp;#x3001;&amp;#x4EC0;&amp;#x4E48;&amp;#x662F; BOMBOM &amp;#x662F;&amp;#x6D4F;&amp;#x89C8;&amp;#x5668;&amp;#x5BF9;&amp;#x8C61;&amp;#x6A21;&amp;#x578B;&amp;#xFF0C;&amp;#x5C06;&amp;#x6D4F;&amp;#x89C8;&amp;#x5668;&amp;#x5F53;&amp;#x4F5C;&amp;#x4E00;&amp;#x4E2A;&amp;#x5BF9;&amp;#x8C61;">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -172,264 +169,264 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、什么是-BOM"><a href="#一、什么是-BOM" class="headerlink" title="一、什么是 BOM"></a>一、什么是 BOM</h2><p>BOM 是浏览器对象模型，将浏览器当作一个对象来操作。</p>
-<h2 id="二、它能干什么"><a href="#二、它能干什么" class="headerlink" title="二、它能干什么"></a>二、它能干什么</h2><p><strong>BOM</strong> 使 <strong>JavaScript</strong> 有能力与浏览器“对话”。</p>
+        <h2 id="&#x4E00;&#x3001;&#x4EC0;&#x4E48;&#x662F;-BOM"><a href="#&#x4E00;&#x3001;&#x4EC0;&#x4E48;&#x662F;-BOM" class="headerlink" title="&#x4E00;&#x3001;&#x4EC0;&#x4E48;&#x662F; BOM"></a>&#x4E00;&#x3001;&#x4EC0;&#x4E48;&#x662F; BOM</h2><p>BOM &#x662F;&#x6D4F;&#x89C8;&#x5668;&#x5BF9;&#x8C61;&#x6A21;&#x578B;&#xFF0C;&#x5C06;&#x6D4F;&#x89C8;&#x5668;&#x5F53;&#x4F5C;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x6765;&#x64CD;&#x4F5C;&#x3002;</p>
+<h2 id="&#x4E8C;&#x3001;&#x5B83;&#x80FD;&#x5E72;&#x4EC0;&#x4E48;"><a href="#&#x4E8C;&#x3001;&#x5B83;&#x80FD;&#x5E72;&#x4EC0;&#x4E48;" class="headerlink" title="&#x4E8C;&#x3001;&#x5B83;&#x80FD;&#x5E72;&#x4EC0;&#x4E48;"></a>&#x4E8C;&#x3001;&#x5B83;&#x80FD;&#x5E72;&#x4EC0;&#x4E48;</h2><p><strong>BOM</strong> &#x4F7F; <strong>JavaScript</strong> &#x6709;&#x80FD;&#x529B;&#x4E0E;&#x6D4F;&#x89C8;&#x5668;&#x201C;&#x5BF9;&#x8BDD;&#x201D;&#x3002;</p>
 <a id="more"></a>
-<h2 id="三、BOM-对象"><a href="#三、BOM-对象" class="headerlink" title="三、BOM 对象"></a>三、BOM 对象</h2><p><strong>BOM</strong> 有如下六种对象：</p>
-<pre><code>* 1. window 对象 ，是JS的最顶层对象，其他的 BOM 对象都是 window 对象的属性；
-* 2. document 对象，文档对象；
-* 3. location 对象，浏览器当前URL信息；
-* 4. navigator 对象，浏览器本身信息；
-* 5. screen 对象，客户端屏幕信息；
-* 6. history 对象，浏览器访问历史信息；
-</code></pre><h3 id="3-1-window-对象"><a href="#3-1-window-对象" class="headerlink" title="3.1 window 对象"></a>3.1 window 对象</h3><p>所有浏览器都支持 <strong>window</strong> 对象。它表示浏览器窗口。</p>
-<p>所有 <strong>JavaScript</strong> 全局对象、函数以及变量均自动成为 <strong>window</strong> 对象的成员。</p>
-<p>全局变量是 <strong>window</strong> 对象的属性。</p>
-<p>全局函数是 <strong>window</strong> 对象的方法。</p>
-<p>甚至 <strong>HTML DOM</strong> 的 <strong>document</strong> 也是 <strong>window</strong> 对象的属性之一：<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.<span class="built_in">document</span>.getElementById(<span class="string">"header"</span>);</div></pre></td></tr></table></figure></p>
-<p>与此相同：<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.getElementById(<span class="string">"header"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
-<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><h5 id="消息框"><a href="#消息框" class="headerlink" title="消息框"></a>消息框</h5><pre><code>* 警告框：alert(&quot;....&quot;):
-* 确认框：confirm(&quot;你确定要删除吗?&quot;): 返回值:boolean
-* 输入框：prompt(&quot;请输入您的姓名&quot;): 返回值:你输入的内容
-</code></pre><h5 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h5><pre><code>设置定时器
-setInterval(code,毫秒数):周期执行
-setTimeout(code,毫秒数):延迟多长事件后 只执行一次.
+<h2 id="&#x4E09;&#x3001;BOM-&#x5BF9;&#x8C61;"><a href="#&#x4E09;&#x3001;BOM-&#x5BF9;&#x8C61;" class="headerlink" title="&#x4E09;&#x3001;BOM &#x5BF9;&#x8C61;"></a>&#x4E09;&#x3001;BOM &#x5BF9;&#x8C61;</h2><p><strong>BOM</strong> &#x6709;&#x5982;&#x4E0B;&#x516D;&#x79CD;&#x5BF9;&#x8C61;&#xFF1A;</p>
+<pre><code>* 1. window &#x5BF9;&#x8C61; &#xFF0C;&#x662F;JS&#x7684;&#x6700;&#x9876;&#x5C42;&#x5BF9;&#x8C61;&#xFF0C;&#x5176;&#x4ED6;&#x7684; BOM &#x5BF9;&#x8C61;&#x90FD;&#x662F; window &#x5BF9;&#x8C61;&#x7684;&#x5C5E;&#x6027;&#xFF1B;
+* 2. document &#x5BF9;&#x8C61;&#xFF0C;&#x6587;&#x6863;&#x5BF9;&#x8C61;&#xFF1B;
+* 3. location &#x5BF9;&#x8C61;&#xFF0C;&#x6D4F;&#x89C8;&#x5668;&#x5F53;&#x524D;URL&#x4FE1;&#x606F;&#xFF1B;
+* 4. navigator &#x5BF9;&#x8C61;&#xFF0C;&#x6D4F;&#x89C8;&#x5668;&#x672C;&#x8EAB;&#x4FE1;&#x606F;&#xFF1B;
+* 5. screen &#x5BF9;&#x8C61;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;&#x5C4F;&#x5E55;&#x4FE1;&#x606F;&#xFF1B;
+* 6. history &#x5BF9;&#x8C61;&#xFF0C;&#x6D4F;&#x89C8;&#x5668;&#x8BBF;&#x95EE;&#x5386;&#x53F2;&#x4FE1;&#x606F;&#xFF1B;
+</code></pre><h3 id="3-1-window-&#x5BF9;&#x8C61;"><a href="#3-1-window-&#x5BF9;&#x8C61;" class="headerlink" title="3.1 window &#x5BF9;&#x8C61;"></a>3.1 window &#x5BF9;&#x8C61;</h3><p>&#x6240;&#x6709;&#x6D4F;&#x89C8;&#x5668;&#x90FD;&#x652F;&#x6301; <strong>window</strong> &#x5BF9;&#x8C61;&#x3002;&#x5B83;&#x8868;&#x793A;&#x6D4F;&#x89C8;&#x5668;&#x7A97;&#x53E3;&#x3002;</p>
+<p>&#x6240;&#x6709; <strong>JavaScript</strong> &#x5168;&#x5C40;&#x5BF9;&#x8C61;&#x3001;&#x51FD;&#x6570;&#x4EE5;&#x53CA;&#x53D8;&#x91CF;&#x5747;&#x81EA;&#x52A8;&#x6210;&#x4E3A; <strong>window</strong> &#x5BF9;&#x8C61;&#x7684;&#x6210;&#x5458;&#x3002;</p>
+<p>&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x662F; <strong>window</strong> &#x5BF9;&#x8C61;&#x7684;&#x5C5E;&#x6027;&#x3002;</p>
+<p>&#x5168;&#x5C40;&#x51FD;&#x6570;&#x662F; <strong>window</strong> &#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<p>&#x751A;&#x81F3; <strong>HTML DOM</strong> &#x7684; <strong>document</strong> &#x4E5F;&#x662F; <strong>window</strong> &#x5BF9;&#x8C61;&#x7684;&#x5C5E;&#x6027;&#x4E4B;&#x4E00;&#xFF1A;<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.<span class="built_in">document</span>.getElementById(<span class="string">&quot;header&quot;</span>);</div></pre></td></tr></table></figure></p>
+<p>&#x4E0E;&#x6B64;&#x76F8;&#x540C;&#xFF1A;<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.getElementById(<span class="string">&quot;header&quot;</span>)<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<h4 id="&#x5E38;&#x7528;&#x65B9;&#x6CD5;"><a href="#&#x5E38;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="&#x5E38;&#x7528;&#x65B9;&#x6CD5;"></a>&#x5E38;&#x7528;&#x65B9;&#x6CD5;</h4><h5 id="&#x6D88;&#x606F;&#x6846;"><a href="#&#x6D88;&#x606F;&#x6846;" class="headerlink" title="&#x6D88;&#x606F;&#x6846;"></a>&#x6D88;&#x606F;&#x6846;</h5><pre><code>* &#x8B66;&#x544A;&#x6846;&#xFF1A;alert(&quot;....&quot;):
+* &#x786E;&#x8BA4;&#x6846;&#xFF1A;confirm(&quot;&#x4F60;&#x786E;&#x5B9A;&#x8981;&#x5220;&#x9664;&#x5417;?&quot;): &#x8FD4;&#x56DE;&#x503C;:boolean
+* &#x8F93;&#x5165;&#x6846;&#xFF1A;prompt(&quot;&#x8BF7;&#x8F93;&#x5165;&#x60A8;&#x7684;&#x59D3;&#x540D;&quot;): &#x8FD4;&#x56DE;&#x503C;:&#x4F60;&#x8F93;&#x5165;&#x7684;&#x5185;&#x5BB9;
+</code></pre><h5 id="&#x5B9A;&#x65F6;&#x5668;"><a href="#&#x5B9A;&#x65F6;&#x5668;" class="headerlink" title="&#x5B9A;&#x65F6;&#x5668;"></a>&#x5B9A;&#x65F6;&#x5668;</h5><pre><code>&#x8BBE;&#x7F6E;&#x5B9A;&#x65F6;&#x5668;
+setInterval(code,&#x6BEB;&#x79D2;&#x6570;):&#x5468;&#x671F;&#x6267;&#x884C;
+setTimeout(code,&#x6BEB;&#x79D2;&#x6570;):&#x5EF6;&#x8FDF;&#x591A;&#x957F;&#x4E8B;&#x4EF6;&#x540E; &#x53EA;&#x6267;&#x884C;&#x4E00;&#x6B21;.
 
-例如:
+&#x4F8B;&#x5982;:
     setInterval(showAd,4000);
     serInterval(&quot;showAd()&quot;,4000);
 
-清除定时器
+&#x6E05;&#x9664;&#x5B9A;&#x65F6;&#x5668;
     clearInterval(id):
     clearTimeout(id):
-</code></pre><h5 id="打开和关闭窗口"><a href="#打开和关闭窗口" class="headerlink" title="打开和关闭窗口"></a>打开和关闭窗口</h5><pre><code>open(url):打开
-close():关闭
-</code></pre><h3 id="3-2-document-对象"><a href="#3-2-document-对象" class="headerlink" title="3.2 document 对象"></a>3.2 document 对象</h3><p><strong>document</strong> 对象 详见 <a href="https://marklogzhu.github.io/2017/09/16/JavaEE%E5%AD%A6%E4%B9%A0/3.JavaScript/4.JavaScript%E4%B9%8BDOM%E7%9A%84%E4%BD%BF%E7%94%A8/">JavaScript 之 DOM 的使用</a></p>
-<h3 id="3-3-location-对象"><a href="#3-3-location-对象" class="headerlink" title="3.3 location 对象"></a>3.3 location 对象</h3><p><strong>location</strong> 属性获取浏览器当前URL信息，这个在企业内外网使用不同 IP 的场景下可用。</p>
-<h4 id="location-对象属性"><a href="#location-对象属性" class="headerlink" title="location 对象属性"></a><strong>location</strong> 对象属性</h4><table>
+</code></pre><h5 id="&#x6253;&#x5F00;&#x548C;&#x5173;&#x95ED;&#x7A97;&#x53E3;"><a href="#&#x6253;&#x5F00;&#x548C;&#x5173;&#x95ED;&#x7A97;&#x53E3;" class="headerlink" title="&#x6253;&#x5F00;&#x548C;&#x5173;&#x95ED;&#x7A97;&#x53E3;"></a>&#x6253;&#x5F00;&#x548C;&#x5173;&#x95ED;&#x7A97;&#x53E3;</h5><pre><code>open(url):&#x6253;&#x5F00;
+close():&#x5173;&#x95ED;
+</code></pre><h3 id="3-2-document-&#x5BF9;&#x8C61;"><a href="#3-2-document-&#x5BF9;&#x8C61;" class="headerlink" title="3.2 document &#x5BF9;&#x8C61;"></a>3.2 document &#x5BF9;&#x8C61;</h3><p><strong>document</strong> &#x5BF9;&#x8C61; &#x8BE6;&#x89C1; <a href="https://marklogzhu.github.io/2017/09/16/JavaEE%E5%AD%A6%E4%B9%A0/3.JavaScript/4.JavaScript%E4%B9%8BDOM%E7%9A%84%E4%BD%BF%E7%94%A8/">JavaScript &#x4E4B; DOM &#x7684;&#x4F7F;&#x7528;</a></p>
+<h3 id="3-3-location-&#x5BF9;&#x8C61;"><a href="#3-3-location-&#x5BF9;&#x8C61;" class="headerlink" title="3.3 location &#x5BF9;&#x8C61;"></a>3.3 location &#x5BF9;&#x8C61;</h3><p><strong>location</strong> &#x5C5E;&#x6027;&#x83B7;&#x53D6;&#x6D4F;&#x89C8;&#x5668;&#x5F53;&#x524D;URL&#x4FE1;&#x606F;&#xFF0C;&#x8FD9;&#x4E2A;&#x5728;&#x4F01;&#x4E1A;&#x5185;&#x5916;&#x7F51;&#x4F7F;&#x7528;&#x4E0D;&#x540C; IP &#x7684;&#x573A;&#x666F;&#x4E0B;&#x53EF;&#x7528;&#x3002;</p>
+<h4 id="location-&#x5BF9;&#x8C61;&#x5C5E;&#x6027;"><a href="#location-&#x5BF9;&#x8C61;&#x5C5E;&#x6027;" class="headerlink" title="location &#x5BF9;&#x8C61;&#x5C5E;&#x6027;"></a><strong>location</strong> &#x5BF9;&#x8C61;&#x5C5E;&#x6027;</h4><table>
 <thead>
 <tr>
-<th>属性</th>
-<th>描述</th>
+<th>&#x5C5E;&#x6027;</th>
+<th>&#x63CF;&#x8FF0;</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>hash</td>
-<td>设置或返回从井号 (#) 开始的 URL（锚）。</td>
+<td>&#x8BBE;&#x7F6E;&#x6216;&#x8FD4;&#x56DE;&#x4ECE;&#x4E95;&#x53F7; (#) &#x5F00;&#x59CB;&#x7684; URL&#xFF08;&#x951A;&#xFF09;&#x3002;</td>
 </tr>
 <tr>
 <td>host</td>
-<td>设置或返回主机名和当前 URL 的端口号。</td>
+<td>&#x8BBE;&#x7F6E;&#x6216;&#x8FD4;&#x56DE;&#x4E3B;&#x673A;&#x540D;&#x548C;&#x5F53;&#x524D; URL &#x7684;&#x7AEF;&#x53E3;&#x53F7;&#x3002;</td>
 </tr>
 <tr>
 <td>hostname</td>
-<td>设置或返回当前 URL 的主机名。</td>
+<td>&#x8BBE;&#x7F6E;&#x6216;&#x8FD4;&#x56DE;&#x5F53;&#x524D; URL &#x7684;&#x4E3B;&#x673A;&#x540D;&#x3002;</td>
 </tr>
 <tr>
 <td>href</td>
-<td>设置或返回完整的 URL。</td>
+<td>&#x8BBE;&#x7F6E;&#x6216;&#x8FD4;&#x56DE;&#x5B8C;&#x6574;&#x7684; URL&#x3002;</td>
 </tr>
 <tr>
 <td>pathname</td>
-<td>设置或返回当前 URL 的路径部分。</td>
+<td>&#x8BBE;&#x7F6E;&#x6216;&#x8FD4;&#x56DE;&#x5F53;&#x524D; URL &#x7684;&#x8DEF;&#x5F84;&#x90E8;&#x5206;&#x3002;</td>
 </tr>
 <tr>
 <td>port</td>
-<td>设置或返回当前 URL 的端口号。</td>
+<td>&#x8BBE;&#x7F6E;&#x6216;&#x8FD4;&#x56DE;&#x5F53;&#x524D; URL &#x7684;&#x7AEF;&#x53E3;&#x53F7;&#x3002;</td>
 </tr>
 <tr>
 <td>protocol</td>
-<td>设置或返回当前 URL 的协议。</td>
+<td>&#x8BBE;&#x7F6E;&#x6216;&#x8FD4;&#x56DE;&#x5F53;&#x524D; URL &#x7684;&#x534F;&#x8BAE;&#x3002;</td>
 </tr>
 <tr>
 <td>search</td>
-<td>设置或返回从问号 (?) 开始的 URL（查询部分）。</td>
+<td>&#x8BBE;&#x7F6E;&#x6216;&#x8FD4;&#x56DE;&#x4ECE;&#x95EE;&#x53F7; (?) &#x5F00;&#x59CB;&#x7684; URL&#xFF08;&#x67E5;&#x8BE2;&#x90E8;&#x5206;&#xFF09;&#x3002;</td>
 </tr>
 </tbody>
 </table>
-<h4 id="location-对象方法"><a href="#location-对象方法" class="headerlink" title="location 对象方法"></a><strong>location</strong> 对象方法</h4><table>
+<h4 id="location-&#x5BF9;&#x8C61;&#x65B9;&#x6CD5;"><a href="#location-&#x5BF9;&#x8C61;&#x65B9;&#x6CD5;" class="headerlink" title="location &#x5BF9;&#x8C61;&#x65B9;&#x6CD5;"></a><strong>location</strong> &#x5BF9;&#x8C61;&#x65B9;&#x6CD5;</h4><table>
 <thead>
 <tr>
-<th>方法名</th>
-<th>描述</th>
+<th>&#x65B9;&#x6CD5;&#x540D;</th>
+<th>&#x63CF;&#x8FF0;</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>assign()</td>
-<td>加载新的文档。</td>
+<td>&#x52A0;&#x8F7D;&#x65B0;&#x7684;&#x6587;&#x6863;&#x3002;</td>
 </tr>
 <tr>
 <td>reload()</td>
-<td>重新加载当前文档。</td>
+<td>&#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x5F53;&#x524D;&#x6587;&#x6863;&#x3002;</td>
 </tr>
 <tr>
 <td>replace()</td>
-<td>用新的文档替换当前文档。</td>
+<td>&#x7528;&#x65B0;&#x7684;&#x6587;&#x6863;&#x66FF;&#x6362;&#x5F53;&#x524D;&#x6587;&#x6863;&#x3002;</td>
 </tr>
 </tbody>
 </table>
-<h3 id="3-4-navigator-对象"><a href="#3-4-navigator-对象" class="headerlink" title="3.4 navigator 对象"></a>3.4 navigator 对象</h3><p><strong>Navigator</strong> 对象包含的属性描述了正在使用的浏览器。可以使用这些属性进行平台专用的配置。</p>
-<h4 id="Navigator-对象属性"><a href="#Navigator-对象属性" class="headerlink" title="Navigator 对象属性"></a><strong>Navigator</strong> 对象属性</h4><table>
+<h3 id="3-4-navigator-&#x5BF9;&#x8C61;"><a href="#3-4-navigator-&#x5BF9;&#x8C61;" class="headerlink" title="3.4 navigator &#x5BF9;&#x8C61;"></a>3.4 navigator &#x5BF9;&#x8C61;</h3><p><strong>Navigator</strong> &#x5BF9;&#x8C61;&#x5305;&#x542B;&#x7684;&#x5C5E;&#x6027;&#x63CF;&#x8FF0;&#x4E86;&#x6B63;&#x5728;&#x4F7F;&#x7528;&#x7684;&#x6D4F;&#x89C8;&#x5668;&#x3002;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8FD9;&#x4E9B;&#x5C5E;&#x6027;&#x8FDB;&#x884C;&#x5E73;&#x53F0;&#x4E13;&#x7528;&#x7684;&#x914D;&#x7F6E;&#x3002;</p>
+<h4 id="Navigator-&#x5BF9;&#x8C61;&#x5C5E;&#x6027;"><a href="#Navigator-&#x5BF9;&#x8C61;&#x5C5E;&#x6027;" class="headerlink" title="Navigator &#x5BF9;&#x8C61;&#x5C5E;&#x6027;"></a><strong>Navigator</strong> &#x5BF9;&#x8C61;&#x5C5E;&#x6027;</h4><table>
 <thead>
 <tr>
-<th>属性</th>
-<th>描述</th>
+<th>&#x5C5E;&#x6027;</th>
+<th>&#x63CF;&#x8FF0;</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>appCodeName</td>
-<td>返回浏览器的代码名。</td>
+<td>&#x8FD4;&#x56DE;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x4EE3;&#x7801;&#x540D;&#x3002;</td>
 </tr>
 <tr>
 <td>appMinorVersion</td>
-<td>返回浏览器的次级版本。</td>
+<td>&#x8FD4;&#x56DE;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x6B21;&#x7EA7;&#x7248;&#x672C;&#x3002;</td>
 </tr>
 <tr>
 <td>appName</td>
-<td>返回浏览器的名称。</td>
+<td>&#x8FD4;&#x56DE;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x540D;&#x79F0;&#x3002;</td>
 </tr>
 <tr>
 <td>appVersion</td>
-<td>返回浏览器的平台和版本信息。</td>
+<td>&#x8FD4;&#x56DE;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x5E73;&#x53F0;&#x548C;&#x7248;&#x672C;&#x4FE1;&#x606F;&#x3002;</td>
 </tr>
 <tr>
 <td>browserLanguage</td>
-<td>返回当前浏览器的语言。</td>
+<td>&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x8BED;&#x8A00;&#x3002;</td>
 </tr>
 <tr>
 <td>cookieEnabled</td>
-<td>返回指明浏览器中是否启用 cookie 的布尔值。</td>
+<td>&#x8FD4;&#x56DE;&#x6307;&#x660E;&#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#x662F;&#x5426;&#x542F;&#x7528; cookie &#x7684;&#x5E03;&#x5C14;&#x503C;&#x3002;</td>
 </tr>
 <tr>
 <td>cpuClass</td>
-<td>返回浏览器系统的 CPU 等级。</td>
+<td>&#x8FD4;&#x56DE;&#x6D4F;&#x89C8;&#x5668;&#x7CFB;&#x7EDF;&#x7684; CPU &#x7B49;&#x7EA7;&#x3002;</td>
 </tr>
 <tr>
 <td>onLine</td>
-<td>返回指明系统是否处于脱机模式的布尔值。</td>
+<td>&#x8FD4;&#x56DE;&#x6307;&#x660E;&#x7CFB;&#x7EDF;&#x662F;&#x5426;&#x5904;&#x4E8E;&#x8131;&#x673A;&#x6A21;&#x5F0F;&#x7684;&#x5E03;&#x5C14;&#x503C;&#x3002;</td>
 </tr>
 <tr>
 <td>platform</td>
-<td>返回运行浏览器的操作系统平台。</td>
+<td>&#x8FD4;&#x56DE;&#x8FD0;&#x884C;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5E73;&#x53F0;&#x3002;</td>
 </tr>
 <tr>
 <td>systemLanguage</td>
-<td>返回 OS 使用的默认语言。</td>
+<td>&#x8FD4;&#x56DE; OS &#x4F7F;&#x7528;&#x7684;&#x9ED8;&#x8BA4;&#x8BED;&#x8A00;&#x3002;</td>
 </tr>
 <tr>
 <td>userAgent</td>
-<td>返回由客户机发送服务器的 user-agent 头部的值。</td>
+<td>&#x8FD4;&#x56DE;&#x7531;&#x5BA2;&#x6237;&#x673A;&#x53D1;&#x9001;&#x670D;&#x52A1;&#x5668;&#x7684; user-agent &#x5934;&#x90E8;&#x7684;&#x503C;&#x3002;</td>
 </tr>
 <tr>
 <td>userLanguage</td>
-<td>返回 OS 的自然语言设置。</td>
+<td>&#x8FD4;&#x56DE; OS &#x7684;&#x81EA;&#x7136;&#x8BED;&#x8A00;&#x8BBE;&#x7F6E;&#x3002;</td>
 </tr>
 </tbody>
 </table>
-<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><table>
+<h4 id="&#x65B9;&#x6CD5;"><a href="#&#x65B9;&#x6CD5;" class="headerlink" title="&#x65B9;&#x6CD5;"></a>&#x65B9;&#x6CD5;</h4><table>
 <thead>
 <tr>
-<th>方法</th>
-<th>描述</th>
+<th>&#x65B9;&#x6CD5;</th>
+<th>&#x63CF;&#x8FF0;</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>javaEnabled()</td>
-<td>规定浏览器是否启用 Java。</td>
+<td>&#x89C4;&#x5B9A;&#x6D4F;&#x89C8;&#x5668;&#x662F;&#x5426;&#x542F;&#x7528; Java&#x3002;</td>
 </tr>
 <tr>
 <td>taintEnabled()</td>
-<td>规定浏览器是否启用数据污点 (data tainting)。</td>
+<td>&#x89C4;&#x5B9A;&#x6D4F;&#x89C8;&#x5668;&#x662F;&#x5426;&#x542F;&#x7528;&#x6570;&#x636E;&#x6C61;&#x70B9; (data tainting)&#x3002;</td>
 </tr>
 </tbody>
 </table>
-<h3 id="3-5-screen-对象"><a href="#3-5-screen-对象" class="headerlink" title="3.5 screen 对象"></a>3.5 screen 对象</h3><p><strong>Screen</strong> 对象包含有关客户端显示屏幕的信息。</p>
-<h4 id="Screen-对象属性"><a href="#Screen-对象属性" class="headerlink" title="Screen 对象属性"></a><strong>Screen</strong> 对象属性</h4><table>
+<h3 id="3-5-screen-&#x5BF9;&#x8C61;"><a href="#3-5-screen-&#x5BF9;&#x8C61;" class="headerlink" title="3.5 screen &#x5BF9;&#x8C61;"></a>3.5 screen &#x5BF9;&#x8C61;</h3><p><strong>Screen</strong> &#x5BF9;&#x8C61;&#x5305;&#x542B;&#x6709;&#x5173;&#x5BA2;&#x6237;&#x7AEF;&#x663E;&#x793A;&#x5C4F;&#x5E55;&#x7684;&#x4FE1;&#x606F;&#x3002;</p>
+<h4 id="Screen-&#x5BF9;&#x8C61;&#x5C5E;&#x6027;"><a href="#Screen-&#x5BF9;&#x8C61;&#x5C5E;&#x6027;" class="headerlink" title="Screen &#x5BF9;&#x8C61;&#x5C5E;&#x6027;"></a><strong>Screen</strong> &#x5BF9;&#x8C61;&#x5C5E;&#x6027;</h4><table>
 <thead>
 <tr>
-<th>属性</th>
-<th>描述</th>
+<th>&#x5C5E;&#x6027;</th>
+<th>&#x63CF;&#x8FF0;</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>availHeight</td>
-<td>返回显示屏幕的高度 (除 Windows 任务栏之外)。</td>
+<td>&#x8FD4;&#x56DE;&#x663E;&#x793A;&#x5C4F;&#x5E55;&#x7684;&#x9AD8;&#x5EA6; (&#x9664; Windows &#x4EFB;&#x52A1;&#x680F;&#x4E4B;&#x5916;)&#x3002;</td>
 </tr>
 <tr>
 <td>availWidth</td>
-<td>返回显示屏幕的宽度 (除 Windows 任务栏之外)。</td>
+<td>&#x8FD4;&#x56DE;&#x663E;&#x793A;&#x5C4F;&#x5E55;&#x7684;&#x5BBD;&#x5EA6; (&#x9664; Windows &#x4EFB;&#x52A1;&#x680F;&#x4E4B;&#x5916;)&#x3002;</td>
 </tr>
 <tr>
 <td>bufferDepth</td>
-<td>设置或返回调色板的比特深度。</td>
+<td>&#x8BBE;&#x7F6E;&#x6216;&#x8FD4;&#x56DE;&#x8C03;&#x8272;&#x677F;&#x7684;&#x6BD4;&#x7279;&#x6DF1;&#x5EA6;&#x3002;</td>
 </tr>
 <tr>
 <td>colorDepth</td>
-<td>返回目标设备或缓冲器上的调色板的比特深度。</td>
+<td>&#x8FD4;&#x56DE;&#x76EE;&#x6807;&#x8BBE;&#x5907;&#x6216;&#x7F13;&#x51B2;&#x5668;&#x4E0A;&#x7684;&#x8C03;&#x8272;&#x677F;&#x7684;&#x6BD4;&#x7279;&#x6DF1;&#x5EA6;&#x3002;</td>
 </tr>
 <tr>
 <td>deviceXDPI</td>
-<td>返回显示屏幕的每英寸水平点数。</td>
+<td>&#x8FD4;&#x56DE;&#x663E;&#x793A;&#x5C4F;&#x5E55;&#x7684;&#x6BCF;&#x82F1;&#x5BF8;&#x6C34;&#x5E73;&#x70B9;&#x6570;&#x3002;</td>
 </tr>
 <tr>
 <td>deviceYDPI</td>
-<td>返回显示屏幕的每英寸垂直点数。</td>
+<td>&#x8FD4;&#x56DE;&#x663E;&#x793A;&#x5C4F;&#x5E55;&#x7684;&#x6BCF;&#x82F1;&#x5BF8;&#x5782;&#x76F4;&#x70B9;&#x6570;&#x3002;</td>
 </tr>
 <tr>
 <td>fontSmoothingEnabled</td>
-<td>返回用户是否在显示控制面板中启用了字体平滑。</td>
+<td>&#x8FD4;&#x56DE;&#x7528;&#x6237;&#x662F;&#x5426;&#x5728;&#x663E;&#x793A;&#x63A7;&#x5236;&#x9762;&#x677F;&#x4E2D;&#x542F;&#x7528;&#x4E86;&#x5B57;&#x4F53;&#x5E73;&#x6ED1;&#x3002;</td>
 </tr>
 <tr>
 <td>height</td>
-<td>返回显示屏幕的高度。</td>
+<td>&#x8FD4;&#x56DE;&#x663E;&#x793A;&#x5C4F;&#x5E55;&#x7684;&#x9AD8;&#x5EA6;&#x3002;</td>
 </tr>
 <tr>
 <td>logicalXDPI</td>
-<td>返回显示屏幕每英寸的水平方向的常规点数。</td>
+<td>&#x8FD4;&#x56DE;&#x663E;&#x793A;&#x5C4F;&#x5E55;&#x6BCF;&#x82F1;&#x5BF8;&#x7684;&#x6C34;&#x5E73;&#x65B9;&#x5411;&#x7684;&#x5E38;&#x89C4;&#x70B9;&#x6570;&#x3002;</td>
 </tr>
 <tr>
 <td>logicalYDPI</td>
-<td>返回显示屏幕每英寸的垂直方向的常规点数。</td>
+<td>&#x8FD4;&#x56DE;&#x663E;&#x793A;&#x5C4F;&#x5E55;&#x6BCF;&#x82F1;&#x5BF8;&#x7684;&#x5782;&#x76F4;&#x65B9;&#x5411;&#x7684;&#x5E38;&#x89C4;&#x70B9;&#x6570;&#x3002;</td>
 </tr>
 <tr>
 <td>pixelDepth</td>
-<td>返回显示屏幕的颜色分辨率（比特每像素）。</td>
+<td>&#x8FD4;&#x56DE;&#x663E;&#x793A;&#x5C4F;&#x5E55;&#x7684;&#x989C;&#x8272;&#x5206;&#x8FA8;&#x7387;&#xFF08;&#x6BD4;&#x7279;&#x6BCF;&#x50CF;&#x7D20;&#xFF09;&#x3002;</td>
 </tr>
 <tr>
 <td>updateInterval</td>
-<td>设置或返回屏幕的刷新率。</td>
+<td>&#x8BBE;&#x7F6E;&#x6216;&#x8FD4;&#x56DE;&#x5C4F;&#x5E55;&#x7684;&#x5237;&#x65B0;&#x7387;&#x3002;</td>
 </tr>
 <tr>
 <td>width</td>
-<td>返回显示器屏幕的宽度。</td>
+<td>&#x8FD4;&#x56DE;&#x663E;&#x793A;&#x5668;&#x5C4F;&#x5E55;&#x7684;&#x5BBD;&#x5EA6;&#x3002;</td>
 </tr>
 </tbody>
 </table>
-<h3 id="3-6-history-对象"><a href="#3-6-history-对象" class="headerlink" title="3.6 history 对象"></a>3.6 history 对象</h3><p><strong>history</strong> 对象获取浏览器的历史浏览记录。</p>
-<h4 id="history-对象属性"><a href="#history-对象属性" class="headerlink" title="history 对象属性"></a><strong>history</strong> 对象属性</h4><table>
+<h3 id="3-6-history-&#x5BF9;&#x8C61;"><a href="#3-6-history-&#x5BF9;&#x8C61;" class="headerlink" title="3.6 history &#x5BF9;&#x8C61;"></a>3.6 history &#x5BF9;&#x8C61;</h3><p><strong>history</strong> &#x5BF9;&#x8C61;&#x83B7;&#x53D6;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x5386;&#x53F2;&#x6D4F;&#x89C8;&#x8BB0;&#x5F55;&#x3002;</p>
+<h4 id="history-&#x5BF9;&#x8C61;&#x5C5E;&#x6027;"><a href="#history-&#x5BF9;&#x8C61;&#x5C5E;&#x6027;" class="headerlink" title="history &#x5BF9;&#x8C61;&#x5C5E;&#x6027;"></a><strong>history</strong> &#x5BF9;&#x8C61;&#x5C5E;&#x6027;</h4><table>
 <thead>
 <tr>
-<th>属性</th>
-<th>描述</th>
+<th>&#x5C5E;&#x6027;</th>
+<th>&#x63CF;&#x8FF0;</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>length</td>
-<td>返回浏览器历史列表中的 URL 数量。</td>
+<td>&#x8FD4;&#x56DE;&#x6D4F;&#x89C8;&#x5668;&#x5386;&#x53F2;&#x5217;&#x8868;&#x4E2D;&#x7684; URL &#x6570;&#x91CF;&#x3002;</td>
 </tr>
 </tbody>
 </table>
-<h4 id="history-对象常用方法"><a href="#history-对象常用方法" class="headerlink" title="history 对象常用方法"></a><strong>history</strong> 对象常用方法</h4><pre><code>back();后退
-forward():向前
+<h4 id="history-&#x5BF9;&#x8C61;&#x5E38;&#x7528;&#x65B9;&#x6CD5;"><a href="#history-&#x5BF9;&#x8C61;&#x5E38;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="history &#x5BF9;&#x8C61;&#x5E38;&#x7528;&#x65B9;&#x6CD5;"></a><strong>history</strong> &#x5BF9;&#x8C61;&#x5E38;&#x7528;&#x65B9;&#x6CD5;</h4><pre><code>back();&#x540E;&#x9000;
+forward():&#x5411;&#x524D;
 go(int)
-    go(-1) 相当于 back()
-    go(1) 相当于 forward()
+    go(-1) &#x76F8;&#x5F53;&#x4E8E; back()
+    go(1) &#x76F8;&#x5F53;&#x4E8E; forward()
 </code></pre>
       
 
@@ -715,14 +712,6 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
@@ -735,7 +724,31 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">C#</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -747,23 +760,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">打印机</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -779,19 +780,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">BOM</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
               </li>
             
             <div class="clearfix"></div>

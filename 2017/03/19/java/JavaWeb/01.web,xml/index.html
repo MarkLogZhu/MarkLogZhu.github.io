@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
   <title>web.xml | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、web.xml简介web.xml是JavaWeb项目的配置文件，主要用来配置欢迎页、servlet、filter等信息，如果你的项目不需要配置这些信息的话，也可以不创建这个文件">
+  <meta name="description" content="&amp;#x4E00;&amp;#x3001;web.xml&amp;#x7B80;&amp;#x4ECB;web.xml&amp;#x662F;JavaWeb&amp;#x9879;&amp;#x76EE;&amp;#x7684;&amp;#x914D;&amp;#x7F6E;&amp;#x6587;&amp;#x4EF6;&amp;#xFF0C;&amp;#x4E3B;&amp;#x8981;&amp;#x7528;&amp;#x6765;&amp;#x914D;&amp;#x7F6E;&amp;#x6B22;&amp;#x8FCE;&amp;#x9875;&amp;#x">
 <meta property="og:type" content="article">
 <meta property="og:title" content="web.xml">
 <meta property="og:url" content="https://marklogzhu.github.io/2017/03/19/java/JavaWeb/01.web,xml/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="一、web.xml简介web.xml是JavaWeb项目的配置文件，主要用来配置欢迎页、servlet、filter等信息，如果你的项目不需要配置这些信息的话，也可以不创建这个文件">
+<meta property="og:description" content="&amp;#x4E00;&amp;#x3001;web.xml&amp;#x7B80;&amp;#x4ECB;web.xml&amp;#x662F;JavaWeb&amp;#x9879;&amp;#x76EE;&amp;#x7684;&amp;#x914D;&amp;#x7F6E;&amp;#x6587;&amp;#x4EF6;&amp;#xFF0C;&amp;#x4E3B;&amp;#x8981;&amp;#x7528;&amp;#x6765;&amp;#x914D;&amp;#x7F6E;&amp;#x6B22;&amp;#x8FCE;&amp;#x9875;&amp;#x">
 <meta property="og:updated_time" content="2017-03-19T03:54:41.827Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web.xml">
-<meta name="twitter:description" content="一、web.xml简介web.xml是JavaWeb项目的配置文件，主要用来配置欢迎页、servlet、filter等信息，如果你的项目不需要配置这些信息的话，也可以不创建这个文件">
+<meta name="twitter:description" content="&amp;#x4E00;&amp;#x3001;web.xml&amp;#x7B80;&amp;#x4ECB;web.xml&amp;#x662F;JavaWeb&amp;#x9879;&amp;#x76EE;&amp;#x7684;&amp;#x914D;&amp;#x7F6E;&amp;#x6587;&amp;#x4EF6;&amp;#xFF0C;&amp;#x4E3B;&amp;#x8981;&amp;#x7528;&amp;#x6765;&amp;#x914D;&amp;#x7F6E;&amp;#x6B22;&amp;#x8FCE;&amp;#x9875;&amp;#x">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -169,47 +169,47 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、web-xml简介"><a href="#一、web-xml简介" class="headerlink" title="一、web.xml简介"></a>一、web.xml简介</h2><pre><code>web.xml是JavaWeb项目的配置文件，主要用来配置欢迎页、servlet、filter等信息，如果你的项目不需要配置这些信息的话，也可以不创建这个文件
+        <h2 id="&#x4E00;&#x3001;web-xml&#x7B80;&#x4ECB;"><a href="#&#x4E00;&#x3001;web-xml&#x7B80;&#x4ECB;" class="headerlink" title="&#x4E00;&#x3001;web.xml&#x7B80;&#x4ECB;"></a>&#x4E00;&#x3001;web.xml&#x7B80;&#x4ECB;</h2><pre><code>web.xml&#x662F;JavaWeb&#x9879;&#x76EE;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF0C;&#x4E3B;&#x8981;&#x7528;&#x6765;&#x914D;&#x7F6E;&#x6B22;&#x8FCE;&#x9875;&#x3001;servlet&#x3001;filter&#x7B49;&#x4FE1;&#x606F;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x7684;&#x9879;&#x76EE;&#x4E0D;&#x9700;&#x8981;&#x914D;&#x7F6E;&#x8FD9;&#x4E9B;&#x4FE1;&#x606F;&#x7684;&#x8BDD;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x521B;&#x5EFA;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;
 </code></pre><a id="more"></a>
-<h2 id="二、常用标签"><a href="#二、常用标签" class="headerlink" title="二、常用标签"></a>二、常用标签</h2><ul>
-<li><p>指定欢迎页面</p>
+<h2 id="&#x4E8C;&#x3001;&#x5E38;&#x7528;&#x6807;&#x7B7E;"><a href="#&#x4E8C;&#x3001;&#x5E38;&#x7528;&#x6807;&#x7B7E;" class="headerlink" title="&#x4E8C;&#x3001;&#x5E38;&#x7528;&#x6807;&#x7B7E;"></a>&#x4E8C;&#x3001;&#x5E38;&#x7528;&#x6807;&#x7B7E;</h2><ul>
+<li><p>&#x6307;&#x5B9A;&#x6B22;&#x8FCE;&#x9875;&#x9762;</p>
 <figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;welcome-<span class="built_in">file</span>-<span class="built_in">list</span>&gt;</div><div class="line">    &lt;welcome-<span class="built_in">file</span>&gt;index.jsp&lt;/welcome-<span class="built_in">file</span>&gt;</div><div class="line">    &lt;welcome-<span class="built_in">file</span>&gt;index1.jsp&lt;/welcome-<span class="built_in">file</span>&gt;</div><div class="line">&lt;/welcome-<span class="built_in">file</span>-<span class="built_in">list</span>&gt;</div></pre></td></tr></table></figure>
-<p>  注：指定两个欢迎页，如果index.jsp不存在就寻找index1.jsp</p>
+<p>  &#x6CE8;&#xFF1A;&#x6307;&#x5B9A;&#x4E24;&#x4E2A;&#x6B22;&#x8FCE;&#x9875;&#xFF0C;&#x5982;&#x679C;index.jsp&#x4E0D;&#x5B58;&#x5728;&#x5C31;&#x5BFB;&#x627E;index1.jsp</p>
 </li>
-<li><p>命名与定制URL(如：Servlet和JSP)</p>
+<li><p>&#x547D;&#x540D;&#x4E0E;&#x5B9A;&#x5236;URL(&#x5982;&#xFF1A;Servlet&#x548C;JSP)</p>
 <ul>
-<li><p>命名</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- Servlet名字，可以随便取，有多个Servlet时不允许重名 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>servlet1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 指定实现这个Servlet的类。完整的包名+类名 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>net.test.TestServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></div></pre></td></tr></table></figure>
+<li><p>&#x547D;&#x540D;</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- Servlet&#x540D;&#x5B57;&#xFF0C;&#x53EF;&#x4EE5;&#x968F;&#x4FBF;&#x53D6;&#xFF0C;&#x6709;&#x591A;&#x4E2A;Servlet&#x65F6;&#x4E0D;&#x5141;&#x8BB8;&#x91CD;&#x540D; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>servlet1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- &#x6307;&#x5B9A;&#x5B9E;&#x73B0;&#x8FD9;&#x4E2A;Servlet&#x7684;&#x7C7B;&#x3002;&#x5B8C;&#x6574;&#x7684;&#x5305;&#x540D;+&#x7C7B;&#x540D; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>net.test.TestServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>定义URL</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--必须和&lt;servlet&gt;里的&lt;servlet-name&gt;内容一样--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>servlet1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 指定访问这个Servlet的URL。这里给出的是对于整个Web应用的相对URL路径 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.do<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line"><span class="tag">&lt; /<span class="attr">servlet-mapping</span>&gt;</span></div></pre></td></tr></table></figure>
+<li><p>&#x5B9A;&#x4E49;URL</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--&#x5FC5;&#x987B;&#x548C;&lt;servlet&gt;&#x91CC;&#x7684;&lt;servlet-name&gt;&#x5185;&#x5BB9;&#x4E00;&#x6837;--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>servlet1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- &#x6307;&#x5B9A;&#x8BBF;&#x95EE;&#x8FD9;&#x4E2A;Servlet&#x7684;URL&#x3002;&#x8FD9;&#x91CC;&#x7ED9;&#x51FA;&#x7684;&#x662F;&#x5BF9;&#x4E8E;&#x6574;&#x4E2A;Web&#x5E94;&#x7528;&#x7684;&#x76F8;&#x5BF9;URL&#x8DEF;&#x5F84; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>*.do<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line"><span class="tag">&lt; /<span class="attr">servlet-mapping</span>&gt;</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
-<li><p>定制初始化参数</p>
-  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>servlet1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>net.test.TestServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- 参数名 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>E-mail<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- 参数值 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>Tommy@163.com<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>userName<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>Tommy<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></div><div class="line"><span class="tag">&lt; /<span class="attr">servlet</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>  在Servlet类中取值：<code>getServletConfig().getInitParameter(&quot;E-mail&quot;)</code></p>
+<li><p>&#x5B9A;&#x5236;&#x521D;&#x59CB;&#x5316;&#x53C2;&#x6570;</p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>servlet1<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>net.test.TestServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- &#x53C2;&#x6570;&#x540D; --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>E-mail<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- &#x53C2;&#x6570;&#x503C; --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>Tommy@163.com<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>userName<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>Tommy<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></div><div class="line"><span class="tag">&lt; /<span class="attr">servlet</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>  &#x5728;Servlet&#x7C7B;&#x4E2D;&#x53D6;&#x503C;&#xFF1A;<code>getServletConfig().getInitParameter(&quot;E-mail&quot;)</code></p>
 </li>
 </ul>
 <ul>
-<li><p>指定错误处理页面</p>
-  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 错误码 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">error-page</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">error-code</span>&gt;</span>404<span class="tag">&lt;/<span class="name">error-code</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">location</span>&gt;</span>/error404.jsp<span class="tag">&lt;/<span class="name">location</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">error-page</span>&gt;</span></div></pre></td></tr></table></figure>
-  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 异常类型 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">error-page</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">exception-type</span>&gt;</span>Java.lang.Exception<span class="tag">&lt;<span class="name">exception-type</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">location</span>&gt;</span>/exception.jsp<span class="tag">&lt;<span class="name">location</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">error-page</span>&gt;</span></div></pre></td></tr></table></figure>
+<li><p>&#x6307;&#x5B9A;&#x9519;&#x8BEF;&#x5904;&#x7406;&#x9875;&#x9762;</p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- &#x9519;&#x8BEF;&#x7801; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">error-page</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">error-code</span>&gt;</span>404<span class="tag">&lt;/<span class="name">error-code</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">location</span>&gt;</span>/error404.jsp<span class="tag">&lt;/<span class="name">location</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">error-page</span>&gt;</span></div></pre></td></tr></table></figure>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- &#x5F02;&#x5E38;&#x7C7B;&#x578B; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">error-page</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">exception-type</span>&gt;</span>Java.lang.Exception<span class="tag">&lt;<span class="name">exception-type</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">location</span>&gt;</span>/exception.jsp<span class="tag">&lt;<span class="name">location</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">error-page</span>&gt;</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>过滤器</p>
-  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--过滤器名，可以随便取，当web应用中有多个过滤器时不允许重名 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>XXXCharaSetFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 具体的过滤器的类的完整的包名+类名。注意：不能写错了。否则容器不能正确的实例化过滤器 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>net.test.CharSetFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 过滤器名，注意要和上面的&lt;filter-name&gt;里的名字一样 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>XXXCharaSetFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 指定过滤器负责过滤的URL。这里指定了*.jsp表示在访问任何一个jsp页面时都会先使用mypack.SampleFilter过滤器进行过滤。如果写成login.jsp.则只有在访问login.jsp时才会调用该过滤器进行过滤 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></div></pre></td></tr></table></figure>
+<li><p>&#x8FC7;&#x6EE4;&#x5668;</p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--&#x8FC7;&#x6EE4;&#x5668;&#x540D;&#xFF0C;&#x53EF;&#x4EE5;&#x968F;&#x4FBF;&#x53D6;&#xFF0C;&#x5F53;web&#x5E94;&#x7528;&#x4E2D;&#x6709;&#x591A;&#x4E2A;&#x8FC7;&#x6EE4;&#x5668;&#x65F6;&#x4E0D;&#x5141;&#x8BB8;&#x91CD;&#x540D; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>XXXCharaSetFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- &#x5177;&#x4F53;&#x7684;&#x8FC7;&#x6EE4;&#x5668;&#x7684;&#x7C7B;&#x7684;&#x5B8C;&#x6574;&#x7684;&#x5305;&#x540D;+&#x7C7B;&#x540D;&#x3002;&#x6CE8;&#x610F;&#xFF1A;&#x4E0D;&#x80FD;&#x5199;&#x9519;&#x4E86;&#x3002;&#x5426;&#x5219;&#x5BB9;&#x5668;&#x4E0D;&#x80FD;&#x6B63;&#x786E;&#x7684;&#x5B9E;&#x4F8B;&#x5316;&#x8FC7;&#x6EE4;&#x5668; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>net.test.CharSetFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- &#x8FC7;&#x6EE4;&#x5668;&#x540D;&#xFF0C;&#x6CE8;&#x610F;&#x8981;&#x548C;&#x4E0A;&#x9762;&#x7684;&lt;filter-name&gt;&#x91CC;&#x7684;&#x540D;&#x5B57;&#x4E00;&#x6837; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>XXXCharaSetFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- &#x6307;&#x5B9A;&#x8FC7;&#x6EE4;&#x5668;&#x8D1F;&#x8D23;&#x8FC7;&#x6EE4;&#x7684;URL&#x3002;&#x8FD9;&#x91CC;&#x6307;&#x5B9A;&#x4E86;*.jsp&#x8868;&#x793A;&#x5728;&#x8BBF;&#x95EE;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;jsp&#x9875;&#x9762;&#x65F6;&#x90FD;&#x4F1A;&#x5148;&#x4F7F;&#x7528;mypack.SampleFilter&#x8FC7;&#x6EE4;&#x5668;&#x8FDB;&#x884C;&#x8FC7;&#x6EE4;&#x3002;&#x5982;&#x679C;&#x5199;&#x6210;login.jsp.&#x5219;&#x53EA;&#x6709;&#x5728;&#x8BBF;&#x95EE;login.jsp&#x65F6;&#x624D;&#x4F1A;&#x8C03;&#x7528;&#x8BE5;&#x8FC7;&#x6EE4;&#x5668;&#x8FDB;&#x884C;&#x8FC7;&#x6EE4; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>监听器</p>
-   <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">listener</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 配置会话侦听器，class表示一个HttpSessionListener或 HttpSessionActivationListener 或 HttpSessionAttributeListener或 HttpSessionBindingListener的实现类。该节点允许多个 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>net.test.XXXLisenet<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">listener</span>&gt;</span></div></pre></td></tr></table></figure>
+<li><p>&#x76D1;&#x542C;&#x5668;</p>
+   <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">listener</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- &#x914D;&#x7F6E;&#x4F1A;&#x8BDD;&#x4FA6;&#x542C;&#x5668;&#xFF0C;class&#x8868;&#x793A;&#x4E00;&#x4E2A;HttpSessionListener&#x6216; HttpSessionActivationListener &#x6216; HttpSessionAttributeListener&#x6216; HttpSessionBindingListener&#x7684;&#x5B9E;&#x73B0;&#x7C7B;&#x3002;&#x8BE5;&#x8282;&#x70B9;&#x5141;&#x8BB8;&#x591A;&#x4E2A; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>net.test.XXXLisenet<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">listener</span>&gt;</span></div></pre></td></tr></table></figure>
 </li>
-<li><p>会话(Session)过期时间</p>
-  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">session-config</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 设定 HttpSession 的生命周期。时间以分钟为单位 --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>60<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></div></pre></td></tr></table></figure>
+<li><p>&#x4F1A;&#x8BDD;(Session)&#x8FC7;&#x671F;&#x65F6;&#x95F4;</p>
+  <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">session-config</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- &#x8BBE;&#x5B9A; HttpSession &#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x3002;&#x65F6;&#x95F4;&#x4EE5;&#x5206;&#x949F;&#x4E3A;&#x5355;&#x4F4D; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>60<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>三、参考文章：</p>
+<p>&#x4E09;&#x3001;&#x53C2;&#x8003;&#x6587;&#x7AE0;&#xFF1A;</p>
 <ul>
-<li><a href="http://blog.csdn.net/u012394231/article/details/16846485" target="_blank" rel="external">web工程中的web.xml文件有什么作用呢？</a></li>
-<li><a href="http://www.cnblogs.com/qinying/archive/2011/01/21/1940800.html" target="_blank" rel="external">一个很详细的web.xml讲解</a></li>
+<li><a href="http://blog.csdn.net/u012394231/article/details/16846485" target="_blank" rel="external">web&#x5DE5;&#x7A0B;&#x4E2D;&#x7684;web.xml&#x6587;&#x4EF6;&#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;&#x5462;&#xFF1F;</a></li>
+<li><a href="http://www.cnblogs.com/qinying/archive/2011/01/21/1940800.html" target="_blank" rel="external">&#x4E00;&#x4E2A;&#x5F88;&#x8BE6;&#x7EC6;&#x7684;web.xml&#x8BB2;&#x89E3;</a></li>
 </ul>
 
       
@@ -488,14 +488,6 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
@@ -508,7 +500,31 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">C#</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -520,23 +536,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">打印机</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -552,19 +556,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">BOM</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
               </li>
             
             <div class="clearfix"></div>

@@ -8,22 +8,22 @@
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
   <title>查看 SQL SERVER 版本信息 | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="sql  版本信息SELECT SERVERPROPERTY(&amp;apos;Edition&amp;apos;) AS Edition,  
+  <meta name="description" content="sql  &amp;#x7248;&amp;#x672C;&amp;#x4FE1;&amp;#x606F;SELECT SERVERPROPERTY(&amp;apos;Edition&amp;apos;) AS Edition,  
        CASE SERVERPROPERTY(&amp;apos;EditionID&amp;apos;)  
-            WHEN 1804890536 THEN &amp;apos;Enterprise Edittion: CAL Lincenseing&amp;apos;">
+            WHEN 1804890536 THEN &amp;apos;Enterprise Edit">
 <meta property="og:type" content="article">
 <meta property="og:title" content="查看 SQL SERVER 版本信息">
 <meta property="og:url" content="https://marklogzhu.github.io/2017/08/25/SQL/查看SQL SERVER 版本信息/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="sql  版本信息SELECT SERVERPROPERTY(&amp;apos;Edition&amp;apos;) AS Edition,  
+<meta property="og:description" content="sql  &amp;#x7248;&amp;#x672C;&amp;#x4FE1;&amp;#x606F;SELECT SERVERPROPERTY(&amp;apos;Edition&amp;apos;) AS Edition,  
        CASE SERVERPROPERTY(&amp;apos;EditionID&amp;apos;)  
-            WHEN 1804890536 THEN &amp;apos;Enterprise Edittion: CAL Lincenseing&amp;apos;">
+            WHEN 1804890536 THEN &amp;apos;Enterprise Edit">
 <meta property="og:updated_time" content="2017-08-25T02:31:19.902Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="查看 SQL SERVER 版本信息">
-<meta name="twitter:description" content="sql  版本信息SELECT SERVERPROPERTY(&amp;apos;Edition&amp;apos;) AS Edition,  
+<meta name="twitter:description" content="sql  &amp;#x7248;&amp;#x672C;&amp;#x4FE1;&amp;#x606F;SELECT SERVERPROPERTY(&amp;apos;Edition&amp;apos;) AS Edition,  
        CASE SERVERPROPERTY(&amp;apos;EditionID&amp;apos;)  
-            WHEN 1804890536 THEN &amp;apos;Enterprise Edittion: CAL Lincenseing&amp;apos;">
+            WHEN 1804890536 THEN &amp;apos;Enterprise Edit">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -175,7 +175,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="sql-版本信息"><a href="#sql-版本信息" class="headerlink" title="sql  版本信息"></a>sql  版本信息</h2><pre><code>SELECT SERVERPROPERTY(&apos;Edition&apos;) AS Edition,  
+        <h2 id="sql-&#x7248;&#x672C;&#x4FE1;&#x606F;"><a href="#sql-&#x7248;&#x672C;&#x4FE1;&#x606F;" class="headerlink" title="sql  &#x7248;&#x672C;&#x4FE1;&#x606F;"></a>sql  &#x7248;&#x672C;&#x4FE1;&#x606F;</h2><pre><code>SELECT SERVERPROPERTY(&apos;Edition&apos;) AS Edition,  
        CASE SERVERPROPERTY(&apos;EditionID&apos;)  
             WHEN 1804890536 THEN &apos;Enterprise Edittion: CAL Lincenseing&apos;  
             WHEN 1872460670 THEN &apos; Enterprise Edition: Core-based Licensing&apos;  
@@ -190,13 +190,13 @@
        END AS [Licensing Model]
 </code></pre><a id="more"></a>
 <pre><code>SELECT   
-    SERVERPROPERTY(&apos;servername&apos;) AS 实例名,  
-    SERVERPROPERTY(&apos;ProductVersion&apos;) AS 实例版本,  
-    SERVERPROPERTY(&apos;Edition&apos;) AS 产品版本,  
-    SERVERPROPERTY(&apos;ProductLevel&apos;) AS 版本级别,  
-    @@VERSION AS 版本信息    
-</code></pre><h2 id="查看CPU数和user-scheduler数目"><a href="#查看CPU数和user-scheduler数目" class="headerlink" title="查看CPU数和user scheduler数目"></a>查看CPU数和user scheduler数目</h2><pre><code>SELECT cpu_count,scheduler_count FROM sys.dm_os_sys_info
-</code></pre><h2 id="查看最大工作线程数"><a href="#查看最大工作线程数" class="headerlink" title="查看最大工作线程数"></a>查看最大工作线程数</h2><pre><code>SELECT max_workers_count FROM sys.dm_os_sys_info
+    SERVERPROPERTY(&apos;servername&apos;) AS &#x5B9E;&#x4F8B;&#x540D;,  
+    SERVERPROPERTY(&apos;ProductVersion&apos;) AS &#x5B9E;&#x4F8B;&#x7248;&#x672C;,  
+    SERVERPROPERTY(&apos;Edition&apos;) AS &#x4EA7;&#x54C1;&#x7248;&#x672C;,  
+    SERVERPROPERTY(&apos;ProductLevel&apos;) AS &#x7248;&#x672C;&#x7EA7;&#x522B;,  
+    @@VERSION AS &#x7248;&#x672C;&#x4FE1;&#x606F;    
+</code></pre><h2 id="&#x67E5;&#x770B;CPU&#x6570;&#x548C;user-scheduler&#x6570;&#x76EE;"><a href="#&#x67E5;&#x770B;CPU&#x6570;&#x548C;user-scheduler&#x6570;&#x76EE;" class="headerlink" title="&#x67E5;&#x770B;CPU&#x6570;&#x548C;user scheduler&#x6570;&#x76EE;"></a>&#x67E5;&#x770B;CPU&#x6570;&#x548C;user scheduler&#x6570;&#x76EE;</h2><pre><code>SELECT cpu_count,scheduler_count FROM sys.dm_os_sys_info
+</code></pre><h2 id="&#x67E5;&#x770B;&#x6700;&#x5927;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x6570;"><a href="#&#x67E5;&#x770B;&#x6700;&#x5927;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x6570;" class="headerlink" title="&#x67E5;&#x770B;&#x6700;&#x5927;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x6570;"></a>&#x67E5;&#x770B;&#x6700;&#x5927;&#x5DE5;&#x4F5C;&#x7EBF;&#x7A0B;&#x6570;</h2><pre><code>SELECT max_workers_count FROM sys.dm_os_sys_info
 </code></pre>
       
 
@@ -478,14 +478,6 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
@@ -498,7 +490,31 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">C#</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -510,23 +526,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">打印机</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -542,19 +546,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">BOM</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
               </li>
             
             <div class="clearfix"></div>

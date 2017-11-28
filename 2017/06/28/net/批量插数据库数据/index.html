@@ -8,19 +8,16 @@
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
   <title>批量插入数据库记录 | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、场景描述在生活中，我们经常看到快递员拿着特制的移动终端，扫描着多个快递面单实现快递单的运输记录。
-当没有网络的情况下，移动终端会将数据存储在本地，等有网络的情况下，会将数据统一提交到后台。而这个也就是我们今天要做的将批量数据插入到数据库中去。">
+  <meta name="description" content="&amp;#x4E00;&amp;#x3001;&amp;#x573A;&amp;#x666F;&amp;#x63CF;&amp;#x8FF0;&amp;#x5728;&amp;#x751F;&amp;#x6D3B;&amp;#x4E2D;&amp;#xFF0C;&amp;#x6211;&amp;#x4EEC;&amp;#x7ECF;&amp;#x5E38;&amp;#x770B;&amp;#x5230;&amp;#x5FEB;&amp;#x9012;&amp;#x5458;&amp;#x62FF;&amp;#x7740;&amp;#x7279;&amp;#x5236;&amp;#x7684;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="批量插入数据库记录">
 <meta property="og:url" content="https://marklogzhu.github.io/2017/06/28/net/批量插数据库数据/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="一、场景描述在生活中，我们经常看到快递员拿着特制的移动终端，扫描着多个快递面单实现快递单的运输记录。
-当没有网络的情况下，移动终端会将数据存储在本地，等有网络的情况下，会将数据统一提交到后台。而这个也就是我们今天要做的将批量数据插入到数据库中去。">
+<meta property="og:description" content="&amp;#x4E00;&amp;#x3001;&amp;#x573A;&amp;#x666F;&amp;#x63CF;&amp;#x8FF0;&amp;#x5728;&amp;#x751F;&amp;#x6D3B;&amp;#x4E2D;&amp;#xFF0C;&amp;#x6211;&amp;#x4EEC;&amp;#x7ECF;&amp;#x5E38;&amp;#x770B;&amp;#x5230;&amp;#x5FEB;&amp;#x9012;&amp;#x5458;&amp;#x62FF;&amp;#x7740;&amp;#x7279;&amp;#x5236;&amp;#x7684;">
 <meta property="og:updated_time" content="2017-06-28T13:53:03.486Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="批量插入数据库记录">
-<meta name="twitter:description" content="一、场景描述在生活中，我们经常看到快递员拿着特制的移动终端，扫描着多个快递面单实现快递单的运输记录。
-当没有网络的情况下，移动终端会将数据存储在本地，等有网络的情况下，会将数据统一提交到后台。而这个也就是我们今天要做的将批量数据插入到数据库中去。">
+<meta name="twitter:description" content="&amp;#x4E00;&amp;#x3001;&amp;#x573A;&amp;#x666F;&amp;#x63CF;&amp;#x8FF0;&amp;#x5728;&amp;#x751F;&amp;#x6D3B;&amp;#x4E2D;&amp;#xFF0C;&amp;#x6211;&amp;#x4EEC;&amp;#x7ECF;&amp;#x5E38;&amp;#x770B;&amp;#x5230;&amp;#x5FEB;&amp;#x9012;&amp;#x5458;&amp;#x62FF;&amp;#x7740;&amp;#x7279;&amp;#x5236;&amp;#x7684;">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -172,63 +169,63 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="一、场景描述"><a href="#一、场景描述" class="headerlink" title="一、场景描述"></a>一、场景描述</h3><pre><code>在生活中，我们经常看到快递员拿着特制的移动终端，扫描着多个快递面单实现快递单的运输记录。
-当没有网络的情况下，移动终端会将数据存储在本地，等有网络的情况下，会将数据统一提交到后台。而这个也就是我们今天要做的将批量数据插入到数据库中去。
+        <h3 id="&#x4E00;&#x3001;&#x573A;&#x666F;&#x63CF;&#x8FF0;"><a href="#&#x4E00;&#x3001;&#x573A;&#x666F;&#x63CF;&#x8FF0;" class="headerlink" title="&#x4E00;&#x3001;&#x573A;&#x666F;&#x63CF;&#x8FF0;"></a>&#x4E00;&#x3001;&#x573A;&#x666F;&#x63CF;&#x8FF0;</h3><pre><code>&#x5728;&#x751F;&#x6D3B;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x7ECF;&#x5E38;&#x770B;&#x5230;&#x5FEB;&#x9012;&#x5458;&#x62FF;&#x7740;&#x7279;&#x5236;&#x7684;&#x79FB;&#x52A8;&#x7EC8;&#x7AEF;&#xFF0C;&#x626B;&#x63CF;&#x7740;&#x591A;&#x4E2A;&#x5FEB;&#x9012;&#x9762;&#x5355;&#x5B9E;&#x73B0;&#x5FEB;&#x9012;&#x5355;&#x7684;&#x8FD0;&#x8F93;&#x8BB0;&#x5F55;&#x3002;
+&#x5F53;&#x6CA1;&#x6709;&#x7F51;&#x7EDC;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x79FB;&#x52A8;&#x7EC8;&#x7AEF;&#x4F1A;&#x5C06;&#x6570;&#x636E;&#x5B58;&#x50A8;&#x5728;&#x672C;&#x5730;&#xFF0C;&#x7B49;&#x6709;&#x7F51;&#x7EDC;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4F1A;&#x5C06;&#x6570;&#x636E;&#x7EDF;&#x4E00;&#x63D0;&#x4EA4;&#x5230;&#x540E;&#x53F0;&#x3002;&#x800C;&#x8FD9;&#x4E2A;&#x4E5F;&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x4ECA;&#x5929;&#x8981;&#x505A;&#x7684;&#x5C06;&#x6279;&#x91CF;&#x6570;&#x636E;&#x63D2;&#x5165;&#x5230;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x53BB;&#x3002;
 </code></pre><a id="more"></a>
-<h3 id="二、ScanLog表结构"><a href="#二、ScanLog表结构" class="headerlink" title="二、ScanLog表结构"></a>二、ScanLog表结构</h3><table>
+<h3 id="&#x4E8C;&#x3001;ScanLog&#x8868;&#x7ED3;&#x6784;"><a href="#&#x4E8C;&#x3001;ScanLog&#x8868;&#x7ED3;&#x6784;" class="headerlink" title="&#x4E8C;&#x3001;ScanLog&#x8868;&#x7ED3;&#x6784;"></a>&#x4E8C;&#x3001;ScanLog&#x8868;&#x7ED3;&#x6784;</h3><table>
 <thead>
 <tr>
-<th>字段名</th>
-<th>字段类型</th>
-<th>字段含义</th>
+<th>&#x5B57;&#x6BB5;&#x540D;</th>
+<th>&#x5B57;&#x6BB5;&#x7C7B;&#x578B;</th>
+<th>&#x5B57;&#x6BB5;&#x542B;&#x4E49;</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>rowId</td>
 <td>INT</td>
-<td>自增主键</td>
+<td>&#x81EA;&#x589E;&#x4E3B;&#x952E;</td>
 </tr>
 <tr>
 <td>barcode</td>
 <td>NVACHAR(30)</td>
-<td>快递单号</td>
+<td>&#x5FEB;&#x9012;&#x5355;&#x53F7;</td>
 </tr>
 <tr>
 <td>jobNumer</td>
 <td>NVACHAR(20)</td>
-<td>操作人员编号</td>
+<td>&#x64CD;&#x4F5C;&#x4EBA;&#x5458;&#x7F16;&#x53F7;</td>
 </tr>
 <tr>
 <td>state</td>
 <td>INT</td>
-<td>单据状态</td>
+<td>&#x5355;&#x636E;&#x72B6;&#x6001;</td>
 </tr>
 <tr>
 <td>doTime</td>
 <td>DATATIME</td>
-<td>操作时间</td>
+<td>&#x64CD;&#x4F5C;&#x65F6;&#x95F4;</td>
 </tr>
 <tr>
 <td>doPlace</td>
 <td>NVACHAR(10)</td>
-<td>所在网点编号</td>
+<td>&#x6240;&#x5728;&#x7F51;&#x70B9;&#x7F16;&#x53F7;</td>
 </tr>
 <tr>
 <td>Tel</td>
 <td>NVACHAR(15)</td>
-<td>联系电话</td>
+<td>&#x8054;&#x7CFB;&#x7535;&#x8BDD;</td>
 </tr>
 </tbody>
 </table>
-<h3 id="三、注意点"><a href="#三、注意点" class="headerlink" title="三、注意点"></a>三、注意点</h3><pre><code>1.数据不是单条记录，而是批量操作
-2.表中可能已存在相同快递单号的记录
-3.本次提交数据中可能存在重复记录
-4.执行效率，移动终端不可能长时间等待后台的返回，所以要在几秒内就能将响应结果返回至终端去
-</code></pre><h3 id="四、实现逻辑"><a href="#四、实现逻辑" class="headerlink" title="四、实现逻辑"></a>四、实现逻辑</h3><pre><code>1.先将数据通过for循环拼接插入临时表中去
-2.将临时表与ScanLog表连接，将非重复数据插入表中
-3.将结果返回给终端
-</code></pre><h3 id="五、实现代码"><a href="#五、实现代码" class="headerlink" title="五、实现代码"></a>五、实现代码</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">region</span> 添加扫描记录</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> 添加扫描记录</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name="scanList"&gt;</span><span class="doctag">&lt;/param&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">bool</span> <span class="title">addRecord</span>(<span class="params">List&lt;ScanRecordModel&gt; scanList</span>) </span>&#123;</div><div class="line">	<span class="keyword">bool</span> flag = <span class="literal">false</span>;</div><div class="line">	StringBuilder strSql = <span class="keyword">new</span> StringBuilder();</div><div class="line">	StringBuilder sql = <span class="keyword">new</span> StringBuilder();</div><div class="line">	String s = String.Empty;</div><div class="line">	String DoTime = DateTime.Now.ToString();</div><div class="line">	strSql.Append(<span class="string">" SELECT * INTO #temp FROM ( "</span>);</div><div class="line">	<span class="keyword">foreach</span> (ScanRecordModel scan <span class="keyword">in</span> scanList) &#123;</div><div class="line">		s = <span class="string">" SELECT '&#123;0&#125;'as barcode ,'&#123;1&#125;' as jobnumer,'&#123;2&#125;' as doTime,'&#123;3&#125;' as doPlace,'&#123;4&#125;' as Tel  UNION ALL "</span>;</div><div class="line">		strSql.Append(String.Format(s, scan.barcode, scan.user.jobNumber, DoTime, scan.netPoint.rowId,scan.tel));</div><div class="line">	&#125;</div><div class="line">	sql.Append(StringUtils.removeLastChar(strSql.ToString(), <span class="string">"UNION ALL"</span>));</div><div class="line">	sql.Append(<span class="string">" )a "</span>);</div><div class="line">	sql.Append(<span class="string">" INSERT INTO ScanRecord(Barcode,JobNumer,DoTime,DoPlace,tel)  "</span>);</div><div class="line">	sql.Append(<span class="string">" SELECT DISTINCT * FROM #temp WHERE  NOT EXISTS (SELECT 1 FROM ScanRecord where ScanRecord.Barcode=#temp.Barcode) "</span>);</div><div class="line">	flag = SqlHelper.ExecCmd(sql.ToString()) &gt; <span class="number">0</span>;</div><div class="line">	<span class="keyword">return</span> flag;</div><div class="line">&#125;</div><div class="line"><span class="meta">#<span class="meta-keyword">endregion</span></span></div></pre></td></tr></table></figure>
+<h3 id="&#x4E09;&#x3001;&#x6CE8;&#x610F;&#x70B9;"><a href="#&#x4E09;&#x3001;&#x6CE8;&#x610F;&#x70B9;" class="headerlink" title="&#x4E09;&#x3001;&#x6CE8;&#x610F;&#x70B9;"></a>&#x4E09;&#x3001;&#x6CE8;&#x610F;&#x70B9;</h3><pre><code>1.&#x6570;&#x636E;&#x4E0D;&#x662F;&#x5355;&#x6761;&#x8BB0;&#x5F55;&#xFF0C;&#x800C;&#x662F;&#x6279;&#x91CF;&#x64CD;&#x4F5C;
+2.&#x8868;&#x4E2D;&#x53EF;&#x80FD;&#x5DF2;&#x5B58;&#x5728;&#x76F8;&#x540C;&#x5FEB;&#x9012;&#x5355;&#x53F7;&#x7684;&#x8BB0;&#x5F55;
+3.&#x672C;&#x6B21;&#x63D0;&#x4EA4;&#x6570;&#x636E;&#x4E2D;&#x53EF;&#x80FD;&#x5B58;&#x5728;&#x91CD;&#x590D;&#x8BB0;&#x5F55;
+4.&#x6267;&#x884C;&#x6548;&#x7387;&#xFF0C;&#x79FB;&#x52A8;&#x7EC8;&#x7AEF;&#x4E0D;&#x53EF;&#x80FD;&#x957F;&#x65F6;&#x95F4;&#x7B49;&#x5F85;&#x540E;&#x53F0;&#x7684;&#x8FD4;&#x56DE;&#xFF0C;&#x6240;&#x4EE5;&#x8981;&#x5728;&#x51E0;&#x79D2;&#x5185;&#x5C31;&#x80FD;&#x5C06;&#x54CD;&#x5E94;&#x7ED3;&#x679C;&#x8FD4;&#x56DE;&#x81F3;&#x7EC8;&#x7AEF;&#x53BB;
+</code></pre><h3 id="&#x56DB;&#x3001;&#x5B9E;&#x73B0;&#x903B;&#x8F91;"><a href="#&#x56DB;&#x3001;&#x5B9E;&#x73B0;&#x903B;&#x8F91;" class="headerlink" title="&#x56DB;&#x3001;&#x5B9E;&#x73B0;&#x903B;&#x8F91;"></a>&#x56DB;&#x3001;&#x5B9E;&#x73B0;&#x903B;&#x8F91;</h3><pre><code>1.&#x5148;&#x5C06;&#x6570;&#x636E;&#x901A;&#x8FC7;for&#x5FAA;&#x73AF;&#x62FC;&#x63A5;&#x63D2;&#x5165;&#x4E34;&#x65F6;&#x8868;&#x4E2D;&#x53BB;
+2.&#x5C06;&#x4E34;&#x65F6;&#x8868;&#x4E0E;ScanLog&#x8868;&#x8FDE;&#x63A5;&#xFF0C;&#x5C06;&#x975E;&#x91CD;&#x590D;&#x6570;&#x636E;&#x63D2;&#x5165;&#x8868;&#x4E2D;
+3.&#x5C06;&#x7ED3;&#x679C;&#x8FD4;&#x56DE;&#x7ED9;&#x7EC8;&#x7AEF;
+</code></pre><h3 id="&#x4E94;&#x3001;&#x5B9E;&#x73B0;&#x4EE3;&#x7801;"><a href="#&#x4E94;&#x3001;&#x5B9E;&#x73B0;&#x4EE3;&#x7801;" class="headerlink" title="&#x4E94;&#x3001;&#x5B9E;&#x73B0;&#x4EE3;&#x7801;"></a>&#x4E94;&#x3001;&#x5B9E;&#x73B0;&#x4EE3;&#x7801;</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">region</span> &#x6DFB;&#x52A0;&#x626B;&#x63CF;&#x8BB0;&#x5F55;</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> &#x6DFB;&#x52A0;&#x626B;&#x63CF;&#x8BB0;&#x5F55;</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;scanList&quot;&gt;</span><span class="doctag">&lt;/param&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">bool</span> <span class="title">addRecord</span>(<span class="params">List&lt;ScanRecordModel&gt; scanList</span>) </span>{</div><div class="line">	<span class="keyword">bool</span> flag = <span class="literal">false</span>;</div><div class="line">	StringBuilder strSql = <span class="keyword">new</span> StringBuilder();</div><div class="line">	StringBuilder sql = <span class="keyword">new</span> StringBuilder();</div><div class="line">	String s = String.Empty;</div><div class="line">	String DoTime = DateTime.Now.ToString();</div><div class="line">	strSql.Append(<span class="string">&quot; SELECT * INTO #temp FROM ( &quot;</span>);</div><div class="line">	<span class="keyword">foreach</span> (ScanRecordModel scan <span class="keyword">in</span> scanList) {</div><div class="line">		s = <span class="string">&quot; SELECT &apos;{0}&apos;as barcode ,&apos;{1}&apos; as jobnumer,&apos;{2}&apos; as doTime,&apos;{3}&apos; as doPlace,&apos;{4}&apos; as Tel  UNION ALL &quot;</span>;</div><div class="line">		strSql.Append(String.Format(s, scan.barcode, scan.user.jobNumber, DoTime, scan.netPoint.rowId,scan.tel));</div><div class="line">	}</div><div class="line">	sql.Append(StringUtils.removeLastChar(strSql.ToString(), <span class="string">&quot;UNION ALL&quot;</span>));</div><div class="line">	sql.Append(<span class="string">&quot; )a &quot;</span>);</div><div class="line">	sql.Append(<span class="string">&quot; INSERT INTO ScanRecord(Barcode,JobNumer,DoTime,DoPlace,tel)  &quot;</span>);</div><div class="line">	sql.Append(<span class="string">&quot; SELECT DISTINCT * FROM #temp WHERE  NOT EXISTS (SELECT 1 FROM ScanRecord where ScanRecord.Barcode=#temp.Barcode) &quot;</span>);</div><div class="line">	flag = SqlHelper.ExecCmd(sql.ToString()) &gt; <span class="number">0</span>;</div><div class="line">	<span class="keyword">return</span> flag;</div><div class="line">}</div><div class="line"><span class="meta">#<span class="meta-keyword">endregion</span></span></div></pre></td></tr></table></figure>
 
       
 
@@ -506,14 +503,6 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
@@ -526,7 +515,31 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">C#</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -538,23 +551,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">打印机</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -570,19 +571,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">BOM</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
               </li>
             
             <div class="clearfix"></div>

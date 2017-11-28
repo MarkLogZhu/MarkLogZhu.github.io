@@ -8,14 +8,12 @@
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
   <title>会话技术之 Cookie 和 Session | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、会话会话是什么？会话可简单理解为：用户开一个浏览器，点击多个超链接，访问服务器多个web资源，然后关闭浏览器，整个过程称之为一个会话。
-有状态会话：一个同学来过教室，下次再来教室，我们会知道这个同学曾经来过，这称之为有状态会话。">
+  <meta name="description" content="&amp;#x4E00;&amp;#x3001;&amp;#x4F1A;&amp;#x8BDD;&amp;#x4F1A;&amp;#x8BDD;&amp;#x662F;&amp;#x4EC0;&amp;#x4E48;&amp;#xFF1F;&amp;#x4F1A;&amp;#x8BDD;&amp;#x53EF;&amp;#x7B80;&amp;#x5355;&amp;#x7406;&amp;#x89E3;&amp;#x4E3A;&amp;#xFF1A;&amp;#x7528;&amp;#x6237;&amp;#x5F00;&amp;#x4E00;&amp;#x4E2A;&amp;#x6D4F;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="会话技术之 Cookie 和 Session">
 <meta property="og:url" content="https://marklogzhu.github.io/2017/04/07/java/JavaWeb/06.会话技术之Cookie和Session/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="一、会话会话是什么？会话可简单理解为：用户开一个浏览器，点击多个超链接，访问服务器多个web资源，然后关闭浏览器，整个过程称之为一个会话。
-有状态会话：一个同学来过教室，下次再来教室，我们会知道这个同学曾经来过，这称之为有状态会话。">
+<meta property="og:description" content="&amp;#x4E00;&amp;#x3001;&amp;#x4F1A;&amp;#x8BDD;&amp;#x4F1A;&amp;#x8BDD;&amp;#x662F;&amp;#x4EC0;&amp;#x4E48;&amp;#xFF1F;&amp;#x4F1A;&amp;#x8BDD;&amp;#x53EF;&amp;#x7B80;&amp;#x5355;&amp;#x7406;&amp;#x89E3;&amp;#x4E3A;&amp;#xFF1A;&amp;#x7528;&amp;#x6237;&amp;#x5F00;&amp;#x4E00;&amp;#x4E2A;&amp;#x6D4F;">
 <meta property="og:image" content="http://oajxivjud.bkt.clouddn.com/CookieDemo01.png">
 <meta property="og:image" content="http://oajxivjud.bkt.clouddn.com/CookieDemo02.png">
 <meta property="og:image" content="http://oajxivjud.bkt.clouddn.com/SessionDemo01.png">
@@ -23,8 +21,7 @@
 <meta property="og:updated_time" content="2017-05-24T11:40:29.831Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="会话技术之 Cookie 和 Session">
-<meta name="twitter:description" content="一、会话会话是什么？会话可简单理解为：用户开一个浏览器，点击多个超链接，访问服务器多个web资源，然后关闭浏览器，整个过程称之为一个会话。
-有状态会话：一个同学来过教室，下次再来教室，我们会知道这个同学曾经来过，这称之为有状态会话。">
+<meta name="twitter:description" content="&amp;#x4E00;&amp;#x3001;&amp;#x4F1A;&amp;#x8BDD;&amp;#x4F1A;&amp;#x8BDD;&amp;#x662F;&amp;#x4EC0;&amp;#x4E48;&amp;#xFF1F;&amp;#x4F1A;&amp;#x8BDD;&amp;#x53EF;&amp;#x7B80;&amp;#x5355;&amp;#x7406;&amp;#x89E3;&amp;#x4E3A;&amp;#xFF1A;&amp;#x7528;&amp;#x6237;&amp;#x5F00;&amp;#x4E00;&amp;#x4E2A;&amp;#x6D4F;">
 <meta name="twitter:image" content="http://oajxivjud.bkt.clouddn.com/CookieDemo01.png">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
@@ -177,119 +174,119 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、会话"><a href="#一、会话" class="headerlink" title="一、会话"></a>一、会话</h2><h4 id="会话是什么？"><a href="#会话是什么？" class="headerlink" title="会话是什么？"></a>会话是什么？</h4><p>会话可简单理解为：用户开一个浏览器，点击多个超链接，访问服务器多个web资源，然后关闭浏览器，整个过程称之为一个会话。</p>
-<p>有状态会话：一个同学来过教室，下次再来教室，我们会知道这个同学曾经来过，这称之为有状态会话。</p>
+        <h2 id="&#x4E00;&#x3001;&#x4F1A;&#x8BDD;"><a href="#&#x4E00;&#x3001;&#x4F1A;&#x8BDD;" class="headerlink" title="&#x4E00;&#x3001;&#x4F1A;&#x8BDD;"></a>&#x4E00;&#x3001;&#x4F1A;&#x8BDD;</h2><h4 id="&#x4F1A;&#x8BDD;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;"><a href="#&#x4F1A;&#x8BDD;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;" class="headerlink" title="&#x4F1A;&#x8BDD;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;"></a>&#x4F1A;&#x8BDD;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;</h4><p>&#x4F1A;&#x8BDD;&#x53EF;&#x7B80;&#x5355;&#x7406;&#x89E3;&#x4E3A;&#xFF1A;&#x7528;&#x6237;&#x5F00;&#x4E00;&#x4E2A;&#x6D4F;&#x89C8;&#x5668;&#xFF0C;&#x70B9;&#x51FB;&#x591A;&#x4E2A;&#x8D85;&#x94FE;&#x63A5;&#xFF0C;&#x8BBF;&#x95EE;&#x670D;&#x52A1;&#x5668;&#x591A;&#x4E2A;web&#x8D44;&#x6E90;&#xFF0C;&#x7136;&#x540E;&#x5173;&#x95ED;&#x6D4F;&#x89C8;&#x5668;&#xFF0C;&#x6574;&#x4E2A;&#x8FC7;&#x7A0B;&#x79F0;&#x4E4B;&#x4E3A;&#x4E00;&#x4E2A;&#x4F1A;&#x8BDD;&#x3002;</p>
+<p>&#x6709;&#x72B6;&#x6001;&#x4F1A;&#x8BDD;&#xFF1A;&#x4E00;&#x4E2A;&#x540C;&#x5B66;&#x6765;&#x8FC7;&#x6559;&#x5BA4;&#xFF0C;&#x4E0B;&#x6B21;&#x518D;&#x6765;&#x6559;&#x5BA4;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x77E5;&#x9053;&#x8FD9;&#x4E2A;&#x540C;&#x5B66;&#x66FE;&#x7ECF;&#x6765;&#x8FC7;&#xFF0C;&#x8FD9;&#x79F0;&#x4E4B;&#x4E3A;&#x6709;&#x72B6;&#x6001;&#x4F1A;&#x8BDD;&#x3002;</p>
 <a id="more"></a>
-<h4 id="会话用来干什么？"><a href="#会话用来干什么？" class="headerlink" title="会话用来干什么？"></a>会话用来干什么？</h4><p>保存浏览器与服务器通信时产生的数据</p>
-<h4 id="有哪些会话技术？"><a href="#有哪些会话技术？" class="headerlink" title="有哪些会话技术？"></a>有哪些会话技术？</h4><ul>
+<h4 id="&#x4F1A;&#x8BDD;&#x7528;&#x6765;&#x5E72;&#x4EC0;&#x4E48;&#xFF1F;"><a href="#&#x4F1A;&#x8BDD;&#x7528;&#x6765;&#x5E72;&#x4EC0;&#x4E48;&#xFF1F;" class="headerlink" title="&#x4F1A;&#x8BDD;&#x7528;&#x6765;&#x5E72;&#x4EC0;&#x4E48;&#xFF1F;"></a>&#x4F1A;&#x8BDD;&#x7528;&#x6765;&#x5E72;&#x4EC0;&#x4E48;&#xFF1F;</h4><p>&#x4FDD;&#x5B58;&#x6D4F;&#x89C8;&#x5668;&#x4E0E;&#x670D;&#x52A1;&#x5668;&#x901A;&#x4FE1;&#x65F6;&#x4EA7;&#x751F;&#x7684;&#x6570;&#x636E;</p>
+<h4 id="&#x6709;&#x54EA;&#x4E9B;&#x4F1A;&#x8BDD;&#x6280;&#x672F;&#xFF1F;"><a href="#&#x6709;&#x54EA;&#x4E9B;&#x4F1A;&#x8BDD;&#x6280;&#x672F;&#xFF1F;" class="headerlink" title="&#x6709;&#x54EA;&#x4E9B;&#x4F1A;&#x8BDD;&#x6280;&#x672F;&#xFF1F;"></a>&#x6709;&#x54EA;&#x4E9B;&#x4F1A;&#x8BDD;&#x6280;&#x672F;&#xFF1F;</h4><ul>
 <li><p>Cookie</p>
-<pre><code>Cookie 是客户端技术，程序把每个用户的数据以 cookie 的形式写给用户各自的浏览器。当用户使用浏览器再去访问服务器中的web资源时，就会带着各自的数据去。这样，web资源处理的就是用户各自的数据了。
+<pre><code>Cookie &#x662F;&#x5BA2;&#x6237;&#x7AEF;&#x6280;&#x672F;&#xFF0C;&#x7A0B;&#x5E8F;&#x628A;&#x6BCF;&#x4E2A;&#x7528;&#x6237;&#x7684;&#x6570;&#x636E;&#x4EE5; cookie &#x7684;&#x5F62;&#x5F0F;&#x5199;&#x7ED9;&#x7528;&#x6237;&#x5404;&#x81EA;&#x7684;&#x6D4F;&#x89C8;&#x5668;&#x3002;&#x5F53;&#x7528;&#x6237;&#x4F7F;&#x7528;&#x6D4F;&#x89C8;&#x5668;&#x518D;&#x53BB;&#x8BBF;&#x95EE;&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x7684;web&#x8D44;&#x6E90;&#x65F6;&#xFF0C;&#x5C31;&#x4F1A;&#x5E26;&#x7740;&#x5404;&#x81EA;&#x7684;&#x6570;&#x636E;&#x53BB;&#x3002;&#x8FD9;&#x6837;&#xFF0C;web&#x8D44;&#x6E90;&#x5904;&#x7406;&#x7684;&#x5C31;&#x662F;&#x7528;&#x6237;&#x5404;&#x81EA;&#x7684;&#x6570;&#x636E;&#x4E86;&#x3002;
 </code></pre></li>
 <li><p>Session</p>
-<pre><code>Session 是服务器端技术，利用这个技术，服务器在运行时可以为每一个用户的浏览器创建一个其独享的 session 对象，由于 session 为用户浏览器独享，所以用户在访问服务器的web资源时，可以把各自的数据放在各自的 session 中，当用户再去访问服务器中的其它web资源时，其它web资源再从用户各自的 session 中取出数据为用户服务。
+<pre><code>Session &#x662F;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x6280;&#x672F;&#xFF0C;&#x5229;&#x7528;&#x8FD9;&#x4E2A;&#x6280;&#x672F;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x53EF;&#x4EE5;&#x4E3A;&#x6BCF;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x7684;&#x6D4F;&#x89C8;&#x5668;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5176;&#x72EC;&#x4EAB;&#x7684; session &#x5BF9;&#x8C61;&#xFF0C;&#x7531;&#x4E8E; session &#x4E3A;&#x7528;&#x6237;&#x6D4F;&#x89C8;&#x5668;&#x72EC;&#x4EAB;&#xFF0C;&#x6240;&#x4EE5;&#x7528;&#x6237;&#x5728;&#x8BBF;&#x95EE;&#x670D;&#x52A1;&#x5668;&#x7684;web&#x8D44;&#x6E90;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x628A;&#x5404;&#x81EA;&#x7684;&#x6570;&#x636E;&#x653E;&#x5728;&#x5404;&#x81EA;&#x7684; session &#x4E2D;&#xFF0C;&#x5F53;&#x7528;&#x6237;&#x518D;&#x53BB;&#x8BBF;&#x95EE;&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x7684;&#x5176;&#x5B83;web&#x8D44;&#x6E90;&#x65F6;&#xFF0C;&#x5176;&#x5B83;web&#x8D44;&#x6E90;&#x518D;&#x4ECE;&#x7528;&#x6237;&#x5404;&#x81EA;&#x7684; session &#x4E2D;&#x53D6;&#x51FA;&#x6570;&#x636E;&#x4E3A;&#x7528;&#x6237;&#x670D;&#x52A1;&#x3002;
 </code></pre></li>
 </ul>
-<h4 id="Cookie-与-Session的区别"><a href="#Cookie-与-Session的区别" class="headerlink" title="Cookie 与 Session的区别"></a>Cookie 与 Session的区别</h4><ul>
-<li>Cookie 是把数据写给浏览器。</li>
-<li>Session 把数据写到每一个浏览器对应的独占 session 中。</li>
-<li>Session 对象由服务器创建，开发人员可以调用 request 对象的 getSession 方法得到session对象。</li>
+<h4 id="Cookie-&#x4E0E;-Session&#x7684;&#x533A;&#x522B;"><a href="#Cookie-&#x4E0E;-Session&#x7684;&#x533A;&#x522B;" class="headerlink" title="Cookie &#x4E0E; Session&#x7684;&#x533A;&#x522B;"></a>Cookie &#x4E0E; Session&#x7684;&#x533A;&#x522B;</h4><ul>
+<li>Cookie &#x662F;&#x628A;&#x6570;&#x636E;&#x5199;&#x7ED9;&#x6D4F;&#x89C8;&#x5668;&#x3002;</li>
+<li>Session &#x628A;&#x6570;&#x636E;&#x5199;&#x5230;&#x6BCF;&#x4E00;&#x4E2A;&#x6D4F;&#x89C8;&#x5668;&#x5BF9;&#x5E94;&#x7684;&#x72EC;&#x5360; session &#x4E2D;&#x3002;</li>
+<li>Session &#x5BF9;&#x8C61;&#x7531;&#x670D;&#x52A1;&#x5668;&#x521B;&#x5EFA;&#xFF0C;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x53EF;&#x4EE5;&#x8C03;&#x7528; request &#x5BF9;&#x8C61;&#x7684; getSession &#x65B9;&#x6CD5;&#x5F97;&#x5230;session&#x5BF9;&#x8C61;&#x3002;</li>
 </ul>
-<h2 id="二、常用方法"><a href="#二、常用方法" class="headerlink" title="二、常用方法"></a>二、常用方法</h2><h3 id="Cookie-常用方法"><a href="#Cookie-常用方法" class="headerlink" title="Cookie 常用方法"></a>Cookie 常用方法</h3><hr>
+<h2 id="&#x4E8C;&#x3001;&#x5E38;&#x7528;&#x65B9;&#x6CD5;"><a href="#&#x4E8C;&#x3001;&#x5E38;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="&#x4E8C;&#x3001;&#x5E38;&#x7528;&#x65B9;&#x6CD5;"></a>&#x4E8C;&#x3001;&#x5E38;&#x7528;&#x65B9;&#x6CD5;</h2><h3 id="Cookie-&#x5E38;&#x7528;&#x65B9;&#x6CD5;"><a href="#Cookie-&#x5E38;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="Cookie &#x5E38;&#x7528;&#x65B9;&#x6CD5;"></a>Cookie &#x5E38;&#x7528;&#x65B9;&#x6CD5;</h3><hr>
 <ul>
-<li>Cookie(String name, String value)<pre><code>构造带指定名称和值的 cookie,cookie 的名称在创建之后不得更改。
+<li>Cookie(String name, String value)<pre><code>&#x6784;&#x9020;&#x5E26;&#x6307;&#x5B9A;&#x540D;&#x79F0;&#x548C;&#x503C;&#x7684; cookie,cookie &#x7684;&#x540D;&#x79F0;&#x5728;&#x521B;&#x5EFA;&#x4E4B;&#x540E;&#x4E0D;&#x5F97;&#x66F4;&#x6539;&#x3002;
 </code></pre></li>
-<li>void setComment(String purpose)<pre><code>指定一个 cookie 用途的注释。
+<li>void setComment(String purpose)<pre><code>&#x6307;&#x5B9A;&#x4E00;&#x4E2A; cookie &#x7528;&#x9014;&#x7684;&#x6CE8;&#x91CA;&#x3002;
 </code></pre></li>
-<li>String getComment()<pre><code>返回描述此 cookie 用途的注释；如果该 cookie 没有注释，则返回 null。
+<li>String getComment()<pre><code>&#x8FD4;&#x56DE;&#x63CF;&#x8FF0;&#x6B64; cookie &#x7528;&#x9014;&#x7684;&#x6CE8;&#x91CA;&#xFF1B;&#x5982;&#x679C;&#x8BE5; cookie &#x6CA1;&#x6709;&#x6CE8;&#x91CA;&#xFF0C;&#x5219;&#x8FD4;&#x56DE; null&#x3002;
 </code></pre></li>
-<li>setDomain(String pattern)<pre><code>指定应在其中显示此 cookie 的域。
+<li>setDomain(String pattern)<pre><code>&#x6307;&#x5B9A;&#x5E94;&#x5728;&#x5176;&#x4E2D;&#x663E;&#x793A;&#x6B64; cookie &#x7684;&#x57DF;&#x3002;
 </code></pre></li>
-<li>String getDomain()<pre><code>返回为此 cookie 设置的域名。
+<li>String getDomain()<pre><code>&#x8FD4;&#x56DE;&#x4E3A;&#x6B64; cookie &#x8BBE;&#x7F6E;&#x7684;&#x57DF;&#x540D;&#x3002;
 </code></pre></li>
-<li>void setMaxAge(int expiry)<pre><code>设置 cookie 的最大生存时间，以秒为单位。0 值会导致删除 cookie。
+<li>void setMaxAge(int expiry)<pre><code>&#x8BBE;&#x7F6E; cookie &#x7684;&#x6700;&#x5927;&#x751F;&#x5B58;&#x65F6;&#x95F4;&#xFF0C;&#x4EE5;&#x79D2;&#x4E3A;&#x5355;&#x4F4D;&#x3002;0 &#x503C;&#x4F1A;&#x5BFC;&#x81F4;&#x5220;&#x9664; cookie&#x3002;
 </code></pre></li>
-<li>int getMaxAge()<pre><code>返回以秒为单位指定的 cookie 的最大生存时间，默认情况下，-1 指示该 cookie 将保留到浏览器关闭为止。
+<li>int getMaxAge()<pre><code>&#x8FD4;&#x56DE;&#x4EE5;&#x79D2;&#x4E3A;&#x5355;&#x4F4D;&#x6307;&#x5B9A;&#x7684; cookie &#x7684;&#x6700;&#x5927;&#x751F;&#x5B58;&#x65F6;&#x95F4;&#xFF0C;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;-1 &#x6307;&#x793A;&#x8BE5; cookie &#x5C06;&#x4FDD;&#x7559;&#x5230;&#x6D4F;&#x89C8;&#x5668;&#x5173;&#x95ED;&#x4E3A;&#x6B62;&#x3002;
 </code></pre></li>
-<li>setPath(String uri)<pre><code>设置cookie 的路径。
+<li>setPath(String uri)<pre><code>&#x8BBE;&#x7F6E;cookie &#x7684;&#x8DEF;&#x5F84;&#x3002;
 </code></pre></li>
-<li>String getPath()<pre><code>返回浏览器将此 cookie 返回到的服务器上的路径。
+<li>String getPath()<pre><code>&#x8FD4;&#x56DE;&#x6D4F;&#x89C8;&#x5668;&#x5C06;&#x6B64; cookie &#x8FD4;&#x56DE;&#x5230;&#x7684;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#x7684;&#x8DEF;&#x5F84;&#x3002;
 </code></pre></li>
-<li>void setSecure(boolean flag)<pre><code>指示浏览器是否只能使用安全协议（如 HTTPS 或 SSL）发送 cookie。 
+<li>void setSecure(boolean flag)<pre><code>&#x6307;&#x793A;&#x6D4F;&#x89C8;&#x5668;&#x662F;&#x5426;&#x53EA;&#x80FD;&#x4F7F;&#x7528;&#x5B89;&#x5168;&#x534F;&#x8BAE;&#xFF08;&#x5982; HTTPS &#x6216; SSL&#xFF09;&#x53D1;&#x9001; cookie&#x3002; 
 </code></pre></li>
-<li>boolean getSecure()<pre><code>如果浏览器仅通过安全协议发送 cookie，则返回 true；如果浏览器可以使用任何协议发送 cookie，则返回 false。
+<li>boolean getSecure()<pre><code>&#x5982;&#x679C;&#x6D4F;&#x89C8;&#x5668;&#x4EC5;&#x901A;&#x8FC7;&#x5B89;&#x5168;&#x534F;&#x8BAE;&#x53D1;&#x9001; cookie&#xFF0C;&#x5219;&#x8FD4;&#x56DE; true&#xFF1B;&#x5982;&#x679C;&#x6D4F;&#x89C8;&#x5668;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4EFB;&#x4F55;&#x534F;&#x8BAE;&#x53D1;&#x9001; cookie&#xFF0C;&#x5219;&#x8FD4;&#x56DE; false&#x3002;
 </code></pre></li>
-<li>String getName()<pre><code>返回 cookie 的名称。名称在创建之后不得更改。 
+<li>String getName()<pre><code>&#x8FD4;&#x56DE; cookie &#x7684;&#x540D;&#x79F0;&#x3002;&#x540D;&#x79F0;&#x5728;&#x521B;&#x5EFA;&#x4E4B;&#x540E;&#x4E0D;&#x5F97;&#x66F4;&#x6539;&#x3002; 
 </code></pre></li>
-<li>void setValue(String newValue)<pre><code>在创建 cookie 之后将新值分配给 cookie
+<li>void setValue(String newValue)<pre><code>&#x5728;&#x521B;&#x5EFA; cookie &#x4E4B;&#x540E;&#x5C06;&#x65B0;&#x503C;&#x5206;&#x914D;&#x7ED9; cookie
 </code></pre></li>
-<li>String getValue()<pre><code>返回 cookie 的值。
+<li>String getValue()<pre><code>&#x8FD4;&#x56DE; cookie &#x7684;&#x503C;&#x3002;
 </code></pre></li>
-<li>int getVersion()<pre><code>返回此 cookie 遵守的协议版本。
+<li>int getVersion()<pre><code>&#x8FD4;&#x56DE;&#x6B64; cookie &#x9075;&#x5B88;&#x7684;&#x534F;&#x8BAE;&#x7248;&#x672C;&#x3002;
 </code></pre></li>
-<li>void setVersion(int v)<pre><code>设置此 cookie 遵守的 cookie 协议版本。
+<li>void setVersion(int v)<pre><code>&#x8BBE;&#x7F6E;&#x6B64; cookie &#x9075;&#x5B88;&#x7684; cookie &#x534F;&#x8BAE;&#x7248;&#x672C;&#x3002;
 </code></pre></li>
-<li>clone()<pre><code>重写标准 java.lang.Object.clone 方法以返回此 cookie 的副本。
+<li>clone()<pre><code>&#x91CD;&#x5199;&#x6807;&#x51C6; java.lang.Object.clone &#x65B9;&#x6CD5;&#x4EE5;&#x8FD4;&#x56DE;&#x6B64; cookie &#x7684;&#x526F;&#x672C;&#x3002;
 </code></pre></li>
 </ul>
 <hr>
-<h3 id="Session-常用方法"><a href="#Session-常用方法" class="headerlink" title="Session 常用方法"></a>Session 常用方法</h3><hr>
+<h3 id="Session-&#x5E38;&#x7528;&#x65B9;&#x6CD5;"><a href="#Session-&#x5E38;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="Session &#x5E38;&#x7528;&#x65B9;&#x6CD5;"></a>Session &#x5E38;&#x7528;&#x65B9;&#x6CD5;</h3><hr>
 <ul>
-<li>long getCreationTime()<pre><code>返回创建此会话的时间
+<li>long getCreationTime()<pre><code>&#x8FD4;&#x56DE;&#x521B;&#x5EFA;&#x6B64;&#x4F1A;&#x8BDD;&#x7684;&#x65F6;&#x95F4;
 </code></pre></li>
-<li>String getId()<pre><code>返回包含分配给此会话的唯一标识符的字符串
+<li>String getId()<pre><code>&#x8FD4;&#x56DE;&#x5305;&#x542B;&#x5206;&#x914D;&#x7ED9;&#x6B64;&#x4F1A;&#x8BDD;&#x7684;&#x552F;&#x4E00;&#x6807;&#x8BC6;&#x7B26;&#x7684;&#x5B57;&#x7B26;&#x4E32;
 </code></pre></li>
-<li>long getLastAccessedTime()<pre><code>返回客户端上一次发送与此会话关联的请求的时间
+<li>long getLastAccessedTime()<pre><code>&#x8FD4;&#x56DE;&#x5BA2;&#x6237;&#x7AEF;&#x4E0A;&#x4E00;&#x6B21;&#x53D1;&#x9001;&#x4E0E;&#x6B64;&#x4F1A;&#x8BDD;&#x5173;&#x8054;&#x7684;&#x8BF7;&#x6C42;&#x7684;&#x65F6;&#x95F4;
 </code></pre></li>
-<li>ServletContext getServletContext()<pre><code>返回此会话所属的 ServletContext
+<li>ServletContext getServletContext()<pre><code>&#x8FD4;&#x56DE;&#x6B64;&#x4F1A;&#x8BDD;&#x6240;&#x5C5E;&#x7684; ServletContext
 </code></pre></li>
-<li>void setMaxInactiveInterval(int interval)<pre><code>指定在 servlet 容器使此会话失效之前客户端请求之间的时间间隔，以秒为单位。负数时间指示会话永远不会超时。
+<li>void setMaxInactiveInterval(int interval)<pre><code>&#x6307;&#x5B9A;&#x5728; servlet &#x5BB9;&#x5668;&#x4F7F;&#x6B64;&#x4F1A;&#x8BDD;&#x5931;&#x6548;&#x4E4B;&#x524D;&#x5BA2;&#x6237;&#x7AEF;&#x8BF7;&#x6C42;&#x4E4B;&#x95F4;&#x7684;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#xFF0C;&#x4EE5;&#x79D2;&#x4E3A;&#x5355;&#x4F4D;&#x3002;&#x8D1F;&#x6570;&#x65F6;&#x95F4;&#x6307;&#x793A;&#x4F1A;&#x8BDD;&#x6C38;&#x8FDC;&#x4E0D;&#x4F1A;&#x8D85;&#x65F6;&#x3002;
 </code></pre></li>
-<li>int getMaxInactiveInterval()<pre><code>返回 servlet 容器在客户端访问之间将使此会话保持打开状态的最大时间间隔，以秒为单位。
+<li>int getMaxInactiveInterval()<pre><code>&#x8FD4;&#x56DE; servlet &#x5BB9;&#x5668;&#x5728;&#x5BA2;&#x6237;&#x7AEF;&#x8BBF;&#x95EE;&#x4E4B;&#x95F4;&#x5C06;&#x4F7F;&#x6B64;&#x4F1A;&#x8BDD;&#x4FDD;&#x6301;&#x6253;&#x5F00;&#x72B6;&#x6001;&#x7684;&#x6700;&#x5927;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#xFF0C;&#x4EE5;&#x79D2;&#x4E3A;&#x5355;&#x4F4D;&#x3002;
 </code></pre></li>
-<li>Object getAttribute(String name)<pre><code>返回与此会话中的指定名称绑定在一起的对象，如果没有对象绑定在该名称下，则返回 null。
+<li>Object getAttribute(String name)<pre><code>&#x8FD4;&#x56DE;&#x4E0E;&#x6B64;&#x4F1A;&#x8BDD;&#x4E2D;&#x7684;&#x6307;&#x5B9A;&#x540D;&#x79F0;&#x7ED1;&#x5B9A;&#x5728;&#x4E00;&#x8D77;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5BF9;&#x8C61;&#x7ED1;&#x5B9A;&#x5728;&#x8BE5;&#x540D;&#x79F0;&#x4E0B;&#xFF0C;&#x5219;&#x8FD4;&#x56DE; null&#x3002;
 </code></pre></li>
-<li>java.util.Enumeration<e> getAttributeNames()<pre><code>返回包含绑定到此会话的所有对象的名称的 String 对象的 Enumeration。
+<li>java.util.Enumeration<e> getAttributeNames()<pre><code>&#x8FD4;&#x56DE;&#x5305;&#x542B;&#x7ED1;&#x5B9A;&#x5230;&#x6B64;&#x4F1A;&#x8BDD;&#x7684;&#x6240;&#x6709;&#x5BF9;&#x8C61;&#x7684;&#x540D;&#x79F0;&#x7684; String &#x5BF9;&#x8C61;&#x7684; Enumeration&#x3002;
 </code></pre></e></li>
-<li>void setAttribute(String name, Object value)<pre><code>使用指定名称将对象绑定到此会话。如果具有同样名称的对象已经绑定到该会话，则替换该对象。
+<li>void setAttribute(String name, Object value)<pre><code>&#x4F7F;&#x7528;&#x6307;&#x5B9A;&#x540D;&#x79F0;&#x5C06;&#x5BF9;&#x8C61;&#x7ED1;&#x5B9A;&#x5230;&#x6B64;&#x4F1A;&#x8BDD;&#x3002;&#x5982;&#x679C;&#x5177;&#x6709;&#x540C;&#x6837;&#x540D;&#x79F0;&#x7684;&#x5BF9;&#x8C61;&#x5DF2;&#x7ECF;&#x7ED1;&#x5B9A;&#x5230;&#x8BE5;&#x4F1A;&#x8BDD;&#xFF0C;&#x5219;&#x66FF;&#x6362;&#x8BE5;&#x5BF9;&#x8C61;&#x3002;
 </code></pre></li>
-<li>void removeAttribute(String name)<pre><code>从此会话中移除与指定名称绑定在一起的对象。如果会话没有与指定名称绑定在一起的对象，则此方法不执行任何操作。
+<li>void removeAttribute(String name)<pre><code>&#x4ECE;&#x6B64;&#x4F1A;&#x8BDD;&#x4E2D;&#x79FB;&#x9664;&#x4E0E;&#x6307;&#x5B9A;&#x540D;&#x79F0;&#x7ED1;&#x5B9A;&#x5728;&#x4E00;&#x8D77;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x5982;&#x679C;&#x4F1A;&#x8BDD;&#x6CA1;&#x6709;&#x4E0E;&#x6307;&#x5B9A;&#x540D;&#x79F0;&#x7ED1;&#x5B9A;&#x5728;&#x4E00;&#x8D77;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5219;&#x6B64;&#x65B9;&#x6CD5;&#x4E0D;&#x6267;&#x884C;&#x4EFB;&#x4F55;&#x64CD;&#x4F5C;&#x3002;
 </code></pre></li>
-<li>void invalidate()<pre><code>使此会话无效，然后取消对任何绑定到它的对象的绑定。
+<li>void invalidate()<pre><code>&#x4F7F;&#x6B64;&#x4F1A;&#x8BDD;&#x65E0;&#x6548;&#xFF0C;&#x7136;&#x540E;&#x53D6;&#x6D88;&#x5BF9;&#x4EFB;&#x4F55;&#x7ED1;&#x5B9A;&#x5230;&#x5B83;&#x7684;&#x5BF9;&#x8C61;&#x7684;&#x7ED1;&#x5B9A;&#x3002;
 </code></pre></li>
-<li>boolean isNew()<pre><code>如果客户端还不知道该会话，或者客户端选择不加入该会话，则返回 true。例如，如果服务器仅使用基于 cookie 的会话，而客户端已经禁止了 cookie 的使用，则每个请求上的会话都将是新会话。
+<li>boolean isNew()<pre><code>&#x5982;&#x679C;&#x5BA2;&#x6237;&#x7AEF;&#x8FD8;&#x4E0D;&#x77E5;&#x9053;&#x8BE5;&#x4F1A;&#x8BDD;&#xFF0C;&#x6216;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#x9009;&#x62E9;&#x4E0D;&#x52A0;&#x5165;&#x8BE5;&#x4F1A;&#x8BDD;&#xFF0C;&#x5219;&#x8FD4;&#x56DE; true&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x670D;&#x52A1;&#x5668;&#x4EC5;&#x4F7F;&#x7528;&#x57FA;&#x4E8E; cookie &#x7684;&#x4F1A;&#x8BDD;&#xFF0C;&#x800C;&#x5BA2;&#x6237;&#x7AEF;&#x5DF2;&#x7ECF;&#x7981;&#x6B62;&#x4E86; cookie &#x7684;&#x4F7F;&#x7528;&#xFF0C;&#x5219;&#x6BCF;&#x4E2A;&#x8BF7;&#x6C42;&#x4E0A;&#x7684;&#x4F1A;&#x8BDD;&#x90FD;&#x5C06;&#x662F;&#x65B0;&#x4F1A;&#x8BDD;&#x3002;
 </code></pre></li>
 </ul>
 <hr>
-<h2 id="三、编码实践"><a href="#三、编码实践" class="headerlink" title="三、编码实践"></a>三、编码实践</h2><ul>
-<li><p>获取上一次访问时间</p>
-  <figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">private static final <span class="keyword">String</span> LAST_ACCESS_TIME = <span class="string">"lastAccessTime"</span>;</div><div class="line"></div><div class="line">protected void doGet(HttpServletRequest request, HttpServletResponse response)</div><div class="line">        throws ServletException, IOException &#123;</div><div class="line">    <span class="comment">// 设置输出字符集</span></div><div class="line">    response.setCharacterEncoding(<span class="string">"utf-8"</span>);</div><div class="line">    <span class="comment">// 获取输出流</span></div><div class="line">    PrintWriter <span class="built_in">writer</span> = response.getWriter();</div><div class="line">    <span class="comment">// 获取Cookie数组</span></div><div class="line">    Cookie[] cookies = request.getCookies();</div><div class="line">    <span class="keyword">if</span> (cookies == <span class="built_in">null</span>) &#123;</div><div class="line">        <span class="built_in">writer</span>.write(<span class="string">"第一次访问..."</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">writer</span>.write(<span class="string">"上次访问时间为："</span>);</div><div class="line">        <span class="keyword">for</span> (Cookie cookie : cookies) &#123;</div><div class="line">            <span class="keyword">if</span> (LAST_ACCESS_TIME.equals(cookie.<span class="built_in">getName</span>())) &#123;</div><div class="line">                Long lastAccessTime = Long.parseLong(cookie.getValue());</div><div class="line">                <span class="built_in">Date</span> <span class="built_in">date</span> = <span class="keyword">new</span> <span class="built_in">Date</span>(lastAccessTime);</div><div class="line">                java.text.DateFormat format1 =</div><div class="line">                        <span class="keyword">new</span> java.text.SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</div><div class="line">                <span class="built_in">writer</span>.write(format1.<span class="keyword">format</span>(<span class="built_in">date</span>));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    Cookie cookie = <span class="keyword">new</span> Cookie(LAST_ACCESS_TIME, <span class="string">""</span> + <span class="keyword">System</span>.currentTimeMillis());</div><div class="line">    response.addCookie(cookie);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>  ####结果：<br>   第一次访问：<br>  <img src="http://oajxivjud.bkt.clouddn.com/CookieDemo01.png" alt=""><br>第二次访问：<br>  <img src="http://oajxivjud.bkt.clouddn.com/CookieDemo02.png" alt=""></p>
+<h2 id="&#x4E09;&#x3001;&#x7F16;&#x7801;&#x5B9E;&#x8DF5;"><a href="#&#x4E09;&#x3001;&#x7F16;&#x7801;&#x5B9E;&#x8DF5;" class="headerlink" title="&#x4E09;&#x3001;&#x7F16;&#x7801;&#x5B9E;&#x8DF5;"></a>&#x4E09;&#x3001;&#x7F16;&#x7801;&#x5B9E;&#x8DF5;</h2><ul>
+<li><p>&#x83B7;&#x53D6;&#x4E0A;&#x4E00;&#x6B21;&#x8BBF;&#x95EE;&#x65F6;&#x95F4;</p>
+  <figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">private static final <span class="keyword">String</span> LAST_ACCESS_TIME = <span class="string">&quot;lastAccessTime&quot;</span>;</div><div class="line"></div><div class="line">protected void doGet(HttpServletRequest request, HttpServletResponse response)</div><div class="line">        throws ServletException, IOException {</div><div class="line">    <span class="comment">// &#x8BBE;&#x7F6E;&#x8F93;&#x51FA;&#x5B57;&#x7B26;&#x96C6;</span></div><div class="line">    response.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</div><div class="line">    <span class="comment">// &#x83B7;&#x53D6;&#x8F93;&#x51FA;&#x6D41;</span></div><div class="line">    PrintWriter <span class="built_in">writer</span> = response.getWriter();</div><div class="line">    <span class="comment">// &#x83B7;&#x53D6;Cookie&#x6570;&#x7EC4;</span></div><div class="line">    Cookie[] cookies = request.getCookies();</div><div class="line">    <span class="keyword">if</span> (cookies == <span class="built_in">null</span>) {</div><div class="line">        <span class="built_in">writer</span>.write(<span class="string">&quot;&#x7B2C;&#x4E00;&#x6B21;&#x8BBF;&#x95EE;...&quot;</span>);</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">        <span class="built_in">writer</span>.write(<span class="string">&quot;&#x4E0A;&#x6B21;&#x8BBF;&#x95EE;&#x65F6;&#x95F4;&#x4E3A;&#xFF1A;&quot;</span>);</div><div class="line">        <span class="keyword">for</span> (Cookie cookie : cookies) {</div><div class="line">            <span class="keyword">if</span> (LAST_ACCESS_TIME.equals(cookie.<span class="built_in">getName</span>())) {</div><div class="line">                Long lastAccessTime = Long.parseLong(cookie.getValue());</div><div class="line">                <span class="built_in">Date</span> <span class="built_in">date</span> = <span class="keyword">new</span> <span class="built_in">Date</span>(lastAccessTime);</div><div class="line">                java.text.DateFormat format1 =</div><div class="line">                        <span class="keyword">new</span> java.text.SimpleDateFormat(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>);</div><div class="line">                <span class="built_in">writer</span>.write(format1.<span class="keyword">format</span>(<span class="built_in">date</span>));</div><div class="line">            }</div><div class="line">        }</div><div class="line">    }</div><div class="line">    Cookie cookie = <span class="keyword">new</span> Cookie(LAST_ACCESS_TIME, <span class="string">&quot;&quot;</span> + <span class="keyword">System</span>.currentTimeMillis());</div><div class="line">    response.addCookie(cookie);</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>  ####&#x7ED3;&#x679C;&#xFF1A;<br>   &#x7B2C;&#x4E00;&#x6B21;&#x8BBF;&#x95EE;&#xFF1A;<br>  <img src="http://oajxivjud.bkt.clouddn.com/CookieDemo01.png" alt=""><br>&#x7B2C;&#x4E8C;&#x6B21;&#x8BBF;&#x95EE;&#xFF1A;<br>  <img src="http://oajxivjud.bkt.clouddn.com/CookieDemo02.png" alt=""></p>
 </li>
-<li><p>cookie中存取中文</p>
-  <figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Cookie cookie = <span class="keyword">new</span> <span class="type">Cookie</span>(<span class="string">"userName"</span>, URLEncoder.encode(<span class="string">"且听风吟"</span>, <span class="string">"UTF-8"</span>));</div><div class="line">response.addCookie(cookie);</div></pre></td></tr></table></figure>
+<li><p>cookie&#x4E2D;&#x5B58;&#x53D6;&#x4E2D;&#x6587;</p>
+  <figure class="highlight haxe"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Cookie cookie = <span class="keyword">new</span> <span class="type">Cookie</span>(<span class="string">&quot;userName&quot;</span>, URLEncoder.encode(<span class="string">&quot;&#x4E14;&#x542C;&#x98CE;&#x541F;&quot;</span>, <span class="string">&quot;UTF-8&quot;</span>));</div><div class="line">response.addCookie(cookie);</div></pre></td></tr></table></figure>
 </li>
-<li><p>cookie中获取中文</p>
-  <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">URLDecoder</span><span class="selector-class">.decode</span>(<span class="selector-tag">cookie</span><span class="selector-class">.getValue</span>(), "<span class="selector-tag">UTF-8</span>")</div></pre></td></tr></table></figure>
+<li><p>cookie&#x4E2D;&#x83B7;&#x53D6;&#x4E2D;&#x6587;</p>
+  <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">URLDecoder</span><span class="selector-class">.decode</span>(<span class="selector-tag">cookie</span><span class="selector-class">.getValue</span>(), &quot;<span class="selector-tag">UTF-8</span>&quot;)</div></pre></td></tr></table></figure>
 </li>
-<li><p>session 基本使用</p>
-  <figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">服务器创建 session 出来后，会把 session 的<span class="built_in">id</span>号，以 cookie 的形式回写给客户机，这样，只要客户机的浏览器不关，再去访问服务器时，都会带着 session 的 <span class="built_in">id</span> 号去，服务器发现客户机浏览器带 session <span class="built_in">id</span> 过来了，就会使用内存中与之对应的 session 为之服务。</div></pre></td></tr></table></figure>
-   <figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">protected void doGet(HttpServletRequest request, HttpServletResponse response)</div><div class="line">        throws ServletException, IOException &#123;</div><div class="line">    <span class="comment">// 设置编码格式</span></div><div class="line">    response.setCharacterEncoding(<span class="string">"UTF-8"</span>);</div><div class="line">    <span class="comment">// 获取输出流</span></div><div class="line">    PrintWriter <span class="built_in">writer</span> = response.getWriter();</div><div class="line">    <span class="comment">// 获取Session,若没有则新建</span></div><div class="line">    HttpSession session = request.getSession();</div><div class="line">    <span class="comment">// 设置值</span></div><div class="line">    session.setAttribute(<span class="string">"name"</span>, <span class="string">"且听风吟"</span>);</div><div class="line">    <span class="comment">// 获取SessionId</span></div><div class="line">    <span class="keyword">String</span> sessionId = session.getId();</div><div class="line">    <span class="comment">// 判断是否第一次创建Session</span></div><div class="line">    <span class="keyword">if</span> (session.isNew()) &#123;</div><div class="line">        <span class="built_in">writer</span>.<span class="keyword">print</span>(<span class="string">"第一次创建Session，id为:"</span> + sessionId);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">writer</span>.<span class="keyword">print</span>(<span class="string">"已存在Session，id为:"</span> + sessionId);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li><p>session &#x57FA;&#x672C;&#x4F7F;&#x7528;</p>
+  <figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x670D;&#x52A1;&#x5668;&#x521B;&#x5EFA; session &#x51FA;&#x6765;&#x540E;&#xFF0C;&#x4F1A;&#x628A; session &#x7684;<span class="built_in">id</span>&#x53F7;&#xFF0C;&#x4EE5; cookie &#x7684;&#x5F62;&#x5F0F;&#x56DE;&#x5199;&#x7ED9;&#x5BA2;&#x6237;&#x673A;&#xFF0C;&#x8FD9;&#x6837;&#xFF0C;&#x53EA;&#x8981;&#x5BA2;&#x6237;&#x673A;&#x7684;&#x6D4F;&#x89C8;&#x5668;&#x4E0D;&#x5173;&#xFF0C;&#x518D;&#x53BB;&#x8BBF;&#x95EE;&#x670D;&#x52A1;&#x5668;&#x65F6;&#xFF0C;&#x90FD;&#x4F1A;&#x5E26;&#x7740; session &#x7684; <span class="built_in">id</span> &#x53F7;&#x53BB;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x53D1;&#x73B0;&#x5BA2;&#x6237;&#x673A;&#x6D4F;&#x89C8;&#x5668;&#x5E26; session <span class="built_in">id</span> &#x8FC7;&#x6765;&#x4E86;&#xFF0C;&#x5C31;&#x4F1A;&#x4F7F;&#x7528;&#x5185;&#x5B58;&#x4E2D;&#x4E0E;&#x4E4B;&#x5BF9;&#x5E94;&#x7684; session &#x4E3A;&#x4E4B;&#x670D;&#x52A1;&#x3002;</div></pre></td></tr></table></figure>
+   <figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">protected void doGet(HttpServletRequest request, HttpServletResponse response)</div><div class="line">        throws ServletException, IOException {</div><div class="line">    <span class="comment">// &#x8BBE;&#x7F6E;&#x7F16;&#x7801;&#x683C;&#x5F0F;</span></div><div class="line">    response.setCharacterEncoding(<span class="string">&quot;UTF-8&quot;</span>);</div><div class="line">    <span class="comment">// &#x83B7;&#x53D6;&#x8F93;&#x51FA;&#x6D41;</span></div><div class="line">    PrintWriter <span class="built_in">writer</span> = response.getWriter();</div><div class="line">    <span class="comment">// &#x83B7;&#x53D6;Session,&#x82E5;&#x6CA1;&#x6709;&#x5219;&#x65B0;&#x5EFA;</span></div><div class="line">    HttpSession session = request.getSession();</div><div class="line">    <span class="comment">// &#x8BBE;&#x7F6E;&#x503C;</span></div><div class="line">    session.setAttribute(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;&#x4E14;&#x542C;&#x98CE;&#x541F;&quot;</span>);</div><div class="line">    <span class="comment">// &#x83B7;&#x53D6;SessionId</span></div><div class="line">    <span class="keyword">String</span> sessionId = session.getId();</div><div class="line">    <span class="comment">// &#x5224;&#x65AD;&#x662F;&#x5426;&#x7B2C;&#x4E00;&#x6B21;&#x521B;&#x5EFA;Session</span></div><div class="line">    <span class="keyword">if</span> (session.isNew()) {</div><div class="line">        <span class="built_in">writer</span>.<span class="keyword">print</span>(<span class="string">&quot;&#x7B2C;&#x4E00;&#x6B21;&#x521B;&#x5EFA;Session&#xFF0C;id&#x4E3A;:&quot;</span> + sessionId);</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">        <span class="built_in">writer</span>.<span class="keyword">print</span>(<span class="string">&quot;&#x5DF2;&#x5B58;&#x5728;Session&#xFF0C;id&#x4E3A;:&quot;</span> + sessionId);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>结果：<br><img src="http://oajxivjud.bkt.clouddn.com/SessionDemo01.png" alt=""><br><img src="http://oajxivjud.bkt.clouddn.com/SessionDemo02.png" alt=""></p>
-<h2 id="四、注意"><a href="#四、注意" class="headerlink" title="四、注意"></a>四、注意</h2><h4 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4><hr>
+<p>&#x7ED3;&#x679C;&#xFF1A;<br><img src="http://oajxivjud.bkt.clouddn.com/SessionDemo01.png" alt=""><br><img src="http://oajxivjud.bkt.clouddn.com/SessionDemo02.png" alt=""></p>
+<h2 id="&#x56DB;&#x3001;&#x6CE8;&#x610F;"><a href="#&#x56DB;&#x3001;&#x6CE8;&#x610F;" class="headerlink" title="&#x56DB;&#x3001;&#x6CE8;&#x610F;"></a>&#x56DB;&#x3001;&#x6CE8;&#x610F;</h2><h4 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4><hr>
 <ul>
-<li>在读取Cookie，然后操作时，除了getName(),getValue()外，不要妄图得到其他信息，其他方法不会得到值的</li>
-<li>一个Cookie只能标识一种信息，它至少含有一个标识该信息的名称（NAME）和设置值（VALUE）。</li>
-<li>一个WEB站点可以给一个WEB浏览器发送多个Cookie，一个WEB浏览器也可以存储多个WEB站点提供的Cookie。</li>
-<li>浏览器一般只允许存放300个Cookie，每个站点最多存放20个Cookie，每个Cookie的大小限制为4KB。</li>
-<li>如果创建了一个cookie，并将他发送到浏览器，默认情况下它是一个会话级别的cookie（即存储在浏览器的内存中），用户退出浏览器之后即被删除。若希望浏览器将该cookie存储在磁盘上，则需要使用maxAge，并给出一个以秒为单位的时间。将最大时效设为0则是命令浏览器删除该cookie。</li>
+<li>&#x5728;&#x8BFB;&#x53D6;Cookie&#xFF0C;&#x7136;&#x540E;&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x9664;&#x4E86;getName(),getValue()&#x5916;&#xFF0C;&#x4E0D;&#x8981;&#x5984;&#x56FE;&#x5F97;&#x5230;&#x5176;&#x4ED6;&#x4FE1;&#x606F;&#xFF0C;&#x5176;&#x4ED6;&#x65B9;&#x6CD5;&#x4E0D;&#x4F1A;&#x5F97;&#x5230;&#x503C;&#x7684;</li>
+<li>&#x4E00;&#x4E2A;Cookie&#x53EA;&#x80FD;&#x6807;&#x8BC6;&#x4E00;&#x79CD;&#x4FE1;&#x606F;&#xFF0C;&#x5B83;&#x81F3;&#x5C11;&#x542B;&#x6709;&#x4E00;&#x4E2A;&#x6807;&#x8BC6;&#x8BE5;&#x4FE1;&#x606F;&#x7684;&#x540D;&#x79F0;&#xFF08;NAME&#xFF09;&#x548C;&#x8BBE;&#x7F6E;&#x503C;&#xFF08;VALUE&#xFF09;&#x3002;</li>
+<li>&#x4E00;&#x4E2A;WEB&#x7AD9;&#x70B9;&#x53EF;&#x4EE5;&#x7ED9;&#x4E00;&#x4E2A;WEB&#x6D4F;&#x89C8;&#x5668;&#x53D1;&#x9001;&#x591A;&#x4E2A;Cookie&#xFF0C;&#x4E00;&#x4E2A;WEB&#x6D4F;&#x89C8;&#x5668;&#x4E5F;&#x53EF;&#x4EE5;&#x5B58;&#x50A8;&#x591A;&#x4E2A;WEB&#x7AD9;&#x70B9;&#x63D0;&#x4F9B;&#x7684;Cookie&#x3002;</li>
+<li>&#x6D4F;&#x89C8;&#x5668;&#x4E00;&#x822C;&#x53EA;&#x5141;&#x8BB8;&#x5B58;&#x653E;300&#x4E2A;Cookie&#xFF0C;&#x6BCF;&#x4E2A;&#x7AD9;&#x70B9;&#x6700;&#x591A;&#x5B58;&#x653E;20&#x4E2A;Cookie&#xFF0C;&#x6BCF;&#x4E2A;Cookie&#x7684;&#x5927;&#x5C0F;&#x9650;&#x5236;&#x4E3A;4KB&#x3002;</li>
+<li>&#x5982;&#x679C;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;cookie&#xFF0C;&#x5E76;&#x5C06;&#x4ED6;&#x53D1;&#x9001;&#x5230;&#x6D4F;&#x89C8;&#x5668;&#xFF0C;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x4F1A;&#x8BDD;&#x7EA7;&#x522B;&#x7684;cookie&#xFF08;&#x5373;&#x5B58;&#x50A8;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x7684;&#x5185;&#x5B58;&#x4E2D;&#xFF09;&#xFF0C;&#x7528;&#x6237;&#x9000;&#x51FA;&#x6D4F;&#x89C8;&#x5668;&#x4E4B;&#x540E;&#x5373;&#x88AB;&#x5220;&#x9664;&#x3002;&#x82E5;&#x5E0C;&#x671B;&#x6D4F;&#x89C8;&#x5668;&#x5C06;&#x8BE5;cookie&#x5B58;&#x50A8;&#x5728;&#x78C1;&#x76D8;&#x4E0A;&#xFF0C;&#x5219;&#x9700;&#x8981;&#x4F7F;&#x7528;maxAge&#xFF0C;&#x5E76;&#x7ED9;&#x51FA;&#x4E00;&#x4E2A;&#x4EE5;&#x79D2;&#x4E3A;&#x5355;&#x4F4D;&#x7684;&#x65F6;&#x95F4;&#x3002;&#x5C06;&#x6700;&#x5927;&#x65F6;&#x6548;&#x8BBE;&#x4E3A;0&#x5219;&#x662F;&#x547D;&#x4EE4;&#x6D4F;&#x89C8;&#x5668;&#x5220;&#x9664;&#x8BE5;cookie&#x3002;</li>
 </ul>
 <hr>
 <h4 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h4><hr>
-<h5 id="session对象的创建时机"><a href="#session对象的创建时机" class="headerlink" title="session对象的创建时机"></a>session对象的创建时机</h5><p>在程序中第一次调用request.getSession()方法时就会创建一个新的Session，可以用isNew()方法来判断Session是不是新创建的</p>
-<h5 id="session对象的销毁时机"><a href="#session对象的销毁时机" class="headerlink" title="session对象的销毁时机"></a>session对象的销毁时机</h5><p>session对象默认30分钟没有使用，则服务器会自动销毁session，在web.xml文件中可以手工配置session的失效时间.如：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 设置Session的有效时间:以分钟为单位--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">session-config</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>15<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>当需要在程序中手动设置Session失效时，可以手工调用session.invalidate方法，摧毁session。<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">HttpSession session = request.getSession()<span class="comment">;</span></div><div class="line">// 手工调用session.invalidate方法，摧毁session</div><div class="line">session.invalidate()<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<h5 id="session&#x5BF9;&#x8C61;&#x7684;&#x521B;&#x5EFA;&#x65F6;&#x673A;"><a href="#session&#x5BF9;&#x8C61;&#x7684;&#x521B;&#x5EFA;&#x65F6;&#x673A;" class="headerlink" title="session&#x5BF9;&#x8C61;&#x7684;&#x521B;&#x5EFA;&#x65F6;&#x673A;"></a>session&#x5BF9;&#x8C61;&#x7684;&#x521B;&#x5EFA;&#x65F6;&#x673A;</h5><p>&#x5728;&#x7A0B;&#x5E8F;&#x4E2D;&#x7B2C;&#x4E00;&#x6B21;&#x8C03;&#x7528;request.getSession()&#x65B9;&#x6CD5;&#x65F6;&#x5C31;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;Session&#xFF0C;&#x53EF;&#x4EE5;&#x7528;isNew()&#x65B9;&#x6CD5;&#x6765;&#x5224;&#x65AD;Session&#x662F;&#x4E0D;&#x662F;&#x65B0;&#x521B;&#x5EFA;&#x7684;</p>
+<h5 id="session&#x5BF9;&#x8C61;&#x7684;&#x9500;&#x6BC1;&#x65F6;&#x673A;"><a href="#session&#x5BF9;&#x8C61;&#x7684;&#x9500;&#x6BC1;&#x65F6;&#x673A;" class="headerlink" title="session&#x5BF9;&#x8C61;&#x7684;&#x9500;&#x6BC1;&#x65F6;&#x673A;"></a>session&#x5BF9;&#x8C61;&#x7684;&#x9500;&#x6BC1;&#x65F6;&#x673A;</h5><p>session&#x5BF9;&#x8C61;&#x9ED8;&#x8BA4;30&#x5206;&#x949F;&#x6CA1;&#x6709;&#x4F7F;&#x7528;&#xFF0C;&#x5219;&#x670D;&#x52A1;&#x5668;&#x4F1A;&#x81EA;&#x52A8;&#x9500;&#x6BC1;session&#xFF0C;&#x5728;web.xml&#x6587;&#x4EF6;&#x4E2D;&#x53EF;&#x4EE5;&#x624B;&#x5DE5;&#x914D;&#x7F6E;session&#x7684;&#x5931;&#x6548;&#x65F6;&#x95F4;.&#x5982;&#xFF1A;<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- &#x8BBE;&#x7F6E;Session&#x7684;&#x6709;&#x6548;&#x65F6;&#x95F4;:&#x4EE5;&#x5206;&#x949F;&#x4E3A;&#x5355;&#x4F4D;--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">session-config</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">session-timeout</span>&gt;</span>15<span class="tag">&lt;/<span class="name">session-timeout</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">session-config</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>&#x5F53;&#x9700;&#x8981;&#x5728;&#x7A0B;&#x5E8F;&#x4E2D;&#x624B;&#x52A8;&#x8BBE;&#x7F6E;Session&#x5931;&#x6548;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x624B;&#x5DE5;&#x8C03;&#x7528;session.invalidate&#x65B9;&#x6CD5;&#xFF0C;&#x6467;&#x6BC1;session&#x3002;<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">HttpSession session = request.getSession()<span class="comment">;</span></div><div class="line">// &#x624B;&#x5DE5;&#x8C03;&#x7528;session.invalidate&#x65B9;&#x6CD5;&#xFF0C;&#x6467;&#x6BC1;session</div><div class="line">session.invalidate()<span class="comment">;</span></div></pre></td></tr></table></figure></p>
 <hr>
 
       
@@ -568,14 +565,6 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
@@ -588,7 +577,31 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">C#</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -600,23 +613,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">打印机</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -632,19 +633,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">BOM</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
               </li>
             
             <div class="clearfix"></div>

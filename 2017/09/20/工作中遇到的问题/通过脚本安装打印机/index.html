@@ -8,22 +8,16 @@
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
   <title>通过脚本安装打印机 | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="财务电脑登录 VPN 后就无法使用打印机打印，必须重新添加下打印机，退出 VPN 后也要重新添加打印机，为了节省时间，从网上找了个 脚本 实现自动安装打印机操作，这里做下记录。
-
-123456789101112@echo offecho 清除连接net use * /del /yecho 添加网络打印机中......sc config spooler start= autonet stop sp">
+  <meta name="description" content="&amp;#x8D22;&amp;#x52A1;&amp;#x7535;&amp;#x8111;&amp;#x767B;&amp;#x5F55; VPN &amp;#x540E;&amp;#x5C31;&amp;#x65E0;&amp;#x6CD5;&amp;#x4F7F;&amp;#x7528;&amp;#x6253;&amp;#x5370;&amp;#x673A;&amp;#x6253;&amp;#x5370;&amp;#xFF0C;&amp;#x5FC5;&amp;#x987B;&amp;#x91CD;&amp;#x65B0;&amp;#x6DFB;&amp;#x52A0;&amp;#">
 <meta property="og:type" content="article">
 <meta property="og:title" content="通过脚本安装打印机">
 <meta property="og:url" content="https://marklogzhu.github.io/2017/09/20/工作中遇到的问题/通过脚本安装打印机/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="财务电脑登录 VPN 后就无法使用打印机打印，必须重新添加下打印机，退出 VPN 后也要重新添加打印机，为了节省时间，从网上找了个 脚本 实现自动安装打印机操作，这里做下记录。
-
-123456789101112@echo offecho 清除连接net use * /del /yecho 添加网络打印机中......sc config spooler start= autonet stop sp">
+<meta property="og:description" content="&amp;#x8D22;&amp;#x52A1;&amp;#x7535;&amp;#x8111;&amp;#x767B;&amp;#x5F55; VPN &amp;#x540E;&amp;#x5C31;&amp;#x65E0;&amp;#x6CD5;&amp;#x4F7F;&amp;#x7528;&amp;#x6253;&amp;#x5370;&amp;#x673A;&amp;#x6253;&amp;#x5370;&amp;#xFF0C;&amp;#x5FC5;&amp;#x987B;&amp;#x91CD;&amp;#x65B0;&amp;#x6DFB;&amp;#x52A0;&amp;#">
 <meta property="og:updated_time" content="2017-09-20T03:19:38.122Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="通过脚本安装打印机">
-<meta name="twitter:description" content="财务电脑登录 VPN 后就无法使用打印机打印，必须重新添加下打印机，退出 VPN 后也要重新添加打印机，为了节省时间，从网上找了个 脚本 实现自动安装打印机操作，这里做下记录。
-
-123456789101112@echo offecho 清除连接net use * /del /yecho 添加网络打印机中......sc config spooler start= autonet stop sp">
+<meta name="twitter:description" content="&amp;#x8D22;&amp;#x52A1;&amp;#x7535;&amp;#x8111;&amp;#x767B;&amp;#x5F55; VPN &amp;#x540E;&amp;#x5C31;&amp;#x65E0;&amp;#x6CD5;&amp;#x4F7F;&amp;#x7528;&amp;#x6253;&amp;#x5370;&amp;#x673A;&amp;#x6253;&amp;#x5370;&amp;#xFF0C;&amp;#x5FC5;&amp;#x987B;&amp;#x91CD;&amp;#x65B0;&amp;#x6DFB;&amp;#x52A0;&amp;#">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -176,9 +170,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>财务电脑登录 VPN 后就无法使用打印机打印，必须重新添加下打印机，退出 VPN 后也要重新添加打印机，为了节省时间，从网上找了个 <a href="http://www.jb51.net/article/59074.htm" target="_blank" rel="external">脚本</a> 实现自动安装打印机操作，这里做下记录。</p>
+<p>&#x8D22;&#x52A1;&#x7535;&#x8111;&#x767B;&#x5F55; VPN &#x540E;&#x5C31;&#x65E0;&#x6CD5;&#x4F7F;&#x7528;&#x6253;&#x5370;&#x673A;&#x6253;&#x5370;&#xFF0C;&#x5FC5;&#x987B;&#x91CD;&#x65B0;&#x6DFB;&#x52A0;&#x4E0B;&#x6253;&#x5370;&#x673A;&#xFF0C;&#x9000;&#x51FA; VPN &#x540E;&#x4E5F;&#x8981;&#x91CD;&#x65B0;&#x6DFB;&#x52A0;&#x6253;&#x5370;&#x673A;&#xFF0C;&#x4E3A;&#x4E86;&#x8282;&#x7701;&#x65F6;&#x95F4;&#xFF0C;&#x4ECE;&#x7F51;&#x4E0A;&#x627E;&#x4E86;&#x4E2A; <a href="http://www.jb51.net/article/59074.htm" target="_blank" rel="external">&#x811A;&#x672C;</a> &#x5B9E;&#x73B0;&#x81EA;&#x52A8;&#x5B89;&#x88C5;&#x6253;&#x5370;&#x673A;&#x64CD;&#x4F5C;&#xFF0C;&#x8FD9;&#x91CC;&#x505A;&#x4E0B;&#x8BB0;&#x5F55;&#x3002;</p>
 </blockquote>
-<figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@<span class="built_in">echo</span> off</div><div class="line"><span class="built_in">echo</span> 清除连接</div><div class="line"><span class="built_in">net</span> use * /<span class="built_in">del</span> /y</div><div class="line"><span class="built_in">echo</span> 添加网络打印机中......</div><div class="line"></div><div class="line">sc config spooler <span class="built_in">start</span>= auto</div><div class="line"><span class="built_in">net</span> stop spooler &amp; <span class="built_in">net</span> <span class="built_in">start</span> spooler</div><div class="line"><span class="comment">rem 只需替换以下ip、打印机名、帐号、密码为具体名称即可</span></div><div class="line"><span class="built_in">net</span> use \\<span class="number">10</span>.<span class="number">10</span>.<span class="number">60</span>.<span class="number">2</span>\IPC$ "密码" /user:"用户名"</div><div class="line">rundll32 printui.dll,PrintUIEntry /<span class="keyword">in</span> /n "\\<span class="number">10</span>.<span class="number">10</span>.<span class="number">60</span>.<span class="number">2</span>\打印机共享名称"</div><div class="line"><span class="built_in">echo</span> 连接成功</div><div class="line"><span class="built_in">pause</span></div></pre></td></tr></table></figure>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@<span class="built_in">echo</span> off</div><div class="line"><span class="built_in">echo</span> &#x6E05;&#x9664;&#x8FDE;&#x63A5;</div><div class="line"><span class="built_in">net</span> use * /<span class="built_in">del</span> /y</div><div class="line"><span class="built_in">echo</span> &#x6DFB;&#x52A0;&#x7F51;&#x7EDC;&#x6253;&#x5370;&#x673A;&#x4E2D;......</div><div class="line"></div><div class="line">sc config spooler <span class="built_in">start</span>= auto</div><div class="line"><span class="built_in">net</span> stop spooler &amp; <span class="built_in">net</span> <span class="built_in">start</span> spooler</div><div class="line"><span class="comment">rem &#x53EA;&#x9700;&#x66FF;&#x6362;&#x4EE5;&#x4E0B;ip&#x3001;&#x6253;&#x5370;&#x673A;&#x540D;&#x3001;&#x5E10;&#x53F7;&#x3001;&#x5BC6;&#x7801;&#x4E3A;&#x5177;&#x4F53;&#x540D;&#x79F0;&#x5373;&#x53EF;</span></div><div class="line"><span class="built_in">net</span> use \\<span class="number">10</span>.<span class="number">10</span>.<span class="number">60</span>.<span class="number">2</span>\IPC$ &quot;&#x5BC6;&#x7801;&quot; /user:&quot;&#x7528;&#x6237;&#x540D;&quot;</div><div class="line">rundll32 printui.dll,PrintUIEntry /<span class="keyword">in</span> /n &quot;\\<span class="number">10</span>.<span class="number">10</span>.<span class="number">60</span>.<span class="number">2</span>\&#x6253;&#x5370;&#x673A;&#x5171;&#x4EAB;&#x540D;&#x79F0;&quot;</div><div class="line"><span class="built_in">echo</span> &#x8FDE;&#x63A5;&#x6210;&#x529F;</div><div class="line"><span class="built_in">pause</span></div></pre></td></tr></table></figure>
       
 
       
@@ -459,14 +453,6 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
@@ -479,7 +465,31 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">C#</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -491,23 +501,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">打印机</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -523,19 +521,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">BOM</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
               </li>
             
             <div class="clearfix"></div>

@@ -8,25 +8,19 @@
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
   <title>通过 SQL 统计考勤 | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="外面买来的考勤机软件出现问题,无法汇总考勤记录。要求我根据开门记录来统计考勤信息，这里做下记录。
-
-开门数据1234567WITH tb(userName,doDate)AS(	select N&apos;张三&apos;,CONVERT(DATETIME,&apos;2016-12-26 8:30:59&apos;) UNION ALL  	select N&apos;张三&apos;,&apos;2016-12-26 13:59:14&apos; UNION ALL">
+  <meta name="description" content="&amp;#x5916;&amp;#x9762;&amp;#x4E70;&amp;#x6765;&amp;#x7684;&amp;#x8003;&amp;#x52E4;&amp;#x673A;&amp;#x8F6F;&amp;#x4EF6;&amp;#x51FA;&amp;#x73B0;&amp;#x95EE;&amp;#x9898;,&amp;#x65E0;&amp;#x6CD5;&amp;#x6C47;&amp;#x603B;&amp;#x8003;&amp;#x52E4;&amp;#x8BB0;&amp;#x5F55;&amp;#x3002;&amp;#x8981;&amp;#x6C4">
 <meta property="og:type" content="article">
 <meta property="og:title" content="通过 SQL 统计考勤">
 <meta property="og:url" content="https://marklogzhu.github.io/2017/09/21/工作中遇到的问题/sql统计考勤时间/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="外面买来的考勤机软件出现问题,无法汇总考勤记录。要求我根据开门记录来统计考勤信息，这里做下记录。
-
-开门数据1234567WITH tb(userName,doDate)AS(	select N&apos;张三&apos;,CONVERT(DATETIME,&apos;2016-12-26 8:30:59&apos;) UNION ALL  	select N&apos;张三&apos;,&apos;2016-12-26 13:59:14&apos; UNION ALL">
+<meta property="og:description" content="&amp;#x5916;&amp;#x9762;&amp;#x4E70;&amp;#x6765;&amp;#x7684;&amp;#x8003;&amp;#x52E4;&amp;#x673A;&amp;#x8F6F;&amp;#x4EF6;&amp;#x51FA;&amp;#x73B0;&amp;#x95EE;&amp;#x9898;,&amp;#x65E0;&amp;#x6CD5;&amp;#x6C47;&amp;#x603B;&amp;#x8003;&amp;#x52E4;&amp;#x8BB0;&amp;#x5F55;&amp;#x3002;&amp;#x8981;&amp;#x6C4">
 <meta property="og:image" content="https://i.imgur.com/nosqjSg.png">
 <meta property="og:image" content="https://i.imgur.com/bswCP1T.png">
 <meta property="og:image" content="https://i.imgur.com/7CbysJN.png">
 <meta property="og:updated_time" content="2017-09-22T03:25:31.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="通过 SQL 统计考勤">
-<meta name="twitter:description" content="外面买来的考勤机软件出现问题,无法汇总考勤记录。要求我根据开门记录来统计考勤信息，这里做下记录。
-
-开门数据1234567WITH tb(userName,doDate)AS(	select N&apos;张三&apos;,CONVERT(DATETIME,&apos;2016-12-26 8:30:59&apos;) UNION ALL  	select N&apos;张三&apos;,&apos;2016-12-26 13:59:14&apos; UNION ALL">
+<meta name="twitter:description" content="&amp;#x5916;&amp;#x9762;&amp;#x4E70;&amp;#x6765;&amp;#x7684;&amp;#x8003;&amp;#x52E4;&amp;#x673A;&amp;#x8F6F;&amp;#x4EF6;&amp;#x51FA;&amp;#x73B0;&amp;#x95EE;&amp;#x9898;,&amp;#x65E0;&amp;#x6CD5;&amp;#x6C47;&amp;#x603B;&amp;#x8003;&amp;#x52E4;&amp;#x8BB0;&amp;#x5F55;&amp;#x3002;&amp;#x8981;&amp;#x6C4">
 <meta name="twitter:image" content="https://i.imgur.com/nosqjSg.png">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
@@ -180,16 +174,16 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>外面买来的考勤机软件出现问题,无法汇总考勤记录。要求我根据开门记录来统计考勤信息，这里做下记录。</p>
+<p>&#x5916;&#x9762;&#x4E70;&#x6765;&#x7684;&#x8003;&#x52E4;&#x673A;&#x8F6F;&#x4EF6;&#x51FA;&#x73B0;&#x95EE;&#x9898;,&#x65E0;&#x6CD5;&#x6C47;&#x603B;&#x8003;&#x52E4;&#x8BB0;&#x5F55;&#x3002;&#x8981;&#x6C42;&#x6211;&#x6839;&#x636E;&#x5F00;&#x95E8;&#x8BB0;&#x5F55;&#x6765;&#x7EDF;&#x8BA1;&#x8003;&#x52E4;&#x4FE1;&#x606F;&#xFF0C;&#x8FD9;&#x91CC;&#x505A;&#x4E0B;&#x8BB0;&#x5F55;&#x3002;</p>
 </blockquote>
-<h4 id="开门数据"><a href="#开门数据" class="headerlink" title="开门数据"></a>开门数据</h4><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">WITH</span> tb(userName,doDate)<span class="keyword">AS</span>(</div><div class="line">	<span class="keyword">select</span> N<span class="string">'张三'</span>,CONVERT(DATETIME,<span class="string">'2016-12-26 8:30:59'</span>) <span class="keyword">UNION</span> ALL  </div><div class="line">	<span class="keyword">select</span> N<span class="string">'张三'</span>,<span class="string">'2016-12-26 13:59:14'</span> <span class="keyword">UNION</span> ALL  </div><div class="line">	<span class="keyword">select</span> N<span class="string">'张三'</span>,<span class="string">'2016-12-26 17:00:00'</span> <span class="keyword">UNION</span> ALL    </div><div class="line">	<span class="keyword">select</span> N<span class="string">'张三'</span>,<span class="string">'2016-12-27 15:59:14'</span> <span class="keyword">UNION</span> ALL  </div><div class="line">	<span class="keyword">select</span> N<span class="string">'张三'</span>,<span class="string">'2016-12-27 17:10:00'</span>              </div><div class="line">)</div></pre></td></tr></table></figure>
+<h4 id="&#x5F00;&#x95E8;&#x6570;&#x636E;"><a href="#&#x5F00;&#x95E8;&#x6570;&#x636E;" class="headerlink" title="&#x5F00;&#x95E8;&#x6570;&#x636E;"></a>&#x5F00;&#x95E8;&#x6570;&#x636E;</h4><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">WITH</span> tb(userName,doDate)<span class="keyword">AS</span>(</div><div class="line">	<span class="keyword">select</span> N<span class="string">&apos;&#x5F20;&#x4E09;&apos;</span>,CONVERT(DATETIME,<span class="string">&apos;2016-12-26 8:30:59&apos;</span>) <span class="keyword">UNION</span> ALL  </div><div class="line">	<span class="keyword">select</span> N<span class="string">&apos;&#x5F20;&#x4E09;&apos;</span>,<span class="string">&apos;2016-12-26 13:59:14&apos;</span> <span class="keyword">UNION</span> ALL  </div><div class="line">	<span class="keyword">select</span> N<span class="string">&apos;&#x5F20;&#x4E09;&apos;</span>,<span class="string">&apos;2016-12-26 17:00:00&apos;</span> <span class="keyword">UNION</span> ALL    </div><div class="line">	<span class="keyword">select</span> N<span class="string">&apos;&#x5F20;&#x4E09;&apos;</span>,<span class="string">&apos;2016-12-27 15:59:14&apos;</span> <span class="keyword">UNION</span> ALL  </div><div class="line">	<span class="keyword">select</span> N<span class="string">&apos;&#x5F20;&#x4E09;&apos;</span>,<span class="string">&apos;2016-12-27 17:10:00&apos;</span>              </div><div class="line">)</div></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/nosqjSg.png" alt=""></p>
 <a id="more"></a>
-<h4 id="获取每天最早跟最晚的一笔记录"><a href="#获取每天最早跟最晚的一笔记录" class="headerlink" title="获取每天最早跟最晚的一笔记录"></a>获取每天最早跟最晚的一笔记录</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> userName,<span class="keyword">CONVERT</span>(<span class="built_in">VARCHAR</span>,tb.doDate,<span class="number">102</span>) <span class="keyword">AS</span> 日期,<span class="keyword">MIN</span>(doDate) <span class="keyword">AS</span> 最早时间,<span class="keyword">MAX</span>(doDate) <span class="keyword">AS</span> 最后时间 <span class="keyword">FROM</span> tb </div><div class="line">	<span class="keyword">GROUP</span> <span class="keyword">BY</span>  userName,<span class="keyword">CONVERT</span>(<span class="built_in">VARCHAR</span>,tb.doDate,<span class="number">102</span>)</div></pre></td></tr></table></figure>
+<h4 id="&#x83B7;&#x53D6;&#x6BCF;&#x5929;&#x6700;&#x65E9;&#x8DDF;&#x6700;&#x665A;&#x7684;&#x4E00;&#x7B14;&#x8BB0;&#x5F55;"><a href="#&#x83B7;&#x53D6;&#x6BCF;&#x5929;&#x6700;&#x65E9;&#x8DDF;&#x6700;&#x665A;&#x7684;&#x4E00;&#x7B14;&#x8BB0;&#x5F55;" class="headerlink" title="&#x83B7;&#x53D6;&#x6BCF;&#x5929;&#x6700;&#x65E9;&#x8DDF;&#x6700;&#x665A;&#x7684;&#x4E00;&#x7B14;&#x8BB0;&#x5F55;"></a>&#x83B7;&#x53D6;&#x6BCF;&#x5929;&#x6700;&#x65E9;&#x8DDF;&#x6700;&#x665A;&#x7684;&#x4E00;&#x7B14;&#x8BB0;&#x5F55;</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> userName,<span class="keyword">CONVERT</span>(<span class="built_in">VARCHAR</span>,tb.doDate,<span class="number">102</span>) <span class="keyword">AS</span> &#x65E5;&#x671F;,<span class="keyword">MIN</span>(doDate) <span class="keyword">AS</span> &#x6700;&#x65E9;&#x65F6;&#x95F4;,<span class="keyword">MAX</span>(doDate) <span class="keyword">AS</span> &#x6700;&#x540E;&#x65F6;&#x95F4; <span class="keyword">FROM</span> tb </div><div class="line">	<span class="keyword">GROUP</span> <span class="keyword">BY</span>  userName,<span class="keyword">CONVERT</span>(<span class="built_in">VARCHAR</span>,tb.doDate,<span class="number">102</span>)</div></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/bswCP1T.png" alt=""></p>
-<h4 id="是否准点"><a href="#是否准点" class="headerlink" title="是否准点"></a>是否准点</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> </div><div class="line">		t.userName,</div><div class="line">		t.CheckDay <span class="keyword">AS</span> <span class="string">'日期'</span>,</div><div class="line">		<span class="keyword">MAX</span>(<span class="keyword">CASE</span> <span class="keyword">WHEN</span> t.CheckInd=<span class="number">1</span> <span class="keyword">THEN</span> <span class="keyword">CASE</span> <span class="keyword">WHEN</span> MinuteOfDay&gt;<span class="number">8</span>*<span class="number">60</span>+<span class="number">30</span><span class="comment">/*8点30分*/</span> <span class="keyword">THEN</span> N<span class="string">'迟到'</span> <span class="keyword">ELSE</span> N<span class="string">'准时'</span> <span class="keyword">END</span>  <span class="keyword">ELSE</span> <span class="literal">NULL</span> <span class="keyword">END</span>)  <span class="keyword">AS</span> <span class="string">'签到'</span>,</div><div class="line">		<span class="keyword">MAX</span>(<span class="keyword">CASE</span> <span class="keyword">WHEN</span> t.CheckInd=t.checkcount <span class="keyword">THEN</span> <span class="keyword">CASE</span> <span class="keyword">WHEN</span> MinuteOfDay&lt;<span class="number">17</span>*<span class="number">60</span> <span class="keyword">THEN</span> N<span class="string">'早退'</span> <span class="keyword">ELSE</span> N<span class="string">'准时'</span> <span class="keyword">END</span>  <span class="keyword">ELSE</span> <span class="literal">NULL</span> <span class="keyword">END</span> ) <span class="keyword">AS</span> <span class="string">'签退'</span></div><div class="line"><span class="keyword">FROM</span> (</div><div class="line">	<span class="keyword">SELECT</span> *,</div><div class="line">			<span class="keyword">CONVERT</span>(<span class="built_in">VARCHAR</span>,tb.doDate,<span class="number">102</span>) <span class="keyword">AS</span> CheckDay,</div><div class="line">			<span class="keyword">DATEPART</span>(<span class="keyword">HOUR</span>,tb.doDate)*<span class="number">60</span>+<span class="keyword">DATEPART</span>(<span class="keyword">MINUTE</span>,tb.doDate) <span class="keyword">AS</span> MinuteOfDay,</div><div class="line">			ROW_NUMBER()<span class="keyword">OVER</span>(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> tb.userName ,<span class="keyword">CONVERT</span>(<span class="built_in">VARCHAR</span>,tb.doDate,<span class="number">110</span>) <span class="keyword">ORDER</span> <span class="keyword">BY</span> tb.doDate) <span class="keyword">AS</span> CheckInd,</div><div class="line">			<span class="keyword">COUNT</span>(<span class="number">0</span>)<span class="keyword">OVER</span>(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> tb.userName, <span class="keyword">CONVERT</span>(<span class="built_in">VARCHAR</span>,tb.doDate,<span class="number">110</span>)) checkcount </div><div class="line">     <span class="keyword">FROM</span> tb</div><div class="line">) <span class="keyword">AS</span> t <span class="keyword">GROUP</span> <span class="keyword">BY</span> t.userName,t.CheckDay</div></pre></td></tr></table></figure>
+<h4 id="&#x662F;&#x5426;&#x51C6;&#x70B9;"><a href="#&#x662F;&#x5426;&#x51C6;&#x70B9;" class="headerlink" title="&#x662F;&#x5426;&#x51C6;&#x70B9;"></a>&#x662F;&#x5426;&#x51C6;&#x70B9;</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> </div><div class="line">		t.userName,</div><div class="line">		t.CheckDay <span class="keyword">AS</span> <span class="string">&apos;&#x65E5;&#x671F;&apos;</span>,</div><div class="line">		<span class="keyword">MAX</span>(<span class="keyword">CASE</span> <span class="keyword">WHEN</span> t.CheckInd=<span class="number">1</span> <span class="keyword">THEN</span> <span class="keyword">CASE</span> <span class="keyword">WHEN</span> MinuteOfDay&gt;<span class="number">8</span>*<span class="number">60</span>+<span class="number">30</span><span class="comment">/*8&#x70B9;30&#x5206;*/</span> <span class="keyword">THEN</span> N<span class="string">&apos;&#x8FDF;&#x5230;&apos;</span> <span class="keyword">ELSE</span> N<span class="string">&apos;&#x51C6;&#x65F6;&apos;</span> <span class="keyword">END</span>  <span class="keyword">ELSE</span> <span class="literal">NULL</span> <span class="keyword">END</span>)  <span class="keyword">AS</span> <span class="string">&apos;&#x7B7E;&#x5230;&apos;</span>,</div><div class="line">		<span class="keyword">MAX</span>(<span class="keyword">CASE</span> <span class="keyword">WHEN</span> t.CheckInd=t.checkcount <span class="keyword">THEN</span> <span class="keyword">CASE</span> <span class="keyword">WHEN</span> MinuteOfDay&lt;<span class="number">17</span>*<span class="number">60</span> <span class="keyword">THEN</span> N<span class="string">&apos;&#x65E9;&#x9000;&apos;</span> <span class="keyword">ELSE</span> N<span class="string">&apos;&#x51C6;&#x65F6;&apos;</span> <span class="keyword">END</span>  <span class="keyword">ELSE</span> <span class="literal">NULL</span> <span class="keyword">END</span> ) <span class="keyword">AS</span> <span class="string">&apos;&#x7B7E;&#x9000;&apos;</span></div><div class="line"><span class="keyword">FROM</span> (</div><div class="line">	<span class="keyword">SELECT</span> *,</div><div class="line">			<span class="keyword">CONVERT</span>(<span class="built_in">VARCHAR</span>,tb.doDate,<span class="number">102</span>) <span class="keyword">AS</span> CheckDay,</div><div class="line">			<span class="keyword">DATEPART</span>(<span class="keyword">HOUR</span>,tb.doDate)*<span class="number">60</span>+<span class="keyword">DATEPART</span>(<span class="keyword">MINUTE</span>,tb.doDate) <span class="keyword">AS</span> MinuteOfDay,</div><div class="line">			ROW_NUMBER()<span class="keyword">OVER</span>(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> tb.userName ,<span class="keyword">CONVERT</span>(<span class="built_in">VARCHAR</span>,tb.doDate,<span class="number">110</span>) <span class="keyword">ORDER</span> <span class="keyword">BY</span> tb.doDate) <span class="keyword">AS</span> CheckInd,</div><div class="line">			<span class="keyword">COUNT</span>(<span class="number">0</span>)<span class="keyword">OVER</span>(<span class="keyword">PARTITION</span> <span class="keyword">BY</span> tb.userName, <span class="keyword">CONVERT</span>(<span class="built_in">VARCHAR</span>,tb.doDate,<span class="number">110</span>)) checkcount </div><div class="line">     <span class="keyword">FROM</span> tb</div><div class="line">) <span class="keyword">AS</span> t <span class="keyword">GROUP</span> <span class="keyword">BY</span> t.userName,t.CheckDay</div></pre></td></tr></table></figure>
 <p><img src="https://i.imgur.com/7CbysJN.png" alt=""></p>
-<p>以上只是最基本的根据时间来进行考勤统计，未加其他业务逻辑。</p>
+<p>&#x4EE5;&#x4E0A;&#x53EA;&#x662F;&#x6700;&#x57FA;&#x672C;&#x7684;&#x6839;&#x636E;&#x65F6;&#x95F4;&#x6765;&#x8FDB;&#x884C;&#x8003;&#x52E4;&#x7EDF;&#x8BA1;&#xFF0C;&#x672A;&#x52A0;&#x5176;&#x4ED6;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x3002;</p>
 <h4 id="END"><a href="#END" class="headerlink" title="END"></a>END</h4>
       
 
@@ -311,6 +305,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2017/11/28/demo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          demo
+        
+      </div>
+    </a>
   
   
     <a href="/2017/09/20/工作中遇到的问题/通过脚本安装打印机/" id="article-nav-older" class="article-nav-link-wrap">
@@ -466,14 +469,6 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
@@ -486,7 +481,31 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">SQLServer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">C#</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -498,23 +517,11 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C#，SQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">JAVA WEB</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">打印机</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">C#</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tool</a>
+                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,19 +537,15 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">JAVA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">BOM</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">AJAX</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">DOM</a>
               </li>
             
             <div class="clearfix"></div>

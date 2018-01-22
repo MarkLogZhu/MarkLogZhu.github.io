@@ -6,18 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://marklogzhu.github.io">
-  <title>Servlet之request | 且听风吟的博客</title>
+  <title>Tag: JSP | 且听风吟的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;#x4E00;&amp;#x3001;Request&amp;#x7B80;&amp;#x4ECB;Request&amp;#x662F;&amp;#x4EC0;&amp;#x4E48;&amp;#xFF1F;Request&amp;#x4EE3;&amp;#x8868;&amp;#x7740;&amp;#x4E00;&amp;#x4E2A;HTTP&amp;#x8BF7;&amp;#x6C42;&amp;#x5BF9;&amp;#x8C61;&amp;#xFF0C;&amp;#x91CC;&amp;#x9762;&amp;#x5B58;&amp;#x653E">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Servlet之request">
-<meta property="og:url" content="https://marklogzhu.github.io/2017/03/30/后台/Java/JavaWeb/04.Servlet之request/index.html">
+  <meta name="description" content="会点皮毛技术,立志于往深处扎根。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="且听风吟的博客">
+<meta property="og:url" content="https://marklogzhu.github.io/tags/JSP/index.html">
 <meta property="og:site_name" content="且听风吟的博客">
-<meta property="og:description" content="&amp;#x4E00;&amp;#x3001;Request&amp;#x7B80;&amp;#x4ECB;Request&amp;#x662F;&amp;#x4EC0;&amp;#x4E48;&amp;#xFF1F;Request&amp;#x4EE3;&amp;#x8868;&amp;#x7740;&amp;#x4E00;&amp;#x4E2A;HTTP&amp;#x8BF7;&amp;#x6C42;&amp;#x5BF9;&amp;#x8C61;&amp;#xFF0C;&amp;#x91CC;&amp;#x9762;&amp;#x5B58;&amp;#x653E">
-<meta property="og:updated_time" content="2017-05-24T11:42:33.514Z">
+<meta property="og:description" content="会点皮毛技术,立志于往深处扎根。">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Servlet之request">
-<meta name="twitter:description" content="&amp;#x4E00;&amp;#x3001;Request&amp;#x7B80;&amp;#x4ECB;Request&amp;#x662F;&amp;#x4EC0;&amp;#x4E48;&amp;#xFF1F;Request&amp;#x4EE3;&amp;#x8868;&amp;#x7740;&amp;#x4E00;&amp;#x4E2A;HTTP&amp;#x8BF7;&amp;#x6C42;&amp;#x5BF9;&amp;#x8C61;&amp;#xFF0C;&amp;#x91CC;&amp;#x9762;&amp;#x5B58;&amp;#x653E">
+<meta name="twitter:title" content="且听风吟的博客">
+<meta name="twitter:description" content="会点皮毛技术,立志于往深处扎根。">
   
     <link rel="alternative" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
   
@@ -149,270 +148,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-后台/Java/JavaWeb/04.Servlet之request" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Servlet之request
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/09/20/后台/Java/JSTL/" class="archive-article-date">
+  	<time datetime="2017-09-20T03:16:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-20</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/09/20/后台/Java/JSTL/">JSTL 的使用</a>
     </h1>
   
 
-        
-        <a href="/2017/03/30/后台/Java/JavaWeb/04.Servlet之request/" class="archive-article-date">
-  	<time datetime="2017-03-30T13:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="&#x4E00;&#x3001;Request&#x7B80;&#x4ECB;"><a href="#&#x4E00;&#x3001;Request&#x7B80;&#x4ECB;" class="headerlink" title="&#x4E00;&#x3001;Request&#x7B80;&#x4ECB;"></a>&#x4E00;&#x3001;Request&#x7B80;&#x4ECB;</h2><h4 id="Request&#x662F;&#x4EC0;&#x4E48;&#xFF1F;"><a href="#Request&#x662F;&#x4EC0;&#x4E48;&#xFF1F;" class="headerlink" title="Request&#x662F;&#x4EC0;&#x4E48;&#xFF1F;"></a>Request&#x662F;&#x4EC0;&#x4E48;&#xFF1F;</h4><p>Request&#x4EE3;&#x8868;&#x7740;&#x4E00;&#x4E2A;HTTP&#x8BF7;&#x6C42;&#x5BF9;&#x8C61;&#xFF0C;&#x91CC;&#x9762;&#x5B58;&#x653E;&#x7740;&#x8BF7;&#x6C42;&#x53C2;&#x6570;&#x548C;&#x5C5E;&#x6027;&#x3002;</p>
-<h4 id="&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x88AB;&#x521B;&#x5EFA;&#xFF1F;"><a href="#&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x88AB;&#x521B;&#x5EFA;&#xFF1F;" class="headerlink" title="&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x88AB;&#x521B;&#x5EFA;&#xFF1F;"></a>&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x88AB;&#x521B;&#x5EFA;&#xFF1F;</h4><p>&#x5F53;&#x8C03;&#x7528; Servlet &#x7684; service() &#x65B9;&#x6CD5;&#x65F6;&#x521B;&#x5EFA;</p>
-<h4 id="&#x8C01;&#x521B;&#x5EFA;&#xFF1F;"><a href="#&#x8C01;&#x521B;&#x5EFA;&#xFF1F;" class="headerlink" title="&#x8C01;&#x521B;&#x5EFA;&#xFF1F;"></a>&#x8C01;&#x521B;&#x5EFA;&#xFF1F;</h4><p>&#x7531;Servlet&#x5BB9;&#x5668;&#x521B;&#x5EFA;&#xFF0C;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;&#x81EA;&#x52A8;&#x5C01;&#x88C5;&#x4E86;&#x8BF7;&#x6C42;&#x65B9;&#x5F0F;&#x53CA;&#x53C2;&#x6570;&#x7B49;&#x4FE1;&#x606F;</p>
-<a id="more"></a>
-<h4 id="&#x80FD;&#x5E72;&#x4EC0;&#x4E48;"><a href="#&#x80FD;&#x5E72;&#x4EC0;&#x4E48;" class="headerlink" title="&#x80FD;&#x5E72;&#x4EC0;&#x4E48;"></a>&#x80FD;&#x5E72;&#x4EC0;&#x4E48;</h4><p>&#x53EF;&#x4EE5;&#x627E;&#x5230;&#x8BF7;&#x6C42;&#x4ECE;&#x54EA;&#x91CC;&#x53D1;&#x51FA;&#xFF0C;&#x8BF7;&#x6C42;&#x4EC0;&#x4E48;&#x8D44;&#x6E90;&#xFF0C;&#x5E26;&#x4EC0;&#x4E48;&#x53C2;&#x6570;&#xFF0C;&#x83B7;&#x53D6;Session&#x5BF9;&#x8C61;&#x548C;&#x5BA2;&#x6237;&#x7AEF;&#x7684;Cookie</p>
-<h4 id="ServletRequest&#x7684;&#x5C42;&#x6B21;&#x7ED3;&#x6784;"><a href="#ServletRequest&#x7684;&#x5C42;&#x6B21;&#x7ED3;&#x6784;" class="headerlink" title="ServletRequest&#x7684;&#x5C42;&#x6B21;&#x7ED3;&#x6784;"></a>ServletRequest&#x7684;&#x5C42;&#x6B21;&#x7ED3;&#x6784;</h4><pre><code>-- javax.servlet.ServletRequest
-    -- javax.servlet.http.HttpServletRequest
-</code></pre><h2 id="&#x4E8C;&#x3001;&#x5E38;&#x7528;&#x65B9;&#x6CD5;"><a href="#&#x4E8C;&#x3001;&#x5E38;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="&#x4E8C;&#x3001;&#x5E38;&#x7528;&#x65B9;&#x6CD5;"></a>&#x4E8C;&#x3001;&#x5E38;&#x7528;&#x65B9;&#x6CD5;</h2><ul>
-<li>void setAttribute(String name,Object o)<pre><code>&#x4EE5; KEY-VLUE &#x7684;&#x5F62;&#x5F0F;&#x8BBE;&#x7F6E;&#x5C5E;&#x6027;
-</code></pre></li>
-<li>Object getAttribute(String name)<pre><code>&#x4EE5; Object &#x5F62;&#x5F0F;&#x8FD4;&#x56DE;&#x6307;&#x5B9A;&#x5C5E;&#x6027;&#x7684;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x5B58;&#x5728;&#x7ED9;&#x5B9A;&#x540D;&#x79F0;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x5219;&#x8FD4;&#x56DE; null&#x3002;
-</code></pre></li>
-<li>void removeAttribute(String name)<pre><code>&#x79FB;&#x9664;&#x6307;&#x5B9A;&#x5C5E;&#x6027;
-</code></pre></li>
-<li>Enumeration<string> getAttributeNames()<pre><code>&#x8FD4;&#x56DE;&#x5305;&#x542B;&#x6B64;&#x8BF7;&#x6C42;&#x53EF;&#x7528;&#x5C5E;&#x6027;&#x7684;&#x540D;&#x79F0;&#x7684; Enumeration&#x3002;&#x5982;&#x679C;&#x8BE5;&#x8BF7;&#x6C42;&#x6CA1;&#x6709;&#x53EF;&#x7528;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x5219;&#x6B64;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x7A7A;&#x7684; Enumeration
-</code></pre></string></li>
-<li>void setCharacterEncoding(String env)<pre><code>&#x8BBE;&#x7F6E;&#x8BF7;&#x6C42;&#x6B63;&#x6587;&#x7F16;&#x7801;&#x5B57;&#x7B26;&#x96C6;
-</code></pre></li>
-<li>String getCharacterEncoding()<pre><code>&#x83B7;&#x53D6;&#x8BF7;&#x6C42;&#x6B63;&#x6587;&#x7F16;&#x7801;&#x5B57;&#x7B26;&#x96C6;
-</code></pre></li>
-<li>String getContentType()<pre><code>&#x83B7;&#x53D6;&#x8FD4;&#x56DE;&#x8BF7;&#x6C42;&#x4E3B;&#x4F53;&#x7684;MIME&#x7C7B;&#x578B;
-</code></pre></li>
-<li>String getParameter(String name)<pre><code>&#x4EE5; String &#x5F62;&#x5F0F;&#x8FD4;&#x56DE;&#x8BF7;&#x6C42;&#x53C2;&#x6570;&#x7684;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x8BE5;&#x53C2;&#x6570;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x8FD4;&#x56DE; null
-</code></pre></li>
-<li>String[] getParameterValues(String name)<pre><code>&#x8FD4;&#x56DE;&#x5305;&#x542B;&#x7ED9;&#x5B9A;&#x8BF7;&#x6C42;&#x53C2;&#x6570;&#x62E5;&#x6709;&#x7684;&#x6240;&#x6709;&#x503C;&#x7684; String &#x5BF9;&#x8C61;&#x6570;&#x7EC4;&#xFF0C;&#x5982;&#x679C;&#x8BE5;&#x53C2;&#x6570;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x8FD4;&#x56DE; null
-</code></pre></li>
-</ul>
-<hr>
-<ul>
-<li>String getMethod()<pre><code>&#x83B7;&#x53D6;&#x8BF7;&#x6C42;&#x7684; HTTP &#x65B9;&#x6CD5;&#x7684;&#x540D;&#x79F0;&#xFF0C;&#x4F8B;&#x5982;GET&#xFF0C;POST&#x6216;PUT
-</code></pre></li>
-<li>String getRequestURI()<pre><code>&#x83B7;&#x53D6;&#x8BF7;&#x6C42;URI,&#x83B7;&#x53D6;&#x7684;&#x662F; &#x4ECE;&#x9879;&#x76EE;&#x540D;&#x5230;&#x53C2;&#x6570;&#x4E4B;&#x524D;&#x7684;&#x5185;&#x5BB9;
-</code></pre></li>
-<li>StringBuffer getRequestURL()<pre><code>&#x83B7;&#x53D6;&#x8BF7;&#x6C42;URL,&#x83B7;&#x53D6;&#x7684;&#x5E26;&#x534F;&#x8BAE;&#x7684;&#x5B8C;&#x6574;&#x8DEF;&#x5F84;
-</code></pre></li>
-<li>String getQueryString()<pre><code>get&#x8BF7;&#x6C42;&#x7684;&#x6240;&#x6709;&#x53C2;&#x6570;
-</code></pre></li>
-<li>String getProtocol()<pre><code>&#x83B7;&#x53D6;&#x534F;&#x8BAE;&#x548C;&#x7248;&#x672C;
-</code></pre></li>
-</ul>
-<hr>
-<ul>
-<li>String getScheme()<pre><code>&#x83B7;&#x53D6;&#x8BF7;&#x6C42;&#x65B9;&#x6848;&#x540D;&#x79F0;&#xFF0C;&#x5982; http&#x3001;https &#x6216; ftp
-</code></pre></li>
-<li>String getServerName()<pre><code>&#x83B7;&#x53D6;&#x5305;&#x542B;&#x670D;&#x52A1;&#x5668;&#x540D;&#x79F0;&#x7684; String&#xFF0C;&#x5982; IP &#x5730;&#x5740;
-</code></pre></li>
-<li>int getServerPort()<pre><code>&#x83B7;&#x53D6;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x53E3;&#x53F7;
-</code></pre></li>
-<li>String getRemoteAddr()<pre><code>&#x83B7;&#x53D6;&#x5BA2;&#x6237;&#x7AEF;IP&#x5730;&#x5740;
-</code></pre></li>
-<li>java.util.Locale getLocale()<pre><code>&#x57FA;&#x4E8E; Accept-Language &#x5934;&#xFF0C;&#x8FD4;&#x56DE;&#x5BA2;&#x6237;&#x7AEF;&#x5C06;&#x7528;&#x6765;&#x63A5;&#x53D7;&#x5185;&#x5BB9;&#x7684;&#x9996;&#x9009; Locale
-</code></pre></li>
-<li>boolean isSecure()<pre><code>&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; boolean &#x503C;&#xFF0C;&#x6307;&#x793A;&#x6B64;&#x8BF7;&#x6C42;&#x662F;&#x5426;&#x662F;&#x4F7F;&#x7528;&#x5B89;&#x5168;&#x901A;&#x9053;&#xFF08;&#x6BD4;&#x5982; HTTPS&#xFF09;&#x53D1;&#x51FA;&#x7684;
-</code></pre></li>
-</ul>
-<h2 id="&#x4E09;&#x3001;&#x7F16;&#x7801;&#x5B9E;&#x8DF5;"><a href="#&#x4E09;&#x3001;&#x7F16;&#x7801;&#x5B9E;&#x8DF5;" class="headerlink" title="&#x4E09;&#x3001;&#x7F16;&#x7801;&#x5B9E;&#x8DF5;"></a>&#x4E09;&#x3001;&#x7F16;&#x7801;&#x5B9E;&#x8DF5;</h2><ul>
-<li><p>&#x5C5E;&#x6027;&#x8BBE;&#x7F6E;&#x3001;&#x83B7;&#x53D6;&#x3001;&#x79FB;&#x9664;</p>
-  <figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="literal">void</span> doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {</div><div class="line">		<span class="built_in">String</span> <span class="built_in">tag</span> = <span class="string">&quot;name&quot;</span>;</div><div class="line">		request.setAttribute(<span class="built_in">tag</span>, <span class="string">&quot;&#x5F20;&#x4E09;&quot;</span>);</div><div class="line">		System.out.println(<span class="built_in">tag</span> + request.getAttribute(<span class="built_in">tag</span>));</div><div class="line">		request.removeAttribute(<span class="built_in">tag</span>);</div><div class="line">            System.out.println(<span class="built_in">tag</span> + request.getAttribute(<span class="built_in">tag</span>));</div><div class="line">}</div></pre></td></tr></table></figure>
-<p>  &#x7ED3;&#x679C;&#xFF1A;</p>
-  <figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">name:</span>&#x5F20;&#x4E09;</div><div class="line"><span class="string">name:</span><span class="literal">null</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>&#x5B57;&#x7B26;&#x96C6;&#x7684;&#x83B7;&#x53D6;&#x4E0E;&#x8BBE;&#x7F6E;</p>
-  <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span>(<span class="params">HttpServletRequest request, HttpServletResponse response</span>) throws ServletException, IOException </span>{</div><div class="line">		System.<span class="keyword">out</span>.println(<span class="string">&quot;&#x6B63;&#x6587;&#x7F16;&#x7801;&#x5B57;&#x7B26;&#x96C6;&#xFF1A;&quot;</span> + request.getCharacterEncoding());</div><div class="line">		request.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</div><div class="line">		System.<span class="keyword">out</span>.println(<span class="string">&quot;&#x6B63;&#x6587;&#x7F16;&#x7801;&#x5B57;&#x7B26;&#x96C6;&#xFF1A;&quot;</span> + request.getCharacterEncoding());</div><div class="line">}</div></pre></td></tr></table></figure>
-<p>  &#x7ED3;&#x679C;&#xFF1A;</p>
-  <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#x6B63;&#x6587;&#x7F16;&#x7801;&#x5B57;&#x7B26;&#x96C6;&#xFF1A;<span class="literal">null</span></div><div class="line">&#x6B63;&#x6587;&#x7F16;&#x7801;&#x5B57;&#x7B26;&#x96C6;&#xFF1A;utf<span class="number">-8</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>&#x83B7;&#x53D6;&#x5BA2;&#x6237;&#x7AEF;&#x4FE1;&#x606F;</p>
-  <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span>(<span class="params">HttpServletRequest request, HttpServletResponse response</span>) throws ServletException, IOException </span>{</div><div class="line">		System.<span class="keyword">out</span>.println(<span class="string">&quot;&#x5BA2;&#x6237;&#x7AEF;IP&#x5730;&#x5740;&#xFF1A;&quot;</span> + request.getRemoteAddr());</div><div class="line">        System.<span class="keyword">out</span>.println(<span class="string">&quot;&#x8BF7;&#x6C42;&#x65B9;&#x5F0F;&#xFF1A;&quot;</span> + request.getScheme());</div><div class="line">        System.<span class="keyword">out</span>.println(<span class="string">&quot;&#x662F;&#x5426;&#x662F;HTTPS&#x8BF7;&#x6C42;&#xFF1A;&quot;</span> + request.isSecure());</div><div class="line">        System.<span class="keyword">out</span>.println(<span class="string">&quot;&#x8BF7;&#x6C42;&#x65B9;&#x5F0F;&#xFF1A;&quot;</span> + request.getMethod());</div><div class="line">}</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>&#x7ED3;&#x679C;&#xFF1A;</p>
-<pre><code><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#x5BA2;&#x6237;&#x7AEF;<span class="selector-tag">IP</span>&#x5730;&#x5740;&#xFF1A;0<span class="selector-pseudo">:0</span><span class="selector-pseudo">:0</span><span class="selector-pseudo">:0</span><span class="selector-pseudo">:0</span><span class="selector-pseudo">:0</span><span class="selector-pseudo">:0</span><span class="selector-pseudo">:1</span></div><div class="line">&#x8BF7;&#x6C42;&#x65B9;&#x5F0F;&#xFF1A;<span class="selector-tag">http</span></div><div class="line">&#x662F;&#x5426;&#x662F;<span class="selector-tag">HTTPS</span>&#x8BF7;&#x6C42;&#xFF1A;<span class="selector-tag">false</span></div><div class="line">&#x8BF7;&#x6C42;&#x65B9;&#x5F0F;&#xFF1A;<span class="selector-tag">GET</span></div></pre></td></tr></table></figure>
-</code></pre><ul>
-<li><p>&#x83B7;&#x53D6;&#x670D;&#x52A1;&#x7AEF;&#x4FE1;&#x606F;</p>
-  <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span>(<span class="params">HttpServletRequest request, HttpServletResponse response</span>)</span></div><div class="line">                throws ServletException, IOException {</div><div class="line">            System.<span class="keyword">out</span>.println(<span class="string">&quot;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x53E3;&#x53F7;&#xFF1A;&quot;</span> + request.getServerPort());</div><div class="line">            System.<span class="keyword">out</span>.println(<span class="string">&quot;&#x670D;&#x52A1;&#x5668;&#x540D;&#x79F0;&#xFF1A;&quot;</span> + request.getServerName());</div><div class="line">            System.<span class="keyword">out</span>.println(<span class="string">&quot;&#x9879;&#x76EE;&#x540D;&#x79F0;&#xFF1A;&quot;</span> + request.getContextPath());</div><div class="line">}</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>&#x7ED3;&#x679C;&#xFF1A;</p>
-<pre><code><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x53E3;&#x53F7;&#xFF1A;<span class="number">8888</span></div><div class="line">&#x670D;&#x52A1;&#x5668;&#x540D;&#x79F0;&#xFF1A;localhost</div><div class="line">&#x9879;&#x76EE;&#x540D;&#x79F0;&#xFF1A;/day01_Servlet</div></pre></td></tr></table></figure>
-</code></pre><ul>
-<li>&#x83B7;&#x53D6;&#x8BF7;&#x6C42;&#x6D88;&#x606F;<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span>(<span class="params">HttpServletRequest request, HttpServletResponse response</span>)</span></div><div class="line">        throws ServletException, IOException {</div><div class="line">    System.<span class="keyword">out</span>.println(<span class="string">&quot;&#x4E0D;&#x5E26;&#x534F;&#x8BAE;&#x8DEF;&#x5F84;&#xFF1A;&quot;</span> + request.getRequestURI());</div><div class="line">    System.<span class="keyword">out</span>.println(<span class="string">&quot;&#x5E26;&#x534F;&#x8BAE;&#x8DEF;&#x5F84;&#xFF1A;&quot;</span> + request.getRequestURL());</div><div class="line">    System.<span class="keyword">out</span>.println(<span class="string">&quot;&#x8BF7;&#x6C42;&#x65B9;&#x5F0F;&#xFF1A;&quot;</span> + request.getMethod());</div><div class="line">    System.<span class="keyword">out</span>.println(<span class="string">&quot;get&#x8BF7;&#x6C42;&#x7684;&#x6240;&#x6709;&#x53C2;&#x6570;:&quot;</span> + request.getQueryString());</div><div class="line">    System.<span class="keyword">out</span>.println(<span class="string">&quot;&#x534F;&#x8BAE;&#x548C;&#x7248;&#x672C;&#xFF1A;&quot;</span> + request.getProtocol());</div><div class="line">}</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>&#x7ED3;&#x679C;&#xFF1A;</p>
-<pre><code><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#x4E0D;&#x5E26;&#x534F;&#x8BAE;&#x8DEF;&#x5F84;&#xFF1A;<span class="regexp">/day01_Servlet/</span>request</div><div class="line">&#x5E26;&#x534F;&#x8BAE;&#x8DEF;&#x5F84;&#xFF1A;<span class="string">http:</span><span class="comment">//localhost:8888/day01_Servlet/request</span></div><div class="line">&#x8BF7;&#x6C42;&#x65B9;&#x5F0F;&#xFF1A;GET</div><div class="line">get&#x8BF7;&#x6C42;&#x7684;&#x6240;&#x6709;&#x53C2;&#x6570;:<span class="literal">null</span></div><div class="line">&#x534F;&#x8BAE;&#x548C;&#x7248;&#x672C;&#xFF1A;HTTP/<span class="number">1.1</span></div></pre></td></tr></table></figure>
-</code></pre>
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>欣赏此文？求鼓励，求支持！<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/img/alipay.jpg">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/img/weixin.jpg">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JAVA WEB</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JSP</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://marklogzhu.github.io/2017/03/30/后台/Java/JavaWeb/04.Servlet之request/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2017/03/31/后台/Java/JavaWeb/05.Servlet之response/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Servlet之response
-        
-      </div>
-    </a>
   
   
-    <a href="/2017/03/19/后台/Java/JavaWeb/03.Servlet之ServletConfig和ServletContext对象/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Servlet之ServletConfig与ServletContext对象</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
-
-  
-  <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="后台/Java/JavaWeb/04.Servlet之request" data-title="Servlet之request" data-url="https://marklogzhu.github.io/2017/03/30/后台/Java/JavaWeb/04.Servlet之request/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"marklogzhu"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
+    </div></section>
   
 
-
+    
 
 
           </div>
@@ -435,9 +224,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",

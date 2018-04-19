@@ -1,0 +1,367 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Maven学习总结(1)--Maven的安装 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Maven学习总结(1)--Maven的安装">
+            
+	            Maven学习总结(1)--Maven的安装
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Maven">
+            Maven
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Maven" title='Maven'>
+                        Maven
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2017/12/11</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="&#x4EC0;&#x4E48;&#x662F;-Maven"><a href="#&#x4EC0;&#x4E48;&#x662F;-Maven" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F; Maven"></a>&#x4EC0;&#x4E48;&#x662F; Maven</h2><p>Maven&#x662F;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#x7BA1;&#x7406;&#x548C;&#x7EFC;&#x5408;&#x5DE5;&#x5177;&#x3002;Maven &#x63D0;&#x4F9B;&#x4E86;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x6846;&#x67B6;&#x3002;&#x5F00;&#x53D1;&#x56E2;&#x961F;&#x53EF;&#x4EE5;&#x81EA;&#x52A8;&#x5B8C;&#x6210;&#x9879;&#x76EE;&#x7684;&#x57FA;&#x7840;&#x5DE5;&#x5177;&#x5EFA;&#x8BBE;&#xFF0C;Maven &#x4F7F;&#x7528;&#x6807;&#x51C6;&#x7684;&#x76EE;&#x5F55;&#x7ED3;&#x6784;&#x548C;&#x9ED8;&#x8BA4;&#x6784;&#x5EFA;&#x751F;&#x547D;&#x5468;&#x671F;&#x3002;</p>
+<p>&#x5728;&#x591A;&#x4E2A;&#x5F00;&#x53D1;&#x56E2;&#x961F;&#x73AF;&#x5883;&#x65F6;&#xFF0C;Maven &#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x6309;&#x6807;&#x51C6;&#x5728;&#x975E;&#x5E38;&#x77ED;&#x7684;&#x65F6;&#x95F4;&#x91CC;&#x5B8C;&#x6210;&#x914D;&#x7F6E;&#x5DE5;&#x4F5C;&#x3002;&#x7531;&#x4E8E;&#x5927;&#x90E8;&#x5206;&#x9879;&#x76EE;&#x7684;&#x8BBE;&#x7F6E;&#x90FD;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x5E76;&#x4E14;&#x53EF;&#x91CD;&#x590D;&#x4F7F;&#x7528;&#xFF0C;Maven &#x8BA9;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x7684;&#x5DE5;&#x4F5C;&#x66F4;&#x8F7B;&#x677E;&#xFF0C;&#x540C;&#x65F6;&#x521B;&#x5EFA;&#x62A5;&#x8868;&#xFF0C;&#x68C0;&#x67E5;&#xFF0C;&#x6784;&#x5EFA;&#x548C;&#x6D4B;&#x8BD5;&#x81EA;&#x52A8;&#x5316;&#x8BBE;&#x7F6E;&#x3002;</p>
+<p>&#x6982;&#x62EC;&#x5730;&#x8BF4;&#xFF0C;Maven &#x7B80;&#x5316;&#x548C;&#x6807;&#x51C6;&#x5316;&#x9879;&#x76EE;&#x5EFA;&#x8BBE;&#x8FC7;&#x7A0B;&#x3002;&#x5904;&#x7406;&#x7F16;&#x8BD1;&#xFF0C;&#x5206;&#x914D;&#xFF0C;&#x6587;&#x6863;&#xFF0C;&#x56E2;&#x961F;&#x534F;&#x4F5C;&#x548C;&#x5176;&#x4ED6;&#x4EFB;&#x52A1;&#x7684;&#x65E0;&#x7F1D;&#x8FDE;&#x63A5;&#x3002; Maven &#x589E;&#x52A0;&#x53EF;&#x91CD;&#x7528;&#x6027;&#x5E76;&#x8D1F;&#x8D23;&#x5EFA;&#x7ACB;&#x76F8;&#x5173;&#x7684;&#x4EFB;&#x52A1;&#x3002;</p>
+<p>&#x5BF9;&#x6211;&#x4EEC;&#x76EE;&#x524D;&#x6765;&#x8BF4;&#x53EF;&#x4EE5;&#x7B80;&#x5355;&#x7684;&#x7406;&#x89E3;&#x4E3A;&#x4F20;&#x7EDF;&#x9879;&#x76EE;&#x9700;&#x8981;&#x624B;&#x5DE5;&#x5BFC;&#x5165; jar &#x5305;&#x5230; lib &#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x4F1A;&#x5BFC;&#x81F4;&#x9879;&#x76EE;&#x6587;&#x4EF6;&#x53D8;&#x5927;&#x5E76;&#x4E14;&#x4E0D;&#x597D;&#x7BA1;&#x7406;&#xFF0C;Mavern &#x901A;&#x8FC7;&#x4ED3;&#x5E93;&#x7684;&#x6982;&#x5FF5;&#x5B9E;&#x73B0;&#x5171;&#x4EAB; jar &#x5305;&#xFF0C;&#x660E;&#x663E;&#x7684;&#x5C06;&#x9879;&#x76EE;&#x5927;&#x5C0F;&#x53D8;&#x5C0F;&#x4E86;&#x3002;</p>
+<a id="more"></a>
+<h2 id="&#x5B89;&#x88C5;"><a href="#&#x5B89;&#x88C5;" class="headerlink" title="&#x5B89;&#x88C5;"></a>&#x5B89;&#x88C5;</h2><p>1) &#x4E0B;&#x8F7D;&#x6307;&#x5B9A;&#x7248;&#x672C; <a href="http://maven.apache.org/download.cgi" target="_blank" rel="external">http://maven.apache.org/download.cgi</a><br>2) &#x89E3;&#x538B;&#x81F3;&#x65E0;&#x4E2D;&#x6587;&#x548C;&#x7A7A;&#x683C;&#x8DEF;&#x5F84;<br>3) &#x914D;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;</p>
+<pre><code>MAVEN_HOME&#xFF1A;Maven &#x5B89;&#x88C5;&#x8DEF;&#x5F84;
+</code></pre><p><img src="/Maven/Maven/Maven&#x5B66;&#x4E60;&#x603B;&#x7ED3;(1)--Maven&#x5B89;&#x88C5;/img/01.png" alt=""></p>
+<pre><code>path &#xFF1A;%MAVEN_HOME%/bin;
+</code></pre><p><img src="/Maven/Maven/Maven&#x5B66;&#x4E60;&#x603B;&#x7ED3;(1)--Maven&#x5B89;&#x88C5;/img/02.png" alt=""></p>
+<p>4) &#x8FD0;&#x884C; CMD &#xFF0C;&#x8F93;&#x5165; mvn -v &#xFF0C;&#x68C0;&#x67E5;&#x662F;&#x5426;&#x914D;&#x7F6E;&#x6210;&#x529F;</p>
+<p><img src="/Maven/Maven/Maven&#x5B66;&#x4E60;&#x603B;&#x7ED3;(1)--Maven&#x5B89;&#x88C5;/img/03.png" alt=""></p>
+<p>&#x6CE8;&#xFF1A;&#x9700;&#x8981;&#x5148;&#x6709; jdk &#x73AF;&#x5883;&#xFF0C;&#x5426;&#x5219;&#x4F1A;&#x63D0;&#x793A; JAVA_HOME &#x672A;&#x914D;&#x7F6E;</p>
+<h2 id="&#x76EE;&#x5F55;&#x7ED3;&#x6784;"><a href="#&#x76EE;&#x5F55;&#x7ED3;&#x6784;" class="headerlink" title="&#x76EE;&#x5F55;&#x7ED3;&#x6784;"></a>&#x76EE;&#x5F55;&#x7ED3;&#x6784;</h2><p><img src="/Maven/Maven/Maven&#x5B66;&#x4E60;&#x603B;&#x7ED3;(1)--Maven&#x5B89;&#x88C5;/img/04.png" alt=""></p>
+<ul>
+<li>bin: &#x5B58;&#x653E; maven &#x547D;&#x4EE4;</li>
+<li>boot: &#x5B58;&#x653E;&#x7C7B;&#x52A0;&#x8F7D;&#x5668;&#x6846;&#x67B6;&#xFF0C;maven&#x901A;&#x8FC7;&#x5B83;&#x6765;&#x52A0;&#x8F7D;&#x81EA;&#x5DF1;&#x7684; Jar &#x5305;</li>
+<li>conf: &#x5B58;&#x653E;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</li>
+<li>lib: maven &#x8FD0;&#x884C;&#x9700;&#x8981;&#x7684; jar &#x5305;</li>
+</ul>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/Maven/Maven/Maven学习总结(2)--Maven仓库配置/" class="pre-post btn btn-default" title='Maven学习总结(2)--Maven仓库配置'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Maven学习总结(2)--Maven仓库配置</span>
+        </a>
+    
+    
+        <a href="/工具/工具/IDEA/01.IDEA 创建 Java 项目/" class="next-post btn btn-default" title='IDEA 创建 JAVA 项目'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">IDEA 创建 JAVA 项目</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/"><i class="fa" aria-hidden="true">tomcat</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/C/" style="font-size: 11.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 13.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 11.67px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 20px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 13.33px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Nginx/" style="font-size: 18.33px;">Nginx</a> <a href="/tags/RabbitMQ/" style="font-size: 13.33px;">RabbitMQ</a> <a href="/tags/SQL/" style="font-size: 18.33px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 11.67px;">SQL Server</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/tomcat/" style="font-size: 16.67px;">tomcat</a> <a href="/tags/tool/" style="font-size: 11.67px;">tool</a> <a href="/tags/前端/" style="font-size: 11.67px;">前端</a> <a href="/tags/前端基础/" style="font-size: 16.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 13.33px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

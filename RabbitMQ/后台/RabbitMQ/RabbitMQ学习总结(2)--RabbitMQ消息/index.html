@@ -1,0 +1,506 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>RabbitMQ学习总结(2)--RabbitMQ消息 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="RabbitMQ学习总结(2)--RabbitMQ消息">
+            
+	            RabbitMQ学习总结(2)--RabbitMQ消息
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/RabbitMQ">
+            RabbitMQ
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/RabbitMQ" title='RabbitMQ'>
+                        RabbitMQ
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/03/11</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="&#x6D88;&#x606F;&#x786E;&#x8BA4;"><a href="#&#x6D88;&#x606F;&#x786E;&#x8BA4;" class="headerlink" title="&#x6D88;&#x606F;&#x786E;&#x8BA4;"></a>&#x6D88;&#x606F;&#x786E;&#x8BA4;</h2><p>&#x5047;&#x8BBE;&#x5904;&#x7406;&#x4E00;&#x6761;&#x6D88;&#x606F;&#x4EFB;&#x52A1;&#x6BD4;&#x8F83;&#x8017;&#x65F6;&#xFF0C;&#x5728;&#x5904;&#x7406;&#x8FC7;&#x7A0B;&#x4E2D;&#x51FA;&#x73B0;&#x95EE;&#x9898;&#x5BFC;&#x81F4;&#x6B63;&#x5728;&#x5904;&#x7406;&#x7684;&#x6D88;&#x606F;&#x4EFB;&#x52A1;&#x5C31;&#x6CA1;&#x6709;&#x5B8C;&#x6210;&#x5C31;&#x4F1A;&#x4E22;&#x5931;&#x8FD9;&#x4E2A;&#x6D88;&#x606F;&#x4EFB;&#x52A1;&#x3002;&#x4E3A;&#x4E86;&#x907F;&#x514D;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;RabbitMQ&#x652F;&#x6301;&#x6D88;&#x606F;&#x786E;&#x8BA4;&#x673A;&#x5236;&#x2013;ACK&#x3002;</p>
+<a id="more"></a>
+<p>ACK&#x673A;&#x5236;&#x662F;&#x6D88;&#x8D39;&#x8005;&#x7AEF;&#x4ECE;RabbitMQ&#x6536;&#x5230;&#x6D88;&#x606F;&#x5E76;&#x5904;&#x7406;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x53CD;&#x9988;&#x7ED9;RabbitMQ&#xFF0C;RabbitMQ&#x6536;&#x5230;&#x53CD;&#x9988;&#x540E;&#x624D;&#x5C06;&#x6B64;&#x6D88;&#x606F;&#x4ECE;&#x961F;&#x5217;&#x4E2D;&#x5220;&#x9664;&#x3002;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x6D88;&#x8D39;&#x8005;&#x5728;&#x5904;&#x7406;&#x6D88;&#x606F;&#x65F6;&#x6302;&#x6389;&#xFF08;&#x7F51;&#x7EDC;&#x4E0D;&#x7A33;&#x5B9A;&#x3001;&#x670D;&#x52A1;&#x5668;&#x5F02;&#x5E38;&#x3001;&#x7F51;&#x7AD9;&#x6545;&#x969C;&#x7B49;&#x539F;&#x56E0;&#x5BFC;&#x81F4;&#x9891;&#x9053;&#x3001;&#x8FDE;&#x63A5;&#x5173;&#x95ED;&#x6216;&#x8005;TCP&#x8FDE;&#x63A5;&#x4E22;&#x5931;&#x7B49;&#xFF09;&#xFF0C;&#x90A3;&#x4E48;&#x4ED6;&#x5C31;&#x4E0D;&#x4F1A;&#x6709;ACK&#x53CD;&#x9988;&#xFF0C;RabbitMQ&#x4F1A;&#x8BA4;&#x4E3A;&#x8FD9;&#x4E2A;&#x6D88;&#x606F;&#x6CA1;&#x6709;&#x6B63;&#x5E38;&#x6D88;&#x8D39;&#xFF0C;&#x4F1A;&#x5C06;&#x6B64;&#x6D88;&#x606F;&#x91CD;&#x65B0;&#x653E;&#x5165;&#x961F;&#x5217;&#x4E2D;&#x3002;&#x5982;&#x679C;&#x6709;&#x5176;&#x4ED6;&#x6D88;&#x8D39;&#x8005;&#x540C;&#x65F6;&#x5728;&#x7EBF;&#xFF0C;RabbitMQ&#x4F1A;&#x7ACB;&#x5373;&#x5C06;&#x8FD9;&#x4E2A;&#x6D88;&#x606F;&#x63A8;&#x9001;&#x7ED9;&#x8FD9;&#x4E2A;&#x5728;&#x7EBF;&#x7684;&#x6D88;&#x8D39;&#x8005;&#x3002;&#x8FD9;&#x79CD;&#x673A;&#x5236;&#x4FDD;&#x8BC1;&#x4E86;&#x5728;&#x6D88;&#x8D39;&#x8005;&#x670D;&#x52A1;&#x5668;&#x6545;&#x969C;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x80FD;&#x4E0D;&#x4E22;&#x5931;&#x4EFB;&#x4F55;&#x6D88;&#x606F;&#x548C;&#x4EFB;&#x52A1;&#x3002;&#x5982;&#x679C;RabbitMQ&#x5411;&#x6D88;&#x8D39;&#x8005;&#x53D1;&#x9001;&#x6D88;&#x606F;&#x65F6;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x670D;&#x52A1;&#x5668;&#x6302;&#x4E86;&#xFF0C;&#x6D88;&#x606F;&#x4E5F;&#x4E0D;&#x4F1A;&#x6709;&#x8D85;&#x65F6;&#xFF1B;&#x5373;&#x4F7F;&#x4E00;&#x4E2A;&#x6D88;&#x606F;&#x9700;&#x8981;&#x975E;&#x5E38;&#x957F;&#x7684;&#x65F6;&#x95F4;&#x5904;&#x7406;&#xFF0C;&#x4E5F;&#x4E0D;&#x4F1A;&#x5BFC;&#x81F4;&#x6D88;&#x606F;&#x8D85;&#x65F6;&#x3002;&#x8FD9;&#x6837;&#x6D88;&#x606F;&#x6C38;&#x8FDC;&#x4E0D;&#x4F1A;&#x4ECE;RabbitMQ&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x5220;&#x9664;&#x3002;&#x53EA;&#x6709;&#x5F53;&#x6D88;&#x8D39;&#x8005;&#x6B63;&#x786E;&#x7684;&#x53D1;&#x9001;ACK&#x786E;&#x8BA4;&#x53CD;&#x9988;&#xFF0C;RabbitMQ&#x786E;&#x8BA4;&#x6536;&#x5230;&#x540E;&#xFF0C;&#x6D88;&#x606F;&#x624D;&#x4F1A;&#x4ECE;RabbitMQ&#x670D;&#x52A1;&#x5668;&#x7684;&#x6570;&#x636E;&#x4E2D;&#x5220;&#x9664;&#x3002; &#x6D88;&#x606F;&#x7684;ACK&#x786E;&#x8BA4;&#x673A;&#x5236;&#x9ED8;&#x8BA4;&#x662F;&#x6253;&#x5F00;&#x7684;&#x3002;</p>
+<h2 id="&#x5173;&#x95ED;&#x6D88;&#x606F;&#x786E;&#x8BA4;"><a href="#&#x5173;&#x95ED;&#x6D88;&#x606F;&#x786E;&#x8BA4;" class="headerlink" title="&#x5173;&#x95ED;&#x6D88;&#x606F;&#x786E;&#x8BA4;"></a>&#x5173;&#x95ED;&#x6D88;&#x606F;&#x786E;&#x8BA4;</h2><p>1) &#x65B0;&#x5EFA;&#x53D1;&#x9001;&#x7C7B;</p>
+<pre><code>public class Send {
+    //&#x961F;&#x5217;&#x540D;&#x79F0;
+    private final static String QUEUE_NAME = &quot;queue&quot;;
+
+    public static void main(String[] argv) throws java.io.IOException, TimeoutException {
+        /**
+         * &#x521B;&#x5EFA;&#x8FDE;&#x63A5;&#x8FDE;&#x63A5;&#x5230;MabbitMQ
+         */
+        ConnectionFactory factory = new ConnectionFactory();
+        //&#x8BBE;&#x7F6E;MabbitMQ&#x6240;&#x5728;&#x4E3B;&#x673A;ip&#x6216;&#x8005;&#x4E3B;&#x673A;&#x540D;
+        factory.setHost(&quot;127.0.0.1&quot;);
+        //&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x8FDE;&#x63A5;
+        Connection connection = factory.newConnection();
+        //&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x9891;&#x9053;
+        Channel channel = connection.createChannel();
+        //&#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x961F;&#x5217;
+        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+
+        //&#x5F80;&#x961F;&#x5217;&#x4E2D;&#x53D1;&#x51FA;&#x4E00;&#x6761;&#x6D88;&#x606F;
+        for (int i = 0; i &lt; 15; i++) {
+            //&#x53D1;&#x9001;&#x7684;&#x6D88;&#x606F;
+            String message = &quot;hello world!&quot;+i;
+            channel.basicPublish(&quot;&quot;, QUEUE_NAME, null, message.getBytes());
+        }
+        //&#x5173;&#x95ED;&#x9891;&#x9053;&#x548C;&#x8FDE;&#x63A5;
+        channel.close();
+        connection.close();
+    }
+</code></pre><p>2) &#x65B0;&#x5EFA;&#x63A5;&#x6536;&#x7C7B;</p>
+<pre><code>import com.rabbitmq.client.*;
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
+
+public class Recv {
+    //&#x961F;&#x5217;&#x540D;&#x79F0;
+    private final static String QUEUE_NAME = &quot;queue&quot;;
+    public static void main(String[] argv) throws java.io.IOException,
+            java.lang.InterruptedException, TimeoutException {
+        //&#x6253;&#x5F00;&#x8FDE;&#x63A5;&#x548C;&#x521B;&#x5EFA;&#x9891;&#x9053;&#xFF0C;&#x4E0E;&#x53D1;&#x9001;&#x7AEF;&#x4E00;&#x6837;
+        ConnectionFactory factory = new ConnectionFactory();
+        //&#x8BBE;&#x7F6E;MabbitMQ&#x6240;&#x5728;&#x4E3B;&#x673A;ip&#x6216;&#x8005;&#x4E3B;&#x673A;&#x540D;
+        factory.setHost(&quot;127.0.0.1&quot;);
+        Connection connection = factory.newConnection();
+        final Channel channel = connection.createChannel();
+        // &#x6BCF;&#x6B21;&#x4ECE;&#x961F;&#x5217;&#x4E2D;&#x83B7;&#x53D6;&#x6570;&#x91CF;
+        channel.basicQos(1);
+        //&#x58F0;&#x660E;&#x961F;&#x5217;&#xFF0C;&#x4E3B;&#x8981;&#x4E3A;&#x4E86;&#x9632;&#x6B62;&#x6D88;&#x606F;&#x63A5;&#x6536;&#x8005;&#x5148;&#x6267;&#x884C;&#x6B64;&#x7A0B;&#x5E8F;&#xFF0C;&#x961F;&#x5217;&#x8FD8;&#x4E0D;&#x5B58;&#x5728;&#x65F6;&#x521B;&#x5EFA;&#x961F;&#x5217;&#x3002;
+        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+        System.out.println(&quot;&#x7B49;&#x5F85;&#x6D88;&#x606F;&#x3002; &#x8981;&#x9000;&#x51FA;&#xFF0C;&#x8BF7;&#x6309; CTRL + C&quot;);
+
+        //&#x521B;&#x5EFA;&#x961F;&#x5217;&#x6D88;&#x8D39;&#x8005;
+        final Consumer consumer = new DefaultConsumer(channel) {
+            @Override
+            public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
+                String message = new String(body, &quot;UTF-8&quot;);
+                System.out.println(&quot;&#x63A5;&#x6536;&#x5185;&#x5BB9;&#xFF1A; &apos;&quot; + message + &quot;&apos;&quot;);
+                try {
+                    doWork(message);
+                } finally {      
+                }
+            }
+        };
+
+        // &#x8BBE;&#x7F6E;&#x6D88;&#x606F;&#x786E;&#x8BA4;&#x72B6;&#x6001;&#x4E3A;&#x542F;&#x7528;
+        boolean autoAck = true;
+        //&#x6307;&#x5B9A;&#x6D88;&#x8D39;&#x961F;&#x5217;
+        channel.basicConsume(QUEUE_NAME, autoAck, consumer);
+    }
+
+
+
+    /**
+     * &#x4EFB;&#x52A1;&#x5904;&#x7406;
+     *
+     * @param task
+     *            void
+     */
+    private static void doWork(String task) {
+        try {
+            Thread.sleep(1000); // &#x6682;&#x505C;1&#x79D2;&#x949F;
+        } catch (InterruptedException _ignored) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}
+</code></pre><p>3) &#x542F;&#x52A8;&#x4E24;&#x4E2A; Recv &#x8FDB;&#x7A0B;&#xFF0C;&#x7136;&#x540E;&#x542F;&#x52A8;Send &#xFF0C;&#x7136;&#x540E;&#x5173;&#x95ED;&#x6389;&#x4E00;&#x4E2A; Recv &#x8FDB;&#x7A0B;</p>
+<p><img src="/RabbitMQ/&#x540E;&#x53F0;/RabbitMQ/RabbitMQ&#x5B66;&#x4E60;&#x603B;&#x7ED3;(2)--RabbitMQ&#x6D88;&#x606F;/img/01.png" alt=""></p>
+<p>&#x53D1;&#x73B0;&#x53EA;&#x6253;&#x5370;&#x4E86;11&#x6761;&#x8BB0;&#x5F55;&#xFF0C;&#x4E22;&#x5931;&#x6389;4&#x6761;&#x8BB0;&#x5F55;<br>4) &#x4FEE;&#x6539; Recv  &#x7C7B;</p>
+<pre><code>import com.rabbitmq.client.*;
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
+
+public class Recv {
+    //&#x961F;&#x5217;&#x540D;&#x79F0;
+    private final static String QUEUE_NAME = &quot;queue&quot;;
+    public static void main(String[] argv) throws java.io.IOException,
+            java.lang.InterruptedException, TimeoutException {
+        //&#x6253;&#x5F00;&#x8FDE;&#x63A5;&#x548C;&#x521B;&#x5EFA;&#x9891;&#x9053;&#xFF0C;&#x4E0E;&#x53D1;&#x9001;&#x7AEF;&#x4E00;&#x6837;
+        ConnectionFactory factory = new ConnectionFactory();
+        //&#x8BBE;&#x7F6E;MabbitMQ&#x6240;&#x5728;&#x4E3B;&#x673A;ip&#x6216;&#x8005;&#x4E3B;&#x673A;&#x540D;
+        factory.setHost(&quot;127.0.0.1&quot;);
+        Connection connection = factory.newConnection();
+        final Channel channel = connection.createChannel();
+        // &#x6BCF;&#x6B21;&#x4ECE;&#x961F;&#x5217;&#x4E2D;&#x83B7;&#x53D6;&#x6570;&#x91CF;
+        channel.basicQos(1);
+        //&#x58F0;&#x660E;&#x961F;&#x5217;&#xFF0C;&#x4E3B;&#x8981;&#x4E3A;&#x4E86;&#x9632;&#x6B62;&#x6D88;&#x606F;&#x63A5;&#x6536;&#x8005;&#x5148;&#x6267;&#x884C;&#x6B64;&#x7A0B;&#x5E8F;&#xFF0C;&#x961F;&#x5217;&#x8FD8;&#x4E0D;&#x5B58;&#x5728;&#x65F6;&#x521B;&#x5EFA;&#x961F;&#x5217;&#x3002;
+        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+        System.out.println(&quot;&#x7B49;&#x5F85;&#x6D88;&#x606F;&#x3002; &#x8981;&#x9000;&#x51FA;&#xFF0C;&#x8BF7;&#x6309; CTRL + C&quot;);
+
+        //&#x521B;&#x5EFA;&#x961F;&#x5217;&#x6D88;&#x8D39;&#x8005;
+        final Consumer consumer = new DefaultConsumer(channel) {
+            @Override
+            public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
+                String message = new String(body, &quot;UTF-8&quot;);
+                System.out.println(&quot;&#x63A5;&#x6536;&#x5185;&#x5BB9;&#xFF1A; &apos;&quot; + message + &quot;&apos;&quot;);
+                try {
+                    doWork(message);
+                } finally {
+                    // &#x6D88;&#x606F;&#x5904;&#x7406;&#x5B8C;&#x6210;&#x786E;&#x8BA4;
+                    channel.basicAck(envelope.getDeliveryTag(), false);
+                }
+            }
+        };
+
+        // &#x8BBE;&#x7F6E;&#x6D88;&#x606F;&#x786E;&#x8BA4;&#x5173;&#x95ED;
+        boolean autoAck = false;
+        //&#x6307;&#x5B9A;&#x6D88;&#x8D39;&#x961F;&#x5217;
+        channel.basicConsume(QUEUE_NAME, autoAck, consumer);
+    }
+
+
+
+    /**
+     * &#x4EFB;&#x52A1;&#x5904;&#x7406;
+     *
+     * @param task
+     *            void
+     */
+    private static void doWork(String task) {
+        try {
+            Thread.sleep(1000); // &#x6682;&#x505C;1&#x79D2;&#x949F;
+        } catch (InterruptedException _ignored) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}
+</code></pre><p>5) &#x542F;&#x52A8;&#x4E24;&#x4E2A; Recv &#x8FDB;&#x7A0B;&#xFF0C;&#x7136;&#x540E;&#x542F;&#x52A8;Send &#xFF0C;&#x7136;&#x540E;&#x5173;&#x95ED;&#x6389;&#x4E00;&#x4E2A; Recv &#x8FDB;&#x7A0B;</p>
+<p><img src="/RabbitMQ/&#x540E;&#x53F0;/RabbitMQ/RabbitMQ&#x5B66;&#x4E60;&#x603B;&#x7ED3;(2)--RabbitMQ&#x6D88;&#x606F;/img/02.png" alt=""></p>
+<p>&#x53D1;&#x73B0;&#x6CA1;&#x6709;&#x4E22;&#x5931;&#x8BB0;&#x5F55;</p>
+<p>&#x6CE8;&#xFF1A;&#x5982;&#x679C;&#x4F60;&#x5173;&#x95ED;&#x4E86;&#x81EA;&#x52A8;&#x6D88;&#x606F;&#x5E94;&#x7B54;&#xFF0C;&#x624B;&#x52A8;&#x4E5F;&#x672A;&#x8BBE;&#x7F6E;&#x5E94;&#x7B54;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x7B80;&#x5355;&#x9519;&#x8BEF;&#xFF0C;&#x4F46;&#x662F;&#x540E;&#x679C;&#x5374;&#x662F;&#x6781;&#x5176;&#x4E25;&#x91CD;&#x7684;&#x3002;&#x6D88;&#x606F;&#x5728;&#x5206;&#x53D1;&#x51FA;&#x53BB;&#x4EE5;&#x540E;&#xFF0C;&#x5F97;&#x4E0D;&#x5230;&#x56DE;&#x5E94;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x4F1A;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x5220;&#x9664;&#xFF0C;&#x7ED3;&#x679C;RabbitMQ&#x4F1A;&#x8D8A;&#x6765;&#x8D8A;&#x5360;&#x7528;&#x5185;&#x5B58;&#xFF0C;&#x6700;&#x7EC8;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x4F60;&#x61C2;&#x5F97;&#x3002;&#x3002;&#x3002;</p>
+<h2 id="&#x6D88;&#x606F;&#x6301;&#x4E45;&#x5316;"><a href="#&#x6D88;&#x606F;&#x6301;&#x4E45;&#x5316;" class="headerlink" title="&#x6D88;&#x606F;&#x6301;&#x4E45;&#x5316;"></a>&#x6D88;&#x606F;&#x6301;&#x4E45;&#x5316;</h2><p>&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x77E5;&#x9053;&#x5982;&#x4F55;&#x786E;&#x4FDD;&#x6D88;&#x8D39;&#x8005;&#x6302;&#x6389;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4EFB;&#x52A1;&#x4E0D;&#x4F1A;&#x6D88;&#x5931;&#x3002;&#x4F46;&#x662F;&#x5982;&#x679C;RabbitMQ&#x670D;&#x52A1;&#x5668;&#x6302;&#x4E86;&#x5462;&#xFF1F;<br>&#x5982;&#x679C;&#x4F60;&#x4E0D;&#x544A;&#x8BC9;RabbitMQ&#xFF0C;&#x5F53;RabbitMQ&#x670D;&#x52A1;&#x5668;&#x6302;&#x4E86;&#xFF0C;&#x5979;&#x53EF;&#x80FD;&#x5C31;&#x4E22;&#x5931;&#x6240;&#x6709;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x6D88;&#x606F;&#x548C;&#x4EFB;&#x52A1;&#x3002;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x8BA9;RabbitMQ&#x8BB0;&#x4F4F;&#x5979;&#x5F53;&#x524D;&#x7684;&#x72B6;&#x6001;&#x548C;&#x5185;&#x5BB9;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x901A;&#x8FC7;2&#x4EF6;&#x4E8B;&#x6765;&#x786E;&#x4FDD;&#x6D88;&#x606F;&#x548C;&#x4EFB;&#x52A1;&#x4E0D;&#x4F1A;&#x4E22;&#x5931;&#x3002;<br>&#x7B2C;&#x4E00;&#x4EF6;&#x4E8B;&#xFF0C;&#x5728;&#x961F;&#x5217;&#x58F0;&#x660E;&#x65F6;&#xFF0C;&#x544A;&#x8BC9;RabbitMQ&#xFF0C;&#x8FD9;&#x4E2A;&#x961F;&#x5217;&#x9700;&#x8981;&#x6301;&#x4E45;&#x5316;&#xFF1A;</p>
+<pre><code>boolean durable = true;
+channel.queueDeclare(&quot;hello&quot;, durable, false, false, null);
+</code></pre><p>&#x5173;&#x4E8E;&#x6D88;&#x606F;&#x6301;&#x4E45;&#x5316;&#x7684;&#x8BF4;&#x660E; </p>
+<pre><code>&#x6807;&#x8BB0;&#x4E3A;&#x6301;&#x4E45;&#x5316;&#x540E;&#x7684;&#x6D88;&#x606F;&#x4E5F;&#x4E0D;&#x80FD;&#x5B8C;&#x5168;&#x4FDD;&#x8BC1;&#x4E0D;&#x4F1A;&#x4E22;&#x5931;&#x3002;&#x867D;&#x7136;&#x5DF2;&#x7ECF;&#x544A;&#x8BC9;RabbitMQ&#x6D88;&#x606F;&#x8981;&#x4FDD;&#x5B58;&#x5230;&#x78C1;&#x76D8;&#x4E0A;&#xFF0C;&#x4F46;&#x662F;&#x7406;&#x8BBA;&#x4E0A;&#xFF0C;RabbitMQ&#x5DF2;&#x7ECF;&#x63A5;&#x6536;&#x5230;&#x751F;&#x4EA7;&#x8005;&#x7684;&#x6D88;&#x606F;&#xFF0C;&#x4F46;&#x662F;&#x8FD8;&#x6CA1;&#x6709;&#x6765;&#x5F97;&#x53CA;&#x4FDD;&#x5B58;&#x5230;&#x78C1;&#x76D8;&#x4E0A;&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x5C31;&#x6302;&#x4E86;&#xFF08;&#x6BD4;&#x5982;&#x673A;&#x623F;&#x65AD;&#x7535;&#xFF09;&#xFF0C;&#x90A3;&#x4E48;&#x91CD;&#x542F;&#x540E;&#xFF0C;RabbitMQ&#x4E2D;&#x7684;&#x8FD9;&#x6761;&#x672A;&#x53CA;&#x65F6;&#x4FDD;&#x5B58;&#x7684;&#x6D88;&#x606F;&#x5C31;&#x4F1A;&#x4E22;&#x5931;&#x3002;&#x56E0;&#x4E3A;RabbitMQ&#x4E0D;&#x505A;&#x5B9E;&#x65F6;&#x7ACB;&#x5373;&#x7684;&#x78C1;&#x76D8;&#x540C;&#x6B65;&#xFF08;fsync&#xFF09;&#x3002;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5BF9;&#x4E8E;&#x6301;&#x4E45;&#x5316;&#x8981;&#x6C42;&#x4E0D;&#x662F;&#x7279;&#x522B;&#x9AD8;&#x7684;&#x7B80;&#x5355;&#x4EFB;&#x52A1;&#x961F;&#x5217;&#x6765;&#x8BF4;&#xFF0C;&#x8FD8;&#x662F;&#x53EF;&#x4EE5;&#x6EE1;&#x8DB3;&#x7684;&#x3002;&#x5982;&#x679C;&#x9700;&#x8981;&#x66F4;&#x5F3A;&#x5927;&#x7684;&#x4FDD;&#x8BC1;&#xFF0C;&#x90A3;&#x4E48;&#x4F60;&#x53EF;&#x4EE5;&#x8003;&#x8651;&#x4F7F;&#x7528;&#x751F;&#x4EA7;&#x8005;&#x786E;&#x8BA4;&#x53CD;&#x9988;&#x673A;&#x5236;&#x3002;
+</code></pre>
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/RabbitMQ/后台/RabbitMQ/RabbitMQ学习总结(3)--RabbitMQ发布订阅/" class="pre-post btn btn-default" title='RabbitMQ学习总结(3)--RabbitMQ发布订阅'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">RabbitMQ学习总结(3)--RabbitMQ发布订阅</span>
+        </a>
+    
+    
+        <a href="/RabbitMQ/后台/RabbitMQ/RabbitMQ学习总结(1)--RabbitMQ入门/" class="next-post btn btn-default" title='RabbitMQ学习总结(1)--RabbitMQ入门'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">RabbitMQ学习总结(1)--RabbitMQ入门</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/"><i class="fa" aria-hidden="true">tomcat</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/C/" style="font-size: 11.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 13.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 11.67px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 20px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 13.33px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Nginx/" style="font-size: 18.33px;">Nginx</a> <a href="/tags/RabbitMQ/" style="font-size: 13.33px;">RabbitMQ</a> <a href="/tags/SQL/" style="font-size: 18.33px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 11.67px;">SQL Server</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/tomcat/" style="font-size: 16.67px;">tomcat</a> <a href="/tags/tool/" style="font-size: 11.67px;">tool</a> <a href="/tags/前端/" style="font-size: 11.67px;">前端</a> <a href="/tags/前端基础/" style="font-size: 16.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 13.33px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

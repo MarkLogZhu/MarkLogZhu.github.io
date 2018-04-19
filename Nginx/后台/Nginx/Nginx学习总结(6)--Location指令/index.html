@@ -1,0 +1,380 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Nginx学习总结(6)--Location指令 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Nginx学习总结(6)--Location指令">
+            
+	            Nginx学习总结(6)--Location指令
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Nginx">
+            Nginx
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Nginx" title='Nginx'>
+                        Nginx
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/04/19</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="Location-&#x6307;&#x4EE4;&#x7684;&#x4F5C;&#x7528;"><a href="#Location-&#x6307;&#x4EE4;&#x7684;&#x4F5C;&#x7528;" class="headerlink" title="Location &#x6307;&#x4EE4;&#x7684;&#x4F5C;&#x7528;"></a>Location &#x6307;&#x4EE4;&#x7684;&#x4F5C;&#x7528;</h2><p> location &#x6307;&#x4EE4;&#x7684;&#x4F5C;&#x7528;&#x662F;&#x6839;&#x636E;&#x7528;&#x6237;&#x8BF7;&#x6C42;&#x7684; URI &#x6765;&#x6267;&#x884C;&#x4E0D;&#x540C;&#x7684;&#x5E94;&#x7528;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x6839;&#x636E;&#x7528;&#x6237;&#x8BF7;&#x6C42;&#x7684;&#x7F51;&#x7AD9; URL &#x8FDB;&#x884C;&#x5339;&#x914D;&#xFF0C;&#x5339;&#x914D;&#x6210;&#x529F;&#x5373;&#x8FDB;&#x884C;&#x76F8;&#x5173;&#x7684;&#x64CD;&#x4F5C;&#x3002;</p>
+<p> Location &#x6307;&#x4EE4;&#x53EF;&#x4EE5;&#x662F;&#x5B57;&#x7B26;&#x4E32;&#x6216;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x3002;&#x4F46;&#x5982;&#x679C;&#x8981;&#x4F7F;&#x7528;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#xFF0C;&#x5219;&#x5FC5;&#x987B;&#x6307;&#x5B9A;&#x524D;&#x7F00;&#x3002;</p>
+<a id="more"></a>
+<h2 id="Location-&#x6307;&#x4EE4;&#x8BED;&#x6CD5;"><a href="#Location-&#x6307;&#x4EE4;&#x8BED;&#x6CD5;" class="headerlink" title="Location &#x6307;&#x4EE4;&#x8BED;&#x6CD5;"></a>Location &#x6307;&#x4EE4;&#x8BED;&#x6CD5;</h2><pre><code>location  [ = | ~ | ~* | ^~ ]     uri          
+
+* location &#xFF1A;&#x6307;&#x4EE4;&#x540D;&#x79F0;
+* [ = | ~ | ~* | ^~ ] &#xFF1A;&#x5339;&#x914D;&#x6807;&#x8BC6;
+* uri    &#xFF1A;&#x5339;&#x914D;&#x7684;&#x7F51;&#x7AD9;&#x7F51;&#x5740;
+* { .... } :&#x5339;&#x914D; URI &#x4E4B;&#x540E;&#x8981;&#x6267;&#x884C;&#x7684;&#x914D;&#x7F6E;&#x6BB5;
+</code></pre><h2 id="&#x5339;&#x914D;&#x6807;&#x8BC6;&#x4F18;&#x5148;&#x7EA7;"><a href="#&#x5339;&#x914D;&#x6807;&#x8BC6;&#x4F18;&#x5148;&#x7EA7;" class="headerlink" title="&#x5339;&#x914D;&#x6807;&#x8BC6;&#x4F18;&#x5148;&#x7EA7;"></a>&#x5339;&#x914D;&#x6807;&#x8BC6;&#x4F18;&#x5148;&#x7EA7;</h2><p>  &#x201C;=&#x201D; &#x7684;&#x4F18;&#x5148;&#x7EA7;&#x4E3A;&#x6700;&#x9AD8;&#xFF0C;&#x4E3A;&#x7CBE;&#x786E;&#x5339;&#x914D;&#xFF1B;&#x7279;&#x6B8A;&#x5B57;&#x7B26; &#x201C;~&#x201D; &#x548C; &#x201C;~*&#x201D; &#x7684;&#x533A;&#x522B;&#x5728;&#x4E8E;&#x524D;&#x8005;&#x533A;&#x5206;&#x5927;&#x5C0F;&#x5199;&#xFF0C;&#x540E;&#x8005;&#x4E0D;&#x533A;&#x5206;&#x5927;&#x5C0F;&#x5199;&#xFF0C;&#x4ED6;&#x4EEC;&#x8FD8;&#x53EF;&#x4EE5;&#x7528;&#x903B;&#x8F91;&#x64CD;&#x4F5C;&#x7B26; &#x201C;!&#x201D; &#x6765;&#x53D6;&#x53CD;&#x5339;&#x914D;&#xFF1B;&#x201D;^~&#x201D; &#x7684;&#x610F;&#x601D;&#x662F;&#x5339;&#x914D;&#x4E4B;&#x540E;&#x4E0D;&#x505A;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x68C0;&#x67E5;&#xFF0C;&#x5C31;&#x662F;&#x4E0D;&#x7528;&#x5339;&#x914D;&#x7C7B;&#x4F3C;&#x4E8E; &#x201C;.(gif|jpg|jpeg)$ &#x201C;&#x7684;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x4E86;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4; &#x201C;^~&#x201D; &#x540E;&#x9762;&#x8DDF;&#x4E86;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x4E5F;&#x6CA1;&#x6709;&#x7528;&#x7684;&#x3002;</p>
+<p> location&#x7684;&#x5339;&#x914D;&#x793A;&#x4F8B;&#xFF1A;</p>
+<pre><code>* location = / { [ configuration A ] }                     #&#x7528;&#x6237;&#x8BF7;&#x6C42;&quot;/&quot;&#x65F6;&#xFF0C;&#x5339;&#x914D;A&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;www.marklogzhu.com/
+* location / { [ configuration B ] }                       #&#x5F53;&#x7528;&#x6237;&#x8BF7;&#x6C42;&quot;/index.html&quot;&#x65F6;&#xFF0C;&#x5339;&#x914D;B&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;www.marklogzhu.com/index.html
+* location /documents/ { [ configuration C ] }             #&#x5F53;&#x7528;&#x6237;&#x8BF7;&#x6C42;&quot;/documents/&quot;&#x65F6;&#xFF0C;&#x5339;&#x914D;C&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;www.marklogzhu.com/documents/index.html      
+* location ^~ /images/ { [ configuration D ] }             #&#x5F53;&#x7528;&#x6237;&#x8BF7;&#x6C42;&quot;/images/&quot;&#x65F6;&#xFF0C;&#x5339;&#x914D;D&#xFF0C;&#xFF1A;www.marklogzhu.com/images/1.jpg 
+* location ~* \.(gif|jpg|jpeg)$ { [ configuration E ] }    #&#x5F53;&#x7528;&#x6237;&#x8BF7;&#x6C42;&quot;.gif|.jpg|.jpeg&quot;&#x65F6;&#xFF0C;&#x5339;&#x914D;E&#xFF0C;&#x4F8B;&#x5982;:www.marklogzhu.com/documents/1.jpg
+                                                           #&#x4E0A;&#x9762;&#x7684;&#x53CD;&#x659C;&#x6760;&#x662F;&#x8F6C;&#x4E49;&#x5B57;&#x7B26;&#xFF0C;$&#x7684;&#x610F;&#x601D;&#x662F;&#x7ED3;&#x5C3E;
+</code></pre><h2 id="&#x5B9E;&#x9645;&#x5E38;&#x7528;&#x89C4;&#x5219;"><a href="#&#x5B9E;&#x9645;&#x5E38;&#x7528;&#x89C4;&#x5219;" class="headerlink" title="&#x5B9E;&#x9645;&#x5E38;&#x7528;&#x89C4;&#x5219;"></a>&#x5B9E;&#x9645;&#x5E38;&#x7528;&#x89C4;&#x5219;</h2><h3 id="&#x9996;&#x9875;"><a href="#&#x9996;&#x9875;" class="headerlink" title="&#x9996;&#x9875;"></a>&#x9996;&#x9875;</h3><p>&#x76F4;&#x63A5;&#x5339;&#x914D;&#x7F51;&#x7AD9;&#x6839;&#xFF0C;&#x901A;&#x8FC7;&#x57DF;&#x540D;&#x8BBF;&#x95EE;&#x7F51;&#x7AD9;&#x9996;&#x9875;&#x6BD4;&#x8F83;&#x9891;&#x7E41;&#xFF0C;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x4F1A;&#x52A0;&#x901F;&#x5904;&#x7406;&#x3002;</p>
+<pre><code>location = / {  
+   proxy_passhttp://tomcat:8080/index  
+}
+</code></pre><p>&#x6CE8;:&#x8FD9;&#x91CC;&#x662F;&#x76F4;&#x63A5;&#x8F6C;&#x53D1;&#x7ED9;&#x540E;&#x7AEF;&#x5E94;&#x7528;&#x670D;&#x52A1;&#x5668;&#x4E86;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x662F;&#x4E00;&#x4E2A;&#x9759;&#x6001;&#x9996;&#x9875;</p>
+<h3 id="&#x9759;&#x6001;&#x6587;&#x4EF6;&#x8BF7;&#x6C42;"><a href="#&#x9759;&#x6001;&#x6587;&#x4EF6;&#x8BF7;&#x6C42;" class="headerlink" title="&#x9759;&#x6001;&#x6587;&#x4EF6;&#x8BF7;&#x6C42;"></a>&#x9759;&#x6001;&#x6587;&#x4EF6;&#x8BF7;&#x6C42;</h3><p>&#x6709;&#x4E24;&#x79CD;&#x914D;&#x7F6E;&#x6A21;&#x5F0F;&#xFF0C;&#x76EE;&#x5F55;&#x5339;&#x914D;&#x6216;&#x540E;&#x7F00;&#x5339;&#x914D;,&#x4EFB;&#x9009;&#x5176;&#x4E00;&#x6216;&#x642D;&#x914D;&#x4F7F;&#x7528;</p>
+<pre><code>location ^~ /static/ {  
+   # &#x8BF7;&#x6C42;/static/a.txt &#x5C06;&#x88AB;&#x6620;&#x5C04;&#x5230;&#x5B9E;&#x9645;&#x76EE;&#x5F55;&#x6587;&#x4EF6;:/webroot/res/static/a.txt  
+   root /webroot/res/;  
+}  
+
+location ~* \.(gif|jpg|jpeg|png|css|js|ico)${  
+   root /webroot/res/;  
+}  
+</code></pre><h3 id="&#x52A8;&#x6001;&#x8BF7;&#x6C42;"><a href="#&#x52A8;&#x6001;&#x8BF7;&#x6C42;" class="headerlink" title="&#x52A8;&#x6001;&#x8BF7;&#x6C42;"></a>&#x52A8;&#x6001;&#x8BF7;&#x6C42;</h3><p>&#x6839;&#x636E;&#x5B9E;&#x9645;&#x60C5;&#x51B5;&#x914D;&#x7F6E;</p>
+<pre><code>location / {  
+   proxy_pass http://tomcat:8080/  
+}  
+</code></pre><h2 id="Location&#x89E3;&#x6790;&#x8FC7;&#x7A0B;"><a href="#Location&#x89E3;&#x6790;&#x8FC7;&#x7A0B;" class="headerlink" title="Location&#x89E3;&#x6790;&#x8FC7;&#x7A0B;"></a>Location&#x89E3;&#x6790;&#x8FC7;&#x7A0B;</h2><p><img src="/Nginx/&#x540E;&#x53F0;/Nginx/Nginx&#x5B66;&#x4E60;&#x603B;&#x7ED3;(6)--Location&#x6307;&#x4EE4;/img/01.png" alt=""></p>
+<p>&#x603B;&#x7ED3;&#xFF1A;</p>
+<p>1&#x3001;&#x5148;&#x5224;&#x65AD;&#x7CBE;&#x51C6;&#x547D;&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x547D;&#x4E2D;&#xFF0C;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x5E76;&#x7ED3;&#x675F;&#x89E3;&#x6790;&#x8FC7;&#x7A0B;&#x3002;<br>2&#x3001;&#x5224;&#x65AD;&#x666E;&#x901A;&#x547D;&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x591A;&#x4E2A;&#x547D;&#x4E2D;&#xFF0C;&#x201C;&#x8BB0;&#x5F55;&#x201D;&#x4E0B;&#x6765;&#x201C;&#x6700;&#x957F;&#x201D;&#x7684;&#x547D;&#x4E2D;&#x7ED3;&#x679C;&#xFF08;&#x8BB0;&#x5F55;&#x4F46;&#x4E0D;&#x7ED3;&#x675F;&#xFF0C;&#x6700;&#x957F;&#x7684;&#x4E3A;&#x51C6;&#xFF09;&#x3002;<br>3&#x3001;&#x7EE7;&#x7EED;&#x5224;&#x65AD;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x89E3;&#x6790;&#x7ED3;&#x679C;&#xFF0C;&#x6309;&#x914D;&#x7F6E;&#x91CC;&#x7684;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x987A;&#x5E8F;&#x4E3A;&#x51C6;&#xFF0C;&#x7531;&#x4E0A;&#x81F3;&#x4E0B;&#x5F00;&#x59CB;&#x5339;&#x914D;&#xFF0C;&#x4E00;&#x65E6;&#x5339;&#x914D;&#x6210;&#x529F;1&#x4E2A;&#xFF0C;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF0C;&#x5E76;&#x7ED3;&#x675F;&#x89E3;&#x6790;&#x8FC7;&#x7A0B;&#x3002;<br>4&#x3001;&#x666E;&#x901A;&#x547D;&#x4E2D;&#x987A;&#x5E8F;&#x65E0;&#x6240;&#x8C13;&#xFF0C;&#x662F;&#x56E0;&#x4E3A;&#x6309;&#x547D;&#x4E2D;&#x7684;&#x957F;&#x77ED;&#x6765;&#x786E;&#x5B9A;&#x3002;&#x6B63;&#x5219;&#x547D;&#x4E2D;&#xFF0C;&#x987A;&#x5E8F;&#x6709;&#x6240;&#x8C13;&#xFF0C;&#x56E0;&#x4E3A;&#x662F;&#x4ECE;&#x524D;&#x5165;&#x5F80;&#x540E;&#x547D;&#x4E2D;&#x7684;&#x3002;</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/Nginx/后台/Nginx/Nginx学习总结(5)--负载均衡/" class="next-post btn btn-default" title='Nginx学习总结(5)--负载均衡'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Nginx学习总结(5)--负载均衡</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/"><i class="fa" aria-hidden="true">tomcat</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/C/" style="font-size: 11.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 13.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 11.67px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 20px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Nginx/" style="font-size: 18.33px;">Nginx</a> <a href="/tags/SQL/" style="font-size: 18.33px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10px;">SQL Server</a> <a href="/tags/SQLServer/" style="font-size: 10px;">SQLServer</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/tomcat/" style="font-size: 16.67px;">tomcat</a> <a href="/tags/tool/" style="font-size: 13.33px;">tool</a> <a href="/tags/前端/" style="font-size: 11.67px;">前端</a> <a href="/tags/前端基础/" style="font-size: 16.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 13.33px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="http://www.shenliyang.com" class="fa" target="_blank">个人博客</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

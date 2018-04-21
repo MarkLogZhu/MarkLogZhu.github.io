@@ -173,10 +173,9 @@
 <p><img src="/Nginx/&#x540E;&#x53F0;/Nginx/Nginx&#x5B66;&#x4E60;&#x603B;&#x7ED3;(5)--&#x8D1F;&#x8F7D;&#x5747;&#x8861;/img/02.png" alt=""></p>
 <p>2) &#x8FDB;&#x5165; conf &#x76EE;&#x5F55;&#x7F16;&#x8F91; nginx.conf &#x6587;&#x4EF6;<br>3) &#x5728; http &#x8282;&#x70B9;&#x4E2D;&#x65B0;&#x5EFA; upstream &#x8282;&#x70B9;</p>
 <pre><code>#&#x8BBE;&#x5B9A;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x7684;&#x670D;&#x52A1;&#x5668;&#x5217;&#x8868;
-upstream mysvr {
-    #weigth&#x53C2;&#x6570;&#x8868;&#x793A;&#x6743;&#x503C;&#xFF0C;&#x6743;&#x503C;&#x8D8A;&#x9AD8;&#x88AB;&#x5206;&#x914D;&#x5230;&#x7684;&#x51E0;&#x7387;&#x8D8A;&#x5927;
-    server 127.0.0.1:8080  weight=5;
-    server 127.0.0.2:8090  weight=5; 
+upstream mysvr {       
+    server 127.0.0.1:8080;
+    server 127.0.0.1:8090; 
 }
 </code></pre><p>4) &#x914D;&#x7F6E; location &#x8282;&#x70B9;</p>
 <pre><code>location / {
@@ -190,6 +189,77 @@ upstream mysvr {
 </code></pre><p>5) &#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#x8F93;&#x5165; <a href="http://localhost" target="_blank" rel="external">http://localhost</a> </p>
 <p> <img src="/Nginx/&#x540E;&#x53F0;/Nginx/Nginx&#x5B66;&#x4E60;&#x603B;&#x7ED3;(5)--&#x8D1F;&#x8F7D;&#x5747;&#x8861;/img/03.png" alt=""></p>
 <p>&#x591A;&#x6B21;&#x5237;&#x65B0;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x8BBF;&#x95EE;&#x5230;&#x4E0D;&#x540C;&#x7684;tomcat</p>
+<h2 id="&#x8D85;&#x65F6;&#x8BBE;&#x7F6E;"><a href="#&#x8D85;&#x65F6;&#x8BBE;&#x7F6E;" class="headerlink" title="&#x8D85;&#x65F6;&#x8BBE;&#x7F6E;"></a>&#x8D85;&#x65F6;&#x8BBE;&#x7F6E;</h2><h3 id="&#x670D;&#x52A1;&#x5668;&#x8D85;&#x65F6;&#x8BBE;&#x7F6E;"><a href="#&#x670D;&#x52A1;&#x5668;&#x8D85;&#x65F6;&#x8BBE;&#x7F6E;" class="headerlink" title="&#x670D;&#x52A1;&#x5668;&#x8D85;&#x65F6;&#x8BBE;&#x7F6E;"></a>&#x670D;&#x52A1;&#x5668;&#x8D85;&#x65F6;&#x8BBE;&#x7F6E;</h3><ul>
+<li>max_fails:&#x8868;&#x793A;&#x5728;fail_timeout&#x65F6;&#x95F4;&#x6BB5;&#x5185;&#x6700;&#x591A;&#x53EF;&#x4EE5;&#x8D85;&#x65F6;&#x7684;&#x65F6;&#x95F4;&#xFF0C;&#x5982;&#x679C;&#x8D85;&#x8FC7;&#x8FD9;&#x4E2A;&#x6B21;&#x6570;,nginx &#x5C06;&#x4F1A;&#x628A;&#x8FD9;&#x53F0;&#x670D;&#x52A1;&#x5668;&#x4ECE;&#x5217;&#x8868;&#x4E2D;&#x5254;&#x9664; fail_timeout &#x65F6;&#x95F4;,&#x5373;&#x5728;fail_timeout &#x65F6;&#x95F4;&#x6BB5;&#x5185;&#x8BF7;&#x6C42;&#x4E0D;&#x4F1A;&#x53D1;&#x9001;&#x81F3;&#x8FD9;&#x53F0;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#xFF0C;&#x9ED8;&#x8BA4;1&#x6B21;&#xFF0C;&#x8BBE;&#x4E3A;0&#x5373;&#x4E3A;&#x4E0D;&#x68C0;&#x67E5;</li>
+<li>fail_timeout:&#x670D;&#x52A1;&#x5668;&#x4EE3;&#x7406;&#x76D1;&#x542C;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#xFF0C;&#x9ED8;&#x8BA4;10&#x79D2;</li>
+</ul>
+<pre><code># &#x8BBE;&#x5B9A;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x7684;&#x670D;&#x52A1;&#x5668;&#x5217;&#x8868;
+upstream mysvr {
+    # &#x6700;&#x591A;&#x8D85;&#x65F6;1&#x6B21;&#xFF0C;&#x65F6;&#x95F4;&#x4E3A;60&#x79D2;
+    server 127.0.0.1:8080 max_fails=1 fail_timeout=60;  
+    server 127.0.0.1:8090 max_fails=1 fail_timeout=60;  
+}
+</code></pre><h3 id="&#x8BF7;&#x6C42;&#x8FDE;&#x63A5;&#x8D85;&#x65F6;&#x65F6;&#x95F4;"><a href="#&#x8BF7;&#x6C42;&#x8FDE;&#x63A5;&#x8D85;&#x65F6;&#x65F6;&#x95F4;" class="headerlink" title="&#x8BF7;&#x6C42;&#x8FDE;&#x63A5;&#x8D85;&#x65F6;&#x65F6;&#x95F4;"></a>&#x8BF7;&#x6C42;&#x8FDE;&#x63A5;&#x8D85;&#x65F6;&#x65F6;&#x95F4;</h3><ul>
+<li>proxy_connect<em>timeout:&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x8FDE;&#x63A5;&#x7684;&#x8D85;&#x65F6;&#x65F6;&#x95F4;</em>&#x53D1;&#x8D77;&#x63E1;&#x624B;&#x7B49;&#x5019;&#x54CD;&#x5E94;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#xFF0C;&#x9ED8;&#x8BA4;&#x503C; 60&#x79D2;&#x5E76;&#x4E14;&#x4E0D;&#x80FD;&#x8D85;&#x8FC7;75&#x79D2;</li>
+<li>proxy_read<em>timeout:&#x8FDE;&#x63A5;&#x6210;&#x529F;&#x540E;</em>&#x7B49;&#x5019;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x54CD;&#x5E94;&#x65F6;&#x95F4;_&#x5176;&#x5B9E;&#x5DF2;&#x7ECF;&#x8FDB;&#x5165;&#x540E;&#x7AEF;&#x7684;&#x6392;&#x961F;&#x4E4B;&#x4E2D;&#x7B49;&#x5019;&#x5904;&#x7406;&#xFF08;&#x4E5F;&#x53EF;&#x4EE5;&#x8BF4;&#x662F;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x5904;&#x7406;&#x8BF7;&#x6C42;&#x7684;&#x65F6;&#x95F4;&#xFF09;&#xFF0C;&#x9ED8;&#x8BA4;&#x503C; 60&#x79D2;</li>
+<li>proxy_send<em>timeout :&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x6570;&#x636E;&#x56DE;&#x4F20;&#x65F6;&#x95F4;</em>&#x5C31;&#x662F;&#x5728;&#x89C4;&#x5B9A;&#x65F6;&#x95F4;&#x4E4B;&#x5185;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x5FC5;&#x987B;&#x4F20;&#x5B8C;&#x6240;&#x6709;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x9ED8;&#x8BA4;&#x503C; 60&#x79D2;</li>
+</ul>
+<pre><code>location / {
+           proxy_pass  http://mysvr;
+           proxy_set_header Host $host;
+           proxy_set_header X-Real-IP $remote_addr;
+           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;        
+           proxy_connect_timeout       1;
+           proxy_read_timeout          1;
+           proxy_send_timeout          1;                        
+       }
+</code></pre><p>&#x6CE8;:&#x5982;&#x679C;&#x4FEE;&#x6539;&#x540E;&#x4F7F;&#x7528; nginx -s reload &#x547D;&#x4EE4;&#x65E0;&#x6548;&#xFF0C;&#x5C06; nginx &#x8FDB;&#x7A0B;&#x5173;&#x95ED;&#xFF0C;&#x91CD;&#x542F; nginx &#x5373;&#x53EF;(&#x8BE5;&#x95EE;&#x9898;&#x8017;&#x65F6;&#x534A;&#x5929;)</p>
+<h2 id="&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x7B56;&#x7565;"><a href="#&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x7B56;&#x7565;" class="headerlink" title="&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x7B56;&#x7565;"></a>&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x7B56;&#x7565;</h2><p>&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x7B56;&#x7565;&#x6709;&#x4EE5;&#x4E0B;&#x4E94;&#x79CD;&#x7B56;&#x7565;&#xFF1A;</p>
+<ul>
+<li>&#x8F6E;&#x8BE2;(&#x9ED8;&#x8BA4;)</li>
+<li>&#x6307;&#x5B9A;&#x6743;&#x91CD;</li>
+<li>ip_hash(IP &#x7ED1;&#x5B9A;)</li>
+<li>fair(&#x7B2C;&#x4E09;&#x65B9;)</li>
+<li>url_hash(&#x7B2C;&#x4E09;&#x65B9;)</li>
+</ul>
+<h3 id="&#x8F6E;&#x8BE2;"><a href="#&#x8F6E;&#x8BE2;" class="headerlink" title="&#x8F6E;&#x8BE2;"></a>&#x8F6E;&#x8BE2;</h3><p>&#x4E4B;&#x524D;&#x7684;&#x4F8B;&#x5B50;&#x5C31;&#x662F;&#x4F7F;&#x7528;&#x8F6E;&#x8BE2;&#x7B56;&#x7565;&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>#&#x8BBE;&#x5B9A;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x7684;&#x670D;&#x52A1;&#x5668;&#x5217;&#x8868;
+upstream mysvr {
+     server 127.0.0.1:8080;  
+     server 127.0.0.1:8090;  
+}
+</code></pre><p>&#x6BCF;&#x4E2A;&#x8BF7;&#x6C42;&#x6309;&#x65F6;&#x95F4;&#x987A;&#x5E8F;&#x9010;&#x4E00;&#x5206;&#x914D;&#x5230;&#x4E0D;&#x540C;&#x7684;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x5982;&#x679C;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x5B95;&#x673A;&#xFF0C;&#x4F1A;&#x81EA;&#x52A8;&#x5254;&#x9664;&#x6389;&#x3002;<br>&#x6CE8;&#xFF1A;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x660E;&#x786E;&#x8BBE;&#x7F6E; fail_timeout &#x5C5E;&#x6027;&#x7684;&#x8BDD;&#xFF0C;fail_timeout &#x9ED8;&#x8BA4;&#x503C;&#x4E3A;10&#x79D2; ,&#x4E5F;&#x5C31;&#x662F;&#x8BF4;10&#x79D2;&#x4E4B;&#x540E;&#x8BF7;&#x6C42;&#x8FD8;&#x662F;&#x4F1A;&#x8F6C;&#x53D1;&#x5230;&#x8FD9;&#x53F0;&#x670D;&#x52A1;&#x5668;&#x4E0A;</p>
+<h3 id="&#x6307;&#x5B9A;&#x6743;&#x91CD;"><a href="#&#x6307;&#x5B9A;&#x6743;&#x91CD;" class="headerlink" title="&#x6307;&#x5B9A;&#x6743;&#x91CD;"></a>&#x6307;&#x5B9A;&#x6743;&#x91CD;</h3><p>&#x6307;&#x5B9A;&#x8F6E;&#x8BE2;&#x51E0;&#x7387;&#xFF0C;weight&#x548C;&#x8BBF;&#x95EE;&#x6BD4;&#x7387;&#x6210;&#x6B63;&#x6BD4;&#xFF0C;&#x7528;&#x4E8E;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x6027;&#x80FD;&#x4E0D;&#x5747;&#x7684;&#x60C5;&#x51B5;&#x3002;<br>&#x5982;&#x679C;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x5B95;&#x673A;&#xFF0C;&#x4F1A;&#x81EA;&#x52A8;&#x5254;&#x9664;&#x6389;&#xFF0C;&#x5254;&#x9664;&#x65F6;&#x95F4;&#x540C;&#x4E0A;&#x3002;<br>&#x6BD4;&#x5982;&#x4E0B;&#x9762;&#x914D;&#x7F6E;&#xFF0C;&#x5219; 90 &#x7AEF;&#x53E3;&#x7684;&#x670D;&#x52A1;&#x5668;&#x7684;&#x8BBF;&#x95EE;&#x91CF;&#x662F; 80 &#x7AEF;&#x53E3;&#x670D;&#x52A1;&#x5668;&#x7684;&#x4E24;&#x500D;&#x3002;</p>
+<pre><code>upstream mysvr {
+        server 127.0.0.1:8080 weight=1;  
+        server 127.0.0.1:8090 weight=2;  
+ }
+</code></pre><h3 id="ip-hash-IP-&#x7ED1;&#x5B9A;"><a href="#ip-hash-IP-&#x7ED1;&#x5B9A;" class="headerlink" title="ip_hash(IP &#x7ED1;&#x5B9A;)"></a>ip_hash(IP &#x7ED1;&#x5B9A;)</h3><p>&#x6BCF;&#x4E2A;&#x8BF7;&#x6C42;&#x6309;&#x8BBF;&#x95EE; ip &#x7684; hash &#x7ED3;&#x679C;&#x5206;&#x914D;&#xFF0C;&#x8FD9;&#x6837;&#x6BCF;&#x4E2A;&#x8BBF;&#x5BA2;&#x56FA;&#x5B9A;&#x8BBF;&#x95EE;&#x4E00;&#x4E2A;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x53EF;&#x4EE5;&#x89E3;&#x51B3;session&#x4E0D;&#x80FD;&#x8DE8;&#x670D;&#x52A1;&#x5668;&#x7684;&#x95EE;&#x9898;&#x3002;<br>&#x5982;&#x679C;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x5B95;&#x673A;&#xFF0C;&#x8981;&#x624B;&#x5DE5;&#x5254;&#x9664;&#x3002;</p>
+<pre><code>upstream resinserver{
+     ip_hash;
+     server 127.0.0.1:8080 ;  
+     server 127.0.0.1:8090 ;  
+}
+</code></pre><h3 id="fair&#xFF08;&#x7B2C;&#x4E09;&#x65B9;&#x63D2;&#x4EF6;&#xFF09;"><a href="#fair&#xFF08;&#x7B2C;&#x4E09;&#x65B9;&#x63D2;&#x4EF6;&#xFF09;" class="headerlink" title="fair&#xFF08;&#x7B2C;&#x4E09;&#x65B9;&#x63D2;&#x4EF6;&#xFF09;"></a>fair&#xFF08;&#x7B2C;&#x4E09;&#x65B9;&#x63D2;&#x4EF6;&#xFF09;</h3><p>&#x6309;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x7684;&#x54CD;&#x5E94;&#x65F6;&#x95F4;&#x6765;&#x5206;&#x914D;&#x8BF7;&#x6C42;&#xFF0C;&#x54CD;&#x5E94;&#x65F6;&#x95F4;&#x77ED;&#x7684;&#x4F18;&#x5148;&#x5206;&#x914D;&#x3002;</p>
+<pre><code>upstream resinserver{
+    server 127.0.0.1:8080 ;  
+    server 127.0.0.1:8090 ;  
+    fair;
+}
+</code></pre><h3 id="url-hash&#xFF08;&#x7B2C;&#x4E09;&#x65B9;&#x63D2;&#x4EF6;&#xFF09;"><a href="#url-hash&#xFF08;&#x7B2C;&#x4E09;&#x65B9;&#x63D2;&#x4EF6;&#xFF09;" class="headerlink" title="url_hash&#xFF08;&#x7B2C;&#x4E09;&#x65B9;&#x63D2;&#x4EF6;&#xFF09;"></a>url_hash&#xFF08;&#x7B2C;&#x4E09;&#x65B9;&#x63D2;&#x4EF6;&#xFF09;</h3><p>&#x6309;&#x8BBF;&#x95EE;url&#x7684;hash&#x7ED3;&#x679C;&#x6765;&#x5206;&#x914D;&#x8BF7;&#x6C42;&#xFF0C;&#x4F7F;&#x6BCF;&#x4E2A;url&#x5B9A;&#x5411;&#x5230;&#x540C;&#x4E00;&#x4E2A;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#x4E3A;&#x7F13;&#x5B58;&#x670D;&#x52A1;&#x5668;&#x65F6;&#x6BD4;&#x8F83;&#x6709;&#x6548;&#x3002;<br>&#x5728;upstream&#x4E2D;&#x52A0;&#x5165;hash&#x8BED;&#x53E5;&#xFF0C;hash_method&#x662F;&#x4F7F;&#x7528;&#x7684;hash&#x7B97;&#x6CD5;</p>
+<pre><code>upstream resinserver{
+    server 127.0.0.1:8080 ;  
+    server 127.0.0.1:8090 ;  
+    hash $request_uri;
+    hash_method crc32;
+}
+</code></pre><h3 id="&#x670D;&#x52A1;&#x5668;&#x7684;&#x72B6;&#x6001;"><a href="#&#x670D;&#x52A1;&#x5668;&#x7684;&#x72B6;&#x6001;" class="headerlink" title="&#x670D;&#x52A1;&#x5668;&#x7684;&#x72B6;&#x6001;"></a>&#x670D;&#x52A1;&#x5668;&#x7684;&#x72B6;&#x6001;</h3><ul>
+<li>down &#x8868;&#x793A;&#x5355;&#x524D;&#x7684;server&#x6682;&#x65F6;&#x4E0D;&#x53C2;&#x4E0E;&#x8D1F;&#x8F7D;</li>
+<li>weight &#x6743;&#x91CD;,&#x9ED8;&#x8BA4;&#x4E3A;1&#x3002; weight&#x8D8A;&#x5927;&#xFF0C;&#x8D1F;&#x8F7D;&#x7684;&#x6743;&#x91CD;&#x5C31;&#x8D8A;&#x5927;&#x3002;</li>
+<li>max_fails &#x5141;&#x8BB8;&#x8BF7;&#x6C42;&#x5931;&#x8D25;&#x7684;&#x6B21;&#x6570;&#x9ED8;&#x8BA4;&#x4E3A;1&#x3002;&#x5F53;&#x8D85;&#x8FC7;&#x6700;&#x5927;&#x6B21;&#x6570;&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;proxy_next_upstream &#x6A21;&#x5757;&#x5B9A;&#x4E49;&#x7684;&#x9519;&#x8BEF;</li>
+<li>fail_timeout max_fails&#x6B21;&#x5931;&#x8D25;&#x540E;&#xFF0C;&#x6682;&#x505C;&#x7684;&#x65F6;&#x95F4;&#x3002;</li>
+<li>backup &#x5907;&#x7528;&#x670D;&#x52A1;&#x5668;, &#x5176;&#x5B83;&#x6240;&#x6709;&#x7684;&#x975E;backup&#x673A;&#x5668;down&#x6216;&#x8005;&#x5FD9;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8BF7;&#x6C42;backup&#x673A;&#x5668;&#x3002;&#x6240;&#x4EE5;&#x8FD9;&#x53F0;&#x673A;&#x5668;&#x538B;&#x529B;&#x4F1A;&#x6700;&#x8F7B;&#x3002;</li>
+</ul>
 
     </div>
 

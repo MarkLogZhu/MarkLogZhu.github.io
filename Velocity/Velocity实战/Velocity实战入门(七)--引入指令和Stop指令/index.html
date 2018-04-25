@@ -1,0 +1,390 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Velocity实战入门(七)--引入指令和#Stop指令  | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Velocity实战入门(七)--引入指令和#Stop指令 ">
+            
+	            Velocity实战入门(七)--引入指令和#Stop指令 
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Velocity">
+            Velocity
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Velocity" title='Velocity'>
+                        Velocity
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/04/25</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="include-&#x6307;&#x4EE4;"><a href="#include-&#x6307;&#x4EE4;" class="headerlink" title="#include &#x6307;&#x4EE4;"></a>#include &#x6307;&#x4EE4;</h2><p><code>#include</code> &#x811A;&#x672C;&#x5143;&#x7D20;&#x5141;&#x8BB8;&#x6A21;&#x677F;&#x8BBE;&#x8BA1;&#x8005;&#x5BFC;&#x5165;&#x4E00;&#x4E2A;&#x672C;&#x5730;&#x6587;&#x4EF6;&#xFF0C;&#x5B83;&#x4F1A;&#x88AB;&#x63D2;&#x5165;&#x5230; <code>#include&#x6307;&#x4EE4;</code> &#x6240;&#x5728;&#x7684;&#x4F4D;&#x7F6E;&#x3002;&#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x4E0D;&#x4F1A;&#x88AB;&#x6A21;&#x677F;&#x5F15;&#x64CE;&#x5904;&#x7406;&#xFF08;render&#xFF09;&#x6240;&#x4EE5;&#x8FD9;&#x4E9B;&#x6587;&#x4EF6;&#x5E94;&#x8BE5;&#x662F;&#x9759;&#x6001;&#x6A21;&#x677F;,&#x5373;&#x4E0D;&#x542B;&#x6709; VTL &#x7684;&#x6A21;&#x677F;&#x3002;&#x51FA;&#x4E8E;&#x5B89;&#x5168;&#x8003;&#x8651;&#xFF0C;&#x88AB;&#x5BFC;&#x5165;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x53EA;&#x80FD;&#x88AB;&#x653E;&#x5728;TEMPLATE_ROOT&#x76EE;&#x5F55;&#x4E0B;&#x3002;</p>
+<pre><code>#include( &quot;one.txt&quot; )
+</code></pre><a id="more"></a>
+<p><code>#include</code>&#x6307;&#x4EE4;&#x8868;&#x660E;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x8981;&#x7528;&#x5F15;&#x53F7;&#x5F15;&#x8D77;&#x6765;&#x3002;&#x5982;&#x679C;&#x8981;&#x5BFC;&#x5165;&#x591A;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;&#x5B83;&#x4EEC;&#x5E94;&#x8BE5;&#x7528;&#x9017;&#x53F7;&#x5206;&#x5F00;&#x3002;</p>
+<pre><code>#include( &quot;one.gif&quot;,&quot;two.txt&quot;,&quot;three.htm&quot; )
+</code></pre><p>&#x5C06;&#x88AB;&#x5BFC;&#x5165;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x65E0;&#x9700;&#x7528;&#x6587;&#x4EF6;&#x540D;&#x6765;&#x5F15;&#x7528;&#xFF1B;&#x4E8B;&#x5B9E;&#x4E0A;&#xFF0C;&#x5E38;&#x7528;&#x53D8;&#x91CF;&#x6765;&#x4EE3;&#x66FF;&#x6587;&#x4EF6;&#x540D;&#x3002;&#x5F53;&#x9875;&#x9762;&#x8BF7;&#x6C42;&#x63D0;&#x4EA4;&#x540E;&#xFF0C;&#x6839;&#x636E;&#x5B83;&#x786E;&#x5B9A;&#x7684;&#x6807;&#x51C6;&#xFF0C;&#x6765;&#x5B9A;&#x4F4D;&#x8F93;&#x51FA;&#x65F6;&#xFF0C;&#x8FD9;&#x5C31;&#x5F88;&#x6709;&#x7528;&#x4E86;&#x3002;&#x8FD9;&#x91CC;&#x6709;&#x4E2A;&#x6F14;&#x793A;&#x540C;&#x65F6;&#x4F7F;&#x7528;&#x6587;&#x4EF6;&#x540D;&#x548C;&#x53D8;&#x91CF;&#x7684;&#x4F8B;&#x5B50;&#x3002;</p>
+<pre><code>#include( &quot;greetings.txt&quot;, $seasonalstock )
+</code></pre><h2 id="Parse-&#x6307;&#x4EE4;"><a href="#Parse-&#x6307;&#x4EE4;" class="headerlink" title="#Parse &#x6307;&#x4EE4;"></a>#Parse &#x6307;&#x4EE4;</h2><p><code>#parse</code> &#x811A;&#x672C;&#x5143;&#x7D20;&#x5141;&#x8BB8;&#x6A21;&#x677F;&#x8BBE;&#x8BA1;&#x8005;&#x5BFC;&#x5165;&#x5305;&#x542B;VTL&#x7684;&#x672C;&#x5730;&#x6587;&#x4EF6;&#x3002;Velocity&#x5C06;&#x89E3;&#x6790;VTL&#x5E76;&#x5904;&#x7406;&#x5236;&#x5B9A;&#x7684;&#x6A21;&#x677F;&#x3002;</p>
+<pre><code>#parse( &quot;me.vm&quot; )
+</code></pre><p>&#x8DDF; <code>#include&#x6307;&#x4EE4;</code> &#x4E00;&#x6837;&#xFF0C;<code>#parse</code>&#x4E5F;&#x80FD;&#x7528;&#x53D8;&#x91CF;&#x5BFC;&#x5165;&#x6A21;&#x677F;&#x3002;<code>#parse</code> &#x5F15;&#x7528;&#x7684;&#x4EFB;&#x4F55;&#x6A21;&#x677F;&#xFF0C;&#x5FC5;&#x987B;&#x5305;&#x542B;&#x5728;TEMPLATE_ROOT&#x76EE;&#x5F55;&#x4E0B;&#x3002;&#x8DDF; <code>#include</code> &#x6307;&#x4EE4;&#x4E0D;&#x540C;&#x7684;&#x662F;&#xFF0C;<code>#parse</code>&#x53EA;&#x80FD;&#x6709;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x3002;</p>
+<p>VTL&#x6A21;&#x677F;&#x5141;&#x8BB8; <code>#parse</code> &#x8BED;&#x53E5;&#x5BFC;&#x5165;&#x7684;&#x6A21;&#x677F;&#xFF0C;&#x4E5F;&#x5305;&#x542B; <code>#parse</code> &#x8BED;&#x53E5;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;velocity.properties &#x4E2D;&#x7684; directive.parse.max.depth &#x503C;&#x662F;10&#xFF0C;&#x5B83;&#x4E5F;&#x5141;&#x8BB8;&#x7528;&#x6237;&#x81EA;&#x5B9A;&#x4E49;&#x3002;&#xFF08;&#x6CE8;&#x610F;&#xFF1A;&#x5982;&#x679C; velocity.properties &#x6587;&#x4EF6;&#x4E2D;&#x7684; directive.parse.max.depth &#x672A;&#x8BBE;&#x7F6E;&#xFF0C;Velocity &#x4F1A;&#x5C06;&#x5B83;&#x8BBE;&#x7F6E;&#x4E3A;&#x7F3A;&#x7701;&#x503C;10&#xFF09;&#x3002;&#x9012;&#x5F52;&#x662F;&#x5141;&#x8BB8;&#x7684;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x6A21;&#x677F;dofoo.vm&#x5305;&#x542B;&#x5982;&#x4E0B;&#x7684;&#x6587;&#x4EF6;&#xFF1A;</p>
+<pre><code>Count down.
+#set( $count = 8 )
+#parse( &quot;parsefoo.vm&quot; )
+All done with dofoo.vm!
+</code></pre><p>&#x5B83;&#x5BFC;&#x5165;parsefoo.vm&#xFF0C;&#x800C;&#x5B83;&#x53EF;&#x4EE5;&#x5305;&#x542B;&#x5982;&#x4E0B;&#x7684;VTL:</p>
+<pre><code>$count
+#set( $count = $count - 1 )
+#if( $count &gt; 0 )
+    #parse( &quot;parsefoo.vm&quot; )
+#else
+    All done with parsefoo.vm!
+#end
+</code></pre><p>&#x5728;&#x201D;Count down.&#x201D;&#x663E;&#x793A;&#x540E;&#xFF0C;Velocity&#x89E3;&#x6790;parsefoo.vm&#xFF0C;&#x4ECE;8&#x5F80;&#x4E0B;&#x9012;&#x51CF;&#x3002;&#x5F53;&#x5230;&#x8FBE;0&#x65F6;&#xFF0C;&#x5C06;&#x4F1A;&#x663E;&#x793A;&#x201D;All done with parsefoo.vm!&#x201D;&#x7684;&#x4FE1;&#x606F;&#x3002;&#x8FD9;&#x65F6;&#xFF0C;Velocity&#x5C06;&#x8FD4;&#x56DE;dofoo.vm&#xFF0C;&#x5E76;&#x4E14;&#x8F93;&#x51FA;&#x201D;All done with dofoo.vm!&#x201D;&#x7684;&#x4FE1;&#x606F;</p>
+<h2 id="Break&#x4E2D;&#x6B62;"><a href="#Break&#x4E2D;&#x6B62;" class="headerlink" title="#Break&#x4E2D;&#x6B62;"></a>#Break&#x4E2D;&#x6B62;</h2><p><code>#break&#x6307;&#x4EE4;</code>&#x505C;&#x6B62;&#x5F53;&#x524D;&#x6267;&#x884C;&#x8FD4;&#x56DE;&#x7684;&#x7EE7;&#x7EED;&#x5904;&#x7406;&#x3002;&#x8DDF;#stop&#x4E0D;&#x540C;&#xFF0C;#break&#x4EC5;&#x4E2D;&#x6B62;&#x6700;&#x91CC;&#x5C42;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x4E2D;&#x6B62;&#x8DF3;&#x51FA;&#x7279;&#x5B9A;&#x7684;&#x6267;&#x884C;&#x8303;&#x56F4;&#xFF0C;&#x90A3;&#x4E48;&#xFF0C;&#x4F60;&#x53EF;&#x5C06;&#x8303;&#x56F4;&#x63A7;&#x5236;&#x5F15;&#x7528;&#xFF08;&#x4F8B;&#x5982;$foreach&#xFF0C;$template&#xFF0C;$evaluate&#xFF0C;$define&#xFF0C;$macro&#xFF0C;&#x6216;$somebodymacro&#xFF09;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x4F20;&#x9012;&#x7ED9;#break&#x3002;&#xFF08;&#x4F8B;&#x5982;#break($macro)&#xFF09;&#x3002;&#x8FD9;&#x4F1A;&#x505C;&#x6B62;&#x6240;&#x6709;&#x8303;&#x56F4;&#x7684;&#x5904;&#x7406;&#xFF0C;&#x76F4;&#x5230;&#x9000;&#x51FA;&#x5230;&#x6307;&#x5B9A;&#x7684;&#x90A3;&#x4E2A;&#x3002;&#x5728;&#x540C;&#x6837;&#x7C7B;&#x578B;&#x7684;&#x5D4C;&#x5957;&#x8303;&#x56F4;&#x5185;&#xFF0C;&#x8BB0;&#x4F4F;&#xFF0C;&#x4F60;&#x603B;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;$<scope>&#x8BBF;&#x95EE;&#x7236;&#x8303;&#x56F4;&#x3002;&#x7236;&#x8303;&#x56F4;&#x6216;$<scope>.topmost&#x4F20;&#x9012;&#x7ED9;#break&#xFF08;&#x4F8B;&#x5982;#break($foreach.parent)&#x6216;#break($macro.topmost)&#xFF09;&#x3002;</scope></scope></p>
+<h2 id="Stop&#x505C;&#x6B62;"><a href="#Stop&#x505C;&#x6B62;" class="headerlink" title="Stop&#x505C;&#x6B62;"></a>Stop&#x505C;&#x6B62;</h2><p><code>#stop&#x6307;&#x4EE4;</code> &#x505C;&#x6B62;&#x6A21;&#x677F;&#x7EE7;&#x7EED;&#x5904;&#x7406;&#x6216;&#x6267;&#x884C;&#x5E76;&#x8FD4;&#x56DE;&#x3002;&#x8FD9;&#x5728;debug&#x4E2D;&#x6BD4;&#x8F83;&#x6709;&#x7528;&#x3002;</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/Velocity/Velocity实战/Velocity实战入门(八)--宏/" class="pre-post btn btn-default" title='Velocity实战入门(八)--宏'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Velocity实战入门(八)--宏</span>
+        </a>
+    
+    
+        <a href="/Velocity/Velocity实战/Velocity实战入门(六)--foreach指令/" class="next-post btn btn-default" title='Velocity实战入门(六)--#foreach指令'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Velocity实战入门(六)--#foreach指令</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/"><i class="fa" aria-hidden="true">tomcat</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/C/" style="font-size: 11.43px;">C#</a> <a href="/tags/CSS/" style="font-size: 12.86px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 11.43px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 20px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 14.29px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 12.86px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Nginx/" style="font-size: 18.57px;">Nginx</a> <a href="/tags/RabbitMQ/" style="font-size: 12.86px;">RabbitMQ</a> <a href="/tags/SQL/" style="font-size: 17.14px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 11.43px;">SQL Server</a> <a href="/tags/Velocity/" style="font-size: 20px;">Velocity</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tomcat/" style="font-size: 15.71px;">tomcat</a> <a href="/tags/tool/" style="font-size: 11.43px;">tool</a> <a href="/tags/前端/" style="font-size: 11.43px;">前端</a> <a href="/tags/前端基础/" style="font-size: 15.71px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12.86px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

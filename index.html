@@ -127,7 +127,380 @@
     <div class="post-content">
         <div class="post-head home-post-head">
             <h1 class="post-title">
-                <a href="/Velocity/Velocity实战/Velocity实战入门(八)--宏/">Velocity实战入门(八)--宏</a>
+                <a href="/Quartz/Quartz实战/Quartz实战入门(四)--Scheduler/">Quartz实战入门(四)--Scheduler</a>
+            </h1>
+            <div class="post-meta">  &bull;
+                <time class="post-date" datetime="" title="">
+                    2018年05月04日
+                </time>
+            </div>
+        </div>
+        <p class="brief">
+		 
+           <!-- -->
+
+            <!--    SchedulerScheduler &amp;#x5C31;&amp;#x662F; Quartz &amp;#x7684;&amp;#x5927;&amp;#x8111;&amp;#xFF0C;&amp;#x6240;&amp;#x6709;&amp;#x4EFB;&amp;#x52A1;&amp;#x90FD;&amp;#x662F;&amp;#x7531;&amp;#x5B83;&amp;#x6765;&amp;#x8BBE;&amp;#x65BD;&amp;#x3002;
+Schduelr &amp;#x5305;&amp;#x542B;&amp;#x4E00;&amp;#x4E2A;&amp;#x4E24;&amp;#x4E2A;&amp;#x91CD;&amp;#x8981;&amp;#x7EC4;&amp;#x4EF6;: JobStore &amp;#x548C; ThreadPool&amp;#x3002;
+JobStore&amp;#x662F;&amp;#x4F1A;&amp;#x6765;&amp;#x5B58;&amp;#x50A8;&amp;#x8FD0;&amp;#x884C;&amp;#x65F6;&amp;#x4FE1;&amp;#x606F;&amp;#x7684;&amp;#xFF0C;&amp;#x5305;&amp;#x62EC;Trigger,Schduler,JobDetail&amp;#xFF0C;&amp;#x4E1A;&amp;#x52A1;&amp;#x9501;&amp;#x7B49;&amp;#x3002;&amp;#x5B83;&amp;#x6709;&amp;#x591A;&amp;#x79CD;&amp;#x5B9E;&amp;#x73B0;RAMJob(&amp;#x5185;&amp;#x5B58;&amp;#x5B9E;&amp;#x73B0;)&amp;#xFF0C;JobStoreTX(JDBC&amp;#xFF0C;&amp;#x4E8B;&amp;#x52A1;&amp;#x7531;Quartz&amp;#x7BA1;&amp;#x7406;&amp;#xFF09;&amp;#xFF0C;JobStoreCMT(JDBC&amp;#xFF0C;&amp;#x4F7F;&amp;#x7528;&amp;#x5BB9;&amp;#x5668;&amp;#x4E8B;&amp;#x52A1;)&amp;#xFF0C;ClusteredJobStore(&amp;#x96C6;&amp;#x7FA4;&amp;#x5B9E;&amp;#x73B0;)&amp;#x3001;TerracottaJobStore(&amp;#x4EC0;&amp;#x4E48;&amp;#x662F;Terractta)&amp;#x3002;
+ThreadPool&amp;#x5C31;&amp;#x662F;&amp;#x7EBF;&amp;#x7A0B;&amp;#x6C60;&amp;#xFF0C;Quartz&amp;#x6709;&amp;#x81EA;&amp;#x5DF1;&amp;#x7684;&amp;#x7EBF;&amp;#x7A0B;&amp;#x6C60;&amp;#x5B9E;&amp;#x73B0;&amp;#x3002;...-->
+         <!--   -->
+        </p>
+    </div>
+    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Quartz">
+            Quartz
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/Quartz" title='Quartz'>
+                        Quartz
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/Quartz/Quartz实战/Quartz实战入门(四)--Scheduler/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+</article>
+
+
+<article class="post">
+    
+    <div class="post-content">
+        <div class="post-head home-post-head">
+            <h1 class="post-title">
+                <a href="/Quartz/Quartz实战/Quartz实战入门(三)--JobDetailANDJob/">Quartz实战入门(三)--JobDetail & Job</a>
+            </h1>
+            <div class="post-meta">  &bull;
+                <time class="post-date" datetime="" title="">
+                    2018年05月04日
+                </time>
+            </div>
+        </div>
+        <p class="brief">
+		 
+           <!-- -->
+
+            <!--    jobDetailjobDetail  &amp;#x662F;&amp;#x4EFB;&amp;#x52A1;&amp;#x7684;&amp;#x5B9A;&amp;#x4E49;&amp;#xFF0C;&amp;#x800C; Job &amp;#x662F;&amp;#x4EFB;&amp;#x52A1;&amp;#x7684;&amp;#x6267;&amp;#x884C;&amp;#x903B;&amp;#x8F91;&amp;#x3002;&amp;#x5728; JobDetail&amp;#x91CC;&amp;#x4F1A;&amp;#x5F15;&amp;#x7528;&amp;#x4E00;&amp;#x4E2A; Job Class&amp;#x5B9A;&amp;#x4E49;&amp;#x3002;&amp;#x4E00;&amp;#x4E2A;&amp;#x6700;&amp;#x7B80;&amp;#x5355;&amp;#x7684;&amp;#x4F8B;&amp;#x5B50;
+12345678910111213141516171819202122232425262728293031323334353637public class JobTest {    public static void main(String[] args) throws SchedulerException, IOException {           JobDetail job=newJob()               .ofType(DoNothingJob.class) //&amp;#x5F15;&amp;#x7528;Job Class               .withIdentity(&amp;quot;job1&amp;quot;, &amp;quot;group1&amp;quot;) //&amp;#x8BBE;&amp;#x7F6E;name/group               .withDescription(&amp;quot;this is a test job&amp;quot;) //&amp;#x8BBE;&amp;#x7F6E;&amp;#x63CF;&amp;#x8FF0;               .usingJobData(&amp;quot;age&amp;quot;, 18) //&amp;#x52A0;&amp;#x5165;&amp;#x5C5E;&amp;#x6027;&amp;#x5230;ageJobDataMap               .build();           job.getJobDataMap().put(&amp;quot;name&amp;quot;, &amp;quot;quertz&amp;quot;); //&amp;#x52A0;&amp;#x5165;&amp;#x5C5E;...-->
+         <!--   -->
+        </p>
+    </div>
+    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Quartz">
+            Quartz
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/Quartz" title='Quartz'>
+                        Quartz
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/Quartz/Quartz实战/Quartz实战入门(三)--JobDetailANDJob/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+</article>
+
+
+<article class="post">
+    
+        <div class="post-media">
+            <a href="/Quartz/Quartz实战/Quartz实战入门(二)--Trigger/">
+                <img class="img-ajax" src="/img/loading.gif"  data-src="/Quartz/Quartz&#x5B9E;&#x6218;/Quartz&#x5B9E;&#x6218;&#x5165;&#x95E8;(&#x4E8C;)--Trigger/img/01.png"   alt="Quartz实战入门(二)--Trigger">
+            </a>
+        </div>
+    
+    <div class="post-content">
+        <div class="post-head home-post-head">
+            <h1 class="post-title">
+                <a href="/Quartz/Quartz实战/Quartz实战入门(二)--Trigger/">Quartz实战入门(二)--Trigger</a>
+            </h1>
+            <div class="post-meta">  &bull;
+                <time class="post-date" datetime="" title="">
+                    2018年05月04日
+                </time>
+            </div>
+        </div>
+        <p class="brief">
+		 
+           <!-- -->
+
+            <!--    Trigger &amp;#x7684;&amp;#x4F5C;&amp;#x7528;&amp;#x7B80;&amp;#x5355;&amp;#x6765;&amp;#x8BF4; Trigger &amp;#x5C31;&amp;#x662F;&amp;#x5B9A;&amp;#x65F6;&amp;#x5668;&amp;#x89E6;&amp;#x53D1;&amp;#x7684;&amp;#x6761;&amp;#x4EF6;
+Trigger &amp;#x7684;&amp;#x79CD;&amp;#x7C7B;Trigger &amp;#x6709;&amp;#x4EE5;&amp;#x4E0B;&amp;#x51E0;&amp;#x79CD;&amp;#x5B9E;&amp;#x73B0;&amp;#x7C7B;:
+
+SimpleTrigger
+CalendarIntervalTrigger
+DailyTimeIntervalTrigger
+CronTrigger
+
+SimpleTrigger&amp;#x6307;&amp;#x5B9A;&amp;#x4ECE;&amp;#x67D0;&amp;#x4E00;&amp;#x4E2A;&amp;#x65F6;&amp;#x95F4;&amp;#x5F00;&amp;#x59CB;&amp;#xFF0C;&amp;#x4EE5;&amp;#x4E00;&amp;#x5B9A;&amp;#x7684;&amp;#x65F6;&amp;#x95F4;&amp;#x95F4;&amp;#x9694;&amp;#xFF08;&amp;#x5355;&amp;#x4F4D;&amp;#x662F;&amp;#x6BEB;&amp;#x79D2;&amp;#xFF09;&amp;#x6267;&amp;#x884C;&amp;#x7684;&amp;#x4EFB;&amp;#x52A1;&amp;#x3002;
+&amp;#x5B83;&amp;#x9002;&amp;#x5408;&amp;#x7684;&amp;#x4EFB;&amp;#x52A1;&amp;#x7C7B;&amp;#x4F3C;&amp;#x4E8E;&amp;#x4ECE; 9:00 &amp;#x5F00;&amp;#x59CB;&amp;#xFF0C;&amp;#x6BCF;&amp;#x9694;1&amp;#x5C0F;&amp;#x65F6;&amp;#xFF0C;&amp;#x6267;&amp;#x884C;&amp;#x4E00;&amp;#x6B21;&amp;#x3002;&amp;#x5C5E;&amp;#x6027;&amp;#xFF1A;
+* repeatInterval: &amp;#x91CD;&amp;#x590D;&amp;#x95F4;&amp;#x9694;
+* repeatCount: &amp;#x91CD;&amp;#x590D;&amp;#x6B21;&amp;#x6570;&amp;#x3002;&amp;#x5B9E;&amp;#x9645;&amp;#x6267;&amp;#x884C;&amp;#x6B21;&amp;#x6570;&amp;#x662F; repeatCount+1&amp;#x3002;&amp;#x56E0;&amp;#x4E3...-->
+         <!--   -->
+        </p>
+    </div>
+    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Quartz">
+            Quartz
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/Quartz" title='Quartz'>
+                        Quartz
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/Quartz/Quartz实战/Quartz实战入门(二)--Trigger/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+</article>
+
+
+<article class="post">
+    
+        <div class="post-media">
+            <a href="/Quartz/Quartz实战/Quartz实战入门(一)--入门/">
+                <img class="img-ajax" src="/img/loading.gif"  data-src="/Quartz/Quartz&#x5B9E;&#x6218;/Quartz&#x5B9E;&#x6218;&#x5165;&#x95E8;(&#x4E00;)--&#x5165;&#x95E8;/img/01.png"   alt="Quartz实战入门(一)--入门">
+            </a>
+        </div>
+    
+    <div class="post-content">
+        <div class="post-head home-post-head">
+            <h1 class="post-title">
+                <a href="/Quartz/Quartz实战/Quartz实战入门(一)--入门/">Quartz实战入门(一)--入门</a>
+            </h1>
+            <div class="post-meta">  &bull;
+                <time class="post-date" datetime="" title="">
+                    2018年05月04日
+                </time>
+            </div>
+        </div>
+        <p class="brief">
+		 
+           <!-- -->
+
+            <!--    &amp;#x4EC0;&amp;#x4E48;&amp;#x662F; Quartz&amp;#x5728;&amp;#x65E5;&amp;#x5E38;&amp;#x751F;&amp;#x6D3B;&amp;#x4E2D;&amp;#x4F60;&amp;#x53EF;&amp;#x4EE5;&amp;#x4F1A;&amp;#x9047;&amp;#x5230;&amp;#x8FD9;&amp;#x6837;&amp;#x7684;&amp;#x95EE;&amp;#x9898;
+
+&amp;#x60F3;&amp;#x6BCF;&amp;#x6708;6&amp;#x53F7;&amp;#xFF0C;&amp;#x4FE1;&amp;#x7528;&amp;#x5361;&amp;#x81EA;&amp;#x52A8;&amp;#x8FD8;&amp;#x6B3E;
+&amp;#x6BCF;&amp;#x9694;&amp;#x4E00;&amp;#x4E2A;&amp;#x5C0F;&amp;#x65F6;&amp;#x5907;&amp;#x4EFD;&amp;#x4E0B;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x6570;&amp;#x636E;
+&amp;#x6BCF;&amp;#x5929;&amp;#x665A;&amp;#x4E0A;&amp;#x6E05;&amp;#x7406;&amp;#x4E0B;&amp;#x7CFB;&amp;#x7EDF;&amp;#x5783;&amp;#x573E;&amp;#x6587;&amp;#x4EF6;
+
+&amp;#x8FD9;&amp;#x4E9B;&amp;#x95EE;&amp;#x9898;&amp;#x603B;&amp;#x7ED3;&amp;#x8D77;&amp;#x6765;&amp;#x5C31;&amp;#x662F;&amp;#xFF1A;&amp;#x5728;&amp;#x67D0;&amp;#x4E00;&amp;#x4E2A;&amp;#x6709;&amp;#x89C4;&amp;#x5F8B;&amp;#x7684;&amp;#x65F6;&amp;#x95F4;&amp;#x70B9;&amp;#x5E72;&amp;#x67D0;&amp;#x4EF6;&amp;#x4E8B;&amp;#x3002;&amp;#x5E76;&amp;#x4E14;&amp;#x65F6;&amp;#x95F4;&amp;#x7684;&amp;#x89E6;&amp;#x53D1;&amp;#x7684;&amp;#x6761;&amp;#x4EF6;&amp;#x53EF;&amp;#x4EE5;&amp;#x975E;&amp;#x5E38;&amp;#x590D;&amp;#x6742;&amp;#xFF08;&amp;#x6BD4;&amp;#x5982;&amp;#x6BCF;&amp;#x6708;&amp;#x6700;&amp;#x540E;&amp;#x4E00;&amp;#x4E2A;&amp;#x5DE5;&amp;#x4F5C;&amp;#x65E5;&amp;#x7684;17:50&amp;#xFF09;&amp;#xFF0C;&amp;#x590D;&amp;#x6742;&amp;#x5230;&amp;#x9700;&amp;#x8981;&amp;#x4E00;&amp;#x4E2A;&amp;#x4E13;&amp;#...-->
+         <!--   -->
+        </p>
+    </div>
+    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Quartz">
+            Quartz
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/Quartz" title='Quartz'>
+                        Quartz
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/Quartz/Quartz实战/Quartz实战入门(一)--入门/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+</article>
+
+
+<article class="post">
+    
+        <div class="post-media">
+            <a href="/java/SSM框架/SSM框架集成/">
+                <img class="img-ajax" src="/img/loading.gif"  data-src="/java/SSM&#x6846;&#x67B6;/SSM&#x6846;&#x67B6;&#x96C6;&#x6210;/img/04.png"   alt="SSM 框架集成">
+            </a>
+        </div>
+    
+    <div class="post-content">
+        <div class="post-head home-post-head">
+            <h1 class="post-title">
+                <a href="/java/SSM框架/SSM框架集成/">SSM 框架集成</a>
+            </h1>
+            <div class="post-meta">  &bull;
+                <time class="post-date" datetime="" title="">
+                    2018年05月03日
+                </time>
+            </div>
+        </div>
+        <p class="brief">
+		 
+           <!-- -->
+
+            <!--    SSM &amp;#x6846;&amp;#x67B6;&amp;#x7531; Spring Mvc + Spring + Mybatis &amp;#x7EC4;&amp;#x6210;&amp;#xFF0C;&amp;#x5728;&amp;#x65E5;&amp;#x5E38;&amp;#x9879;&amp;#x76EE;&amp;#x5F00;&amp;#x53D1;&amp;#x4E2D;&amp;#x7ECF;&amp;#x5E38;&amp;#x88AB;&amp;#x4F7F;&amp;#x7528;&amp;#x5230;&amp;#xFF0C;&amp;#x76F8;&amp;#x6BD4;&amp;#x4E8E; SSH &amp;#x6846;&amp;#x67B6;&amp;#xFF0C;&amp;#x5B83;&amp;#x5728;&amp;#x8FD1;&amp;#x51E0;&amp;#x5E74;&amp;#x7684;&amp;#x5F00;&amp;#x53D1;&amp;#x4E2D;&amp;#x8FD0;&amp;#x7528;&amp;#x7684;&amp;#x66F4;&amp;#x52A0;&amp;#x5E7F;&amp;#x6CDB;&amp;#x3002;
+
+SpringMVC &amp;#x662F; Spring &amp;#x5B9E;&amp;#x73B0;&amp;#x7684;&amp;#x4E00;&amp;#x4E2A; We b&amp;#x5C42;&amp;#xFF0C;&amp;#x76F8;&amp;#x5F53;&amp;#x4E8E; Struts &amp;#x7684;&amp;#x6846;&amp;#x67B6;&amp;#xFF0C;&amp;#x4F46;&amp;#x662F;&amp;#x6BD4; Struts &amp;#x66F4;&amp;#x52A0;&amp;#x7075;&amp;#x6D3B;&amp;#x548C;&amp;#x5F3A;&amp;#x5927;&amp;#xFF01;
+Spring &amp;#x4F5C;&amp;#x4E3A;&amp;#x4E00;&amp;#x4E2A;&amp;#x8F7B;&amp;#x91CF;&amp;#x7EA7;&amp;#x7684;&amp;#x6846;&amp;#x67B6;&amp;#xFF0C;&amp;#x6709;&amp;#x5F88;&amp;#x591A;&amp;#x7684;&amp;#x62D3;&amp;#x5C55;&amp;#x529F;&amp;#x80FD;&amp;#xFF0C;&amp;#x6700;&amp;#x4E3B;&amp;#x8981;&amp;#x7684;&amp;#x6211;&amp;#x4EEC;&amp;#x4E00;&amp;#x822C;&amp;#x9879;&amp;#x76EE;&amp;#x4F7F;&amp;#x7528;&amp;#x7684;&amp;#x5C31;&amp;#x662F; IOC &amp;#x548C; AOP &amp;#x3002;
+Mybatis &amp;#x662F; &amp;#x4E00;&amp;#x4E2A;&amp;#x6301;&amp;#x4E45;&amp;#x5C42;&amp;#x7684;...-->
+         <!--   -->
+        </p>
+    </div>
+    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/java">
+            java
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/SSM框架" title='SSM框架'>
+                        SSM框架
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/java/SSM框架/SSM框架集成/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+</article>
+
+
+<article class="post">
+    
+    <div class="post-content">
+        <div class="post-head home-post-head">
+            <h1 class="post-title">
+                <a href="/Velocity/Velocity实战/Velocity实战入门(八)--宏 /">Velocity实战入门(八)--宏</a>
             </h1>
             <div class="post-meta">  &bull;
                 <time class="post-date" datetime="" title="">
@@ -136,10 +509,18 @@
             </div>
         </div>
         <p class="brief">
-		 <h2 id="include-&#x6307;&#x4EE4;"><a href="#include-&#x6307;&#x4EE4;" class="headerlink" title="#include &#x6307;&#x4EE4;"></a>#include &#x6307;&#x4EE4;</h2><p><code>#include</code> &#x811A;&#x672C;&#x5143;&#x7D20;&#x5141;&#x8BB8;&#x6A21;&#x677F;&#x8BBE;&#x8BA1;&#x8005;&#x5BFC;&#x5165;&#x4E00;&#x4E2A;&#x672C;&#x5730;&#x6587;&#x4EF6;&#xFF0C;&#x5B83;&#x4F1A;&#x88AB;&#x63D2;&#x5165;&#x5230; <code>#include&#x6307;&#x4EE4;</code> &#x6240;&#x5728;&#x7684;&#x4F4D;&#x7F6E;&#x3002;&#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x4E0D;&#x4F1A;&#x88AB;&#x6A21;&#x677F;&#x5F15;&#x64CE;&#x5904;&#x7406;&#xFF08;render&#xFF09;&#x6240;&#x4EE5;&#x8FD9;&#x4E9B;&#x6587;&#x4EF6;&#x5E94;&#x8BE5;&#x662F;&#x9759;&#x6001;&#x6A21;&#x677F;,&#x5373;&#x4E0D;&#x542B;&#x6709; VTL &#x7684;&#x6A21;&#x677F;&#x3002;&#x51FA;&#x4E8E;&#x5B89;&#x5168;&#x8003;&#x8651;&#xFF0C;&#x88AB;&#x5BFC;&#x5165;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x53EA;&#x80FD;&#x88AB;&#x653E;&#x5728;TEMPLATE_ROOT&#x76EE;&#x5F55;&#x4E0B;&#x3002;</p>
+		 
            <!-- -->
-            <!--    #include &amp;#x6307;&amp;#x4EE4;#include &amp;#x811A;&amp;#x672C;&amp;#x5143;&amp;#x7D20;&amp;#x5141;&amp;#x8BB8;&amp;#x6A21;&amp;#x677F;&amp;#x8BBE;&amp;#x8BA1;&amp;#x8005;&amp;#x5BFC;&amp;#x5165;&amp;#x4E00;&amp;#x4E2A;&amp;#x672C;&amp;#x5730;&amp;#x6587;&amp;#x4EF6;&amp;#xFF0C;&amp;#x5B83;&amp;#x4F1A;&amp;#x88AB;&amp;#x63D2;&amp;#x5165;&amp;#x5230; #include&amp;#x6307;&amp;#x4EE4; &amp;#x6240;&amp;#x5728;&amp;#x7684;&amp;#x4F4D;&amp;#x7F6E;&amp;#x3002;&amp;#x6587;&amp;#x4EF6;&amp;#x7684;&amp;#x5185;&amp;#x5BB9;&amp;#xFF0C;&amp;#x4E0D;&amp;#x4F1A;&amp;#x88AB;&amp;#x6A21;&amp;#x677F;&amp;#x5F15;&amp;#x64CE;&amp;#x5904;&amp;#x7406;&amp;#xFF08;render&amp;#xFF09;&amp;#x6240;&amp;#x4EE5;&amp;#x8FD9;&amp;#x4E9B;&amp;#x6587;&amp;#x4EF6;&amp;#x5E94;&amp;#x8BE5;&amp;#x662F;&amp;#x9759;&amp;#x6001;&amp;#x6A21;&amp;#x677F;,&amp;#x5373;&amp;#x4E0D;&amp;#x542B;&amp;#x6709; VTL &amp;#x7684;&amp;#x6A21;&amp;#x677F;&amp;#x3002;&amp;#x51FA;&amp;#x4E8E;&amp;#x5B89;&amp;#x5168;&amp;#x8003;&amp;#x8651;&amp;#xFF0C;&amp;#x88AB;&amp;#x5BFC;&amp;#x5165;&amp;#x7684;&amp;#x6587;&amp;#x4EF6;&amp;#xFF0C;&amp;#x53EA;&amp;#x80FD;&amp;#x88AB;&amp;#x653E;&amp;#x5728;TEMPLATE_ROOT&amp;#x76EE;&amp;#x5F55;&amp;#x4E0B;&amp;#x3002;…-->
-           <!-- -->
+
+            <!--    &amp;#x5B9A;&amp;#x4E49;&amp;#x5B8F;&amp;#x548C;&amp;#x4F7F;&amp;#x7528;&amp;#x5B8F;#macro&amp;#x6307;&amp;#x4EE4; &amp;#x7528;&amp;#x4E8E;&amp;#x5B9A;&amp;#x4E49;&amp;#x4E00;&amp;#x4E2A; VTL &amp;#x6A21;&amp;#x677F;&amp;#x7684;&amp;#x91CD;&amp;#x590D;&amp;#x4EE3;&amp;#x7801;&amp;#x5757;&amp;#x2014;&amp;#x2014;&amp;#x5B8F;&amp;#x3002;&amp;#x4E0B;&amp;#x9762;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x7B80;&amp;#x5355;&amp;#x7684;&amp;#x5B9A;&amp;#x4E49;&amp;#x5B8F;&amp;#x7684;&amp;#x4F8B;&amp;#x5B50;&amp;#xFF1A;
+#macro( d )
+&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;tr&amp;gt;
+#end
+&amp;#x8FD9;&amp;#x6BB5;&amp;#x4EE3;&amp;#x7801;&amp;#x5B9A;&amp;#x4E49;&amp;#x4E86;&amp;#x4E00;&amp;#x4E2A;&amp;#x5B8F;&amp;#xFF0C;&amp;#x540D;&amp;#x5B57;&amp;#x4E3A;d&amp;#xFF0C;&amp;#x6CA1;&amp;#x6709;&amp;#x53C2;&amp;#x6570;&amp;#x3002;&amp;#x4E0B;&amp;#x9762;&amp;#x662F;&amp;#x4F7F;&amp;#x7528;&amp;#x8FD9;&amp;#x4E2A;&amp;#x5B8F;&amp;#x7684;&amp;#x4EE3;&amp;#x7801;&amp;#xFF1A;
+#d()
+Velocity&amp;#x5728;&amp;#x9047;&amp;#x5230;#d()&amp;#x7684;&amp;#x65F6;&amp;#x5019;&amp;#xFF0C;&amp;#x4F1A;&amp;#x7528; &amp;quot;&amp;lt;tr&amp;gt;&amp;lt;td&amp;gt;&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&amp;quot; &amp;#x66FF;&amp;#x4EE3;&amp;#x4E0A;&amp;#x9762;&amp;#x7684; #d() &amp;#x8FD9;&amp;#x4E00;&amp;#x884C;&amp;#x3002;
+&amp;#x5B8F;&amp;#x7684;&amp;#x53C2;&amp;#x6570;&amp;#xFF1A;&amp;#x5B8F;&amp;#x4E5F;&amp;#x53EF;&amp;#x4EE5;&amp;#x5E26;&amp;#x53C2;&amp;#x6570;&amp;#xFF0C;&amp;#x800C;&amp;#x4E14;&amp;#x662F;&amp;#x...-->
+         <!--   -->
         </p>
     </div>
     
@@ -176,7 +557,7 @@
             </div>
 
             <div class="post-permalink">
-                <a href="/Velocity/Velocity实战/Velocity实战入门(八)--宏/" class="btn btn-default">阅读全文</a>
+                <a href="/Velocity/Velocity实战/Velocity实战入门(八)--宏 /" class="btn btn-default">阅读全文</a>
             </div>
         </footer>
     
@@ -402,405 +783,6 @@
 </article>
 
 
-<article class="post">
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/Velocity/Velocity实战/Velocity实战入门(四)--注释 /">Velocity实战入门(四)--注释 </a>
-            </h1>
-            <div class="post-meta">  &bull;
-                <time class="post-date" datetime="" title="">
-                    2018年04月25日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
-		 <blockquote>
-<p>&#x6CE8;&#x91CA;&#x7684;&#x4F7F;&#x7528;&#x65B9;&#x5F0F; </p>
-</blockquote>
-<h2 id="&#x4EC0;&#x4E48;&#x662F;&#x6CE8;&#x91CA;"><a href="#&#x4EC0;&#x4E48;&#x662F;&#x6CE8;&#x91CA;" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F;&#x6CE8;&#x91CA;"></a>&#x4EC0;&#x4E48;&#x662F;&#x6CE8;&#x91CA;</h2><p>&#x6CE8;&#x91CA;&#x5141;&#x8BB8;&#x5305;&#x542B;&#x4E00;&#x4E9B;&#x63CF;&#x8FF0;&#x6027;&#x7684;&#x6587;&#x672C;&#xFF0C;&#x5B83;&#x4EEC;&#x5E76;&#x4E0D;&#x4F1A;&#x5728;&#x6A21;&#x7248;&#x5F15;&#x64CE;&#x4E2D;&#x8F93;&#x51FA;&#x3002;&#x6CE8;&#x91CA;&#x80FD;&#x6709;&#x6548;&#x5730;&#x63D0;&#x9192;&#x4F60;&#x81EA;&#x5DF1;&#xFF0C;&#x6216;&#x89E3;&#x91CA;&#x7ED9;&#x522B;&#x4EBA;&#xFF0C;&#x4F60;&#x7684; VTL &#x8BED;&#x53E5;&#x5728;&#x505A;&#x4EC0;&#x4E48;&#xFF0C;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x4F60;&#x53D1;&#x73B0;&#x6709;&#x7528;&#x7684;&#x4EFB;&#x4F55;&#x76EE;&#x7684;&#x3002;</p>
-           <!-- -->
-            <!--    
-&amp;#x6CE8;&amp;#x91CA;&amp;#x7684;&amp;#x4F7F;&amp;#x7528;&amp;#x65B9;&amp;#x5F0F; 
-
-&amp;#x4EC0;&amp;#x4E48;&amp;#x662F;&amp;#x6CE8;&amp;#x91CA;&amp;#x6CE8;&amp;#x91CA;&amp;#x5141;&amp;#x8BB8;&amp;#x5305;&amp;#x542B;&amp;#x4E00;&amp;#x4E9B;&amp;#x63CF;&amp;#x8FF0;&amp;#x6027;&amp;#x7684;&amp;#x6587;&amp;#x672C;&amp;#xFF0C;&amp;#x5B83;&amp;#x4EEC;&amp;#x5E76;&amp;#x4E0D;&amp;#x4F1A;&amp;#x5728;&amp;#x6A21;&amp;#x7248;&amp;#x5F15;&amp;#x64CE;&amp;#x4E2D;&amp;#x8F93;&amp;#x51FA;&amp;#x3002;&amp;#x6CE8;&amp;#x91CA;&amp;#x80FD;&amp;#x6709;&amp;#x6548;&amp;#x5730;&amp;#x63D0;&amp;#x9192;&amp;#x4F60;&amp;#x81EA;&amp;#x5DF1;&amp;#xFF0C;&amp;#x6216;&amp;#x89E3;&amp;#x91CA;&amp;#x7ED9;&amp;#x522B;&amp;#x4EBA;&amp;#xFF0C;&amp;#x4F60;&amp;#x7684; VTL &amp;#x8BED;&amp;#x53E5;&amp;#x5728;&amp;#x505A;&amp;#x4EC0;&amp;#x4E48;&amp;#xFF0C;&amp;#x6216;&amp;#x8005;&amp;#x5176;&amp;#x4ED6;&amp;#x4F60;&amp;#x53D1;&amp;#x73B0;&amp;#x6709;&amp;#x7528;&amp;#x7684;&amp;#x4EFB;&amp;#x4F55;&amp;#x76EE;&amp;#x7684;&amp;#x3002;…-->
-           <!-- -->
-        </p>
-    </div>
-    
-        <footer class="post-footer clearfix">
-            <div class="pull-left tag-list">
-                <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/Velocity">
-            Velocity
-        </a>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-                
-                    <a href="/tags/Velocity" title='Velocity'>
-                        Velocity
-                    </a>
-                
-            
-        </span>
-    </span>
-    
-
-    
-</div>
-
-            </div>
-
-            <div class="post-permalink">
-                <a href="/Velocity/Velocity实战/Velocity实战入门(四)--注释 /" class="btn btn-default">阅读全文</a>
-            </div>
-        </footer>
-    
-</article>
-
-
-<article class="post">
-    
-        <div class="post-media">
-            <a href="/Velocity/Velocity实战/Velocity实战入门(三)--赋值/">
-                <img class="img-ajax" src="/img/loading.gif"  data-src="/Velocity/Velocity&#x5B9E;&#x6218;/Velocity&#x5B9E;&#x6218;&#x5165;&#x95E8;(&#x4E09;)--&#x8D4B;&#x503C;/img/01.png"   alt="Velocity实战入门(三)--赋值">
-            </a>
-        </div>
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/Velocity/Velocity实战/Velocity实战入门(三)--赋值/">Velocity实战入门(三)--赋值</a>
-            </h1>
-            <div class="post-meta">  &bull;
-                <time class="post-date" datetime="" title="">
-                    2018年04月25日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
-		 <blockquote>
-<p>&#x5728;&#x4E0A;&#x4E00;&#x7BC7;&#x4E2D;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x4E86;&#x89E3;&#x4E86;&#x600E;&#x4E48;&#x53D6;&#x503C;&#xFF0C;&#x73B0;&#x5728;&#x5C31;&#x8BA9;&#x6211;&#x4EEC;&#x6765;&#x5B66;&#x4E60;&#x4E0B;&#x600E;&#x4E48;&#x8D4B;&#x503C;</p>
-</blockquote>
-<h2 id="&#x8D4B;&#x503C;&#x65B9;&#x5F0F;"><a href="#&#x8D4B;&#x503C;&#x65B9;&#x5F0F;" class="headerlink" title="&#x8D4B;&#x503C;&#x65B9;&#x5F0F;"></a>&#x8D4B;&#x503C;&#x65B9;&#x5F0F;</h2><p>&#x8D4B;&#x503C;&#x65B9;&#x5F0F;&#x6709;&#x4E24;&#x79CD;&#xFF1A;</p>
-<pre><code>* &#x540E;&#x53F0;&#x8D4B;&#x503C;
-* &#x9875;&#x9762; #set &#x6307;&#x4EE4;&#x8D4B;&#x503C;
-</code></pre>
-           <!-- -->
-            <!--    
-&amp;#x5728;&amp;#x4E0A;&amp;#x4E00;&amp;#x7BC7;&amp;#x4E2D;&amp;#x6211;&amp;#x4EEC;&amp;#x5DF2;&amp;#x7ECF;&amp;#x4E86;&amp;#x89E3;&amp;#x4E86;&amp;#x600E;&amp;#x4E48;&amp;#x53D6;&amp;#x503C;&amp;#xFF0C;&amp;#x73B0;&amp;#x5728;&amp;#x5C31;&amp;#x8BA9;&amp;#x6211;&amp;#x4EEC;&amp;#x6765;&amp;#x5B66;&amp;#x4E60;&amp;#x4E0B;&amp;#x600E;&amp;#x4E48;&amp;#x8D4B;&amp;#x503C;
-
-&amp;#x8D4B;&amp;#x503C;&amp;#x65B9;&amp;#x5F0F;&amp;#x8D4B;&amp;#x503C;&amp;#x65B9;&amp;#x5F0F;&amp;#x6709;&amp;#x4E24;&amp;#x79CD;&amp;#xFF1A;
-* &amp;#x540E;&amp;#x53F0;&amp;#x8D4B;&amp;#x503C;
-* &amp;#x9875;&amp;#x9762; #set &amp;#x6307;&amp;#x4EE4;&amp;#x8D4B;&amp;#x503C;
-…-->
-           <!-- -->
-        </p>
-    </div>
-    
-        <footer class="post-footer clearfix">
-            <div class="pull-left tag-list">
-                <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/Velocity">
-            Velocity
-        </a>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-                
-                    <a href="/tags/Velocity" title='Velocity'>
-                        Velocity
-                    </a>
-                
-            
-        </span>
-    </span>
-    
-
-    
-</div>
-
-            </div>
-
-            <div class="post-permalink">
-                <a href="/Velocity/Velocity实战/Velocity实战入门(三)--赋值/" class="btn btn-default">阅读全文</a>
-            </div>
-        </footer>
-    
-</article>
-
-
-<article class="post">
-    
-        <div class="post-media">
-            <a href="/Velocity/Velocity实战/Velocity实战入门(二)--取值/">
-                <img class="img-ajax" src="/img/loading.gif"  data-src="/Velocity/Velocity&#x5B9E;&#x6218;/Velocity&#x5B9E;&#x6218;&#x5165;&#x95E8;(&#x4E8C;)--&#x53D6;&#x503C;/img/01.png"   alt="Velocity实战入门(二)--取值">
-            </a>
-        </div>
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/Velocity/Velocity实战/Velocity实战入门(二)--取值/">Velocity实战入门(二)--取值</a>
-            </h1>
-            <div class="post-meta">  &bull;
-                <time class="post-date" datetime="" title="">
-                    2018年04月25日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
-		 <h2 id="&#x53D6;&#x503C;&#x65B9;&#x5F0F;"><a href="#&#x53D6;&#x503C;&#x65B9;&#x5F0F;" class="headerlink" title="&#x53D6;&#x503C;&#x65B9;&#x5F0F;"></a>&#x53D6;&#x503C;&#x65B9;&#x5F0F;</h2><p>&#x5728;&#x4E0A;&#x4E00;&#x7BC7;&#x4E2D;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x642D;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;&#x5165;&#x95E8;&#x6848;&#x4F8B;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5728;&#x540E;&#x53F0;&#x7ED9;&#x524D;&#x53F0;&#x8FD4;&#x56DE;&#x4E86;&#x4E00;&#x4E2A;&#x5C5E;&#x6027; </p>
-<pre><code>@RequestMapping(&quot;/index&quot;)
-public String vmIndex(Model model) {
-    model.addAttribute(&quot;hello&quot;, &quot;hello velocity&quot;);
-    return &quot;test&quot;;
-}
-</code></pre><p>&#x90A3;&#x4E48; Velocity &#x662F;&#x600E;&#x4E48;&#x53D6;&#x503C;&#x7684;&#x5462;&#xFF1F;<br></p>
-           <!-- -->
-            <!--    &amp;#x53D6;&amp;#x503C;&amp;#x65B9;&amp;#x5F0F;&amp;#x5728;&amp;#x4E0A;&amp;#x4E00;&amp;#x7BC7;&amp;#x4E2D;&amp;#x6211;&amp;#x4EEC;&amp;#x5DF2;&amp;#x7ECF;&amp;#x642D;&amp;#x5EFA;&amp;#x4E86;&amp;#x4E00;&amp;#x4E2A;&amp;#x5165;&amp;#x95E8;&amp;#x6848;&amp;#x4F8B;&amp;#xFF0C;&amp;#x6211;&amp;#x4EEC;&amp;#x53EF;&amp;#x4EE5;&amp;#x770B;&amp;#x5230;&amp;#x5728;&amp;#x540E;&amp;#x53F0;&amp;#x7ED9;&amp;#x524D;&amp;#x53F0;&amp;#x8FD4;&amp;#x56DE;&amp;#x4E86;&amp;#x4E00;&amp;#x4E2A;&amp;#x5C5E;&amp;#x6027; 
-@RequestMapping(&amp;quot;/index&amp;quot;)
-public String vmIndex(Model model) {
-    model.addAttribute(&amp;quot;hello&amp;quot;, &amp;quot;hello velocity&amp;quot;);
-    return &amp;quot;test&amp;quot;;
-}
-&amp;#x90A3;&amp;#x4E48; Velocity &amp;#x662F;&amp;#x600E;&amp;#x4E48;&amp;#x53D6;&amp;#x503C;&amp;#x7684;&amp;#x5462;&amp;#xFF1F;…-->
-           <!-- -->
-        </p>
-    </div>
-    
-        <footer class="post-footer clearfix">
-            <div class="pull-left tag-list">
-                <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/Velocity">
-            Velocity
-        </a>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-                
-                    <a href="/tags/Velocity" title='Velocity'>
-                        Velocity
-                    </a>
-                
-            
-        </span>
-    </span>
-    
-
-    
-</div>
-
-            </div>
-
-            <div class="post-permalink">
-                <a href="/Velocity/Velocity实战/Velocity实战入门(二)--取值/" class="btn btn-default">阅读全文</a>
-            </div>
-        </footer>
-    
-</article>
-
-
-<article class="post">
-    
-        <div class="post-media">
-            <a href="/Velocity/Velocity实战/Velocity实战入门(一)--环境搭建/">
-                <img class="img-ajax" src="/img/loading.gif"  data-src="/Velocity/Velocity&#x5B9E;&#x6218;/Velocity&#x5B9E;&#x6218;&#x5165;&#x95E8;(&#x4E00;)--&#x73AF;&#x5883;&#x642D;&#x5EFA;/img/01.png"   alt="Velocity实战入门(一)--环境搭建">
-            </a>
-        </div>
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/Velocity/Velocity实战/Velocity实战入门(一)--环境搭建/">Velocity实战入门(一)--环境搭建</a>
-            </h1>
-            <div class="post-meta">  &bull;
-                <time class="post-date" datetime="" title="">
-                    2018年04月24日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
-		 <h2 id="&#x4EC0;&#x4E48;&#x662F;-Velocity"><a href="#&#x4EC0;&#x4E48;&#x662F;-Velocity" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F; Velocity"></a>&#x4EC0;&#x4E48;&#x662F; Velocity</h2><p>Velocity &#x662F;&#x4E00;&#x4E2A;&#x57FA;&#x4E8E; Java &#x7684;&#x6A21;&#x7248;&#x5F15;&#x64CE;&#x3002;&#x5B83;&#x5141;&#x8BB8;&#x9875;&#x9762;&#x8BBE;&#x8BA1;&#x4EBA;&#x5458;&#x5F15;&#x7528; Java &#x4EE3;&#x7801;&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x65B9;&#x6CD5;&#x3002;Web &#x9875;&#x9762;&#x8BBE;&#x8BA1;&#x4EBA;&#x5458;&#xFF0C;&#x53EF;&#x4EE5;&#x8DDF;Java&#x7A0B;&#x5E8F;&#x5458;&#x5E76;&#x884C;&#x5DE5;&#x4F5C;&#xFF1A;&#x6839;&#x636E;MVC&#x6A21;&#x578B;&#xFF0C;&#x4EE5;&#x5F00;&#x53D1;Web&#x9875;&#x9762;&#xFF1B;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x3002;Web&#x9875;&#x9762;&#x8BBE;&#x8BA1;&#x4EBA;&#x5458;&#x80FD;&#x4E13;&#x6CE8;&#x4E8E;&#x521B;&#x5EFA;&#x66F4;&#x597D;&#x7684;&#x9875;&#x9762;&#xFF0C;&#x800C;&#x7A0B;&#x5E8F;&#x5458;&#x80FD;&#x4E13;&#x6CE8;&#x4E8E;&#x7F16;&#x5199;&#x4F18;&#x79C0;&#x7684;&#x4EE3;&#x7801;&#x3002;Velocity&#x5206;&#x79BB;&#x4E86;Java&#x4EE3;&#x7801;&#x548C;Web&#x9875;&#x9762;&#xFF0C;&#x5B83;&#x4F7F;&#x5F97; Web &#x9875;&#x9762;&#x4ECE;&#x957F;&#x8FDC;&#x6765;&#x770B;&#x66F4;&#x5BB9;&#x6613;&#x7EF4;&#x62A4;&#xFF0C;&#x5B83;&#x4E3A; JSP &#x6216; PHP &#x63D0;&#x4F9B;&#x4E86;&#x53EF;&#x66FF;&#x4EE3;&#x7684;&#x65B9;&#x6848;&#x3002;</p>
-<p>Velocity&#x53EF;&#x7528;&#x6765;&#x4ECE;&#x6A21;&#x7248;&#x4E2D;&#xFF0C;&#x751F;&#x6210;Web&#x9875;&#x9762;&#xFF0C;SQL&#xFF0C;PostScript&#x548C;&#x5176;&#x4ED6;&#x8F93;&#x51FA;&#x3002;&#x5B83;&#x5373;&#x53EF;&#x4F5C;&#x4E3A;&#x72EC;&#x7ACB;&#x7684;&#x5DE5;&#x5177;&#xFF0C;&#x7528;&#x6765;&#x751F;&#x6210;&#x6E90;&#x4EE3;&#x7801;&#x548C;&#x62A5;&#x544A;&#xFF1B;&#x4E5F;&#x53EF;&#x4F5C;&#x4E3A;&#x5176;&#x4ED6;&#x7CFB;&#x7EDF;&#x7684;&#x4E00;&#x4E2A;&#x96C6;&#x6210;&#x7EC4;&#x4EF6;&#x3002;&#x96C6;&#x6210;&#x597D;&#x540E;&#xFF0C;Velocity&#x5C06;&#x4E3A;Turbine Web&#x5E94;&#x7528;&#x6846;&#x67B6;&#x63D0;&#x4F9B;&#x6A21;&#x677F;&#x670D;&#x52A1;&#x3002; Velocity+Turbine&#x63D0;&#x4F9B;&#x7684;&#x6A21;&#x677F;&#x670D;&#x52A1;&#xFF0C;&#x5C06;&#x53EF;&#x5B9E;&#x73B0;&#x6839;&#x636E;&#x4E00;&#x4E2A;&#x771F;&#x6B63;&#x7684;MVC&#x6A21;&#x578B;&#xFF0C;&#x5F00;&#x53D1;Web&#x5E94;&#x7528;&#x3002;</p>
-           <!-- -->
-            <!--    &amp;#x4EC0;&amp;#x4E48;&amp;#x662F; VelocityVelocity &amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x57FA;&amp;#x4E8E; Java &amp;#x7684;&amp;#x6A21;&amp;#x7248;&amp;#x5F15;&amp;#x64CE;&amp;#x3002;&amp;#x5B83;&amp;#x5141;&amp;#x8BB8;&amp;#x9875;&amp;#x9762;&amp;#x8BBE;&amp;#x8BA1;&amp;#x4EBA;&amp;#x5458;&amp;#x5F15;&amp;#x7528; Java &amp;#x4EE3;&amp;#x7801;&amp;#x4E2D;&amp;#x5B9A;&amp;#x4E49;&amp;#x7684;&amp;#x65B9;&amp;#x6CD5;&amp;#x3002;Web &amp;#x9875;&amp;#x9762;&amp;#x8BBE;&amp;#x8BA1;&amp;#x4EBA;&amp;#x5458;&amp;#xFF0C;&amp;#x53EF;&amp;#x4EE5;&amp;#x8DDF;Java&amp;#x7A0B;&amp;#x5E8F;&amp;#x5458;&amp;#x5E76;&amp;#x884C;&amp;#x5DE5;&amp;#x4F5C;&amp;#xFF1A;&amp;#x6839;&amp;#x636E;MVC&amp;#x6A21;&amp;#x578B;&amp;#xFF0C;&amp;#x4EE5;&amp;#x5F00;&amp;#x53D1;Web&amp;#x9875;&amp;#x9762;&amp;#xFF1B;&amp;#x8FD9;&amp;#x610F;&amp;#x5473;&amp;#x7740;&amp;#x3002;Web&amp;#x9875;&amp;#x9762;&amp;#x8BBE;&amp;#x8BA1;&amp;#x4EBA;&amp;#x5458;&amp;#x80FD;&amp;#x4E13;&amp;#x6CE8;&amp;#x4E8E;&amp;#x521B;&amp;#x5EFA;&amp;#x66F4;&amp;#x597D;&amp;#x7684;&amp;#x9875;&amp;#x9762;&amp;#xFF0C;&amp;#x800C;&amp;#x7A0B;&amp;#x5E8F;&amp;#x5458;&amp;#x80FD;&amp;#x4E13;&amp;#x6CE8;&amp;#x4E8E;&amp;#x7F16;&amp;#x5199;&amp;#x4F18;&amp;#x79C0;&amp;#x7684;&amp;#x4EE3;&amp;#x7801;&amp;#x3002;Velocity&amp;#x5206;&amp;#x79BB;&amp;#x4E86;Java&amp;#x4EE3;&amp;#x7801;&amp;#x548C;Web&amp;#x9875;&amp;#x9762;&amp;#xFF0C;&amp;#x5B83;&amp;#x4F7F;&amp;#x5F97; Web &amp;#x9875;&amp;#x9762;&amp;#x4ECE;&amp;#x957F;&amp;#x8FDC;&amp;#x6765;&amp;#x770B;&amp;#x66F4;&amp;#x5BB9;&amp;#x6613;&amp;#x7EF4;&amp;#x62A4;&amp;#xFF0C;&amp;#x5B83;&amp;#x4E3A; JSP &amp;#x6216; PHP &amp;#x63D0;&amp;#x4F9B;&amp;#x4E86;&amp;#x53EF;&amp;#x66FF;&amp;#x4EE3;&amp;#x7684;&amp;#x65B9;&amp;#x6848;&amp;#x3002;
-Velocity&amp;#x53EF;&amp;#x7528;&amp;#x6765;&amp;#x4ECE;&amp;#x6A21;&amp;#x7248;&amp;#x4E2D;&amp;#xFF0C;&amp;#x751F;&amp;#x6210;Web&amp;#x9875;&amp;#x9762;&amp;#xFF0C;SQL&amp;#xFF0C;PostScript&amp;#x548C;&amp;#x5176;&amp;#x4ED6;&amp;#x8F93;&amp;#x51FA;&amp;#x3002;&amp;#x5B83;&amp;#x5373;&amp;#x53EF;&amp;#x4F5C;&amp;#x4E3A;&amp;#x72EC;&amp;#x7ACB;&amp;#x7684;&amp;#x5DE5;&amp;#x5177;&amp;#xFF0C;&amp;#x7528;&amp;#x6765;&amp;#x751F;&amp;#x6210;&amp;#x6E90;&amp;#x4EE3;&amp;#x7801;&amp;#x548C;&amp;#x62A5;&amp;#x544A;&amp;#xFF1B;&amp;#x4E5F;&amp;#x53EF;&amp;#x4F5C;&amp;#x4E3A;&amp;#x5176;&amp;#x4ED6;&amp;#x7CFB;&amp;#x7EDF;&amp;#x7684;&amp;#x4E00;&amp;#x4E2A;&amp;#x96C6;&amp;#x6210;&amp;#x7EC4;&amp;#x4EF6;&amp;#x3002;&amp;#x96C6;&amp;#x6210;&amp;#x597D;&amp;#x540E;&amp;#xFF0C;Velocity&amp;#x5C06;&amp;#x4E3A;Turbine Web&amp;#x5E94;&amp;#x7528;&amp;#x6846;&amp;#x67B6;&amp;#x63D0;&amp;#x4F9B;&amp;#x6A21;&amp;#x677F;&amp;#x670D;&amp;#x52A1;&amp;#x3002; Velocity+Turbine&amp;#x63D0;&amp;#x4F9B;&amp;#x7684;&amp;#x6A21;&amp;#x677F;&amp;#x670D;&amp;#x52A1;&amp;#xFF0C;&amp;#x5C06;&amp;#x53EF;&amp;#x5B9E;&amp;#x73B0;&amp;#x6839;&amp;#x636E;&amp;#x4E00;&amp;#x4E2A;&amp;#x771F;&amp;#x6B63;&amp;#x7684;MVC&amp;#x6A21;&amp;#x578B;&amp;#xFF0C;&amp;#x5F00;&amp;#x53D1;Web&amp;#x5E94;&amp;#x7528;&amp;#x3002;…-->
-           <!-- -->
-        </p>
-    </div>
-    
-        <footer class="post-footer clearfix">
-            <div class="pull-left tag-list">
-                <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/Velocity">
-            Velocity
-        </a>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-                
-                    <a href="/tags/Velocity" title='Velocity'>
-                        Velocity
-                    </a>
-                
-            
-        </span>
-    </span>
-    
-
-    
-</div>
-
-            </div>
-
-            <div class="post-permalink">
-                <a href="/Velocity/Velocity实战/Velocity实战入门(一)--环境搭建/" class="btn btn-default">阅读全文</a>
-            </div>
-        </footer>
-    
-</article>
-
-
-<article class="post">
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/Nginx/后台/Nginx/nginx–s reload命令无效/">nginx–s reload 命令无效问题</a>
-            </h1>
-            <div class="post-meta">  &bull;
-                <time class="post-date" datetime="" title="">
-                    2018年04月21日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
-		 <h2 id="&#x4F7F;&#x7528;&#x573A;&#x666F;"><a href="#&#x4F7F;&#x7528;&#x573A;&#x666F;" class="headerlink" title="&#x4F7F;&#x7528;&#x573A;&#x666F;"></a>&#x4F7F;&#x7528;&#x573A;&#x666F;</h2><p>nginx &#x914D;&#x7F6E;&#x4E24;&#x4E2A;tomcat&#x5B9E;&#x73B0;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#xFF0C;&#x4EBA;&#x4E3A;&#x5C06;&#x5176;&#x4E2D;&#x4E00;&#x53F0;tomcat&#x5173;&#x95ED;&#x6D4B;&#x8BD5;nginx&#x8F6C;&#x53D1;&#x60C5;&#x51B5;&#x5E76;&#x4FEE;&#x6539;&#x8FDE;&#x63A5;&#x8D85;&#x65F6;&#x914D;&#x7F6E;</p>
-<pre><code>upstream mysvr {
-    #weigth&#x53C2;&#x6570;&#x8868;&#x793A;&#x6743;&#x503C;&#xFF0C;&#x6743;&#x503C;&#x8D8A;&#x9AD8;&#x88AB;&#x5206;&#x914D;&#x5230;&#x7684;&#x51E0;&#x7387;&#x8D8A;&#x5927;
-    #max_fails&#x6700;&#x5927;&#x8D85;&#x65F6;&#x6B21;&#x6570;
-    #fail_timeout&#x670D;&#x52A1;&#x5668;&#x4EE3;&#x7406;&#x76D1;&#x542C;&#x8D85;&#x65F6;&#x65F6;&#x95F4;  
-    server 127.0.0.3:8080 weight=1 max_fails=1 fail_timeout=60;
-    server 127.0.0.3:8090 weight=1 max_fails=1 fail_timeout=60;
-}    
-server {
-    listen       80;
-    server_name  localhost;      
-    location / {
-        proxy_pass  http://mysvr;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        # &#x8BBE;&#x7F6E;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x4E3A;1&#x79D2;
-        proxy_connect_timeout       1;
-        proxy_read_timeout          1;
-        proxy_send_timeout          1;                    
-    }
-}
-</code></pre>
-           <!-- -->
-            <!--    &amp;#x4F7F;&amp;#x7528;&amp;#x573A;&amp;#x666F;nginx &amp;#x914D;&amp;#x7F6E;&amp;#x4E24;&amp;#x4E2A;tomcat&amp;#x5B9E;&amp;#x73B0;&amp;#x8D1F;&amp;#x8F7D;&amp;#x5747;&amp;#x8861;&amp;#xFF0C;&amp;#x4EBA;&amp;#x4E3A;&amp;#x5C06;&amp;#x5176;&amp;#x4E2D;&amp;#x4E00;&amp;#x53F0;tomcat&amp;#x5173;&amp;#x95ED;&amp;#x6D4B;&amp;#x8BD5;nginx&amp;#x8F6C;&amp;#x53D1;&amp;#x60C5;&amp;#x51B5;&amp;#x5E76;&amp;#x4FEE;&amp;#x6539;&amp;#x8FDE;&amp;#x63A5;&amp;#x8D85;&amp;#x65F6;&amp;#x914D;&amp;#x7F6E;
-upstream mysvr {
-    #weigth&amp;#x53C2;&amp;#x6570;&amp;#x8868;&amp;#x793A;&amp;#x6743;&amp;#x503C;&amp;#xFF0C;&amp;#x6743;&amp;#x503C;&amp;#x8D8A;&amp;#x9AD8;&amp;#x88AB;&amp;#x5206;&amp;#x914D;&amp;#x5230;&amp;#x7684;&amp;#x51E0;&amp;#x7387;&amp;#x8D8A;&amp;#x5927;
-    #max_fails&amp;#x6700;&amp;#x5927;&amp;#x8D85;&amp;#x65F6;&amp;#x6B21;&amp;#x6570;
-    #fail_timeout&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x4EE3;&amp;#x7406;&amp;#x76D1;&amp;#x542C;&amp;#x8D85;&amp;#x65F6;&amp;#x65F6;&amp;#x95F4;  
-    server 127.0.0.3:8080 weight=1 max_fails=1 fail_timeout=60;
-    server 127.0.0.3:8090 weight=1 max_fails=1 fail_timeout=60;
-}    
-server {
-    listen       80;
-    server_name  localhost;      
-    location / {
-        proxy_pass  http://mysvr;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        # &amp;#x8BBE;&amp;#x7F6E;&amp;#x8D85;&amp;#x65F6;&amp;#x65F6;&amp;#x95F4;&amp;#x4E3A;1&amp;#x79D2;
-        proxy_connect_timeout       1;
-        proxy_read_timeout          1;
-        proxy_send_timeout          1;                    
-    }
-}
-…-->
-           <!-- -->
-        </p>
-    </div>
-    
-        <footer class="post-footer clearfix">
-            <div class="pull-left tag-list">
-                <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/Nginx">
-            Nginx
-        </a>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-                
-                    <a href="/tags/Nginx" title='Nginx'>
-                        Nginx
-                    </a>
-                
-            
-        </span>
-    </span>
-    
-
-    
-</div>
-
-            </div>
-
-            <div class="post-permalink">
-                <a href="/Nginx/后台/Nginx/nginx–s reload命令无效/" class="btn btn-default">阅读全文</a>
-            </div>
-        </footer>
-    
-</article>
-
-
 
 
     <nav class="pagination" role="navigation">
@@ -874,7 +856,7 @@ server {
         
     <div class="widget">
         <h3 class="title">分类</h3>
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/"><i class="fa" aria-hidden="true">tomcat</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/"><i class="fa" aria-hidden="true">java</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/"><i class="fa" aria-hidden="true">tomcat</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
     </div>
 
 
@@ -882,7 +864,7 @@ server {
         
     <div class="widget">
       <h3 class="title">归档</h3>
-        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
     </div>
 
 
@@ -891,7 +873,7 @@ server {
   <div class="widget">
     <h3 class="title">标签云</h3>
     <div class="content tag-cloud">
-        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/C/" style="font-size: 11.43px;">C#</a> <a href="/tags/CSS/" style="font-size: 12.86px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 11.43px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 20px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 14.29px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 12.86px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Nginx/" style="font-size: 18.57px;">Nginx</a> <a href="/tags/RabbitMQ/" style="font-size: 12.86px;">RabbitMQ</a> <a href="/tags/SQL/" style="font-size: 17.14px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 11.43px;">SQL Server</a> <a href="/tags/Velocity/" style="font-size: 20px;">Velocity</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tomcat/" style="font-size: 15.71px;">tomcat</a> <a href="/tags/tool/" style="font-size: 11.43px;">tool</a> <a href="/tags/前端/" style="font-size: 11.43px;">前端</a> <a href="/tags/前端基础/" style="font-size: 15.71px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12.86px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/C/" style="font-size: 11.43px;">C#</a> <a href="/tags/CSS/" style="font-size: 12.86px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 11.43px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 20px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 17.14px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 14.29px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 12.86px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/Nginx/" style="font-size: 18.57px;">Nginx</a> <a href="/tags/Quartz/" style="font-size: 14.29px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 12.86px;">RabbitMQ</a> <a href="/tags/SQL/" style="font-size: 17.14px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 11.43px;">SQL Server</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Velocity/" style="font-size: 20px;">Velocity</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tomcat/" style="font-size: 15.71px;">tomcat</a> <a href="/tags/tool/" style="font-size: 11.43px;">tool</a> <a href="/tags/前端/" style="font-size: 11.43px;">前端</a> <a href="/tags/前端基础/" style="font-size: 15.71px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12.86px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
     </div>
   </div>
 

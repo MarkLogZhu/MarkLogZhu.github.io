@@ -1,0 +1,654 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Spring学习总结(六)--事务管理 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Spring学习总结(六)--事务管理">
+            
+	            Spring学习总结(六)--事务管理
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Spring">
+            Spring
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/SSM" title='SSM'>
+                        SSM
+                    </a>
+                
+                    <a href="/tags/Spring" title='Spring'>
+                        Spring
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/05/16</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="&#x4E8B;&#x52A1;&#x7BA1;&#x7406;"><a href="#&#x4E8B;&#x52A1;&#x7BA1;&#x7406;" class="headerlink" title="&#x4E8B;&#x52A1;&#x7BA1;&#x7406;"></a>&#x4E8B;&#x52A1;&#x7BA1;&#x7406;</h2><p>&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x4E8B;&#x52A1;&#x662F;&#x4E00;&#x4E2A;&#x88AB;&#x89C6;&#x4E3A;&#x5355;&#x4E00;&#x7684;&#x5DE5;&#x4F5C;&#x5355;&#x5143;&#x7684;&#x64CD;&#x4F5C;&#x5E8F;&#x5217;&#x3002;&#x8FD9;&#x4E9B;&#x64CD;&#x4F5C;&#x5E94;&#x8BE5;&#x8981;&#x4E48;&#x5B8C;&#x6574;&#x5730;&#x6267;&#x884C;&#xFF0C;&#x8981;&#x4E48;&#x5B8C;&#x5168;&#x4E0D;&#x6267;&#x884C;&#x3002;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;&#x662F;&#x4E00;&#x4E2A;&#x91CD;&#x8981;&#x7EC4;&#x6210;&#x90E8;&#x5206;&#xFF0C;RDBMS &#x9762;&#x5411;&#x4F01;&#x4E1A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF0C;&#x4EE5;&#x786E;&#x4FDD;&#x6570;&#x636E;&#x5B8C;&#x6574;&#x6027;&#x548C;&#x4E00;&#x81F4;&#x6027;&#x3002;&#x4E8B;&#x52A1;&#x7684;&#x6982;&#x5FF5;&#x53EF;&#x4EE5;&#x63CF;&#x8FF0;&#x4E3A;&#x5177;&#x6709;&#x4EE5;&#x4E0B;&#x56DB;&#x4E2A;&#x5173;&#x952E;&#x5C5E;&#x6027;&#x8BF4;&#x6210;&#x662F; ACID&#xFF1A;</p>
+<ul>
+<li><p>&#x539F;&#x5B50;&#x6027;&#xFF1A;&#x4E8B;&#x52A1;&#x5E94;&#x8BE5;&#x5F53;&#x4F5C;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x5355;&#x5143;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x6574;&#x4E2A;&#x5E8F;&#x5217;&#x64CD;&#x4F5C;&#x8981;&#x4E48;&#x662F;&#x6210;&#x529F;&#xFF0C;&#x8981;&#x4E48;&#x662F;&#x5931;&#x8D25;&#x7684;&#x3002;</p>
+</li>
+<li><p>&#x4E00;&#x81F4;&#x6027;&#xFF1A;&#x8FD9;&#x8868;&#x793A;&#x6570;&#x636E;&#x5E93;&#x7684;&#x5F15;&#x7528;&#x5B8C;&#x6574;&#x6027;&#x7684;&#x4E00;&#x81F4;&#x6027;&#xFF0C;&#x8868;&#x4E2D;&#x552F;&#x4E00;&#x7684;&#x4E3B;&#x952E;&#x7B49;&#x3002;</p>
+</li>
+<li><p>&#x9694;&#x79BB;&#x6027;&#xFF1A;&#x53EF;&#x80FD;&#x540C;&#x65F6;&#x5904;&#x7406;&#x5F88;&#x591A;&#x6709;&#x76F8;&#x540C;&#x7684;&#x6570;&#x636E;&#x96C6;&#x7684;&#x4E8B;&#x52A1;&#xFF0C;&#x6BCF;&#x4E2A;&#x4E8B;&#x52A1;&#x5E94;&#x8BE5;&#x4E0E;&#x5176;&#x4ED6;&#x4E8B;&#x52A1;&#x9694;&#x79BB;&#xFF0C;&#x4EE5;&#x9632;&#x6B62;&#x6570;&#x636E;&#x635F;&#x574F;&#x3002;</p>
+</li>
+<li><p>&#x6301;&#x4E45;&#x6027;&#xFF1A;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#x4E00;&#x65E6;&#x5B8C;&#x6210;&#x5168;&#x90E8;&#x64CD;&#x4F5C;&#x540E;&#xFF0C;&#x8FD9;&#x4E2A;&#x4E8B;&#x52A1;&#x7684;&#x7ED3;&#x679C;&#x5FC5;&#x987B;&#x662F;&#x6C38;&#x4E45;&#x6027;&#x7684;&#xFF0C;&#x4E0D;&#x80FD;&#x56E0;&#x7CFB;&#x7EDF;&#x6545;&#x969C;&#x800C;&#x4ECE;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x5220;&#x9664;&#x3002;</p>
+</li>
+</ul>
+<a id="more"></a> 
+<p>&#x4E00;&#x4E2A;&#x771F;&#x6B63;&#x7684; RDBMS &#x6570;&#x636E;&#x5E93;&#x7CFB;&#x7EDF;&#x5C06;&#x4E3A;&#x6BCF;&#x4E2A;&#x4E8B;&#x52A1;&#x4FDD;&#x8BC1;&#x6240;&#x6709;&#x7684;&#x56DB;&#x4E2A;&#x5C5E;&#x6027;&#x3002;&#x4F7F;&#x7528; SQL &#x53D1;&#x5E03;&#x5230;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x7684;&#x4E8B;&#x52A1;&#x7684;&#x7B80;&#x5355;&#x89C6;&#x56FE;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li><p>&#x4F7F;&#x7528; begin transaction &#x547D;&#x4EE4;&#x5F00;&#x59CB;&#x4E8B;&#x52A1;&#x3002;</p>
+</li>
+<li><p>&#x4F7F;&#x7528; SQL &#x67E5;&#x8BE2;&#x8BED;&#x53E5;&#x6267;&#x884C;&#x5404;&#x79CD;&#x5220;&#x9664;&#x3001;&#x66F4;&#x65B0;&#x6216;&#x63D2;&#x5165;&#x64CD;&#x4F5C;&#x3002;</p>
+</li>
+<li><p>&#x5982;&#x679C;&#x6240;&#x6709;&#x7684;&#x64CD;&#x4F5C;&#x90FD;&#x6210;&#x529F;&#xFF0C;&#x5219;&#x6267;&#x884C;&#x63D0;&#x4EA4;&#x64CD;&#x4F5C;&#xFF0C;&#x5426;&#x5219;&#x56DE;&#x6EDA;&#x6240;&#x6709;&#x64CD;&#x4F5C;&#x3002;</p>
+</li>
+</ul>
+<p>Spring &#x6846;&#x67B6;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x5E95;&#x5C42;&#x4E8B;&#x52A1;&#x7BA1;&#x7406; APIs &#x7684;&#x9876;&#x90E8;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;&#x62BD;&#x8C61;&#x5C42;&#x3002;Spring &#x7684;&#x4E8B;&#x52A1;&#x652F;&#x6301;&#x65E8;&#x5728;&#x901A;&#x8FC7;&#x6DFB;&#x52A0;&#x4E8B;&#x52A1;&#x80FD;&#x529B;&#x5230; POJOs &#x6765;&#x63D0;&#x4F9B;&#x7ED9; EJB &#x4E8B;&#x52A1;&#x4E00;&#x4E2A;&#x9009;&#x62E9;&#x65B9;&#x6848;&#x3002;Spring &#x652F;&#x6301;&#x7F16;&#x7A0B;&#x5F0F;&#x548C;&#x58F0;&#x660E;&#x5F0F;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;&#x3002;EJBs &#x9700;&#x8981;&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x4F46; Spring &#x4E8B;&#x52A1;&#x7BA1;&#x7406;&#x53EF;&#x4EE5;&#x5728;&#x4E0D;&#x9700;&#x8981;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x670D;&#x52A1;&#x5668;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x5B9E;&#x73B0;&#x3002;</p>
+<h2 id="&#x5C40;&#x90E8;&#x4E8B;&#x7269;-vs-&#x5168;&#x5C40;&#x4E8B;&#x52A1;"><a href="#&#x5C40;&#x90E8;&#x4E8B;&#x7269;-vs-&#x5168;&#x5C40;&#x4E8B;&#x52A1;" class="headerlink" title="&#x5C40;&#x90E8;&#x4E8B;&#x7269; vs. &#x5168;&#x5C40;&#x4E8B;&#x52A1;"></a>&#x5C40;&#x90E8;&#x4E8B;&#x7269; vs. &#x5168;&#x5C40;&#x4E8B;&#x52A1;</h2><p>&#x5C40;&#x90E8;&#x4E8B;&#x52A1;&#x662F;&#x7279;&#x5B9A;&#x4E8E;&#x4E00;&#x4E2A;&#x5355;&#x4E00;&#x7684;&#x4E8B;&#x52A1;&#x8D44;&#x6E90;&#xFF0C;&#x5982;&#x4E00;&#x4E2A; JDBC &#x8FDE;&#x63A5;&#xFF0C;&#x800C;&#x5168;&#x5C40;&#x4E8B;&#x52A1;&#x53EF;&#x4EE5;&#x8DE8;&#x591A;&#x4E2A;&#x4E8B;&#x52A1;&#x8D44;&#x6E90;&#x4E8B;&#x52A1;&#xFF0C;&#x5982;&#x5728;&#x4E00;&#x4E2A;&#x5206;&#x5E03;&#x5F0F;&#x7CFB;&#x7EDF;&#x4E2D;&#x7684;&#x4E8B;&#x52A1;&#x3002;</p>
+<p>&#x5C40;&#x90E8;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;&#x5728;&#x4E00;&#x4E2A;&#x96C6;&#x4E2D;&#x7684;&#x8BA1;&#x7B97;&#x73AF;&#x5883;&#x4E2D;&#x662F;&#x6709;&#x7528;&#x7684;&#xFF0C;&#x8BE5;&#x8BA1;&#x7B97;&#x73AF;&#x5883;&#x4E2D;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7EC4;&#x4EF6;&#x548C;&#x8D44;&#x6E90;&#x4F4D;&#x4E8E;&#x4E00;&#x4E2A;&#x5355;&#x4F4D;&#x70B9;&#xFF0C;&#x800C;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;&#x53EA;&#x6D89;&#x53CA;&#x5230;&#x4E00;&#x4E2A;&#x8FD0;&#x884C;&#x5728;&#x4E00;&#x4E2A;&#x5355;&#x4E00;&#x673A;&#x5668;&#x4E2D;&#x7684;&#x672C;&#x5730;&#x6570;&#x636E;&#x7BA1;&#x7406;&#x5668;&#x3002;&#x5C40;&#x90E8;&#x4E8B;&#x52A1;&#x66F4;&#x5BB9;&#x6613;&#x5B9E;&#x73B0;&#x3002;</p>
+<p>&#x5168;&#x5C40;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;&#x9700;&#x8981;&#x5728;&#x5206;&#x5E03;&#x5F0F;&#x8BA1;&#x7B97;&#x73AF;&#x5883;&#x4E2D;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x8D44;&#x6E90;&#x90FD;&#x5206;&#x5E03;&#x5728;&#x591A;&#x4E2A;&#x7CFB;&#x7EDF;&#x4E2D;&#x3002;&#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;&#x9700;&#x8981;&#x540C;&#x65F6;&#x5728;&#x5C40;&#x90E8;&#x548C;&#x5168;&#x5C40;&#x8303;&#x56F4;&#x5185;&#x8FDB;&#x884C;&#x3002;&#x5206;&#x5E03;&#x5F0F;&#x6216;&#x5168;&#x5C40;&#x4E8B;&#x52A1;&#x8DE8;&#x591A;&#x4E2A;&#x7CFB;&#x7EDF;&#x6267;&#x884C;&#xFF0C;&#x5B83;&#x7684;&#x6267;&#x884C;&#x9700;&#x8981;&#x5168;&#x5C40;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#x548C;&#x6240;&#x6709;&#x76F8;&#x5173;&#x7CFB;&#x7EDF;&#x7684;&#x5C40;&#x90E8;&#x6570;&#x636E;&#x7BA1;&#x7406;&#x4EBA;&#x5458;&#x4E4B;&#x95F4;&#x7684;&#x534F;&#x8C03;&#x3002;</p>
+<h2 id="&#x7F16;&#x7A0B;&#x5F0F;-vs-&#x58F0;&#x660E;&#x5F0F;"><a href="#&#x7F16;&#x7A0B;&#x5F0F;-vs-&#x58F0;&#x660E;&#x5F0F;" class="headerlink" title="&#x7F16;&#x7A0B;&#x5F0F; vs. &#x58F0;&#x660E;&#x5F0F;"></a>&#x7F16;&#x7A0B;&#x5F0F; vs. &#x58F0;&#x660E;&#x5F0F;</h2><p>Spring &#x652F;&#x6301;&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;:</p>
+<ul>
+<li><p>&#x7F16;&#x7A0B;&#x5F0F;&#x4E8B;&#x52A1;&#x7BA1;&#x7406; &#xFF1A;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x4F60;&#x5728;&#x7F16;&#x7A0B;&#x7684;&#x5E2E;&#x52A9;&#x4E0B;&#x6709;&#x7BA1;&#x7406;&#x4E8B;&#x52A1;&#x3002;&#x8FD9;&#x7ED9;&#x4E86;&#x4F60;&#x6781;&#x5927;&#x7684;&#x7075;&#x6D3B;&#x6027;&#xFF0C;&#x4F46;&#x5374;&#x5F88;&#x96BE;&#x7EF4;&#x62A4;&#x3002;</p>
+</li>
+<li><p>&#x58F0;&#x660E;&#x5F0F;&#x4E8B;&#x52A1;&#x7BA1;&#x7406; &#xFF1A;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x4F60;&#x4ECE;&#x4E1A;&#x52A1;&#x4EE3;&#x7801;&#x4E2D;&#x5206;&#x79BB;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;&#x3002;&#x4F60;&#x4EC5;&#x4EC5;&#x4F7F;&#x7528;&#x6CE8;&#x91CA;&#x6216; XML &#x914D;&#x7F6E;&#x6765;&#x7BA1;&#x7406;&#x4E8B;&#x52A1;&#x3002;</p>
+</li>
+</ul>
+<p>&#x58F0;&#x660E;&#x5F0F;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;&#x6BD4;&#x7F16;&#x7A0B;&#x5F0F;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;&#x66F4;&#x53EF;&#x53D6;&#xFF0C;&#x5C3D;&#x7BA1;&#x5B83;&#x4E0D;&#x5982;&#x7F16;&#x7A0B;&#x5F0F;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;&#x7075;&#x6D3B;&#xFF0C;&#x4F46;&#x5B83;&#x5141;&#x8BB8;&#x4F60;&#x901A;&#x8FC7;&#x4EE3;&#x7801;&#x63A7;&#x5236;&#x4E8B;&#x52A1;&#x3002;&#x4F46;&#x4F5C;&#x4E3A;&#x4E00;&#x79CD;&#x6A2A;&#x5207;&#x5173;&#x6CE8;&#x70B9;&#xFF0C;&#x58F0;&#x660E;&#x5F0F;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; AOP &#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x6A21;&#x5757;&#x5316;&#x3002;Spring &#x652F;&#x6301;&#x4F7F;&#x7528; Spring AOP &#x6846;&#x67B6;&#x7684;&#x58F0;&#x660E;&#x5F0F;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;&#x3002;</p>
+<h2 id="Spring-&#x4E8B;&#x52A1;&#x62BD;&#x8C61;"><a href="#Spring-&#x4E8B;&#x52A1;&#x62BD;&#x8C61;" class="headerlink" title="Spring &#x4E8B;&#x52A1;&#x62BD;&#x8C61;"></a>Spring &#x4E8B;&#x52A1;&#x62BD;&#x8C61;</h2><p>Spring &#x4E8B;&#x52A1;&#x62BD;&#x8C61;&#x7684;&#x5173;&#x952E;&#x662F;&#x7531; <code>org.springframework.transaction.PlatformTransactionManager</code> &#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#xFF0C;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PlatformTransactionManager</span> </span>{</div><div class="line">   <span class="function">TransactionStatus <span class="title">getTransaction</span><span class="params">(TransactionDefinition definition)</span></span>;</div><div class="line">   <span class="keyword">throws</span> TransactionException;</div><div class="line">   <span class="function"><span class="keyword">void</span> <span class="title">commit</span><span class="params">(TransactionStatus status)</span> <span class="keyword">throws</span> TransactionException</span>;</div><div class="line">   <span class="function"><span class="keyword">void</span> <span class="title">rollback</span><span class="params">(TransactionStatus status)</span> <span class="keyword">throws</span> TransactionException</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>&#x5E8F;&#x53F7;</th>
+<th>&#x65B9;&#x6CD5;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>TransactionStatus getTransaction(TransactionDefinition definition)</td>
+<td>&#x6839;&#x636E;&#x6307;&#x5B9A;&#x7684;&#x4F20;&#x64AD;&#x884C;&#x4E3A;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x6D3B;&#x52A8;&#x4E8B;&#x52A1;&#x6216;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x4E8B;&#x52A1;&#x3002;</td>
+</tr>
+<tr>
+<td>2</td>
+<td>void commit(TransactionStatus status)</td>
+<td>&#x8BE5;&#x65B9;&#x6CD5;&#x63D0;&#x4EA4;&#x7ED9;&#x5B9A;&#x7684;&#x4E8B;&#x52A1;&#x548C;&#x5173;&#x4E8E;&#x5B83;&#x7684;&#x72B6;&#x6001;&#x3002;</td>
+</tr>
+<tr>
+<td>3</td>
+<td>void rollback(TransactionStatus status)</td>
+<td>&#x8BE5;&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x4E00;&#x4E2A;&#x7ED9;&#x5B9A;&#x4E8B;&#x52A1;&#x7684;&#x56DE;&#x6EDA;&#x3002;</td>
+</tr>
+</tbody>
+</table>
+<p>TransactionDefinition &#x662F;&#x5728; Spring &#x4E2D;&#x4E8B;&#x52A1;&#x652F;&#x6301;&#x7684;&#x6838;&#x5FC3;&#x63A5;&#x53E3;&#xFF0C;&#x5B83;&#x7684;&#x5B9A;&#x4E49;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TransactionDefinition</span> </span>{</div><div class="line">   <span class="function"><span class="keyword">int</span> <span class="title">getPropagationBehavior</span><span class="params">()</span></span>;</div><div class="line">   <span class="function"><span class="keyword">int</span> <span class="title">getIsolationLevel</span><span class="params">()</span></span>;</div><div class="line">   <span class="function">String <span class="title">getName</span><span class="params">()</span></span>;</div><div class="line">   <span class="function"><span class="keyword">int</span> <span class="title">getTimeout</span><span class="params">()</span></span>;</div><div class="line">   <span class="function"><span class="keyword">boolean</span> <span class="title">isReadOnly</span><span class="params">()</span></span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>&#x5E8F;&#x53F7;</th>
+<th>&#x65B9;&#x6CD5;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>int getPropagationBehavior()</td>
+<td>&#x8BE5;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x4F20;&#x64AD;&#x884C;&#x4E3A;&#x3002;Spring &#x63D0;&#x4F9B;&#x4E86;&#x4E0E; EJB CMT &#x7C7B;&#x4F3C;&#x7684;&#x6240;&#x6709;&#x7684;&#x4E8B;&#x52A1;&#x4F20;&#x64AD;&#x9009;&#x9879;&#x3002;</td>
+</tr>
+<tr>
+<td>2</td>
+<td>int getIsolationLevel()</td>
+<td>&#x8BE5;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x8BE5;&#x4E8B;&#x52A1;&#x72EC;&#x7ACB;&#x4E8E;&#x5176;&#x4ED6;&#x4E8B;&#x52A1;&#x7684;&#x5DE5;&#x4F5C;&#x7684;&#x7A0B;&#x5EA6;&#x3002;</td>
+</tr>
+<tr>
+<td>3</td>
+<td>String getName()</td>
+<td>&#x8BE5;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x8BE5;&#x4E8B;&#x52A1;&#x7684;&#x540D;&#x79F0;&#x3002;</td>
+</tr>
+<tr>
+<td>4</td>
+<td>int getTimeout()</td>
+<td>&#x8BE5;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x4EE5;&#x79D2;&#x4E3A;&#x5355;&#x4F4D;&#x7684;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#xFF0C;&#x4E8B;&#x52A1;&#x5FC5;&#x987B;&#x5728;&#x8BE5;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x5185;&#x5B8C;&#x6210;&#x3002;</td>
+</tr>
+<tr>
+<td>5</td>
+<td>boolean isReadOnly()</td>
+<td>&#x8BE5;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x8BE5;&#x4E8B;&#x52A1;&#x662F;&#x5426;&#x662F;&#x53EA;&#x8BFB;&#x7684;&#x3002;</td>
+</tr>
+</tbody>
+</table>
+<p>&#x4E0B;&#x9762;&#x662F;&#x9694;&#x79BB;&#x7EA7;&#x522B;&#x7684;&#x53EF;&#x80FD;&#x503C;:</p>
+<table>
+<thead>
+<tr>
+<th>&#x5E8F;&#x53F7;</th>
+<th>&#x9694;&#x79BB;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>TransactionDefinition.ISOLATION_DEFAULT</td>
+<td>&#x8FD9;&#x662F;&#x9ED8;&#x8BA4;&#x7684;&#x9694;&#x79BB;&#x7EA7;&#x522B;&#x3002;</td>
+</tr>
+<tr>
+<td>2</td>
+<td>TransactionDefinition.ISOLATION_READ_COMMITTED</td>
+<td>&#x8868;&#x660E;&#x80FD;&#x591F;&#x963B;&#x6B62;&#x8BEF;&#x8BFB;&#xFF1B;&#x53EF;&#x4EE5;&#x53D1;&#x751F;&#x4E0D;&#x53EF;&#x91CD;&#x590D;&#x8BFB;&#x548C;&#x865A;&#x8BFB;&#x3002;</td>
+</tr>
+<tr>
+<td>3</td>
+<td>TransactionDefinition.ISOLATION_READ_UNCOMMITTED</td>
+<td>&#x8868;&#x660E;&#x53EF;&#x4EE5;&#x53D1;&#x751F;&#x8BEF;&#x8BFB;&#x3001;&#x4E0D;&#x53EF;&#x91CD;&#x590D;&#x8BFB;&#x548C;&#x865A;&#x8BFB;&#x3002;</td>
+</tr>
+<tr>
+<td>4</td>
+<td>TransactionDefinition.ISOLATION_REPEATABLE_READ</td>
+<td>&#x8868;&#x660E;&#x80FD;&#x591F;&#x963B;&#x6B62;&#x8BEF;&#x8BFB;&#x548C;&#x4E0D;&#x53EF;&#x91CD;&#x590D;&#x8BFB;&#xFF1B;&#x53EF;&#x4EE5;&#x53D1;&#x751F;&#x865A;&#x8BFB;&#x3002;</td>
+</tr>
+<tr>
+<td>5</td>
+<td>TransactionDefinition.ISOLATION_SERIALIZABLE</td>
+<td>&#x8868;&#x660E;&#x80FD;&#x591F;&#x963B;&#x6B62;&#x8BEF;&#x8BFB;&#x3001;&#x4E0D;&#x53EF;&#x91CD;&#x590D;&#x8BFB;&#x548C;&#x865A;&#x8BFB;&#x3002;</td>
+</tr>
+</tbody>
+</table>
+<p>&#x4E0B;&#x9762;&#x662F;&#x4F20;&#x64AD;&#x7C7B;&#x578B;&#x7684;&#x53EF;&#x80FD;&#x503C;:</p>
+<table>
+<thead>
+<tr>
+<th>&#x5E8F;&#x53F7;</th>
+<th>&#x4F20;&#x64AD;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>TransactionDefinition.PROPAGATION_MANDATORY</td>
+<td>&#x652F;&#x6301;&#x5F53;&#x524D;&#x4E8B;&#x52A1;&#xFF1B;&#x5982;&#x679C;&#x4E0D;&#x5B58;&#x5728;&#x5F53;&#x524D;&#x4E8B;&#x52A1;&#xFF0C;&#x5219;&#x629B;&#x51FA;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#x3002;</td>
+</tr>
+<tr>
+<td>2</td>
+<td>TransactionDefinition.PROPAGATION_NESTED</td>
+<td></td>
+<td>&#x5982;&#x679C;&#x5B58;&#x5728;&#x5F53;&#x524D;&#x4E8B;&#x52A1;&#xFF0C;&#x5219;&#x5728;&#x4E00;&#x4E2A;&#x5D4C;&#x5957;&#x7684;&#x4E8B;&#x52A1;&#x4E2D;&#x6267;&#x884C;&#x3002;</td>
+</tr>
+<tr>
+<td>3</td>
+<td>TransactionDefinition.PROPAGATION_NEVER</td>
+<td>&#x4E0D;&#x652F;&#x6301;&#x5F53;&#x524D;&#x4E8B;&#x52A1;&#xFF1B;&#x5982;&#x679C;&#x5B58;&#x5728;&#x5F53;&#x524D;&#x4E8B;&#x52A1;&#xFF0C;&#x5219;&#x629B;&#x51FA;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#x3002;</td>
+</tr>
+<tr>
+<td>4</td>
+<td>TransactionDefinition.PROPAGATION_NOT_SUPPORTED</td>
+<td>&#x4E0D;&#x652F;&#x6301;&#x5F53;&#x524D;&#x4E8B;&#x52A1;&#xFF1B;&#x800C;&#x603B;&#x662F;&#x6267;&#x884C;&#x975E;&#x4E8B;&#x52A1;&#x6027;&#x3002;</td>
+</tr>
+<tr>
+<td>5</td>
+<td>TransactionDefinition.PROPAGATION_REQUIRED</td>
+<td>&#x652F;&#x6301;&#x5F53;&#x524D;&#x4E8B;&#x52A1;&#xFF1B;&#x5982;&#x679C;&#x4E0D;&#x5B58;&#x5728;&#x4E8B;&#x52A1;&#xFF0C;&#x5219;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x4E8B;&#x52A1;&#x3002;</td>
+</tr>
+<tr>
+<td>6</td>
+<td>TransactionDefinition.PROPAGATION_REQUIRES_NEW</td>
+<td>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x4E8B;&#x52A1;&#xFF0C;&#x5982;&#x679C;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x4E8B;&#x52A1;&#xFF0C;&#x5219;&#x628A;&#x5F53;&#x524D;&#x4E8B;&#x52A1;&#x6302;&#x8D77;&#x3002;</td>
+</tr>
+<tr>
+<td>7</td>
+<td>TransactionDefinition.PROPAGATION_SUPPORTS</td>
+<td>&#x652F;&#x6301;&#x5F53;&#x524D;&#x4E8B;&#x52A1;&#xFF1B;&#x5982;&#x679C;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x6267;&#x884C;&#x975E;&#x4E8B;&#x52A1;&#x6027;&#x3002;</td>
+</tr>
+<tr>
+<td>8</td>
+<td>TransactionDefinition.TIMEOUT_DEFAULT</td>
+<td>&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x8D85;&#x65F6;&#x7684;&#x5E95;&#x5C42;&#x4E8B;&#x52A1;&#x7CFB;&#x7EDF;&#xFF0C;&#x6216;&#x8005;&#x5982;&#x679C;&#x4E0D;&#x652F;&#x6301;&#x8D85;&#x65F6;&#x5219;&#x6CA1;&#x6709;&#x3002;</td>
+</tr>
+</tbody>
+</table>
+<p>TransactionStatus &#x63A5;&#x53E3;&#x4E3A;&#x4E8B;&#x52A1;&#x4EE3;&#x7801;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x6CD5;&#x6765;&#x63A7;&#x5236;&#x4E8B;&#x52A1;&#x7684;&#x6267;&#x884C;&#x548C;&#x67E5;&#x8BE2;&#x4E8B;&#x52A1;&#x72B6;&#x6001;&#x3002;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TransactionStatus</span> <span class="keyword">extends</span> <span class="title">SavepointManager</span> </span>{</div><div class="line">   <span class="function"><span class="keyword">boolean</span> <span class="title">isNewTransaction</span><span class="params">()</span></span>;</div><div class="line">   <span class="function"><span class="keyword">boolean</span> <span class="title">hasSavepoint</span><span class="params">()</span></span>;</div><div class="line">   <span class="function"><span class="keyword">void</span> <span class="title">setRollbackOnly</span><span class="params">()</span></span>;</div><div class="line">   <span class="function"><span class="keyword">boolean</span> <span class="title">isRollbackOnly</span><span class="params">()</span></span>;</div><div class="line">   <span class="function"><span class="keyword">boolean</span> <span class="title">isCompleted</span><span class="params">()</span></span>;</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>&#x5E8F;&#x53F7;</th>
+<th>&#x65B9;&#x6CD5;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>boolean hasSavepoint()</td>
+<td>&#x8BE5;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x8BE5;&#x4E8B;&#x52A1;&#x5185;&#x90E8;&#x662F;&#x5426;&#x6709;&#x4E00;&#x4E2A;&#x4FDD;&#x5B58;&#x70B9;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x57FA;&#x4E8E;&#x4E00;&#x4E2A;&#x4FDD;&#x5B58;&#x70B9;&#x5DF2;&#x7ECF;&#x521B;&#x5EFA;&#x4E86;&#x5D4C;&#x5957;&#x4E8B;&#x52A1;&#x3002;</td>
+</tr>
+<tr>
+<td>2</td>
+<td>boolean isCompleted()</td>
+<td>&#x8BE5;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x8BE5;&#x4E8B;&#x52A1;&#x662F;&#x5426;&#x5B8C;&#x6210;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x5B83;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x63D0;&#x4EA4;&#x6216;&#x56DE;&#x6EDA;&#x3002;</td>
+</tr>
+<tr>
+<td>3</td>
+<td>boolean isNewTransaction()</td>
+<td>&#x5728;&#x5F53;&#x524D;&#x4E8B;&#x52A1;&#x65F6;&#x65B0;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE; true&#x3002;</td>
+</tr>
+<tr>
+<td>4</td>
+<td>boolean isRollbackOnly()</td>
+<td>&#x8BE5;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x8BE5;&#x4E8B;&#x52A1;&#x662F;&#x5426;&#x5DF2;&#x6807;&#x8BB0;&#x4E3A; rollback-only&#x3002;</td>
+</tr>
+<tr>
+<td>5</td>
+<td>void setRollbackOnly()</td>
+<td>&#x8BE5;&#x65B9;&#x6CD5;&#x8BBE;&#x7F6E;&#x8BE5;&#x4E8B;&#x52A1;&#x4E3A; rollback-only &#x6807;&#x8BB0;&#x3002;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="&#x58F0;&#x660E;&#x5F0F;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;"><a href="#&#x58F0;&#x660E;&#x5F0F;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;" class="headerlink" title="&#x58F0;&#x660E;&#x5F0F;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;"></a>&#x58F0;&#x660E;&#x5F0F;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;</h2><p> &#x58F0;&#x660E;&#x5F0F;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;&#x4E5F;&#x6709;&#x4E24;&#x79CD;&#x5E38;&#x7528;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x4E00;&#x79CD;&#x662F;&#x57FA;&#x4E8E; tx &#x548C; aop &#x540D;&#x5B57;&#x7A7A;&#x95F4;&#x7684; xml &#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF0C;&#x53E6;&#x4E00;&#x79CD;&#x5C31;&#x662F;&#x57FA;&#x4E8E; @Transactional &#x6CE8;&#x89E3;&#x3002;&#x663E;&#x7136;&#x57FA;&#x4E8E;&#x6CE8;&#x89E3;&#x7684;&#x65B9;&#x5F0F;&#x66F4;&#x7B80;&#x5355;&#x6613;&#x7528;&#xFF0C;&#x66F4;&#x6E05;&#x723D;&#x3002;</p>
+<h2 id="Transactional-&#x6CE8;&#x89E3;"><a href="#Transactional-&#x6CE8;&#x89E3;" class="headerlink" title="@Transactional &#x6CE8;&#x89E3;"></a>@Transactional &#x6CE8;&#x89E3;</h2><h3 id="Transactional&#x5C5E;&#x6027;"><a href="#Transactional&#x5C5E;&#x6027;" class="headerlink" title="@Transactional&#x5C5E;&#x6027;"></a>@Transactional&#x5C5E;&#x6027;</h3><table>
+<thead>
+<tr>
+<th>&#x5C5E;&#x6027;</th>
+<th>&#x7C7B;&#x578B;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>value</td>
+<td>String</td>
+<td>&#x53EF;&#x9009;&#x7684;&#x9650;&#x5B9A;&#x63CF;&#x8FF0;&#x7B26;&#xFF0C;&#x6307;&#x5B9A;&#x4F7F;&#x7528;&#x7684;&#x4E8B;&#x52A1;&#x7BA1;&#x7406;&#x5668;</td>
+</tr>
+<tr>
+<td>propagation</td>
+<td>enum: Propagation</td>
+<td>&#x53EF;&#x9009;&#x7684;&#x4E8B;&#x52A1;&#x4F20;&#x64AD;&#x884C;&#x4E3A;&#x8BBE;&#x7F6E;</td>
+</tr>
+<tr>
+<td>isolation</td>
+<td>enum: Isolation</td>
+<td>&#x53EF;&#x9009;&#x7684;&#x4E8B;&#x52A1;&#x9694;&#x79BB;&#x7EA7;&#x522B;&#x8BBE;&#x7F6E;</td>
+</tr>
+<tr>
+<td>readOnly</td>
+<td>boolean</td>
+<td>&#x8BFB;&#x5199;&#x6216;&#x53EA;&#x8BFB;&#x4E8B;&#x52A1;&#xFF0C;&#x9ED8;&#x8BA4;&#x8BFB;&#x5199;</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>int (in seconds granularity)</td>
+<td>&#x4E8B;&#x52A1;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x8BBE;&#x7F6E;</td>
+</tr>
+<tr>
+<td>rollbackFor</td>
+<td>Class&#x5BF9;&#x8C61;&#x6570;&#x7EC4;&#xFF0C;&#x5FC5;&#x987B;&#x7EE7;&#x627F;&#x81EA;Throwable</td>
+<td>&#x5BFC;&#x81F4;&#x4E8B;&#x52A1;&#x56DE;&#x6EDA;&#x7684;&#x5F02;&#x5E38;&#x7C7B;&#x6570;&#x7EC4;</td>
+</tr>
+<tr>
+<td>rollbackForClassName</td>
+<td>&#x7C7B;&#x540D;&#x6570;&#x7EC4;&#xFF0C;&#x5FC5;&#x987B;&#x7EE7;&#x627F;&#x81EA;Throwable</td>
+<td>&#x5BFC;&#x81F4;&#x4E8B;&#x52A1;&#x56DE;&#x6EDA;&#x7684;&#x5F02;&#x5E38;&#x7C7B;&#x540D;&#x5B57;&#x6570;&#x7EC4;</td>
+</tr>
+<tr>
+<td>noRollbackFor</td>
+<td>Class&#x5BF9;&#x8C61;&#x6570;&#x7EC4;&#xFF0C;&#x5FC5;&#x987B;&#x7EE7;&#x627F;&#x81EA;Throwable</td>
+<td>&#x4E0D;&#x4F1A;&#x5BFC;&#x81F4;&#x4E8B;&#x52A1;&#x56DE;&#x6EDA;&#x7684;&#x5F02;&#x5E38;&#x7C7B;&#x6570;&#x7EC4;</td>
+</tr>
+<tr>
+<td>noRollbackForClassName</td>
+<td>&#x7C7B;&#x540D;&#x6570;&#x7EC4;&#xFF0C;&#x5FC5;&#x987B;&#x7EE7;&#x627F;&#x81EA;Throwable</td>
+<td>&#x4E0D;&#x4F1A;&#x5BFC;&#x81F4;&#x4E8B;&#x52A1;&#x56DE;&#x6EDA;&#x7684;&#x5F02;&#x5E38;&#x7C7B;&#x540D;&#x5B57;&#x6570;&#x7EC4;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="&#x7528;&#x6CD5;"><a href="#&#x7528;&#x6CD5;" class="headerlink" title="&#x7528;&#x6CD5;"></a>&#x7528;&#x6CD5;</h3><p>@Transactional &#x53EF;&#x4EE5;&#x4F5C;&#x7528;&#x4E8E;&#x63A5;&#x53E3;&#x3001;&#x63A5;&#x53E3;&#x65B9;&#x6CD5;&#x3001;&#x7C7B;&#x4EE5;&#x53CA;&#x7C7B;&#x65B9;&#x6CD5;&#x4E0A;&#x3002;&#x5F53;&#x4F5C;&#x7528;&#x4E8E;&#x7C7B;&#x4E0A;&#x65F6;&#xFF0C;&#x8BE5;&#x7C7B;&#x7684;&#x6240;&#x6709; public &#x65B9;&#x6CD5;&#x5C06;&#x90FD;&#x5177;&#x6709;&#x8BE5;&#x7C7B;&#x578B;&#x7684;&#x4E8B;&#x52A1;&#x5C5E;&#x6027;&#xFF0C;&#x540C;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x65B9;&#x6CD5;&#x7EA7;&#x522B;&#x4F7F;&#x7528;&#x8BE5;&#x6807;&#x6CE8;&#x6765;&#x8986;&#x76D6;&#x7C7B;&#x7EA7;&#x522B;&#x7684;&#x5B9A;&#x4E49;&#x3002;</p>
+<p>&#x867D;&#x7136; @Transactional &#x6CE8;&#x89E3;&#x53EF;&#x4EE5;&#x4F5C;&#x7528;&#x4E8E;&#x63A5;&#x53E3;&#x3001;&#x63A5;&#x53E3;&#x65B9;&#x6CD5;&#x3001;&#x7C7B;&#x4EE5;&#x53CA;&#x7C7B;&#x65B9;&#x6CD5;&#x4E0A;&#xFF0C;&#x4F46;&#x662F; Spring &#x5EFA;&#x8BAE;&#x4E0D;&#x8981;&#x5728;&#x63A5;&#x53E3;&#x6216;&#x8005;&#x63A5;&#x53E3;&#x65B9;&#x6CD5;&#x4E0A;&#x4F7F;&#x7528;&#x8BE5;&#x6CE8;&#x89E3;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x53EA;&#x6709;&#x5728;&#x4F7F;&#x7528;&#x57FA;&#x4E8E;&#x63A5;&#x53E3;&#x7684;&#x4EE3;&#x7406;&#x65F6;&#x5B83;&#x624D;&#x4F1A;&#x751F;&#x6548;&#x3002;&#x53E6;&#x5916;&#xFF0C; @Transactional &#x6CE8;&#x89E3;&#x5E94;&#x8BE5;&#x53EA;&#x88AB;&#x5E94;&#x7528;&#x5230; public &#x65B9;&#x6CD5;&#x4E0A;&#xFF0C;&#x8FD9;&#x662F;&#x7531; Spring AOP &#x7684;&#x672C;&#x8D28;&#x51B3;&#x5B9A;&#x7684;&#x3002;&#x5982;&#x679C;&#x4F60;&#x5728; protected&#x3001;private &#x6216;&#x8005;&#x9ED8;&#x8BA4;&#x53EF;&#x89C1;&#x6027;&#x7684;&#x65B9;&#x6CD5;&#x4E0A;&#x4F7F;&#x7528; @Transactional &#x6CE8;&#x89E3;&#xFF0C;&#x8FD9;&#x5C06;&#x88AB;&#x5FFD;&#x7565;&#xFF0C;&#x4E5F;&#x4E0D;&#x4F1A;&#x629B;&#x51FA;&#x4EFB;&#x4F55;&#x5F02;&#x5E38;&#x3002;</p>
+<p>&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x53EA;&#x6709;&#x6765;&#x81EA;&#x5916;&#x90E8;&#x7684;&#x65B9;&#x6CD5;&#x8C03;&#x7528;&#x624D;&#x4F1A;&#x88AB;AOP&#x4EE3;&#x7406;&#x6355;&#x83B7;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#xFF0C;&#x7C7B;&#x5185;&#x90E8;&#x65B9;&#x6CD5;&#x8C03;&#x7528;&#x672C;&#x7C7B;&#x5185;&#x90E8;&#x7684;&#x5176;&#x4ED6;&#x65B9;&#x6CD5;&#x5E76;&#x4E0D;&#x4F1A;&#x5F15;&#x8D77;&#x4E8B;&#x52A1;&#x884C;&#x4E3A;&#xFF0C;&#x5373;&#x4F7F;&#x88AB;&#x8C03;&#x7528;&#x65B9;&#x6CD5;&#x4F7F;&#x7528; @Transactional&#x6CE8;&#x89E3;&#x8FDB;&#x884C;&#x4FEE;&#x9970;&#x3002;</p>
+<h3 id="&#x5728;-spring-xml-&#x914D;&#x7F6E;-Transactional-&#x6CE8;&#x89E3;"><a href="#&#x5728;-spring-xml-&#x914D;&#x7F6E;-Transactional-&#x6CE8;&#x89E3;" class="headerlink" title="&#x5728; spring.xml &#x914D;&#x7F6E; @Transactional &#x6CE8;&#x89E3;"></a>&#x5728; spring.xml &#x914D;&#x7F6E; @Transactional &#x6CE8;&#x89E3;</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">!-- &#x914D;&#x7F6E;spring&#x7684;PlatformTransactionManager&#xFF0C;&#x540D;&#x5B57;&#x4E3A;&#x9ED8;&#x8BA4;&#x503C; --&gt;  </div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;transactionManager&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;dataSource&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;dataSource&quot;</span> /&gt;</span>  </div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span>  </div><div class="line">      </div><div class="line">    <span class="comment">&lt;!-- &#x5F00;&#x542F;&#x4E8B;&#x52A1;&#x63A7;&#x5236;&#x7684;&#x6CE8;&#x89E3;&#x652F;&#x6301; --&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">tx:annotation-driven</span> <span class="attr">transaction-manager</span>=<span class="string">&quot;transactionManager&quot;</span>/&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="&#x57FA;&#x4E8E;-tx-&#x548C;-aop-&#x540D;&#x5B57;&#x7A7A;&#x95F4;&#x7684;-xml-&#x914D;&#x7F6E;"><a href="#&#x57FA;&#x4E8E;-tx-&#x548C;-aop-&#x540D;&#x5B57;&#x7A7A;&#x95F4;&#x7684;-xml-&#x914D;&#x7F6E;" class="headerlink" title="&#x57FA;&#x4E8E; tx &#x548C; aop &#x540D;&#x5B57;&#x7A7A;&#x95F4;&#x7684; xml &#x914D;&#x7F6E;"></a>&#x57FA;&#x4E8E; tx &#x548C; aop &#x540D;&#x5B57;&#x7A7A;&#x95F4;&#x7684; xml &#x914D;&#x7F6E;</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- &#x4E8B;&#x7269;&#x5207;&#x9762;&#x914D;&#x7F6E; --&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">tx:advice</span> <span class="attr">id</span>=<span class="string">&quot;advice&quot;</span> <span class="attr">transaction-manager</span>=<span class="string">&quot;transactionManager&quot;</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">tx:attributes</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">&quot;update*&quot;</span> <span class="attr">propagation</span>=<span class="string">&quot;REQUIRED&quot;</span> <span class="attr">read-only</span>=<span class="string">&quot;false&quot;</span> <span class="attr">rollback-for</span>=<span class="string">&quot;java.lang.Exception&quot;</span>/&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">&quot;insert&quot;</span> <span class="attr">propagation</span>=<span class="string">&quot;REQUIRED&quot;</span> <span class="attr">read-only</span>=<span class="string">&quot;false&quot;</span>/&gt;</span>  </div><div class="line">    <span class="tag">&lt;/<span class="name">tx:attributes</span>&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">tx:advice</span>&gt;</span>  </div><div class="line">  </div><div class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">&quot;testService&quot;</span> <span class="attr">expression</span>=<span class="string">&quot;execution (* com.baobao.service.MyBatisService.*(..))&quot;</span>/&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">advice-ref</span>=<span class="string">&quot;advice&quot;</span> <span class="attr">pointcut-ref</span>=<span class="string">&quot;testService&quot;</span>/&gt;</span>  </div><div class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></div></pre></td></tr></table></figure>
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/Spring/后台/Java/Spring/Spring学习总结(五)--AOP/" class="next-post btn btn-default" title='Spring学习总结(五)--AOP'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Spring学习总结(五)--AOP</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/"><i class="fa" aria-hidden="true">tomcat</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/C/" style="font-size: 11px;">C#</a> <a href="/tags/CSS/" style="font-size: 12px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 11px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 17px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 13px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 18px;">MyBatis</a> <a href="/tags/Nginx/" style="font-size: 16px;">Nginx</a> <a href="/tags/Quartz/" style="font-size: 13px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 12px;">RabbitMQ</a> <a href="/tags/SQL/" style="font-size: 16px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 11px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 19px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 17px;">SpringMVC</a> <a href="/tags/Velocity/" style="font-size: 17px;">Velocity</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tomcat/" style="font-size: 14px;">tomcat</a> <a href="/tags/tool/" style="font-size: 11px;">tool</a> <a href="/tags/前端/" style="font-size: 11px;">前端</a> <a href="/tags/前端基础/" style="font-size: 14px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 13px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Shiro学习总结(四)--Shiro+SSM整合 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Shiro学习总结(四)--Shiro+SSM整合">
+            
+	            Shiro学习总结(四)--Shiro+SSM整合
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Shiro">
+            Shiro
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/Shiro" title='Shiro'>
+                        Shiro
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/05/22</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x5206;&#x522B;&#x8BB2;&#x89E3;&#x4E86;&#x4E0B; <code>Shiro</code> &#x7684;&#x8EAB;&#x4EFD;&#x8BA4;&#x8BC1;&#x8DDF;&#x6388;&#x6743;&#xFF0C;&#x4F46;&#x662F;&#x5B9E;&#x9645;&#x9879;&#x76EE;&#x4E2D;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x5462;&#xFF1F;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x505A;&#x4E00;&#x4E2A; <code>Shiro + SSM</code> &#x7684;&#x6574;&#x5408;&#x3002; &#x672C;&#x6B21;&#x9879;&#x76EE;&#x662F;&#x5728; <a href="https://marklogzhu.github.io/Java/%E5%90%8E%E5%8F%B0/Java/SSM/SSM%E6%A1%86%E6%9E%B6/SSM%E6%A1%86%E6%9E%B6%E9%9B%86%E6%88%90/">SSM &#x6846;&#x67B6;&#x96C6;&#x6210;</a> &#x4E4B;&#x4E0A;&#x5B8C;&#x6210;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x77E5;&#x9053;&#x600E;&#x4E48;&#x642D;&#x5EFA; <code>SSM</code> &#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x3002;</p>
+<a id="more"></a> 
+<h3 id="maven-&#x4F9D;&#x8D56;"><a href="#maven-&#x4F9D;&#x8D56;" class="headerlink" title="maven &#x4F9D;&#x8D56;"></a>maven &#x4F9D;&#x8D56;</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- shiro --&gt;</span></div><div class="line"><span class="comment">&lt;!-- &#x6DFB;&#x52A0; shiro web&#x652F;&#x6301; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.shiro<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shiro-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- &#x6DFB;&#x52A0; shiro spring&#x652F;&#x6301; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.shiro<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shiro-spring<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="&#x5728;-resources-spring-&#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA;-applicationContext-shiro-xml-&#x6587;&#x4EF6;"><a href="#&#x5728;-resources-spring-&#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA;-applicationContext-shiro-xml-&#x6587;&#x4EF6;" class="headerlink" title="&#x5728; resources/spring &#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA; applicationContext-shiro.xml &#x6587;&#x4EF6;"></a>&#x5728; resources/spring &#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA; applicationContext-shiro.xml &#x6587;&#x4EF6;</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></div><div class="line">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></div><div class="line">       <span class="attr">xmlns:aop</span>=<span class="string">&quot;http://www.springframework.org/schema/aop&quot;</span></div><div class="line">       <span class="attr">xmlns:tx</span>=<span class="string">&quot;http://www.springframework.org/schema/tx&quot;</span></div><div class="line">       <span class="attr">xmlns:jdbc</span>=<span class="string">&quot;http://www.springframework.org/schema/jdbc&quot;</span></div><div class="line">       <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></div><div class="line">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;</span></div><div class="line">     http://www.springframework.org/schema/context</div><div class="line">     http://www.springframework.org/schema/context/spring-context.xsd</div><div class="line">     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</div><div class="line">     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd</div><div class="line">     http://www.springframework.org/schema/aop</div><div class="line">     http://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;shiroFilter&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.spring.web.ShiroFilterFactoryBean&quot;</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!--shiro &#x6838;&#x5FC3;&#x5B89;&#x5168;&#x63A5;&#x53E3;  --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;securityManager&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;securityManager&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!--&#x767B;&#x5F55;&#x65F6;&#x7684;&#x8FDE;&#x63A5;  --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;loginUrl&quot;</span> <span class="attr">value</span>=<span class="string">&quot;/login&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!--&#x672A;&#x6388;&#x6743;&#x65F6;&#x8DF3;&#x8F6C;&#x7684;&#x8FDE;&#x63A5;  --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;unauthorizedUrl&quot;</span> <span class="attr">value</span>=<span class="string">&quot;/unauthorized.jsp&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- &#x5176;&#x4ED6;&#x8FC7;&#x6EE4;&#x5668; --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;filters&quot;</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">map</span>&gt;</span></div><div class="line">                <span class="comment">&lt;!-- &lt;entry key=&quot;rememberMe&quot; value-ref=&quot;RememberMeFilter&quot;&gt;&lt;/entry&gt; --&gt;</span>              </div><div class="line">            <span class="tag">&lt;/<span class="name">map</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- &#x8BFB;&#x53D6;&#x521D;&#x59CB;&#x81EA;&#x5B9A;&#x4E49;&#x6743;&#x9650;&#x5185;&#x5BB9;--&gt;</span></div><div class="line">        <span class="comment">&lt;!-- &#x5982;&#x679C;&#x4F7F;&#x7528;authc&#x9A8C;&#x8BC1;,&#x9700;&#x91CD;&#x5199;&#x5B9E;&#x73B0;rememberMe&#x7684;&#x8FC7;&#x6EE4;&#x5668;,&#x6216;&#x914D;&#x7F6E;formAuthenticationFilter&#x7684;Bean --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;filterChainDefinitions&quot;</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span></div><div class="line">                /js/**=anon</div><div class="line">                /css/**=anon</div><div class="line">                /images/**=anon</div><div class="line">                /skin/**=anon</div><div class="line">                /lib/**=anon</div><div class="line">                /nodel/**=anon</div><div class="line">                /WEB-INF/jsp/**=anon</div><div class="line">                /adminUserLogin/**=anon</div><div class="line">                /test/login=anon</div><div class="line">                /test/logout=anon</div><div class="line">                /test/isLogin=anon</div><div class="line">                /**/submitLogin.do=anon</div><div class="line">                /**=user</div><div class="line">            <span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- Shiro&#x751F;&#x547D;&#x5468;&#x671F;&#x5904;&#x7406;&#x5668;--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;lifecycleBeanPostProcessor&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.spring.LifecycleBeanPostProcessor&quot;</span> /&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- &#x5B89;&#x5168;&#x7BA1;&#x7406;&#x5668; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;securityManager&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.web.mgt.DefaultWebSecurityManager&quot;</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;realm&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;MyRealm&quot;</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;rememberMeManager&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;rememberMeManager&quot;</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!--&#x81EA;&#x5B9A;&#x4E49;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x4E0E;&#x6388;&#x6743;--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;MyRealm&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.marklogzhu.ssm.shiro.MyRealm&quot;</span> &gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;cachingEnabled&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- &#x76F8;&#x5F53;&#x4E8E;&#x8C03;&#x7528;SecurityUtils.setSecurityManager(securityManager) --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.beans.factory.config.MethodInvokingFactoryBean&quot;</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;staticMethod&quot;</span> <span class="attr">value</span>=<span class="string">&quot;org.apache.shiro.SecurityUtils.setSecurityManager&quot;</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;arguments&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;securityManager&quot;</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- sessionIdCookie&#xFF1A;maxAge=-1&#x8868;&#x793A;&#x6D4F;&#x89C8;&#x5668;&#x5173;&#x95ED;&#x65F6;&#x5931;&#x6548;&#x6B64;Cookie --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;sessionIdCookie&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.web.servlet.SimpleCookie&quot;</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">&quot;rememberMe&quot;</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;httpOnly&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;maxAge&quot;</span> <span class="attr">value</span>=<span class="string">&quot;-1&quot;</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- &#x7528;&#x6237;&#x4FE1;&#x606F;&#x8BB0;&#x4F4F;&#x6211;&#x529F;&#x80FD;&#x7684;&#x76F8;&#x5173;&#x914D;&#x7F6E; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;rememberMeCookie&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.web.servlet.SimpleCookie&quot;</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">&quot;rememberMe&quot;</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;httpOnly&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></div><div class="line">        <span class="comment">&lt;!-- &#x914D;&#x7F6E;&#x5B58;&#x50A8;rememberMe Cookie&#x7684;domain&#x4E3A; &#x4E00;&#x7EA7;&#x57DF;&#x540D;        &#x8FD9;&#x91CC;&#x5982;&#x679C;&#x914D;&#x7F6E;&#x9700;&#x8981;&#x548C;Session&#x56DE;&#x8BDD;&#x4E00;&#x81F4;&#x66F4;&#x597D;&#x3002;--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;maxAge&quot;</span> <span class="attr">value</span>=<span class="string">&quot;604800&quot;</span>/&gt;</span><span class="comment">&lt;!-- &#x8BB0;&#x4F4F;&#x6211;==&#x4FDD;&#x7559;Cookie&#x6709;&#x6548;7&#x5929; --&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- rememberMe&#x7BA1;&#x7406;&#x5668; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;rememberMeManager&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.web.mgt.CookieRememberMeManager&quot;</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- rememberMe cookie&#x52A0;&#x5BC6;&#x7684;&#x5BC6;&#x94A5; &#x5EFA;&#x8BAE;&#x6BCF;&#x4E2A;&#x9879;&#x76EE;&#x90FD;&#x4E0D;&#x4E00;&#x6837; &#x9ED8;&#x8BA4;AES&#x7B97;&#x6CD5; &#x5BC6;&#x94A5;&#x957F;&#x5EA6;&#xFF08;128 256 512 &#x4F4D;&#xFF09;--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;cipherKey&quot;</span></span></div><div class="line">                  <span class="attr">value</span>=<span class="string">&quot;#{T(org.apache.shiro.codec.Base64).decode(&apos;3AvVhmFLUs0KTA3Kprsdag==&apos;)}&quot;</span>/&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;cookie&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;rememberMeCookie&quot;</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- rememberMeParam&#x8BF7;&#x6C42;&#x53C2;&#x6570;&#x662F; boolean &#x7C7B;&#x578B;&#xFF0C;true &#x8868;&#x793A; rememberMe --&gt;</span></div><div class="line">    <span class="comment">&lt;!-- shiro&#x89C4;&#x5B9A;&#x8BB0;&#x4F4F;&#x6211;&#x529F;&#x80FD;&#x6700;&#x591A;&#x5F97;user&#x7EA7;&#x522B;&#x7684;&#xFF0C;&#x4E0D;&#x80FD;&#x5230;authc&#x7EA7;&#x522B;.&#x6240;&#x4EE5;&#x5982;&#x679C;&#x4F7F;&#x7528;authc&#xFF0C;&#x9700;&#x6253;&#x5F00;&#x6B64;&#x914D;&#x7F6E;&#x6216;&#x91CD;&#x5199;&#x5B9E;&#x73B0;rememberMe&#x7684;&#x8FC7;&#x6EE4;&#x5668; --&gt;</span></div><div class="line">    <span class="comment">&lt;!-- &lt;bean id=&quot;formAuthenticationFilter&quot; class=&quot;org.apache.shiro.web.filter.authc.FormAuthenticationFilter&quot;&gt;</span></div><div class="line">        &lt;property name=&quot;rememberMeParam&quot; value=&quot;rememberMe&quot;/&gt;</div><div class="line">    &lt;/bean&gt; --&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="web-xml-&#x914D;&#x7F6E;-shiroFilter"><a href="#web-xml-&#x914D;&#x7F6E;-shiroFilter" class="headerlink" title="web.xml &#x914D;&#x7F6E; shiroFilter"></a>web.xml &#x914D;&#x7F6E; shiroFilter</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--filter-name &#x4E0E; applicationContext-shiro.xml&#x4E2D;&#x7684; &apos;shiroFilter&apos; bean&#x7684;&#x540D;&#x79F0;&#x5339;&#x914D;--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>shiroFilter<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.springframework.web.filter.DelegatingFilterProxy<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>targetFilterLifecycle<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="&#x5728;-com-marklogzhu-ssm-shiro-&#x5305;&#x4E0B;&#x65B0;&#x5EFA;-MyRealm-java-&#x6587;&#x4EF6;"><a href="#&#x5728;-com-marklogzhu-ssm-shiro-&#x5305;&#x4E0B;&#x65B0;&#x5EFA;-MyRealm-java-&#x6587;&#x4EF6;" class="headerlink" title="&#x5728; com.marklogzhu.ssm.shiro &#x5305;&#x4E0B;&#x65B0;&#x5EFA; MyRealm.java &#x6587;&#x4EF6;"></a>&#x5728; com.marklogzhu.ssm.shiro &#x5305;&#x4E0B;&#x65B0;&#x5EFA; MyRealm.java &#x6587;&#x4EF6;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyRealm</span> <span class="keyword">extends</span> <span class="title">AuthorizingRealm</span> </span>{</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> UserService userService;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x83B7;&#x53D6;&#x6388;&#x6743;&#x4FE1;&#x606F;,&#x5373;&#x6388;&#x6743;&#x9A8C;&#x8BC1;</div><div class="line">     * <span class="doctag">@param</span> principalCollection</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> AuthorizationInfo <span class="title">doGetAuthorizationInfo</span><span class="params">(PrincipalCollection principalCollection)</span> </span>{</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x83B7;&#x53D6;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x4FE1;&#x606F;,&#x5373;&#x767B;&#x5F55;&#x9A8C;&#x8BC1;</div><div class="line">     * <span class="doctag">@param</span> token</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     * <span class="doctag">@throws</span> AuthenticationException</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> AuthenticationInfo <span class="title">doGetAuthenticationInfo</span><span class="params">(AuthenticationToken token)</span> <span class="keyword">throws</span> AuthenticationException </span>{</div><div class="line">        String userName = (String) token.getPrincipal();</div><div class="line">        String password = <span class="keyword">new</span> String((<span class="keyword">char</span>[])token.getCredentials());</div><div class="line">        User user = userService.login(userName,password);</div><div class="line">        <span class="keyword">if</span>(user == <span class="keyword">null</span>){</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> AccountException(<span class="string">&quot;&#x5E10;&#x53F7;&#x6216;&#x5BC6;&#x7801;&#x4E0D;&#x6B63;&#x786E;&#xFF01;&quot;</span>);</div><div class="line">        }</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SimpleAuthenticationInfo(user.getUserName(), user.getPassword(), getName());</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="&#x5728;-com-marklogzhu-ssm-service-&#x5305;&#x4E0B;&#x65B0;&#x5EFA;-UserService-java-&#x6587;&#x4EF6;"><a href="#&#x5728;-com-marklogzhu-ssm-service-&#x5305;&#x4E0B;&#x65B0;&#x5EFA;-UserService-java-&#x6587;&#x4EF6;" class="headerlink" title="&#x5728; com.marklogzhu.ssm.service &#x5305;&#x4E0B;&#x65B0;&#x5EFA; UserService.java &#x6587;&#x4EF6;"></a>&#x5728; com.marklogzhu.ssm.service &#x5305;&#x4E0B;&#x65B0;&#x5EFA; UserService.java &#x6587;&#x4EF6;</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div></pre></td><td class="code"><pre><div class="line">@Service</div><div class="line">public class UserService {</div><div class="line"></div><div class="line">    @Autowired</div><div class="line">    private UserMapper userMapper;</div><div class="line"></div><div class="line">    public User login(String userName,String password){</div><div class="line">        UserExample example = new UserExample();</div><div class="line">        UserExample.Criteria criteria = example.createCriteria();</div><div class="line">        criteria.andUserNameEqualTo(userName);</div><div class="line">        criteria.andPasswordEqualTo(password);</div><div class="line">        List&lt;User&gt; userList = userMapper.selectByExample(example);</div><div class="line">        return userList.size() &gt; 0 ? userList.get(0) : null;</div><div class="line">    }</div><div class="line"></div><div class="line">}</div><div class="line"></div><div class="line">``` </div><div class="line"></div><div class="line">### &#x5728; TestController.java &#x6587;&#x4EF6;&#x4E2D;&#x7F16;&#x8F91;&#x5982;&#x4E0B;&#x6D4B;&#x8BD5;&#x65B9;&#x6CD5;</div><div class="line"></div><div class="line">``` java</div><div class="line">@Controller</div><div class="line">@RequestMapping(&quot;/test&quot;)</div><div class="line">public class TestController {</div><div class="line"> </div><div class="line">    @RequestMapping(&quot;/login&quot;)</div><div class="line">    @ResponseBody</div><div class="line">    public JsonData login(String userName, String password) {</div><div class="line">        Subject subject = SecurityUtils.getSubject();</div><div class="line">        UsernamePasswordToken token = new UsernamePasswordToken(userName, MD5Utils.encryptPassword(password));</div><div class="line">        try {</div><div class="line">            subject.login(token);</div><div class="line">			subject.getSession().setAttribute(&quot;loginName&quot;,userName);</div><div class="line">            return JsonData.createBySuccessMessage(CodeMsg.SUCCESS_LOGIN);</div><div class="line">        } catch (DisabledAccountException e) {</div><div class="line">            return JsonData.createByErrorMessage(CodeMsg.ERROR_LOGIN.fillArgs(&quot;&#x5E10;&#x53F7;&#x5DF2;&#x88AB;&#x7981;&#x7528;!&quot;));</div><div class="line">        } catch (ExcessiveAttemptsException e) {</div><div class="line">            return JsonData.createByErrorMessage(CodeMsg.ERROR_LOGIN.fillArgs(&quot;&#x7528;&#x6237;&#x767B;&#x5F55;&#x6B21;&#x6570;&#x8FC7;&#x591A;&#xFF0C;&#x6709;&#x66B4;&#x529B;&#x7834;&#x89E3;&#x7684;&#x5ACC;&#x7591;!&quot;));</div><div class="line">        } catch (AccountException e) {</div><div class="line">            return JsonData.createByErrorMessage(CodeMsg.ERROR_LOGIN.fillArgs(&quot;&#x5E10;&#x53F7;&#x6216;&#x5BC6;&#x7801;&#x9519;&#x8BEF;!&quot;));</div><div class="line">        } catch (AuthenticationException e) {</div><div class="line">            return JsonData.createByErrorMessage(CodeMsg.ERROR_LOGIN.fillArgs(&quot;&#x8EAB;&#x4EFD;&#x8BA4;&#x8BC1;&#x5931;&#x8D25;!&quot;));</div><div class="line">        } catch (Exception e) {</div><div class="line">            return JsonData.createByErrorMessage(CodeMsg.ERROR_LOGIN.fillArgs(e.toString()));</div><div class="line">        }</div><div class="line">    }</div><div class="line">	</div><div class="line">    @RequestMapping(&quot;/isLogin&quot;)</div><div class="line">    @ResponseBody</div><div class="line">    public JsonData isLogin(String userName){</div><div class="line">        Subject subject = SecurityUtils.getSubject();</div><div class="line">        if(subject.isAuthenticated()){</div><div class="line">            return JsonData.createBySuccess(userName +&quot;&#x5DF2;&#x767B;&#x5F55;&quot;);</div><div class="line">        }else {</div><div class="line">            return JsonData.createBySuccess(userName +&quot;&#x672A;&#x767B;&#x5F55;&quot;);</div><div class="line">        }</div><div class="line">    }</div><div class="line"></div><div class="line">    @RequestMapping(&quot;/logout&quot;)</div><div class="line">    @ResponseBody</div><div class="line">    public JsonData logout(String userName){</div><div class="line">        Subject subject = SecurityUtils.getSubject();</div><div class="line">        subject.logout();</div><div class="line">        return JsonData.createBySuccess(userName +&quot;&#x5DF2;&#x767B;&#x51FA;&quot;);</div><div class="line">    }</div><div class="line"></div><div class="line">    @RequestMapping(&quot;/print&quot;)</div><div class="line">    @ResponseBody</div><div class="line">    public JsonData print(){</div><div class="line">        return JsonData.createBySuccess();</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="&#x542F;&#x52A8;&#x8FD0;&#x884C;&#x9879;&#x76EE;"><a href="#&#x542F;&#x52A8;&#x8FD0;&#x884C;&#x9879;&#x76EE;" class="headerlink" title="&#x542F;&#x52A8;&#x8FD0;&#x884C;&#x9879;&#x76EE;"></a>&#x542F;&#x52A8;&#x8FD0;&#x884C;&#x9879;&#x76EE;</h3><ul>
+<li><p>&#x8BBF;&#x95EE; <code>http://localhost:8080/test/print</code><br>&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x53D1;&#x73B0;url &#x8DF3;&#x8F6C;&#x5230; http://localhost:8080/login, &#x4F46;&#x662F;&#x56E0;&#x4E3A;&#x6CA1;&#x6709;&#x9879;&#x76EE;&#x4E2D;&#x6CA1;&#x6709;&#x914D;&#x7F6E;&#x5BFC;&#x81F4;&#x62A5; 404 &#x9519;&#x8BEF;</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x8BBF;&#x95EE; <code>http://localhost:8080/test/isLogin?userName=&#x5F20;&#x4E09;</code><br>&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">	status: 0,</div><div class="line">	msg: null,</div><div class="line">	data: &quot;&#x5F20;&#x4E09;&#x672A;&#x767B;&#x5F55;&quot;</div><div class="line">}</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x8BBF;&#x95EE; <code>http://localhost:8080/test/login?userName=&#x5F20;&amp;password=123456</code><br>&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">	status: 500216,</div><div class="line">	msg: &quot;&#x767B;&#x5F55;&#x5931;&#x8D25;&#xFF0C;&#x9519;&#x8BEF;&#x539F;&#x56E0;&#xFF1A;&#x5E10;&#x53F7;&#x6216;&#x5BC6;&#x7801;&#x9519;&#x8BEF;!&quot;,</div><div class="line">	data: null</div><div class="line">}</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x8BBF;&#x95EE; <code>http://localhost:8080/test/login?userName=&#x5F20;&#x4E09;&amp;password=123456</code><br>&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">	status: 0,</div><div class="line">	msg: &quot;&#x767B;&#x5F55;&#x6210;&#x529F;&quot;,</div><div class="line">	data: null</div><div class="line">}</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x8BBF;&#x95EE; <code>http://localhost:8080/test/isLogin?userName=&#x5F20;&#x4E09;</code><br>&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">	status: 0,</div><div class="line">	msg: null,</div><div class="line">	data: &quot;&#x5F20;&#x4E09;&#x5DF2;&#x767B;&#x5F55;&quot;</div><div class="line">}</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x8BBF;&#x95EE; <code>http://localhost:8080/test/print</code><br>&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">	status: 0,</div><div class="line">	msg: null,</div><div class="line">	data: null</div><div class="line">}</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x8BBF;&#x95EE; <code>http://localhost:8080/test/logout?userName=&#x5F20;&#x4E09;</code><br>&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">	status: 0,</div><div class="line">	msg: null,</div><div class="line">	data: &quot;&#x5F20;&#x4E09;&#x5DF2;&#x767B;&#x51FA;&quot;</div><div class="line">}</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x672A;&#x767B;&#x5F55;&#x524D;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x8BBF;&#x95EE; <code>/test/isLogin</code>&#x3001; <code>/test/login</code>&#x548C;<code>/test/logout</code> &#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x80FD;&#x8BBF;&#x95EE; <code>/test/print</code>&#xFF0C; &#x8FD9;&#x662F;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x5728; <code>applicationContext-shiro.xml</code> &#x4E2D;&#x914D;&#x7F6E;&#x4E86; url &#x6743;&#x9650;</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;filterChainDefinitions&quot;</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span></div><div class="line">      /js/**=anon</div><div class="line">      /css/**=anon</div><div class="line">      /images/**=anon</div><div class="line">      /skin/**=anon</div><div class="line">      /lib/**=anon</div><div class="line">      /nodel/**=anon</div><div class="line">      /WEB-INF/jsp/**=anon</div><div class="line">      /adminUserLogin/**=anon</div><div class="line">      /test/login=anon</div><div class="line">      /test/logout=anon</div><div class="line">      /test/isLogin=anon</div><div class="line">      /**/submitLogin.do=anon</div><div class="line">      /**=user</div><div class="line">   <span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="&#x6743;&#x9650;&#x914D;&#x7F6E;&#x542B;&#x4E49;"><a href="#&#x6743;&#x9650;&#x914D;&#x7F6E;&#x542B;&#x4E49;" class="headerlink" title="&#x6743;&#x9650;&#x914D;&#x7F6E;&#x542B;&#x4E49;"></a>&#x6743;&#x9650;&#x914D;&#x7F6E;&#x542B;&#x4E49;</h3><h4 id="anon"><a href="#anon" class="headerlink" title="anon"></a>anon</h4><p>&#x542B;&#x4E49;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8868;&#x793A;&#x53EF;&#x4EE5;&#x533F;&#x540D;&#x4F7F;&#x7528;&#x3002;</div></pre></td></tr></table></figure></p>
+<p>&#x5B9E;&#x4F8B;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/admins/**=anon</div></pre></td></tr></table></figure></p>
+<h4 id="authc"><a href="#authc" class="headerlink" title="authc"></a>authc</h4><p>&#x542B;&#x4E49;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8868;&#x793A;&#x9700;&#x8981;&#x8BA4;&#x8BC1;(&#x767B;&#x5F55;)&#x624D;&#x80FD;&#x4F7F;&#x7528;&#xFF0C;&#x6CA1;&#x6709;&#x53C2;&#x6570;</div></pre></td></tr></table></figure></p>
+<p>&#x5B9E;&#x4F8B;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/admins/user/**=authc</div></pre></td></tr></table></figure></p>
+<h4 id="roles-&#x89D2;&#x8272;"><a href="#roles-&#x89D2;&#x8272;" class="headerlink" title="roles(&#x89D2;&#x8272;)"></a>roles(&#x89D2;&#x8272;)</h4><p>&#x542B;&#x4E49;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x6307;&#x5B9A;&#x7684;&#x89D2;&#x8272;&#x624D;&#x80FD;&#x8BBF;&#x95EE;&#xFF0C;&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x5199;&#x591A;&#x4E2A;&#xFF0C;&#x591A;&#x4E2A;&#x65F6;&#x5FC5;&#x987B;&#x52A0;&#x4E0A;&#x5F15;&#x53F7;&#xFF0C;&#x5E76;&#x4E14;&#x53C2;&#x6570;&#x4E4B;&#x95F4;&#x7528;&#x9017;&#x53F7;&#x5206;&#x5272;&#xFF0C;&#x5F53;&#x6709;&#x591A;&#x4E2A;&#x53C2;&#x6570;&#x65F6;&#xFF0C;&#x6BCF;&#x4E2A;&#x53C2;&#x6570;&#x901A;&#x8FC7;&#x624D;&#x7B97;&#x901A;&#x8FC7;&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;hasAllRoles()&#x65B9;&#x6CD5;&#x3002;</div></pre></td></tr></table></figure></p>
+<p>&#x5B9E;&#x4F8B;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/admins/user/**=roles[admin]</div><div class="line">/admins/user/**=roles[&quot;admin,guest&quot;]</div></pre></td></tr></table></figure></p>
+<h4 id="perms&#xFF08;&#x6743;&#x9650;&#xFF09;"><a href="#perms&#xFF08;&#x6743;&#x9650;&#xFF09;" class="headerlink" title="perms&#xFF08;&#x6743;&#x9650;&#xFF09;"></a>perms&#xFF08;&#x6743;&#x9650;&#xFF09;</h4><p>&#x542B;&#x4E49;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x62E5;&#x6709;&#x6307;&#x5B9A;&#x6743;&#x9650;&#x624D;&#x80FD;&#x8BBF;&#x95EE;&#xFF0C;&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x5199;&#x591A;&#x4E2A;&#xFF0C;&#x591A;&#x4E2A;&#x65F6;&#x5FC5;&#x987B;&#x52A0;&#x4E0A;&#x5F15;&#x53F7;&#xFF0C;&#x5E76;&#x4E14;&#x53C2;&#x6570;&#x4E4B;&#x95F4;&#x7528;&#x9017;&#x53F7;&#x5206;&#x5272;&#x3002;&#x5F53;&#x6709;&#x591A;&#x4E2A;&#x53C2;&#x6570;&#x65F6;&#x5FC5;&#x987B;&#x6BCF;&#x4E2A;&#x53C2;&#x6570;&#x90FD;&#x901A;&#x8FC7;&#x624D;&#x901A;&#x8FC7;&#xFF0C;&#x60F3;&#x5F53;&#x4E8E;isPermitedAll()&#x65B9;&#x6CD5;</div></pre></td></tr></table></figure></p>
+<p>&#x5B9E;&#x4F8B;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/admins/user/**=perms[user:add:*]</div><div class="line">/admins/user/**=perms[&quot;user:add:*,user:modify:*&quot;]</div></pre></td></tr></table></figure></p>
+<h4 id="rest"><a href="#rest" class="headerlink" title="rest"></a>rest</h4><p>&#x542B;&#x4E49;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x6839;&#x636E;&#x8BF7;&#x6C42;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;/admins/user/**=perms[user:method] ,&#x5176;&#x4E2D;method&#x4E3A;post&#xFF0C;get&#xFF0C;delete&#x7B49;&#x3002;</div></pre></td></tr></table></figure></p>
+<p>&#x5B9E;&#x4F8B;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/admins/user/**=rest[user]</div></pre></td></tr></table></figure></p>
+<h4 id="port"><a href="#port" class="headerlink" title="port"></a>port</h4><p>&#x542B;&#x4E49;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x6839;&#x636E;&#x8BF7;&#x6C42;&#x7684;&#x7AEF;&#x53E3;&#xFF0C;&#x5F53;&#x8BF7;&#x6C42;&#x7684;url&#x7684;&#x7AEF;&#x53E3;&#x4E0D;&#x662F;8081&#x65F6;&#x8DF3;&#x8F6C;&#x5230; schemal://serverName:8081?queryString ,&#x5176;&#x4E2D; schmal &#x662F;&#x534F;&#x8BAE;http&#x6216;https&#x7B49;&#xFF0C;serverName &#x662F;&#x4F60;&#x8BBF;&#x95EE;&#x7684;host,8081&#x662F; url &#x914D;&#x7F6E;&#x91CC; port &#x7684;&#x7AEF;&#x53E3;&#xFF0C;queryString &#x662F;&#x4F60;&#x8BBF;&#x95EE;&#x7684;url&#x91CC;&#x7684;&#xFF1F;&#x540E;&#x9762;&#x7684;&#x53C2;&#x6570;&#x3002;</div></pre></td></tr></table></figure></p>
+<p>&#x5B9E;&#x4F8B;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/admins/user/**=port[8081]</div></pre></td></tr></table></figure></p>
+<h4 id="authcBasic"><a href="#authcBasic" class="headerlink" title="authcBasic"></a>authcBasic</h4><p>&#x542B;&#x4E49;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8868;&#x793A;httpBasic&#x8BA4;&#x8BC1;</div></pre></td></tr></table></figure></p>
+<p>&#x5B9E;&#x4F8B;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/admins/user/**=authcBasic</div></pre></td></tr></table></figure></p>
+<h4 id="ssl"><a href="#ssl" class="headerlink" title="ssl"></a>ssl</h4><p>&#x542B;&#x4E49;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8868;&#x793A;&#x5B89;&#x5168;&#x7684;url&#x8BF7;&#x6C42;&#xFF0C;&#x534F;&#x8BAE;&#x4E3A;https</div></pre></td></tr></table></figure></p>
+<p>&#x5B9E;&#x4F8B;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/admins/user/**=ssl</div></pre></td></tr></table></figure></p>
+<h4 id="user"><a href="#user" class="headerlink" title="user"></a>user</h4><p>&#x542B;&#x4E49;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8868;&#x793A;&#x5FC5;&#x987B;&#x5B58;&#x5728;&#x7528;&#x6237;&#xFF0C;&#x5F53;&#x767B;&#x5165;&#x64CD;&#x4F5C;&#x65F6;&#x4E0D;&#x505A;&#x68C0;&#x67E5;</div></pre></td></tr></table></figure></p>
+<p>&#x5B9E;&#x4F8B;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/admins/user/**=user</div></pre></td></tr></table></figure></p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/Shiro/后台/Java/Shiro/Shiro学习总结(五)--Shiro动态加载权限/" class="pre-post btn btn-default" title='Shiro学习总结(五)--Shiro动态加载权限'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Shiro学习总结(五)--Shiro动态加载权限</span>
+        </a>
+    
+    
+        <a href="/Shiro/后台/Java/Shiro/Shiro学习总结(三)--授权/" class="next-post btn btn-default" title='Shiro学习总结(三)--授权'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Shiro学习总结(三)--授权</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/"><i class="fa" aria-hidden="true">tomcat</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">39</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/C/" style="font-size: 11px;">C#</a> <a href="/tags/CSS/" style="font-size: 12px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 11px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 17px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 13px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 18px;">MyBatis</a> <a href="/tags/Nginx/" style="font-size: 16px;">Nginx</a> <a href="/tags/Quartz/" style="font-size: 13px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 12px;">RabbitMQ</a> <a href="/tags/SQL/" style="font-size: 16px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 11px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 19px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 17px;">SpringMVC</a> <a href="/tags/Velocity/" style="font-size: 17px;">Velocity</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tomcat/" style="font-size: 14px;">tomcat</a> <a href="/tags/tool/" style="font-size: 11px;">tool</a> <a href="/tags/前端/" style="font-size: 11px;">前端</a> <a href="/tags/前端基础/" style="font-size: 14px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 13px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

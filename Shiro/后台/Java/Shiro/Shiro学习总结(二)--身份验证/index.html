@@ -1,0 +1,415 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Shiro学习总结(二)--身份验证 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Shiro学习总结(二)--身份验证">
+            
+	            Shiro学习总结(二)--身份验证
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Shiro">
+            Shiro
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/Shiro" title='Shiro'>
+                        Shiro
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/05/21</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x8BB2;&#x89E3;&#x4E86; <code>Shiro</code> &#x7684;&#x4E00;&#x4E9B;&#x7406;&#x8BBA;&#x77E5;&#x8BC6;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x901A;&#x8FC7;&#x5B9E;&#x9645;&#x6765;&#x6F14;&#x793A;&#x4E0B;&#x5982;&#x4F55;&#x4F7F;&#x7528; <code>Shiro</code>&#x3002;</p>
+<a id="more"></a> 
+<h2 id="&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7528;&#x6237;&#x767B;&#x9646;&#x9A8C;&#x8BC1;"><a href="#&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7528;&#x6237;&#x767B;&#x9646;&#x9A8C;&#x8BC1;" class="headerlink" title="&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7528;&#x6237;&#x767B;&#x9646;&#x9A8C;&#x8BC1;"></a>&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7528;&#x6237;&#x767B;&#x9646;&#x9A8C;&#x8BC1;</h2><h3 id="&#x52A0;&#x5165;&#x4F9D;&#x8D56;"><a href="#&#x52A0;&#x5165;&#x4F9D;&#x8D56;" class="headerlink" title="&#x52A0;&#x5165;&#x4F9D;&#x8D56;"></a>&#x52A0;&#x5165;&#x4F9D;&#x8D56;</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- junit --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.11<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- shiro --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.shiro<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>shiro-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="&#x5728;-resources-shiro-&#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA;-shiro-ini-&#x6587;&#x4EF6;"><a href="#&#x5728;-resources-shiro-&#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA;-shiro-ini-&#x6587;&#x4EF6;" class="headerlink" title="&#x5728; resources/shiro &#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA; shiro.ini &#x6587;&#x4EF6;"></a>&#x5728; resources/shiro &#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA; shiro.ini &#x6587;&#x4EF6;</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="section">[users]</span></div><div class="line"><span class="attr">admin</span>=<span class="number">123456</span></div><div class="line"><span class="attr">marklogzhu</span>=<span class="number">123456</span></div></pre></td></tr></table></figure>
+<p>&#x6B64;&#x5904;&#x4F7F;&#x7528; ini &#x914D;&#x7F6E;&#x6587;&#x4EF6; &#x901A;&#x8FC7; [users] &#x6307;&#x5B9A;&#x4E86;&#x4E24;&#x4E2A;&#x7528;&#x6237;&#xFF1A;admin,marklogzhu&#xFF0C;&#x5BC6;&#x7801;&#x90FD;&#x662F;123456</p>
+<h3 id="&#x5728;test-java-&#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA;-ShiroTest-java"><a href="#&#x5728;test-java-&#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA;-ShiroTest-java" class="headerlink" title="&#x5728;test/java &#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA; ShiroTest.java"></a>&#x5728;test/java &#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA; ShiroTest.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShiroTest</span> </span>{</div><div class="line"></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testLogin_01</span><span class="params">()</span></span>{</div><div class="line">        <span class="comment">// 1&#x3001;&#x83B7;&#x53D6; SecurityManager &#x5DE5;&#x5382;&#xFF0C;&#x6B64;&#x5904;&#x4F7F;&#x7528;Ini&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x521D;&#x59CB;&#x5316; SecurityManager</span></div><div class="line">        Factory&lt;SecurityManager&gt; factory = <span class="keyword">new</span> IniSecurityManagerFactory(<span class="string">&quot;classpath:shiro/shiro.ini&quot;</span>);</div><div class="line">        <span class="comment">// 2&#x3001;&#x5F97;&#x5230; SecurityManager &#x5B9E;&#x4F8B; &#x5E76;&#x7ED1;&#x5B9A;&#x7ED9; SecurityUtils</span></div><div class="line">        SecurityManager securityManager = factory.getInstance();</div><div class="line">        SecurityUtils.setSecurityManager(securityManager);</div><div class="line">        <span class="comment">// 3&#x3001;&#x5F97;&#x5230; Subject &#x53CA;&#x521B;&#x5EFA;&#x7528;&#x6237;&#x540D;/&#x5BC6;&#x7801;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;T oken&#xFF08;&#x5373;&#x7528;&#x6237;&#x8EAB;&#x4EFD;/&#x51ED;&#x8BC1;&#xFF09;</span></div><div class="line">        Subject subject = SecurityUtils.getSubject();</div><div class="line">        UsernamePasswordToken token = <span class="keyword">new</span> UsernamePasswordToken(<span class="string">&quot;admin&quot;</span>, <span class="string">&quot;123&quot;</span>);</div><div class="line">        <span class="keyword">try</span> {</div><div class="line">            <span class="comment">// 4&#x3001;&#x767B;&#x5F55;&#xFF0C;&#x5373;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;</span></div><div class="line">            subject.login(token);</div><div class="line">        } <span class="keyword">catch</span> (AuthenticationException e) {</div><div class="line">            <span class="comment">// 5&#x3001;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x5931;&#x8D25;</span></div><div class="line">            System.out.println(<span class="string">&quot;&#x767B;&#x9646;&#x5931;&#x8D25;,&#x9519;&#x8BEF;&#x539F;&#x56E0;&#xFF1A;&quot;</span> + e );</div><div class="line">        }</div><div class="line">        Assert.assertEquals(<span class="keyword">true</span>, subject.isAuthenticated()); <span class="comment">//&#x65AD;&#x8A00;&#x7528;&#x6237;&#x5DF2;&#x7ECF;&#x767B;&#x5F55;</span></div><div class="line">        <span class="comment">//6&#x3001;&#x9000;&#x51FA;</span></div><div class="line">        subject.logout();</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x6211;&#x4EEC;&#x8BBE;&#x7F6E;&#x7528;&#x6237;&#x4E3A; <code>admin</code> &#xFF0C;&#x4F46;&#x662F;&#x5BC6;&#x7801;&#x5374;&#x4E0D;&#x662F;&#x4E8B;&#x5148;&#x8BBE;&#x7F6E;&#x7684;<code>123456</code>&#xFF0C;&#x6211;&#x4EEC;&#x542F;&#x52A8;&#x8FD0;&#x884C;&#x770B;&#x770B;</p>
+<h3 id="&#x542F;&#x52A8;&#x8FD0;&#x884C;"><a href="#&#x542F;&#x52A8;&#x8FD0;&#x884C;" class="headerlink" title="&#x542F;&#x52A8;&#x8FD0;&#x884C;"></a>&#x542F;&#x52A8;&#x8FD0;&#x884C;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#x767B;&#x9646;&#x5931;&#x8D25;,&#x9519;&#x8BEF;&#x539F;&#x56E0;&#xFF1A;org.apache.shiro.authc.IncorrectCredentialsException: Submitted credentials for token [org.apache.shiro.authc.UsernamePasswordToken - admin, rememberMe=false] did not match the expected credentials.</div><div class="line"></div><div class="line">java.lang.AssertionError: </div><div class="line">Expected :true</div><div class="line">Actual   :false</div></pre></td></tr></table></figure>
+<p>&#x4ECE;&#x4E0A;&#x9762;&#x7684;&#x65E5;&#x5FD7;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x62A5;&#x767B;&#x9646;&#x5F02;&#x5E38;&#x9519;&#x8BEF;&#xFF0C;&#x9519;&#x8BEF;&#x539F;&#x56E0;&#x4E3A;&#x63D0;&#x4EA4;&#x7684;&#x7528;&#x6237;&#x540D;&#x548C;&#x5BC6;&#x7801;&#x4E0E;&#x9884;&#x671F;&#x4E0D;&#x4E00;&#x81F4;&#x3002;&#x6211;&#x4EEC;&#x4FEE;&#x6539;&#x5BC6;&#x7801;&#x4E3A; <code>123456</code>&#xFF0C;&#x5728;&#x8FD0;&#x884C;&#x770B;&#x770B;</p>
+<h3 id="&#x542F;&#x52A8;&#x8FD0;&#x884C;-1"><a href="#&#x542F;&#x52A8;&#x8FD0;&#x884C;-1" class="headerlink" title="&#x542F;&#x52A8;&#x8FD0;&#x884C;"></a>&#x542F;&#x52A8;&#x8FD0;&#x884C;</h3><p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x63A7;&#x5236;&#x53F0;&#x6CA1;&#x6709;&#x8F93;&#x51FA;&#x5F02;&#x5E38;&#x4FE1;&#x606F;&#x5E76;&#x4E14;&#x662F;&#x7EFF;&#x6761;&#xFF0C;&#x8BF4;&#x660E;&#x6D4B;&#x8BD5;&#x901A;&#x8FC7;&#x3002;</p>
+<h3 id="&#x6D41;&#x7A0B;&#x5206;&#x6790;"><a href="#&#x6D41;&#x7A0B;&#x5206;&#x6790;" class="headerlink" title="&#x6D41;&#x7A0B;&#x5206;&#x6790;"></a>&#x6D41;&#x7A0B;&#x5206;&#x6790;</h3><ul>
+<li><p>&#x9996;&#x5148;&#x901A;&#x8FC7; <code>new IniSecurityManagerFactory</code> &#x5E76;&#x6307;&#x5B9A;&#x4E00;&#x4E2A; ini &#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x6765;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; <code>SecurityManager</code> &#x5DE5;&#x5382;&#xFF1B;</p>
+</li>
+<li><p>&#x63A5;&#x7740;&#x83B7;&#x53D6; <code>SecurityManager</code> &#x5E76;&#x7ED1;&#x5B9A;&#x5230; <code>SecurityUtils</code>&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x5168;&#x5C40;&#x8BBE;&#x7F6E;&#xFF0C;&#x8BBE;&#x7F6E;&#x4E00;&#x6B21;&#x5373;&#x53EF;&#xFF1B;</p>
+</li>
+<li><p>&#x901A;&#x8FC7; <code>SecurityUtils</code> &#x5F97;&#x5230; <code>Subject</code>&#xFF0C;&#x5176;&#x4F1A;&#x81EA;&#x52A8;&#x7ED1;&#x5B9A;&#x5230;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#xFF1B;&#x5982;&#x679C;&#x5728; web &#x73AF;&#x5883;&#x5728;&#x8BF7;&#x6C42;&#x7ED3;&#x675F;&#x65F6;&#x9700;&#x8981;&#x89E3;&#x9664;&#x7ED1;&#x5B9A;&#xFF1B;&#x7136;&#x540E;&#x83B7;&#x53D6;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x7684; <code>Token</code>&#xFF0C;&#x5982;&#x7528;&#x6237;&#x540D; / &#x5BC6;&#x7801;&#xFF1B;</p>
+</li>
+<li><p>&#x8C03;&#x7528; <code>subject.login</code> &#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x767B;&#x5F55;&#xFF0C;&#x5176;&#x4F1A;&#x81EA;&#x52A8;&#x59D4;&#x6258;&#x7ED9; <code>SecurityManager.login</code> &#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x767B;&#x5F55;&#xFF1B;</p>
+</li>
+<li><p>&#x5982;&#x679C;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x5931;&#x8D25;&#x8BF7;&#x6355;&#x83B7; <code>AuthenticationException</code> &#x6216;&#x5176;&#x5B50;&#x7C7B;&#xFF0C;&#x5E38;&#x89C1;&#x7684;&#x5982;&#xFF1A; <code>DisabledAccountException</code>&#xFF08;&#x7981;&#x7528;&#x7684;&#x5E10;&#x53F7;&#xFF09;&#x3001;<code>LockedAccountException</code>&#xFF08;&#x9501;&#x5B9A;&#x7684;&#x5E10;&#x53F7;&#xFF09;&#x3001;<code>UnknownAccountException</code>&#xFF08;&#x9519;&#x8BEF;&#x7684;&#x5E10;&#x53F7;&#xFF09;&#x3001;<code>ExcessiveAttemptsException</code>&#xFF08;&#x767B;&#x5F55;&#x5931;&#x8D25;&#x6B21;&#x6570;&#x8FC7;&#x591A;&#xFF09;&#x3001;<code>IncorrectCredentialsException</code> &#xFF08;&#x9519;&#x8BEF;&#x7684;&#x51ED;&#x8BC1;&#xFF09;&#x3001;<code>ExpiredCredentialsException</code>&#xFF08;&#x8FC7;&#x671F;&#x7684;&#x51ED;&#x8BC1;&#xFF09;&#x7B49;&#xFF0C;&#x5177;&#x4F53;&#x8BF7;&#x67E5;&#x770B;&#x5176;&#x7EE7;&#x627F;&#x5173;&#x7CFB;&#xFF1B;&#x5BF9;&#x4E8E;&#x9875;&#x9762;&#x7684;&#x9519;&#x8BEF;&#x6D88;&#x606F;&#x5C55;&#x793A;&#xFF0C;&#x6700;&#x597D;&#x4F7F;&#x7528;&#x5982; &#x201C;&#x7528;&#x6237;&#x540D; / &#x5BC6;&#x7801;&#x9519;&#x8BEF;&#x201D; &#x800C;&#x4E0D;&#x662F; &#x201C;&#x7528;&#x6237;&#x540D;&#x9519;&#x8BEF;&#x201D;/&#x201C;&#x5BC6;&#x7801;&#x9519;&#x8BEF;&#x201D;&#xFF0C;&#x9632;&#x6B62;&#x4E00;&#x4E9B;&#x6076;&#x610F;&#x7528;&#x6237;&#x975E;&#x6CD5;&#x626B;&#x63CF;&#x5E10;&#x53F7;&#x5E93;&#xFF1B;</p>
+</li>
+<li><p>&#x6700;&#x540E;&#x53EF;&#x4EE5;&#x8C03;&#x7528; <code>subject.logout</code> &#x9000;&#x51FA;&#xFF0C;&#x5176;&#x4F1A;&#x81EA;&#x52A8;&#x59D4;&#x6258;&#x7ED9; <code>SecurityManager.logout</code> &#x65B9;&#x6CD5;&#x9000;&#x51FA;&#x3002;</p>
+</li>
+</ul>
+<p>## </p>
+<p>&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x6211;&#x4EEC;&#x662F;&#x628A;&#x8D26;&#x53F7;&#x4FE1;&#x606F;&#x914D;&#x7F6E;&#x5230; <code>ini</code> &#x6587;&#x4EF6;&#x4E2D;&#x53BB;,&#x90A3;&#x4E48;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4ECE;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x8BFB;&#x53D6;&#x7528;&#x6237;&#x4FE1;&#x606F;&#x5417;&#xFF0C;&#x7B54;&#x6848;&#x81EA;&#x7136;&#x662F;&#x53EF;&#x4EE5;&#x7684;&#xFF0C;&#x5728;&#x5C06;&#x8FD9;&#x4E2A;&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x5148;&#x6765;&#x4E86;&#x89E3;&#x4E0B; <code>Shiro</code> &#x662F;&#x600E;&#x4E48;&#x8FDB;&#x884C;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x7684;&#x3002;</p>
+<h2 id="&#x8EAB;&#x4EFD;&#x8BA4;&#x8BC1;&#x6D41;&#x7A0B;"><a href="#&#x8EAB;&#x4EFD;&#x8BA4;&#x8BC1;&#x6D41;&#x7A0B;" class="headerlink" title="&#x8EAB;&#x4EFD;&#x8BA4;&#x8BC1;&#x6D41;&#x7A0B;"></a>&#x8EAB;&#x4EFD;&#x8BA4;&#x8BC1;&#x6D41;&#x7A0B;</h2><p><img src="/Shiro/&#x540E;&#x53F0;/Java/Shiro/Shiro&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E8C;)--&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;/img/01.png" alt=""></p>
+<p>&#x6D41;&#x7A0B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li>&#x9996;&#x5148;&#x8C03;&#x7528; <code>Subject.login(token)</code> &#x8FDB;&#x884C;&#x767B;&#x5F55;&#xFF0C;&#x5176;&#x4F1A;&#x81EA;&#x52A8;&#x59D4;&#x6258;&#x7ED9; <code>Security Manager</code>&#xFF0C;&#x8C03;&#x7528;&#x4E4B;&#x524D;&#x5FC5;&#x987B;&#x901A;&#x8FC7; <code>SecurityUtils.setSecurityManager()</code> &#x8BBE;&#x7F6E;&#xFF1B;</li>
+<li><code>SecurityManager</code> &#x8D1F;&#x8D23;&#x771F;&#x6B63;&#x7684;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x903B;&#x8F91;&#xFF1B;&#x5B83;&#x4F1A;&#x59D4;&#x6258;&#x7ED9; <code>Authenticator</code> &#x8FDB;&#x884C;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#xFF1B;<br><code>Authenticator</code> &#x624D;&#x662F;&#x771F;&#x6B63;&#x7684;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x8005;&#xFF0C;<code>Shiro</code> <code>API</code> &#x4E2D;&#x6838;&#x5FC3;&#x7684;&#x8EAB;&#x4EFD;&#x8BA4;&#x8BC1;&#x5165;&#x53E3;&#x70B9;&#xFF0C;&#x6B64;&#x5904;&#x53EF;&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;&#x63D2;&#x5165;&#x81EA;&#x5DF1;&#x7684;&#x5B9E;&#x73B0;&#xFF1B;</li>
+<li><code>Authenticator</code> &#x53EF;&#x80FD;&#x4F1A;&#x59D4;&#x6258;&#x7ED9;&#x76F8;&#x5E94;&#x7684; <code>AuthenticationStrategy</code> &#x8FDB;&#x884C;&#x591A; <code>Realm</code> &#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#xFF0C;&#x9ED8;&#x8BA4; <code>ModularRealmAuthenticator</code> &#x4F1A;&#x8C03;&#x7528; <code>AuthenticationStrategy</code> &#x8FDB;&#x884C;&#x591A; <code>Realm</code> &#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#xFF1B;</li>
+<li><code>Authenticator</code> &#x4F1A;&#x628A;&#x76F8;&#x5E94;&#x7684; <code>token</code> &#x4F20;&#x5165; <code>Realm</code>&#xFF0C;&#x4ECE; <code>Realm</code> &#x83B7;&#x53D6;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x4FE1;&#x606F;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x8FD4;&#x56DE; / &#x629B;&#x51FA;&#x5F02;&#x5E38;&#x8868;&#x793A;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x5931;&#x8D25;&#x4E86;&#x3002;&#x6B64;&#x5904;&#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#x591A;&#x4E2A; <code>Realm</code>&#xFF0C;&#x5C06;&#x6309;&#x7167;&#x76F8;&#x5E94;&#x7684;&#x987A;&#x5E8F;&#x53CA;&#x7B56;&#x7565;&#x8FDB;&#x884C;&#x8BBF;&#x95EE;&#x3002;</li>
+</ul>
+<h2 id="Realm"><a href="#Realm" class="headerlink" title="Realm"></a>Realm</h2><p><code>Realm</code>&#xFF1A;&#x57DF;&#xFF0C;<code>Shiro</code> &#x4ECE;&#x4ECE; <code>Realm</code> &#x83B7;&#x53D6;&#x5B89;&#x5168;&#x6570;&#x636E;&#xFF08;&#x5982;&#x7528;&#x6237;&#x3001;&#x89D2;&#x8272;&#x3001;&#x6743;&#x9650;&#xFF09;&#xFF0C;&#x5C31;&#x662F;&#x8BF4; <code>SecurityManager</code> &#x8981;&#x9A8C;&#x8BC1;&#x7528;&#x6237;&#x8EAB;&#x4EFD;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x9700;&#x8981;&#x4ECE; <code>Realm</code> &#x83B7;&#x53D6;&#x76F8;&#x5E94;&#x7684;&#x7528;&#x6237;&#x8FDB;&#x884C;&#x6BD4;&#x8F83;&#x4EE5;&#x786E;&#x5B9A;&#x7528;&#x6237;&#x8EAB;&#x4EFD;&#x662F;&#x5426;&#x5408;&#x6CD5;&#xFF1B;&#x4E5F;&#x9700;&#x8981;&#x4ECE; <code>Realm</code> &#x5F97;&#x5230;&#x7528;&#x6237;&#x76F8;&#x5E94;&#x7684;&#x89D2;&#x8272; / &#x6743;&#x9650;&#x8FDB;&#x884C;&#x9A8C;&#x8BC1;&#x7528;&#x6237;&#x662F;&#x5426;&#x80FD;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#xFF1B;&#x53EF;&#x4EE5;&#x628A; <code>Realm</code> &#x770B;&#x6210; <code>DataSource</code>&#xFF0C;&#x5373;&#x5B89;&#x5168;&#x6570;&#x636E;&#x6E90;&#x3002;&#x5982;&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x7684; <code>ini</code> &#x914D;&#x7F6E;&#x65B9;&#x5F0F;&#x5C06;&#x4F7F;&#x7528; <code>org.apache.shiro.realm.text.IniRealm</code>&#x3002;</p>
+<p><code>org.apache.shiro.realm.Realm</code> &#x63A5;&#x53E3;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function">String <span class="title">getName</span><span class="params">()</span></span>; <span class="comment">//&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x552F;&#x4E00;&#x7684; Realm &#x540D;&#x5B57;</span></div><div class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">supports</span><span class="params">(AuthenticationToken token)</span></span>; <span class="comment">//&#x5224;&#x65AD;&#x6B64; Realm &#x662F;&#x5426;&#x652F;&#x6301;&#x6B64; Token</span></div><div class="line"><span class="function">AuthenticationInfo <span class="title">getAuthenticationInfo</span><span class="params">(AuthenticationToken token)</span> <span class="keyword">throws</span> AuthenticationException</span>;  <span class="comment">//&#x6839;&#x636E; Token &#x83B7;&#x53D6;&#x8BA4;&#x8BC1;&#x4FE1;&#x606F;</span></div></pre></td></tr></table></figure>
+<h2 id="&#x5355;Realm-&#x914D;&#x7F6E;"><a href="#&#x5355;Realm-&#x914D;&#x7F6E;" class="headerlink" title="&#x5355;Realm &#x914D;&#x7F6E;"></a>&#x5355;Realm &#x914D;&#x7F6E;</h2><h3 id="&#x81EA;&#x5B9A;&#x4E49;-Realm"><a href="#&#x81EA;&#x5B9A;&#x4E49;-Realm" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49; Realm"></a>&#x81EA;&#x5B9A;&#x4E49; Realm</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyRealm</span> <span class="keyword">implements</span> <span class="title">Realm</span> </span>{</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> <span class="string">&quot;myRealm&quot;</span>;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">supports</span><span class="params">(AuthenticationToken token)</span> </span>{</div><div class="line">        <span class="comment">//&#x4EC5;&#x652F;&#x6301;UsernamePasswordToken&#x7C7B;&#x578B;&#x7684;Token</span></div><div class="line">        <span class="keyword">return</span> token <span class="keyword">instanceof</span> UsernamePasswordToken;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> AuthenticationInfo <span class="title">getAuthenticationInfo</span><span class="params">(AuthenticationToken token)</span> <span class="keyword">throws</span> AuthenticationException </span>{</div><div class="line">        String username = (String)token.getPrincipal();  <span class="comment">//&#x5F97;&#x5230;&#x7528;&#x6237;&#x540D;</span></div><div class="line">        String password = <span class="keyword">new</span> String((<span class="keyword">char</span>[])token.getCredentials()); <span class="comment">//&#x5F97;&#x5230;&#x5BC6;&#x7801;</span></div><div class="line">        <span class="keyword">if</span>(!<span class="string">&quot;marklogzhu&quot;</span>.equals(username)) {</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UnknownAccountException(); <span class="comment">//&#x5982;&#x679C;&#x7528;&#x6237;&#x540D;&#x9519;&#x8BEF;</span></div><div class="line">        }</div><div class="line">        <span class="keyword">if</span>(!<span class="string">&quot;123456&quot;</span>.equals(password)) {</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IncorrectCredentialsException(); <span class="comment">//&#x5982;&#x679C;&#x5BC6;&#x7801;&#x9519;&#x8BEF;</span></div><div class="line">        }</div><div class="line">        <span class="comment">//&#x5982;&#x679C;&#x8EAB;&#x4EFD;&#x8BA4;&#x8BC1;&#x9A8C;&#x8BC1;&#x6210;&#x529F;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;AuthenticationInfo&#x5B9E;&#x73B0;&#xFF1B;</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SimpleAuthenticationInfo(username, password, getName());</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="&#x5728;-resources-shiro-&#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA;-shiro2-ini-&#x6587;&#x4EF6;"><a href="#&#x5728;-resources-shiro-&#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA;-shiro2-ini-&#x6587;&#x4EF6;" class="headerlink" title="&#x5728; resources/shiro &#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA; shiro2.ini &#x6587;&#x4EF6;"></a>&#x5728; resources/shiro &#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA; shiro2.ini &#x6587;&#x4EF6;</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># &#x58F0;&#x660E;&#x4E00;&#x4E2A;realm</div><div class="line">myRealm=com.marklogzhu.ssm.realm.MyRealm</div><div class="line"># &#x6307;&#x5B9A;securityManager&#x7684;realms&#x5B9E;&#x73B0;</div><div class="line">securityManager.realms=$myRealm</div></pre></td></tr></table></figure>
+<h3 id="&#x7F16;&#x8F91;-Shiro-java-&#x6587;&#x4EF6;&#xFF0C;&#x589E;&#x52A0;&#x6D4B;&#x8BD5;&#x65B9;&#x6CD5;"><a href="#&#x7F16;&#x8F91;-Shiro-java-&#x6587;&#x4EF6;&#xFF0C;&#x589E;&#x52A0;&#x6D4B;&#x8BD5;&#x65B9;&#x6CD5;" class="headerlink" title="&#x7F16;&#x8F91; Shiro.java &#x6587;&#x4EF6;&#xFF0C;&#x589E;&#x52A0;&#x6D4B;&#x8BD5;&#x65B9;&#x6CD5;"></a>&#x7F16;&#x8F91; Shiro.java &#x6587;&#x4EF6;&#xFF0C;&#x589E;&#x52A0;&#x6D4B;&#x8BD5;&#x65B9;&#x6CD5;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public class ShiroTest {</div><div class="line">    @Test</div><div class="line">    public void testLogin_02(){</div><div class="line">        // 1&#x3001;&#x83B7;&#x53D6;SecurityManager&#x5DE5;&#x5382;&#xFF0C;&#x6B64;&#x5904;&#x4F7F;&#x7528;Ini&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x521D;&#x59CB;&#x5316;SecurityManager</div><div class="line">        Factory&lt;SecurityManager&gt; factory = new IniSecurityManagerFactory(&quot;classpath:shiro/shiro2.ini&quot;);</div><div class="line">        // 2&#x3001;&#x5F97;&#x5230;SecurityManager&#x5B9E;&#x4F8B; &#x5E76;&#x7ED1;&#x5B9A;&#x7ED9;SecurityUtils</div><div class="line">        SecurityManager securityManager = factory.getInstance();</div><div class="line">        SecurityUtils.setSecurityManager(securityManager);</div><div class="line">        // 3&#x3001;&#x5F97;&#x5230;Subject&#x53CA;&#x521B;&#x5EFA;&#x7528;&#x6237;&#x540D;/&#x5BC6;&#x7801;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;Token&#xFF08;&#x5373;&#x7528;&#x6237;&#x8EAB;&#x4EFD;/&#x51ED;&#x8BC1;&#xFF09;</div><div class="line">        Subject subject = SecurityUtils.getSubject();</div><div class="line">        UsernamePasswordToken token = new UsernamePasswordToken(&quot;admin&quot;, &quot;123456&quot;);</div><div class="line">        try {</div><div class="line">            // 4&#x3001;&#x767B;&#x5F55;&#xFF0C;&#x5373;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;</div><div class="line">            subject.login(token);</div><div class="line">        } catch (AuthenticationException e) {</div><div class="line">            // 5&#x3001;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x5931;&#x8D25;</div><div class="line">            System.out.println(&quot;&#x767B;&#x9646;&#x5931;&#x8D25;,&#x9519;&#x8BEF;&#x539F;&#x56E0;&#xFF1A;&quot; + e );</div><div class="line">        }</div><div class="line">        Assert.assertEquals(true, subject.isAuthenticated()); //&#x65AD;&#x8A00;&#x7528;&#x6237;&#x5DF2;&#x7ECF;&#x767B;&#x5F55;</div><div class="line">        //6&#x3001;&#x9000;&#x51FA;</div><div class="line">        subject.logout();</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="&#x542F;&#x52A8;&#x8FD0;&#x884C;-2"><a href="#&#x542F;&#x52A8;&#x8FD0;&#x884C;-2" class="headerlink" title="&#x542F;&#x52A8;&#x8FD0;&#x884C;"></a>&#x542F;&#x52A8;&#x8FD0;&#x884C;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#x767B;&#x9646;&#x5931;&#x8D25;,&#x9519;&#x8BEF;&#x539F;&#x56E0;&#xFF1A;org.apache.shiro.authc.UnknownAccountException</div><div class="line"></div><div class="line">java.lang.AssertionError: </div><div class="line">Expected :true</div><div class="line">Actual   :false</div><div class="line"> &lt;Click to see difference&gt;</div></pre></td></tr></table></figure>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x767B;&#x9646;&#x5931;&#x8D25;&#xFF0C;&#x5931;&#x8D25;&#x539F;&#x56E0;&#x662F;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x65F6;&#x5019;&#x5DF2;&#x7ECF;&#x5C06;&#x7528;&#x6237;&#x540D;&#x9650;&#x5236;&#x4E3A; <code>marklogzhu</code> &#xFF0C;&#x9664;&#x4E86;&#x8FD9;&#x4E2A;&#x8D26;&#x53F7;&#x5916;&#x5176;&#x4ED6;&#x90FD;&#x662F;&#x672A;&#x5B9A;&#x4E49;&#x7684;&#x8D26;&#x53F7;&#xFF0C;&#x81EA;&#x7136;&#x5C31;&#x767B;&#x9646;&#x5931;&#x8D25;&#x4E86;&#x3002;&#x5728;&#x81EA;&#x5B9A;&#x4E49; <code>Realm</code> &#x81EA;&#x7136;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8C03;&#x7528;&#x6570;&#x636E;&#x5E93;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x5B9E;&#x73B0;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x3002;</p>
+<h2 id="&#x591A;-Realm-&#x914D;&#x7F6E;"><a href="#&#x591A;-Realm-&#x914D;&#x7F6E;" class="headerlink" title="&#x591A; Realm &#x914D;&#x7F6E;"></a>&#x591A; Realm &#x914D;&#x7F6E;</h2><h3 id="ini-&#x914D;&#x7F6E;&#x6587;&#x4EF6;"><a href="#ini-&#x914D;&#x7F6E;&#x6587;&#x4EF6;" class="headerlink" title="ini &#x914D;&#x7F6E;&#x6587;&#x4EF6;"></a>ini &#x914D;&#x7F6E;&#x6587;&#x4EF6;</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># &#x58F0;&#x660E;&#x4E00;&#x4E2A;realm</div><div class="line">myRealm1=com.marklogzhu.realm.MyRealm1</div><div class="line">myRealm2=com.marklogzhu.realm.MyRealm2</div><div class="line"># &#x6307;&#x5B9A;securityManager&#x7684;realms&#x5B9E;&#x73B0;</div><div class="line">securityManager.realms=$myRealm1,$myRealm2;</div></pre></td></tr></table></figure>
+<p><code>securityManager</code> &#x4F1A;&#x6309;&#x7167; <code>realms</code> &#x6307;&#x5B9A;&#x7684;&#x987A;&#x5E8F;&#x8FDB;&#x884C;&#x8EAB;&#x4EFD;&#x8BA4;&#x8BC1;&#x3002;&#x6B64;&#x5904;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x663E;&#x793A;&#x6307;&#x5B9A;&#x987A;&#x5E8F;&#x7684;&#x65B9;&#x5F0F;&#x6307;&#x5B9A;&#x4E86; <code>Realm</code> &#x7684;&#x987A;&#x5E8F;&#xFF0C;&#x5982;&#x679C;&#x5220;&#x9664; &#x201C;securityManager.realms=$myRealm1,$myRealm2&#x201D;&#xFF0C;&#x90A3;&#x4E48;<code>securityManager</code> &#x4F1A;&#x6309;&#x7167; <code>realm</code> &#x58F0;&#x660E;&#x7684;&#x987A;&#x5E8F;&#x8FDB;&#x884C;&#x4F7F;&#x7528;&#xFF08;&#x5373;&#x65E0;&#x9700;&#x8BBE;&#x7F6E; <code>realms</code>&#x5C5E;&#x6027;&#xFF0C;&#x5176;&#x4F1A;&#x81EA;&#x52A8;&#x53D1;&#x73B0;&#xFF09;&#xFF0C;&#x5F53;&#x6211;&#x4EEC;&#x663E;&#x793A;&#x6307;&#x5B9A; <code>realm</code> &#x540E;&#xFF0C;&#x5176;&#x4ED6;&#x6CA1;&#x6709;&#x6307;&#x5B9A; <code>realm</code> &#x5C06;&#x88AB;&#x5FFD;&#x7565;&#xFF0C;&#x5982; &#x201C;securityManager.realms=$myRealm1&#x201D;&#xFF0C;&#x90A3;&#x4E48; <code>myRealm2</code> &#x4E0D;&#x4F1A;&#x88AB;&#x81EA;&#x52A8;&#x8BBE;&#x7F6E;&#x8FDB;&#x53BB;&#x3002;</p>
+<h2 id="Shiro-&#x9ED8;&#x8BA4;&#x63D0;&#x4F9B;&#x7684;-Realm"><a href="#Shiro-&#x9ED8;&#x8BA4;&#x63D0;&#x4F9B;&#x7684;-Realm" class="headerlink" title="Shiro &#x9ED8;&#x8BA4;&#x63D0;&#x4F9B;&#x7684; Realm"></a>Shiro &#x9ED8;&#x8BA4;&#x63D0;&#x4F9B;&#x7684; Realm</h2><p><img src="/Shiro/&#x540E;&#x53F0;/Java/Shiro/Shiro&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E8C;)--&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;/img/02.png" alt=""></p>
+<p>&#x9879;&#x76EE;&#x4E2D;&#x4E00;&#x822C;&#x7EE7;&#x627F; <code>AuthorizingRealm</code>&#xFF08;&#x6388;&#x6743;&#xFF09;&#x5373;&#x53EF;&#xFF1B;&#x5176;&#x7EE7;&#x627F;&#x4E86; <code>AuthenticatingRealm</code>&#xFF08;&#x5373;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#xFF09;&#xFF0C;&#x800C;&#x4E14;&#x4E5F;&#x95F4;&#x63A5;&#x7EE7;&#x627F;&#x4E86; <code>CachingRealm</code>&#xFF08;&#x5E26;&#x6709;&#x7F13;&#x5B58;&#x5B9E;&#x73B0;&#xFF09;&#x3002;&#x7EE7;&#x627F; <code>AuthorizingRealm</code> &#x53EA;&#x9700;&#x8981;&#x5B9E;&#x73B0;&#x5982;&#x4E0B;&#x4E24;&#x4E2A;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * &#x83B7;&#x53D6;&#x6388;&#x6743;&#x4FE1;&#x606F;,&#x5373;&#x6388;&#x6743;&#x9A8C;&#x8BC1;</div><div class="line"> * <span class="doctag">@param</span> principalCollection</div><div class="line"> * <span class="doctag">@return</span></div><div class="line"> */</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> AuthorizationInfo <span class="title">doGetAuthorizationInfo</span><span class="params">(PrincipalCollection principalCollection)</span> </span>{</div><div class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * &#x83B7;&#x53D6;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x4FE1;&#x606F;,&#x5373;&#x767B;&#x5F55;&#x9A8C;&#x8BC1;</div><div class="line"> * <span class="doctag">@param</span> token</div><div class="line"> * <span class="doctag">@return</span></div><div class="line"> * <span class="doctag">@throws</span> AuthenticationException</div><div class="line"> */</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> AuthenticationInfo <span class="title">doGetAuthenticationInfo</span><span class="params">(AuthenticationToken token)</span> <span class="keyword">throws</span> AuthenticationException </span>{</div><div class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/Shiro/后台/Java/Shiro/Shiro学习总结(三)--授权/" class="pre-post btn btn-default" title='Shiro学习总结(三)--授权'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Shiro学习总结(三)--授权</span>
+        </a>
+    
+    
+        <a href="/Shiro/后台/Java/Shiro/Shiro学习总结(一)--入门/" class="next-post btn btn-default" title='Shiro学习总结(一)--入门'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Shiro学习总结(一)--入门</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/"><i class="fa" aria-hidden="true">tomcat</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">39</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/C/" style="font-size: 11px;">C#</a> <a href="/tags/CSS/" style="font-size: 12px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 11px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 17px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 13px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 18px;">MyBatis</a> <a href="/tags/Nginx/" style="font-size: 16px;">Nginx</a> <a href="/tags/Quartz/" style="font-size: 13px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 12px;">RabbitMQ</a> <a href="/tags/SQL/" style="font-size: 16px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 11px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 19px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 17px;">SpringMVC</a> <a href="/tags/Velocity/" style="font-size: 17px;">Velocity</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tomcat/" style="font-size: 14px;">tomcat</a> <a href="/tags/tool/" style="font-size: 11px;">tool</a> <a href="/tags/前端/" style="font-size: 11px;">前端</a> <a href="/tags/前端基础/" style="font-size: 14px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 13px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

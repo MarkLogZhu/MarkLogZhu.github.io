@@ -1,0 +1,372 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Shiro学习总结(六)--Shiro并发登录 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Shiro学习总结(六)--Shiro并发登录">
+            
+	            Shiro学习总结(六)--Shiro并发登录
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Shiro">
+            Shiro
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/Shiro" title='Shiro'>
+                        Shiro
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/05/23</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="&#x4EC0;&#x4E48;&#x662F;&#x5E76;&#x53D1;&#x767B;&#x5F55;"><a href="#&#x4EC0;&#x4E48;&#x662F;&#x5E76;&#x53D1;&#x767B;&#x5F55;" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F;&#x5E76;&#x53D1;&#x767B;&#x5F55;"></a>&#x4EC0;&#x4E48;&#x662F;&#x5E76;&#x53D1;&#x767B;&#x5F55;</h2><p>&#x5E76;&#x53D1;&#x767B;&#x5F55;&#x6307;&#x7684;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x8D26;&#x53F7;&#x5728;&#x591A;&#x4E2A;&#x5730;&#x65B9;&#x540C;&#x65F6;&#x767B;&#x5F55;&#xFF0C;&#x6709;&#x4E9B;&#x9879;&#x76EE;&#x5141;&#x8BB8;&#x540C;&#x65F6;&#x540C;&#x7C7B;&#xFF0C;&#x6709;&#x4E9B;&#x9879;&#x76EE;&#x4E3A;&#x4E86;&#x5B89;&#x5168;&#x8003;&#x8651;&#x53EA;&#x5141;&#x8BB8;&#x4E00;&#x4E2A;&#x4EBA;&#x767B;&#x5F55;&#xFF0C;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x8981;&#x4E48;&#x4E0D;&#x8BA9;&#x540E;&#x8005;&#x767B;&#x5F55;&#xFF1B;&#x8981;&#x4E48;&#x8E22;&#x51FA;&#x524D;&#x8005;&#x767B;&#x5F55;&#xFF08;&#x5F3A;&#x5236;&#x9000;&#x51FA;&#xFF09;&#x3002;<code>Shiro</code> &#x6CA1;&#x6709;&#x63D0;&#x4F9B;&#x9ED8;&#x8BA4;&#x5B9E;&#x73B0;&#xFF0C;&#x4E0D;&#x8FC7;&#x53EF;&#x4EE5;&#x5F88;&#x5BB9;&#x6613;&#x7684;&#x5728; <code>Shiro</code> &#x4E2D;&#x52A0;&#x5165;&#x8FD9;&#x4E2A;&#x529F;&#x80FD;&#x3002;&#x901A;&#x8FC7; <code>Shiro Filter</code> &#x673A;&#x5236;&#x6269; <code>KickoutSessionControlFilter</code> &#x5B8C;&#x6210;&#x3002;</p>
+<a id="more"></a> 
+<h3 id="&#x6838;&#x5FC3;&#x4F9D;&#x8D56;"><a href="#&#x6838;&#x5FC3;&#x4F9D;&#x8D56;" class="headerlink" title="&#x6838;&#x5FC3;&#x4F9D;&#x8D56;"></a>&#x6838;&#x5FC3;&#x4F9D;&#x8D56;</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-context-support<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ehcache-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.sf.ehcache<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">``` </div><div class="line"></div><div class="line">###  &#x5728; com.marklogzhu.ssm.shiro &#x4E0B;&#x65B0;&#x5EFA; SpringCacheManagerWrapper.java &#x6587;&#x4EF6;</div><div class="line"></div><div class="line">``` java</div><div class="line">public class SpringCacheManagerWrapper implements CacheManager {</div><div class="line"></div><div class="line">    private org.springframework.cache.CacheManager cacheManager;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * &#x8BBE;&#x7F6E;spring cache manager</div><div class="line">     *</div><div class="line">     * @param cacheManager</div><div class="line">     */</div><div class="line">    public void setCacheManager(org.springframework.cache.CacheManager cacheManager) {</div><div class="line">        this.cacheManager = cacheManager;</div><div class="line">    }</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public <span class="tag">&lt;<span class="name">K,</span> <span class="attr">V</span>&gt;</span> Cache<span class="tag">&lt;<span class="name">K,</span> <span class="attr">V</span>&gt;</span> getCache(String name) throws CacheException {</div><div class="line">        org.springframework.cache.Cache springCache = cacheManager.getCache(name);</div><div class="line">        return new SpringCacheWrapper(springCache);</div><div class="line">    }</div><div class="line"></div><div class="line">    static class SpringCacheWrapper implements Cache {</div><div class="line">        private org.springframework.cache.Cache springCache;</div><div class="line"></div><div class="line">        SpringCacheWrapper(org.springframework.cache.Cache springCache) {</div><div class="line">            this.springCache = springCache;</div><div class="line">        }</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public Object get(Object key) throws CacheException {</div><div class="line">            Object value = springCache.get(key);</div><div class="line">            if (value instanceof SimpleValueWrapper) {</div><div class="line">                return ((SimpleValueWrapper) value).get();</div><div class="line">            }</div><div class="line">            return value;</div><div class="line">        }</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public Object put(Object key, Object value) throws CacheException {</div><div class="line">            springCache.put(key, value);</div><div class="line">            return value;</div><div class="line">        }</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public Object remove(Object key) throws CacheException {</div><div class="line">            springCache.evict(key);</div><div class="line">            return null;</div><div class="line">        }</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public void clear() throws CacheException {</div><div class="line">            springCache.clear();</div><div class="line">        }</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public int size() {</div><div class="line">            if(springCache.getNativeCache() instanceof Ehcache) {</div><div class="line">                Ehcache ehcache = (Ehcache) springCache.getNativeCache();</div><div class="line">                return ehcache.getSize();</div><div class="line">            }</div><div class="line">            throw new UnsupportedOperationException(&quot;invoke spring cache abstract size method not supported&quot;);</div><div class="line">        }</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public Set keys() {</div><div class="line">            if(springCache.getNativeCache() instanceof Ehcache) {</div><div class="line">                Ehcache ehcache = (Ehcache) springCache.getNativeCache();</div><div class="line">                return new HashSet(ehcache.getKeys());</div><div class="line">            }</div><div class="line">            throw new UnsupportedOperationException(&quot;invoke spring cache abstract keys method not supported&quot;);</div><div class="line">        }</div><div class="line"></div><div class="line">        @Override</div><div class="line">        public Collection values() {</div><div class="line">            if(springCache.getNativeCache() instanceof Ehcache) {</div><div class="line">                Ehcache ehcache = (Ehcache) springCache.getNativeCache();</div><div class="line">                List keys = ehcache.getKeys();</div><div class="line">                if (!CollectionUtils.isEmpty(keys)) {</div><div class="line">                    List values = new ArrayList(keys.size());</div><div class="line">                    for (Object key : keys) {</div><div class="line">                        Object value = get(key);</div><div class="line">                        if (value != null) {</div><div class="line">                            values.add(value);</div><div class="line">                        }</div><div class="line">                    }</div><div class="line">                    return Collections.unmodifiableList(values);</div><div class="line">                } else {</div><div class="line">                    return Collections.emptyList();</div><div class="line">                }</div><div class="line">            }</div><div class="line">            throw new UnsupportedOperationException(&quot;invoke spring cache abstract values method not supported&quot;);</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="&#x5728;-com-marklogzhu-ssm-shiro&#x65B0;&#x5EFA;-KickoutSessionControlFilter-java-&#x6587;&#x4EF6;"><a href="#&#x5728;-com-marklogzhu-ssm-shiro&#x65B0;&#x5EFA;-KickoutSessionControlFilter-java-&#x6587;&#x4EF6;" class="headerlink" title="&#x5728; com.marklogzhu.ssm.shiro&#x65B0;&#x5EFA; KickoutSessionControlFilter.java &#x6587;&#x4EF6;"></a>&#x5728; com.marklogzhu.ssm.shiro&#x65B0;&#x5EFA; KickoutSessionControlFilter.java &#x6587;&#x4EF6;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">@Slf</span>4j</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">KickoutSessionControlFilter</span> <span class="keyword">extends</span> <span class="title">AccessControlFilter</span> </span>{</div><div class="line"></div><div class="line"></div><div class="line">	<span class="comment">// &#x8FD9;&#x91CC;&#x5148;&#x5199;&#x6B7B;&#xFF0C;&#x540E;&#x671F;&#x8C03;&#x6574;&#x5230;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x53BB;</span></div><div class="line">    <span class="keyword">private</span> String kickout = <span class="string">&quot;true&quot;</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> String kickoutUrl;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> kickoutAfter = <span class="keyword">false</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maxSession = <span class="number">1</span>;</div><div class="line">    <span class="keyword">private</span> Cache&lt;String, Deque&lt;Session&gt;&gt; cache;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setKickoutUrl</span><span class="params">(String kickoutUrl)</span> </span>{</div><div class="line">        <span class="keyword">this</span>.kickoutUrl = kickoutUrl;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setKickoutAfter</span><span class="params">(<span class="keyword">boolean</span> kickoutAfter)</span> </span>{</div><div class="line">        <span class="keyword">this</span>.kickoutAfter = kickoutAfter;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMaxSession</span><span class="params">(<span class="keyword">int</span> maxSession)</span> </span>{</div><div class="line">        <span class="keyword">this</span>.maxSession = maxSession;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCacheManager</span><span class="params">(CacheManager cacheManager)</span> </span>{</div><div class="line">        <span class="keyword">this</span>.cache = cacheManager.getCache(<span class="string">&quot;shiro-kickout-session&quot;</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">isAccessAllowed</span><span class="params">(ServletRequest request, ServletResponse response, Object mappedValue)</span> <span class="keyword">throws</span> Exception </span>{</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    }</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">onAccessDenied</span><span class="params">(ServletRequest request, ServletResponse response)</span> <span class="keyword">throws</span> Exception </span>{</div><div class="line">        <span class="comment">// &#x5982;&#x679C;&#x4E0D;&#x9700;&#x8981;&#x5355;&#x7528;&#x6237;&#x767B;&#x5F55;&#x7684;&#x9650;&#x5236;</span></div><div class="line">        <span class="keyword">if</span> (!<span class="string">&quot;true&quot;</span>.equals(kickout)) {</div><div class="line">            <span class="keyword">return</span> Boolean.TRUE;</div><div class="line">        }</div><div class="line">        Subject subject = getSubject(request, response);</div><div class="line">        <span class="comment">// &#x5982;&#x679C;&#x6CA1;&#x767B;&#x5F55;&#xFF0C;&#x76F4;&#x63A5;&#x8FDB;&#x884C;&#x4E4B;&#x540E;&#x7684;&#x6D41;&#x7A0B;</span></div><div class="line">        <span class="keyword">if</span> (!subject.isAuthenticated() &amp;&amp; !subject.isRemembered()) {</div><div class="line">            <span class="keyword">return</span> Boolean.TRUE;</div><div class="line">        }</div><div class="line">        Session session = subject.getSession();</div><div class="line">        Serializable sessionId = session.getId();</div><div class="line">		<span class="comment">// &#x53D6;&#x51FA;&#x767B;&#x9646;&#x65F6;&#x8BBE;&#x7F6E;&#x7684;&#x5C5E;&#x6027;</span></div><div class="line">        String usernameTenant = (String) session.getAttribute(<span class="string">&quot;loginName&quot;</span>);</div><div class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>.cache) {</div><div class="line">            <span class="keyword">if</span> (cache == <span class="keyword">null</span>) {</div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">&quot;cache &#x4E3A;&#x7A7A;&quot;</span>);</div><div class="line">            }</div><div class="line">            Deque&lt;Session&gt; deque = cache.get(usernameTenant);</div><div class="line">            <span class="keyword">if</span> (deque == <span class="keyword">null</span>) {</div><div class="line">                deque = <span class="keyword">new</span> LinkedList&lt;Session&gt;();</div><div class="line">                cache.put(usernameTenant, deque);</div><div class="line">            }</div><div class="line"></div><div class="line">            <span class="comment">// &#x5982;&#x679C;&#x961F;&#x5217;&#x91CC;&#x6CA1;&#x6709;&#x6B64; sessionId&#xFF0C;&#x4E14;&#x7528;&#x6237;&#x6CA1;&#x6709;&#x88AB;&#x8E22;&#x51FA;&#xFF1B;&#x653E;&#x5165;&#x961F;&#x5217;</span></div><div class="line">            <span class="keyword">boolean</span> whetherPutDeQue = <span class="keyword">true</span>;</div><div class="line">            <span class="keyword">if</span> (deque.isEmpty()) {</div><div class="line">                whetherPutDeQue = <span class="keyword">true</span>;</div><div class="line">            } <span class="keyword">else</span> {</div><div class="line">                <span class="keyword">for</span> (Session sessionInqueue : deque) {</div><div class="line">                    <span class="keyword">if</span> (sessionId.equals(sessionInqueue.getId())) {</div><div class="line">                        whetherPutDeQue = <span class="keyword">false</span>;</div><div class="line">                        <span class="keyword">break</span>;</div><div class="line">                    }</div><div class="line">                }</div><div class="line">            }</div><div class="line">            <span class="keyword">if</span> (whetherPutDeQue) {</div><div class="line">                deque.push(session);</div><div class="line">            }</div><div class="line">            log.debug(<span class="string">&quot;logged user:&quot;</span> + usernameTenant + <span class="string">&quot;, deque size = &quot;</span> + deque.size());</div><div class="line">            log.debug(<span class="string">&quot;deque = &quot;</span> + deque);</div><div class="line"></div><div class="line">            <span class="comment">//&#x5982;&#x679C;&#x961F;&#x5217;&#x91CC;&#x7684;sessionId&#x6570;&#x8D85;&#x51FA;&#x6700;&#x5927;&#x4F1A;&#x8BDD;&#x6570;&#xFF0C;&#x5F00;&#x59CB;&#x8E22;&#x4EBA;</span></div><div class="line">            <span class="keyword">while</span> (deque.size() &gt; maxSession) {</div><div class="line">                Session kickoutSession = <span class="keyword">null</span>;</div><div class="line">                <span class="keyword">if</span> (kickoutAfter) { <span class="comment">//&#x5982;&#x679C;&#x8E22;&#x51FA;&#x540E;&#x8005;</span></div><div class="line">                    kickoutSession = deque.removeFirst();</div><div class="line">                    log.debug(<span class="string">&quot;&#x8E22;&#x51FA;&#x540E;&#x767B;&#x5F55;&#x7684;&#xFF0C;&#x88AB;&#x8E22;&#x51FA;&#x7684;sessionId&#x4E3A;: &quot;</span> + kickoutSession.getId());</div><div class="line">                } <span class="keyword">else</span> { <span class="comment">//&#x5426;&#x5219;&#x8E22;&#x51FA;&#x524D;&#x8005;</span></div><div class="line">                    kickoutSession = deque.removeLast();</div><div class="line">                    log.debug(<span class="string">&quot;&#x8E22;&#x51FA;&#x5148;&#x767B;&#x5F55;&#x7684;&#xFF0C;&#x88AB;&#x8E22;&#x51FA;&#x7684;sessionId&#x4E3A;&#xFF1A; &quot;</span> + kickoutSession.getId());</div><div class="line">                }</div><div class="line">                <span class="keyword">if</span> (kickoutSession != <span class="keyword">null</span>) {</div><div class="line">                    kickoutSession.stop();</div><div class="line">                }</div><div class="line">            }</div><div class="line">        }</div><div class="line">        <span class="keyword">return</span> Boolean.TRUE;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="&#x5728;-resources-ehcache-&#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA;-ehcache-xml-&#x6587;&#x4EF6;"><a href="#&#x5728;-resources-ehcache-&#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA;-ehcache-xml-&#x6587;&#x4EF6;" class="headerlink" title="&#x5728; resources/ehcache &#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA; ehcache.xml &#x6587;&#x4EF6;"></a>&#x5728; resources/ehcache &#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA; ehcache.xml &#x6587;&#x4EF6;</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ehcache</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- &#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#xFF0C;&#x5F53;EhCache&#x628A;&#x6570;&#x636E;&#x5199;&#x5230;&#x786C;&#x76D8;&#x4E0A;&#x65F6;&#xFF0C;&#x5C06;&#x628A;&#x6570;&#x636E;&#x5199;&#x5230;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x76EE;&#x5F55;&#x4E0B; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">diskStore</span> <span class="attr">path</span>=<span class="string">&quot;java.io.tmpdir&quot;</span>/&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- &#x8BBE;&#x5B9A;&#x7F13;&#x5B58;&#x7684;&#x9ED8;&#x8BA4;&#x6570;&#x636E;&#x8FC7;&#x671F;&#x7B56;&#x7565; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">defaultCache</span></span></div><div class="line">            <span class="attr">maxElementsInMemory</span>=<span class="string">&quot;10000&quot;</span></div><div class="line">            <span class="attr">eternal</span>=<span class="string">&quot;false&quot;</span></div><div class="line">            <span class="attr">overflowToDisk</span>=<span class="string">&quot;true&quot;</span></div><div class="line">            <span class="attr">timeToIdleSeconds</span>=<span class="string">&quot;10&quot;</span></div><div class="line">            <span class="attr">timeToLiveSeconds</span>=<span class="string">&quot;20&quot;</span></div><div class="line">            <span class="attr">diskPersistent</span>=<span class="string">&quot;false&quot;</span></div><div class="line">            <span class="attr">diskExpiryThreadIntervalSeconds</span>=<span class="string">&quot;120&quot;</span>/&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">cache</span> <span class="attr">name</span>=<span class="string">&quot;shiro-kickout-session&quot;</span></span></div><div class="line">           <span class="attr">eternal</span>=<span class="string">&quot;false&quot;</span></div><div class="line">           <span class="attr">timeToIdleSeconds</span>=<span class="string">&quot;3600&quot;</span></div><div class="line">           <span class="attr">maxBytesLocalHeap</span>=<span class="string">&quot;500M&quot;</span></div><div class="line">           <span class="attr">timeToLiveSeconds</span>=<span class="string">&quot;0&quot;</span></div><div class="line">           <span class="attr">overflowToDisk</span>=<span class="string">&quot;false&quot;</span></div><div class="line">           <span class="attr">statistics</span>=<span class="string">&quot;true&quot;</span>&gt;</div><div class="line">    <span class="tag">&lt;/<span class="name">cache</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ehcache</span>&gt;</span></div><div class="line">``` </div><div class="line"></div><div class="line"></div><div class="line">### &#x5728; resources/spring &#x76EE;&#x5F55;&#x4E0B;&#x65B0;&#x5EFA; applicationContext-cache.xml &#x6587;&#x4EF6;</div><div class="line"></div><div class="line">``` xml</div><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></div><div class="line">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></div><div class="line">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--&lt;cache:annotation-driven cache-manager=&quot;cacheManager&quot; proxy-target-class=&quot;true&quot;/&gt;--&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;springCacheManager&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.cache.ehcache.EhCacheCacheManager&quot;</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;cacheManager&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;ehcacheManager&quot;</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!--ehcache--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;ehcacheManager&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.cache.ehcache.EhCacheManagerFactoryBean&quot;</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;configLocation&quot;</span> <span class="attr">value</span>=<span class="string">&quot;classpath:ehcache/ehcache.xml&quot;</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="&#x5728;-resources-spring-&#x76EE;&#x5F55;&#x4E0B;&#x7F16;&#x8F91;-applicationContext-shiro-xml"><a href="#&#x5728;-resources-spring-&#x76EE;&#x5F55;&#x4E0B;&#x7F16;&#x8F91;-applicationContext-shiro-xml" class="headerlink" title="&#x5728; resources/spring &#x76EE;&#x5F55;&#x4E0B;&#x7F16;&#x8F91; applicationContext-shiro.xml"></a>&#x5728; resources/spring &#x76EE;&#x5F55;&#x4E0B;&#x7F16;&#x8F91; <code>applicationContext-shiro.xml</code></h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></div><div class="line">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></div><div class="line">       <span class="attr">xmlns:aop</span>=<span class="string">&quot;http://www.springframework.org/schema/aop&quot;</span></div><div class="line">       <span class="attr">xmlns:tx</span>=<span class="string">&quot;http://www.springframework.org/schema/tx&quot;</span></div><div class="line">       <span class="attr">xmlns:jdbc</span>=<span class="string">&quot;http://www.springframework.org/schema/jdbc&quot;</span></div><div class="line">       <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></div><div class="line">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;</span></div><div class="line">     http://www.springframework.org/schema/context</div><div class="line">     http://www.springframework.org/schema/context/spring-context.xsd</div><div class="line">     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</div><div class="line">     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd</div><div class="line">     http://www.springframework.org/schema/aop</div><div class="line">     http://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;shiroFilter&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.marklogzhu.ssm.shiro.MyShiroFilterFactoryBean&quot;</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!--shiro &#x6838;&#x5FC3;&#x5B89;&#x5168;&#x63A5;&#x53E3;  --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;securityManager&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;securityManager&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!--&#x767B;&#x5F55;&#x65F6;&#x7684;&#x8FDE;&#x63A5;  --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;loginUrl&quot;</span> <span class="attr">value</span>=<span class="string">&quot;/login&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!--&#x672A;&#x6388;&#x6743;&#x65F6;&#x8DF3;&#x8F6C;&#x7684;&#x8FDE;&#x63A5;  --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;unauthorizedUrl&quot;</span> <span class="attr">value</span>=<span class="string">&quot;/unauthorized.jsp&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- &#x5176;&#x4ED6;&#x8FC7;&#x6EE4;&#x5668; --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;filters&quot;</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">map</span>&gt;</span></div><div class="line">                <span class="comment">&lt;!-- &lt;entry key=&quot;rememberMe&quot; value-ref=&quot;RememberMeFilter&quot;&gt;&lt;/entry&gt; --&gt;</span></div><div class="line">                <span class="comment">&lt;!--&#x5E76;&#x53D1;&#x63A7;&#x5236;&#x8FC7;&#x6EE4;&#x5668;--&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">&quot;kickout&quot;</span> <span class="attr">value-ref</span>=<span class="string">&quot;KickoutSessionControlFilter&quot;</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">map</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;filterChainDefinitions&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&quot;</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- Shiro&#x751F;&#x547D;&#x5468;&#x671F;&#x5904;&#x7406;&#x5668;--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;lifecycleBeanPostProcessor&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.spring.LifecycleBeanPostProcessor&quot;</span>/&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- &#x5B89;&#x5168;&#x7BA1;&#x7406;&#x5668; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;securityManager&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.web.mgt.DefaultWebSecurityManager&quot;</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;realm&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;MyRealm&quot;</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;rememberMeManager&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;rememberMeManager&quot;</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;cacheManager&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;cacheManager&quot;</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">&lt;!--&#x81EA;&#x5B9A;&#x4E49;&#x8EAB;&#x4EFD;&#x9A8C;&#x8BC1;&#x4E0E;&#x6388;&#x6743;--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;MyRealm&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.marklogzhu.ssm.shiro.MyRealm&quot;</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;cachingEnabled&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- rememberMe&#x7BA1;&#x7406;&#x5668; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;rememberMeManager&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.web.mgt.CookieRememberMeManager&quot;</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- rememberMe cookie&#x52A0;&#x5BC6;&#x7684;&#x5BC6;&#x94A5; &#x5EFA;&#x8BAE;&#x6BCF;&#x4E2A;&#x9879;&#x76EE;&#x90FD;&#x4E0D;&#x4E00;&#x6837; &#x9ED8;&#x8BA4;AES&#x7B97;&#x6CD5; &#x5BC6;&#x94A5;&#x957F;&#x5EA6;&#xFF08;128 256 512 &#x4F4D;&#xFF09;--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;cipherKey&quot;</span></span></div><div class="line">                  <span class="attr">value</span>=<span class="string">&quot;#{T(org.apache.shiro.codec.Base64).decode(&apos;3AvVhmFLUs0KTA3Kprsdag==&apos;)}&quot;</span>/&gt;</div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;cookie&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;rememberMeCookie&quot;</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- &#x7528;&#x6237;&#x4FE1;&#x606F;&#x8BB0;&#x4F4F;&#x6211;&#x529F;&#x80FD;&#x7684;&#x76F8;&#x5173;&#x914D;&#x7F6E; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;rememberMeCookie&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.web.servlet.SimpleCookie&quot;</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">&quot;rememberMe&quot;</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;httpOnly&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></div><div class="line">        <span class="comment">&lt;!-- &#x914D;&#x7F6E;&#x5B58;&#x50A8;rememberMe Cookie&#x7684;domain&#x4E3A; &#x4E00;&#x7EA7;&#x57DF;&#x540D;        &#x8FD9;&#x91CC;&#x5982;&#x679C;&#x914D;&#x7F6E;&#x9700;&#x8981;&#x548C;Session&#x56DE;&#x8BDD;&#x4E00;&#x81F4;&#x66F4;&#x597D;&#x3002;--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;maxAge&quot;</span> <span class="attr">value</span>=<span class="string">&quot;604800&quot;</span>/&gt;</span><span class="comment">&lt;!-- &#x8BB0;&#x4F4F;&#x6211;==&#x4FDD;&#x7559;Cookie&#x6709;&#x6548;7&#x5929; --&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- &#x76F8;&#x5F53;&#x4E8E;&#x8C03;&#x7528;SecurityUtils.setSecurityManager(securityManager) --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.beans.factory.config.MethodInvokingFactoryBean&quot;</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;staticMethod&quot;</span> <span class="attr">value</span>=<span class="string">&quot;org.apache.shiro.SecurityUtils.setSecurityManager&quot;</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;arguments&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;securityManager&quot;</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- sessionIdCookie&#xFF1A;maxAge=-1&#x8868;&#x793A;&#x6D4F;&#x89C8;&#x5668;&#x5173;&#x95ED;&#x65F6;&#x5931;&#x6548;&#x6B64;Cookie --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;sessionIdCookie&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.web.servlet.SimpleCookie&quot;</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">&quot;rememberMe&quot;</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;httpOnly&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;maxAge&quot;</span> <span class="attr">value</span>=<span class="string">&quot;-1&quot;</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">&lt;!--&#x5E76;&#x53D1;&#x767B;&#x5F55;&#x63A7;&#x5236;--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;KickoutSessionControlFilter&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.marklogzhu.ssm.shiro.KickoutSessionControlFilter&quot;</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!--&#x7F13;&#x5B58;&#x7BA1;&#x7406;&#x5668;--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;cacheManager&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;cacheManager&quot;</span>/&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!--&#x662F;&#x5426;&#x8E22;&#x51FA;&#x540E;&#x6765;&#x767B;&#x5F55;&#x7684;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;false&#xFF0C;&#x5373;&#x540E;&#x6765;&#x767B;&#x5F55;&#x7684;&#x8E22;&#x51FA;&#x524D;&#x8005;&#x3002;--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;kickoutAfter&quot;</span> <span class="attr">value</span>=<span class="string">&quot;false&quot;</span>/&gt;</span></div><div class="line">        <span class="comment">&lt;!--&#x540C;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x7684;&#x6700;&#x5927;&#x4F1A;&#x8BDD;&#x6570;&#xFF0C;&#x9ED8;&#x8BA4;1&#xFF0C;&#x8868;&#x793A;&#x540C;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x6700;&#x591A;&#x540C;&#x65F6;&#x4E00;&#x4E2A;&#x4EBA;&#x767B;&#x5F55;&#x3002;--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;maxSession&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span>/&gt;</span></div><div class="line">        <span class="comment">&lt;!--&#x88AB;&#x8E22;&#x51FA;&#x540E;&#x91CD;&#x5B9A;&#x5411;&#x7684;&#x5730;&#x5740;--&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;kickoutUrl&quot;</span> <span class="attr">value</span>=<span class="string">&quot;/user/login.page&quot;</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;cacheManager&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.marklogzhu.ssm.shiro.SpringCacheManagerWrapper&quot;</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;cacheManager&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;springCacheManager&quot;</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="&#x542F;&#x52A8;&#x9879;&#x76EE;&#x5E76;&#x8FD0;&#x884C;"><a href="#&#x542F;&#x52A8;&#x9879;&#x76EE;&#x5E76;&#x8FD0;&#x884C;" class="headerlink" title="&#x542F;&#x52A8;&#x9879;&#x76EE;&#x5E76;&#x8FD0;&#x884C;"></a>&#x542F;&#x52A8;&#x9879;&#x76EE;&#x5E76;&#x8FD0;&#x884C;</h3><p>&#x5206;&#x522B;&#x5728;&#x4E24;&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#x8BBF;&#x95EE; <code>http://localhost:8080/test/login?userName=&#x5F20;&#x4E09;&amp;password=123456</code> &#xFF0C;&#x89C2;&#x5BDF;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x51FA;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2018-05-23 14:48:37.008 [http-bio-8080-exec-7] DEBUG c.marklogzhu.ssm.shiro.KickoutSessionControlFilter - &#x8E22;&#x51FA;&#x5148;&#x767B;&#x5F55;&#x7684;&#xFF0C;&#x88AB;&#x8E22;&#x51FA;&#x7684;sessionId&#x4E3A;&#xFF1A; E7E6362159C529C152C1CECEE3D61AB6</div></pre></td></tr></table></figure>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5148;&#x767B;&#x9646;&#x7684;&#x88AB;&#x8E22;&#x51FA;&#x4E86;&#xFF01;</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/Shiro/后台/Java/Shiro/Shiro学习总结(五)--Shiro动态加载权限/" class="next-post btn btn-default" title='Shiro学习总结(五)--Shiro动态加载权限'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Shiro学习总结(五)--Shiro动态加载权限</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/"><i class="fa" aria-hidden="true">tomcat</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">39</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/C/" style="font-size: 11px;">C#</a> <a href="/tags/CSS/" style="font-size: 12px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 11px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 17px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 13px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 18px;">MyBatis</a> <a href="/tags/Nginx/" style="font-size: 16px;">Nginx</a> <a href="/tags/Quartz/" style="font-size: 13px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 12px;">RabbitMQ</a> <a href="/tags/SQL/" style="font-size: 16px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 11px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 19px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 17px;">SpringMVC</a> <a href="/tags/Velocity/" style="font-size: 17px;">Velocity</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tomcat/" style="font-size: 14px;">tomcat</a> <a href="/tags/tool/" style="font-size: 11px;">tool</a> <a href="/tags/前端/" style="font-size: 11px;">前端</a> <a href="/tags/前端基础/" style="font-size: 14px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 13px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

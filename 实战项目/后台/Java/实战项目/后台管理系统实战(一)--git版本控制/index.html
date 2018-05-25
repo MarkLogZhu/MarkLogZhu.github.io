@@ -1,0 +1,409 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>后台管理系统实战(一)--git版本控制 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="后台管理系统实战(一)--git版本控制">
+            
+	            后台管理系统实战(一)--git版本控制
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/实战项目">
+            实战项目
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/SSM" title='SSM'>
+                        SSM
+                    </a>
+                
+                    <a href="/tags/Shiro" title='Shiro'>
+                        Shiro
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/05/25</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <blockquote>
+<p>&#x672C;&#x6587;&#x9ED8;&#x8BA4;&#x8BFB;&#x8005;&#x5DF2;&#x6709; github &#x8D26;&#x53F7;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x7684;&#x8BDD;&#x8BF7;&#x5148;&#x6CE8;&#x518C;,&#x5E76;&#x4E14;&#x5DF2;&#x5B89;&#x88C5; git &#x73AF;&#x5883;&#x3002;</p>
+</blockquote>
+<p>&#x9700;&#x8981; git &#x7BA1;&#x7406;&#x7684;&#x8BDD;&#xFF0C;&#x5FC5;&#x987B;&#x8981;&#x5148;&#x6709;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x53C2;&#x7167; <a href="https://blog.marklogzhu.com/Maven/Maven/Maven%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93(4)--%E6%9E%84%E5%BB%BAweb%E9%A1%B9%E7%9B%AE/" target="_blank" rel="external">Maven&#x5B66;&#x4E60;&#x603B;&#x7ED3;(4)&#x2013;&#x6784;&#x5EFA;web&#x9879;&#x76EE;</a> &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#x3002;</p>
+<a id="more"></a> 
+<h2 id="github-&#x65B0;&#x5EFA;&#x4ED3;&#x5E93;"><a href="#github-&#x65B0;&#x5EFA;&#x4ED3;&#x5E93;" class="headerlink" title="github &#x65B0;&#x5EFA;&#x4ED3;&#x5E93;"></a>github &#x65B0;&#x5EFA;&#x4ED3;&#x5E93;</h2><h3 id="&#x65B0;&#x5EFA;&#x4ED3;&#x5E93;"><a href="#&#x65B0;&#x5EFA;&#x4ED3;&#x5E93;" class="headerlink" title="&#x65B0;&#x5EFA;&#x4ED3;&#x5E93;"></a>&#x65B0;&#x5EFA;&#x4ED3;&#x5E93;</h3><p><img src="/&#x5B9E;&#x6218;&#x9879;&#x76EE;/&#x540E;&#x53F0;/Java/&#x5B9E;&#x6218;&#x9879;&#x76EE;/&#x540E;&#x53F0;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#x5B9E;&#x6218;(&#x4E00;)--git&#x7248;&#x672C;&#x63A7;&#x5236;/img/01.png" alt=""></p>
+<h3 id="&#x586B;&#x5199;&#x4ED3;&#x5E93;&#x4FE1;&#x606F;"><a href="#&#x586B;&#x5199;&#x4ED3;&#x5E93;&#x4FE1;&#x606F;" class="headerlink" title="&#x586B;&#x5199;&#x4ED3;&#x5E93;&#x4FE1;&#x606F;"></a>&#x586B;&#x5199;&#x4ED3;&#x5E93;&#x4FE1;&#x606F;</h3><p><img src="/&#x5B9E;&#x6218;&#x9879;&#x76EE;/&#x540E;&#x53F0;/Java/&#x5B9E;&#x6218;&#x9879;&#x76EE;/&#x540E;&#x53F0;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#x5B9E;&#x6218;(&#x4E00;)--git&#x7248;&#x672C;&#x63A7;&#x5236;/img/02.png" alt=""></p>
+<p>&#x8FD9;&#x6837;&#x5C31;&#x751F;&#x6210;&#x4E86;&#x4E00;&#x4E2A;&#x4ED3;&#x5E93;&#x4E86;&#x3002;</p>
+<h2 id="&#x751F;&#x6210;-SSH"><a href="#&#x751F;&#x6210;-SSH" class="headerlink" title="&#x751F;&#x6210; SSH"></a>&#x751F;&#x6210; SSH</h2><h3 id="&#x8FDB;&#x5165;&#x672C;&#x5730;&#x9879;&#x76EE;&#x76EE;&#x5F55;&#xFF0C;&#x53F3;&#x952E;&#x9009;&#x62E9;-git-bash-here"><a href="#&#x8FDB;&#x5165;&#x672C;&#x5730;&#x9879;&#x76EE;&#x76EE;&#x5F55;&#xFF0C;&#x53F3;&#x952E;&#x9009;&#x62E9;-git-bash-here" class="headerlink" title="&#x8FDB;&#x5165;&#x672C;&#x5730;&#x9879;&#x76EE;&#x76EE;&#x5F55;&#xFF0C;&#x53F3;&#x952E;&#x9009;&#x62E9; git bash here"></a>&#x8FDB;&#x5165;&#x672C;&#x5730;&#x9879;&#x76EE;&#x76EE;&#x5F55;&#xFF0C;&#x53F3;&#x952E;&#x9009;&#x62E9; git bash here</h3><p><img src="/&#x5B9E;&#x6218;&#x9879;&#x76EE;/&#x540E;&#x53F0;/Java/&#x5B9E;&#x6218;&#x9879;&#x76EE;/&#x540E;&#x53F0;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#x5B9E;&#x6218;(&#x4E00;)--git&#x7248;&#x672C;&#x63A7;&#x5236;/img/03.png" alt=""></p>
+<h3 id="&#x751F;&#x6210;-SSH-&#x5BC6;&#x94A5;-&#x5982;&#x679C;&#x5DF2;&#x7ECF;&#x751F;&#x6210;&#x53EF;&#x4EE5;&#x8DF3;&#x8FC7;"><a href="#&#x751F;&#x6210;-SSH-&#x5BC6;&#x94A5;-&#x5982;&#x679C;&#x5DF2;&#x7ECF;&#x751F;&#x6210;&#x53EF;&#x4EE5;&#x8DF3;&#x8FC7;" class="headerlink" title="&#x751F;&#x6210; SSH &#x5BC6;&#x94A5; (&#x5982;&#x679C;&#x5DF2;&#x7ECF;&#x751F;&#x6210;&#x53EF;&#x4EE5;&#x8DF3;&#x8FC7;)"></a>&#x751F;&#x6210; SSH &#x5BC6;&#x94A5; (&#x5982;&#x679C;&#x5DF2;&#x7ECF;&#x751F;&#x6210;&#x53EF;&#x4EE5;&#x8DF3;&#x8FC7;)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C &quot;&#x81EA;&#x5DF1;&#x7684;&#x90AE;&#x7BB1;&quot;</div></pre></td></tr></table></figure>
+<p><img src="/&#x5B9E;&#x6218;&#x9879;&#x76EE;/&#x540E;&#x53F0;/Java/&#x5B9E;&#x6218;&#x9879;&#x76EE;/&#x540E;&#x53F0;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#x5B9E;&#x6218;(&#x4E00;)--git&#x7248;&#x672C;&#x63A7;&#x5236;/img/04.png" alt=""></p>
+<p>&#x7136;&#x540E;&#x4E00;&#x76F4;&#x56DE;&#x8F66;&#x5373;&#x53EF;&#xFF0C;&#x4F1A;&#x5728; c:\users\&#x7528;&#x6237;&#x540D;.ssh &#x76EE;&#x5F55;&#x4E0B;&#x751F;&#x6210;&#x4E24;&#x4E2A;&#x6587;&#x4EF6;: id_rsa &#x548C; id_rsa.pub</p>
+<h2 id="&#x914D;&#x7F6E;-github-ssh"><a href="#&#x914D;&#x7F6E;-github-ssh" class="headerlink" title="&#x914D;&#x7F6E; github ssh"></a>&#x914D;&#x7F6E; github ssh</h2><h3 id="&#x6253;&#x5F00;-github-&#x8BBE;&#x7F6E;"><a href="#&#x6253;&#x5F00;-github-&#x8BBE;&#x7F6E;" class="headerlink" title="&#x6253;&#x5F00; github &#x8BBE;&#x7F6E;"></a>&#x6253;&#x5F00; github &#x8BBE;&#x7F6E;</h3><p><img src="/&#x5B9E;&#x6218;&#x9879;&#x76EE;/&#x540E;&#x53F0;/Java/&#x5B9E;&#x6218;&#x9879;&#x76EE;/&#x540E;&#x53F0;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#x5B9E;&#x6218;(&#x4E00;)--git&#x7248;&#x672C;&#x63A7;&#x5236;/img/05.png" alt=""></p>
+<h3 id="&#x9009;&#x62E9;-SHH-and-GPG-keys-&#x9879;&#x5E76;&#x70B9;&#x51FB;-News-SSH-key-&#x6309;&#x94AE;"><a href="#&#x9009;&#x62E9;-SHH-and-GPG-keys-&#x9879;&#x5E76;&#x70B9;&#x51FB;-News-SSH-key-&#x6309;&#x94AE;" class="headerlink" title="&#x9009;&#x62E9; SHH and GPG keys &#x9879;&#x5E76;&#x70B9;&#x51FB; News SSH key &#x6309;&#x94AE;"></a>&#x9009;&#x62E9; SHH and GPG keys &#x9879;&#x5E76;&#x70B9;&#x51FB; News SSH key &#x6309;&#x94AE;</h3><p><img src="/&#x5B9E;&#x6218;&#x9879;&#x76EE;/&#x540E;&#x53F0;/Java/&#x5B9E;&#x6218;&#x9879;&#x76EE;/&#x540E;&#x53F0;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#x5B9E;&#x6218;(&#x4E00;)--git&#x7248;&#x672C;&#x63A7;&#x5236;/img/06.png" alt=""></p>
+<h3 id="&#x5C06;&#x4E4B;&#x524D;&#x751F;&#x6210;&#x7684;-id-rsa-pub-&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x4FE1;&#x606F;&#x590D;&#x5236;&#x5230;-kye&#x4E2D;&#xFF0C;&#x70B9;&#x51FB;-Add-SSH-key-&#x6309;&#x94AE;"><a href="#&#x5C06;&#x4E4B;&#x524D;&#x751F;&#x6210;&#x7684;-id-rsa-pub-&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x4FE1;&#x606F;&#x590D;&#x5236;&#x5230;-kye&#x4E2D;&#xFF0C;&#x70B9;&#x51FB;-Add-SSH-key-&#x6309;&#x94AE;" class="headerlink" title="&#x5C06;&#x4E4B;&#x524D;&#x751F;&#x6210;&#x7684; id_rsa.pub &#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x4FE1;&#x606F;&#x590D;&#x5236;&#x5230; kye&#x4E2D;&#xFF0C;&#x70B9;&#x51FB; Add SSH key &#x6309;&#x94AE;"></a>&#x5C06;&#x4E4B;&#x524D;&#x751F;&#x6210;&#x7684; id_rsa.pub &#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x4FE1;&#x606F;&#x590D;&#x5236;&#x5230; kye&#x4E2D;&#xFF0C;&#x70B9;&#x51FB; Add SSH key &#x6309;&#x94AE;</h3><p><img src="/&#x5B9E;&#x6218;&#x9879;&#x76EE;/&#x540E;&#x53F0;/Java/&#x5B9E;&#x6218;&#x9879;&#x76EE;/&#x540E;&#x53F0;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#x5B9E;&#x6218;(&#x4E00;)--git&#x7248;&#x672C;&#x63A7;&#x5236;/img/07.png" alt=""></p>
+<h3 id="&#x9A8C;&#x8BC1;&#x662F;&#x5426;&#x6210;&#x529F;&#xFF0C;&#x5728;-git-bash&#x4E0B;&#x8F93;&#x5165;"><a href="#&#x9A8C;&#x8BC1;&#x662F;&#x5426;&#x6210;&#x529F;&#xFF0C;&#x5728;-git-bash&#x4E0B;&#x8F93;&#x5165;" class="headerlink" title="&#x9A8C;&#x8BC1;&#x662F;&#x5426;&#x6210;&#x529F;&#xFF0C;&#x5728; git bash&#x4E0B;&#x8F93;&#x5165;"></a>&#x9A8C;&#x8BC1;&#x662F;&#x5426;&#x6210;&#x529F;&#xFF0C;&#x5728; git bash&#x4E0B;&#x8F93;&#x5165;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh -T git@github.com</div></pre></td></tr></table></figure>
+<p>&#x8FD4;&#x56DE;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">The authenticity of host &apos;github.com (x.x.x.x)&apos; can&apos;t be established.</div><div class="line">RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.</div><div class="line">Are you sure you want to continue connecting (yes/no)?</div></pre></td></tr></table></figure></p>
+<p>&#x8F93;&#x5165; yes &#x540E;&#x8FD4;&#x56DE;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hi MarkLogZhu! You&apos;ve successfully authenticated, but GitHub does not provide shell access.</div></pre></td></tr></table></figure></p>
+<p>&#x8FD9;&#x4EE3;&#x8868;&#x914D;&#x7F6E;&#x6210;&#x529F;&#x4E86;&#x3002;</p>
+<h2 id="&#x6DFB;&#x52A0;&#x4EE3;&#x7801;&#x5230;-github"><a href="#&#x6DFB;&#x52A0;&#x4EE3;&#x7801;&#x5230;-github" class="headerlink" title="&#x6DFB;&#x52A0;&#x4EE3;&#x7801;&#x5230; github"></a>&#x6DFB;&#x52A0;&#x4EE3;&#x7801;&#x5230; github</h2><h3 id="&#x786E;&#x8BA4;&#x7528;&#x6237;&#x540D;&#x8DDF;&#x90AE;&#x7BB1;&#x662F;&#x5426;&#x8BBE;&#x7F6E;"><a href="#&#x786E;&#x8BA4;&#x7528;&#x6237;&#x540D;&#x8DDF;&#x90AE;&#x7BB1;&#x662F;&#x5426;&#x8BBE;&#x7F6E;" class="headerlink" title="&#x786E;&#x8BA4;&#x7528;&#x6237;&#x540D;&#x8DDF;&#x90AE;&#x7BB1;&#x662F;&#x5426;&#x8BBE;&#x7F6E;"></a>&#x786E;&#x8BA4;&#x7528;&#x6237;&#x540D;&#x8DDF;&#x90AE;&#x7BB1;&#x662F;&#x5426;&#x8BBE;&#x7F6E;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config user.name</div><div class="line">git config user.email</div></pre></td></tr></table></figure>
+<h3 id="&#x5982;&#x679C;&#x6CA1;&#x6709;&#x8FD4;&#x56DE;&#x503C;&#x7684;&#x8BDD;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x5148;&#x8BBE;&#x7F6E;"><a href="#&#x5982;&#x679C;&#x6CA1;&#x6709;&#x8FD4;&#x56DE;&#x503C;&#x7684;&#x8BDD;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x5148;&#x8BBE;&#x7F6E;" class="headerlink" title="&#x5982;&#x679C;&#x6CA1;&#x6709;&#x8FD4;&#x56DE;&#x503C;&#x7684;&#x8BDD;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x5148;&#x8BBE;&#x7F6E;"></a>&#x5982;&#x679C;&#x6CA1;&#x6709;&#x8FD4;&#x56DE;&#x503C;&#x7684;&#x8BDD;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x5148;&#x8BBE;&#x7F6E;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config user.name &quot;&#x7528;&#x6237;&#x540D;&quot;</div><div class="line">git config user.email &quot;&#x90AE;&#x7BB1;&quot;</div></pre></td></tr></table></figure>
+<h3 id="&#x521D;&#x59CB;&#x5316;&#x4ED3;&#x5E93;"><a href="#&#x521D;&#x59CB;&#x5316;&#x4ED3;&#x5E93;" class="headerlink" title="&#x521D;&#x59CB;&#x5316;&#x4ED3;&#x5E93;"></a>&#x521D;&#x59CB;&#x5316;&#x4ED3;&#x5E93;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init</div></pre></td></tr></table></figure>
+<h3 id="&#x6DFB;&#x52A0;&#x8FDC;&#x7A0B;&#x5730;&#x5740;"><a href="#&#x6DFB;&#x52A0;&#x8FDC;&#x7A0B;&#x5730;&#x5740;" class="headerlink" title="&#x6DFB;&#x52A0;&#x8FDC;&#x7A0B;&#x5730;&#x5740;"></a>&#x6DFB;&#x52A0;&#x8FDC;&#x7A0B;&#x5730;&#x5740;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote add origin git@github.com:yourName/yourRepo.git</div></pre></td></tr></table></figure>
+<p>&#x540E;&#x9762;&#x7684;yourName&#x548C;yourRepo&#x8868;&#x793A;&#x4F60;&#x518D; github &#x7684;&#x7528;&#x6237;&#x540D;&#x548C;&#x521A;&#x624D;&#x65B0;&#x5EFA;&#x7684;&#x4ED3;&#x5E93;&#xFF0C;&#x52A0;&#x5B8C;&#x4E4B;&#x540E;&#x8FDB;&#x5165; .git &#x76EE;&#x5F55;&#xFF0C;&#x6253;&#x5F00; config &#x6587;&#x4EF6;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x591A;&#x4E86;&#x4E00;&#x4E2A; remote &#x201C;origin&#x201D; &#x5185;&#x5BB9;&#xFF0C;&#x8FD9;&#x5C31;&#x662F;&#x521A;&#x624D;&#x6DFB;&#x52A0;&#x7684;&#x8FDC;&#x7A0B;&#x5730;&#x5740;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4FEE;&#x6539; config &#x6765;&#x914D;&#x7F6E;&#x8FDC;&#x7A0B;&#x5730;&#x5740;&#x3002;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">git remote add origin git@github.com:MarkLogZhu/platform</div><div class="line">``` </div><div class="line">&#x4E0E; github &#x4E0A;&#x7684;&#x4ED3;&#x5E93;&#x540D;&#x5BF9;&#x5E94;&#x3002;</div><div class="line"> </div><div class="line">![](/img/09.png)</div><div class="line"></div><div class="line">### &#x6392;&#x9664;&#x6587;&#x4EF6;</div><div class="line"></div><div class="line">&#x9879;&#x76EE;&#x5B58;&#x5728; .idea &#x548C; target &#x76EE;&#x5F55;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;idea &#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;&#x542F;&#x52A8;&#x751F;&#x6210;&#x7684;&#x90FD;&#x4E0D;&#x9700;&#x8981;&#x6DFB;&#x52A0;&#x5230; git &#x4E2D;&#x53D6;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5C06;&#x5B83;&#x4EEC;&#x6392;&#x9664;&#x51FA;&#x53BB;&#x3002;&#x901A;&#x8FC7;&#x5728; .gitignore &#x6587;&#x4EF6;&#x4E2D;&#x914D;&#x7F6E;&#x5373;&#x53EF;&#x3002;</div><div class="line"></div><div class="line">### &#x65B0;&#x5EFA; .gitignore &#x6587;&#x4EF6;</div><div class="line"></div><div class="line">&gt; &#x5728; Windows &#x4E2D;&#x65E0;&#x6CD5;&#x65B0;&#x5EFA; .gitignore &#xFF0C;&#x4F1A;&#x51FA;&#x73B0;&#x8FD9;&#x6837;&#x7684;&#x9519;&#x8BEF;&#x63D0;&#x793A;&#x201C;&#x5FC5;&#x987B;&#x952E;&#x5165;&#x6587;&#x4EF6;&#x540D;&#x201D;&#x3002;</div><div class="line"></div><div class="line">* &#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5148;&#x5EFA;&#x7ACB;&#x4E00;&#x4E2A; gitignore.txt &#x6587;&#x4EF6;</div><div class="line">* &#x7136;&#x540E;&#x901A;&#x8FC7;cmd &#x6267;&#x884C;&#x5982;&#x4E0B;&#x547D;&#x4EE4;:</div><div class="line"></div><div class="line">``` cmd</div><div class="line">ren gitignore.txt .gitignore</div></pre></td></tr></table></figure>
+<h3 id="&#x914D;&#x7F6E;-gitignore-&#x6587;&#x4EF6;"><a href="#&#x914D;&#x7F6E;-gitignore-&#x6587;&#x4EF6;" class="headerlink" title="&#x914D;&#x7F6E; .gitignore &#x6587;&#x4EF6;"></a>&#x914D;&#x7F6E; .gitignore &#x6587;&#x4EF6;</h3><p>&#x4ECE; github &#x4ED3;&#x5E93;&#x4E2D;&#x7684; .gitignore &#x62F7;&#x8D1D;&#x9ED8;&#x8BA4;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x7136;&#x540E;&#x8FFD;&#x52A0;&#x672C;&#x6B21;&#x8981;&#x6392;&#x9664;&#x7684;&#x6587;&#x4EF6;</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"># Compiled class file</div><div class="line">*.class</div><div class="line"></div><div class="line"># Log file</div><div class="line">*.log</div><div class="line"></div><div class="line"># BlueJ files</div><div class="line">*.ctxt</div><div class="line"></div><div class="line"># Mobile Tools for Java (J2ME)</div><div class="line">.mtj.tmp/</div><div class="line"></div><div class="line"># Package Files #</div><div class="line">*.jar</div><div class="line">*.war</div><div class="line">*.nar</div><div class="line">*.ear</div><div class="line">*.zip</div><div class="line">*.tar.gz</div><div class="line">*.rar</div><div class="line"></div><div class="line"># virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml</div><div class="line">hs_err_pid*</div><div class="line"></div><div class="line">/.idea</div><div class="line">/target</div><div class="line">platform.iml</div></pre></td></tr></table></figure>
+<h3 id="&#x5C06;&#x9879;&#x76EE;&#x7684;&#x6240;&#x6709;&#x6587;&#x4EF6;&#x6DFB;&#x52A0;&#x5230;&#x4ED3;&#x5E93;&#x4E2D;"><a href="#&#x5C06;&#x9879;&#x76EE;&#x7684;&#x6240;&#x6709;&#x6587;&#x4EF6;&#x6DFB;&#x52A0;&#x5230;&#x4ED3;&#x5E93;&#x4E2D;" class="headerlink" title="&#x5C06;&#x9879;&#x76EE;&#x7684;&#x6240;&#x6709;&#x6587;&#x4EF6;&#x6DFB;&#x52A0;&#x5230;&#x4ED3;&#x5E93;&#x4E2D;"></a>&#x5C06;&#x9879;&#x76EE;&#x7684;&#x6240;&#x6709;&#x6587;&#x4EF6;&#x6DFB;&#x52A0;&#x5230;&#x4ED3;&#x5E93;&#x4E2D;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git add .</div></pre></td></tr></table></figure>
+<h3 id="&#x5C06;-add-&#x7684;&#x6587;&#x4EF6;-commit-&#x5230;&#x4ED3;&#x5E93;"><a href="#&#x5C06;-add-&#x7684;&#x6587;&#x4EF6;-commit-&#x5230;&#x4ED3;&#x5E93;" class="headerlink" title="&#x5C06; add &#x7684;&#x6587;&#x4EF6; commit &#x5230;&#x4ED3;&#x5E93;"></a>&#x5C06; add &#x7684;&#x6587;&#x4EF6; commit &#x5230;&#x4ED3;&#x5E93;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit -m &quot;&#x6CE8;&#x91CA;&#x8BED;&#x53E5;&quot;</div></pre></td></tr></table></figure>
+<h3 id="&#x63D0;&#x4EA4;&#x5230;-github"><a href="#&#x63D0;&#x4EA4;&#x5230;-github" class="headerlink" title="&#x63D0;&#x4EA4;&#x5230; github"></a>&#x63D0;&#x4EA4;&#x5230; github</h3><p>&#x7B2C;&#x4E00;&#x6B21;&#x63D0;&#x4EA4;&#xFF0C;&#x56E0;&#x4E3A;&#x4E0D;&#x662F;&#x4ECE; github &#x514B;&#x9686;&#x4E0B;&#x6765;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x4F1A;&#x51FA;&#x73B0;&#x7248;&#x672C;&#x4E0D;&#x4E00;&#x81F4;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x9700;&#x8981;&#x5F3A;&#x5236;&#x63D0;&#x4EA4;&#x3002;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push -u origin master -f</div></pre></td></tr></table></figure>
+<p>&#x4E4B;&#x540E;&#x7684;&#x63D0;&#x4EA4;&#x4E0D;&#x5EFA;&#x8BAE;&#x5F3A;&#x5236;&#x63D0;&#x4EA4;&#xFF0C;&#x4F7F;&#x7528;&#x5982;&#x4E0B;&#x547D;&#x4EE4;&#x63D0;&#x4EA4;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure>
+<p><img src="/&#x5B9E;&#x6218;&#x9879;&#x76EE;/&#x540E;&#x53F0;/Java/&#x5B9E;&#x6218;&#x9879;&#x76EE;/&#x540E;&#x53F0;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#x5B9E;&#x6218;(&#x4E00;)--git&#x7248;&#x672C;&#x63A7;&#x5236;/img/10.png" alt=""></p>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5DF2;&#x7ECF;&#x63D0;&#x4EA4;&#x6210;&#x529F;&#x4E86;&#x3002;</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/uncategorized/后台/Java/实战项目/后台管理系统实战(二)--SSM框架搭建/" class="pre-post btn btn-default" title=''>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs"></span>
+        </a>
+    
+    
+        <a href="/Maven/Maven/Maven学习总结(4)--构建web项目/" class="next-post btn btn-default" title='Maven学习总结(4)--构建web项目'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Maven学习总结(4)--构建web项目</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tomcat/"><i class="fa" aria-hidden="true">tomcat</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">42</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">22</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/C/" style="font-size: 11px;">C#</a> <a href="/tags/CSS/" style="font-size: 12px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 11px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 17px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 13px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 13px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 18px;">MyBatis</a> <a href="/tags/Nginx/" style="font-size: 16px;">Nginx</a> <a href="/tags/Quartz/" style="font-size: 13px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 12px;">RabbitMQ</a> <a href="/tags/SQL/" style="font-size: 16px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 11px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 19px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 16px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 17px;">SpringMVC</a> <a href="/tags/Velocity/" style="font-size: 17px;">Velocity</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tomcat/" style="font-size: 14px;">tomcat</a> <a href="/tags/tool/" style="font-size: 11px;">tool</a> <a href="/tags/前端/" style="font-size: 11px;">前端</a> <a href="/tags/前端基础/" style="font-size: 14px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 13px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

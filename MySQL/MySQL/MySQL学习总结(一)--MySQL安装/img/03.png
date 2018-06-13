@@ -1,0 +1,66 @@
+---
+layout: post
+title: "MySQL学习总结(一)--MySQL安装"
+date: 2018-06-12 13:44
+comments: true
+categories: MySQL
+tags:
+	- MySQL
+---
+
+## MySQL 简介 
+
+ MySQL 是一个关系型数据库管理系统，由瑞典 MySQL AB 公司开发，目前属于 Oracle 公司。MySQL 是一种关联数据库管理系统，关联数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。 
+* MySQL 是开源的，所以你不需要支付额外的费用。
+* MySQL 支持大型的数据库。可以处理拥有上千万条记录的大型数据库。
+* MySQL 使用标准的SQL数据语言形式。
+* MySQL 可以运行于多个系统上，并且支持多种语言。这些编程语言包括C、C++、Python、Java、Perl、PHP、Eiffel、Ruby和Tcl等。
+* MySQL 对PHP有很好的支持，PHP是目前最流行的Web开发语言。
+* MySQL 支持大型数据库，支持5000万条记录的数据仓库，32位系统表文件最大可支持4GB，64位系统支持最大的表文件为8TB。
+* MySQL 是可以定制的，采用了GPL协议，你可以修改源码来开发自己的 MySQL 系统。
+
+<!-- more --> 
+
+
+## Windows 环境下安装
+
+### 1) 前往 [官网](https://dev.mysql.com/downloads/mysql) 下载指定版本安装包
+
+![](/img/01.png)
+
+### 2) 下载完毕后解压，一直点击下一步安装即可
+
+![](/img/02.png)
+
+### 3) 以管理员身份运行 CMD，并进入 MySQL 安装目录
+
+![](/img/03.png)
+
+### 4) 输入 `net strat mysql` 启动服务（`net stop mysql` 为关闭服务）
+
+![](/img/04.png)
+
+### 5) 安装/移除服务
+``` cmd 
+安装：mysqld --install [服务名]
+移除：mysqld --remove [服务名] 
+```
+[服务名]为可选参数，默认不填写则为 MySQL
+
+
+## Linux 环境下安装
+
+
+
+## 登录 MySQL
+
+### 输入 `mysqladmin -u root password 密码` 设置密码（初次登陆没有密码需要先设置）
+
+### 输入 `mysql -u root -p` 回车，然后输入密码
+
+![](/img/05.png)
+
+
+## 常用图形化管理工具推荐
+
+目前我们是通过命令行的形式进行数据库的操作，实际开发中当然不会单单通过命令行的形式操作，目前笔者使用的是 `NavicatPremium` 图形化界面管理工具。

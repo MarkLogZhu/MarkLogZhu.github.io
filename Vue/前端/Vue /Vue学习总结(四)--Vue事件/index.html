@@ -1,0 +1,418 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Vue学习总结(四)--Vue事件 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Vue学习总结(四)--Vue事件">
+            
+	            Vue学习总结(四)--Vue事件
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Vue">
+            Vue
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Vue" title='Vue'>
+                        Vue
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/07/09</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>&#x5728; <a href="https://blog.marklogzhu.com/Vue/%E5%89%8D%E7%AB%AF/Vue%20/Vue%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93(%E4%BA%8C)--Vue%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7/" target="_blank" rel="external">Vue&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E8C;)&#x2013;Vue&#x5E38;&#x7528;&#x5C5E;&#x6027;</a> &#x4ECB;&#x7ECD; <code>Vue</code> &#x7684; <code>methods</code> &#x5C5E;&#x6027;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x7528;&#x5230;&#x4E86; <code>v-on:click</code> &#x7ED1;&#x5B9A;&#x6309;&#x94AE;&#x7684;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x3002;&#x8FD9;&#x91CC;&#x5C31;&#x7528;&#x5230;&#x4E86; <code>Vue</code> &#x7684;&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x6765;&#x4E86;&#x89E3;&#x4E0B;  <code>Vue</code> &#x7684;&#x4E8B;&#x4EF6;&#x64CD;&#x4F5C;&#x3002;</p>
+<h2 id="&#x76D1;&#x542C;&#x4E8B;&#x4EF6;"><a href="#&#x76D1;&#x542C;&#x4E8B;&#x4EF6;" class="headerlink" title="&#x76D1;&#x542C;&#x4E8B;&#x4EF6;"></a>&#x76D1;&#x542C;&#x4E8B;&#x4EF6;</h2><p>&#x5728; <code>Vue</code> &#x4E2D;&#x53EF;&#x4EE5;&#x7528; <code>v-on</code> &#x6307;&#x4EE4;&#x76D1;&#x542C; <code>DOM</code> &#x4E8B;&#x4EF6;&#xFF0C;&#x5E76;&#x5728;&#x89E6;&#x53D1;&#x65F6;&#x8FD0;&#x884C;&#x4E00;&#x4E9B; <code>JavaScript</code> &#x4EE3;&#x7801;&#x3002;</p>
+<a id="more"></a> 
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">		</div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span> <span class="attr">v-on:click</span>=<span class="string">&quot;count++&quot;</span>&gt;</span></div><div class="line">			{{count}}		</div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span>	</div><div class="line">		</div><div class="line">		<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">			<span class="keyword">var</span> app = <span class="keyword">new</span> Vue({</div><div class="line">				<span class="attr">el</span>:<span class="string">&quot;#app&quot;</span>,		</div><div class="line">				<span class="attr">data</span>:{</div><div class="line">					<span class="attr">count</span>:<span class="number">0</span></div><div class="line">				}				</div><div class="line">			});</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>&#x8FD0;&#x884C;&#x6548;&#x679C;&#xFF1A;</p>
+<p><img src="/Vue/&#x524D;&#x7AEF;/Vue /Vue&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x56DB;)--Vue&#x4E8B;&#x4EF6;/img/01.gif" alt=""></p>
+<h2 id="&#x4E8B;&#x4EF6;&#x5904;&#x7406;"><a href="#&#x4E8B;&#x4EF6;&#x5904;&#x7406;" class="headerlink" title="&#x4E8B;&#x4EF6;&#x5904;&#x7406;"></a>&#x4E8B;&#x4EF6;&#x5904;&#x7406;</h2><p>&#x5927;&#x591A;&#x6570;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x4F1A;&#x5F88;&#x590D;&#x6742;&#xFF0C;&#x5982;&#x679C;&#x76F4;&#x63A5;&#x5728; v-on &#x6307;&#x4EE4;&#x4E2D;&#x52A0;&#x5165; JavaScript &#x4EE3;&#x7801;&#x662F;&#x4E0D;&#x53EF;&#x884C;&#x7684;&#x3002;&#x56E0;&#x6B64; v-on &#x8FD8;&#x53EF;&#x4EE5;&#x63A5;&#x6536;&#x4E00;&#x4E2A;&#x9700;&#x8981;&#x8C03;&#x7528;&#x7684;&#x65B9;&#x6CD5;&#x540D;&#x79F0;&#x3002;</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">		</div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span> <span class="attr">v-on:click</span>=<span class="string">&quot;add(1)&quot;</span>&gt;</span></div><div class="line">			{{count}}		</div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span>	</div><div class="line">		</div><div class="line">		<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">			<span class="keyword">var</span> app = <span class="keyword">new</span> Vue({</div><div class="line">				<span class="attr">el</span>:<span class="string">&quot;#app&quot;</span>,		</div><div class="line">				<span class="attr">data</span>:{</div><div class="line">					<span class="attr">count</span>:<span class="number">0</span></div><div class="line">				},</div><div class="line">				<span class="attr">methods</span>:{</div><div class="line">					<span class="attr">add</span>:<span class="function"><span class="keyword">function</span>(<span class="params">step</span>)</span>{</div><div class="line">						<span class="keyword">this</span>.count+=step;</div><div class="line">					}</div><div class="line">				}				</div><div class="line">			});</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>&#x8FD0;&#x884C;&#x6548;&#x679C;&#xFF1A;</p>
+<p><img src="/Vue/&#x524D;&#x7AEF;/Vue /Vue&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x56DB;)--Vue&#x4E8B;&#x4EF6;/img/01.gif" alt=""></p>
+<h2 id="&#x4E8B;&#x4EF6;&#x7F29;&#x5199;"><a href="#&#x4E8B;&#x4EF6;&#x7F29;&#x5199;" class="headerlink" title="&#x4E8B;&#x4EF6;&#x7F29;&#x5199;"></a>&#x4E8B;&#x4EF6;&#x7F29;&#x5199;</h2><p><code>v-on:click=&quot;add(1)&quot;</code> &#x53EF;&#x4EE5;&#x7F29;&#x5199;&#x4E3A; <code>@click=&quot;add(1)&quot;</code>&#x3002;</p>
+<h2 id="&#x4E8B;&#x4EF6;&#x4FEE;&#x9970;&#x7B26;"><a href="#&#x4E8B;&#x4EF6;&#x4FEE;&#x9970;&#x7B26;" class="headerlink" title="&#x4E8B;&#x4EF6;&#x4FEE;&#x9970;&#x7B26;"></a>&#x4E8B;&#x4EF6;&#x4FEE;&#x9970;&#x7B26;</h2><p>&#x5728;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x4E2D;&#x8C03;&#x7528; <code>event.preventDefault()</code> &#x6216; <code>event.stopPropagation()</code> &#x662F;&#x975E;&#x5E38;&#x5E38;&#x89C1;&#x7684;&#x9700;&#x6C42;&#x3002;&#x5C3D;&#x7BA1;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x65B9;&#x6CD5;&#x4E2D;&#x8F7B;&#x677E;&#x5B9E;&#x73B0;&#x8FD9;&#x70B9;&#xFF0C;&#x4F46;&#x66F4;&#x597D;&#x7684;&#x65B9;&#x5F0F;&#x662F;&#xFF1A;&#x65B9;&#x6CD5;&#x53EA;&#x6709;&#x7EAF;&#x7CB9;&#x7684;&#x6570;&#x636E;&#x903B;&#x8F91;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x53BB;&#x5904;&#x7406; <code>DOM</code> &#x4E8B;&#x4EF6;&#x7EC6;&#x8282;&#x3002;</p>
+<p>&#x4E3A;&#x4E86;&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;<code>Vue.js</code> &#x4E3A; <code>v-on</code> &#x63D0;&#x4F9B;&#x4E86;&#x4E8B;&#x4EF6;&#x4FEE;&#x9970;&#x7B26;&#x3002;&#x4E4B;&#x524D;&#x63D0;&#x8FC7;&#xFF0C;&#x4FEE;&#x9970;&#x7B26;&#x662F;&#x7531;&#x70B9;&#x5F00;&#x5934;&#x7684;&#x6307;&#x4EE4;&#x540E;&#x7F00;&#x6765;&#x8868;&#x793A;&#x7684;&#x3002;</p>
+<ul>
+<li>.stop</li>
+<li>.prevent</li>
+<li>.capture</li>
+<li>.self</li>
+<li>.once</li>
+<li>.passive</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- &#x963B;&#x6B62;&#x5355;&#x51FB;&#x4E8B;&#x4EF6;&#x7EE7;&#x7EED;&#x4F20;&#x64AD; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.stop</span>=<span class="string">&quot;doThis&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- &#x63D0;&#x4EA4;&#x4E8B;&#x4EF6;&#x4E0D;&#x518D;&#x91CD;&#x8F7D;&#x9875;&#x9762; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>=<span class="string">&quot;onSubmit&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- &#x4FEE;&#x9970;&#x7B26;&#x53EF;&#x4EE5;&#x4E32;&#x8054; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.stop.prevent</span>=<span class="string">&quot;doThat&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- &#x53EA;&#x6709;&#x4FEE;&#x9970;&#x7B26; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- &#x6DFB;&#x52A0;&#x4E8B;&#x4EF6;&#x76D1;&#x542C;&#x5668;&#x65F6;&#x4F7F;&#x7528;&#x4E8B;&#x4EF6;&#x6355;&#x83B7;&#x6A21;&#x5F0F; --&gt;</span></div><div class="line"><span class="comment">&lt;!-- &#x5373;&#x5143;&#x7D20;&#x81EA;&#x8EAB;&#x89E6;&#x53D1;&#x7684;&#x4E8B;&#x4EF6;&#x5148;&#x5728;&#x6B64;&#x5904;&#x5904;&#x7406;&#xFF0C;&#x7136;&#x540E;&#x624D;&#x4EA4;&#x7531;&#x5185;&#x90E8;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x5904;&#x7406; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:click.capture</span>=<span class="string">&quot;doThis&quot;</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- &#x53EA;&#x5F53;&#x5728; event.target &#x662F;&#x5F53;&#x524D;&#x5143;&#x7D20;&#x81EA;&#x8EAB;&#x65F6;&#x89E6;&#x53D1;&#x5904;&#x7406;&#x51FD;&#x6570; --&gt;</span></div><div class="line"><span class="comment">&lt;!-- &#x5373;&#x4E8B;&#x4EF6;&#x4E0D;&#x662F;&#x4ECE;&#x5185;&#x90E8;&#x5143;&#x7D20;&#x89E6;&#x53D1;&#x7684; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:click.self</span>=<span class="string">&quot;doThat&quot;</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- &#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x5C06;&#x53EA;&#x4F1A;&#x89E6;&#x53D1;&#x4E00;&#x6B21; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.once</span>=<span class="string">&quot;doThis&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- &#x6EDA;&#x52A8;&#x4E8B;&#x4EF6;&#x7684;&#x9ED8;&#x8BA4;&#x884C;&#x4E3A; (&#x5373;&#x6EDA;&#x52A8;&#x884C;&#x4E3A;) &#x5C06;&#x4F1A;&#x7ACB;&#x5373;&#x89E6;&#x53D1; --&gt;</span></div><div class="line"><span class="comment">&lt;!-- &#x800C;&#x4E0D;&#x4F1A;&#x7B49;&#x5F85; `onScroll` &#x5B8C;&#x6210;  --&gt;</span></div><div class="line"><span class="comment">&lt;!-- &#x8FD9;&#x5176;&#x4E2D;&#x5305;&#x542B; `event.preventDefault()` &#x7684;&#x60C5;&#x51B5; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:scroll.passive</span>=<span class="string">&quot;onScroll&quot;</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="&#x6CE8;&#x610F;"><a href="#&#x6CE8;&#x610F;" class="headerlink" title="&#x6CE8;&#x610F;"></a>&#x6CE8;&#x610F;</h3><p>&#x4F7F;&#x7528;&#x4FEE;&#x9970;&#x7B26;&#x65F6;&#xFF0C;&#x987A;&#x5E8F;&#x5F88;&#x91CD;&#x8981;&#xFF1B;&#x76F8;&#x5E94;&#x7684;&#x4EE3;&#x7801;&#x4F1A;&#x4EE5;&#x540C;&#x6837;&#x7684;&#x987A;&#x5E8F;&#x4EA7;&#x751F;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x7528; <code>v-on:click.prevent.self</code> &#x4F1A;&#x963B;&#x6B62;&#x6240;&#x6709;&#x7684;&#x70B9;&#x51FB;&#xFF0C;&#x800C; <code>v-on:click.self.prevent</code> &#x53EA;&#x4F1A;&#x963B;&#x6B62;&#x5BF9;&#x5143;&#x7D20;&#x81EA;&#x8EAB;&#x7684;&#x70B9;&#x51FB;&#x3002;</p>
+<h2 id="&#x6309;&#x952E;&#x4FEE;&#x9970;&#x7B26;"><a href="#&#x6309;&#x952E;&#x4FEE;&#x9970;&#x7B26;" class="headerlink" title="&#x6309;&#x952E;&#x4FEE;&#x9970;&#x7B26;"></a>&#x6309;&#x952E;&#x4FEE;&#x9970;&#x7B26;</h2><p>&#x5728;&#x76D1;&#x542C;&#x952E;&#x76D8;&#x4E8B;&#x4EF6;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x7ECF;&#x5E38;&#x9700;&#x8981;&#x68C0;&#x67E5;&#x5E38;&#x89C1;&#x7684;&#x952E;&#x503C;&#x3002;<code>Vue</code> &#x5141;&#x8BB8;&#x4E3A; <code>v-on</code> &#x5728;&#x76D1;&#x542C;&#x952E;&#x76D8;&#x4E8B;&#x4EF6;&#x65F6;&#x6DFB;&#x52A0;&#x6309;&#x952E;&#x4FEE;&#x9970;&#x7B26;&#xFF1A;</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- &#x53EA;&#x6709;&#x5728; `keyCode` &#x662F; 13 &#x65F6;&#x8C03;&#x7528; `vm.submit()` --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-on:keyup.13</span>=<span class="string">&quot;submit&quot;</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>&#x8BB0;&#x4F4F;&#x6240;&#x6709;&#x7684; keyCode &#x6BD4;&#x8F83;&#x56F0;&#x96BE;&#xFF0C;&#x6240;&#x4EE5; Vue &#x4E3A;&#x6700;&#x5E38;&#x7528;&#x7684;&#x6309;&#x952E;&#x63D0;&#x4F9B;&#x4E86;&#x522B;&#x540D;&#xFF1A;<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- &#x540C;&#x4E0A; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-on:keyup.enter</span>=<span class="string">&quot;submit&quot;</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- &#x7F29;&#x5199;&#x8BED;&#x6CD5; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> @<span class="attr">keyup.enter</span>=<span class="string">&quot;submit&quot;</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>&#x5168;&#x90E8;&#x7684;&#x6309;&#x952E;&#x522B;&#x540D;&#xFF1A;</p>
+<ul>
+<li>.enter</li>
+<li>.tab</li>
+<li>.delete (&#x6355;&#x83B7;&#x201C;&#x5220;&#x9664;&#x201D;&#x548C;&#x201C;&#x9000;&#x683C;&#x201D;&#x952E;)</li>
+<li>.esc</li>
+<li>.space</li>
+<li>.up</li>
+<li>.down</li>
+<li>.left</li>
+<li>.right</li>
+</ul>
+<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5168;&#x5C40; config.keyCodes &#x5BF9;&#x8C61;&#x81EA;&#x5B9A;&#x4E49;&#x6309;&#x952E;&#x4FEE;&#x9970;&#x7B26;&#x522B;&#x540D;&#xFF1A;</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// &#x53EF;&#x4EE5;&#x4F7F;&#x7528; `v-on:keyup.f1`</div><div class="line">Vue.config.keyCodes.f1 = 112</div></pre></td></tr></table></figure>
+<h2 id="exact-&#x4FEE;&#x9970;&#x7B26;"><a href="#exact-&#x4FEE;&#x9970;&#x7B26;" class="headerlink" title=".exact &#x4FEE;&#x9970;&#x7B26;"></a>.exact &#x4FEE;&#x9970;&#x7B26;</h2><p>.exact &#x4FEE;&#x9970;&#x7B26;&#x5141;&#x8BB8;&#x4F60;&#x63A7;&#x5236;&#x7531;&#x7CBE;&#x786E;&#x7684;&#x7CFB;&#x7EDF;&#x4FEE;&#x9970;&#x7B26;&#x7EC4;&#x5408;&#x89E6;&#x53D1;&#x7684;&#x4E8B;&#x4EF6;&#x3002;</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- &#x5373;&#x4F7F; Alt &#x6216; Shift &#x88AB;&#x4E00;&#x540C;&#x6309;&#x4E0B;&#x65F6;&#x4E5F;&#x4F1A;&#x89E6;&#x53D1; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click.ctrl</span>=<span class="string">&quot;onClick&quot;</span>&gt;</span>A<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- &#x6709;&#x4E14;&#x53EA;&#x6709; Ctrl &#x88AB;&#x6309;&#x4E0B;&#x7684;&#x65F6;&#x5019;&#x624D;&#x89E6;&#x53D1; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click.ctrl.exact</span>=<span class="string">&quot;onCtrlClick&quot;</span>&gt;</span>A<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- &#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x7CFB;&#x7EDF;&#x4FEE;&#x9970;&#x7B26;&#x88AB;&#x6309;&#x4E0B;&#x7684;&#x65F6;&#x5019;&#x624D;&#x89E6;&#x53D1; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click.exact</span>=<span class="string">&quot;onClick&quot;</span>&gt;</span>A<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="&#x9F20;&#x6807;&#x6309;&#x94AE;&#x4FEE;&#x9970;&#x7B26;"><a href="#&#x9F20;&#x6807;&#x6309;&#x94AE;&#x4FEE;&#x9970;&#x7B26;" class="headerlink" title="&#x9F20;&#x6807;&#x6309;&#x94AE;&#x4FEE;&#x9970;&#x7B26;"></a>&#x9F20;&#x6807;&#x6309;&#x94AE;&#x4FEE;&#x9970;&#x7B26;</h2><ul>
+<li>.left</li>
+<li>.right</li>
+<li>.middle</li>
+</ul>
+<p>&#x8FD9;&#x4E9B;&#x4FEE;&#x9970;&#x7B26;&#x4F1A;&#x9650;&#x5236;&#x5904;&#x7406;&#x51FD;&#x6570;&#x4EC5;&#x54CD;&#x5E94;&#x7279;&#x5B9A;&#x7684;&#x9F20;&#x6807;&#x6309;&#x94AE;&#x3002;</p>
+<h2 id="&#x4E3A;&#x4EC0;&#x4E48;&#x5728;-HTML-&#x4E2D;&#x76D1;&#x542C;&#x4E8B;&#x4EF6;"><a href="#&#x4E3A;&#x4EC0;&#x4E48;&#x5728;-HTML-&#x4E2D;&#x76D1;&#x542C;&#x4E8B;&#x4EF6;" class="headerlink" title="&#x4E3A;&#x4EC0;&#x4E48;&#x5728; HTML &#x4E2D;&#x76D1;&#x542C;&#x4E8B;&#x4EF6;?"></a>&#x4E3A;&#x4EC0;&#x4E48;&#x5728; HTML &#x4E2D;&#x76D1;&#x542C;&#x4E8B;&#x4EF6;?</h2><p>&#x4F60;&#x53EF;&#x80FD;&#x6CE8;&#x610F;&#x5230;&#x8FD9;&#x79CD;&#x4E8B;&#x4EF6;&#x76D1;&#x542C;&#x7684;&#x65B9;&#x5F0F;&#x8FDD;&#x80CC;&#x4E86;&#x5173;&#x6CE8;&#x70B9;&#x5206;&#x79BB; <code>(separation of concern)</code> &#x8FD9;&#x4E2A;&#x957F;&#x671F;&#x4EE5;&#x6765;&#x7684;&#x4F18;&#x826F;&#x4F20;&#x7EDF;&#x3002;&#x4F46;&#x4E0D;&#x5FC5;&#x62C5;&#x5FC3;&#xFF0C;&#x56E0;&#x4E3A;&#x6240;&#x6709;&#x7684; <code>Vue.js</code> &#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x65B9;&#x6CD5;&#x548C;&#x8868;&#x8FBE;&#x5F0F;&#x90FD;&#x4E25;&#x683C;&#x7ED1;&#x5B9A;&#x5728;&#x5F53;&#x524D;&#x89C6;&#x56FE;&#x7684; <code>ViewModel</code> &#x4E0A;&#xFF0C;&#x5B83;&#x4E0D;&#x4F1A;&#x5BFC;&#x81F4;&#x4EFB;&#x4F55;&#x7EF4;&#x62A4;&#x4E0A;&#x7684;&#x56F0;&#x96BE;&#x3002;&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;&#x4F7F;&#x7528; <code>v-on</code> &#x6709;&#x51E0;&#x4E2A;&#x597D;&#x5904;&#xFF1A;</p>
+<p>&#x626B;&#x4E00;&#x773C; <code>HTML</code> &#x6A21;&#x677F;&#x4FBF;&#x80FD;&#x8F7B;&#x677E;&#x5B9A;&#x4F4D;&#x5728; <code>JavaScript</code> &#x4EE3;&#x7801;&#x91CC;&#x5BF9;&#x5E94;&#x7684;&#x65B9;&#x6CD5;&#x3002;</p>
+<p>&#x56E0;&#x4E3A;&#x4F60;&#x65E0;&#x987B;&#x5728; <code>JavaScript</code> &#x91CC;&#x624B;&#x52A8;&#x7ED1;&#x5B9A;&#x4E8B;&#x4EF6;&#xFF0C;&#x4F60;&#x7684; ViewModel &#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x662F;&#x975E;&#x5E38;&#x7EAF;&#x7CB9;&#x7684;&#x903B;&#x8F91;&#xFF0C;&#x548C; <code>DOM</code> &#x5B8C;&#x5168;&#x89E3;&#x8026;&#xFF0C;&#x66F4;&#x6613;&#x4E8E;&#x6D4B;&#x8BD5;&#x3002;</p>
+<p>&#x5F53;&#x4E00;&#x4E2A; <code>ViewModel</code> &#x88AB;&#x9500;&#x6BC1;&#x65F6;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x5668;&#x90FD;&#x4F1A;&#x81EA;&#x52A8;&#x88AB;&#x5220;&#x9664;&#x3002;&#x4F60;&#x65E0;&#x987B;&#x62C5;&#x5FC3;&#x5982;&#x4F55;&#x6E05;&#x7406;&#x5B83;&#x4EEC;&#x3002;</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/Vue/前端/Vue /Vue学习总结(五)--Vue指令/" class="pre-post btn btn-default" title='Vue学习总结(五)--Vue指令'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Vue学习总结(五)--Vue指令</span>
+        </a>
+    
+    
+        <a href="/Vue/前端/Vue /Vue学习总结(三)-- Vue的生命周期/" class="next-post btn btn-default" title='Vue学习总结(三)-- Vue的生命周期'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Vue学习总结(三)-- Vue的生命周期</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQ/"><i class="fa" aria-hidden="true">MySQ</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">49</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/C/" style="font-size: 10.83px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.67px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 10.83px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 15.83px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12.5px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 17.5px;">MyBatis</a> <a href="/tags/MySQ/" style="font-size: 10px;">MySQ</a> <a href="/tags/MySQL/" style="font-size: 16.67px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 15px;">Nginx</a> <a href="/tags/Quartz/" style="font-size: 12.5px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 11.67px;">RabbitMQ</a> <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.83px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 19.17px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 18.33px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 14.17px;">Spring</a> <a href="/tags/SpringMVC/" style="font-size: 17.5px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Utils/" style="font-size: 10.83px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 15.83px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 15.83px;">Vue</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10.83px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10.83px;">tool</a> <a href="/tags/前端/" style="font-size: 10.83px;">前端</a> <a href="/tags/前端基础/" style="font-size: 13.33px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12.5px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

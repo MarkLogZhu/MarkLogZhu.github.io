@@ -1,0 +1,746 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>分类: SpringBoot | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content ">
+                    <h3> 
+    
+        SpringBoot 
+    
+</h3>
+
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/SpringBoot/后台/Java/SpringBoot/SpringBoot学习总结(八)--集成Swagger2/">SpringBoot学习总结(八)--集成Swagger2</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2018年07月26日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<h2 id="Swagger2-&#x662F;&#x4EC0;&#x4E48;&#xFF1F;"><a href="#Swagger2-&#x662F;&#x4EC0;&#x4E48;&#xFF1F;" class="headerlink" title="Swagger2 &#x662F;&#x4EC0;&#x4E48;&#xFF1F;"></a>Swagger2 &#x662F;&#x4EC0;&#x4E48;&#xFF1F;</h2><p><code>Swagger2</code> &#x662F;&#x4E00;&#x6B3E;RESTFUL&#x63A5;&#x53E3;&#x7684;&#x6587;&#x6863;&#x5728;&#x7EBF;&#x81EA;&#x52A8;&#x751F;&#x6210;+&#x529F;&#x80FD;&#x6D4B;&#x8BD5;&#x529F;&#x80FD;&#x8F6F;&#x4EF6;&#x3002;</p>
+<p><code>Swagger2</code> &#x662F;&#x4E00;&#x4E2A;&#x89C4;&#x8303;&#x548C;&#x5B8C;&#x6574;&#x7684;&#x6846;&#x67B6;&#xFF0C;&#x7528;&#x4E8E;&#x751F;&#x6210;&#x3001;&#x63CF;&#x8FF0;&#x3001;&#x8C03;&#x7528;&#x548C;&#x53EF;&#x89C6;&#x5316; <code>RESTful</code> &#x98CE;&#x683C;&#x7684; <code>Web</code> &#x670D;&#x52A1;&#x3002;&#x603B;&#x4F53;&#x76EE;&#x6807;&#x662F;&#x4F7F;&#x5BA2;&#x6237;&#x7AEF;&#x548C;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x4F5C;&#x4E3A;&#x670D;&#x52A1;&#x5668;&#x4EE5;&#x540C;&#x6837;&#x7684;&#x901F;&#x5EA6;&#x6765;&#x66F4;&#x65B0;&#x3002;&#x6587;&#x4EF6;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x53C2;&#x6570;&#x548C;&#x6A21;&#x578B;&#x7D27;&#x5BC6;&#x96C6;&#x6210;&#x5230;&#x670D;&#x52A1;&#x5668;&#x7AEF;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x5141;&#x8BB8; <code>API</code> &#x6765;&#x59CB;&#x7EC8;&#x4FDD;&#x6301;&#x540C;&#x6B65;&#x3002;<code>Swagger2</code> &#x8BA9;&#x90E8;&#x7F72;&#x7BA1;&#x7406;&#x548C;&#x4F7F;&#x7528;&#x529F;&#x80FD;&#x5F3A;&#x5927;&#x7684; <code>API</code> &#x4ECE;&#x672A;&#x5982;&#x6B64;&#x7B80;&#x5355;&#x3002;</p>
+<ul>
+<li><a href="http://swagger.io/">&#x5B98;&#x7F51;</a> </li>
+<li><a href="https://github.com/swagger-api/swagger-ui">GitHub&#x5730;&#x5740;</a></li>
+</ul>
+              <!--   -->
+              <!--      Swagger2 &amp;#x662F;&amp;#x4EC0;&amp;#x4E48;&amp;#xFF1F;Swagger2 &amp;#x662F;&amp;#x4E00;&amp;#x6B3E;RESTFUL&amp;#x63A5;&amp;#x53E3;&amp;#x7684;&amp;#x6587;&amp;#x6863;&amp;#x5728;&amp;#x7EBF;&amp;#x81EA;&amp;#x52A8;&amp;#x751F;&amp;#x6210;+&amp;#x529F;&amp;#x80FD;&amp;#x6D4B;&amp;#x8BD5;&amp;#x529F;&amp;#x80FD;&amp;#x8F6F;&amp;#x4EF6;&amp;#x3002;
+Swagger2 &amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x89C4;&amp;#x8303;&amp;#x548C;&amp;#x5B8C;&amp;#x6574;&amp;#x7684;&amp;#x6846;&amp;#x67B6;&amp;#xFF0C;&amp;#x7528;&amp;#x4E8E;&amp;#x751F;&amp;#x6210;&amp;#x3001;&amp;#x63CF;&amp;#x8FF0;&amp;#x3001;&amp;#x8C03;&amp;#x7528;&amp;#x548C;&amp;#x53EF;&amp;#x89C6;&amp;#x5316; RESTful &amp;#x98CE;&amp;#x683C;&amp;#x7684; Web &amp;#x670D;&amp;#x52A1;&amp;#x3002;&amp;#x603B;&amp;#x4F53;&amp;#x76EE;&amp;#x6807;&amp;#x662F;&amp;#x4F7F;&amp;#x5BA2;&amp;#x6237;&amp;#x7AEF;&amp;#x548C;&amp;#x6587;&amp;#x4EF6;&amp;#x7CFB;&amp;#x7EDF;&amp;#x4F5C;&amp;#x4E3A;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x4EE5;&amp;#x540C;&amp;#x6837;&amp;#x7684;&amp;#x901F;&amp;#x5EA6;&amp;#x6765;&amp;#x66F4;&amp;#x65B0;&amp;#x3002;&amp;#x6587;&amp;#x4EF6;&amp;#x7684;&amp;#x65B9;&amp;#x6CD5;&amp;#xFF0C;&amp;#x53C2;&amp;#x6570;&amp;#x548C;&amp;#x6A21;&amp;#x578B;&amp;#x7D27;&amp;#x5BC6;&amp;#x96C6;&amp;#x6210;&amp;#x5230;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x7AEF;&amp;#x7684;&amp;#x4EE3;&amp;#x7801;&amp;#xFF0C;&amp;#x5141;&amp;#x8BB8; API &amp;#x6765;&amp;#x59CB;&amp;#x7EC8;&amp;#x4FDD;&amp;#x6301;&amp;#x540C;&amp;#x6B65;&amp;#x3002;Swagger2 &amp;#x8BA9;&amp;#x90E8;&amp;#x7F72;&amp;#x7BA1;&amp;#x7406;&amp;#x548C;&amp;#x4F7F;&amp;#x7528;&amp;#x529F;&amp;#x80FD;&amp;#x5F3A;&amp;#x5927;&amp;#x7684; API &amp;#x4ECE;&amp;#x672A;&amp;#x5982;&amp;#x6B64;&amp;#x7B80;&amp;#x5355;&amp;#x3002;
+
+&amp;#x5B98;&amp;#x7F51; 
+GitHub&amp;#x5730;&amp;#x5740;
+… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/SpringBoot" title='SpringBoot'>
+                        SpringBoot
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/SpringBoot/后台/Java/SpringBoot/SpringBoot学习总结(八)--集成Swagger2/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/SpringBoot/后台/Java/SpringBoot/SpringBoot学习总结(六)--集成邮件服务/">SpringBoot学习总结(六)--集成邮件服务</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2018年07月25日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<blockquote>
+<p>&#x9664;&#x4E86;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x5916;&#xFF0C;&#x90AE;&#x4EF6;&#x53D1;&#x9001;&#x529F;&#x80FD;&#x4E5F;&#x662F;&#x4E00;&#x4E2A;&#x7ECF;&#x5E38;&#x4F7F;&#x7528;&#x7684;&#x529F;&#x80FD;&#x70B9;&#x3002;&#x5B83;&#x901A;&#x5E38;&#x7528;&#x6765;&#x901A;&#x77E5;&#x7528;&#x6237;&#x4E00;&#x4E9B;&#x4FE1;&#x606F;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x5B9E;&#x73B0;&#x4E0B;&#x90AE;&#x4EF6;&#x7684;&#x53D1;&#x9001;&#x3002;</p>
+</blockquote>
+<h2 id="&#x7B80;&#x5355;&#x90AE;&#x4EF6;&#x53D1;&#x9001;"><a href="#&#x7B80;&#x5355;&#x90AE;&#x4EF6;&#x53D1;&#x9001;" class="headerlink" title="&#x7B80;&#x5355;&#x90AE;&#x4EF6;&#x53D1;&#x9001;"></a>&#x7B80;&#x5355;&#x90AE;&#x4EF6;&#x53D1;&#x9001;</h2><h3 id="1-&#x5F15;&#x5165;&#x4F9D;&#x8D56;"><a href="#1-&#x5F15;&#x5165;&#x4F9D;&#x8D56;" class="headerlink" title="1) &#x5F15;&#x5165;&#x4F9D;&#x8D56;"></a>1) &#x5F15;&#x5165;&#x4F9D;&#x8D56;</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-mail<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+              <!--   -->
+              <!--      
+&amp;#x9664;&amp;#x4E86;&amp;#x5B9A;&amp;#x65F6;&amp;#x4EFB;&amp;#x52A1;&amp;#x5916;&amp;#xFF0C;&amp;#x90AE;&amp;#x4EF6;&amp;#x53D1;&amp;#x9001;&amp;#x529F;&amp;#x80FD;&amp;#x4E5F;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x7ECF;&amp;#x5E38;&amp;#x4F7F;&amp;#x7528;&amp;#x7684;&amp;#x529F;&amp;#x80FD;&amp;#x70B9;&amp;#x3002;&amp;#x5B83;&amp;#x901A;&amp;#x5E38;&amp;#x7528;&amp;#x6765;&amp;#x901A;&amp;#x77E5;&amp;#x7528;&amp;#x6237;&amp;#x4E00;&amp;#x4E9B;&amp;#x4FE1;&amp;#x606F;&amp;#xFF0C;&amp;#x4ECA;&amp;#x5929;&amp;#x6211;&amp;#x4EEC;&amp;#x5C31;&amp;#x6765;&amp;#x5B9E;&amp;#x73B0;&amp;#x4E0B;&amp;#x90AE;&amp;#x4EF6;&amp;#x7684;&amp;#x53D1;&amp;#x9001;&amp;#x3002;
+
+&amp;#x7B80;&amp;#x5355;&amp;#x90AE;&amp;#x4EF6;&amp;#x53D1;&amp;#x9001;1) &amp;#x5F15;&amp;#x5165;&amp;#x4F9D;&amp;#x8D56;1234&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;spring-boot-starter-mail&amp;lt;/artifactId&amp;gt;&amp;lt;/dependency&amp;gt;… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/SpringBoot" title='SpringBoot'>
+                        SpringBoot
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/SpringBoot/后台/Java/SpringBoot/SpringBoot学习总结(六)--集成邮件服务/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/SpringBoot/后台/Java/SpringBoot/SpringBoot学习总结(五)--定时任务/">SpringBoot学习总结(五)--定时任务</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2018年07月24日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<blockquote>
+<p>&#x9879;&#x76EE;&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x65F6;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x529F;&#x80FD;&#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x6709;&#x7528;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x4E86;&#x89E3;&#x4E0B; <code>SpringBoot</code> &#x81EA;&#x5E26;&#x7684;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1; <code>Schedule</code>, &#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x8F7B;&#x91CF;&#x7EA7;&#x7684; <code>Quartz</code>&#x3002;</p>
+</blockquote>
+<h2 id="&#x56FA;&#x5B9A;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x7EC4;&#x4EF6;"><a href="#&#x56FA;&#x5B9A;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x7EC4;&#x4EF6;" class="headerlink" title="&#x56FA;&#x5B9A;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x7EC4;&#x4EF6;"></a>&#x56FA;&#x5B9A;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x7EC4;&#x4EF6;</h2><h3 id="1-&#x5F15;&#x5165;&#x4F9D;&#x8D56;"><a href="#1-&#x5F15;&#x5165;&#x4F9D;&#x8D56;" class="headerlink" title="1) &#x5F15;&#x5165;&#x4F9D;&#x8D56;"></a>1) &#x5F15;&#x5165;&#x4F9D;&#x8D56;</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+              <!--   -->
+              <!--      
+&amp;#x9879;&amp;#x76EE;&amp;#x5B9E;&amp;#x9645;&amp;#x4F7F;&amp;#x7528;&amp;#x65F6;&amp;#x5B9A;&amp;#x65F6;&amp;#x4EFB;&amp;#x52A1;&amp;#x529F;&amp;#x80FD;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x5F88;&amp;#x6709;&amp;#x7528;&amp;#x7684;&amp;#x529F;&amp;#x80FD;&amp;#xFF0C;&amp;#x4ECA;&amp;#x5929;&amp;#x6211;&amp;#x4EEC;&amp;#x5C31;&amp;#x6765;&amp;#x4E86;&amp;#x89E3;&amp;#x4E0B; SpringBoot &amp;#x81EA;&amp;#x5E26;&amp;#x7684;&amp;#x5B9A;&amp;#x65F6;&amp;#x4EFB;&amp;#x52A1; Schedule, &amp;#x5B83;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x8F7B;&amp;#x91CF;&amp;#x7EA7;&amp;#x7684; Quartz&amp;#x3002;
+
+&amp;#x56FA;&amp;#x5B9A;&amp;#x5B9A;&amp;#x65F6;&amp;#x4EFB;&amp;#x52A1;&amp;#x7EC4;&amp;#x4EF6;1) &amp;#x5F15;&amp;#x5165;&amp;#x4F9D;&amp;#x8D56;12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.mybatis.spring.boot&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;mybatis-spring-boot-starter&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;1.1.1&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/SpringBoot" title='SpringBoot'>
+                        SpringBoot
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/SpringBoot/后台/Java/SpringBoot/SpringBoot学习总结(五)--定时任务/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/SpringBoot/后台/Java/SpringBoot/SpringBoot学习总结(四)--集成Redis/">SpringBoot学习总结(四)--集成Redis</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2018年07月24日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<blockquote>
+<p>Redis&#x662F;&#x76EE;&#x524D;&#x4E1A;&#x754C;&#x4F7F;&#x7528;&#x6700;&#x5E7F;&#x6CDB;&#x7684;&#x5185;&#x5B58;&#x6570;&#x636E;&#x5B58;&#x50A8;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x96C6;&#x6210;&#x4F7F;&#x7528;&#x4E0B;Redis&#x3002;</p>
+</blockquote>
+<h2 id="&#x96C6;&#x6210;-Redis"><a href="#&#x96C6;&#x6210;-Redis" class="headerlink" title="&#x96C6;&#x6210; Redis"></a>&#x96C6;&#x6210; Redis</h2><h3 id="1-&#x5F15;&#x5165;&#x4F9D;&#x8D56;"><a href="#1-&#x5F15;&#x5165;&#x4F9D;&#x8D56;" class="headerlink" title="1) &#x5F15;&#x5165;&#x4F9D;&#x8D56;"></a>1) &#x5F15;&#x5165;&#x4F9D;&#x8D56;</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="2-&#x914D;&#x7F6E;-application-properties"><a href="#2-&#x914D;&#x7F6E;-application-properties" class="headerlink" title="2) &#x914D;&#x7F6E; application.properties"></a>2) &#x914D;&#x7F6E; application.properties</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"># Redis&#x6570;&#x636E;&#x5E93;&#x7D22;&#x5F15;&#xFF08;&#x9ED8;&#x8BA4;&#x4E3A;0&#xFF09;</div><div class="line">spring.redis.database=0  </div><div class="line"># Redis&#x670D;&#x52A1;&#x5668;&#x5730;&#x5740;</div><div class="line">spring.redis.host=120.0.0.1</div><div class="line"># Redis&#x670D;&#x52A1;&#x5668;&#x8FDE;&#x63A5;&#x7AEF;&#x53E3;</div><div class="line">spring.redis.port=6379  </div><div class="line"># Redis&#x670D;&#x52A1;&#x5668;&#x8FDE;&#x63A5;&#x5BC6;&#x7801;&#xFF08;&#x9ED8;&#x8BA4;&#x4E3A;&#x7A7A;&#xFF09;</div><div class="line">spring.redis.password=</div><div class="line"># &#x8FDE;&#x63A5;&#x6C60;&#x6700;&#x5927;&#x8FDE;&#x63A5;&#x6570;&#xFF08;&#x4F7F;&#x7528;&#x8D1F;&#x503C;&#x8868;&#x793A;&#x6CA1;&#x6709;&#x9650;&#x5236;&#xFF09;</div><div class="line">spring.redis.pool.max-active=8  </div><div class="line"># &#x8FDE;&#x63A5;&#x6C60;&#x6700;&#x5927;&#x963B;&#x585E;&#x7B49;&#x5F85;&#x65F6;&#x95F4;&#xFF08;&#x4F7F;&#x7528;&#x8D1F;&#x503C;&#x8868;&#x793A;&#x6CA1;&#x6709;&#x9650;&#x5236;&#xFF09;</div><div class="line">spring.redis.pool.max-wait=-1  </div><div class="line"># &#x8FDE;&#x63A5;&#x6C60;&#x4E2D;&#x7684;&#x6700;&#x5927;&#x7A7A;&#x95F2;&#x8FDE;&#x63A5;</div><div class="line">spring.redis.pool.max-idle=8  </div><div class="line"># &#x8FDE;&#x63A5;&#x6C60;&#x4E2D;&#x7684;&#x6700;&#x5C0F;&#x7A7A;&#x95F2;&#x8FDE;&#x63A5;</div><div class="line">spring.redis.pool.min-idle=0  </div><div class="line"># &#x8FDE;&#x63A5;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#xFF08;&#x6BEB;&#x79D2;&#xFF09;</div><div class="line">spring.redis.timeout=0</div></pre></td></tr></table></figure>
+              <!--   -->
+              <!--      
+Redis&amp;#x662F;&amp;#x76EE;&amp;#x524D;&amp;#x4E1A;&amp;#x754C;&amp;#x4F7F;&amp;#x7528;&amp;#x6700;&amp;#x5E7F;&amp;#x6CDB;&amp;#x7684;&amp;#x5185;&amp;#x5B58;&amp;#x6570;&amp;#x636E;&amp;#x5B58;&amp;#x50A8;&amp;#xFF0C;&amp;#x4ECA;&amp;#x5929;&amp;#x6211;&amp;#x4EEC;&amp;#x5C31;&amp;#x6765;&amp;#x96C6;&amp;#x6210;&amp;#x4F7F;&amp;#x7528;&amp;#x4E0B;Redis&amp;#x3002;
+
+&amp;#x96C6;&amp;#x6210; Redis1) &amp;#x5F15;&amp;#x5165;&amp;#x4F9D;&amp;#x8D56;1234&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;spring-boot-starter-redis&amp;lt;/artifactId&amp;gt;&amp;lt;/dependency&amp;gt;
+2) &amp;#x914D;&amp;#x7F6E; application.properties123456789101112131415161718# Redis&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x7D22;&amp;#x5F15;&amp;#xFF08;&amp;#x9ED8;&amp;#x8BA4;&amp;#x4E3A;0&amp;#xFF09;spring.redis.database=0  # Redis&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x5730;&amp;#x5740;spring.redis.host=120.0.0.1# Redis&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x8FDE;&amp;#x63A5;&amp;#x7AEF;&amp;#x53E3;spring.redis.port=6379  # Redis&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x8FDE;&amp;#x63A5;&amp;#x5BC6;&amp;#x7801;&amp;#xFF08;&amp;#x9ED8;&amp;#x8BA4;&amp;#x4E3A;&amp;#x7A7A;&amp;#xFF09;spring.redis.password=# &amp;#x8FDE;&amp;#x63A5;&amp;#x6C60;&amp;#x6700;&amp;#x5927;&amp;#x8FDE;&amp;#x63A5;&amp;#x6570;&amp;#xFF08;&amp;#x4F7F;&amp;#x7528;&amp;#x8D1F;&amp;#x503C;&amp;#x8868;&amp;#x793A;&amp;#x6CA1;&amp;#x6709;&amp;#x9650;&amp;#x5236;&amp;#xFF09;spring.redis.pool.max-active=8  # &amp;#x8FDE;&amp;#x63A5;&amp;#x6C60;&amp;#x6700;&amp;#x5927;&amp;#x963B;&amp;#x585E;&amp;#x7B49;&amp;#x5F85;&amp;#x65F6;&amp;#x95F4;&amp;#xFF08;&amp;#x4F7F;&amp;#x7528;&amp;#x8D1F;&amp;#x503C;&amp;#x8868;&amp;#x793A;&amp;#x6CA1;&amp;#x6709;&amp;#x9650;&amp;#x5236;&amp;#xFF09;spring.redis.pool.max-wait=-1  # &amp;#x8FDE;&amp;#x63A5;&amp;#x6C60;&amp;#x4E2D;&amp;#x7684;&amp;#x6700;&amp;#x5927;&amp;#x7A7A;&amp;#x95F2;&amp;#x8FDE;&amp;#x63A5;spring.redis.pool.max-idle=8  # &amp;#x8FDE;&amp;#x63A5;&amp;#x6C60;&amp;#x4E2D;&amp;#x7684;&amp;#x6700;&amp;#x5C0F;&amp;#x7A7A;&amp;#x95F2;&amp;#x8FDE;&amp;#x63A5;spring.redis.pool.min-idle=0  # &amp;#x8FDE;&amp;#x63A5;&amp;#x8D85;&amp;#x65F6;&amp;#x65F6;&amp;#x95F4;&amp;#xFF08;&amp;#x6BEB;&amp;#x79D2;&amp;#xFF09;spring.redis.timeout=0… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/SpringBoot" title='SpringBoot'>
+                        SpringBoot
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/SpringBoot/后台/Java/SpringBoot/SpringBoot学习总结(四)--集成Redis/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/SpringBoot/后台/Java/SpringBoot/SpringBoot学习总结(七)--集成RabbitMQ/">SpringBoot学习总结(三)--集成 SpringDataJpa</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2018年07月23日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<blockquote>
+<p>&#x5728;&#x4E0A;&#x4E00;&#x7AE0;&#x8282;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x8BB2;&#x5230;&#x4E86;&#x9664;&#x4E86; Mybatis &#x5916;&#xFF0C;&#x8FD8;&#x6709;&#x53E6;&#x4E00;&#x79CD; <code>orm</code> &#x6846;&#x67B6;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x5B66;&#x4E60;&#x4E0B;&#x600E;&#x4E48;&#x96C6;&#x6210;&#x4F7F;&#x7528;&#x3002;</p>
+</blockquote>
+<h2 id="&#x4EC0;&#x4E48;&#x662F;-spring-data-jpa"><a href="#&#x4EC0;&#x4E48;&#x662F;-spring-data-jpa" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F; spring data jpa"></a>&#x4EC0;&#x4E48;&#x662F; spring data jpa</h2><p><code>Spring Data JPA</code> &#x662F; <code>Spring</code> &#x57FA;&#x4E8E; <code>ORM</code> &#x6846;&#x67B6; &#x548C; <code>JPA</code> &#x89C4;&#x8303;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x5C01;&#x88C5;&#x7684;&#x4E00;&#x5957; <code>JPA</code> &#x5E94;&#x7528;&#x6846;&#x67B6;&#xFF0C;&#x53EF;&#x4F7F;&#x5F00;&#x53D1;&#x8005;&#x7528;&#x6781;&#x7B80;&#x7684;&#x4EE3;&#x7801;&#x5373;&#x53EF;&#x5B9E;&#x73B0;&#x5BF9;&#x6570;&#x636E;&#x7684;&#x8BBF;&#x95EE;&#x548C;&#x64CD;&#x4F5C;&#x3002;&#x5B83;&#x63D0;&#x4F9B;&#x4E86;&#x5305;&#x62EC;&#x589E;&#x5220;&#x6539;&#x67E5;&#x7B49;&#x5728;&#x5185;&#x7684;&#x5E38;&#x7528;&#x529F;&#x80FD;&#xFF0C;&#x4E14;&#x6613;&#x4E8E;&#x6269;&#x5C55;&#xFF01;&#x5B66;&#x4E60;&#x5E76;&#x4F7F;&#x7528; <code>Spring Data JPA</code> &#x53EF;&#x4EE5;&#x6781;&#x5927;&#x63D0;&#x9AD8;&#x5F00;&#x53D1;&#x6548;&#x7387;&#xFF01;</p>
+<p><code>spring data jpa</code> &#x8BA9;&#x6211;&#x4EEC;&#x89E3;&#x8131;&#x4E86; <code>DAO</code> &#x5C42;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x57FA;&#x672C;&#x4E0A;&#x6240;&#x6709; <code>CRUD</code> &#x90FD;&#x53EF;&#x4EE5;&#x4F9D;&#x8D56;&#x4E8E;&#x5B83;&#x6765;&#x5B9E;&#x73B0;&#x3002;</p>
+              <!--   -->
+              <!--      
+&amp;#x5728;&amp;#x4E0A;&amp;#x4E00;&amp;#x7AE0;&amp;#x8282;&amp;#x4E2D;&amp;#xFF0C;&amp;#x6211;&amp;#x4EEC;&amp;#x8BB2;&amp;#x5230;&amp;#x4E86;&amp;#x9664;&amp;#x4E86; Mybatis &amp;#x5916;&amp;#xFF0C;&amp;#x8FD8;&amp;#x6709;&amp;#x53E6;&amp;#x4E00;&amp;#x79CD; orm &amp;#x6846;&amp;#x67B6;&amp;#xFF0C;&amp;#x4ECA;&amp;#x5929;&amp;#x6211;&amp;#x4EEC;&amp;#x5C31;&amp;#x6765;&amp;#x5B66;&amp;#x4E60;&amp;#x4E0B;&amp;#x600E;&amp;#x4E48;&amp;#x96C6;&amp;#x6210;&amp;#x4F7F;&amp;#x7528;&amp;#x3002;
+
+&amp;#x4EC0;&amp;#x4E48;&amp;#x662F; spring data jpaSpring Data JPA &amp;#x662F; Spring &amp;#x57FA;&amp;#x4E8E; ORM &amp;#x6846;&amp;#x67B6; &amp;#x548C; JPA &amp;#x89C4;&amp;#x8303;&amp;#x7684;&amp;#x57FA;&amp;#x7840;&amp;#x4E0A;&amp;#x5C01;&amp;#x88C5;&amp;#x7684;&amp;#x4E00;&amp;#x5957; JPA &amp;#x5E94;&amp;#x7528;&amp;#x6846;&amp;#x67B6;&amp;#xFF0C;&amp;#x53EF;&amp;#x4F7F;&amp;#x5F00;&amp;#x53D1;&amp;#x8005;&amp;#x7528;&amp;#x6781;&amp;#x7B80;&amp;#x7684;&amp;#x4EE3;&amp;#x7801;&amp;#x5373;&amp;#x53EF;&amp;#x5B9E;&amp;#x73B0;&amp;#x5BF9;&amp;#x6570;&amp;#x636E;&amp;#x7684;&amp;#x8BBF;&amp;#x95EE;&amp;#x548C;&amp;#x64CD;&amp;#x4F5C;&amp;#x3002;&amp;#x5B83;&amp;#x63D0;&amp;#x4F9B;&amp;#x4E86;&amp;#x5305;&amp;#x62EC;&amp;#x589E;&amp;#x5220;&amp;#x6539;&amp;#x67E5;&amp;#x7B49;&amp;#x5728;&amp;#x5185;&amp;#x7684;&amp;#x5E38;&amp;#x7528;&amp;#x529F;&amp;#x80FD;&amp;#xFF0C;&amp;#x4E14;&amp;#x6613;&amp;#x4E8E;&amp;#x6269;&amp;#x5C55;&amp;#xFF01;&amp;#x5B66;&amp;#x4E60;&amp;#x5E76;&amp;#x4F7F;&amp;#x7528; Spring Data JPA &amp;#x53EF;&amp;#x4EE5;&amp;#x6781;&amp;#x5927;&amp;#x63D0;&amp;#x9AD8;&amp;#x5F00;&amp;#x53D1;&amp;#x6548;&amp;#x7387;&amp;#xFF01;
+spring data jpa &amp;#x8BA9;&amp;#x6211;&amp;#x4EEC;&amp;#x89E3;&amp;#x8131;&amp;#x4E86; DAO &amp;#x5C42;&amp;#x7684;&amp;#x64CD;&amp;#x4F5C;&amp;#xFF0C;&amp;#x57FA;&amp;#x672C;&amp;#x4E0A;&amp;#x6240;&amp;#x6709; CRUD &amp;#x90FD;&amp;#x53EF;&amp;#x4EE5;&amp;#x4F9D;&amp;#x8D56;&amp;#x4E8E;&amp;#x5B83;&amp;#x6765;&amp;#x5B9E;&amp;#x73B0;&amp;#x3002;… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/SpringBoot" title='SpringBoot'>
+                        SpringBoot
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/SpringBoot/后台/Java/SpringBoot/SpringBoot学习总结(七)--集成RabbitMQ/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/SpringBoot/后台/Java/SpringBoot/SpringBoot学习总结(三)--集成SpringDataJpa/">SpringBoot学习总结(三)--集成 SpringDataJpa</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2018年07月23日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<blockquote>
+<p>&#x5728;&#x4E0A;&#x4E00;&#x7AE0;&#x8282;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x8BB2;&#x5230;&#x4E86;&#x9664;&#x4E86; Mybatis &#x5916;&#xFF0C;&#x8FD8;&#x6709;&#x53E6;&#x4E00;&#x79CD; <code>orm</code> &#x6846;&#x67B6;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x5B66;&#x4E60;&#x4E0B;&#x600E;&#x4E48;&#x96C6;&#x6210;&#x4F7F;&#x7528;&#x3002;</p>
+</blockquote>
+<h2 id="&#x4EC0;&#x4E48;&#x662F;-spring-data-jpa"><a href="#&#x4EC0;&#x4E48;&#x662F;-spring-data-jpa" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F; spring data jpa"></a>&#x4EC0;&#x4E48;&#x662F; spring data jpa</h2><p><code>Spring Data JPA</code> &#x662F; <code>Spring</code> &#x57FA;&#x4E8E; <code>ORM</code> &#x6846;&#x67B6; &#x548C; <code>JPA</code> &#x89C4;&#x8303;&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x5C01;&#x88C5;&#x7684;&#x4E00;&#x5957; <code>JPA</code> &#x5E94;&#x7528;&#x6846;&#x67B6;&#xFF0C;&#x53EF;&#x4F7F;&#x5F00;&#x53D1;&#x8005;&#x7528;&#x6781;&#x7B80;&#x7684;&#x4EE3;&#x7801;&#x5373;&#x53EF;&#x5B9E;&#x73B0;&#x5BF9;&#x6570;&#x636E;&#x7684;&#x8BBF;&#x95EE;&#x548C;&#x64CD;&#x4F5C;&#x3002;&#x5B83;&#x63D0;&#x4F9B;&#x4E86;&#x5305;&#x62EC;&#x589E;&#x5220;&#x6539;&#x67E5;&#x7B49;&#x5728;&#x5185;&#x7684;&#x5E38;&#x7528;&#x529F;&#x80FD;&#xFF0C;&#x4E14;&#x6613;&#x4E8E;&#x6269;&#x5C55;&#xFF01;&#x5B66;&#x4E60;&#x5E76;&#x4F7F;&#x7528; <code>Spring Data JPA</code> &#x53EF;&#x4EE5;&#x6781;&#x5927;&#x63D0;&#x9AD8;&#x5F00;&#x53D1;&#x6548;&#x7387;&#xFF01;</p>
+<p><code>spring data jpa</code> &#x8BA9;&#x6211;&#x4EEC;&#x89E3;&#x8131;&#x4E86; <code>DAO</code> &#x5C42;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x57FA;&#x672C;&#x4E0A;&#x6240;&#x6709; <code>CRUD</code> &#x90FD;&#x53EF;&#x4EE5;&#x4F9D;&#x8D56;&#x4E8E;&#x5B83;&#x6765;&#x5B9E;&#x73B0;&#x3002;</p>
+              <!--   -->
+              <!--      
+&amp;#x5728;&amp;#x4E0A;&amp;#x4E00;&amp;#x7AE0;&amp;#x8282;&amp;#x4E2D;&amp;#xFF0C;&amp;#x6211;&amp;#x4EEC;&amp;#x8BB2;&amp;#x5230;&amp;#x4E86;&amp;#x9664;&amp;#x4E86; Mybatis &amp;#x5916;&amp;#xFF0C;&amp;#x8FD8;&amp;#x6709;&amp;#x53E6;&amp;#x4E00;&amp;#x79CD; orm &amp;#x6846;&amp;#x67B6;&amp;#xFF0C;&amp;#x4ECA;&amp;#x5929;&amp;#x6211;&amp;#x4EEC;&amp;#x5C31;&amp;#x6765;&amp;#x5B66;&amp;#x4E60;&amp;#x4E0B;&amp;#x600E;&amp;#x4E48;&amp;#x96C6;&amp;#x6210;&amp;#x4F7F;&amp;#x7528;&amp;#x3002;
+
+&amp;#x4EC0;&amp;#x4E48;&amp;#x662F; spring data jpaSpring Data JPA &amp;#x662F; Spring &amp;#x57FA;&amp;#x4E8E; ORM &amp;#x6846;&amp;#x67B6; &amp;#x548C; JPA &amp;#x89C4;&amp;#x8303;&amp;#x7684;&amp;#x57FA;&amp;#x7840;&amp;#x4E0A;&amp;#x5C01;&amp;#x88C5;&amp;#x7684;&amp;#x4E00;&amp;#x5957; JPA &amp;#x5E94;&amp;#x7528;&amp;#x6846;&amp;#x67B6;&amp;#xFF0C;&amp;#x53EF;&amp;#x4F7F;&amp;#x5F00;&amp;#x53D1;&amp;#x8005;&amp;#x7528;&amp;#x6781;&amp;#x7B80;&amp;#x7684;&amp;#x4EE3;&amp;#x7801;&amp;#x5373;&amp;#x53EF;&amp;#x5B9E;&amp;#x73B0;&amp;#x5BF9;&amp;#x6570;&amp;#x636E;&amp;#x7684;&amp;#x8BBF;&amp;#x95EE;&amp;#x548C;&amp;#x64CD;&amp;#x4F5C;&amp;#x3002;&amp;#x5B83;&amp;#x63D0;&amp;#x4F9B;&amp;#x4E86;&amp;#x5305;&amp;#x62EC;&amp;#x589E;&amp;#x5220;&amp;#x6539;&amp;#x67E5;&amp;#x7B49;&amp;#x5728;&amp;#x5185;&amp;#x7684;&amp;#x5E38;&amp;#x7528;&amp;#x529F;&amp;#x80FD;&amp;#xFF0C;&amp;#x4E14;&amp;#x6613;&amp;#x4E8E;&amp;#x6269;&amp;#x5C55;&amp;#xFF01;&amp;#x5B66;&amp;#x4E60;&amp;#x5E76;&amp;#x4F7F;&amp;#x7528; Spring Data JPA &amp;#x53EF;&amp;#x4EE5;&amp;#x6781;&amp;#x5927;&amp;#x63D0;&amp;#x9AD8;&amp;#x5F00;&amp;#x53D1;&amp;#x6548;&amp;#x7387;&amp;#xFF01;
+spring data jpa &amp;#x8BA9;&amp;#x6211;&amp;#x4EEC;&amp;#x89E3;&amp;#x8131;&amp;#x4E86; DAO &amp;#x5C42;&amp;#x7684;&amp;#x64CD;&amp;#x4F5C;&amp;#xFF0C;&amp;#x57FA;&amp;#x672C;&amp;#x4E0A;&amp;#x6240;&amp;#x6709; CRUD &amp;#x90FD;&amp;#x53EF;&amp;#x4EE5;&amp;#x4F9D;&amp;#x8D56;&amp;#x4E8E;&amp;#x5B83;&amp;#x6765;&amp;#x5B9E;&amp;#x73B0;&amp;#x3002;… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/SpringBoot" title='SpringBoot'>
+                        SpringBoot
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/SpringBoot/后台/Java/SpringBoot/SpringBoot学习总结(三)--集成SpringDataJpa/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/SpringBoot/后台/Java/SpringBoot/SpringBoot学习总结(二)--集成Mybatis/">SpringBoot学习总结(二)--集成 Mybatis</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2018年07月20日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<p><code>orm</code> &#x6846;&#x67B6;&#x7684;&#x672C;&#x8D28;&#x662F;&#x7B80;&#x5316;&#x7F16;&#x7A0B;&#x4E2D;&#x64CD;&#x4F5C;&#x6570;&#x636E;&#x5E93;&#x7684;&#x7F16;&#x7801;&#xFF0C;&#x53D1;&#x5C55;&#x5230;&#x73B0;&#x5728;&#x57FA;&#x672C;&#x4E0A;&#x5C31;&#x5269;&#x4E24;&#x5BB6;&#x4E86;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;&#x5BA3;&#x79F0;&#x53EF;&#x4EE5;&#x4E0D;&#x7528;&#x5199;&#x4E00;&#x53E5;<code>SQL</code>&#x7684; <code>hibernate</code>&#xFF0C;&#x4E00;&#x4E2A;&#x662F;&#x53EF;&#x4EE5;&#x7075;&#x6D3B;&#x8C03;&#x8BD5;&#x52A8;&#x6001; <code>sql</code> &#x7684; <code>mybatis</code>,&#x4E24;&#x8005;&#x5404;&#x6709;&#x7279;&#x70B9;&#xFF0C;&#x5728;&#x4F01;&#x4E1A;&#x7EA7;&#x7CFB;&#x7EDF;&#x5F00;&#x53D1;&#x4E2D;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x9700;&#x6C42;&#x7075;&#x6D3B;&#x4F7F;&#x7528;&#x3002;</p>
+<p><code>SpringBoot</code> &#x5BF9;&#x4E8E; <code>Mybatis</code> &#x4E5F;&#x505A;&#x4E86;&#x4F18;&#x5316;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x4F7F;&#x7528;&#x4E0B;&#x5427;&#xFF01;</p>
+              <!--   -->
+              <!--      orm &amp;#x6846;&amp;#x67B6;&amp;#x7684;&amp;#x672C;&amp;#x8D28;&amp;#x662F;&amp;#x7B80;&amp;#x5316;&amp;#x7F16;&amp;#x7A0B;&amp;#x4E2D;&amp;#x64CD;&amp;#x4F5C;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x7684;&amp;#x7F16;&amp;#x7801;&amp;#xFF0C;&amp;#x53D1;&amp;#x5C55;&amp;#x5230;&amp;#x73B0;&amp;#x5728;&amp;#x57FA;&amp;#x672C;&amp;#x4E0A;&amp;#x5C31;&amp;#x5269;&amp;#x4E24;&amp;#x5BB6;&amp;#x4E86;&amp;#xFF0C;&amp;#x4E00;&amp;#x4E2A;&amp;#x662F;&amp;#x5BA3;&amp;#x79F0;&amp;#x53EF;&amp;#x4EE5;&amp;#x4E0D;&amp;#x7528;&amp;#x5199;&amp;#x4E00;&amp;#x53E5;SQL&amp;#x7684; hibernate&amp;#xFF0C;&amp;#x4E00;&amp;#x4E2A;&amp;#x662F;&amp;#x53EF;&amp;#x4EE5;&amp;#x7075;&amp;#x6D3B;&amp;#x8C03;&amp;#x8BD5;&amp;#x52A8;&amp;#x6001; sql &amp;#x7684; mybatis,&amp;#x4E24;&amp;#x8005;&amp;#x5404;&amp;#x6709;&amp;#x7279;&amp;#x70B9;&amp;#xFF0C;&amp;#x5728;&amp;#x4F01;&amp;#x4E1A;&amp;#x7EA7;&amp;#x7CFB;&amp;#x7EDF;&amp;#x5F00;&amp;#x53D1;&amp;#x4E2D;&amp;#x53EF;&amp;#x4EE5;&amp;#x6839;&amp;#x636E;&amp;#x9700;&amp;#x6C42;&amp;#x7075;&amp;#x6D3B;&amp;#x4F7F;&amp;#x7528;&amp;#x3002;
+SpringBoot &amp;#x5BF9;&amp;#x4E8E; Mybatis &amp;#x4E5F;&amp;#x505A;&amp;#x4E86;&amp;#x4F18;&amp;#x5316;&amp;#xFF0C;&amp;#x4ECA;&amp;#x5929;&amp;#x6211;&amp;#x4EEC;&amp;#x5C31;&amp;#x6765;&amp;#x4F7F;&amp;#x7528;&amp;#x4E0B;&amp;#x5427;&amp;#xFF01;… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/SpringBoot" title='SpringBoot'>
+                        SpringBoot
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/SpringBoot/后台/Java/SpringBoot/SpringBoot学习总结(二)--集成Mybatis/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/SpringBoot/后台/Java/SpringBoot/SpringBoot学习总结(一)--HelloWorld/">SpringBoot学习总结(一)--Hello World</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2018年07月17日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<blockquote>
+<p>&#x5982;&#x679C;&#x6709;&#x4F7F;&#x7528;&#x8FC7; <code>SSM</code> &#x6846;&#x67B6;&#x7ECF;&#x9A8C;&#x7684;&#x540C;&#x5B66;&#x80AF;&#x5B9A;&#x77E5;&#x9053;&#xFF0C;&#x5728;&#x8FD0;&#x884C;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#x524D;&#x4F60;&#x9700;&#x8981;&#x914D;&#x7F6E;&#x76F8;&#x5F53;&#x591A;&#x7684;&#x914D;&#x7F6E;&#x3002;&#x590D;&#x6742;&#x7E41;&#x7410;&#x7684;&#x914D;&#x7F6E;&#x8BA9;&#x65B0;&#x624B;&#x65E0;&#x6240;&#x9002;&#x4ECE;&#xFF0C;&#x800C;&#x6B64;&#x65F6;&#x3010;&#x6B64;&#x5904;&#x5E94;&#x6709;&#x638C;&#x58F0;&#x3011;<code>SprignBoot</code> &#x95EA;&#x4EAE;&#x767B;&#x573A;&#x3002;</p>
+</blockquote>
+<h2 id="&#x4EC0;&#x4E48;&#x662F;-SpringBoot"><a href="#&#x4EC0;&#x4E48;&#x662F;-SpringBoot" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F; SpringBoot"></a>&#x4EC0;&#x4E48;&#x662F; SpringBoot</h2><p><code>Spring Boot</code> &#x662F;&#x7531; <code>Pivotal</code> &#x56E2;&#x961F;&#x63D0;&#x4F9B;&#x7684;&#x5168;&#x65B0;&#x6846;&#x67B6;&#xFF0C;&#x5176;&#x8BBE;&#x8BA1;&#x76EE;&#x7684;&#x662F;&#x7528;&#x6765;&#x7B80;&#x5316; <code>Spring</code> &#x5E94;&#x7528;&#x7684;&#x521D;&#x59CB;&#x642D;&#x5EFA;&#x4EE5;&#x53CA;&#x5F00;&#x53D1;&#x8FC7;&#x7A0B;&#x3002;&#x8BE5;&#x6846;&#x67B6;&#x4F7F;&#x7528;&#x4E86;&#x7279;&#x5B9A;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x8FDB;&#x884C;&#x914D;&#x7F6E;&#xFF0C;&#x4ECE;&#x800C;&#x4F7F;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x4E0D;&#x518D;&#x9700;&#x8981;&#x5B9A;&#x4E49;&#x6837;&#x677F;&#x5316;&#x7684;&#x914D;&#x7F6E;&#x3002;&#x7B80;&#x5355;&#x6765;&#x8BF4;&#xFF0C;&#x5C31;&#x662F;&#x5B9E;&#x73B0; <code>&#x7EA6;&#x5B9A;&#x5927;&#x4E8E;&#x914D;&#x7F6E;</code> &#x8FD9;&#x4E00;&#x53E3;&#x53F7;&#xFF0C;&#x4F60;&#x901A;&#x8FC7;&#x9ED8;&#x8BA4;&#x7684;&#x8BBE;&#x7F6E;&#x5C31;&#x80FD;&#x6B63;&#x5E38;&#x542F;&#x52A8;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#x5566;&#xFF01;</p>
+              <!--   -->
+              <!--      
+&amp;#x5982;&amp;#x679C;&amp;#x6709;&amp;#x4F7F;&amp;#x7528;&amp;#x8FC7; SSM &amp;#x6846;&amp;#x67B6;&amp;#x7ECF;&amp;#x9A8C;&amp;#x7684;&amp;#x540C;&amp;#x5B66;&amp;#x80AF;&amp;#x5B9A;&amp;#x77E5;&amp;#x9053;&amp;#xFF0C;&amp;#x5728;&amp;#x8FD0;&amp;#x884C;&amp;#x4E00;&amp;#x4E2A;&amp;#x9879;&amp;#x76EE;&amp;#x524D;&amp;#x4F60;&amp;#x9700;&amp;#x8981;&amp;#x914D;&amp;#x7F6E;&amp;#x76F8;&amp;#x5F53;&amp;#x591A;&amp;#x7684;&amp;#x914D;&amp;#x7F6E;&amp;#x3002;&amp;#x590D;&amp;#x6742;&amp;#x7E41;&amp;#x7410;&amp;#x7684;&amp;#x914D;&amp;#x7F6E;&amp;#x8BA9;&amp;#x65B0;&amp;#x624B;&amp;#x65E0;&amp;#x6240;&amp;#x9002;&amp;#x4ECE;&amp;#xFF0C;&amp;#x800C;&amp;#x6B64;&amp;#x65F6;&amp;#x3010;&amp;#x6B64;&amp;#x5904;&amp;#x5E94;&amp;#x6709;&amp;#x638C;&amp;#x58F0;&amp;#x3011;SprignBoot &amp;#x95EA;&amp;#x4EAE;&amp;#x767B;&amp;#x573A;&amp;#x3002;
+
+&amp;#x4EC0;&amp;#x4E48;&amp;#x662F; SpringBootSpring Boot &amp;#x662F;&amp;#x7531; Pivotal &amp;#x56E2;&amp;#x961F;&amp;#x63D0;&amp;#x4F9B;&amp;#x7684;&amp;#x5168;&amp;#x65B0;&amp;#x6846;&amp;#x67B6;&amp;#xFF0C;&amp;#x5176;&amp;#x8BBE;&amp;#x8BA1;&amp;#x76EE;&amp;#x7684;&amp;#x662F;&amp;#x7528;&amp;#x6765;&amp;#x7B80;&amp;#x5316; Spring &amp;#x5E94;&amp;#x7528;&amp;#x7684;&amp;#x521D;&amp;#x59CB;&amp;#x642D;&amp;#x5EFA;&amp;#x4EE5;&amp;#x53CA;&amp;#x5F00;&amp;#x53D1;&amp;#x8FC7;&amp;#x7A0B;&amp;#x3002;&amp;#x8BE5;&amp;#x6846;&amp;#x67B6;&amp;#x4F7F;&amp;#x7528;&amp;#x4E86;&amp;#x7279;&amp;#x5B9A;&amp;#x7684;&amp;#x65B9;&amp;#x5F0F;&amp;#x6765;&amp;#x8FDB;&amp;#x884C;&amp;#x914D;&amp;#x7F6E;&amp;#xFF0C;&amp;#x4ECE;&amp;#x800C;&amp;#x4F7F;&amp;#x5F00;&amp;#x53D1;&amp;#x4EBA;&amp;#x5458;&amp;#x4E0D;&amp;#x518D;&amp;#x9700;&amp;#x8981;&amp;#x5B9A;&amp;#x4E49;&amp;#x6837;&amp;#x677F;&amp;#x5316;&amp;#x7684;&amp;#x914D;&amp;#x7F6E;&amp;#x3002;&amp;#x7B80;&amp;#x5355;&amp;#x6765;&amp;#x8BF4;&amp;#xFF0C;&amp;#x5C31;&amp;#x662F;&amp;#x5B9E;&amp;#x73B0; &amp;#x7EA6;&amp;#x5B9A;&amp;#x5927;&amp;#x4E8E;&amp;#x914D;&amp;#x7F6E; &amp;#x8FD9;&amp;#x4E00;&amp;#x53E3;&amp;#x53F7;&amp;#xFF0C;&amp;#x4F60;&amp;#x901A;&amp;#x8FC7;&amp;#x9ED8;&amp;#x8BA4;&amp;#x7684;&amp;#x8BBE;&amp;#x7F6E;&amp;#x5C31;&amp;#x80FD;&amp;#x6B63;&amp;#x5E38;&amp;#x542F;&amp;#x52A8;&amp;#x4E00;&amp;#x4E2A;&amp;#x9879;&amp;#x76EE;&amp;#x5566;&amp;#xFF01;… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/SpringBoot" title='SpringBoot'>
+                        SpringBoot
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/SpringBoot/后台/Java/SpringBoot/SpringBoot学习总结(一)--HelloWorld/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+
+
+
+
+
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">49</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/C/" style="font-size: 10.91px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.82px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 10.91px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 16.36px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12.73px;">JavaScript</a> <a href="/tags/Liunx/" style="font-size: 15.45px;">Liunx</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12.73px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 17.27px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 17.27px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 15.45px;">Nginx</a> <a href="/tags/Quartz/" style="font-size: 12.73px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 11.82px;">RabbitMQ</a> <a href="/tags/SQL/" style="font-size: 15.45px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.91px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 19.09px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 18.18px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 14.55px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 16.36px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 17.27px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Utils/" style="font-size: 10.91px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 16.36px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 16.36px;">Vue</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10.91px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10.91px;">tool</a> <a href="/tags/前端/" style="font-size: 10.91px;">前端</a> <a href="/tags/前端基础/" style="font-size: 13.64px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12.73px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

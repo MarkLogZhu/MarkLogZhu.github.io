@@ -1,0 +1,699 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Liunx学习总结(一)--初识 Liunx | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Liunx学习总结(一)--初识 Liunx">
+            
+	            Liunx学习总结(一)--初识 Liunx
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Liunx">
+            Liunx
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Liunx" title='Liunx'>
+                        Liunx
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/07/31</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <blockquote>
+<p>liunx &#x7CFB;&#x7EDF;&#x53EF;&#x4EE5;&#x8BF4;&#x662F;&#x76EE;&#x524D;&#x4E3A;&#x6B62;&#x4EFD;&#x989D;&#x6700;&#x5927;&#x7684;&#x4E00;&#x4E2A;&#x7CFB;&#x7EDF;&#x4E86;&#xFF0C;&#x57FA;&#x672C;&#x4E0A;&#x5927;&#x591A;&#x6570;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#x90FD;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5B83;&#x7684;&#x8EAB;&#x5F71;&#x3002;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x5B66;&#x4E60;&#x4E00;&#x4E0B;&#x5B83;&#x3002;</p>
+</blockquote>
+<h2 id="Liunx-&#x7B80;&#x4ECB;"><a href="#Liunx-&#x7B80;&#x4ECB;" class="headerlink" title="Liunx &#x7B80;&#x4ECB;"></a>Liunx &#x7B80;&#x4ECB;</h2><blockquote>
+<p>Linux &#x662F;&#x4E00;&#x5957;&#x514D;&#x8D39;&#x4F7F;&#x7528;&#x548C;&#x81EA;&#x7531;&#x4F20;&#x64AD;&#x7684;&#x7C7B; Unix &#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#xFF0C;&#x662F;&#x4E00;&#x4E2A;&#x57FA;&#x4E8E; POSIX &#x548C; UNIX &#x7684;&#x591A;&#x7528;&#x6237;&#x3001;&#x591A;&#x4EFB;&#x52A1;&#x3001;&#x652F;&#x6301;&#x591A;&#x7EBF;&#x7A0B;&#x548C;&#x591A; CPU &#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x3002;&#x5B83;&#x80FD;&#x8FD0;&#x884C;&#x4E3B;&#x8981;&#x7684; UNIX &#x5DE5;&#x5177;&#x8F6F;&#x4EF6;&#x3001;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x548C;&#x7F51;&#x7EDC;&#x534F;&#x8BAE;&#x3002;&#x5B83;&#x652F;&#x6301;32&#x4F4D;&#x548C;64&#x4F4D;&#x786C;&#x4EF6;&#x3002;Linux &#x7EE7;&#x627F;&#x4E86; Unix &#x4EE5;&#x7F51;&#x7EDC;&#x4E3A;&#x6838;&#x5FC3;&#x7684;&#x8BBE;&#x8BA1;&#x601D;&#x60F3;&#xFF0C;&#x662F;&#x4E00;&#x4E2A;&#x6027;&#x80FD;&#x7A33;&#x5B9A;&#x7684;&#x591A;&#x7528;&#x6237;&#x7F51;&#x7EDC;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x3002;</p>
+<p>Linux &#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x8BDE;&#x751F;&#x4E8E;1991 &#x5E74;10 &#x6708;5 &#x65E5;&#xFF08;&#x8FD9;&#x662F;&#x7B2C;&#x4E00;&#x6B21;&#x6B63;&#x5F0F;&#x5411;&#x5916;&#x516C;&#x5E03;&#x65F6;&#x95F4;&#xFF09;&#x3002;Linux &#x5B58;&#x5728;&#x7740;&#x8BB8;&#x591A;&#x4E0D;&#x540C;&#x7684; Linux &#x7248;&#x672C;&#xFF0C;&#x4F46;&#x5B83;&#x4EEC;&#x90FD;&#x4F7F;&#x7528;&#x4E86; Linux &#x5185;&#x6838;&#x3002;Linux &#x53EF;&#x5B89;&#x88C5;&#x5728;&#x5404;&#x79CD;&#x8BA1;&#x7B97;&#x673A;&#x786C;&#x4EF6;&#x8BBE;&#x5907;&#x4E2D;&#xFF0C;&#x6BD4;&#x5982;&#x624B;&#x673A;&#x3001;&#x5E73;&#x677F;&#x7535;&#x8111;&#x3001;&#x8DEF;&#x7531;&#x5668;&#x3001;&#x89C6;&#x9891;&#x6E38;&#x620F;&#x63A7;&#x5236;&#x53F0;&#x3001;&#x53F0;&#x5F0F;&#x8BA1;&#x7B97;&#x673A;&#x3001;&#x5927;&#x578B;&#x673A;&#x548C;&#x8D85;&#x7EA7;&#x8BA1;&#x7B97;&#x673A;&#x3002;</p>
+<p>&#x4E25;&#x683C;&#x6765;&#x8BB2;&#xFF0C;Linux &#x8FD9;&#x4E2A;&#x8BCD;&#x672C;&#x8EAB;&#x53EA;&#x8868;&#x793A; Linux &#x5185;&#x6838;&#xFF0C;&#x4F46;&#x5B9E;&#x9645;&#x4E0A;&#x4EBA;&#x4EEC;&#x5DF2;&#x7ECF;&#x4E60;&#x60EF;&#x4E86;&#x7528; Linux &#x6765;&#x5F62;&#x5BB9;&#x6574;&#x4E2A;&#x57FA;&#x4E8E; Linux &#x5185;&#x6838;&#xFF0C;&#x5E76;&#x4E14;&#x4F7F;&#x7528; GNU &#x5DE5;&#x7A0B;&#x5404;&#x79CD;&#x5DE5;&#x5177;&#x548C;&#x6570;&#x636E;&#x5E93;&#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x3002;</p>
+</blockquote>
+<p>&#x4EE5;&#x4E0A;&#x7684;&#x4ECB;&#x7ECD;&#x6765;&#x81EA;&#x4E8E;&#x767E;&#x5EA6;&#x767E;&#x79D1;&#xFF0C;&#x7B80;&#x5355;&#x6765;&#x8BF4; Liunx &#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x8DDF; windows &#x4E00;&#x6837;&#x7684;&#x7CFB;&#x7EDF;&#xFF0C;&#x4F46;&#x662F;&#x8DDF; windows &#x76F8;&#x6BD4;&#xFF0C;&#x5B83;&#x662F;&#x5F00;&#x6E90;&#x514D;&#x8D39;&#x7684;(&#x5927;&#x591A;&#x6570;)&#xFF0C;&#x800C;&#x4E14;&#x5B83;&#x6709;&#x5F88;&#x591A;&#x4F18;&#x79C0;&#x7684;&#x5730;&#x65B9;&#x3002;&#x57FA;&#x4E8E;&#x8FD9;&#x4E24;&#x70B9;&#x5728;&#x670D;&#x52A1;&#x5668;&#x9886;&#x57DF;&#x5360;&#x636E;&#x534A;&#x58C1;&#x6C5F;&#x5C71;&#x81EA;&#x7136;&#x662F;&#x4E0D;&#x5728;&#x8BDD;&#x4E0B;&#x4E86;&#x3002;</p>
+<a id="more"></a> 
+<h2 id="Liunx-&#x5B89;&#x88C5;"><a href="#Liunx-&#x5B89;&#x88C5;" class="headerlink" title="Liunx &#x5B89;&#x88C5;"></a>Liunx &#x5B89;&#x88C5;</h2><p>Liunx &#x5B89;&#x88C5;&#x8BF7;&#x81EA;&#x884C;&#x641C;&#x7D22;&#x5B89;&#x88C5;&#xFF0C;&#x8FD9;&#x91CC;&#x4E0D;&#x505A;&#x8FC7;&#x591A;&#x89E3;&#x91CA;&#x3002;</p>
+<h2 id="Liunx-&#x8DEF;&#x5F84;"><a href="#Liunx-&#x8DEF;&#x5F84;" class="headerlink" title="Liunx &#x8DEF;&#x5F84;"></a>Liunx &#x8DEF;&#x5F84;</h2><p>Linux &#x4E2D;&#x8DEF;&#x5F84;&#x5206;&#x4E3A;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;&#x548C;&#x76F8;&#x5BF9;&#x8DEF;&#x5F84;&#xFF0C;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;&#x662F;&#x4ECE; <code>/</code>&#x5F00;&#x59CB;&#x5199;&#x7684;&#xFF0C;&#x76F8;&#x5BF9;&#x8DEF;&#x5F84;&#x5C31;&#x662F;&#x4ECE;&#x5F53;&#x524D;&#x8DEF;&#x5F84;&#x5F00;&#x59CB;&#x3002;</p>
+<h3 id="&#x8DEF;&#x5F84;&#x7B26;&#x53F7;"><a href="#&#x8DEF;&#x5F84;&#x7B26;&#x53F7;" class="headerlink" title="&#x8DEF;&#x5F84;&#x7B26;&#x53F7;"></a>&#x8DEF;&#x5F84;&#x7B26;&#x53F7;</h3><table>
+<thead>
+<tr>
+<th>&#x7B26;&#x53F7;</th>
+<th>&#x542B;&#x4E49;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.</td>
+<td>(&#x4E00;&#x4E2A;&#x70B9;)&#x8868;&#x793A;&#x5F53;&#x524D;&#x76EE;&#x5F55;</td>
+</tr>
+<tr>
+<td>.</td>
+<td>(&#x4E24;&#x4E2A;&#x70B9;)&#x8868;&#x793A;&#x4E0A;&#x4E00;&#x5C42;&#x76EE;&#x5F55;</td>
+</tr>
+<tr>
+<td>-</td>
+<td>(&#x4E00;&#x4E2A;&#x77ED;&#x6A2A;&#x7EBF;)&#x8868;&#x793A;&#x4E0A;&#x4E00;&#x6B21;&#x4F7F;&#x7528;&#x7684;&#x76EE;&#x5F55;&#xFF0C;&#x4F8B;&#x5982;&#x4ECE;/tmp&#x76F4;&#x63A5;&#x5207;&#x6362;&#x5230;/etc&#x4E0B;&#xFF0C;-&#x5C31;&#x8868;&#x793A;/tmp</td>
+</tr>
+<tr>
+<td>~</td>
+<td>(&#x6CE2;&#x6D6A;&#x7B26;&#x53F7;)&#x8868;&#x793A;&#x7528;&#x6237;&#x7684;&#x5BB6;&#x76EE;&#x5F55;&#xFF0C;&#x4F8B;&#x5982;&#x201D;~account&#x201D;&#x8868;&#x793A;account&#x7528;&#x6237;&#x7684;&#x5BB6;&#x76EE;&#x5F55;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="&#x8DEF;&#x5F84;&#x6307;&#x4EE4;"><a href="#&#x8DEF;&#x5F84;&#x6307;&#x4EE4;" class="headerlink" title="&#x8DEF;&#x5F84;&#x6307;&#x4EE4;"></a>&#x8DEF;&#x5F84;&#x6307;&#x4EE4;</h3><table>
+<thead>
+<tr>
+<th>&#x6307;&#x4EE4;</th>
+<th>&#x542B;&#x4E49;</th>
+<th>&#x793A;&#x4F8B;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cd</td>
+<td>&#x5207;&#x6362;&#x8DEF;&#x5F84;</td>
+<td>cd usr/local</td>
+</tr>
+<tr>
+<td>pwd</td>
+<td>&#x663E;&#x793A;&#x5F53;&#x524D;&#x8DEF;&#x5F84;</td>
+<td>pwd</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Liunx-&#x76EE;&#x5F55;&#x7ED3;&#x6784;"><a href="#Liunx-&#x76EE;&#x5F55;&#x7ED3;&#x6784;" class="headerlink" title="Liunx &#x76EE;&#x5F55;&#x7ED3;&#x6784;"></a>Liunx &#x76EE;&#x5F55;&#x7ED3;&#x6784;</h2><p><img src="/Liunx/&#x7CFB;&#x7EDF;/liunx/Liunx&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E00;)--&#x521D;&#x8BC6;Liunx/img/01.png" alt=""></p>
+<p>&#x5982;&#x56FE;&#x6240;&#x793A;&#xFF0C;liunx &#x662F;&#x6811;&#x5F62;&#x7ED3;&#x6784;&#x76EE;&#x5F55;&#xFF0C;<code>/</code> &#x662F;&#x5B83;&#x7684;&#x6839;&#x76EE;&#x5F55;&#x6587;&#x4EF6;&#x3002;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E0B;&#x5404;&#x76EE;&#x5F55;&#x5206;&#x522B;&#x4EE3;&#x8868;&#x4EC0;&#x4E48;&#x542B;&#x4E49;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x76EE;&#x5F55;&#x540D;&#x79F0;</th>
+<th>&#x4F5C;&#x7528;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bin</td>
+<td></td>
+<td>Binary&#x7684;&#x7F29;&#x5199;, &#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x5B58;&#x653E;&#x7740;&#x6700;&#x7ECF;&#x5E38;&#x4F7F;&#x7528;&#x7684;&#x547D;&#x4EE4;&#x3002;</td>
+</tr>
+<tr>
+<td>boot</td>
+<td>&#x5B58;&#x653E;&#x7684;&#x662F;&#x542F;&#x52A8;Linux&#x65F6;&#x4F7F;&#x7528;&#x7684;&#x4E00;&#x4E9B;&#x6838;&#x5FC3;&#x6587;&#x4EF6;&#xFF0C;&#x5305;&#x62EC;&#x4E00;&#x4E9B;&#x8FDE;&#x63A5;&#x6587;&#x4EF6;&#x4EE5;&#x53CA;&#x955C;&#x50CF;&#x6587;&#x4EF6;&#x3002;</td>
+</tr>
+<tr>
+<td>dev</td>
+<td>&#x662F;Device(&#x8BBE;&#x5907;)&#x7684;&#x7F29;&#x5199;, &#x8BE5;&#x76EE;&#x5F55;&#x4E0B;&#x5B58;&#x653E;&#x7684;&#x662F;Linux&#x7684;&#x5916;&#x90E8;&#x8BBE;&#x5907;&#xFF0C;&#x5728;Linux&#x4E2D;&#x8BBF;&#x95EE;&#x8BBE;&#x5907;&#x7684;&#x65B9;&#x5F0F;&#x548C;&#x8BBF;&#x95EE;&#x6587;&#x4EF6;&#x7684;&#x65B9;&#x5F0F;&#x662F;&#x76F8;&#x540C;&#x7684;&#x3002;</td>
+</tr>
+<tr>
+<td>etc</td>
+<td>&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x7528;&#x6765;&#x5B58;&#x653E;&#x6240;&#x6709;&#x7684;&#x7CFB;&#x7EDF;&#x7BA1;&#x7406;&#x6240;&#x9700;&#x8981;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x548C;&#x5B50;&#x76EE;&#x5F55;&#x3002;</td>
+</tr>
+<tr>
+<td>home</td>
+<td>&#x7528;&#x6237;&#x7684;&#x4E3B;&#x76EE;&#x5F55;&#xFF0C;&#x5728;Linux&#x4E2D;&#xFF0C;&#x6BCF;&#x4E2A;&#x7528;&#x6237;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x81EA;&#x5DF1;&#x7684;&#x76EE;&#x5F55;&#xFF0C;&#x4E00;&#x822C;&#x8BE5;&#x76EE;&#x5F55;&#x540D;&#x662F;&#x4EE5;&#x7528;&#x6237;&#x7684;&#x8D26;&#x53F7;&#x547D;&#x540D;&#x7684;</td>
+</tr>
+<tr>
+<td>lib</td>
+<td>&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x91CC;&#x5B58;&#x653E;&#x7740;&#x7CFB;&#x7EDF;&#x6700;&#x57FA;&#x672C;&#x7684;&#x52A8;&#x6001;&#x8FDE;&#x63A5;&#x5171;&#x4EAB;&#x5E93;&#xFF0C;&#x5176;&#x4F5C;&#x7528;&#x7C7B;&#x4F3C;&#x4E8E;Windows&#x91CC;&#x7684;DLL&#x6587;&#x4EF6;&#x3002;&#x51E0;&#x4E4E;&#x6240;&#x6709;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x90FD;&#x9700;&#x8981;&#x7528;&#x5230;&#x8FD9;&#x4E9B;&#x5171;&#x4EAB;&#x5E93;&#x3002;</td>
+</tr>
+<tr>
+<td>lib64</td>
+<td>&#x5305;&#x542B;&#x8BB8;&#x591A;&#x88AB; /bin/ &#x548C; /sbin/ &#x4E2D;&#x7684;&#x7A0B;&#x5E8F;&#x4F7F;&#x7528;&#x7684;&#x5E93;&#x6587;&#x4EF6;&#x3002;&#x76EE;&#x5F55; /usr/lib/ &#x4E2D;&#x542B;&#x6709;&#x66F4;&#x591A;&#x7528;&#x4E8E;&#x7528;&#x6237;&#x7A0B;&#x5E8F;&#x7684;&#x5E93;&#x6587;&#x4EF6;&#x3002;</td>
+</tr>
+<tr>
+<td>lost+found</td>
+<td>&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4E0B;&#x662F;&#x7A7A;&#x7684;&#xFF0C;&#x5F53;&#x7CFB;&#x7EDF;&#x975E;&#x6CD5;&#x5173;&#x673A;&#x540E;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x5B58;&#x653E;&#x4E86;&#x4E00;&#x4E9B;&#x6587;&#x4EF6;&#x3002;</td>
+</tr>
+<tr>
+<td>media</td>
+<td>linux&#x7CFB;&#x7EDF;&#x4F1A;&#x81EA;&#x52A8;&#x8BC6;&#x522B;&#x4E00;&#x4E9B;&#x8BBE;&#x5907;&#xFF0C;&#x4F8B;&#x5982;U&#x76D8;&#x3001;&#x5149;&#x9A71;&#x7B49;&#x7B49;&#xFF0C;&#x5F53;&#x8BC6;&#x522B;&#x540E;&#xFF0C;linux&#x4F1A;&#x628A;&#x8BC6;&#x522B;&#x7684;&#x8BBE;&#x5907;&#x6302;&#x8F7D;&#x5230;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x4E0B;&#x3002;</td>
+</tr>
+<tr>
+<td>mnt</td>
+<td>&#x7CFB;&#x7EDF;&#x63D0;&#x4F9B;&#x8BE5;&#x76EE;&#x5F55;&#x662F;&#x4E3A;&#x4E86;&#x8BA9;&#x7528;&#x6237;&#x4E34;&#x65F6;&#x6302;&#x8F7D;&#x522B;&#x7684;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5C06;&#x5149;&#x9A71;&#x6302;&#x8F7D;&#x5728;/mnt/&#x4E0A;&#xFF0C;&#x7136;&#x540E;&#x8FDB;&#x5165;&#x8BE5;&#x76EE;&#x5F55;&#x5C31;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x5149;&#x9A71;&#x91CC;&#x7684;&#x5185;&#x5BB9;&#x4E86;&#x3002;</td>
+</tr>
+<tr>
+<td>opt</td>
+<td>&#x8FD9;&#x662F;&#x7ED9;&#x4E3B;&#x673A;&#x989D;&#x5916;&#x5B89;&#x88C5;&#x8F6F;&#x4EF6;&#x6240;&#x6446;&#x653E;&#x7684;&#x76EE;&#x5F55;&#x3002;&#x6BD4;&#x5982;&#x4F60;&#x5B89;&#x88C5;&#x4E00;&#x4E2A;ORACLE&#x6570;&#x636E;&#x5E93;&#x5219;&#x5C31;&#x53EF;&#x4EE5;&#x653E;&#x5230;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x4E0B;&#x3002;&#x9ED8;&#x8BA4;&#x662F;&#x7A7A;&#x7684;&#x3002;</td>
+</tr>
+<tr>
+<td>proc</td>
+<td>&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x662F;&#x4E00;&#x4E2A;&#x865A;&#x62DF;&#x7684;&#x76EE;&#x5F55;&#xFF0C;&#x5B83;&#x662F;&#x7CFB;&#x7EDF;&#x5185;&#x5B58;&#x7684;&#x6620;&#x5C04;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x76F4;&#x63A5;&#x8BBF;&#x95EE;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x6765;&#x83B7;&#x53D6;&#x7CFB;&#x7EDF;&#x4FE1;&#x606F;&#x3002;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x7684;&#x5185;&#x5BB9;&#x4E0D;&#x5728;&#x786C;&#x76D8;&#x4E0A;&#x800C;&#x662F;&#x5728;&#x5185;&#x5B58;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4FEE;&#x6539;&#x91CC;&#x9762;&#x7684;&#x67D0;&#x4E9B;&#x6587;&#x4EF6;&#xFF0C;&#x6BD4;&#x5982;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#x6765;&#x5C4F;&#x853D;&#x4E3B;&#x673A;&#x7684;ping&#x547D;&#x4EE4;&#xFF0C;&#x4F7F;&#x522B;&#x4EBA;&#x65E0;&#x6CD5;ping&#x4F60;&#x7684;&#x673A;&#x5668;&#xFF1A;echo 1 &gt; /proc/sys/net/ipv4/icmp_echo_ignore_all</td>
+</tr>
+<tr>
+<td>root</td>
+<td>&#x8BE5;&#x76EE;&#x5F55;&#x4E3A;&#x7CFB;&#x7EDF;&#x7BA1;&#x7406;&#x5458;&#xFF0C;&#x4E5F;&#x79F0;&#x4F5C;&#x8D85;&#x7EA7;&#x6743;&#x9650;&#x8005;&#x7684;&#x7528;&#x6237;&#x4E3B;&#x76EE;&#x5F55;&#x3002;</td>
+</tr>
+<tr>
+<td>sbin</td>
+<td>s&#x5C31;&#x662F;Super User&#x7684;&#x610F;&#x601D;&#xFF0C;&#x8FD9;&#x91CC;&#x5B58;&#x653E;&#x7684;&#x662F;&#x7CFB;&#x7EDF;&#x7BA1;&#x7406;&#x5458;&#x4F7F;&#x7528;&#x7684;&#x7CFB;&#x7EDF;&#x7BA1;&#x7406;&#x7A0B;&#x5E8F;&#x3002;</td>
+</tr>
+<tr>
+<td>srv</td>
+<td>&#x8BE5;&#x76EE;&#x5F55;&#x5B58;&#x653E;&#x4E00;&#x4E9B;&#x670D;&#x52A1;&#x542F;&#x52A8;&#x4E4B;&#x540E;&#x9700;&#x8981;&#x63D0;&#x53D6;&#x7684;&#x6570;&#x636E;&#x3002;</td>
+</tr>
+<tr>
+<td>sys</td>
+<td>&#x8FD9;&#x662F;linux2.6&#x5185;&#x6838;&#x7684;&#x4E00;&#x4E2A;&#x5F88;&#x5927;&#x7684;&#x53D8;&#x5316;&#x3002;&#x8BE5;&#x76EE;&#x5F55;&#x4E0B;&#x5B89;&#x88C5;&#x4E86;2.6&#x5185;&#x6838;&#x4E2D;&#x65B0;&#x51FA;&#x73B0;&#x7684;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF; sysfs &#x3002;sysfs&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x96C6;&#x6210;&#x4E86;&#x4E0B;&#x9762;3&#x79CD;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x7684;&#x4FE1;&#x606F;&#xFF1A;&#x9488;&#x5BF9;&#x8FDB;&#x7A0B;&#x4FE1;&#x606F;&#x7684;proc&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x3001;&#x9488;&#x5BF9;&#x8BBE;&#x5907;&#x7684;devfs&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x4EE5;&#x53CA;&#x9488;&#x5BF9;&#x4F2A;&#x7EC8;&#x7AEF;&#x7684;devpts&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x3002;&#x8BE5;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x662F;&#x5185;&#x6838;&#x8BBE;&#x5907;&#x6811;&#x7684;&#x4E00;&#x4E2A;&#x76F4;&#x89C2;&#x53CD;&#x6620;&#x3002;&#x5F53;&#x4E00;&#x4E2A;&#x5185;&#x6838;&#x5BF9;&#x8C61;&#x88AB;&#x521B;&#x5EFA;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5BF9;&#x5E94;&#x7684;&#x6587;&#x4EF6;&#x548C;&#x76EE;&#x5F55;&#x4E5F;&#x5728;&#x5185;&#x6838;&#x5BF9;&#x8C61;&#x5B50;&#x7CFB;&#x7EDF;&#x4E2D;&#x88AB;&#x521B;&#x5EFA;&#x3002;</td>
+</tr>
+<tr>
+<td>tmp</td>
+<td>&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x662F;&#x7528;&#x6765;&#x5B58;&#x653E;&#x4E00;&#x4E9B;&#x4E34;&#x65F6;&#x6587;&#x4EF6;&#x7684;&#x3002;</td>
+</tr>
+<tr>
+<td>usr</td>
+<td>&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x7684;&#x76EE;&#x5F55;&#xFF0C;&#x7528;&#x6237;&#x7684;&#x5F88;&#x591A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x548C;&#x6587;&#x4EF6;&#x90FD;&#x653E;&#x5728;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E;windows&#x4E0B;&#x7684;program files&#x76EE;&#x5F55;&#x3002;</td>
+</tr>
+<tr>
+<td>usr/local</td>
+<td>&#x5B58;&#x653E;&#x624B;&#x52A8;&#x5B89;&#x88C5;&#x7684;&#x7A0B;&#x5E8F;</td>
+</tr>
+<tr>
+<td>var</td>
+<td>&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x4E2D;&#x5B58;&#x653E;&#x7740;&#x5728;&#x4E0D;&#x65AD;&#x6269;&#x5145;&#x7740;&#x7684;&#x4E1C;&#x897F;&#xFF0C;&#x6211;&#x4EEC;&#x4E60;&#x60EF;&#x5C06;&#x90A3;&#x4E9B;&#x7ECF;&#x5E38;&#x88AB;&#x4FEE;&#x6539;&#x7684;&#x76EE;&#x5F55;&#x653E;&#x5728;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x4E0B;&#x3002;&#x5305;&#x62EC;&#x5404;&#x79CD;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x3002;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="&#x76EE;&#x5F55;&#x547D;&#x4EE4;"><a href="#&#x76EE;&#x5F55;&#x547D;&#x4EE4;" class="headerlink" title="&#x76EE;&#x5F55;&#x547D;&#x4EE4;"></a>&#x76EE;&#x5F55;&#x547D;&#x4EE4;</h2><h3 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h3><p>&#x67E5;&#x770B;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#x4E0B;&#x6240;&#x6709;&#x6587;&#x4EF6;&#xFF0C;&#x4EE5;&#x5236;&#x8868;&#x7B26;&#x95F4;&#x9694;&#x3002;</p>
+<p><img src="/Liunx/&#x7CFB;&#x7EDF;/liunx/Liunx&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E00;)--&#x521D;&#x8BC6;Liunx/img/02.png" alt=""></p>
+<p>&#x5982;&#x679C;&#x60F3;&#x67E5;&#x770B;&#x66F4;&#x5177;&#x4F53;&#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x5982;&#x4E0B;&#x9009;&#x9879;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x9009;&#x9879;</th>
+<th>&#x4F5C;&#x7528;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-l</td>
+<td>(long)&#x957F;&#x683C;&#x5F0F;&#x663E;&#x793A;&#xFF0C;&#x5373;&#x663E;&#x793A;&#x5C5E;&#x6027;&#x7B49;&#x4FE1;&#x606F;(&#x5305;&#x62EC;mtime)&#x3002;&#x6CE8;&#x610F;&#xFF1A;&#x663E;&#x793A;&#x7684;&#x76EE;&#x5F55;&#x5927;&#x5C0F;&#x662F;&#x8282;&#x70B9;&#x6240;&#x5360;&#x5927;&#x5C0F;&#x3002;&#x50CF;win&#x4E00;&#x6837;&#x8BA1;&#x7B97;&#x76EE;&#x5F55;&#x5927;&#x5C0F;&#x65F6;&#x5305;&#x62EC;&#x6587;&#x4EF6;&#x5927;&#x5C0F;&#x8981;&#x7528;du -sh</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>&#x5217;&#x51FA;ctime</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>&#x5217;&#x51FA;atime</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>(direcorty)&#x67E5;&#x770B;&#x76EE;&#x5F55;&#x672C;&#x8EAB;&#x5C5E;&#x6027;&#x4FE1;&#x606F;&#xFF0C;&#x4E0D;&#x67E5;&#x770B;&#x76EE;&#x5F55;&#x91CC;&#x9762;&#x7684;&#x4E1C;&#x897F;&#x3002;&#x4E0D;&#x52A0;-d&#x4F1A;&#x67E5;&#x770B;&#x91CC;&#x9762;&#x6587;&#x4EF6;&#x7684;&#x4FE1;&#x606F;</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>&#x4F1A;&#x663E;&#x793A;&#x6240;&#x6709;&#x6587;&#x4EF6;&#xFF0C;&#x5305;&#x62EC;&#x4E24;&#x4E2A;&#x76F8;&#x5BF9;&#x8DEF;&#x5F84;&#x7684;&#x6587;&#x4EF6;&#x201D;.&#x201D;&#x548C;&#x201D;..&#x201D;&#x4EE5;&#x53CA;&#x4EE5;&#x70B9;&#x5F00;&#x5934;&#x7684;&#x9690;&#x85CF;&#x6587;&#x4EF6;</td>
+</tr>
+<tr>
+<td>-A</td>
+<td>&#x4F1A;&#x5217;&#x51FA;&#x7EDD;&#x5927;&#x591A;&#x6570;&#x6587;&#x4EF6;&#xFF0C;&#x5373;&#x5FFD;&#x7565;&#x4E24;&#x4E2A;&#x76F8;&#x5BF9;&#x8DEF;&#x5F84;&#x7684;&#x6587;&#x4EF6;&#x201D;.&#x201D;&#x548C;&#x201D;..&#x201D;</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>(human)&#x4EBA;&#x7C7B;&#x53EF;&#x8BFB;&#x7684;&#x683C;&#x5F0F;&#xFF0C;&#x5C06;&#x5B57;&#x8282;&#x6362;&#x6210;k,&#x5C06;K&#x6362;&#x6210;M&#xFF0C;&#x5C06;M&#x6362;&#x6210;G</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>(inode)&#x6743;&#x9650;&#x5C5E;&#x6027;&#x7684;&#x524D;&#x9762;&#x52A0;&#x4E0A;&#x4E00;&#x5806;&#x6570;&#x5B57;</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>&#x5BF9;&#x76EE;&#x5F55;&#x52A0;&#x4E0A;/&#x6807;&#x8BC6;&#x7B26;&#x4EE5;&#x4F5C;&#x533A;&#x5206;</td>
+</tr>
+<tr>
+<td>-F</td>
+<td>&#x5BF9;&#x4E0D;&#x540C;&#x7C7B;&#x578B;&#x7684;&#x6587;&#x4EF6;&#x52A0;&#x4E0A;&#x4E0D;&#x540C;&#x6807;&#x8BC6;&#x7B26;&#x4EE5;&#x4F5C;&#x533A;&#x5206;&#xFF0C;&#x5BF9;&#x76EE;&#x5F55;&#x52A0;&#x7684;&#x6587;&#x4EF6;&#x4E5F;&#x662F;/</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>&#x6309;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#x6392;&#x5E8F;&#x5185;&#x5BB9;&#x3002;&#x4E0D;&#x52A0;&#x4EFB;&#x4F55;&#x6539;&#x53D8;&#x987A;&#x5E8F;&#x7684;&#x9009;&#x9879;&#x65F6;&#xFF0C;ls&#x9ED8;&#x8BA4;&#x6309;&#x7167;&#x5B57;&#x6BCD;&#x987A;&#x5E8F;&#x6392;&#x5E8F;</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>&#x53CD;&#x8F6C;&#x6392;&#x5E8F;</td>
+</tr>
+<tr>
+<td>-R</td>
+<td>&#x9012;&#x5F52;&#x663E;&#x793A;</td>
+</tr>
+<tr>
+<td>-S</td>
+<td>&#x6309;&#x6587;&#x4EF6;&#x5927;&#x5C0F;&#x6392;&#x5E8F;&#xFF0C;&#x9ED8;&#x8BA4;&#x964D;&#x5E8F;&#x6392;&#x5E8F;</td>
+</tr>
+<tr>
+<td>-color</td>
+<td>&#x663E;&#x793A;&#x989C;&#x8272;</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>&#x4F7F;&#x7528;&#x9017;&#x53F7;&#x5206;&#x9694;&#x5404;&#x6587;&#x4EF6;&#xFF0C;&#x5F53;&#x7136;&#xFF0C;&#x53EA;&#x9002;&#x7528;&#x4E8E;&#x672A;&#x4F7F;&#x7528;&#x957F;&#x683C;&#x5F0F;(ls -l)&#x7684;&#x60C5;&#x51B5;</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>(&#x6570;&#x503C;&#x4E00;)&#xFF0C;&#x4EE5;&#x6362;&#x884C;&#x7B26;&#x5206;&#x9694;&#x6587;&#x4EF6;&#xFF0C;&#x5F53;&#x7136;&#xFF0C;&#x548C;-m&#x6216;-l(&#x5C0F;&#x5199;&#x5B57;&#x6BCD;)&#x662F;&#x51B2;&#x7A81;&#x7684;</td>
+</tr>
+<tr>
+<td>-I pattern</td>
+<td>&#x5FFD;&#x7565;&#x88AB; pattern &#x5339;&#x914D;&#x5230;&#x7684;&#x6587;&#x4EF6;</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/Liunx/&#x7CFB;&#x7EDF;/liunx/Liunx&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E00;)--&#x521D;&#x8BC6;Liunx/img/03.png" alt=""></p>
+<p><code>ls -l</code> &#x53EF;&#x4EE5;&#x7B80;&#x5199;&#x4E3A; <code>ll</code> , &#x6548;&#x679C;&#x662F;&#x4E00;&#x6837;&#x7684;&#x3002;</p>
+<h3 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h3><p>&#x5C06;&#x6587;&#x4EF6;&#x4EE5;&#x6811;&#x5F62;&#x7ED3;&#x6784;&#x7684;&#x65B9;&#x5F0F;&#x5217;&#x51FA;&#x6765;&#xFF0C;&#x4E00;&#x822C;&#x7CFB;&#x7EDF;&#x4E0D;&#x81EA;&#x5E26;&#x9700;&#x8981;&#x989D;&#x5916;&#x5B89;&#x88C5;&#x3002;</p>
+<h4 id="&#x5B89;&#x88C5;&#x547D;&#x4EE4;"><a href="#&#x5B89;&#x88C5;&#x547D;&#x4EE4;" class="headerlink" title="&#x5B89;&#x88C5;&#x547D;&#x4EE4;"></a>&#x5B89;&#x88C5;&#x547D;&#x4EE4;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install tree</div></pre></td></tr></table></figure>
+<h4 id="&#x9009;&#x9879;&#x8BF4;&#x660E;"><a href="#&#x9009;&#x9879;&#x8BF4;&#x660E;" class="headerlink" title="&#x9009;&#x9879;&#x8BF4;&#x660E;"></a>&#x9009;&#x9879;&#x8BF4;&#x660E;</h4><table>
+<thead>
+<tr>
+<th>&#x9009;&#x9879;&#x7C7B;&#x578B;</th>
+<th>&#x9009;&#x9879;</th>
+<th>&#x4F5C;&#x7528;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#x5339;&#x914D;&#x9009;&#x9879;</td>
+<td>-L</td>
+<td>&#x7528;&#x4E8E;&#x6307;&#x5B9A;&#x9012;&#x5F52;&#x663E;&#x793A;&#x7684;&#x6DF1;&#x5EA6;&#xFF0C;&#x6307;&#x5B9A;&#x7684;&#x6DF1;&#x5EA6;&#x5FC5;&#x987B;&#x662F;&#x5927;&#x4E8E;0&#x7684;&#x6574;&#x6570;&#x3002;</td>
+</tr>
+<tr>
+<td>&#x5339;&#x914D;&#x9009;&#x9879;</td>
+<td>-P</td>
+<td>&#x7528;&#x4E8E;&#x663E;&#x793A;&#x7EDF;&#x914D;&#x7B26;&#x5339;&#x914D;&#x6A21;&#x5F0F;&#x7684;&#x76EE;&#x5F55;&#x548C;&#x6587;&#x4EF6;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x7BA1;&#x662F;&#x5426;&#x5339;&#x914D;&#xFF0C;&#x76EE;&#x5F55;&#x4E00;&#x5B9A;&#x663E;&#x793A;&#x3002;</td>
+</tr>
+<tr>
+<td>&#x5339;&#x914D;&#x9009;&#x9879;</td>
+<td>-I</td>
+<td>&#x7528;&#x4E8E;&#x663E;&#x793A;&#x9664;&#x88AB;&#x901A;&#x914D;&#x7B26;&#x5339;&#x914D;&#x5916;&#x7684;&#x6240;&#x6709;&#x76EE;&#x5F55;&#x548C;&#x6587;&#x4EF6;&#x3002;</td>
+</tr>
+<tr>
+<td>&#x663E;&#x793A;&#x9009;&#x9879;</td>
+<td>-a</td>
+<td>&#x7528;&#x4E8E;&#x663E;&#x793A;&#x9690;&#x85CF;&#x6587;&#x4EF6;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E0D;&#x663E;&#x793A;&#x3002;</td>
+</tr>
+<tr>
+<td>&#x663E;&#x793A;&#x9009;&#x9879;</td>
+<td>-d</td>
+<td>&#x6307;&#x5B9A;&#x53EA;&#x663E;&#x793A;&#x76EE;&#x5F55;&#x3002;</td>
+</tr>
+<tr>
+<td>&#x663E;&#x793A;&#x9009;&#x9879;</td>
+<td>-f</td>
+<td>&#x6307;&#x5B9A;&#x663E;&#x793A;&#x5168;&#x8DEF;&#x5F84;&#x3002;</td>
+</tr>
+<tr>
+<td>&#x663E;&#x793A;&#x9009;&#x9879;</td>
+<td>-i</td>
+<td>&#x4E0D;&#x7F29;&#x8FDB;&#x663E;&#x793A;&#x3002;&#x548C;-f&#x4E00;&#x8D77;&#x4F7F;&#x7528;&#x5F88;&#x6709;&#x7528;&#x3002;</td>
+</tr>
+<tr>
+<td>&#x663E;&#x793A;&#x9009;&#x9879;</td>
+<td>-p</td>
+<td>&#x7528;&#x4E8E;&#x663E;&#x793A;&#x6743;&#x9650;&#x4F4D;&#x4FE1;&#x606F;&#x3002;</td>
+</tr>
+<tr>
+<td>&#x663E;&#x793A;&#x9009;&#x9879;</td>
+<td>-h</td>
+<td>&#x7528;&#x4E8E;&#x663E;&#x793A;&#x5927;&#x5C0F;&#x3002;</td>
+</tr>
+<tr>
+<td>&#x663E;&#x793A;&#x9009;&#x9879;</td>
+<td>-u</td>
+<td>&#x663E;&#x793A;username&#x6216;UID(&#x5F53;&#x6CA1;&#x6709;username&#x65F6;&#x53EA;&#x80FD;&#x663E;&#x793A;UID&#x4E86;)&#x3002;</td>
+</tr>
+<tr>
+<td>&#x663E;&#x793A;&#x9009;&#x9879;</td>
+<td>-g</td>
+<td>&#x663E;&#x793A;groupname&#x6216;GID&#x3002;</td>
+</tr>
+<tr>
+<td>&#x663E;&#x793A;&#x9009;&#x9879;</td>
+<td>-D</td>
+<td>&#x663E;&#x793A;&#x6587;&#x4EF6;&#x7684;&#x6700;&#x540E;&#x4E00;&#x6B21;Mtime&#x3002;</td>
+</tr>
+<tr>
+<td>&#x663E;&#x793A;&#x9009;&#x9879;</td>
+<td>&#x2013;inodes</td>
+<td>&#x663E;&#x793A;inode&#x53F7;&#x3002;</td>
+</tr>
+<tr>
+<td>&#x663E;&#x793A;&#x9009;&#x9879;</td>
+<td>&#x2013;device</td>
+<td>&#x663E;&#x793A;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x6240;&#x5C5E;&#x7684;&#x8BBE;&#x5907;&#x53F7;&#x3002;</td>
+</tr>
+<tr>
+<td>&#x663E;&#x793A;&#x9009;&#x9879;</td>
+<td>-C</td>
+<td>&#x663E;&#x793A;&#x989C;&#x8272;&#x3002;</td>
+</tr>
+<tr>
+<td>&#x8F93;&#x51FA;&#x9009;&#x9879;</td>
+<td>-o filename</td>
+<td>&#x6307;&#x5B9A;&#x5C06; tree &#x7684;&#x7ED3;&#x679C;&#x8F93;&#x51FA;&#x5230; filename &#x6587;&#x4EF6;&#x4E2D;&#x3002;</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/Liunx/&#x7CFB;&#x7EDF;/liunx/Liunx&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E00;)--&#x521D;&#x8BC6;Liunx/img/04.png" alt=""></p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/Liunx/系统/liunx/Liunx学习总结(二)--目录和文件管理/" class="pre-post btn btn-default" title='Liunx学习总结(二)--目录和文件管理'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Liunx学习总结(二)--目录和文件管理</span>
+        </a>
+    
+    
+        <a href="/Liunx/系统/liunx/Liunx学习总结(六)--进程/" class="next-post btn btn-default" title='Liunx学习总结(六)--进程'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Liunx学习总结(六)--进程</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">18</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">49</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/C/" style="font-size: 10.91px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.82px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 10.91px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 16.36px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12.73px;">JavaScript</a> <a href="/tags/Liunx/" style="font-size: 15.45px;">Liunx</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12.73px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 17.27px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 17.27px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 15.45px;">Nginx</a> <a href="/tags/Quartz/" style="font-size: 12.73px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 11.82px;">RabbitMQ</a> <a href="/tags/SQL/" style="font-size: 15.45px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.91px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 19.09px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 18.18px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 14.55px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 16.36px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 17.27px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Utils/" style="font-size: 10.91px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 16.36px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 16.36px;">Vue</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10.91px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10.91px;">tool</a> <a href="/tags/前端/" style="font-size: 10.91px;">前端</a> <a href="/tags/前端基础/" style="font-size: 13.64px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12.73px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

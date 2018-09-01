@@ -1,0 +1,504 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Beetl学习总结(二)--基本用法 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Beetl学习总结(二)--基本用法">
+            
+	            Beetl学习总结(二)--基本用法
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Beetl">
+            Beetl
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/Beetl" title='Beetl'>
+                        Beetl
+                    </a>
+                
+                    <a href="/tags/模板引擎" title='模板引擎'>
+                        模板引擎
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/08/26</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <blockquote>
+<p>&#x5728;&#x4E0A;&#x4E00;&#x7AE0;&#x8282;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x642D;&#x5EFA;&#x597D;&#x4E86;&#x4E00;&#x4E2A;&#x8FD0;&#x884C;&#x73AF;&#x5883;&#x5E76;&#x4E14;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x4E0A;&#x8F93;&#x51FA;&#x4E86;&#x4E00;&#x4E2A;&#x52A0;&#x6CD5;&#x7684;&#x6F14;&#x793A;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x6765;&#x5C1D;&#x8BD5;&#x4E0B;&#x5B83;&#x7684;&#x5404;&#x79CD;&#x7528;&#x6CD5;&#x3002;</p>
+</blockquote>
+<h2 id="&#x5B9A;&#x754C;&#x7B26;&#x4E0E;&#x5360;&#x4F4D;&#x7B26;&#x53F7;"><a href="#&#x5B9A;&#x754C;&#x7B26;&#x4E0E;&#x5360;&#x4F4D;&#x7B26;&#x53F7;" class="headerlink" title="&#x5B9A;&#x754C;&#x7B26;&#x4E0E;&#x5360;&#x4F4D;&#x7B26;&#x53F7;"></a>&#x5B9A;&#x754C;&#x7B26;&#x4E0E;&#x5360;&#x4F4D;&#x7B26;&#x53F7;</h2><h3 id="&#x5B9A;&#x754C;&#x7B26;"><a href="#&#x5B9A;&#x754C;&#x7B26;" class="headerlink" title="&#x5B9A;&#x754C;&#x7B26;"></a>&#x5B9A;&#x754C;&#x7B26;</h3><p>&#x56E0;&#x4E3A;&#x6A21;&#x677F;&#x8BED;&#x8A00;&#x8DDF;&#x5176;&#x4ED6;&#x5185;&#x5BB9;&#x662F;&#x5199;&#x5728;&#x4E00;&#x8D77;&#x7684;&#xFF0C;&#x9700;&#x8981;&#x6709;&#x4E00;&#x4E2A;&#x6807;&#x8BC6;&#x8BC1;&#x660E;&#x662F;&#x6A21;&#x677F;&#x5185;&#x5BB9;&#x8FD8;&#x662F;&#x666E;&#x901A;&#x7684;&#x5185;&#x5BB9;&#x3002;&#x800C;&#x8FD9;&#x4E2A;&#x6807;&#x8BC6;&#x6211;&#x4EEC;&#x5C31;&#x53EB;&#x5B83;&#x5B9A;&#x754C;&#x7B26;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x5728; application.yml &#x4E2D;&#x914D;&#x7F6E;&#x8FC7;&#x5B9A;&#x754C;&#x7B26;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">delimiter-statement-start: \@   </div><div class="line">delimiter-statement-end: null</div></pre></td></tr></table></figure>
+<p>Beetl &#x9ED8;&#x8BA4;&#x8BBE;&#x7F6E;&#x7684;&#x5B9A;&#x754C;&#x7B26;&#x5F00;&#x5934;&#x662F; <code>&lt;%</code> &#xFF0C;&#x7ED3;&#x5C3E;&#x662F; <code>%&gt;</code> &#x3002;&#x4F46;&#x662F;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x53D8;&#x66F4;&#xFF0C;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x5C31;&#x8BBE;&#x7F6E;&#x5F00;&#x5934;&#x4E3A; <code>@</code> &#x7ED3;&#x5C3E;&#x4E0D;&#x8BBE;&#x7F6E;&#x3002;</p>
+<p>&#x6CE8;&#xFF1A; <code>\</code> &#x662F;&#x8F6C;&#x4E49;&#x7B26;&#xFF0C;&#x8D77;&#x8F6C;&#x4E49;&#x4F5C;&#x7528;&#x3002;</p>
+<a id="more"></a> 
+<h3 id="&#x5360;&#x4F4D;&#x7B26;"><a href="#&#x5360;&#x4F4D;&#x7B26;" class="headerlink" title="&#x5360;&#x4F4D;&#x7B26;"></a>&#x5360;&#x4F4D;&#x7B26;</h3><p>&#x7528;&#x6765;&#x7B49;&#x5F85;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x540E;&#x66FF;&#x6362;&#x7684;&#x5185;&#x5BB9;&#x6211;&#x4EEC;&#x5C31;&#x53EB;&#x5B83;&#x5360;&#x4F4D;&#x7B26;&#xFF0C;&#x9ED8;&#x8BA4;&#x7B26;&#x53F7;&#x662F; <code>${&#x53D8;&#x91CF;&#x540D;}</code>&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5728; application.yml &#x4E2D;&#x914D;&#x7F6E;&#xFF0C;&#x5E76;&#x5728; BeetlProperties &#x7C7B;&#x4E2D;&#x5F15;&#x7528;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">delimiter-placeholder-start: ${  </div><div class="line">delimiter-placeholder-end: }</div></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x91CC;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#x4E0D;&#x80FD;&#x5728;&#x5B9A;&#x754C;&#x7B26;&#x91CC;&#x4F7F;&#x7528;&#x5360;&#x4F4D;&#x7B26;&#xFF0C;&#x56E0;&#x4E3A;&#x5360;&#x4F4D;&#x7B26;&#x901A;&#x5E38;&#x7528;&#x5728;&#x9759;&#x6001;&#x6587;&#x672C;&#x91CC;&#x3002;</p>
+<h2 id="&#x6CE8;&#x91CA;"><a href="#&#x6CE8;&#x91CA;" class="headerlink" title="&#x6CE8;&#x91CA;"></a>&#x6CE8;&#x91CA;</h2><p>Beetl &#x7684;&#x6CE8;&#x91CA;&#x8DDF; Java &#x662F;&#x7C7B;&#x4F3C;&#x7684;&#xFF1A;</p>
+<ul>
+<li>&#x5355;&#x884C;&#x6CE8;&#x91CA;&#xFF1A; </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@ // &#x6CE8;&#x91CA;&#x6587;&#x5B57;</div></pre></td></tr></table></figure>
+<ul>
+<li>&#x591A;&#x884C;&#x6CE8;&#x91CA;&#xFF1A; </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@/**</div><div class="line">@    &#x6CE8;&#x91CA;&#x6587;&#x5B57;</div><div class="line">@**/</div></pre></td></tr></table></figure>
+<h2 id="&#x53D8;&#x91CF;"><a href="#&#x53D8;&#x91CF;" class="headerlink" title="&#x53D8;&#x91CF;"></a>&#x53D8;&#x91CF;</h2><h3 id="&#x4E34;&#x65F6;&#x53D8;&#x91CF;"><a href="#&#x4E34;&#x65F6;&#x53D8;&#x91CF;" class="headerlink" title="&#x4E34;&#x65F6;&#x53D8;&#x91CF;"></a>&#x4E34;&#x65F6;&#x53D8;&#x91CF;</h3><p>&#x5728;&#x6A21;&#x677F;&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x53D8;&#x91CF;&#x6210;&#x4E3A;&#x4E34;&#x65F6;&#x53D8;&#x91CF;&#xFF0C;&#x8FD9;&#x7C7B;&#x4F3C; js &#x4E2D;&#x91C7;&#x7528; var &#x5B9A;&#x4E49;&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x5982;&#x4E0B;&#x4F8B;&#x5B50;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@ var a = 3;</div><div class="line">@ var b = 3,c = &quot;abc&quot;,d=true,e=null;</div><div class="line">@ var f = [1,2,3];</div><div class="line">@ var g = {key1:a,key2:c};</div><div class="line">@ var i = a+b;</div></pre></td></tr></table></figure>
+<h3 id="&#x5168;&#x5C40;&#x53D8;&#x91CF;"><a href="#&#x5168;&#x5C40;&#x53D8;&#x91CF;" class="headerlink" title="&#x5168;&#x5C40;&#x53D8;&#x91CF;"></a>&#x5168;&#x5C40;&#x53D8;&#x91CF;</h3><p>&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x662F;&#x901A;&#x8FC7; template.binding &#x4F20;&#x5165;&#x7684;&#x53D8;&#x91CF;,&#x8FD9;&#x4E9B;&#x53D8;&#x91CF;&#x80FD;&#x5728;&#x6A21;&#x677F;&#x7684;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x5730;&#x65B9;&#xFF0C;&#x5305;&#x62EC;&#x5B50;&#x6A21;&#x677F;&#x90FD;&#x80FD;&#x8BBF;&#x95EE;&#x5230;&#x3002;&#x5982;&#x5728; java &#x4EE3;&#x7801;&#x91CC;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">template.binding(&quot;list&quot;,service.getUserList());</div></pre></td></tr></table></figure>
+<p>&#x5728;&#x6A21;&#x677F;&#x91CC;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@ for(user in list){</div><div class="line">@   hello,${user.name};</div><div class="line">@ }</div></pre></td></tr></table></figure></p>
+<p>&#x81EA;&#x4ECE; 2.8.0 &#x7248;&#x672C;&#x540E;&#xFF0C;&#x6709;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x53D8;&#x91CF;&#x79F0;&#x4E3A; <code>root</code> &#x53D8;&#x91CF;&#xFF0C;&#x5F53;&#x6A21;&#x677F;&#x627E;&#x4E0D;&#x5230;&#x53D8;&#x91CF;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F1A;&#x5BFB;&#x627E; <code>root</code> &#x53D8;&#x91CF;&#x7684;&#x5C5E;&#x6027;&#x6765;&#x4F5C;&#x4E3A;&#x53D8;&#x91CF;&#x7684;&#x503C;&#xFF0C;&#x8FD9;&#x4E2A; <code>root</code> &#x53D8;&#x91CF;&#x5FC5;&#x987B;&#x7ED1;&#x5B9A;&#x4E3A; &#x201C;_root&#x201D;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">template.binding(&quot;_root&quot;,new User());</div></pre></td></tr></table></figure>
+<p>&#x5728;&#x6A21;&#x677F;&#x91CC;:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">${name}</div><div class="line">${wife.name}</div></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x91CC; name &#x548C; wife &#x90FD;&#x662F; User &#x5BF9;&#x8C61;&#x7684;&#x5C5E;&#x6027;&#x3002;</p>
+<h3 id="&#x5171;&#x4EAB;&#x53D8;&#x91CF;"><a href="#&#x5171;&#x4EAB;&#x53D8;&#x91CF;" class="headerlink" title="&#x5171;&#x4EAB;&#x53D8;&#x91CF;"></a>&#x5171;&#x4EAB;&#x53D8;&#x91CF;</h3><p>&#x5171;&#x4EAB;&#x53D8;&#x91CF;&#x6307;&#x5728;&#x6240;&#x6709;&#x6A21;&#x677F;&#x4E2D;&#x90FD;&#x53EF;&#x4EE5;&#x5F15;&#x7528;&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x53EF;&#x901A;&#x8FC7; <code>groupTemplate.setSharedVars(Map&lt;String, Object&gt; sharedVars)</code> &#x4F20;&#x5165;&#x53D8;&#x91CF;,&#x8FD9;&#x4E9B;&#x53D8;&#x91CF;&#x80FD;&#x7528;&#x5728;&#x6240;&#x6709;&#x6A21;&#x677F;&#x7684;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x5730;&#x65B9;&#x3002;</p>
+<h3 id="&#x6A21;&#x677F;&#x53D8;&#x91CF;"><a href="#&#x6A21;&#x677F;&#x53D8;&#x91CF;" class="headerlink" title="&#x6A21;&#x677F;&#x53D8;&#x91CF;"></a>&#x6A21;&#x677F;&#x53D8;&#x91CF;</h3><p>&#x6A21;&#x677F;&#x53D8;&#x91CF;&#x662F;&#x4E00;&#x79CD;&#x7279;&#x6B8A;&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x5373;&#x53EF;&#x4EE5;&#x5C06;&#x6A21;&#x677F;&#x4E2D;&#x4EFB;&#x4F55;&#x4E00;&#x6BB5;&#x7684;&#x8F93;&#x51FA;&#x8D4B;&#x503C;&#x5230;&#x8BE5;&#x53D8;&#x91CF;&#xFF0C;&#x5E76;&#x5141;&#x8BB8;&#x7A0D;&#x540E;&#x5728;&#x5176;&#x4ED6;&#x5730;&#x65B9;&#x4F7F;&#x7528;&#xFF0C;&#x5982;&#x4E0B;&#x4EE3;&#x7801;:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> @ var content = {</div><div class="line">        @ var c = &quot;1234&quot;;</div><div class="line">        @ print(c);</div><div class="line">    &#x6A21;&#x677F;&#x5176;&#x4ED6;&#x5185;&#x5BB9;&#xFF1A;</div><div class="line"> @ };</div><div class="line">&lt;h1&gt;&#x6A21;&#x677F;&#x53D8;&#x91CF;&#xFF1A;${content}&lt;/h1&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="&#x5B9E;&#x4F8B;"><a href="#&#x5B9E;&#x4F8B;" class="headerlink" title="&#x5B9E;&#x4F8B;"></a>&#x5B9E;&#x4F8B;</h3><p>1&#xFF09;&#x65B0;&#x5EFA; GlobalExt &#x7C7B; &#x5B9E;&#x73B0; WebRenderExt &#x63A5;&#x53E3;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalExt</span> <span class="keyword">implements</span> <span class="title">WebRenderExt</span> </span>{</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">modify</span><span class="params">(Template template, GroupTemplate groupTemplate, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)</span> </span>{</div><div class="line">        template.binding(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;MarkLogZhu&quot;</span>);</div><div class="line">        Map&lt;String,Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">        map.put(<span class="string">&quot;age&quot;</span>,<span class="number">18</span>);</div><div class="line">        map.put(<span class="string">&quot;mail&quot;</span>,<span class="string">&quot;marklogzhu@163.com&quot;</span>);</div><div class="line">        groupTemplate.setSharedVars(map);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>2) &#x5728; application.yml &#x589E;&#x52A0;&#x5C5E;&#x6027;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">beetl:</div><div class="line">  ......</div><div class="line">  webapp-ext: com.marklogzhu.learn.beetl.demo.GlobalExt</div></pre></td></tr></table></figure></p>
+<p>3) &#x5728; BeetlProperties &#x589E;&#x52A0;&#x5C5E;&#x6027;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> String webappExt;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> Properties <span class="title">getProperties</span><span class="params">()</span> </span>{</div><div class="line">    ......</div><div class="line">    <span class="keyword">if</span> (StringUtils.isNotBlank(webappExt)) {</div><div class="line">            properties.setProperty(<span class="string">&quot;WEBAPP_EXT&quot;</span>,webappExt);</div><div class="line">    }</div><div class="line">    ......</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>4) &#x4FEE;&#x6539; test.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>index<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#x540D;&#x79F0;&#xFF1A;${name}<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#x5E74;&#x9F84;&#xFF1A;${age}<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#x90AE;&#x7BB1;&#xFF1A;${mail}<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"></div><div class="line">    @ var content = {</div><div class="line">        @ var c = &quot;1234&quot;;</div><div class="line">        @ print(c);</div><div class="line">    &#x6A21;&#x677F;&#x5176;&#x4ED6;&#x5185;&#x5BB9;&#xFF1A;</div><div class="line">    @ };</div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#x6A21;&#x677F;&#x53D8;&#x91CF;&#xFF1A;${content}<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>5) &#x542F;&#x52A8;&#x9879;&#x76EE;&#x5E76;&#x8BBF;&#x95EE; <code>http://localhost:8080/test</code></p>
+<p><img src="/Beetl/&#x540E;&#x53F0;/Java/&#x6A21;&#x677F;&#x5F15;&#x64CE;/beetl/Beetl&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E8C;)--&#x57FA;&#x672C;&#x7528;&#x6CD5;/img/01.png" alt=""></p>
+<h2 id="&#x5C5E;&#x6027;"><a href="#&#x5C5E;&#x6027;" class="headerlink" title="&#x5C5E;&#x6027;"></a>&#x5C5E;&#x6027;</h2><h3 id="&#x5C5E;&#x6027;&#x5F15;&#x7528;"><a href="#&#x5C5E;&#x6027;&#x5F15;&#x7528;" class="headerlink" title="&#x5C5E;&#x6027;&#x5F15;&#x7528;"></a>&#x5C5E;&#x6027;&#x5F15;&#x7528;</h3><p>Beetl &#x8DDF; JavaScript &#x7684;&#x5C5E;&#x6027;&#x5F15;&#x7528;&#x4F7F;&#x7528;&#x65B9;&#x5F0F;&#x4E00;&#x6837;&#xFF0C;&#x5177;&#x4F53;&#x64CD;&#x4F5C;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li>Beetl &#x652F;&#x6301;&#x901A;&#x8FC7; <code>.</code> &#x53F7;&#x6765;&#x8BBF;&#x95EE;&#x5BF9;&#x8C61;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x5982; User &#x5BF9;&#x8C61;&#x91CC;&#x6709; getName() &#x65B9;&#x6CD5;&#xFF0C;&#x90A3;&#x4E48;&#x5728;&#x6A21;&#x677F;&#x4E2D;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>${user.name}</code> &#x6765;&#x8BBF;&#x95EE;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x53D8;&#x91CF;&#x662F;&#x6570;&#x7EC4;&#x6216; List &#x7C7B;, &#x53EF;&#x4EE5;&#x901A;&#x8FC7; <code>[]</code> &#x6765;&#x8BBF;&#x95EE;&#xFF0C;&#x5982; <code>${userList[0]}</code></li>
+<li>&#x5982;&#x679C;&#x53D8;&#x91CF;&#x662F; Map &#x7C7B;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; <code>[]</code> &#x6765;&#x8BBF;&#x95EE;&#xFF0C;&#x5982; <code>${map[&quot;name&quot;]}</code></li>
+<li>Beetl &#x8FD8;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x989D;&#x5916;&#x7684;&#x5BF9;&#x8C61;&#x5C5E;&#x6027;&#xFF0C;&#x800C;&#x65E0;&#x9700;&#x66F4;&#x6539; java &#x5BF9;&#x8C61;&#xFF0C;&#x8FD9;&#x79CD;&#x5C5E;&#x6027;&#x53EB;&#x505A;&#x865A;&#x62DF;&#x5C5E;&#x6027;&#xFF0C;&#x5982;&#xFF0C;&#x5BF9;&#x4E8E;&#x6240;&#x6709;&#x96C6;&#x5408;&#xFF0C;&#x6570;&#x7EC4;&#xFF0C;&#x90FD;&#x6709;&#x5171;&#x540C;&#x7684;&#x865A;&#x62DF;&#x5C5E;&#x6027; size.&#x865A;&#x62DF;&#x5C5E;&#x6027;&#x662F; &#x201C;.~&#x201D; + &#x865A;&#x62DF;&#x5C5E;&#x6027;&#x540D;</li>
+</ul>
+<h3 id="&#x5C5E;&#x6027;&#x8D4B;&#x503C;"><a href="#&#x5C5E;&#x6027;&#x8D4B;&#x503C;" class="headerlink" title="&#x5C5E;&#x6027;&#x8D4B;&#x503C;"></a>&#x5C5E;&#x6027;&#x8D4B;&#x503C;</h3><p>Beetl 2.7.0 &#x5F00;&#x59CB;&#x652F;&#x6301;&#x5BF9;&#x8C61;&#x8D4B;&#x503C;&#xFF0C;&#x5982;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@ var user = ....</div><div class="line">@ user.name=&quot;marklogzhu&quot;;</div><div class="line">@ user.friends[0] = getNewUser();</div><div class="line">@ user.map[&quot;name&quot;] = &quot;marklogzhu&quot;;</div></pre></td></tr></table></figure></p>
+<h2 id="&#x8868;&#x8FBE;&#x5F0F;"><a href="#&#x8868;&#x8FBE;&#x5F0F;" class="headerlink" title="&#x8868;&#x8FBE;&#x5F0F;"></a>&#x8868;&#x8FBE;&#x5F0F;</h2><h3 id="&#x7B97;&#x6570;&#x8868;&#x8FBE;&#x5F0F;"><a href="#&#x7B97;&#x6570;&#x8868;&#x8FBE;&#x5F0F;" class="headerlink" title="&#x7B97;&#x6570;&#x8868;&#x8FBE;&#x5F0F;"></a>&#x7B97;&#x6570;&#x8868;&#x8FBE;&#x5F0F;</h3><p>Beetl &#x652F;&#x6301;&#x7C7B;&#x4F3C; javascript &#x7684;&#x7B97;&#x672F;&#x8868;&#x8FBE;&#x5F0F;&#x548C;&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F;&#xFF0C;&#x5982; <code>+ - * / %</code> &#x4EE5;&#x53CA;<code>&#xFF08;&#xFF09;</code> &#x548C;&#x81EA;&#x589E;<code>++</code>&#xFF0C;&#x81EA;&#x51CF;<code>--</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@ var a = 1;</div><div class="line">@ var b = &quot;hi&quot;;</div><div class="line">@ var c = a++;</div><div class="line">@ var d = a+100.232;</div><div class="line">@ var e = (d+12)*a;</div><div class="line">@ var f = 122228833330322.1112h</div></pre></td></tr></table></figure></p>
+<p>Beetl &#x91CC;&#x5B9A;&#x4E49;&#x7684;&#x4E34;&#x65F6;&#x53D8;&#x91CF;&#x7C7B;&#x578B;&#x9ED8;&#x8BA4;&#x5BF9;&#x5E94;&#x7684; java &#x7C7B;&#x578B;&#x662F; Int &#x578B;&#x6216;&#x8005; double &#x7C7B;&#x578B;&#xFF0C;&#x5BF9;&#x4E8E;&#x6A21;&#x677F;&#x5E38;&#x7528;&#x60C5;&#x51B5;&#xFF0C;&#x5DF2;&#x7ECF;&#x591F;&#x4E86;.&#x5982;&#x679C;&#x9700;&#x8981;&#x5B9A;&#x4E49;&#x957F;&#x7CBE;&#x5EA6;&#x7C7B;&#x578B;&#xFF08;&#x5BF9;&#x5E94; java &#x7684; BigDecimal&#xFF09;&#xFF0C;&#x5219;&#x9700;&#x8981;&#x5728;&#x6570;&#x5B57;&#x672B;&#x5C3E;&#x52A0;&#x4E0A; <code>h</code> &#x4EE5;&#x8868;&#x793A;&#x8FD9;&#x662F;&#x957F;&#x7CBE;&#x5EA6; BigDecimal&#xFF0C;&#x5176;&#x540E;&#x7684;&#x8BA1;&#x7B97;&#x548C;&#x8F93;&#x51FA;&#x4EE5;&#x53CA;&#x903B;&#x8F91;&#x8868;&#x8FBE;&#x5F0F;&#x90FD;&#x5C06;&#x6309;&#x7167;&#x957F;&#x7CBE;&#x5EA6;&#x7C7B;&#x578B;&#x6765;&#x8003;&#x8651;&#x3002;</p>
+<h3 id="&#x903B;&#x8F91;&#x8868;&#x8FBE;&#x5F0F;"><a href="#&#x903B;&#x8F91;&#x8868;&#x8FBE;&#x5F0F;" class="headerlink" title="&#x903B;&#x8F91;&#x8868;&#x8FBE;&#x5F0F;"></a>&#x903B;&#x8F91;&#x8868;&#x8FBE;&#x5F0F;</h3><p>Beetl &#x652F;&#x6301;&#x7C7B;&#x4F3C; Javascript,java &#x7684;&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x5F0F; &#x5982; <code>&gt;&#xFF0C;\&lt;&#xFF0C;==&#xFF0C;!=&#xFF0C;&gt;= , \&lt;=</code> &#x4EE5;&#x53CA; <code>!</code>, &#x8FD8;&#x6709; <code>&amp;&amp;</code> &#x548C; <code>||</code> &#xFF0C;&#x8FD8;&#x6709;&#x4E09;&#x5143;&#x8868;&#x8FBE;&#x5F0F;&#x7B49;&#xFF0C;&#x5982;&#x4E0B;&#x4F8B;&#x5B50;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@ var a = 1;</div><div class="line">@ var b=&quot;good&quot;;</div><div class="line">@ var c = null;</div><div class="line">@ if(a!=1&amp;&amp;b==&quot;good&quot;&amp;&amp;c==null){</div><div class="line">@      ......</div><div class="line">@ }</div></pre></td></tr></table></figure>
+<p>&#x4E09;&#x5143;&#x8868;&#x8FBE;&#x5F0F;&#x5982;&#x679C;&#x53EA;&#x8003;&#x8651; true &#x6761;&#x4EF6;&#x5BF9;&#x5E94;&#x7684;&#x503C;&#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x4EE5;&#x505A;&#x7B80;&#x5316;,&#x5982;&#x4E0B;&#x4FE9;&#x884C;&#x6548;&#x679C;&#x662F;&#x4E00;&#x6837;&#x7684;&#x3002;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@ var  a = 1 ;</div><div class="line">${a==1 ? &quot;ok&quot; : &apos;&apos;}</div><div class="line">${a==1 ? &quot;ok&quot;}</div></pre></td></tr></table></figure></p>
+<h2 id="&#x5FAA;&#x73AF;&#x8BED;&#x53E5;"><a href="#&#x5FAA;&#x73AF;&#x8BED;&#x53E5;" class="headerlink" title="&#x5FAA;&#x73AF;&#x8BED;&#x53E5;"></a>&#x5FAA;&#x73AF;&#x8BED;&#x53E5;</h2><p>Beetl &#x652F;&#x6301;&#x4E30;&#x5BCC;&#x7684;&#x5FAA;&#x73AF;&#x65B9;&#x5F0F;&#xFF0C;&#x5982; <code>for-in,for(exp;exp;exp)</code> &#xFF0C;&#x4EE5;&#x53CA; <code>while</code> &#x5FAA;&#x73AF;&#xFF0C;&#x4EE5;&#x53CA;&#x5FAA;&#x73AF;&#x63A7;&#x5236;&#x8BED;&#x53E5; <code>break;continue;</code> &#x53E6;&#x5916;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x8FDB;&#x5165; <code>for</code> &#x5FAA;&#x73AF;&#x4F53;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x6267;&#x884C; <code>elsefor</code> &#x6307;&#x5B9A;&#x7684;&#x8BED;&#x53E5;&#x3002;</p>
+<h3 id="for-in"><a href="#for-in" class="headerlink" title="for-in"></a>for-in</h3><p>for-in &#x5FAA;&#x73AF;&#x652F;&#x6301;&#x904D;&#x5386;&#x96C6;&#x5408;&#x5BF9;&#x8C61;&#xFF0C;&#x5BF9;&#x4E8E; List &#x3001;&#x6570;&#x7EC4;&#x4EE5;&#x53CA;Iterator &#x6765;&#x8BF4;&#xFF0C;&#x5BF9;&#x8C61;&#x5C31;&#x662F;&#x96C6;&#x5408;&#x5BF9;&#x8C61;&#xFF0C;&#x5BF9;&#x4E8E; Map &#x6765;&#x8BF4;&#xFF0C;&#x5BF9;&#x8C61;&#x5C31;&#x662F; Map.entry ,&#x5982;&#x4E0B;&#x4FE9;&#x4E2A;&#x4F8B;&#x5B50;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@ for(user in userList){</div><div class="line">@        print(userLP.index);</div><div class="line">@        print(user.name);</div><div class="line">@ }</div></pre></td></tr></table></figure>
+<p>&#x7B2C;&#x4E8C;&#x884C;&#x4EE3;&#x7801; userLP &#x662F; Beetl &#x9690;&#x542B;&#x5B9A;&#x4E49;&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x80FD;&#x5728;&#x5FAA;&#x73AF;&#x4F53;&#x5185;&#x4F7F;&#x7528;&#x3002;&#x5176;&#x547D;&#x540D;&#x89C4;&#x8303;&#x662F; item &#x540D;&#x79F0;&#x540E;&#x52A0;&#x4E0A; LP&#xFF0C;&#x4ED6;&#x63D0;&#x4F9B;&#x4E86;&#x5F53;&#x524D;&#x5FAA;&#x73AF;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x5982;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">* userLP.index &#x5F53;&#x524D;&#x7684;&#x7D22;&#x5F15;&#xFF0C;&#x4ECE;1&#x5F00;&#x59CB;</div><div class="line">* userLP.size &#x96C6;&#x5408;&#x7684;&#x957F;&#x5EA6;</div><div class="line">* userLP.first &#x662F;&#x5426;&#x662F;&#x7B2C;&#x4E00;&#x4E2A;</div><div class="line">* userLP.last &#x662F;&#x5426;&#x662F;&#x6700;&#x540E;&#x4E00;&#x4E2A;</div><div class="line">* userLP.even &#x7D22;&#x5F15;&#x662F;&#x5426;&#x662F;&#x5076;&#x6570;</div><div class="line">* userLP.odd &#x7D22;&#x5F15;&#x662F;&#x5426;&#x662F;&#x5947;&#x6570;</div></pre></td></tr></table></figure>
+<p>&#x5982;&#x4E0B;&#x662F;Map&#x4F7F;&#x7528;&#x4F8B;&#x5B50;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@ for(entry in map){</div><div class="line">@        var key = entry.key;</div><div class="line">@        var value = entry.value;</div><div class="line">@        print(value.name);</div><div class="line">@ }</div></pre></td></tr></table></figure>
+<h3 id="for-exp-exp-exp"><a href="#for-exp-exp-exp" class="headerlink" title="for(exp;exp;exp)"></a>for(exp;exp;exp)</h3><p>&#x5BF9;&#x4E8E;&#x6E32;&#x67D3;&#x903B;&#x8F91;&#x66F4;&#x4E3A;&#x5E38;&#x89C1;&#x7684;&#x662F;&#x7ECF;&#x5178;&#x7684; for &#x5FAA;&#x73AF;&#x8BED;&#x53E5;&#xFF0C;&#x5982;&#x4E0B;&#x4F8B;&#x5B50;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@ var a = [1,2,3];</div><div class="line">@ for(var i=0;i&lt;a.~size;i++){</div><div class="line">@       print(a[i]);</div><div class="line">@ }</div></pre></td></tr></table></figure></p>
+<h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><p>&#x5BF9;&#x4E8E;&#x6E32;&#x67D3;&#x903B;&#x8F91;&#x540C;&#x6837;&#x5E38;&#x89C1;&#x7684; while &#x5FAA;&#x73AF;&#x8BED;&#x53E5;&#xFF0C;&#x5982;&#x4E0B;&#x4F8B;&#x5B50;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@ var i = 0;</div><div class="line">@ while(i&lt;5){</div><div class="line">@        print(i);</div><div class="line">@        i++;</div><div class="line">@ }</div></pre></td></tr></table></figure>
+<h3 id="elsefor"><a href="#elsefor" class="headerlink" title="elsefor"></a>elsefor</h3><p>&#x4E0D;&#x540C;&#x4E8E;&#x901A;&#x5E38;&#x7A0B;&#x5E8F;&#x8BED;&#x8A00;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x8FDB;&#x5165;&#x5FAA;&#x73AF;&#x4F53;&#xFF0C;&#x5219;&#x4E0D;&#x9700;&#x989D;&#x5916;&#x7684;&#x5904;&#x7406;&#xFF0C;&#x6A21;&#x677F;&#x6E32;&#x67D3;&#x903B;&#x8F91;&#x66F4;&#x5E38;&#x89C1;&#x60C5;&#x51B5;&#x662F;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x8FDB;&#x5165;&#x5FAA;&#x73AF;&#x4F53;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x505A;&#x70B9;&#x4EC0;&#x4E48;&#xFF0C;&#x56E0;&#x6B64;&#xFF0C;&#x5BF9;&#x4E8E; for &#x5FAA;&#x73AF;&#x6765;&#x8BF4;&#xFF0C;&#x8FD8;&#x6709; elsefor &#x7528;&#x6765;&#x8868;&#x8FBE;&#x5982;&#x679C;&#x5FAA;&#x73AF;&#x4F53;&#x6CA1;&#x6709;&#x8FDB;&#x5165;&#xFF0C;&#x5219;&#x6267;&#x884C;elsefor &#x540E;&#x7684;&#x8BED;&#x53E5;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@ var list = [];</div><div class="line">@ for(item in list){</div><div class="line">@ </div><div class="line">@ } elsefor {</div><div class="line">@         print(&quot;&#x672A;&#x6709;&#x8BB0;&#x5F55;&quot;);</div><div class="line">@ }</div></pre></td></tr></table></figure>
+<h2 id="&#x6761;&#x4EF6;&#x8BED;&#x53E5;"><a href="#&#x6761;&#x4EF6;&#x8BED;&#x53E5;" class="headerlink" title="&#x6761;&#x4EF6;&#x8BED;&#x53E5;"></a>&#x6761;&#x4EF6;&#x8BED;&#x53E5;</h2><h3 id="if-else"><a href="#if-else" class="headerlink" title="if else"></a>if else</h3><p>&#x540C; js &#x4E00;&#x6837;&#xFF0C;&#x652F;&#x6301; if else,&#x5982;&#x4E0B;&#x4F8B;&#x5B50;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@ var a =true;</div><div class="line">@ var b = 1;</div><div class="line">@ if(a&amp;&amp;b==1){</div><div class="line">@</div><div class="line">@ }else if(a){</div><div class="line">@ </div><div class="line">@ }else{</div><div class="line">@ </div><div class="line">@ }</div></pre></td></tr></table></figure>
+<h3 id="switch-case"><a href="#switch-case" class="headerlink" title="switch-case"></a>switch-case</h3><p>&#x540C; js &#x4E00;&#x6837;&#xFF0C;&#x652F;&#x6301; switch-case ,&#x5982;&#x4E0B;&#x4F8B;&#x5B50;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@ var b = 1;</div><div class="line">@ switch(b){</div><div class="line">@         case 0:</div><div class="line">@                 print(&quot;it&apos;s 0&quot;);</div><div class="line">@                 break;</div><div class="line">@         case 1:</div><div class="line">@                 print(&quot;it&apos;s 1&quot;);</div><div class="line">@                 break;</div><div class="line">@         default:</div><div class="line">@                 print(&quot;error&quot;);</div><div class="line">@ }</div></pre></td></tr></table></figure>
+<p>switch &#x53D8;&#x91CF;&#x53EF;&#x4EE5;&#x652F;&#x6301;&#x4EFB;&#x4F55;&#x7C7B;&#x578B;&#xFF0C;&#x800C;&#x4E0D;&#x50CF; js &#x90A3;&#x6837;&#x53EA;&#x80FD;&#x662F;&#x6574;&#x578B;&#x3002;</p>
+<h3 id="select-case"><a href="#select-case" class="headerlink" title="select-case"></a>select-case</h3><p>select-case &#x662F; switch case &#x7684;&#x589E;&#x5F3A;&#x7248;&#x3002;&#x4ED6;&#x5141;&#x8BB8; case &#x91CC;&#x6709;&#x903B;&#x8F91;&#x8868;&#x8FBE;&#x5F0F;&#xFF0C;&#x540C;&#x65F6;&#xFF0C;&#x4E5F;&#x4E0D;&#x9700;&#x8981;&#x6BCF;&#x4E2A; case &#x90FD;break &#x4E00;&#x4E0B;&#xFF0C;&#x9ED8;&#x8BA4;&#x9047;&#x5230;&#x5408;&#x4E4E;&#x6761;&#x4EF6;&#x7684; case &#x6267;&#x884C;&#x540E;&#x5C31;&#x9000;&#x51FA;&#x3002;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">@ var b = 1;</div><div class="line">@ select(b){</div><div class="line">@         case 0,1:</div><div class="line">@                 print(&quot;it&apos;s small int&quot;);</div><div class="line">@         case 2,3:</div><div class="line">@                 print(&quot;it&apos;s big int&quot;);</div><div class="line">@         default:</div><div class="line">@                 print(&quot;error&quot;);</div><div class="line">@ }</div></pre></td></tr></table></figure>
+<p>select &#x540E;&#x4E5F;&#x4E0D;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#xFF0C;&#x8FD9;&#x6837; case &#x540E;&#x7684;&#x903B;&#x8F91;&#x8868;&#x8FBE;&#x5F0F;&#x5C06;&#x51B3;&#x5B9A;&#x6267;&#x884C;&#x54EA;&#x4E2A; case.&#x5176;&#x683C;&#x5F0F;&#x662F;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@ select {</div><div class="line">@         case boolExp,orBoolExp2:</div><div class="line">@                 doSomething();</div><div class="line">@ }</div></pre></td></tr></table></figure></p>
+<p>&#x5B9E;&#x4F8B;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@ var b = 1;</div><div class="line">@ select{</div><div class="line">@         case b&lt;1,b&gt;10:</div><div class="line">@                 print(&quot;it&apos;s out of range&quot;);</div><div class="line">@                 break;</div><div class="line">@         case b==1:</div><div class="line">@                 print(&quot;it&apos;s 1&quot;);</div><div class="line">@                 break;</div><div class="line">@         default:</div><div class="line">@                 print(&quot;error&quot;);</div><div class="line">@ }</div></pre></td></tr></table></figure>
+<h3 id="try-catch"><a href="#try-catch" class="headerlink" title="try-catch"></a>try-catch</h3><p>&#x901A;&#x5E38;&#x6A21;&#x677F;&#x6E32;&#x67D3;&#x903B;&#x8F91;&#x5F88;&#x5C11;&#x7528;&#x5230; try-catch &#x4F46;&#x8003;&#x8651;&#x5230;&#x6E32;&#x67D3;&#x903B;&#x8F91;&#x590D;&#x6742;&#x6027;&#xFF0C;&#x4EE5;&#x53CA;&#x6A21;&#x677F;&#x4E5F;&#x6709;&#x4E0D;&#x53EF;&#x63A7;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x6240;&#x4EE5;&#x63D0;&#x4F9B;try catch&#xFF0C;&#x5728;&#x6E32;&#x67D3;&#x5931;&#x8D25;&#x7684;&#x65F6;&#x5019;&#x4ECD;&#x7136;&#x80FD;&#x4FDD;&#x8BC1;&#x8F93;&#x51FA;&#x6B63;&#x5E38;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@ try{</div><div class="line">@         callOtherSystemView()</div><div class="line">@ }catch(error){</div><div class="line">@         print(&quot;&#x6682;&#x65F6;&#x65E0;&#x6570;&#x636E;&quot;);</div><div class="line">@ }</div></pre></td></tr></table></figure>
+<p>error &#x4EE3;&#x8868;&#x4E86;&#x4E00;&#x4E2A;&#x5F02;&#x5E38;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; error.message &#x6765;&#x83B7;&#x53D6;&#x53EF;&#x80FD;&#x7684;&#x9519;&#x8BEF;&#x4FE1;&#x606F;</p>
+<p>&#x4E5F;&#x53EF;&#x4EE5;&#x7701;&#x7565; catch &#x90E8;&#x5206;&#xFF0C;&#x8FD9;&#x6837;&#x51FA;&#x73B0;&#x5F02;&#x5E38;&#xFF0C;&#x4E0D;&#x505A;&#x4EFB;&#x4F55;&#x64CD;&#x4F5C;</p>
+<h3 id="&#x51FD;&#x6570;&#x8C03;&#x7528;"><a href="#&#x51FD;&#x6570;&#x8C03;&#x7528;" class="headerlink" title="&#x51FD;&#x6570;&#x8C03;&#x7528;"></a>&#x51FD;&#x6570;&#x8C03;&#x7528;</h3><p>Beetl &#x5185;&#x7F6E;&#x4E86;&#x5C11;&#x91CF;&#x5B9E;&#x7528;&#x51FD;&#x6570;&#xFF0C;&#x53EF;&#x4EE5;&#x5728; Beetl&#x4EFB;&#x4F55;&#x5730;&#x65B9;&#x8C03;&#x7528;&#x3002;&#x5982;&#x4E0B;&#x4F8B;&#x5B50;&#x662F;&#x8C03;&#x7528; date &#x51FD;&#x6570;&#xFF0C;&#x4E0D;&#x4F20;&#x53C2;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x65E5;&#x671F;:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@ var date = date();</div><div class="line">@ var len = strutil.length(&quot;cbd&quot;);</div><div class="line">@ println(&quot;len=&quot;+len);</div></pre></td></tr></table></figure></p>
+<p>&#x6CE8;&#x610F;&#x51FD;&#x6570;&#x540D;&#x652F;&#x6301; namespace &#x65B9;&#x5F0F;&#xFF0C;&#x56E0;&#x6B64;&#x4EE3;&#x7801;&#x7B2C;2&#x884C;&#x8C03;&#x7528;&#x7684;&#x51FD;&#x6570;&#x662F; strutil.length</p>
+<h3 id="&#x51FD;&#x6570;&#x81EA;&#x5B9A;&#x4E49;"><a href="#&#x51FD;&#x6570;&#x81EA;&#x5B9A;&#x4E49;" class="headerlink" title="&#x51FD;&#x6570;&#x81EA;&#x5B9A;&#x4E49;"></a>&#x51FD;&#x6570;&#x81EA;&#x5B9A;&#x4E49;</h3><p>&#x81EA;&#x5B9A;&#x4E49; beetl &#x7684;&#x65B9;&#x6CD5;&#x975E;&#x5E38;&#x5BB9;&#x6613;&#xFF0C;&#x6709;&#x4E09;&#x79CD;&#x65B9;&#x6CD5;&#xFF1A;<br>*&#x5B9E;&#x73B0; Function &#x7C7B;&#x7684; call &#x65B9;&#x6CD5;&#xFF0C;&#x5E76;&#x6DFB;&#x52A0;&#x5230;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x91CC;&#xFF0C;&#x6216;&#x8005;&#x663E;&#x793A;&#x7684;&#x901A;&#x8FC7;&#x4EE3;&#x7801;&#x6CE8;&#x518C;registerFunction(name,yourFunction)</p>
+<ul>
+<li>&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x8C03;&#x7528;registerFunctionPackage(namespace,yourJavaObject),&#x8FD9;&#x65F6;&#x5019;yourJavaObject&#x91CC;&#x7684;&#x6240;&#x6709;public&#x65B9;&#x6CD5;&#x90FD;&#x5C06;&#x6CE8;&#x518C;&#x4E3A;Beetl&#x65B9;&#x6CD5;&#xFF0C;&#x65B9;&#x6CD5;&#x540D;&#x662F;namespace+&#x201D;.&#x201D;+&#x65B9;&#x6CD5;&#x540D;</li>
+<li>&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5199;&#x6A21;&#x677F;&#x6587;&#x4EF6;&#x5E76;&#x4E14;&#x4EE5;html&#x4F5C;&#x4E3A;&#x540E;&#x7F00;&#xFF0C;&#x653E;&#x5230;root/functions&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x8FD9;&#x6837;&#x6B64;&#x6A21;&#x677F;&#x6587;&#x4EF6;&#x81EA;&#x52A8;&#x6CE8;&#x518C;&#x4E3A;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x5176;&#x51FD;&#x6570;&#x540D;&#x662F;&#x8BE5;&#x6A21;&#x677F;&#x6587;&#x4EF6;&#x540D;&#x3002;</li>
+</ul>
+<h3 id="&#x5E38;&#x7528;&#x5185;&#x7F6E;&#x51FD;&#x6570;"><a href="#&#x5E38;&#x7528;&#x5185;&#x7F6E;&#x51FD;&#x6570;" class="headerlink" title="&#x5E38;&#x7528;&#x5185;&#x7F6E;&#x51FD;&#x6570;"></a>&#x5E38;&#x7528;&#x5185;&#x7F6E;&#x51FD;&#x6570;</h3><ul>
+<li>date &#x8FD4;&#x56DE;&#x4E00;&#x4E2A;java.util.Date&#x7C7B;&#x578B;&#x7684;&#x53D8;&#x91CF;&#xFF0C;&#x5982; date() &#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5F53;&#x524D;&#x65F6;&#x95F4;(&#x5BF9;&#x5E94;java&#x7684;java.util.Date); ${date( &#x201C;2011-1-1&#x201D; , &#x201C;yyyy-MM-dd&#x201D; )} &#x8FD4;&#x56DE;&#x6307;&#x5B9A;&#x65E5;&#x671F;,date(ms),&#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x6BEB;&#x79D2;&#x6570;&#x3002;&#x76F8;&#x5F53;&#x4E8E;&#x8C03;&#x7528;java.util.Date(ms)</li>
+<li>print &#x6253;&#x5370;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61; print(user.name);</li>
+<li>println &#x6253;&#x5370;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x4EE5;&#x53CA;&#x56DE;&#x8F66;&#x6362;&#x884C;&#x7B26;&#x53F7;&#xFF0C;&#x56DE;&#x8F66;&#x6362;&#x53F7;&#x7B26;&#x53F7;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x6A21;&#x677F;&#x672C;&#x8EAB;&#x7684;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x672C;&#x5730;&#x7CFB;&#x7EDF;&#x7684;.&#x5982;&#x679C;&#x4EC5;&#x4EC5;&#x6253;&#x5370;&#x4E00;&#x4E2A;&#x6362;&#x884C;&#x7B26;&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x8C03;&#x7528;println() &#x5373;&#x53EF;</li>
+<li>nvl &#x51FD;&#x6570;nvl&#xFF0C;&#x5982;&#x679C;&#x5BF9;&#x8C61;&#x4E3A;null&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5426;&#x5219;&#xFF0C;&#x8FD4;&#x56DE;&#x81EA;&#x5DF1; nvl(user,&#x201D;&#x4E0D;&#x5B58;&#x5728;&#x201D;)</li>
+<li>isEmpty &#x5224;&#x65AD;&#x53D8;&#x91CF;&#x6216;&#x8005;&#x8868;&#x8FBE;&#x5F0F;&#x662F;&#x5426;&#x4E3A;&#x7A7A;&#xFF0C;&#x53D8;&#x91CF;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x53D8;&#x91CF;&#x4E3A;null&#xFF0C;&#x53D8;&#x91CF;&#x662F;&#x7A7A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x53D8;&#x91CF;&#x662F;&#x7A7A;&#x96C6;&#x5408;&#xFF0C;&#x53D8;&#x91CF;&#x662F;&#x7A7A;&#x6570;&#x7EC4;&#xFF0C;&#x6B64;&#x51FD;&#x6570;&#x90FD;&#x5C06;&#x8FD4;&#x56DE;true</li>
+<li>isNotEmpty &#x540C;&#x4E0A;&#xFF0C;&#x5224;&#x65AD;&#x5BF9;&#x8C61;&#x662F;&#x5426;&#x4E0D;&#x4E3A;&#x7A7A;</li>
+<li>has &#x53D8;&#x91CF;&#x540D;&#x4E3A;&#x53C2;&#x6570;&#xFF0C;&#x5224;&#x65AD;&#x662F;&#x5426;&#x5B58;&#x5728;&#x6B64;&#x201D;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x201D;&#xFF0C;&#x5982; has(userList),&#x7C7B;&#x4F3C;&#x4E8E;1.x&#x7248;&#x672C;&#x7684;exist(&#x201C;userList&#x201D;),&#x4F46;&#x4E0D;&#x9700;&#x8981;&#x8F93;&#x5165;&#x5F15;&#x53F7;&#x4E86;.&#x6CE8;&#x610F;&#xFF0C;has&#x548C;isEmpety &#x5224;&#x65AD;&#x7684;&#x662F;&#x4ECE;java&#x4F20;&#x5230;&#x6A21;&#x677F;&#x7684;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4E34;&#x65F6;&#x53D8;&#x91CF;</li>
+<li>hasAttriute &#x6D4B;&#x8BD5;&#x76EE;&#x6807;&#x5BF9;&#x8C61;&#x662F;&#x5426;&#x6709;&#x6B64;&#x5C5E;&#x6027;&#xFF0C;hasAttribute(user,&#x201D;name&#x201D;)</li>
+<li>assert &#x5982;&#x679C;&#x8868;&#x8FBE;&#x5F0F;&#x4E3A;false&#xFF0C;&#x5219;&#x629B;&#x51FA;&#x5F02;&#x5E38;</li>
+<li>trim &#x622A;&#x53D6;&#x6570;&#x5B57;&#x6216;&#x8005;&#x65E5;&#x671F;&#xFF0C;&#x8FD4;&#x56DE;&#x5B57;&#x7B26;,&#x5982;trim(12.456,2)&#x8FD4;&#x56DE;&#x201D;12.45&#x201D;,trim(date,&#x2019;yyyy&#x2019;)&#x8FD4;&#x56DE;&#x201D;2017&#x201D;</li>
+<li>trunc &#x622A;&#x53D6;&#x6570;&#x5B57;&#xFF0C;&#x4FDD;&#x7559;&#x6307;&#x5B9A;&#x7684;&#x5C0F;&#x6570;&#x4F4D;&#xFF0C;&#x5982;trunc(12.456,2) &#x8F93;&#x51FA;&#x662F;12.45.&#x4E0D;&#x63A8;&#x8350;&#x4F7F;&#x7528;&#xFF0C;&#x56E0;&#x4E3A;&#x5904;&#x7406;float&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x517C;&#x5BB9;&#x539F;&#x56E0;&#x4FDD;&#x7559;&#x4E86;</li>
+<li>decode &#x4E00;&#x4E2A;&#x7B80;&#x5316;&#x7684;if else &#x7ED3;&#x6784;&#xFF0C;&#x5982; decode(a,1,&#x201D;a=1&#x201D;,2,&#x201D;a=2&#x201D;,&#x201D;&#x4E0D;&#x77E5;&#x9053;&#x4E86;&#x201D;),&#x5982;&#x679C;a&#x662F;1&#xFF0C;&#x8FD9;decode&#x8F93;&#x51FA;&#x201D;a=1&#x201D;,&#x5982;&#x679C;a&#x662F;2&#xFF0C;&#x5219;&#x8F93;&#x51FA;&#x201D;a==2&#x201D;, &#x5982;&#x679C;&#x662F;&#x5176;&#x4ED6;&#x503C;&#xFF0C;&#x5219;&#x8F93;&#x51FA;&#x201D;&#x4E0D;&#x77E5;&#x9053;&#x4E86;&#x201D;</li>
+<li>debug &#x5728;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x51FA;debug&#x6307;&#x5B9A;&#x7684;&#x5BF9;&#x8C61;&#x4EE5;&#x53CA;&#x6240;&#x5728;&#x6A21;&#x677F;&#x6587;&#x4EF6;&#x4EE5;&#x53CA;&#x6A21;&#x677F;&#x4E2D;&#x7684;&#x884C;&#x6570;&#xFF0C;&#x5982;debug(1),&#x5219;&#x8F93;&#x51FA;1 [&#x5728;3&#x884C;@/org/beetl/core/lab/hello.txt],&#x4E5F;&#x53EF;&#x4EE5;&#x8F93;&#x51FA;&#x591A;&#x4E2A;&#xFF0C;&#x5982;debug(&#x201C;hi&#x201D;,a),&#x5219;&#x8F93;&#x51FA;hi,a=123,[&#x5728;3&#x884C;@/org/beetl/core/lab/hello.txt]</li>
+<li>parseInt &#x5C06;&#x6570;&#x5B57;&#x6216;&#x8005;&#x5B57;&#x7B26;&#x89E3;&#x6790;&#x4E3A;&#x6574;&#x5F62; &#x5982; parseInt(&#x201C;123&#x201D;);</li>
+<li>parseLong &#x5C06;&#x6570;&#x5B57;&#x6216;&#x8005;&#x5B57;&#x7B26;&#x89E3;&#x6790;&#x4E3A;&#x957F;&#x6574;&#x5F62;&#xFF0C;parseInt(123.12);</li>
+<li>parseDouble &#x5C06;&#x6570;&#x5B57;&#x6216;&#x8005;&#x5B57;&#x7B26;&#x89E3;&#x6790;&#x4E3A;&#x6D6E;&#x70B9;&#x7C7B;&#x578B; &#x5982;parseDouble(&#x201C;1.23&#x201D;)</li>
+<li>range &#x63A5;&#x6536;&#x4E09;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x521D;&#x59CB;&#x503C;&#xFF0C;&#x7ED3;&#x675F;&#x503C;&#xFF0C;&#x8FD8;&#x6709;&#x6B65;&#x589E;&#xFF08;&#x53EF;&#x4EE5;&#x4E0D;&#x9700;&#x8981;&#xFF0C;&#x5219;&#x9ED8;&#x8BA4;&#x4E3A;1&#xFF09;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;Iterator&#xFF0C;&#x5E38;&#x7528;&#x4E8E;&#x5FAA;&#x73AF;&#x4E2D;&#xFF0C;&#x5982;for(var i in range(1,5)) {print(i)},&#x5C06;&#x4F9D;&#x6B21;&#x6253;&#x5370;1234.</li>
+<li>flush &#x5F3A;&#x5236;io&#x8F93;&#x51FA;&#x3002;</li>
+<li>json&#xFF0C;&#x5C06;&#x5BF9;&#x8C61;&#x8F6C;&#x6210;json&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5982; var data = json(userList) &#x53EF;&#x4EE5;&#x8DDF;&#x4E00;&#x4E2A;&#x5E8F;&#x5217;&#x5316;&#x89C4;&#x5219; &#x5982;,var data = json(userList,&#x201D;[*].id:i&#x201D;),&#x5177;&#x4F53;&#x53C2;&#x8003; <a href="https://git.oschina.net/xiandafu/beetl-json" target="_blank" rel="external">https://git.oschina.net/xiandafu/beetl-json</a></li>
+<li>pageCtx &#xFF0C;&#x4EC5;&#x4EC5;&#x5728;web&#x5F00;&#x53D1;&#x4E2D;&#xFF0C;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#xFF0C;&#x7136;&#x540E;&#x53EF;&#x4EE5;&#x5728;&#x9875;&#x9762;&#x6E32;&#x67D3;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x8C03;&#x7528;&#x6B64;api&#x83B7;&#x53D6;&#xFF0C;&#x5982;pageCtx(&#x201C;title&#x201D;,&#x201D;&#x7528;&#x6237;&#x6DFB;&#x52A0;&#x9875;&#x9762;&#x201D;)&#xFF0C;&#x5728;&#x5176;&#x540E;&#x4EFB;&#x4F55;&#x5730;&#x65B9;&#xFF0C;&#x53EF;&#x4EE5;pageCtx(&#x201C;title&#x201D;) &#x83B7;&#x53D6;&#x8BE5;&#x53D8;&#x91CF;</li>
+<li>type.new &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;&#xFF0C;&#x5982; var user = type.new(&#x201C;com.xx.User&#x201D;); &#x5982;&#x679C;&#x914D;&#x7F6E;&#x4E86;IMPORT_PACKAGE&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x7701;&#x7565;&#x5305;&#x540D;&#xFF0C;type.new(&#x201C;User&#x201D;)</li>
+<li>type.name &#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x7684;&#x540D;&#x5B57;&#xFF0C;var userClassName = type.name(user),&#x8FD4;&#x56DE;&#x201D;User&#x201D;</li>
+<li>global &#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x503C;&#xFF0C;&#x53C2;&#x6570;&#x662F;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5982; var user = global(&#x201C;user_&#x201D;+i);</li>
+<li>cookie &#x8FD4;&#x56DE;&#x6307;&#x5B9A;&#x7684;cookie&#x5BF9;&#x8C61; &#xFF0C;&#x5982;var userCook = cookie(&#x201C;user&#x201D;),allCookies = cookie();</li>
+</ul>
+<h2 id="&#x5B89;&#x5168;&#x8F93;&#x51FA;"><a href="#&#x5B89;&#x5168;&#x8F93;&#x51FA;" class="headerlink" title="&#x5B89;&#x5168;&#x8F93;&#x51FA;"></a>&#x5B89;&#x5168;&#x8F93;&#x51FA;</h2><p>&#x5B89;&#x5168;&#x8F93;&#x51FA;&#x662F;&#x6307;&#x6A21;&#x677F;&#x53D8;&#x91CF;&#x51FA;&#x73B0;&#x5F02;&#x5E38;&#xFF0C;&#x5982;&#x53D8;&#x91CF;&#x4E3A; null &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8FD8;&#x662F;&#x53EF;&#x4EE5;&#x6B63;&#x5E38;&#x6E32;&#x67D3;&#xFF0C;&#x5982;&#x4E0D;&#x8F93;&#x51FA;&#x6216;&#x8F93;&#x51FA;&#x9ED8;&#x8BA4;&#x503C;&#x3002;<br>&#x5B83;&#x7684;&#x683C;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">* &#x5B57;&#x7B26;&#x4E32;&#x5E38;&#x91CF;,&#x5982; ${user.count!&quot;&#x65E0;&#x7ED3;&#x679C;&quot;}</div><div class="line">* boolean&#x5E38;&#x91CF; ${user.count!false}</div><div class="line">* &#x6570;&#x5B57;&#x5E38;&#x91CF;&#xFF0C;&#x4EC5;&#x9650;&#x4E8E;&#x6B63;&#x6570;&#xFF0C;&#x56E0;&#x4E3A;&#x5982;&#x679C;&#x662F;&#x8D1F;&#x6570;&#xFF0C;&#x5219;&#x7C7B;&#x4F3C;&#x51CF;&#x53F7;&#xFF0C;&#x5BB9;&#x6613;&#x8BEF;&#x7528;&#xFF0C;&#x56E0;&#x6B64;&#xFF0C;&#x5982;&#x679C;&#x9700;&#x8981;&#x8868;&#x793A;&#x8D1F;&#x6570;&#xFF0C;&#x8BF7;&#x7528;&#x62EC;&#x53F7;&#xFF0C;&#x5982;${user.count!(-1)}</div><div class="line">* class&#x76F4;&#x63A5;&#x8C03;&#x7528;&#xFF0C;&#x5982;${user.count!@User.DEFAULT_NUM}</div><div class="line">* &#x65B9;&#x6CD5;&#x8C03;&#x7528;&#xFF0C;&#x5982; ${user.count!getDefault() }</div><div class="line">* &#x5C5E;&#x6027;&#x5F15;&#x7528;&#xFF0C;&#x5982; ${user.count!user.maxCount }</div><div class="line">* &#x4EFB;&#x4F55;&#x8868;&#x8FBE;&#x5F0F;&#xFF0C;&#x9700;&#x8981;&#x7528;&#x62EC;&#x53F7;</div></pre></td></tr></table></figure>
+<p>&#x5982;&#x679C;&#x6574;&#x4E2A;&#x9875;&#x9762;&#x90FD;&#x9700;&#x8981;&#x8BBE;&#x7F6E;&#x5B89;&#x5168;&#x8F93;&#x51FA;&#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x9875;&#x9762;&#x9876;&#x90E8;&#x8BBE;&#x7F6E;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DIRECTIVE SAFE_OUTPUT_OPEN;</div></pre></td></tr></table></figure>
+<p>&#x4F46;&#x662F;&#x4E0D;&#x5EFA;&#x8BAE;&#x8FD9;&#x6837;&#x7528;&#xFF0C;&#x7B2C;&#x4E00;&#x662F;&#x53EF;&#x80FD;&#x4F1A;&#x5C06;&#x9519;&#x8BEF;&#x63A9;&#x76D6;&#xFF0C;&#x7B2C;&#x4E8C;&#x662F;&#x6709;&#x6027;&#x80FD;&#x8017;&#x635F;&#x3002;</p>
+<h2 id="&#x683C;&#x5F0F;&#x5316;"><a href="#&#x683C;&#x5F0F;&#x5316;" class="headerlink" title="&#x683C;&#x5F0F;&#x5316;"></a>&#x683C;&#x5F0F;&#x5316;</h2><p>&#x51E0;&#x4E4E;&#x6240;&#x6709;&#x7684;&#x6A21;&#x677F;&#x8BED;&#x8A00;&#x90FD;&#x652F;&#x6301;&#x683C;&#x5F0F;&#x5316;&#xFF0C;Beetl &#x4E5F;&#x4E0D;&#x5217;&#x5916;&#xFF0C;&#x4E0B;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x4F7F;&#x7528;&#x4E86; Beetl &#x63D0;&#x4F9B;&#x7684;&#x5185;&#x7F6E;&#x65E5;&#x671F;&#x683C;&#x5F0F;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@ var date = date(); </div><div class="line">Today is ${date,dateFormat=&quot;yyyy-MM-dd&quot;}.</div><div class="line">Today is ${date,dateFormat}</div><div class="line">salary is ${salary,numberFormat=&quot;##.##&quot;}</div></pre></td></tr></table></figure></p>
+<p>&#x683C;&#x5F0F;&#x5316;&#x51FD;&#x6570;&#x53EA;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x653E;&#x5728; <code>=</code> &#x53F7;&#x540E;&#x9762;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x4E3A;&#x683C;&#x5F0F;&#x5316;&#x51FD;&#x6570;&#x8F93;&#x5165;&#x53C2;&#x6570;&#xFF0C;&#x5219;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x503C;&#xFF0C;dateFormat &#x683C;&#x5F0F;&#x5316;&#x51FD;&#x6570;&#x9ED8;&#x8BA4;&#x503C;&#x662F; local</p>
+<p>Beetl &#x4E5F;&#x5141;&#x8BB8;&#x4E3A;&#x6307;&#x5B9A;&#x7684; java class &#x8BBE;&#x5B9A;&#x683C;&#x5F0F;&#x5316;&#x51FD;&#x6570;&#xFF0C;&#x8B6C;&#x5982;&#x5DF2;&#x7ECF;&#x5185;&#x7F6E;&#x4E86;&#x5BF9;java.util.Date,java.sql.Date &#x8BBE;&#x7F6E;&#x4E86;&#x4E86;&#x683C;&#x5F0F;&#x5316;&#x51FD;&#x6570;&#xFF0C;&#x56E0;&#x6B64;&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x53EF;&#x4EE5;&#x7B80;&#x5316;&#x4E3A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">${date,&#x201C;yyyy-MM-dd&#x201D;}</div></pre></td></tr></table></figure>
+<h2 id="&#x6807;&#x7B7E;&#x51FD;&#x6570;"><a href="#&#x6807;&#x7B7E;&#x51FD;&#x6570;" class="headerlink" title="&#x6807;&#x7B7E;&#x51FD;&#x6570;"></a>&#x6807;&#x7B7E;&#x51FD;&#x6570;</h2><p>&#x6807;&#x7B7E;&#x51FD;&#x6570;&#x4ECB;&#x7ECD;&#x5141;&#x8BB8;&#x5904;&#x7406;&#x6A21;&#x677F;&#x6587;&#x4EF6;&#x91CC;&#x7684;&#x4E00;&#x5757;&#x5185;&#x5BB9;&#xFF0C;&#x529F;&#x80FD;&#x7B49;&#x4E8E;&#x540C; jsp tag&#x3002;&#x5982; Beetl &#x5185;&#x7F6E;&#x7684; layout &#x6807;&#x7B7E;</p>
+<p>index.html<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@ layout(&quot;/inc/layout.html&quot;,{title:&apos;&#x4E3B;&#x9898;&apos;}){</div><div class="line">@  Hello,this is main part</div><div class="line">@ }</div></pre></td></tr></table></figure></p>
+<p>layout.html</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">title is ${title}</div><div class="line">body content ${layoutContent}</div><div class="line">footer</div></pre></td></tr></table></figure>
+<p>&#x7B2C;1&#x884C;&#x53D8;&#x91CF;title&#x6765;&#x81EA;&#x4E8E;layout&#x6807;&#x7B7E;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;<br>&#x7B2C;2&#x884C;layoutContent &#x662F;layout&#x6807;&#x7B7E;&#x4F53;{}&#x6E32;&#x67D3;&#x540E;&#x7684;&#x7ED3;&#x679C;</p>
+<p>Beetl&#x5185;&#x7F6E;&#x4E86;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x6807;&#x7B7E;&#x662F; include,&#x5141;&#x8BB8; include &#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x6A21;&#x677F;&#x6587;&#x4EF6;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@ include(&quot;/inc/header.html&quot;){}</div></pre></td></tr></table></figure>
+<p>layout &#x6807;&#x7B7E;&#x5C06;&#x6267;&#x884C;{}&#x4E2D;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x800C; include &#x6807;&#x7B7E;&#x5219;&#x5FFD;&#x7565;&#x6807;&#x7B7E;&#x4F53;&#x5185;&#x5BB9;&#x3002;</p>
+<h2 id="html-&#x6807;&#x7B7E;"><a href="#html-&#x6807;&#x7B7E;" class="headerlink" title="html &#x6807;&#x7B7E;"></a>html &#x6807;&#x7B7E;</h2><p>Beetl &#x4E5F;&#x652F;&#x6301;HTML tag&#x5F62;&#x5F0F;&#x7684;&#x6807;&#x7B7E;&#xFF0C; &#x533A;&#x5206;beetl&#x7684;html tag &#x4E0E; &#x6807;&#x51C6;html tag&#x3002;&#x5982;&#x8BBE;&#x5B9A;HTML_TAG_FLAG=#&#xFF0C;&#x5219;&#x5982;&#x4E0B;html tag&#x5C06;&#x88AB;beetl&#x89E3;&#x6790;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;#footer style=&#x201D;simple&#x201D;/&gt;</div><div class="line">&lt;#richeditor id=&#x201D;rid&#x201D; path=&quot;${ctxPath}/upload&quot; name=&#x201D;rname&#x201D;  maxlength=&#x201D;${maxlength}&#x201D;&gt; ${html} &#x2026;&#x5176;&#x4ED6;&#x6A21;&#x677F;&#x5185;&#x5BB9;   &lt;/#richdeitor&gt;</div><div class="line">&lt;#html:input  id=&#x2019;aaaa&#x2019; /&gt;</div></pre></td></tr></table></figure>
+<p>&#x5982;&#x5BF9;&#x4E8E;&#x6807;&#x7B7E; footer,Beetl &#x9ED8;&#x8BA4;&#x4F1A;&#x5BFB;&#x627E; WebRoot/htmltag/footer.tag (&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4FEE;&#x6539;&#x8DEF;&#x5F84;&#x548C;&#x540E;&#x7F00;) ,&#x5185;&#x5BB9;&#x5982;&#x4E0B;:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@ if(style==&#x2019;simple&#x2019;){ </div><div class="line"> &#x8BF7;&#x8054;&#x7CFB;&#x6211; ${session.user.name}</div><div class="line">@ }else{ </div><div class="line">&#x8BF7;&#x8054;&#x7CFB;&#x6211; ${session.user.name},phone:${session.user.phone}</div><div class="line">@ }</div></pre></td></tr></table></figure>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/Beetl/后台/Java/模板引擎/beetl/Beetl学习总结(一)--环境搭建/" class="next-post btn btn-default" title='Beetl学习总结(一)--环境搭建'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Beetl学习总结(一)--环境搭建</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">49</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 11.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.83px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.67px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 10.83px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 15.83px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/tags/Liunx/" style="font-size: 18.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.5px;">Liunx软件安装</a> <a href="/tags/Liunx软件安装/" style="font-size: 10px;">Liunx软件安装'</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12.5px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 16.67px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 17.5px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 15.83px;">Nginx</a> <a href="/tags/Quartz/" style="font-size: 12.5px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 11.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.83px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 19.17px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 17.5px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 14.17px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 15px;">SpringBoot</a> <a href="/tags/SpringBoots/" style="font-size: 10px;">SpringBoots</a> <a href="/tags/SpringMVC/" style="font-size: 16.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Utils/" style="font-size: 10.83px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 15.83px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 15.83px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10.83px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10.83px;">tool</a> <a href="/tags/前端/" style="font-size: 10.83px;">前端</a> <a href="/tags/前端基础/" style="font-size: 13.33px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12.5px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 11.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>SpringBoot学习总结(五)--定时任务 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="SpringBoot学习总结(五)--定时任务">
+            
+	            SpringBoot学习总结(五)--定时任务
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/SpringBoot">
+            SpringBoot
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/SpringBoot" title='SpringBoot'>
+                        SpringBoot
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/07/24</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <blockquote>
+<p>&#x9879;&#x76EE;&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x65F6;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x529F;&#x80FD;&#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x6709;&#x7528;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x4E86;&#x89E3;&#x4E0B; <code>SpringBoot</code> &#x81EA;&#x5E26;&#x7684;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1; <code>Schedule</code>, &#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x8F7B;&#x91CF;&#x7EA7;&#x7684; <code>Quartz</code>&#x3002;</p>
+</blockquote>
+<h2 id="&#x56FA;&#x5B9A;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x7EC4;&#x4EF6;"><a href="#&#x56FA;&#x5B9A;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x7EC4;&#x4EF6;" class="headerlink" title="&#x56FA;&#x5B9A;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x7EC4;&#x4EF6;"></a>&#x56FA;&#x5B9A;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x7EC4;&#x4EF6;</h2><h3 id="1-&#x5F15;&#x5165;&#x4F9D;&#x8D56;"><a href="#1-&#x5F15;&#x5165;&#x4F9D;&#x8D56;" class="headerlink" title="1) &#x5F15;&#x5165;&#x4F9D;&#x8D56;"></a>1) &#x5F15;&#x5165;&#x4F9D;&#x8D56;</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="2-&#x7F16;&#x5199;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x5B9E;&#x73B0;"><a href="#2-&#x7F16;&#x5199;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x5B9E;&#x73B0;" class="headerlink" title="2) &#x7F16;&#x5199;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x5B9E;&#x73B0;"></a>2) &#x7F16;&#x5199;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x5B9E;&#x73B0;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrintTask</span> </span>{</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> SimpleDateFormat dateFormat = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;HH:mm:ss&quot;</span>);</div><div class="line">    </div><div class="line">    <span class="meta">@Scheduled</span>(fixedRate = <span class="number">5000</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pringCurrentTime_01</span><span class="params">()</span> </span>{</div><div class="line">        System.out.println(<span class="string">&quot;&#x73B0;&#x5728;&#x65F6;&#x95F4;_01&#xFF1A;&quot;</span> + dateFormat.format(<span class="keyword">new</span> Date()));</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Scheduled</span>(cron = <span class="string">&quot;${printTask.intervals}&quot;</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pringCurrentTime_02</span><span class="params">()</span> </span>{</div><div class="line">        System.out.println(<span class="string">&quot;&#x73B0;&#x5728;&#x65F6;&#x95F4;_02&#xFF1A;&quot;</span> + dateFormat.format(<span class="keyword">new</span> Date()));</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="3-application-properties-&#x6DFB;&#x52A0;&#x5C5E;&#x6027;"><a href="#3-application-properties-&#x6DFB;&#x52A0;&#x5C5E;&#x6027;" class="headerlink" title="3) application.properties &#x6DFB;&#x52A0;&#x5C5E;&#x6027;"></a>3) application.properties &#x6DFB;&#x52A0;&#x5C5E;&#x6027;</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># &#x6253;&#x5370;&#x4EFB;&#x52A1;&#x95F4;&#x9694;&#x65F6;&#x95F4;</div><div class="line">printTask.intervals = */5 * * * * ?</div></pre></td></tr></table></figure>
+<h3 id="4-&#x542F;&#x52A8;&#x7C7B;&#x4E0A;&#x589E;&#x52A0;&#x542F;&#x7528;&#x5B9A;&#x65F6;&#x6CE8;&#x89E3;"><a href="#4-&#x542F;&#x52A8;&#x7C7B;&#x4E0A;&#x589E;&#x52A0;&#x542F;&#x7528;&#x5B9A;&#x65F6;&#x6CE8;&#x89E3;" class="headerlink" title="4) &#x542F;&#x52A8;&#x7C7B;&#x4E0A;&#x589E;&#x52A0;&#x542F;&#x7528;&#x5B9A;&#x65F6;&#x6CE8;&#x89E3;"></a>4) &#x542F;&#x52A8;&#x7C7B;&#x4E0A;&#x589E;&#x52A0;&#x542F;&#x7528;&#x5B9A;&#x65F6;&#x6CE8;&#x89E3;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableScheduling</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringbootApplication</span> </span>{</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</div><div class="line">		SpringApplication.run(SpringbootApplication.class, args);</div><div class="line">	}</div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="5-&#x542F;&#x52A8;&#x8FD0;&#x884C;&#xFF0C;&#x89C2;&#x5BDF;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x51FA;"><a href="#5-&#x542F;&#x52A8;&#x8FD0;&#x884C;&#xFF0C;&#x89C2;&#x5BDF;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x51FA;" class="headerlink" title="5) &#x542F;&#x52A8;&#x8FD0;&#x884C;&#xFF0C;&#x89C2;&#x5BDF;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x51FA;"></a>5) &#x542F;&#x52A8;&#x8FD0;&#x884C;&#xFF0C;&#x89C2;&#x5BDF;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x51FA;</h3><p><img src="/SpringBoot/&#x540E;&#x53F0;/Java/&#x6846;&#x67B6;/SpringBoot/SpringBoot&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E94;)--&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;/img/01.png" alt=""></p>
+<h2 id="&#x53C2;&#x6570;&#x8BF4;&#x660E;"><a href="#&#x53C2;&#x6570;&#x8BF4;&#x660E;" class="headerlink" title="&#x53C2;&#x6570;&#x8BF4;&#x660E;"></a>&#x53C2;&#x6570;&#x8BF4;&#x660E;</h2><ul>
+<li>@Component:&#x5C06;&#x7C7B;&#x5BF9;&#x8C61;&#x6CE8;&#x5165;&#x5230; spring &#x5BB9;&#x5668;&#x4E2D;</li>
+<li>@Scheduled:&#x914D;&#x7F6E;&#x5B9A;&#x65F6;&#x8BBE;&#x7F6E;&#xFF0C;&#x5B83;&#x7684;&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x63A5;&#x53D7;&#x4E24;&#x79CD;&#x5B9A;&#x65F6;&#x7684;&#x8BBE;&#x7F6E;&#xFF0C;&#x4E00;&#x79CD;&#x662F;&#x6211;&#x4EEC;&#x5E38;&#x7528;&#x7684; <code>cron=&quot;*/5 * * * * ?&quot;</code>,&#x4E00;&#x79CD;&#x662F; <code>fixedRate = 5000</code>&#xFF0C;&#x8FD9;&#x4E24;&#x79CD;&#x914D;&#x7F6E;&#x90FD;&#x8868;&#x793A;&#x6BCF;&#x9694;&#x4E94;&#x79D2;&#x6253;&#x5370;&#x4E00;&#x4E0B;&#x5185;&#x5BB9;&#x3002;</li>
+</ul>
+<h3 id="fixedRate-&#x8BF4;&#x660E;"><a href="#fixedRate-&#x8BF4;&#x660E;" class="headerlink" title="fixedRate &#x8BF4;&#x660E;"></a>fixedRate &#x8BF4;&#x660E;</h3><ul>
+<li>@Scheduled(fixedRate = 5000) &#xFF1A;&#x4E0A;&#x4E00;&#x6B21;&#x5F00;&#x59CB;&#x6267;&#x884C;&#x65F6;&#x95F4;&#x70B9;&#x4E4B;&#x540E;&#x4E94;&#x79D2;&#x518D;&#x6267;&#x884C;&#x3002;</li>
+<li>@Scheduled(fixedDelay = 5000) &#xFF1A;&#x4E0A;&#x4E00;&#x6B21;&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#x65F6;&#x95F4;&#x70B9;&#x4E4B;&#x540E;&#x4E94;&#x79D2;&#x518D;&#x6267;&#x884C;&#x3002;</li>
+<li>@Scheduled(initialDelay=1000, fixedRate=6000) &#xFF1A;&#x7B2C;&#x4E00;&#x6B21;&#x5EF6;&#x8FDF;&#x4E00;&#x79D2;&#x540E;&#x6267;&#x884C;&#xFF0C;&#x4E4B;&#x540E;&#x6309;fixedRate&#x7684;&#x89C4;&#x5219;&#x6BCF;&#x4E94;&#x79D2;&#x6267;&#x884C;&#x4E00;&#x6B21;&#x3002;</li>
+</ul>
+<h3 id="crontab&#x8868;&#x8FBE;&#x5F0F;&#x8D44;&#x6E90;"><a href="#crontab&#x8868;&#x8FBE;&#x5F0F;&#x8D44;&#x6E90;" class="headerlink" title="crontab&#x8868;&#x8FBE;&#x5F0F;&#x8D44;&#x6E90;"></a>crontab&#x8868;&#x8FBE;&#x5F0F;&#x8D44;&#x6E90;</h3><p><a href="http://cron.qqe2.com/" target="_blank" rel="external">crontab  &#x8868;&#x8FBE;&#x5F0F;&#x5728;&#x7EBF;&#x751F;&#x6210;</a></p>
+<p>&#x4E0A;&#x9762;&#x6211;&#x4EEC;&#x5B8C;&#x6210;&#x4E86;&#x4E00;&#x4E2A;&#x56FA;&#x5B9A;&#x65F6;&#x95F4;&#x7684;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#xFF0C;&#x90A3;&#x600E;&#x4E48;&#x6837;&#x505A;&#x5230;&#x4E0D;&#x91CD;&#x542F;&#x9879;&#x76EE;&#x800C;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x5B9A;&#x65F6;&#x5668;&#x6267;&#x884C;&#x65F6;&#x95F4;&#x5462; &#xFF1F;</p>
+<h2 id="&#x53EF;&#x914D;&#x7F6E;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x7EC4;&#x4EF6;"><a href="#&#x53EF;&#x914D;&#x7F6E;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x7EC4;&#x4EF6;" class="headerlink" title="&#x53EF;&#x914D;&#x7F6E;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x7EC4;&#x4EF6;"></a>&#x53EF;&#x914D;&#x7F6E;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x7EC4;&#x4EF6;</h2><p>&#x53EF;&#x914D;&#x7F6E;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x7EC4;&#x4EF6;&#x9700;&#x8981;&#x5B9E;&#x73B0; <code>SchedulingConfigurer</code> &#x63A5;&#x53E3;&#x4E2D;&#x7684; <code>configureTasks</code> &#x65B9;&#x6CD5;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x6709;&#x4E24;&#x4E2A;&#x5165;&#x53C2; <code>Runnable task&#x3001; Trigger trigger</code>&#xFF0C;&#x7B2C;&#x4E00;&#x4E2A;&#x4E3A;&#x6211;&#x4EEC;&#x4EFB;&#x52A1;&#x7684;&#x5177;&#x4F53;&#x903B;&#x8F91;&#x5B9E;&#x73B0;&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x4E3A;&#x89E6;&#x53D1;&#x5668;&#xFF0C;&#x52A8;&#x6001;&#x7684;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x5219;&#x610F;&#x5473;&#x7740; <code>Trigger</code> &#x9700;&#x8981;&#x52A8;&#x6001;&#x83B7;&#x53D6;&#x3002;</p>
+<h3 id="1-&#x4FEE;&#x6539;-PrintTask"><a href="#1-&#x4FEE;&#x6539;-PrintTask" class="headerlink" title="1) &#x4FEE;&#x6539; PrintTask"></a>1) &#x4FEE;&#x6539; PrintTask</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrintTask</span> <span class="keyword">implements</span> <span class="title">SchedulingConfigurer</span> </span>{</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> SimpleDateFormat dateFormat = <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;HH:mm:ss&quot;</span>);</div><div class="line"></div><div class="line">    <span class="keyword">private</span> String cronString;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PrintTask</span><span class="params">()</span> </span>{</div><div class="line">        cronString = <span class="string">&quot;*/5 * * * * ?&quot;</span>;</div><div class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</div><div class="line">            <span class="comment">// &#x5F00;&#x542F;&#x65B0;&#x7EBF;&#x7A0B;&#x6A21;&#x62DF;&#x5916;&#x90E8;&#x66F4;&#x6539;&#x4E86;&#x4EFB;&#x52A1;&#x6267;&#x884C;&#x5468;&#x671F;.</span></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</div><div class="line">                <span class="keyword">try</span> {</div><div class="line">                    <span class="comment">// &#x8BA9;&#x7EBF;&#x7A0B;&#x7761;&#x7720; 15&#x79D2;.</span></div><div class="line">                    Thread.sleep(<span class="number">15000</span>);</div><div class="line">                    cronString= <span class="string">&quot;*/6 * * * * ?&quot;</span>;</div><div class="line">                } <span class="keyword">catch</span> (InterruptedException e) {</div><div class="line">                    e.printStackTrace();</div><div class="line">                }</div><div class="line">            }</div><div class="line">        }).start();</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureTasks</span><span class="params">(ScheduledTaskRegistrar scheduledTaskRegistrar)</span> </span>{</div><div class="line">        scheduledTaskRegistrar.addTriggerTask(doTask(), getTrigger());</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> Runnable <span class="title">doTask</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Runnable() {</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</div><div class="line">                System.out.println(<span class="string">&quot;&#x73B0;&#x5728;&#x65F6;&#x95F4;&#xFF1A;&quot;</span> + dateFormat.format(<span class="keyword">new</span> Date()));</div><div class="line">            }</div><div class="line">        };</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> Trigger <span class="title">getTrigger</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Trigger() {</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> Date <span class="title">nextExecutionTime</span><span class="params">(TriggerContext triggerContext)</span> </span>{</div><div class="line">                <span class="comment">//&#x4EFB;&#x52A1;&#x89E6;&#x53D1;&#xFF0C;&#x53EF;&#x4FEE;&#x6539;&#x4EFB;&#x52A1;&#x7684;&#x6267;&#x884C;&#x5468;&#x671F;.</span></div><div class="line">                CronTrigger trigger = <span class="keyword">new</span> CronTrigger(cronString);</div><div class="line">                Date nextExec = trigger.nextExecutionTime(triggerContext);</div><div class="line">                <span class="keyword">return</span> nextExec;</div><div class="line">            }</div><div class="line">        };</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="2-&#x542F;&#x52A8;&#x8FD0;&#x884C;&#xFF0C;&#x89C2;&#x5BDF;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x51FA;"><a href="#2-&#x542F;&#x52A8;&#x8FD0;&#x884C;&#xFF0C;&#x89C2;&#x5BDF;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x51FA;" class="headerlink" title="2) &#x542F;&#x52A8;&#x8FD0;&#x884C;&#xFF0C;&#x89C2;&#x5BDF;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x51FA;"></a>2) &#x542F;&#x52A8;&#x8FD0;&#x884C;&#xFF0C;&#x89C2;&#x5BDF;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x51FA;</h3><p><img src="/SpringBoot/&#x540E;&#x53F0;/Java/&#x6846;&#x67B6;/SpringBoot/SpringBoot&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E94;)--&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;/img/02.png" alt=""></p>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x4E00;&#x5F00;&#x59CB;&#x662F;&#x6BCF;&#x4E94;&#x79D2;&#x6253;&#x5370;&#x4E00;&#x6B21;&#xFF0C;&#x4E4B;&#x540E;&#x5C31;&#x53D8;&#x6210;&#x6BCF;&#x516D;&#x79D2;&#x6253;&#x5370;&#x4E00;&#x6B21;&#x3002;&#x5728;&#x8FD9;&#x8FC7;&#x7A0B;&#x4E2D;&#x6709;&#x4E09;&#x79D2;&#x7684;&#x8F6C;&#x6362;&#x505C;&#x987F;&#x3002;</p>
+<h2 id="&#x542F;&#x52A8;&#x3001;&#x7EC8;&#x6B62;&#x3001;&#x4FEE;&#x6539;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;"><a href="#&#x542F;&#x52A8;&#x3001;&#x7EC8;&#x6B62;&#x3001;&#x4FEE;&#x6539;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;" class="headerlink" title="&#x542F;&#x52A8;&#x3001;&#x7EC8;&#x6B62;&#x3001;&#x4FEE;&#x6539;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;"></a>&#x542F;&#x52A8;&#x3001;&#x7EC8;&#x6B62;&#x3001;&#x4FEE;&#x6539;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;</h2><h3 id="&#x539F;&#x7406;"><a href="#&#x539F;&#x7406;" class="headerlink" title="&#x539F;&#x7406;"></a>&#x539F;&#x7406;</h3><p>&#x901A;&#x8FC7;&#x7EBF;&#x7A0B;&#x6C60;&#x4EFB;&#x52A1;&#x8C03;&#x5EA6;&#x5668; <code>ThreadPoolTaskScheduler</code>&#xFF0C;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x4EFB;&#x52A1;&#x7684;&#x542F;&#x52A8;&#x3001;&#x7EC8;&#x6B62;&#x548C;&#x4FEE;&#x6539;&#x64CD;&#x4F5C;&#x3002;</p>
+<h3 id="1-&#x5B9A;&#x4E49;-TaskController"><a href="#1-&#x5B9A;&#x4E49;-TaskController" class="headerlink" title="1) &#x5B9A;&#x4E49; TaskController"></a>1) &#x5B9A;&#x4E49; TaskController</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">@RestController</div><div class="line">@RequestMapping(&quot;/task&quot;)</div><div class="line">public class TaskController {</div><div class="line"></div><div class="line">    @Autowired</div><div class="line">    private ThreadPoolTaskScheduler threadPoolTaskScheduler;</div><div class="line"></div><div class="line">    private ScheduledFuture&lt;?&gt; future;</div><div class="line"></div><div class="line">    private static final SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;HH:mm:ss&quot;);</div><div class="line">    private Runnable doTask = new Runnable() {</div><div class="line">        @Override</div><div class="line">        public void run() {</div><div class="line">            System.out.println(&quot;&#x73B0;&#x5728;&#x65F6;&#x95F4;&#xFF1A;&quot; + dateFormat.format(new Date()));</div><div class="line">        }</div><div class="line">    };</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public ThreadPoolTaskScheduler trPoolTaskScheduler() {</div><div class="line">        return new ThreadPoolTaskScheduler();</div><div class="line">    }</div><div class="line"></div><div class="line"></div><div class="line">    @RequestMapping(&quot;/start&quot;)</div><div class="line">    public String start() {</div><div class="line">        future = threadPoolTaskScheduler.schedule(doTask, new CronTrigger(&quot;0/5 * * * * *&quot;));</div><div class="line">        System.out.println(&quot;&#x542F;&#x52A8;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x6210;&#x529F;&quot;);</div><div class="line">        return &quot;&#x542F;&#x52A8;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x6210;&#x529F;&quot;;</div><div class="line">    }</div><div class="line"></div><div class="line">    @RequestMapping(&quot;/stop&quot;)</div><div class="line">    public String stop() {</div><div class="line">        if (future != null) {</div><div class="line">            future.cancel(true);</div><div class="line">        }</div><div class="line">        System.out.println(&quot;&#x5173;&#x95ED;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x6210;&#x529F;&quot;);</div><div class="line">        return &quot;&#x5173;&#x95ED;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x6210;&#x529F;&quot;;</div><div class="line">    }</div><div class="line"></div><div class="line">    @RequestMapping(&quot;/modify&quot;)</div><div class="line">    public String modify() {</div><div class="line">        String cronString = &quot;*/6 * * * * ?&quot;;</div><div class="line">        // &#x505C;&#x6B62;&#x5B9A;&#x65F6;&#x5668;</div><div class="line">        stop();</div><div class="line">        // &#x5B9A;&#x4E49;&#x65B0;&#x7684;&#x6267;&#x884C;&#x65F6;&#x95F4;&#x5E76;&#x542F;&#x52A8;</div><div class="line">        future = threadPoolTaskScheduler.schedule(doTask, new CronTrigger(cronString));</div><div class="line">        System.out.println(&quot;&#x4FEE;&#x6539;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x6210;&#x529F;&quot;);</div><div class="line">        return &quot;&#x4FEE;&#x6539;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x6210;&#x529F;&quot;;</div><div class="line">    }</div><div class="line">}</div><div class="line">``` </div><div class="line"></div><div class="line">### 2) &#x542F;&#x52A8;&#x9879;&#x76EE;</div><div class="line"></div><div class="line">* &#x8BBF;&#x95EE; `http://localhost:8080/task/start`&#xFF0C;&#x542F;&#x52A8;&#x5B9A;&#x65F6;&#x5668;,&#x89C2;&#x5BDF;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x51FA;&#xFF1A;</div><div class="line">``` log</div><div class="line">&#x542F;&#x52A8;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x6210;&#x529F;</div><div class="line">&#x73B0;&#x5728;&#x65F6;&#x95F4;&#xFF1A;09:14:35</div><div class="line">&#x73B0;&#x5728;&#x65F6;&#x95F4;&#xFF1A;09:14:40</div><div class="line">&#x73B0;&#x5728;&#x65F6;&#x95F4;&#xFF1A;09:14:45</div></pre></td></tr></table></figure>
+<ul>
+<li><p>&#x8BBF;&#x95EE; <code>http://localhost:8080/task/stop</code>&#xFF0C;&#x5173;&#x95ED;&#x5B9A;&#x65F6;&#x5668;,&#x89C2;&#x5BDF;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x51FA;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#x542F;&#x52A8;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x6210;&#x529F;</div><div class="line">&#x73B0;&#x5728;&#x65F6;&#x95F4;&#xFF1A;09:14:35</div><div class="line">&#x73B0;&#x5728;&#x65F6;&#x95F4;&#xFF1A;09:14:40</div><div class="line">&#x73B0;&#x5728;&#x65F6;&#x95F4;&#xFF1A;09:14:45</div><div class="line">&#x5173;&#x95ED;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x6210;&#x529F;</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x8BBF;&#x95EE; <code>http://localhost:8080/task/start</code>&#xFF0C;&#x5148;&#x542F;&#x52A8;&#x5B9A;&#x65F6;&#x5668;&#xFF0C;&#x518D;&#x8BBF;&#x95EE; <code>http://localhost:8080/task/modify</code>&#xFF0C;&#x4FEE;&#x6539;&#x5B9A;&#x65F6;&#x5668;&#x65F6;&#x95F4;,&#x89C2;&#x5BDF;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x51FA;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#x542F;&#x52A8;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x6210;&#x529F;</div><div class="line">&#x73B0;&#x5728;&#x65F6;&#x95F4;&#xFF1A;09:15:05</div><div class="line">&#x73B0;&#x5728;&#x65F6;&#x95F4;&#xFF1A;09:15:10</div><div class="line">&#x5173;&#x95ED;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x6210;&#x529F;</div><div class="line">&#x4FEE;&#x6539;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x6210;&#x529F;</div><div class="line">&#x73B0;&#x5728;&#x65F6;&#x95F4;&#xFF1A;09:15:18</div><div class="line">&#x73B0;&#x5728;&#x65F6;&#x95F4;&#xFF1A;09:15:24</div><div class="line">&#x73B0;&#x5728;&#x65F6;&#x95F4;&#xFF1A;09:15:30</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>&#x4ECE;&#x65E5;&#x5FD7;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x5B9A;&#x65F6;&#x5668;&#x64CD;&#x4F5C;&#x8FBE;&#x5230;&#x5B8C;&#x7F8E;&#x9884;&#x671F;&#x7684;&#x6548;&#x679C;&#x4E86;&#x3002;</p>
+<h2 id="Scheduled-&#x5F0A;&#x7AEF;"><a href="#Scheduled-&#x5F0A;&#x7AEF;" class="headerlink" title="Scheduled &#x5F0A;&#x7AEF;"></a>Scheduled &#x5F0A;&#x7AEF;</h2><p><code>Scheduled Task</code> &#x662F;&#x4E00;&#x79CD;&#x8F7B;&#x91CF;&#x7EA7;&#x7684;&#x4EFB;&#x52A1;&#x5B9A;&#x65F6;&#x8C03;&#x5EA6;&#x5668;&#xFF0C;&#x76F8;&#x6BD4;&#x4E8E; <code>Quartz</code>,&#x51CF;&#x5C11;&#x4E86;&#x5F88;&#x591A;&#x7684;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#xFF0C;&#x4F46;&#x662F; <code>Scheduled Task</code> &#x5B58;&#x5728;&#x5982;&#x4E0B;&#x95EE;&#x9898;</p>
+<pre><code>* &#x4E0D;&#x9002;&#x7528;&#x4E8E;&#x5206;&#x5E03;&#x5F0F;&#x96C6;&#x7FA4;&#xFF0C;&#x5728;&#x5206;&#x5E03;&#x5F0F;&#x96C6;&#x7FA4;&#x4E0B;&#x4F1A;&#x51FA;&#x73B0;&#x4EFB;&#x52A1;&#x88AB;&#x591A;&#x6B21;&#x8C03;&#x5EA6;&#x6267;&#x884C;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x56E0;&#x4E3A;&#x96C6;&#x7FA4;&#x7684;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x662F;&#x4E0D;&#x4F1A;&#x5171;&#x4EAB;&#x4EFB;&#x52A1;&#x4FE1;&#x606F;&#x7684;
+* &#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x90FD;&#x4F1A;&#x5B9A;&#x65F6;&#x6267;&#x884C;
+</code></pre><p>&#x6240;&#x4EE5;&#x5728;&#x5206;&#x5E03;&#x5F0F;&#x96C6;&#x7FA4;&#x4E2D;&#x66F4;&#x63A8;&#x8350;&#x4F7F;&#x7528; <code>Quartz</code>&#x3002;</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/SpringBoot/后台/Java/框架/SpringBoot/SpringBoot学习总结(六)--集成邮件服务/" class="pre-post btn btn-default" title='SpringBoot学习总结(六)--集成邮件服务'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">SpringBoot学习总结(六)--集成邮件服务</span>
+        </a>
+    
+    
+        <a href="/SpringBoot/后台/Java/框架/SpringBoot/SpringBoot学习总结(四)--集成Redis/" class="next-post btn btn-default" title='SpringBoot学习总结(四)--集成Redis'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">SpringBoot学习总结(四)--集成Redis</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">49</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 11.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.83px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.67px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 10.83px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 15.83px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/tags/Liunx/" style="font-size: 18.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.5px;">Liunx软件安装</a> <a href="/tags/Liunx软件安装/" style="font-size: 10px;">Liunx软件安装'</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12.5px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 16.67px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 17.5px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 15.83px;">Nginx</a> <a href="/tags/Quartz/" style="font-size: 12.5px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 11.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.83px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 19.17px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 17.5px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 14.17px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 15px;">SpringBoot</a> <a href="/tags/SpringBoots/" style="font-size: 10px;">SpringBoots</a> <a href="/tags/SpringMVC/" style="font-size: 16.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Utils/" style="font-size: 10.83px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 15.83px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 15.83px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10.83px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10.83px;">tool</a> <a href="/tags/前端/" style="font-size: 10.83px;">前端</a> <a href="/tags/前端基础/" style="font-size: 13.33px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12.5px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 11.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

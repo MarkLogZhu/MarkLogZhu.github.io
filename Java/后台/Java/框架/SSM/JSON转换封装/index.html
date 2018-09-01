@@ -1,0 +1,377 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>JSON转换封装 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="JSON转换封装">
+            
+	            JSON转换封装
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Java">
+            Java
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/SSM" title='SSM'>
+                        SSM
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/05/10</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>&#x76EE;&#x524D;&#x5F00;&#x6E90;&#x7684; <code>JSON</code> &#x5DE5;&#x5177;&#x7C7B;&#x6709;&#x5F88;&#x591A;&#xFF0C;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x9879;&#x76EE;&#x7684;&#x5B9E;&#x9645;&#x9700;&#x8981;&#x9009;&#x62E9;&#x5176;&#x4E2D;&#x4E00;&#x79CD;&#x6216;&#x6DF7;&#x5408;&#x4F7F;&#x7528;&#xFF0C;&#x5728;&#x4F7F;&#x7528;&#x8FC7;&#x7A0B;&#x4E2D;&#x5982;&#x679C;&#x4E0D;&#x5BF9; <code>JOSN</code> &#x7684;&#x8F6C;&#x6362;&#x505A;&#x8FDB;&#x4E00;&#x6B65;&#x7684;&#x5C01;&#x88C5;(&#x5DE5;&#x5177;&#x7C7B;&#x7684;&#x5F62;&#x5F0F;),&#x90A3;&#x4E48;&#x5728;&#x4E2D;&#x9014;&#x66F4;&#x6362;&#x5DE5;&#x5177;&#x7C7B;&#x5E93;&#x7684;&#x65F6;&#x5019;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x7684;&#x5730;&#x65B9;&#x5C31;&#x5F88;&#x591A;&#xFF0C;&#x6240;&#x6709;&#x6211;&#x4EEC;&#x4ECA;&#x5929;&#x5C31;&#x8981;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A; <code>JSON</code> &#x7684;&#x5DE5;&#x5177;&#x7C7B;&#xFF01;</p>
+<a id="more"></a>
+<h2 id="&#x6838;&#x5FC3;&#x4F9D;&#x8D56;"><a href="#&#x6838;&#x5FC3;&#x4F9D;&#x8D56;" class="headerlink" title="&#x6838;&#x5FC3;&#x4F9D;&#x8D56;"></a>&#x6838;&#x5FC3;&#x4F9D;&#x8D56;</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- json --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--&#x65E5;&#x671F;&#x5DE5;&#x5177;&#x7C7B;&#xFF1A;&#x9762;&#x5411; Java &#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x65E5;&#x671F;/&#x65F6;&#x95F4;&#x5E93;&#x7684;&#x66FF;&#x4EE3;&#x9009;&#x62E9;&#xFF0C;Joda-Time &#x4EE4;&#x65F6;&#x95F4;&#x548C;&#x65E5;&#x671F;&#x503C;&#x53D8;&#x5F97;&#x6613;&#x4E8E;&#x7BA1;&#x7406;&#x3001;&#x64CD;&#x4F5C;&#x548C;&#x7406;&#x89E3;--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>joda-time<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>joda-time<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="comment">&lt;!--Commons&#x9879;&#x76EE;&#x4E2D;&#x7528;&#x6765;&#x5904;&#x7406;Java&#x57FA;&#x672C;&#x5BF9;&#x8C61;&#x65B9;&#x6CD5;&#x7684;&#x5DE5;&#x5177;&#x7C7B;&#x5305;--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.commons<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-lang3<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="&#x5DE5;&#x5177;&#x7C7B;"><a href="#&#x5DE5;&#x5177;&#x7C7B;" class="headerlink" title="&#x5DE5;&#x5177;&#x7C7B;"></a>&#x5DE5;&#x5177;&#x7C7B;</h2><h3 id="&#x65E5;&#x671F;&#x5DE5;&#x5177;&#x7C7B;"><a href="#&#x65E5;&#x671F;&#x5DE5;&#x5177;&#x7C7B;" class="headerlink" title="&#x65E5;&#x671F;&#x5DE5;&#x5177;&#x7C7B;"></a>&#x65E5;&#x671F;&#x5DE5;&#x5177;&#x7C7B;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DateTimeUtil</span> </span>{    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String STANDARD_FORMAT = <span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>;    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Date <span class="title">strToDate</span><span class="params">(String dateTimeStr, String formatStr)</span></span>{        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern(formatStr);        DateTime dateTime = dateTimeFormatter.parseDateTime(dateTimeStr);        <span class="keyword">return</span> dateTime.toDate();    }    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">dateToStr</span><span class="params">(Date date,String formatStr)</span></span>{        <span class="keyword">if</span>(date == <span class="keyword">null</span>){            <span class="keyword">return</span> StringUtils.EMPTY;        }        DateTime dateTime = <span class="keyword">new</span> DateTime(date);        <span class="keyword">return</span> dateTime.toString(formatStr);    }    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Date <span class="title">strToDate</span><span class="params">(String dateTimeStr)</span></span>{        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern(STANDARD_FORMAT);        DateTime dateTime = dateTimeFormatter.parseDateTime(dateTimeStr);        <span class="keyword">return</span> dateTime.toDate();    }    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">dateToStr</span><span class="params">(Date date)</span></span>{        <span class="keyword">if</span>(date == <span class="keyword">null</span>){            <span class="keyword">return</span> StringUtils.EMPTY;        }        DateTime dateTime = <span class="keyword">new</span> DateTime(date);        <span class="keyword">return</span> dateTime.toString(STANDARD_FORMAT);    }}</div></pre></td></tr></table></figure>
+<h3 id="JSON-&#x8F6C;&#x6362;&#x5DE5;&#x5177;&#x7C7B;"><a href="#JSON-&#x8F6C;&#x6362;&#x5DE5;&#x5177;&#x7C7B;" class="headerlink" title="JSON &#x8F6C;&#x6362;&#x5DE5;&#x5177;&#x7C7B;"></a>JSON &#x8F6C;&#x6362;&#x5DE5;&#x5177;&#x7C7B;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> com.fasterxml.jackson.annotation.JsonInclude;</div><div class="line"><span class="keyword">import</span> com.fasterxml.jackson.core.type.TypeReference;</div><div class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.*;</div><div class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</div><div class="line"><span class="keyword">import</span> org.apache.commons.lang3.StringUtils;</div><div class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</div><div class="line"><span class="meta">@Slf</span>4j</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JsonUtil</span> </span>{</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ObjectMapper objectMapper = <span class="keyword">new</span> ObjectMapper();</div><div class="line">    <span class="comment">// &#x521D;&#x59CB;&#x5316;JSON &#x8F6C;&#x6362;&#x89C4;&#x5219;</span></div><div class="line">    <span class="keyword">static</span>{</div><div class="line">        <span class="comment">// &#x5BF9;&#x8C61;&#x7684;&#x6240;&#x6709;&#x5B57;&#x6BB5;&#x5168;&#x90E8;&#x5217;&#x5165;</span></div><div class="line">        objectMapper.setSerializationInclusion(JsonInclude.Include.ALWAYS);</div><div class="line">        <span class="comment">// &#x53D6;&#x6D88;&#x9ED8;&#x8BA4;&#x8F6C;&#x6362;timestamps&#x5F62;&#x5F0F;</span></div><div class="line">        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,<span class="keyword">false</span>);</div><div class="line">        <span class="comment">// &#x5FFD;&#x7565;&#x7A7A;Bean&#x8F6C;json&#x7684;&#x9519;&#x8BEF;</span></div><div class="line">        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS,<span class="keyword">false</span>);</div><div class="line">        <span class="comment">// &#x6240;&#x6709;&#x7684;&#x65E5;&#x671F;&#x683C;&#x5F0F;&#x90FD;&#x7EDF;&#x4E00;&#x4E3A;&#x4EE5;&#x4E0B;&#x7684;&#x6837;&#x5F0F;&#xFF0C;&#x5373;yyyy-MM-dd HH:mm:ss</span></div><div class="line">        objectMapper.setDateFormat(<span class="keyword">new</span> SimpleDateFormat(DateTimeUtil.STANDARD_FORMAT));</div><div class="line">        <span class="comment">// &#x5FFD;&#x7565; &#x5728;json&#x5B57;&#x7B26;&#x4E32;&#x4E2D;&#x5B58;&#x5728;&#xFF0C;&#x4F46;&#x662F;&#x5728;java&#x5BF9;&#x8C61;&#x4E2D;&#x4E0D;&#x5B58;&#x5728;&#x5BF9;&#x5E94;&#x5C5E;&#x6027;&#x7684;&#x60C5;&#x51B5;&#x3002;&#x9632;&#x6B62;&#x9519;&#x8BEF;</span></div><div class="line">        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES,<span class="keyword">false</span>);</div><div class="line">    }</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x5C06;&#x5BF9;&#x8C61;&#x8F6C;&#x4E3A;JSON&#x5B57;&#x7B26;&#x4E32;</div><div class="line">     * <span class="doctag">@param</span> obj       &#x5BF9;&#x8C61;</div><div class="line">     * <span class="doctag">@param</span> &lt;T&gt;       &#x5BF9;&#x8C61;&#x7C7B;&#x578B;</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">String <span class="title">obj2String</span><span class="params">(T obj)</span></span>{</div><div class="line">        <span class="keyword">if</span>(obj == <span class="keyword">null</span>){</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        }</div><div class="line">        <span class="keyword">try</span> {</div><div class="line">            <span class="keyword">return</span> obj <span class="keyword">instanceof</span> String ? (String)obj :  objectMapper.writeValueAsString(obj);</div><div class="line">        } <span class="keyword">catch</span> (Exception e) {</div><div class="line">            log.warn(<span class="string">&quot;Parse Object to String error&quot;</span>,e);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        }</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x5C06;&#x5BF9;&#x8C61;&#x8F6C;&#x4E3A;JSON&#x5B57;&#x7B26;&#x4E32;&#x5E76;&#x683C;&#x5F0F;&#x5316;</div><div class="line">     * <span class="doctag">@param</span> obj       &#x5BF9;&#x8C61;</div><div class="line">     * <span class="doctag">@param</span> &lt;T&gt;       &#x5BF9;&#x8C61;&#x7C7B;&#x578B;</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">String <span class="title">obj2StringPretty</span><span class="params">(T obj)</span></span>{</div><div class="line">        <span class="keyword">if</span>(obj == <span class="keyword">null</span>){</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        }</div><div class="line">        <span class="keyword">try</span> {</div><div class="line">            <span class="keyword">return</span> obj <span class="keyword">instanceof</span> String ? (String)obj :  objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);</div><div class="line">        } <span class="keyword">catch</span> (Exception e) {</div><div class="line">            log.warn(<span class="string">&quot;Parse Object to String error&quot;</span>,e);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        }</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">string2Obj</span><span class="params">(String str,Class&lt;T&gt; clazz)</span></span>{</div><div class="line">        <span class="keyword">if</span>(StringUtils.isEmpty(str) || clazz == <span class="keyword">null</span>){</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        }</div><div class="line"></div><div class="line">        <span class="keyword">try</span> {</div><div class="line">            <span class="keyword">return</span> clazz.equals(String.class)? (T)str : objectMapper.readValue(str,clazz);</div><div class="line">        } <span class="keyword">catch</span> (Exception e) {</div><div class="line">            log.warn(<span class="string">&quot;Parse String to Object error&quot;</span>,e);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        }</div><div class="line">    }</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">string2Obj</span><span class="params">(String str, TypeReference&lt;T&gt; typeReference)</span></span>{</div><div class="line">        <span class="keyword">if</span>(StringUtils.isEmpty(str) || typeReference == <span class="keyword">null</span>){</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        }</div><div class="line">        <span class="keyword">try</span> {</div><div class="line">            <span class="keyword">return</span> (T)(typeReference.getType().equals(String.class)? str : objectMapper.readValue(str,typeReference));</div><div class="line">        } <span class="keyword">catch</span> (Exception e) {</div><div class="line">            log.warn(<span class="string">&quot;Parse String to Object error&quot;</span>,e);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        }</div><div class="line">    }</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">string2Obj</span><span class="params">(String str,Class&lt;?&gt; collectionClass,Class&lt;?&gt;... elementClasses)</span></span>{</div><div class="line">        JavaType javaType = objectMapper.getTypeFactory().constructParametricType(collectionClass,elementClasses);</div><div class="line">        <span class="keyword">try</span> {</div><div class="line">            <span class="keyword">return</span> objectMapper.readValue(str,javaType);</div><div class="line">        } <span class="keyword">catch</span> (Exception e) {</div><div class="line">            log.warn(<span class="string">&quot;Parse String to Object error&quot;</span>,e);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h2 id="&#x6D4B;&#x8BD5;"><a href="#&#x6D4B;&#x8BD5;" class="headerlink" title="&#x6D4B;&#x8BD5;"></a>&#x6D4B;&#x8BD5;</h2><h3 id="&#x6D4B;&#x8BD5;&#x5BF9;&#x8C61;"><a href="#&#x6D4B;&#x8BD5;&#x5BF9;&#x8C61;" class="headerlink" title="&#x6D4B;&#x8BD5;&#x5BF9;&#x8C61;"></a>&#x6D4B;&#x8BD5;&#x5BF9;&#x8C61;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestUser</span> </span>{</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> Integer age;</div><div class="line">    <span class="keyword">private</span> List&lt;String&gt; hobbies;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>{</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getAge</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> age;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(Integer age)</span> </span>{</div><div class="line">        <span class="keyword">this</span>.age = age;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">getHobbies</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> hobbies;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setHobbies</span><span class="params">(List&lt;String&gt; hobbies)</span> </span>{</div><div class="line">        <span class="keyword">this</span>.hobbies = hobbies;</div><div class="line">    }</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>{</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span> == o) <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        <span class="keyword">if</span> (o == <span class="keyword">null</span> || getClass() != o.getClass()) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        TestUser testUser = (TestUser) o;</div><div class="line">        <span class="keyword">return</span> Objects.equals(name, testUser.name) &amp;&amp;</div><div class="line">                Objects.equals(age, testUser.age) &amp;&amp;</div><div class="line">                Objects.equals(hobbies, testUser.hobbies);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> Objects.hash(name, age, hobbies);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="&#x6D4B;&#x8BD5;&#x65B9;&#x6CD5;"><a href="#&#x6D4B;&#x8BD5;&#x65B9;&#x6CD5;" class="headerlink" title="&#x6D4B;&#x8BD5;&#x65B9;&#x6CD5;"></a>&#x6D4B;&#x8BD5;&#x65B9;&#x6CD5;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JsonUtilTest</span> </span>{</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String OBJ2STRING = <span class="string">&quot;{\&quot;name\&quot;:\&quot;marklogzhu\&quot;,\&quot;age\&quot;:18,\&quot;hobbies\&quot;:[\&quot;java&#x7F16;&#x7A0B;\&quot;,\&quot;&#x8DB3;&#x7403;\&quot;,\&quot;&#x7BEE;&#x7403;\&quot;]}&quot;</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String OBJ2STRING_LIST = <span class="string">&quot;[{\&quot;name\&quot;:\&quot;marklogzhu\&quot;,\&quot;age\&quot;:18,\&quot;hobbies\&quot;:[\&quot;java&#x7F16;&#x7A0B;\&quot;,\&quot;&#x8DB3;&#x7403;\&quot;,\&quot;&#x7BEE;&#x7403;\&quot;]},{\&quot;name\&quot;:\&quot;marklogzhu\&quot;,\&quot;age\&quot;:18,\&quot;hobbies\&quot;:[\&quot;java&#x7F16;&#x7A0B;\&quot;,\&quot;&#x8DB3;&#x7403;\&quot;,\&quot;&#x7BEE;&#x7403;\&quot;]},{\&quot;name\&quot;:\&quot;marklogzhu\&quot;,\&quot;age\&quot;:18,\&quot;hobbies\&quot;:[\&quot;java&#x7F16;&#x7A0B;\&quot;,\&quot;&#x8DB3;&#x7403;\&quot;,\&quot;&#x7BEE;&#x7403;\&quot;]}]&quot;</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String OBJ2STRING_LIST_FORMAT =<span class="string">&quot;[ {\n&quot;</span> +</div><div class="line">            <span class="string">&quot;  \&quot;name\&quot; : \&quot;marklogzhu\&quot;,\n&quot;</span> +</div><div class="line">            <span class="string">&quot;  \&quot;age\&quot; : 18,\n&quot;</span> +</div><div class="line">            <span class="string">&quot;  \&quot;hobbies\&quot; : [ \&quot;java&#x7F16;&#x7A0B;\&quot;, \&quot;&#x8DB3;&#x7403;\&quot;, \&quot;&#x7BEE;&#x7403;\&quot; ]\n&quot;</span> +</div><div class="line">            <span class="string">&quot;}, {\n&quot;</span> +</div><div class="line">            <span class="string">&quot;  \&quot;name\&quot; : \&quot;marklogzhu\&quot;,\n&quot;</span> +</div><div class="line">            <span class="string">&quot;  \&quot;age\&quot; : 18,\n&quot;</span> +</div><div class="line">            <span class="string">&quot;  \&quot;hobbies\&quot; : [ \&quot;java&#x7F16;&#x7A0B;\&quot;, \&quot;&#x8DB3;&#x7403;\&quot;, \&quot;&#x7BEE;&#x7403;\&quot; ]\n&quot;</span> +</div><div class="line">            <span class="string">&quot;}, {\n&quot;</span> +</div><div class="line">            <span class="string">&quot;  \&quot;name\&quot; : \&quot;marklogzhu\&quot;,\n&quot;</span> +</div><div class="line">            <span class="string">&quot;  \&quot;age\&quot; : 18,\n&quot;</span> +</div><div class="line">            <span class="string">&quot;  \&quot;hobbies\&quot; : [ \&quot;java&#x7F16;&#x7A0B;\&quot;, \&quot;&#x8DB3;&#x7403;\&quot;, \&quot;&#x7BEE;&#x7403;\&quot; ]\n&quot;</span> +</div><div class="line">            <span class="string">&quot;} ]&quot;</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> TestUser <span class="title">getTestUser</span><span class="params">()</span></span>{</div><div class="line">        List&lt;String&gt; hobbies = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        hobbies.add(<span class="string">&quot;java&#x7F16;&#x7A0B;&quot;</span>);</div><div class="line">        hobbies.add(<span class="string">&quot;&#x8DB3;&#x7403;&quot;</span>);</div><div class="line">        hobbies.add(<span class="string">&quot;&#x7BEE;&#x7403;&quot;</span>);</div><div class="line">        TestUser user = <span class="keyword">new</span> TestUser();</div><div class="line">        user.setName(<span class="string">&quot;marklogzhu&quot;</span>);</div><div class="line">        user.setAge(<span class="number">18</span>);</div><div class="line">        user.setHobbies(hobbies);</div><div class="line">        <span class="keyword">return</span> user;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> List&lt;TestUser&gt; <span class="title">geTestUserList</span><span class="params">()</span></span>{</div><div class="line">        List&lt;TestUser&gt; userList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        userList.add(getTestUser());</div><div class="line">        userList.add(getTestUser());</div><div class="line">        userList.add(getTestUser());</div><div class="line">        <span class="keyword">return</span> userList;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">obj2String</span><span class="params">()</span> </span>{</div><div class="line">        Assert.assertEquals(OBJ2STRING,JsonUtil.obj2String(getTestUser()));</div><div class="line">    }</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">string2Obj</span><span class="params">()</span> </span>{</div><div class="line">        Assert.assertEquals(getTestUser(),JsonUtil.string2Obj(OBJ2STRING,TestUser.class));</div><div class="line">    }</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">obj2StringPretty</span><span class="params">()</span> </span>{</div><div class="line">        Assert.assertEquals(OBJ2STRING_LIST_FORMAT,JsonUtil.obj2StringPretty(geTestUserList()));</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">string2Obj1</span><span class="params">()</span> </span>{</div><div class="line">        Assert.assertEquals(geTestUserList(),JsonUtil.string2Obj(OBJ2STRING_LIST,<span class="keyword">new</span> TypeReference&lt;List&lt;TestUser&gt;&gt;(){}));</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">string2Obj2</span><span class="params">()</span> </span>{</div><div class="line">        Assert.assertEquals(geTestUserList(),JsonUtil.string2Obj(OBJ2STRING_LIST,List.class,TestUser.class));</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/Java/后台/Java/框架/SSM/获取Spring上下文工具-ApplicationContextHelper/" class="pre-post btn btn-default" title='获取Spring上下文工具-ApplicationContextHelper'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">获取Spring上下文工具-ApplicationContextHelper</span>
+        </a>
+    
+    
+        <a href="/Java/后台/Java/框架/SSM/参数校验工具-BeanValidator/" class="next-post btn btn-default" title='参数校验工具-BeanValidator'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">参数校验工具-BeanValidator</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">49</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 11.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.83px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.67px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 10.83px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 15.83px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/tags/Liunx/" style="font-size: 18.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.5px;">Liunx软件安装</a> <a href="/tags/Liunx软件安装/" style="font-size: 10px;">Liunx软件安装'</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12.5px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 16.67px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 17.5px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 15.83px;">Nginx</a> <a href="/tags/Quartz/" style="font-size: 12.5px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 11.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.83px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 19.17px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 17.5px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 14.17px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 15px;">SpringBoot</a> <a href="/tags/SpringBoots/" style="font-size: 10px;">SpringBoots</a> <a href="/tags/SpringMVC/" style="font-size: 16.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Utils/" style="font-size: 10.83px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 15.83px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 15.83px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10.83px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10.83px;">tool</a> <a href="/tags/前端/" style="font-size: 10.83px;">前端</a> <a href="/tags/前端基础/" style="font-size: 13.33px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12.5px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 11.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

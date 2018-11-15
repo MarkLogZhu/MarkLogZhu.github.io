@@ -125,6 +125,356 @@
         <div class="post-content">
             <div class="post-head home-post-head">
                 <h1 class="post-title"> 
+                    <a href="/Redis/后台/中间件/Redis/Redis学习总结(四)--Redis主从配置/">Redis学习总结(四)--Redis主从配置</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2018年11月15日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<blockquote>
+<p>&#x5728;&#x5206;&#x5E03;&#x5F0F;&#x7CFB;&#x7EDF;&#x67B6;&#x6784;&#x8BBE;&#x8BA1;&#x4E2D;&#x9AD8;&#x53EF;&#x7528;&#x662F;&#x5FC5;&#x987B;&#x8003;&#x8651;&#x7684;&#x56E0;&#x7D20;&#x4E4B;&#x4E00;&#x3002;&#x9AD8;&#x53EF;&#x7528;&#x901A;&#x5E38;&#x662F;&#x6307;&#xFF0C;&#x901A;&#x8FC7;&#x8BBE;&#x8BA1;&#x51CF;&#x5C11;&#x7CFB;&#x7EDF;&#x4E0D;&#x80FD;&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#x7684;&#x65F6;&#x95F4;&#x3002;&#x800C;&#x5355;&#x70B9;&#x662F;&#x7CFB;&#x7EDF;&#x9AD8;&#x53EF;&#x7528;&#x7684;&#x6700;&#x5927;&#x7684;&#x8D25;&#x7B14;&#xFF0C;&#x5982;&#x679C;&#x5355;&#x70B9;&#x51FA;&#x73B0;&#x95EE;&#x9898;&#x7684;&#x8BDD;&#xFF0C;&#x90A3;&#x4E48;&#x6574;&#x4E2A;&#x670D;&#x52A1;&#x5C31;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x4E86;&#xFF0C;&#x6240;&#x4EE5;&#x5E94;&#x8BE5;&#x5C3D;&#x91CF;&#x5728;&#x7CFB;&#x7EDF;&#x8BBE;&#x8BA1;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x907F;&#x514D;&#x5355;&#x70B9;&#x3002;&#x5BF9;&#x4E8E; redis &#x670D;&#x52A1;&#x4E5F;&#x662F;&#x8FD9;&#x6837;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x5B9E;&#x73B0; Redis &#x7684;&#x9AD8;&#x53EF;&#x7528;&#x7684;&#x57FA;&#x7840; &#x2013;&gt; &#x4E3B;&#x4ECE;&#x914D;&#x7F6E;&#x3002;</p>
+</blockquote>
+<h2 id="&#x4E3B;&#x4ECE;&#x6982;&#x5FF5;"><a href="#&#x4E3B;&#x4ECE;&#x6982;&#x5FF5;" class="headerlink" title="&#x4E3B;&#x4ECE;&#x6982;&#x5FF5;"></a>&#x4E3B;&#x4ECE;&#x6982;&#x5FF5;</h2><p>&#x6709;&#x591A;&#x53F0; Redis &#x670D;&#x52A1;&#x5668;(&#x81F3;&#x5C11;&#x4E24;&#x53F0;&#x6216;&#x4EE5;&#x4E0A;)&#xFF0C;&#x5176;&#x4E2D;&#x4E00;&#x53F0;&#x662F;&#x4E3B;&#x670D;&#x52A1;&#x5668;&#xFF08;master&#xFF09; &#x8D1F;&#x8D23;&#x5199;&#x6307;&#x4EE4;&#x7684;&#x64CD;&#x4F5C;,&#x5176;&#x4ED6;&#x90FD;&#x662F;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#xFF08;slave&#xFF09;&#x8D1F;&#x8D23;&#x8BFB;&#x6307;&#x4EE4;&#x7684;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x4E3B;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x4E4B;&#x95F4;&#x4F1A;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x7684;&#x540C;&#x6B65;&#xFF08;&#x5373;&#xFF1A;&#x4E3B;&#x670D;&#x52A1;&#x5668;&#x4F1A;&#x5C06;&#x6570;&#x636E;&#x540C;&#x6B65;&#x5230;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x53BB;&#xFF09;&#xFF0C;&#x4FDD;&#x8BC1;&#x6570;&#x636E;&#x662F;&#x4E00;&#x81F4;&#x7684;&#x3002;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x5C06;&#x8BFB;&#x6307;&#x4EE4;&#x64CD;&#x4F5C;&#x5206;&#x6D41;&#x51CF;&#x5C11;&#x670D;&#x52A1;&#x5668;&#x538B;&#x529B;&#xFF0C;&#x800C;&#x4E14;&#x5176;&#x4E2D;&#x4E00;&#x53F0;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x51FA;&#x73B0;&#x9519;&#x8BEF;&#xFF0C;&#x4E0D;&#x5F71;&#x54CD;&#x5176;&#x4ED6;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x7684;&#x4F7F;&#x7528;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x662F;&#x4E3B;&#x670D;&#x52A1;&#x5668;&#x51FA;&#x73B0;&#x95EE;&#x9898;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x9700;&#x8981;&#x5B9E;&#x73B0;&#x6545;&#x969C;&#x8F6C;&#x79FB;(&#x624B;&#x52A8;/&#x81EA;&#x52A8;)&#x5C06;&#x5176;&#x4E2D;&#x4E00;&#x53F0;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x63D0;&#x5347;&#x4E3A;&#x4E3B;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x5176;&#x4ED6;&#x4ECE;&#x670D;&#x52A1;&#x5668;&#x90FD;&#x4ECE;&#x8FD9;&#x4E2A;&#x65B0;&#x7684;&#x4E3B;&#x670D;&#x52A1;&#x5668;&#x540C;&#x6B65;&#x6570;&#x636E;&#x3002;</p>
+<p>&#x4ECE;&#x4E0A;&#x9762;&#x8FD9;&#x6BB5;&#x8BDD;&#x4E2D;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x77E5;&#x9053; Redis &#x5B9E;&#x73B0;&#x9AD8;&#x53EF;&#x7528;&#x7684;&#x4E24;&#x4E2A;&#x529F;&#x80FD;&#x70B9;&#xFF1A;</p>
+<ul>
+<li>&#x4E3B;&#x4ECE;&#x590D;&#x5236;</li>
+<li>&#x6545;&#x969C;&#x8F6C;&#x79FB;</li>
+</ul>
+              <!--   -->
+              <!--      
+&amp;#x5728;&amp;#x5206;&amp;#x5E03;&amp;#x5F0F;&amp;#x7CFB;&amp;#x7EDF;&amp;#x67B6;&amp;#x6784;&amp;#x8BBE;&amp;#x8BA1;&amp;#x4E2D;&amp;#x9AD8;&amp;#x53EF;&amp;#x7528;&amp;#x662F;&amp;#x5FC5;&amp;#x987B;&amp;#x8003;&amp;#x8651;&amp;#x7684;&amp;#x56E0;&amp;#x7D20;&amp;#x4E4B;&amp;#x4E00;&amp;#x3002;&amp;#x9AD8;&amp;#x53EF;&amp;#x7528;&amp;#x901A;&amp;#x5E38;&amp;#x662F;&amp;#x6307;&amp;#xFF0C;&amp;#x901A;&amp;#x8FC7;&amp;#x8BBE;&amp;#x8BA1;&amp;#x51CF;&amp;#x5C11;&amp;#x7CFB;&amp;#x7EDF;&amp;#x4E0D;&amp;#x80FD;&amp;#x63D0;&amp;#x4F9B;&amp;#x670D;&amp;#x52A1;&amp;#x7684;&amp;#x65F6;&amp;#x95F4;&amp;#x3002;&amp;#x800C;&amp;#x5355;&amp;#x70B9;&amp;#x662F;&amp;#x7CFB;&amp;#x7EDF;&amp;#x9AD8;&amp;#x53EF;&amp;#x7528;&amp;#x7684;&amp;#x6700;&amp;#x5927;&amp;#x7684;&amp;#x8D25;&amp;#x7B14;&amp;#xFF0C;&amp;#x5982;&amp;#x679C;&amp;#x5355;&amp;#x70B9;&amp;#x51FA;&amp;#x73B0;&amp;#x95EE;&amp;#x9898;&amp;#x7684;&amp;#x8BDD;&amp;#xFF0C;&amp;#x90A3;&amp;#x4E48;&amp;#x6574;&amp;#x4E2A;&amp;#x670D;&amp;#x52A1;&amp;#x5C31;&amp;#x4E0D;&amp;#x80FD;&amp;#x4F7F;&amp;#x7528;&amp;#x4E86;&amp;#xFF0C;&amp;#x6240;&amp;#x4EE5;&amp;#x5E94;&amp;#x8BE5;&amp;#x5C3D;&amp;#x91CF;&amp;#x5728;&amp;#x7CFB;&amp;#x7EDF;&amp;#x8BBE;&amp;#x8BA1;&amp;#x7684;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4E2D;&amp;#x907F;&amp;#x514D;&amp;#x5355;&amp;#x70B9;&amp;#x3002;&amp;#x5BF9;&amp;#x4E8E; redis &amp;#x670D;&amp;#x52A1;&amp;#x4E5F;&amp;#x662F;&amp;#x8FD9;&amp;#x6837;&amp;#xFF0C;&amp;#x4ECA;&amp;#x5929;&amp;#x6211;&amp;#x4EEC;&amp;#x5C31;&amp;#x6765;&amp;#x5B9E;&amp;#x73B0; Redis &amp;#x7684;&amp;#x9AD8;&amp;#x53EF;&amp;#x7528;&amp;#x7684;&amp;#x57FA;&amp;#x7840; &amp;#x2013;&amp;gt; &amp;#x4E3B;&amp;#x4ECE;&amp;#x914D;&amp;#x7F6E;&amp;#x3002;
+
+&amp;#x4E3B;&amp;#x4ECE;&amp;#x6982;&amp;#x5FF5;&amp;#x6709;&amp;#x591A;&amp;#x53F0; Redis &amp;#x670D;&amp;#x52A1;&amp;#x5668;(&amp;#x81F3;&amp;#x5C11;&amp;#x4E24;&amp;#x53F0;&amp;#x6216;&amp;#x4EE5;&amp;#x4E0A;)&amp;#xFF0C;&amp;#x5176;&amp;#x4E2D;&amp;#x4E00;&amp;#x53F0;&amp;#x662F;&amp;#x4E3B;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#xFF08;master&amp;#xFF09; &amp;#x8D1F;&amp;#x8D23;&amp;#x5199;&amp;#x6307;&amp;#x4EE4;&amp;#x7684;&amp;#x64CD;&amp;#x4F5C;,&amp;#x5176;&amp;#x4ED6;&amp;#x90FD;&amp;#x662F;&amp;#x4ECE;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#xFF08;slave&amp;#xFF09;&amp;#x8D1F;&amp;#x8D23;&amp;#x8BFB;&amp;#x6307;&amp;#x4EE4;&amp;#x7684;&amp;#x64CD;&amp;#x4F5C;&amp;#x3002;
+&amp;#x4E3B;&amp;#x4ECE;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x4E4B;&amp;#x95F4;&amp;#x4F1A;&amp;#x8FDB;&amp;#x884C;&amp;#x6570;&amp;#x636E;&amp;#x7684;&amp;#x540C;&amp;#x6B65;&amp;#xFF08;&amp;#x5373;&amp;#xFF1A;&amp;#x4E3B;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x4F1A;&amp;#x5C06;&amp;#x6570;&amp;#x636E;&amp;#x540C;&amp;#x6B65;&amp;#x5230;&amp;#x4ECE;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x53BB;&amp;#xFF09;&amp;#xFF0C;&amp;#x4FDD;&amp;#x8BC1;&amp;#x6570;&amp;#x636E;&amp;#x662F;&amp;#x4E00;&amp;#x81F4;&amp;#x7684;&amp;#x3002;&amp;#x4ECE;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x5C06;&amp;#x8BFB;&amp;#x6307;&amp;#x4EE4;&amp;#x64CD;&amp;#x4F5C;&amp;#x5206;&amp;#x6D41;&amp;#x51CF;&amp;#x5C11;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x538B;&amp;#x529B;&amp;#xFF0C;&amp;#x800C;&amp;#x4E14;&amp;#x5176;&amp;#x4E2D;&amp;#x4E00;&amp;#x53F0;&amp;#x4ECE;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x51FA;&amp;#x73B0;&amp;#x9519;&amp;#x8BEF;&amp;#xFF0C;&amp;#x4E0D;&amp;#x5F71;&amp;#x54CD;&amp;#x5176;&amp;#x4ED6;&amp;#x4ECE;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x7684;&amp;#x4F7F;&amp;#x7528;&amp;#x3002;
+&amp;#x5982;&amp;#x679C;&amp;#x662F;&amp;#x4E3B;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x51FA;&amp;#x73B0;&amp;#x95EE;&amp;#x9898;&amp;#xFF0C;&amp;#x90A3;&amp;#x4E48;&amp;#x5C31;&amp;#x9700;&amp;#x8981;&amp;#x5B9E;&amp;#x73B0;&amp;#x6545;&amp;#x969C;&amp;#x8F6C;&amp;#x79FB;(&amp;#x624B;&amp;#x52A8;/&amp;#x81EA;&amp;#x52A8;)&amp;#x5C06;&amp;#x5176;&amp;#x4E2D;&amp;#x4E00;&amp;#x53F0;&amp;#x4ECE;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x63D0;&amp;#x5347;&amp;#x4E3A;&amp;#x4E3B;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#xFF0C;&amp;#x5176;&amp;#x4ED6;&amp;#x4ECE;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x90FD;&amp;#x4ECE;&amp;#x8FD9;&amp;#x4E2A;&amp;#x65B0;&amp;#x7684;&amp;#x4E3B;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x540C;&amp;#x6B65;&amp;#x6570;&amp;#x636E;&amp;#x3002;
+&amp;#x4ECE;&amp;#x4E0A;&amp;#x9762;&amp;#x8FD9;&amp;#x6BB5;&amp;#x8BDD;&amp;#x4E2D;&amp;#x6211;&amp;#x4EEC;&amp;#x53EF;&amp;#x4EE5;&amp;#x77E5;&amp;#x9053; Redis &amp;#x5B9E;&amp;#x73B0;&amp;#x9AD8;&amp;#x53EF;&amp;#x7528;&amp;#x7684;&amp;#x4E24;&amp;#x4E2A;&amp;#x529F;&amp;#x80FD;&amp;#x70B9;&amp;#xFF1A;
+
+&amp;#x4E3B;&amp;#x4ECE;&amp;#x590D;&amp;#x5236;
+&amp;#x6545;&amp;#x969C;&amp;#x8F6C;&amp;#x79FB;
+… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Redis">
+            Redis
+        </a>
+    </span>
+    
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/Redis/后台/中间件/Redis/Redis学习总结(四)--Redis主从配置/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/Redis/后台/中间件/Redis/Redis学习总结(三)--Redis持久化/">Redis学习总结(三)--Redis持久化</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2018年11月09日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<blockquote>
+<p>Redis &#x662F;&#x5C06;&#x6570;&#x636E;&#x5B58;&#x50A8;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x51FA;&#x73B0;&#x65AD;&#x7535;&#x6216;&#x7CFB;&#x7EDF;&#x6545;&#x969C;&#x7684;&#x65F6;&#x5019;&#x6570;&#x636E;&#x5C31;&#x4F1A;&#x5B58;&#x5728;&#x4E22;&#x5931;&#x7684;&#x73B0;&#x8C61;&#xFF0C;Redis&#x901A;&#x8FC7;&#x5C06;&#x6570;&#x636E;&#x6301;&#x4E45;&#x5316;&#x5230;&#x786C;&#x76D8;&#x4E2D;&#x6765;&#x907F;&#x514D;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x7684;&#x51FA;&#x73B0;&#xFF0C;&#x6211;&#x4EEC;&#x4ECA;&#x5929;&#x5C31;&#x6765;&#x5B66;&#x4E60;&#x4E0B; Redis &#x6301;&#x4E45;&#x5316;&#x3002;</p>
+</blockquote>
+<h2 id="Redis-&#x6301;&#x4E45;&#x5316;&#x89E6;&#x53D1;&#x6761;&#x4EF6;"><a href="#Redis-&#x6301;&#x4E45;&#x5316;&#x89E6;&#x53D1;&#x6761;&#x4EF6;" class="headerlink" title="Redis &#x6301;&#x4E45;&#x5316;&#x89E6;&#x53D1;&#x6761;&#x4EF6;"></a>Redis &#x6301;&#x4E45;&#x5316;&#x89E6;&#x53D1;&#x6761;&#x4EF6;</h2><ul>
+<li>&#x624B;&#x52A8;&#x89E6;&#x53D1;<ul>
+<li>save</li>
+<li>bgsave </li>
+</ul>
+</li>
+<li>&#x81EA;&#x52A8;&#x89E6;&#x53D1;<ul>
+<li>&#x914D;&#x7F6E;&#x7B56;&#x7565;</li>
+</ul>
+</li>
+<li>&#x7CFB;&#x7EDF;&#x547D;&#x4EE4;<ul>
+<li>flushdb</li>
+<li>exit</li>
+</ul>
+</li>
+</ul>
+<h3 id="save-&#x548C;-bgsave-&#x7684;&#x533A;&#x522B;"><a href="#save-&#x548C;-bgsave-&#x7684;&#x533A;&#x522B;" class="headerlink" title="save &#x548C; bgsave &#x7684;&#x533A;&#x522B;"></a>save &#x548C; bgsave &#x7684;&#x533A;&#x522B;</h3><p>Redis &#x662F;&#x5355;&#x7EBF;&#x7A0B;&#x64CD;&#x4F5C;&#x7684;&#xFF0C;&#x5F53;&#x6267;&#x884C; <code>save</code> &#x547D;&#x4EE4;&#x65F6;&#x4F1A;&#x963B;&#x585E;&#x4F4F;&#x7EBF;&#x7A0B;&#xFF0C;&#x963B;&#x585E;&#x65F6;&#x957F;&#x6839;&#x636E;&#x6570;&#x636E;&#x91CF;&#x53D8;&#x5316;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x4F1A;&#x9020;&#x6210; Redis &#x65E0;&#x6CD5;&#x54CD;&#x5E94;&#x5176;&#x4ED6;&#x547D;&#x4EE4;&#x3002;&#x800C;&#x8C03;&#x7528; <code>bgsave</code> &#x547D;&#x4EE4; Redis &#x4F1A;&#x8C03;&#x7528; <code>fork</code> &#x6765;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5B50;&#x8FDB;&#x7A0B;&#xFF0C;&#x7136;&#x540E;&#x5B50;&#x8FDB;&#x7A0B;&#x8D1F;&#x8D23;&#x8FDB;&#x884C;&#x6301;&#x4E45;&#x5316;&#x64CD;&#x4F5C;&#xFF0C;&#x800C;&#x4E3B;&#x8FDB;&#x7A0B;&#x7EE7;&#x7EED;&#x5904;&#x7406;&#x547D;&#x4EE4;&#x3002;</p>
+<h3 id="&#x914D;&#x7F6E;&#x7B56;&#x7565;"><a href="#&#x914D;&#x7F6E;&#x7B56;&#x7565;" class="headerlink" title="&#x914D;&#x7F6E;&#x7B56;&#x7565;"></a>&#x914D;&#x7F6E;&#x7B56;&#x7565;</h3><p>Redis &#x5728;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x8BBE;&#x7F6E;&#x4E86;&#x51E0;&#x4E2A;&#x7B56;&#x7565;:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">save 900 1  	 # 900&#x79D2;&#x5185;&#xFF08;15&#x5206;&#x949F;&#xFF09;,&#x66F4;&#x6539;&#x4E86;1&#x4E2A;&#x4EE5;&#x4E0A;&#x7684;&#x952E;</div><div class="line">save 300 10  	# 30&#x79D2;&#x5185;&#xFF08;5&#x5206;&#x949F;&#xFF09;&#x6539;&#x53D8;&#x4E86;10&#x4E2A;&#x4EE5;&#x4E0A;&#x7684;&#x952E;</div><div class="line">save 60 10000	# 60&#x79D2;&#x5185;&#x6539;&#x53D8;&#x4E86;10000&#x4E2A;&#x4EE5;&#x4E0A;&#x7684;&#x952E;</div></pre></td></tr></table></figure>
+<p>&#x5F53;&#x6EE1;&#x8DB3;&#x4EE5;&#x4E0A;&#x4EFB;&#x610F;&#x6761;&#x4EF6;&#x65F6;&#x5C31;&#x80FD;&#x89E6;&#x53D1;&#x3002;</p>
+<h2 id="Redis-&#x6301;&#x4E45;&#x5316;&#x9009;&#x9879;"><a href="#Redis-&#x6301;&#x4E45;&#x5316;&#x9009;&#x9879;" class="headerlink" title="Redis &#x6301;&#x4E45;&#x5316;&#x9009;&#x9879;"></a>Redis &#x6301;&#x4E45;&#x5316;&#x9009;&#x9879;</h2><p>Redis &#x63D0;&#x4F9B;&#x4E86;&#x4E24;&#x79CD;&#x6301;&#x4E45;&#x5316;&#x65B9;&#x5F0F;&#x5C06;&#x6570;&#x636E;&#x5B58;&#x50A8;&#x5230;&#x786C;&#x76D8;&#x4E2D;&#x3002;</p>
+<p>&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#x53EB;&#x505A; RDB&#xFF08;Redis DataBase&#xFF09;&#xFF0C;&#x5728;&#x6307;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x5185;&#xFF0C;&#x6267;&#x884C;&#x6307;&#x5B9A;&#x6B21;&#x6570;&#x7684;&#x5199;&#x64CD;&#x4F5C;&#xFF0C;&#x5C31;&#x4F1A;&#x89E6;&#x53D1;&#x5C06;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x5199;&#x5165;&#x5230;&#x786C;&#x76D8;&#x4E2D;(&#x5373;&#x5728;&#x6307;&#x5B9A;&#x76EE;&#x5F55;&#x4E0B;&#x751F;&#x6210;&#x4E00;&#x4E2A; dump.rdb &#x6587;&#x4EF6;)&#x3002;&#x5B83;&#x662F; Redis &#x9ED8;&#x8BA4;&#x7684;&#x6301;&#x4E45;&#x5316;&#x65B9;&#x5F0F;&#x3002;</p>
+<p>&#x53E6;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#x53EB;&#x505A; AOF(Append Only File)&#xFF0C;&#x5728;&#x6307;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x5185;&#xFF0C;&#x6267;&#x884C;&#x6307;&#x5B9A;&#x6B21;&#x6570;&#x7684;&#x5199;&#x64CD;&#x4F5C;&#xFF0C;&#x5C31;&#x4F1A;&#x89E6;&#x53D1;&#x5C06;&#x5199;&#x6307;&#x4EE4;&#x547D;&#x4EE4;&#x8FFD;&#x52A0;&#x5230;&#x786C;&#x76D8;&#x4E2D;&#x7684;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x91CC;&#x3002;</p>
+<p>&#x7B80;&#x5355;&#x6765;&#x8BF4;&#xFF0C;&#x524D;&#x8005;&#x662F;&#x5C06;&#x6240;&#x6709;&#x6570;&#x636E;&#x90FD;&#x4FDD;&#x5B58;&#x8D77;&#x6765;&#xFF0C;&#x5728;&#x4E4B;&#x540E;&#x5168;&#x91CF;&#x6062;&#x590D;&#x3002;&#x800C;&#x540E;&#x8005;&#x662F;&#x5C06;&#x6307;&#x4EE4;&#x4EE5;&#x65E5;&#x5FD7;&#x5F62;&#x5F0F;&#x5B58;&#x50A8;&#xFF0C;&#x5728;&#x4E4B;&#x540E;&#x901A;&#x8FC7;&#x91CD;&#x65B0;&#x6267;&#x884C;&#x6307;&#x4EE4;&#x6765;&#x8FD8;&#x539F;&#x6570;&#x636E;&#x3002;</p>
+              <!--   -->
+              <!--      
+Redis &amp;#x662F;&amp;#x5C06;&amp;#x6570;&amp;#x636E;&amp;#x5B58;&amp;#x50A8;&amp;#x5728;&amp;#x5185;&amp;#x5B58;&amp;#x4E2D;&amp;#x7684;&amp;#xFF0C;&amp;#x5982;&amp;#x679C;&amp;#x51FA;&amp;#x73B0;&amp;#x65AD;&amp;#x7535;&amp;#x6216;&amp;#x7CFB;&amp;#x7EDF;&amp;#x6545;&amp;#x969C;&amp;#x7684;&amp;#x65F6;&amp;#x5019;&amp;#x6570;&amp;#x636E;&amp;#x5C31;&amp;#x4F1A;&amp;#x5B58;&amp;#x5728;&amp;#x4E22;&amp;#x5931;&amp;#x7684;&amp;#x73B0;&amp;#x8C61;&amp;#xFF0C;Redis&amp;#x901A;&amp;#x8FC7;&amp;#x5C06;&amp;#x6570;&amp;#x636E;&amp;#x6301;&amp;#x4E45;&amp;#x5316;&amp;#x5230;&amp;#x786C;&amp;#x76D8;&amp;#x4E2D;&amp;#x6765;&amp;#x907F;&amp;#x514D;&amp;#x8FD9;&amp;#x4E2A;&amp;#x95EE;&amp;#x9898;&amp;#x7684;&amp;#x51FA;&amp;#x73B0;&amp;#xFF0C;&amp;#x6211;&amp;#x4EEC;&amp;#x4ECA;&amp;#x5929;&amp;#x5C31;&amp;#x6765;&amp;#x5B66;&amp;#x4E60;&amp;#x4E0B; Redis &amp;#x6301;&amp;#x4E45;&amp;#x5316;&amp;#x3002;
+
+Redis &amp;#x6301;&amp;#x4E45;&amp;#x5316;&amp;#x89E6;&amp;#x53D1;&amp;#x6761;&amp;#x4EF6;
+&amp;#x624B;&amp;#x52A8;&amp;#x89E6;&amp;#x53D1;
+save
+bgsave 
+
+
+&amp;#x81EA;&amp;#x52A8;&amp;#x89E6;&amp;#x53D1;
+&amp;#x914D;&amp;#x7F6E;&amp;#x7B56;&amp;#x7565;
+
+
+&amp;#x7CFB;&amp;#x7EDF;&amp;#x547D;&amp;#x4EE4;
+flushdb
+exit
+
+
+
+save &amp;#x548C; bgsave &amp;#x7684;&amp;#x533A;&amp;#x522B;Redis &amp;#x662F;&amp;#x5355;&amp;#x7EBF;&amp;#x7A0B;&amp;#x64CD;&amp;#x4F5C;&amp;#x7684;&amp;#xFF0C;&amp;#x5F53;&amp;#x6267;&amp;#x884C; save &amp;#x547D;&amp;#x4EE4;&amp;#x65F6;&amp;#x4F1A;&amp;#x963B;&amp;#x585E;&amp;#x4F4F;&amp;#x7EBF;&amp;#x7A0B;&amp;#xFF0C;&amp;#x963B;&amp;#x585E;&amp;#x65F6;&amp;#x957F;&amp;#x6839;&amp;#x636E;&amp;#x6570;&amp;#x636E;&amp;#x91CF;&amp;#x53D8;&amp;#x5316;&amp;#xFF0C;&amp;#x8FD9;&amp;#x6837;&amp;#x5C31;&amp;#x4F1A;&amp;#x9020;&amp;#x6210; Redis &amp;#x65E0;&amp;#x6CD5;&amp;#x54CD;&amp;#x5E94;&amp;#x5176;&amp;#x4ED6;&amp;#x547D;&amp;#x4EE4;&amp;#x3002;&amp;#x800C;&amp;#x8C03;&amp;#x7528; bgsave &amp;#x547D;&amp;#x4EE4; Redis &amp;#x4F1A;&amp;#x8C03;&amp;#x7528; fork &amp;#x6765;&amp;#x521B;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;&amp;#x5B50;&amp;#x8FDB;&amp;#x7A0B;&amp;#xFF0C;&amp;#x7136;&amp;#x540E;&amp;#x5B50;&amp;#x8FDB;&amp;#x7A0B;&amp;#x8D1F;&amp;#x8D23;&amp;#x8FDB;&amp;#x884C;&amp;#x6301;&amp;#x4E45;&amp;#x5316;&amp;#x64CD;&amp;#x4F5C;&amp;#xFF0C;&amp;#x800C;&amp;#x4E3B;&amp;#x8FDB;&amp;#x7A0B;&amp;#x7EE7;&amp;#x7EED;&amp;#x5904;&amp;#x7406;&amp;#x547D;&amp;#x4EE4;&amp;#x3002;
+&amp;#x914D;&amp;#x7F6E;&amp;#x7B56;&amp;#x7565;Redis &amp;#x5728;&amp;#x914D;&amp;#x7F6E;&amp;#x6587;&amp;#x4EF6;&amp;#x4E2D;&amp;#x8BBE;&amp;#x7F6E;&amp;#x4E86;&amp;#x51E0;&amp;#x4E2A;&amp;#x7B56;&amp;#x7565;:
+123save 900 1  	 # 900&amp;#x79D2;&amp;#x5185;&amp;#xFF08;15&amp;#x5206;&amp;#x949F;&amp;#xFF09;,&amp;#x66F4;&amp;#x6539;&amp;#x4E86;1&amp;#x4E2A;&amp;#x4EE5;&amp;#x4E0A;&amp;#x7684;&amp;#x952E;save 300 10  	# 30&amp;#x79D2;&amp;#x5185;&amp;#xFF08;5&amp;#x5206;&amp;#x949F;&amp;#xFF09;&amp;#x6539;&amp;#x53D8;&amp;#x4E86;10&amp;#x4E2A;&amp;#x4EE5;&amp;#x4E0A;&amp;#x7684;&amp;#x952E;save 60 10000	# 60&amp;#x79D2;&amp;#x5185;&amp;#x6539;&amp;#x53D8;&amp;#x4E86;10000&amp;#x4E2A;&amp;#x4EE5;&amp;#x4E0A;&amp;#x7684;&amp;#x952E;
+&amp;#x5F53;&amp;#x6EE1;&amp;#x8DB3;&amp;#x4EE5;&amp;#x4E0A;&amp;#x4EFB;&amp;#x610F;&amp;#x6761;&amp;#x4EF6;&amp;#x65F6;&amp;#x5C31;&amp;#x80FD;&amp;#x89E6;&amp;#x53D1;&amp;#x3002;
+Redis &amp;#x6301;&amp;#x4E45;&amp;#x5316;&amp;#x9009;&amp;#x9879;Redis &amp;#x63D0;&amp;#x4F9B;&amp;#x4E86;&amp;#x4E24;&amp;#x79CD;&amp;#x6301;&amp;#x4E45;&amp;#x5316;&amp;#x65B9;&amp;#x5F0F;&amp;#x5C06;&amp;#x6570;&amp;#x636E;&amp;#x5B58;&amp;#x50A8;&amp;#x5230;&amp;#x786C;&amp;#x76D8;&amp;#x4E2D;&amp;#x3002;
+&amp;#x4E00;&amp;#x79CD;&amp;#x65B9;&amp;#x5F0F;&amp;#x53EB;&amp;#x505A; RDB&amp;#xFF08;Redis DataBase&amp;#xFF09;&amp;#xFF0C;&amp;#x5728;&amp;#x6307;&amp;#x5B9A;&amp;#x7684;&amp;#x65F6;&amp;#x95F4;&amp;#x95F4;&amp;#x9694;&amp;#x5185;&amp;#xFF0C;&amp;#x6267;&amp;#x884C;&amp;#x6307;&amp;#x5B9A;&amp;#x6B21;&amp;#x6570;&amp;#x7684;&amp;#x5199;&amp;#x64CD;&amp;#x4F5C;&amp;#xFF0C;&amp;#x5C31;&amp;#x4F1A;&amp;#x89E6;&amp;#x53D1;&amp;#x5C06;&amp;#x5185;&amp;#x5B58;&amp;#x4E2D;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x5199;&amp;#x5165;&amp;#x5230;&amp;#x786C;&amp;#x76D8;&amp;#x4E2D;(&amp;#x5373;&amp;#x5728;&amp;#x6307;&amp;#x5B9A;&amp;#x76EE;&amp;#x5F55;&amp;#x4E0B;&amp;#x751F;&amp;#x6210;&amp;#x4E00;&amp;#x4E2A; dump.rdb &amp;#x6587;&amp;#x4EF6;)&amp;#x3002;&amp;#x5B83;&amp;#x662F; Redis &amp;#x9ED8;&amp;#x8BA4;&amp;#x7684;&amp;#x6301;&amp;#x4E45;&amp;#x5316;&amp;#x65B9;&amp;#x5F0F;&amp;#x3002;
+&amp;#x53E6;&amp;#x4E00;&amp;#x79CD;&amp;#x65B9;&amp;#x5F0F;&amp;#x53EB;&amp;#x505A; AOF(Append Only File)&amp;#xFF0C;&amp;#x5728;&amp;#x6307;&amp;#x5B9A;&amp;#x7684;&amp;#x65F6;&amp;#x95F4;&amp;#x95F4;&amp;#x9694;&amp;#x5185;&amp;#xFF0C;&amp;#x6267;&amp;#x884C;&amp;#x6307;&amp;#x5B9A;&amp;#x6B21;&amp;#x6570;&amp;#x7684;&amp;#x5199;&amp;#x64CD;&amp;#x4F5C;&amp;#xFF0C;&amp;#x5C31;&amp;#x4F1A;&amp;#x89E6;&amp;#x53D1;&amp;#x5C06;&amp;#x5199;&amp;#x6307;&amp;#x4EE4;&amp;#x547D;&amp;#x4EE4;&amp;#x8FFD;&amp;#x52A0;&amp;#x5230;&amp;#x786C;&amp;#x76D8;&amp;#x4E2D;&amp;#x7684;&amp;#x65E5;&amp;#x5FD7;&amp;#x6587;&amp;#x4EF6;&amp;#x91CC;&amp;#x3002;
+&amp;#x7B80;&amp;#x5355;&amp;#x6765;&amp;#x8BF4;&amp;#xFF0C;&amp;#x524D;&amp;#x8005;&amp;#x662F;&amp;#x5C06;&amp;#x6240;&amp;#x6709;&amp;#x6570;&amp;#x636E;&amp;#x90FD;&amp;#x4FDD;&amp;#x5B58;&amp;#x8D77;&amp;#x6765;&amp;#xFF0C;&amp;#x5728;&amp;#x4E4B;&amp;#x540E;&amp;#x5168;&amp;#x91CF;&amp;#x6062;&amp;#x590D;&amp;#x3002;&amp;#x800C;&amp;#x540E;&amp;#x8005;&amp;#x662F;&amp;#x5C06;&amp;#x6307;&amp;#x4EE4;&amp;#x4EE5;&amp;#x65E5;&amp;#x5FD7;&amp;#x5F62;&amp;#x5F0F;&amp;#x5B58;&amp;#x50A8;&amp;#xFF0C;&amp;#x5728;&amp;#x4E4B;&amp;#x540E;&amp;#x901A;&amp;#x8FC7;&amp;#x91CD;&amp;#x65B0;&amp;#x6267;&amp;#x884C;&amp;#x6307;&amp;#x4EE4;&amp;#x6765;&amp;#x8FD8;&amp;#x539F;&amp;#x6570;&amp;#x636E;&amp;#x3002;… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Redis">
+            Redis
+        </a>
+    </span>
+    
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/Redis/后台/中间件/Redis/Redis学习总结(三)--Redis持久化/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/Redis/后台/中间件/Redis/Redis学习总结(二)--Redis数据结构/">Redis学习总结(二)--Redis数据结构</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2018年11月09日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<blockquote>
+<p>Redis&#x652F;&#x6301;&#x516D;&#x79CD;&#x6570;&#x636E;&#x7C7B;&#x578B;&#xFF1A;string&#xFF08;&#x5B57;&#x7B26;&#x4E32;&#xFF09;&#xFF0C;hash&#xFF08;&#x54C8;&#x5E0C;&#xFF09;&#xFF0C;list&#xFF08;&#x5217;&#x8868;&#xFF09;&#xFF0C;set&#xFF08;&#x96C6;&#x5408;&#xFF09;&#x53CA;zset(sorted set&#xFF1A;&#x6709;&#x5E8F;&#x96C6;&#x5408;)&#x3002;</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>&#x7ED3;&#x6784;&#x7C7B;&#x578B;</th>
+<th>&#x5B58;&#x50A8;&#x7684;&#x503C;</th>
+<th>&#x7ED3;&#x6784;&#x8BFB;&#x5199;&#x529F;&#x80FD;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>string</td>
+<td>&#x53EF;&#x4EE5;&#x662F;&#x5B57;&#x7B26;&#x4E32;&#x3001;&#x6D6E;&#x70B9;&#x578B;&#x3001;&#x6574;&#x578B;</td>
+<td>&#x5BF9;&#x6574;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x6216;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x5176;&#x4E2D;&#x4E00;&#x90E8;&#x5206;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#xFF1B;&#x5BF9;&#x6D6E;&#x70B9;&#x578B;&#x3001;&#x6574;&#x578B;&#x8FDB;&#x884C;&#x81EA;&#x589E;&#x6216;&#x81EA;&#x51CF;&#x64CD;&#x4F5C;</td>
+</tr>
+<tr>
+<td>list</td>
+<td>&#x4E00;&#x4E2A;&#x94FE;&#x8868;&#xFF0C;&#x94FE;&#x8868;&#x4E0A;&#x7684;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x5B58;&#x653E;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;</td>
+<td>&#x4ECE;&#x94FE;&#x8868;&#x7684;&#x4E24;&#x7AEF;&#x63A8;&#x5165;&#x6216;&#x5F39;&#x51FA;&#x5BF9;&#x8C61;;&#x6839;&#x636E;&#x504F;&#x79FB;&#x91CF;&#x5BF9;&#x94FE;&#x8868;&#x8FDB;&#x884C;&#x4FEE;&#x526A;;&#x8BFB;&#x53D6;&#x5355;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x5BF9;&#x8C61;;&#x6839;&#x636E;&#x503C;&#x67E5;&#x627E;&#x6216;&#x79FB;&#x9664;&#x5BF9;&#x8C61;</td>
+</tr>
+<tr>
+<td>set</td>
+<td>&#x5305;&#x542B;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x65E0;&#x5E8F;&#x5BB9;&#x5668;&#xFF0C;&#x91CC;&#x9762;&#x7684;&#x6BCF;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x90FD;&#x4E0D;&#x76F8;&#x540C;</td>
+<td>&#x6DFB;&#x52A0;&#x3001;&#x79FB;&#x9664;&#x3001;&#x83B7;&#x53D6;&#x5355;&#x4E2A;&#x5BF9;&#x8C61;;&#x68C0;&#x67E5;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x662F;&#x5426;&#x5B58;&#x5728;&#x96C6;&#x5408;&#x4E2D;;&#x8BA1;&#x7B97;&#x4EA4;&#x96C6;&#x3001;&#x5E76;&#x96C6;&#x3001;&#x5DEE;&#x96C6;;&#x4ECE;&#x96C6;&#x5408;&#x4E2D;&#x968F;&#x673A;&#x83B7;&#x53D6;&#x5BF9;&#x8C61;</td>
+</tr>
+<tr>
+<td>hash</td>
+<td>&#x5305;&#x542B;&#x952E;&#x503C;&#x5BF9;&#x7684;&#x65E0;&#x5E8F;&#x6563;&#x5217;&#x8868;</td>
+<td>&#x6DFB;&#x52A0;&#x3001;&#x79FB;&#x9664;&#x3001;&#x83B7;&#x53D6;&#x5355;&#x4E2A;&#x952E;&#x503C;&#x5BF9;;&#x83B7;&#x53D6;&#x6240;&#x6709;&#x952E;&#x503C;&#x5BF9;</td>
+</tr>
+<tr>
+<td>sorted set</td>
+<td>&#x5B57;&#x7B26;&#x4E32;&#x4E0E;&#x6D6E;&#x70B9;&#x6570;&#x5206;&#x503C;&#x4E4B;&#x95F4;&#x7684;&#x6709;&#x5E8F;&#x6620;&#x5C04;&#xFF0C;&#x6392;&#x5217;&#x987A;&#x5E8F;&#x7531;&#x5206;&#x503C;&#x7684;&#x5927;&#x5C0F;&#x51B3;&#x5B9A;</td>
+<td>&#x6DFB;&#x52A0;&#x3001;&#x79FB;&#x9664;&#x3001;&#x83B7;&#x53D6;&#x5355;&#x4E2A;&#x5BF9;&#x8C61;;&#x6839;&#x636E;&#x5206;&#x503C;&#x8303;&#x56F4;&#x6216;&#x8005;&#x6210;&#x5458;&#x6765;&#x83B7;&#x53D6;&#x5BF9;&#x8C61;</td>
+</tr>
+<tr>
+<td>HyperLogLog</td>
+<td>&#x57FA;&#x6570;&#x7EDF;&#x8BA1;</td>
+<td>&#x6DFB;&#x52A0;&#x5143;&#x7D20;; &#x7EDF;&#x8BA1;&#x57FA;&#x6570;;</td>
+</tr>
+</tbody>
+</table>
+              <!--   -->
+              <!--      
+Redis&amp;#x652F;&amp;#x6301;&amp;#x516D;&amp;#x79CD;&amp;#x6570;&amp;#x636E;&amp;#x7C7B;&amp;#x578B;&amp;#xFF1A;string&amp;#xFF08;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#xFF09;&amp;#xFF0C;hash&amp;#xFF08;&amp;#x54C8;&amp;#x5E0C;&amp;#xFF09;&amp;#xFF0C;list&amp;#xFF08;&amp;#x5217;&amp;#x8868;&amp;#xFF09;&amp;#xFF0C;set&amp;#xFF08;&amp;#x96C6;&amp;#x5408;&amp;#xFF09;&amp;#x53CA;zset(sorted set&amp;#xFF1A;&amp;#x6709;&amp;#x5E8F;&amp;#x96C6;&amp;#x5408;)&amp;#x3002;
+
+
+
+
+&amp;#x7ED3;&amp;#x6784;&amp;#x7C7B;&amp;#x578B;
+&amp;#x5B58;&amp;#x50A8;&amp;#x7684;&amp;#x503C;
+&amp;#x7ED3;&amp;#x6784;&amp;#x8BFB;&amp;#x5199;&amp;#x529F;&amp;#x80FD;
+
+
+
+
+string
+&amp;#x53EF;&amp;#x4EE5;&amp;#x662F;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x3001;&amp;#x6D6E;&amp;#x70B9;&amp;#x578B;&amp;#x3001;&amp;#x6574;&amp;#x578B;
+&amp;#x5BF9;&amp;#x6574;&amp;#x4E2A;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x6216;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x7684;&amp;#x5176;&amp;#x4E2D;&amp;#x4E00;&amp;#x90E8;&amp;#x5206;&amp;#x8FDB;&amp;#x884C;&amp;#x64CD;&amp;#x4F5C;&amp;#xFF1B;&amp;#x5BF9;&amp;#x6D6E;&amp;#x70B9;&amp;#x578B;&amp;#x3001;&amp;#x6574;&amp;#x578B;&amp;#x8FDB;&amp;#x884C;&amp;#x81EA;&amp;#x589E;&amp;#x6216;&amp;#x81EA;&amp;#x51CF;&amp;#x64CD;&amp;#x4F5C;
+
+
+list
+&amp;#x4E00;&amp;#x4E2A;&amp;#x94FE;&amp;#x8868;&amp;#xFF0C;&amp;#x94FE;&amp;#x8868;&amp;#x4E0A;&amp;#x7684;&amp;#x6BCF;&amp;#x4E2A;&amp;#x8282;&amp;#x70B9;&amp;#x5B58;&amp;#x653E;&amp;#x4E00;&amp;#x4E2A;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;
+&amp;#x4ECE;&amp;#x94FE;&amp;#x8868;&amp;#x7684;&amp;#x4E24;&amp;#x7AEF;&amp;#x63A8;&amp;#x5165;&amp;#x6216;&amp;#x5F39;&amp;#x51FA;&amp;#x5BF9;&amp;#x8C61;;&amp;#x6839;&amp;#x636E;&amp;#x504F;&amp;#x79FB;&amp;#x91CF;&amp;#x5BF9;&amp;#x94FE;&amp;#x8868;&amp;#x8FDB;&amp;#x884C;&amp;#x4FEE;&amp;#x526A;;&amp;#x8BFB;&amp;#x53D6;&amp;#x5355;&amp;#x4E2A;&amp;#x6216;&amp;#x591A;&amp;#x4E2A;&amp;#x5BF9;&amp;#x8C61;;&amp;#x6839;&amp;#x636E;&amp;#x503C;&amp;#x67E5;&amp;#x627E;&amp;#x6216;&amp;#x79FB;&amp;#x9664;&amp;#x5BF9;&amp;#x8C61;
+
+
+set
+&amp;#x5305;&amp;#x542B;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x7684;&amp;#x65E0;&amp;#x5E8F;&amp;#x5BB9;&amp;#x5668;&amp;#xFF0C;&amp;#x91CC;&amp;#x9762;&amp;#x7684;&amp;#x6BCF;&amp;#x4E2A;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x90FD;&amp;#x4E0D;&amp;#x76F8;&amp;#x540C;
+&amp;#x6DFB;&amp;#x52A0;&amp;#x3001;&amp;#x79FB;&amp;#x9664;&amp;#x3001;&amp;#x83B7;&amp;#x53D6;&amp;#x5355;&amp;#x4E2A;&amp;#x5BF9;&amp;#x8C61;;&amp;#x68C0;&amp;#x67E5;&amp;#x4E00;&amp;#x4E2A;&amp;#x5BF9;&amp;#x8C61;&amp;#x662F;&amp;#x5426;&amp;#x5B58;&amp;#x5728;&amp;#x96C6;&amp;#x5408;&amp;#x4E2D;;&amp;#x8BA1;&amp;#x7B97;&amp;#x4EA4;&amp;#x96C6;&amp;#x3001;&amp;#x5E76;&amp;#x96C6;&amp;#x3001;&amp;#x5DEE;&amp;#x96C6;;&amp;#x4ECE;&amp;#x96C6;&amp;#x5408;&amp;#x4E2D;&amp;#x968F;&amp;#x673A;&amp;#x83B7;&amp;#x53D6;&amp;#x5BF9;&amp;#x8C61;
+
+
+hash
+&amp;#x5305;&amp;#x542B;&amp;#x952E;&amp;#x503C;&amp;#x5BF9;&amp;#x7684;&amp;#x65E0;&amp;#x5E8F;&amp;#x6563;&amp;#x5217;&amp;#x8868;
+&amp;#x6DFB;&amp;#x52A0;&amp;#x3001;&amp;#x79FB;&amp;#x9664;&amp;#x3001;&amp;#x83B7;&amp;#x53D6;&amp;#x5355;&amp;#x4E2A;&amp;#x952E;&amp;#x503C;&amp;#x5BF9;;&amp;#x83B7;&amp;#x53D6;&amp;#x6240;&amp;#x6709;&amp;#x952E;&amp;#x503C;&amp;#x5BF9;
+
+
+sorted set
+&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x4E0E;&amp;#x6D6E;&amp;#x70B9;&amp;#x6570;&amp;#x5206;&amp;#x503C;&amp;#x4E4B;&amp;#x95F4;&amp;#x7684;&amp;#x6709;&amp;#x5E8F;&amp;#x6620;&amp;#x5C04;&amp;#xFF0C;&amp;#x6392;&amp;#x5217;&amp;#x987A;&amp;#x5E8F;&amp;#x7531;&amp;#x5206;&amp;#x503C;&amp;#x7684;&amp;#x5927;&amp;#x5C0F;&amp;#x51B3;&amp;#x5B9A;
+&amp;#x6DFB;&amp;#x52A0;&amp;#x3001;&amp;#x79FB;&amp;#x9664;&amp;#x3001;&amp;#x83B7;&amp;#x53D6;&amp;#x5355;&amp;#x4E2A;&amp;#x5BF9;&amp;#x8C61;;&amp;#x6839;&amp;#x636E;&amp;#x5206;&amp;#x503C;&amp;#x8303;&amp;#x56F4;&amp;#x6216;&amp;#x8005;&amp;#x6210;&amp;#x5458;&amp;#x6765;&amp;#x83B7;&amp;#x53D6;&amp;#x5BF9;&amp;#x8C61;
+
+
+HyperLogLog
+&amp;#x57FA;&amp;#x6570;&amp;#x7EDF;&amp;#x8BA1;
+&amp;#x6DFB;&amp;#x52A0;&amp;#x5143;&amp;#x7D20;; &amp;#x7EDF;&amp;#x8BA1;&amp;#x57FA;&amp;#x6570;;
+
+
+… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Redis">
+            Redis
+        </a>
+    </span>
+    
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/Redis/后台/中间件/Redis/Redis学习总结(二)--Redis数据结构/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/Redis/后台/中间件/Redis/Redis学习总结(一)--Redis入门/">Redis学习总结(一)--Redis入门</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2018年11月08日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<h2 id="Redis-&#x6982;&#x5FF5;"><a href="#Redis-&#x6982;&#x5FF5;" class="headerlink" title="Redis &#x6982;&#x5FF5;"></a>Redis &#x6982;&#x5FF5;</h2><h3 id="1-Redis-&#x662F;&#x4EC0;&#x4E48;"><a href="#1-Redis-&#x662F;&#x4EC0;&#x4E48;" class="headerlink" title="1.Redis &#x662F;&#x4EC0;&#x4E48;"></a>1.Redis &#x662F;&#x4EC0;&#x4E48;</h3><p>Redis &#x662F;&#x4E00;&#x4E2A;&#x5F00;&#x6E90;&#xFF08;BSD&#x8BB8;&#x53EF;&#xFF09;&#xFF0C;&#x5185;&#x5B58;&#x5B58;&#x50A8;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x53EF;&#x7528;&#x4F5C;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x9AD8;&#x901F;&#x7F13;&#x5B58;&#x548C;&#x6D88;&#x606F;&#x961F;&#x5217;&#x4EE3;&#x7406;&#x3002;</p>
+<h3 id="2-Redis-&#x80FD;&#x5E72;&#x4EC0;&#x4E48;"><a href="#2-Redis-&#x80FD;&#x5E72;&#x4EC0;&#x4E48;" class="headerlink" title="2.Redis &#x80FD;&#x5E72;&#x4EC0;&#x4E48;"></a>2.Redis &#x80FD;&#x5E72;&#x4EC0;&#x4E48;</h3><p>Redis &#x652F;&#x6301;&#x5B57;&#x7B26;&#x4E32;&#x3001;&#x54C8;&#x5E0C;&#x8868;&#x3001;&#x5217;&#x8868;&#x3001;&#x96C6;&#x5408;&#x3001;&#x6709;&#x5E8F;&#x96C6;&#x5408;&#xFF0C;&#x4F4D;&#x56FE;&#xFF0C;hyperloglogs&#x7B49;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x3002;&#x5185;&#x7F6E;&#x590D;&#x5236;&#x3001;Lua &#x811A;&#x672C;&#x3001;LRU &#x6536;&#x56DE;&#x3001;&#x4E8B;&#x52A1;&#x4EE5;&#x53CA;&#x4E0D;&#x540C;&#x7EA7;&#x522B;&#x78C1;&#x76D8;&#x6301;&#x4E45;&#x5316;&#x529F;&#x80FD;&#xFF0C;&#x540C;&#x65F6;&#x901A;&#x8FC7; Redis Sentinel &#x63D0;&#x4F9B;&#x9AD8;&#x53EF;&#x7528;&#xFF0C;&#x901A;&#x8FC7; Redis Cluster&#x63D0;&#x4F9B;&#x81EA;&#x52A8;&#x5206;&#x533A;&#x3002;</p>
+<p>&#x7B80;&#x5355;&#x6765;&#x8BF4;&#x5C31;&#x662F; Redis &#x6BD4;&#x5173;&#x7CFB;&#x578B;&#x6570;&#x636E;&#x5E93;&#xFF08;&#x5982;&#xFF1A;<strong>MySql</strong>&#xFF09;&#x8BFB;&#x5199;&#x6570;&#x636E;&#x66F4;&#x5FEB;&#xFF0C;&#x53EF;&#x4EE5;&#x4EE3;&#x66FF;&#x5927;&#x90E8;&#x5206;&#x6570;&#x636E;&#x5E93;&#x529F;&#x80FD;&#x3002; </p>
+              <!--   -->
+              <!--      Redis &amp;#x6982;&amp;#x5FF5;1.Redis &amp;#x662F;&amp;#x4EC0;&amp;#x4E48;Redis &amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x5F00;&amp;#x6E90;&amp;#xFF08;BSD&amp;#x8BB8;&amp;#x53EF;&amp;#xFF09;&amp;#xFF0C;&amp;#x5185;&amp;#x5B58;&amp;#x5B58;&amp;#x50A8;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x7ED3;&amp;#x6784;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#xFF0C;&amp;#x53EF;&amp;#x7528;&amp;#x4F5C;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#xFF0C;&amp;#x9AD8;&amp;#x901F;&amp;#x7F13;&amp;#x5B58;&amp;#x548C;&amp;#x6D88;&amp;#x606F;&amp;#x961F;&amp;#x5217;&amp;#x4EE3;&amp;#x7406;&amp;#x3002;
+2.Redis &amp;#x80FD;&amp;#x5E72;&amp;#x4EC0;&amp;#x4E48;Redis &amp;#x652F;&amp;#x6301;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x3001;&amp;#x54C8;&amp;#x5E0C;&amp;#x8868;&amp;#x3001;&amp;#x5217;&amp;#x8868;&amp;#x3001;&amp;#x96C6;&amp;#x5408;&amp;#x3001;&amp;#x6709;&amp;#x5E8F;&amp;#x96C6;&amp;#x5408;&amp;#xFF0C;&amp;#x4F4D;&amp;#x56FE;&amp;#xFF0C;hyperloglogs&amp;#x7B49;&amp;#x6570;&amp;#x636E;&amp;#x7C7B;&amp;#x578B;&amp;#x3002;&amp;#x5185;&amp;#x7F6E;&amp;#x590D;&amp;#x5236;&amp;#x3001;Lua &amp;#x811A;&amp;#x672C;&amp;#x3001;LRU &amp;#x6536;&amp;#x56DE;&amp;#x3001;&amp;#x4E8B;&amp;#x52A1;&amp;#x4EE5;&amp;#x53CA;&amp;#x4E0D;&amp;#x540C;&amp;#x7EA7;&amp;#x522B;&amp;#x78C1;&amp;#x76D8;&amp;#x6301;&amp;#x4E45;&amp;#x5316;&amp;#x529F;&amp;#x80FD;&amp;#xFF0C;&amp;#x540C;&amp;#x65F6;&amp;#x901A;&amp;#x8FC7; Redis Sentinel &amp;#x63D0;&amp;#x4F9B;&amp;#x9AD8;&amp;#x53EF;&amp;#x7528;&amp;#xFF0C;&amp;#x901A;&amp;#x8FC7; Redis Cluster&amp;#x63D0;&amp;#x4F9B;&amp;#x81EA;&amp;#x52A8;&amp;#x5206;&amp;#x533A;&amp;#x3002;
+&amp;#x7B80;&amp;#x5355;&amp;#x6765;&amp;#x8BF4;&amp;#x5C31;&amp;#x662F; Redis &amp;#x6BD4;&amp;#x5173;&amp;#x7CFB;&amp;#x578B;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#xFF08;&amp;#x5982;&amp;#xFF1A;MySql&amp;#xFF09;&amp;#x8BFB;&amp;#x5199;&amp;#x6570;&amp;#x636E;&amp;#x66F4;&amp;#x5FEB;&amp;#xFF0C;&amp;#x53EF;&amp;#x4EE5;&amp;#x4EE3;&amp;#x66FF;&amp;#x5927;&amp;#x90E8;&amp;#x5206;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x529F;&amp;#x80FD;&amp;#x3002; … -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Redis">
+            Redis
+        </a>
+    </span>
+    
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/Redis/后台/中间件/Redis/Redis学习总结(一)--Redis入门/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
                     <a href="/Liunx/系统/Liunx软件安装/Liunx软件安装(三)--安装Redis/">Liunx软件安装(三)--安装Redis</a>
                 </h1>
                 <div class="post-meta">  &bull;
@@ -239,7 +589,7 @@
         
     <div class="widget">
         <h3 class="title">分类</h3>
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link current" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li></ul>
     </div>
 
 
@@ -247,7 +597,7 @@
         
     <div class="widget">
       <h3 class="title">归档</h3>
-        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">49</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">49</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
     </div>
 
 
@@ -256,7 +606,7 @@
   <div class="widget">
     <h3 class="title">标签云</h3>
     <div class="content tag-cloud">
-        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.83px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.83px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.67px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 10.83px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 15.83px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/tags/Liunx/" style="font-size: 18.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 13.33px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12.5px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 16.67px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 17.5px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 15.83px;">Nginx</a> <a href="/tags/Quartz/" style="font-size: 12.5px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 11.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.83px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 19.17px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 17.5px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 14.17px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 15px;">SpringBoot</a> <a href="/tags/SpringBoots/" style="font-size: 10px;">SpringBoots</a> <a href="/tags/SpringMVC/" style="font-size: 16.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Utils/" style="font-size: 10.83px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 15.83px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 15.83px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10.83px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10.83px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.83px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 10.83px;">前端</a> <a href="/tags/前端基础/" style="font-size: 13.33px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12.5px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.83px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.83px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.83px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.67px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 10.83px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 15.83px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/tags/Liunx/" style="font-size: 18.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 13.33px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12.5px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 16.67px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 17.5px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 15.83px;">Nginx</a> <a href="/tags/Quartz/" style="font-size: 12.5px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 11.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 13.33px;">Redis</a> <a href="/tags/SQL/" style="font-size: 15px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.83px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 19.17px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 17.5px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 14.17px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 15px;">SpringBoot</a> <a href="/tags/SpringBoots/" style="font-size: 10px;">SpringBoots</a> <a href="/tags/SpringMVC/" style="font-size: 16.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Utils/" style="font-size: 10.83px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 15.83px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 15.83px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10.83px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10.83px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.83px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 10.83px;">前端</a> <a href="/tags/前端基础/" style="font-size: 13.33px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12.5px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.83px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a>
     </div>
   </div>
 

@@ -1,0 +1,415 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>设计模式学习总结(二)--单例模式 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="设计模式学习总结(二)--单例模式">
+            
+	            设计模式学习总结(二)--单例模式
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/设计模式">
+            设计模式
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/设计模式" title='设计模式'>
+                        设计模式
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/12/12</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="&#x5355;&#x4F8B;&#x6A21;&#x5F0F;&#x6982;&#x5FF5;"><a href="#&#x5355;&#x4F8B;&#x6A21;&#x5F0F;&#x6982;&#x5FF5;" class="headerlink" title="&#x5355;&#x4F8B;&#x6A21;&#x5F0F;&#x6982;&#x5FF5;"></a>&#x5355;&#x4F8B;&#x6A21;&#x5F0F;&#x6982;&#x5FF5;</h2><h3 id="&#x4EC0;&#x4E48;&#x662F;&#x5355;&#x4F8B;&#x6A21;&#x5F0F;"><a href="#&#x4EC0;&#x4E48;&#x662F;&#x5355;&#x4F8B;&#x6A21;&#x5F0F;" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F;&#x5355;&#x4F8B;&#x6A21;&#x5F0F;"></a>&#x4EC0;&#x4E48;&#x662F;&#x5355;&#x4F8B;&#x6A21;&#x5F0F;</h3><p>&#x6574;&#x4E2A;&#x7A0B;&#x5E8F;&#x4E2D;&#x53EA;&#x5141;&#x8BB8;&#x6709;&#x552F;&#x4E00;&#x7684;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF08;&#x8FD9;&#x4E2A;&#x7C7B;&#x53EA;&#x80FD;&#x5B9E;&#x4F8B;&#x5316;&#x4E00;&#x6B21;&#xFF09;&#xFF0C;&#x5982;&#x6253;&#x5370;&#x673A;&#x3001;&#x5355;&#x6838;&#x5904;&#x7406;&#x5668;&#x7B49;</p>
+<h3 id="&#x4F18;&#x70B9;"><a href="#&#x4F18;&#x70B9;" class="headerlink" title="&#x4F18;&#x70B9;"></a>&#x4F18;&#x70B9;</h3><ul>
+<li>&#x5355;&#x4F8B;&#x6A21;&#x5F0F;&#x63D0;&#x4F9B;&#x4E86;&#x5BF9;&#x552F;&#x4E00;&#x5B9E;&#x4F8B;&#x7684;&#x53D7;&#x63A7;&#x8BBF;&#x95EE;&#x3002;&#x56E0;&#x4E3A;&#x5355;&#x4F8B;&#x7C7B;&#x5C01;&#x88C5;&#x4E86;&#x5B83;&#x7684;&#x552F;&#x4E00;&#x5B9E;&#x4F8B;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x53EF;&#x4EE5;&#x4E25;&#x683C;&#x63A7;&#x5236;&#x5BA2;&#x6237;&#x600E;&#x6837;&#x4EE5;&#x53CA;&#x4F55;&#x65F6;&#x8BBF;&#x95EE;&#x5B83;&#x3002;</li>
+<li>&#x7531;&#x4E8E;&#x5728;&#x7CFB;&#x7EDF;&#x5185;&#x5B58;&#x4E2D;&#x53EA;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x56E0;&#x6B64;&#x53EF;&#x4EE5;&#x8282;&#x7EA6;&#x7CFB;&#x7EDF;&#x8D44;&#x6E90;&#xFF0C;&#x5BF9;&#x4E8E;&#x4E00;&#x4E9B;&#x9700;&#x8981;&#x9891;&#x7E41;&#x521B;&#x5EFA;&#x548C;&#x9500;&#x6BC1;&#x7684;&#x5BF9;&#x8C61;&#x5355;&#x4F8B;&#x6A21;&#x5F0F;&#x65E0;&#x7591;&#x53EF;&#x4EE5;&#x63D0;&#x9AD8;&#x7CFB;&#x7EDF;&#x7684;&#x6027;&#x80FD;&#x3002;</li>
+<li>&#x5141;&#x8BB8;&#x53EF;&#x53D8;&#x6570;&#x76EE;&#x7684;&#x5B9E;&#x4F8B;&#x3002;&#x57FA;&#x4E8E;&#x5355;&#x4F8B;&#x6A21;&#x5F0F;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x6269;&#x5C55;&#xFF0C;&#x4F7F;&#x7528;&#x4E0E;&#x5355;&#x4F8B;&#x63A7;&#x5236;&#x76F8;&#x4F3C;&#x7684;&#x65B9;&#x6CD5;&#x6765;&#x83B7;&#x5F97;&#x6307;&#x5B9A;&#x4E2A;&#x6570;&#x7684;&#x5BF9;&#x8C61;&#x5B9E;&#x4F8B;&#xFF0C;&#x65E2;&#x8282;&#x7701;&#x7CFB;&#x7EDF;&#x8D44;&#x6E90;&#xFF0C;&#x53C8;&#x89E3;&#x51B3;&#x4E86;&#x5355;&#x4F8B;&#x5355;&#x4F8B;&#x5BF9;&#x8C61;&#x5171;&#x4EAB;&#x8FC7;&#x591A;&#x6709;&#x635F;&#x6027;&#x80FD;&#x7684;&#x95EE;&#x9898;&#x3002;</li>
+</ul>
+<h3 id="&#x7F3A;&#x70B9;"><a href="#&#x7F3A;&#x70B9;" class="headerlink" title="&#x7F3A;&#x70B9;"></a>&#x7F3A;&#x70B9;</h3><ul>
+<li>&#x7531;&#x4E8E;&#x5355;&#x4F8B;&#x6A21;&#x5F0F;&#x4E2D;&#x6CA1;&#x6709;&#x62BD;&#x8C61;&#x5C42;&#xFF0C;&#x56E0;&#x6B64;&#x5355;&#x4F8B;&#x7C7B;&#x7684;&#x6269;&#x5C55;&#x6709;&#x5F88;&#x5927;&#x7684;&#x56F0;&#x96BE;&#x3002;</li>
+<li>&#x5355;&#x4F8B;&#x7C7B;&#x7684;&#x804C;&#x8D23;&#x8FC7;&#x91CD;&#xFF0C;&#x5728;&#x4E00;&#x5B9A;&#x7A0B;&#x5EA6;&#x4E0A;&#x8FDD;&#x80CC;&#x4E86;&#x201C;&#x5355;&#x4E00;&#x804C;&#x8D23;&#x539F;&#x5219;&#x201D;&#x3002;&#x56E0;&#x4E3A;&#x5355;&#x4F8B;&#x7C7B;&#x65E2;&#x5145;&#x5F53;&#x4E86;&#x5DE5;&#x5382;&#x89D2;&#x8272;&#xFF0C;&#x63D0;&#x4F9B;&#x4E86;&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#xFF0C;&#x540C;&#x65F6;&#x53C8;&#x5145;&#x5F53;&#x4E86;&#x4EA7;&#x54C1;&#x89D2;&#x8272;&#xFF0C;&#x5305;&#x542B;&#x4E00;&#x4E9B;&#x4E1A;&#x52A1;&#x65B9;&#x6CD5;&#xFF0C;&#x5C06;&#x4EA7;&#x54C1;&#x7684;&#x521B;&#x5EFA;&#x548C;&#x4EA7;&#x54C1;&#x7684;&#x672C;&#x8EAB;&#x7684;&#x529F;&#x80FD;&#x878D;&#x5408;&#x5230;&#x4E00;&#x8D77;&#x3002;</li>
+<li>&#x73B0;&#x5728;&#x5F88;&#x591A;&#x9762;&#x5411;&#x5BF9;&#x8C61;&#x8BED;&#x8A00;(&#x5982;Java&#x3001;C#)&#x7684;&#x8FD0;&#x884C;&#x73AF;&#x5883;&#x90FD;&#x63D0;&#x4F9B;&#x4E86;&#x81EA;&#x52A8;&#x5783;&#x573E;&#x56DE;&#x6536;&#x7684;&#x6280;&#x672F;&#xFF0C;&#x56E0;&#x6B64;&#xFF0C;&#x5982;&#x679C;&#x5B9E;&#x4F8B;&#x5316;&#x7684;&#x5171;&#x4EAB;&#x5BF9;&#x8C61;&#x957F;&#x65F6;&#x95F4;&#x4E0D;&#x88AB;&#x5229;&#x7528;&#xFF0C;&#x7CFB;&#x7EDF;&#x4F1A;&#x8BA4;&#x4E3A;&#x5B83;&#x662F;&#x5783;&#x573E;&#xFF0C;&#x4F1A;&#x81EA;&#x52A8;&#x9500;&#x6BC1;&#x5E76;&#x56DE;&#x6536;&#x8D44;&#x6E90;&#xFF0C;&#x4E0B;&#x6B21;&#x5229;&#x7528;&#x65F6;&#x53C8;&#x5C06;&#x91CD;&#x65B0;&#x5B9E;&#x4F8B;&#x5316;&#xFF0C;&#x8FD9;&#x5C06;&#x5BFC;&#x81F4;&#x5171;&#x4EAB;&#x7684;&#x5355;&#x4F8B;&#x5BF9;&#x8C61;&#x72B6;&#x6001;&#x7684;&#x4E22;&#x5931;&#x3002;</li>
+</ul>
+<h3 id="&#x9002;&#x7528;&#x573A;&#x666F;"><a href="#&#x9002;&#x7528;&#x573A;&#x666F;" class="headerlink" title="&#x9002;&#x7528;&#x573A;&#x666F;"></a>&#x9002;&#x7528;&#x573A;&#x666F;</h3><ul>
+<li><p>&#x7CFB;&#x7EDF;&#x53EA;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x5B9E;&#x4F8B;&#x5BF9;&#x8C61;&#xFF0C;&#x5982;&#x7CFB;&#x7EDF;&#x8981;&#x6C42;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x552F;&#x4E00;&#x7684;&#x5E8F;&#x5217;&#x53F7;&#x751F;&#x6210;&#x5668;&#x6216;&#x8D44;&#x6E90;&#x7BA1;&#x7406;&#x5668;&#xFF0C;&#x6216;&#x8005;&#x9700;&#x8981;&#x8003;&#x8651;&#x8D44;&#x6E90;&#x6D88;&#x8017;&#x592A;&#x5927;&#x800C;&#x53EA;&#x5141;&#x8BB8;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x3002;</p>
+</li>
+<li><p>&#x5BA2;&#x6237;&#x8C03;&#x7528;&#x7C7B;&#x7684;&#x5355;&#x4E2A;&#x5B9E;&#x4F8B;&#x53EA;&#x5141;&#x8BB8;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x516C;&#x5171;&#x8BBF;&#x95EE;&#x70B9;&#xFF0C;&#x9664;&#x4E86;&#x8BE5;&#x516C;&#x5171;&#x8BBF;&#x95EE;&#x70B9;&#xFF0C;&#x4E0D;&#x80FD;&#x901A;&#x8FC7;&#x5176;&#x4ED6;&#x9014;&#x5F84;&#x8BBF;&#x95EE;&#x8BE5;&#x5B9E;&#x4F8B;&#x3002;</p>
+</li>
+</ul>
+<a id="more"></a> 
+<h2 id="&#x5355;&#x4F8B;&#x5B9E;&#x73B0;"><a href="#&#x5355;&#x4F8B;&#x5B9E;&#x73B0;" class="headerlink" title="&#x5355;&#x4F8B;&#x5B9E;&#x73B0;"></a>&#x5355;&#x4F8B;&#x5B9E;&#x73B0;</h2><h3 id="&#x997F;&#x6C49;&#x5F0F;-&#x9759;&#x6001;&#x5E38;&#x91CF;"><a href="#&#x997F;&#x6C49;&#x5F0F;-&#x9759;&#x6001;&#x5E38;&#x91CF;" class="headerlink" title="&#x997F;&#x6C49;&#x5F0F;(&#x9759;&#x6001;&#x5E38;&#x91CF;)"></a>&#x997F;&#x6C49;&#x5F0F;(&#x9759;&#x6001;&#x5E38;&#x91CF;)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>{</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton SINGLETON = <span class="keyword">new</span> Singleton();</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x79C1;&#x6709;&#x5316;&#x6784;&#x9020;&#x5668;</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>{</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x83B7;&#x53D6;&#x5BF9;&#x8C61;</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> SINGLETON;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x4F18;&#x70B9;&#xFF1A;&#x8FD9;&#x79CD;&#x5199;&#x6CD5;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#xFF0C;&#x5C31;&#x662F;&#x5728;&#x7C7B;&#x88C5;&#x8F7D;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x5B8C;&#x6210;&#x5B9E;&#x4F8B;&#x5316;&#x3002;&#x907F;&#x514D;&#x4E86;&#x7EBF;&#x7A0B;&#x540C;&#x6B65;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x7F3A;&#x70B9;&#xFF1A;&#x5728;&#x7C7B;&#x88C5;&#x8F7D;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x5B8C;&#x6210;&#x5B9E;&#x4F8B;&#x5316;&#xFF0C;&#x6CA1;&#x6709;&#x8FBE;&#x5230;&#x5EF6;&#x8FDF;&#x52A0;&#x8F7D;&#x7684;&#x6548;&#x679C;&#x3002;&#x5982;&#x679C;&#x4ECE;&#x59CB;&#x81F3;&#x7EC8;&#x4ECE;&#x672A;&#x4F7F;&#x7528;&#x8FC7;&#x8FD9;&#x4E2A;&#x5B9E;&#x4F8B;&#xFF0C;&#x5219;&#x4F1A;&#x9020;&#x6210;&#x5185;&#x5B58;&#x7684;&#x6D6A;&#x8D39;&#x3002;</p>
+<h3 id="&#x997F;&#x6C49;&#x5F0F;-&#x9759;&#x6001;&#x4EE3;&#x7801;&#x5757;"><a href="#&#x997F;&#x6C49;&#x5F0F;-&#x9759;&#x6001;&#x4EE3;&#x7801;&#x5757;" class="headerlink" title="&#x997F;&#x6C49;&#x5F0F;(&#x9759;&#x6001;&#x4EE3;&#x7801;&#x5757;)"></a>&#x997F;&#x6C49;&#x5F0F;(&#x9759;&#x6001;&#x4EE3;&#x7801;&#x5757;)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>{</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton;</div><div class="line"></div><div class="line">    <span class="keyword">static</span>{</div><div class="line">        singleton = <span class="keyword">new</span> Singleton();</div><div class="line">    }</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x79C1;&#x6709;&#x5316;&#x6784;&#x9020;&#x5668;</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>{</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x83B7;&#x53D6;&#x5BF9;&#x8C61;</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> singleton;</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x548C;&#x4E0A;&#x9762;&#x7684;&#x65B9;&#x5F0F;&#x5176;&#x5B9E;&#x7C7B;&#x4F3C;&#xFF0C;&#x53EA;&#x4E0D;&#x8FC7;&#x5C06;&#x7C7B;&#x5B9E;&#x4F8B;&#x5316;&#x7684;&#x8FC7;&#x7A0B;&#x653E;&#x5728;&#x4E86;&#x9759;&#x6001;&#x4EE3;&#x7801;&#x5757;&#x4E2D;&#xFF0C;&#x4E5F;&#x662F;&#x5728;&#x7C7B;&#x88C5;&#x8F7D;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5C31;&#x6267;&#x884C;&#x9759;&#x6001;&#x4EE3;&#x7801;&#x5757;&#x4E2D;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x521D;&#x59CB;&#x5316;&#x7C7B;&#x7684;&#x5B9E;&#x4F8B;&#x3002;&#x4F18;&#x7F3A;&#x70B9;&#x548C;&#x4E0A;&#x9762;&#x662F;&#x4E00;&#x6837;&#x7684;&#x3002;</p>
+<h3 id="&#x61D2;&#x6C49;&#x5F0F;"><a href="#&#x61D2;&#x6C49;&#x5F0F;" class="headerlink" title="&#x61D2;&#x6C49;&#x5F0F;"></a>&#x61D2;&#x6C49;&#x5F0F;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>{</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Singleton singleton;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x79C1;&#x6709;&#x5316;&#x6784;&#x9020;&#x5668;</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>{</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x83B7;&#x53D6;&#x5BF9;&#x8C61;</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) {</div><div class="line">            <span class="keyword">synchronized</span> (Singleton.class) {</div><div class="line">                <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) {</div><div class="line">                    singleton = <span class="keyword">new</span> Singleton();</div><div class="line">                }</div><div class="line">            }</div><div class="line">        }</div><div class="line">        <span class="keyword">return</span> singleton;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x4F18;&#x70B9;&#xFF1A;&#x5B9E;&#x73B0;&#x5EF6;&#x8FDF;&#x52A0;&#x8F7D;&#xFF0C;&#x5E76;&#x4E14;&#x901A;&#x8FC7;&#x53CC;&#x91CD;&#x68C0;&#x67E5;&#x4FDD;&#x8BC1;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;</p>
+<h3 id="&#x9759;&#x6001;&#x5185;&#x90E8;&#x7C7B;"><a href="#&#x9759;&#x6001;&#x5185;&#x90E8;&#x7C7B;" class="headerlink" title="&#x9759;&#x6001;&#x5185;&#x90E8;&#x7C7B;"></a>&#x9759;&#x6001;&#x5185;&#x90E8;&#x7C7B;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>{</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>{}</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonInstance</span> </span>{</div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> SingletonInstance.INSTANCE;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x4F18;&#x70B9;&#xFF1A;&#x907F;&#x514D;&#x4E86;&#x7EBF;&#x7A0B;&#x4E0D;&#x5B89;&#x5168;&#xFF0C;&#x5EF6;&#x8FDF;&#x52A0;&#x8F7D;&#xFF0C;&#x6548;&#x7387;&#x9AD8;&#x3002;</p>
+<h3 id="&#x679A;&#x4E3E;"><a href="#&#x679A;&#x4E3E;" class="headerlink" title="&#x679A;&#x4E3E;"></a>&#x679A;&#x4E3E;</h3><pre><code class="java"><span class="keyword">public</span> <span class="keyword">enum</span> Singleton {
+    INSTANCE {
+
+        <span class="meta">@Override</span>
+        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">()</span> </span>{
+            System.out.println(<span class="string">&quot;read&quot;</span>);
+        }
+
+        <span class="meta">@Override</span>
+        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">()</span> </span>{
+            System.out.println(<span class="string">&quot;write&quot;</span>);
+        }
+
+    };
+    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">()</span></span>;
+    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">()</span></span>;
+}
+</code></pre>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/设计模式/后台/Java/设计模式/设计模式学习总结(三)--工厂模式/" class="pre-post btn btn-default" title='设计模式学习总结(三)--工厂模式'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">设计模式学习总结(三)--工厂模式</span>
+        </a>
+    
+    
+        <a href="/设计模式/后台/Java/设计模式/设计模式学习总结(一)--面向对象设计七大原则/" class="next-post btn btn-default" title='设计模式学习总结(一)--面向对象设计七大原则'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">设计模式学习总结(一)--面向对象设计七大原则</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">49</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.77px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.77px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.54px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 10.77px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 15.38px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12.31px;">JavaScript</a> <a href="/tags/Liunx/" style="font-size: 17.69px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 13.08px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12.31px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 16.15px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16.92px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 15.38px;">Nginx</a> <a href="/tags/Quartz/" style="font-size: 12.31px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 11.54px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 16.15px;">Redis</a> <a href="/tags/SQL/" style="font-size: 14.62px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.77px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 19.23px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 16.92px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 13.85px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 14.62px;">SpringBoot</a> <a href="/tags/SpringBoots/" style="font-size: 10px;">SpringBoots</a> <a href="/tags/SpringMVC/" style="font-size: 16.15px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Utils/" style="font-size: 10.77px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 15.38px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 15.38px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10.77px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10.77px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.77px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 10.77px;">前端</a> <a href="/tags/前端基础/" style="font-size: 13.08px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12.31px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.77px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 18.46px;">设计模式</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

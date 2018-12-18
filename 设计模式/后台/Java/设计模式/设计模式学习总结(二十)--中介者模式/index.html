@@ -1,0 +1,407 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>设计模式学习总结(二十)--中介者模式 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="设计模式学习总结(二十)--中介者模式">
+            
+	            设计模式学习总结(二十)--中介者模式
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/设计模式">
+            设计模式
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/设计模式" title='设计模式'>
+                        设计模式
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/12/18</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="&#x5B9A;&#x4E49;"><a href="#&#x5B9A;&#x4E49;" class="headerlink" title="&#x5B9A;&#x4E49;"></a>&#x5B9A;&#x4E49;</h2><p>&#x4E2D;&#x4ECB;&#x8005;&#x6A21;&#x5F0F;&#x5C31;&#x662F;&#x7528;&#x4E00;&#x4E2A;&#x4E2D;&#x4ECB;&#x5BF9;&#x8C61;&#x6765;&#x5C01;&#x88C5;&#x4E00;&#x7CFB;&#x5217;&#x7684;&#x5BF9;&#x8C61;&#x4EA4;&#x4E92;&#xFF0C;&#x4E2D;&#x4ECB;&#x8005;&#x4F7F;&#x5404;&#x5BF9;&#x8C61;&#x4E0D;&#x9700;&#x8981;&#x663E;&#x5F0F;&#x5730;&#x76F8;&#x4E92;&#x5F15;&#x7528;&#xFF0C;&#x4ECE;&#x800C;&#x4F7F;&#x5176;&#x8026;&#x5408;&#x677E;&#x6563;&#xFF0C;&#x800C;&#x4E14;&#x53EF;&#x4EE5;&#x72EC;&#x7ACB;&#x5730;&#x6539;&#x53D8;&#x5B83;&#x4EEC;&#x4E4B;&#x95F4;&#x7684;&#x4EA4;&#x4E92;&#x3002;</p>
+<h2 id="&#x89D2;&#x8272;&#xFF1A;"><a href="#&#x89D2;&#x8272;&#xFF1A;" class="headerlink" title="&#x89D2;&#x8272;&#xFF1A;"></a>&#x89D2;&#x8272;&#xFF1A;</h2><ul>
+<li><p>Mediator: &#x62BD;&#x8C61;&#x4E2D;&#x4ECB;&#x8005;&#x3002;&#x5B9A;&#x4E49;&#x4E86;&#x540C;&#x4E8B;&#x5BF9;&#x8C61;&#x5230;&#x4E2D;&#x4ECB;&#x8005;&#x5BF9;&#x8C61;&#x4E4B;&#x95F4;&#x7684;&#x63A5;&#x53E3;&#x3002;</p>
+</li>
+<li><p>ConcreteMediator: &#x5177;&#x4F53;&#x4E2D;&#x4ECB;&#x8005;&#x3002;&#x5B9E;&#x73B0;&#x62BD;&#x8C61;&#x4E2D;&#x4ECB;&#x8005;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x9700;&#x8981;&#x77E5;&#x9053;&#x6240;&#x6709;&#x7684;&#x5177;&#x4F53;&#x540C;&#x4E8B;&#x7C7B;&#xFF0C;&#x540C;&#x65F6;&#x9700;&#x8981;&#x4ECE;&#x5177;&#x4F53;&#x7684;&#x540C;&#x4E8B;&#x7C7B;&#x90A3;&#x91CC;&#x63A5;&#x6536;&#x4FE1;&#x606F;&#xFF0C;&#x5E76;&#x4E14;&#x5411;&#x5177;&#x4F53;&#x7684;&#x540C;&#x4E8B;&#x7C7B;&#x53D1;&#x9001;&#x4FE1;&#x606F;&#x3002;</p>
+</li>
+<li><p>Colleague: &#x62BD;&#x8C61;&#x540C;&#x4E8B;&#x7C7B;&#x3002;</p>
+</li>
+<li><p>ConcreteColleague: &#x5177;&#x4F53;&#x540C;&#x4E8B;&#x7C7B;&#x3002;&#x6BCF;&#x4E2A;&#x5177;&#x4F53;&#x540C;&#x4E8B;&#x7C7B;&#x90FD;&#x53EA;&#x9700;&#x8981;&#x77E5;&#x9053;&#x81EA;&#x5DF1;&#x7684;&#x884C;&#x4E3A;&#x5373;&#x53EF;&#xFF0C;&#x4F46;&#x662F;&#x4ED6;&#x4EEC;&#x90FD;&#x9700;&#x8981;&#x8BA4;&#x8BC6;&#x4E2D;&#x4ECB;&#x8005;&#x3002;</p>
+</li>
+</ul>
+<p>&#x6CE8;&#xFF1A;&#x5BF9;&#x8C61;&#x4E4B;&#x95F4;&#x5B58;&#x5728;&#x5927;&#x91CF;&#x7684;&#x591A;&#x5BF9;&#x591A;&#x8054;&#x7CFB;&#xFF0C;&#x5C06;&#x5BFC;&#x81F4;&#x7CFB;&#x7EDF;&#x975E;&#x5E38;&#x590D;&#x6742;&#xFF0C;&#x8FD9;&#x4E9B;&#x5BF9;&#x8C61;&#x65E2;&#x4F1A;&#x5F71;&#x54CD;&#x522B;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x4E5F;&#x4F1A;&#x88AB;&#x522B;&#x7684;&#x5BF9;&#x8C61;&#x6240;&#x5F71;&#x54CD;&#xFF0C;&#x8FD9;&#x4E9B;&#x5BF9;&#x8C61;&#x79F0;&#x4E3A;&#x540C;&#x4E8B;&#x5BF9;&#x8C61;&#xFF0C;&#x5B83;&#x4EEC;&#x4E4B;&#x95F4;&#x901A;&#x8FC7;&#x5F7C;&#x6B64;&#x7684;&#x76F8;&#x4E92;&#x4F5C;&#x7528;&#x5B9E;&#x73B0;&#x7CFB;&#x7EDF;&#x7684;&#x884C;&#x4E3A;&#x3002;</p>
+<a id="more"></a> 
+<p>&#x5728;&#x4E2D;&#x4ECB;&#x8005;&#x6A21;&#x5F0F;&#x4E2D;&#x4E2D;&#x4ECB;&#x8005;&#x5BF9;&#x8C61;&#x5904;&#x4E8E;&#x6838;&#x5FC3;&#x5730;&#x4F4D;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x5B9A;&#x4E49;&#x4E86;&#x6574;&#x4E2A;&#x7CFB;&#x7EDF;&#x4E2D;&#x6240;&#x6709;&#x5177;&#x4F53;&#x540C;&#x4E8B;&#x7C7B;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#x3002;&#x5728;&#x6574;&#x4E2A;&#x7CFB;&#x7EDF;&#x4E2D;&#x5B83;&#x4E3B;&#x8981;&#x627F;&#x62C5;&#x4E24;&#x4E2A;&#x65B9;&#x9762;&#x7684;&#x8D23;&#x4EFB;&#x3002;</p>
+<ul>
+<li><p>1&#x3001; &#x7ED3;&#x6784;&#x4E0A;&#x8D77;&#x5230;&#x4E2D;&#x8F6C;&#x4F5C;&#x7528;&#x3002;&#x901A;&#x8FC7;&#x4E2D;&#x4ECB;&#x8005;&#x5BF9;&#x8C61;&#x5BF9;&#x5173;&#x7CFB;&#x7684;&#x5C01;&#x88C5;&#xFF0C;&#x4F7F;&#x5F97;&#x5177;&#x4F53;&#x7684;&#x540C;&#x4E8B;&#x7C7B;&#x4E0D;&#x518D;&#x9700;&#x8981;&#x663E;&#x793A;&#x7684;&#x5F15;&#x7528;&#x5176;&#x4ED6;&#x5BF9;&#x8C61;&#xFF0C;&#x5B83;&#x53EA;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x4E2D;&#x4ECB;&#x8005;&#x5C31;&#x53EF;&#x4EE5;&#x5B8C;&#x6210;&#x4E0E;&#x5176;&#x4ED6;&#x540C;&#x4E8B;&#x7C7B;&#x4E4B;&#x95F4;&#x7684;&#x901A;&#x4FE1;&#x3002;</p>
+</li>
+<li><p>2&#x3001; &#x884C;&#x4E3A;&#x4E0A;&#x8D77;&#x5230;&#x534F;&#x4F5C;&#x4F5C;&#x7528;&#x3002;&#x4E2D;&#x4ECB;&#x8005;&#x5BF9;&#x540C;&#x4E8B;&#x7C7B;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#x8FDB;&#x884C;&#x5C01;&#x88C5;&#xFF0C;&#x540C;&#x4E8B;&#x7C7B;&#x5728;&#x4E0D;&#x9700;&#x8981;&#x77E5;&#x9053;&#x5176;&#x4ED6;&#x5BF9;&#x8C61;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x901A;&#x8FC7;&#x4E2D;&#x4ECB;&#x8005;&#x4E0E;&#x5176;&#x4ED6;&#x5BF9;&#x8C61;&#x5B8C;&#x6210;&#x901A;&#x4FE1;&#x3002;&#x5728;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x4E2D;&#x540C;&#x4E8B;&#x7C7B;&#x662F;&#x4E0D;&#x9700;&#x8981;&#x6307;&#x660E;&#x4E2D;&#x4ECB;&#x8005;&#x8BE5;&#x5982;&#x4F55;&#x505A;&#xFF0C;&#x4E2D;&#x4ECB;&#x8005;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x81EA;&#x8EAB;&#x7684;&#x903B;&#x8F91;&#x6765;&#x8FDB;&#x884C;&#x534F;&#x8C03;&#xFF0C;&#x5BF9;&#x540C;&#x4E8B;&#x7684;&#x8BF7;&#x6C42;&#x8FDB;&#x4E00;&#x6B65;&#x5904;&#x7406;&#xFF0C;&#x5C06;&#x540C;&#x4E8B;&#x6210;&#x5458;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#x884C;&#x4E3A;&#x8FDB;&#x884C;&#x5206;&#x79BB;&#x548C;&#x5C01;&#x88C5;&#x3002;</p>
+</li>
+</ul>
+<p>&#x540C;&#x65F6;&#x7531;&#x4E8E;&#x4E2D;&#x4ECB;&#x8005;&#x5BF9;&#x5BF9;&#x8C61;&#x7684;&#x5173;&#x7CFB;&#x8FDB;&#x884C;&#x4E86;&#x5C01;&#x88C5;&#xFF0C;&#x4F7F;&#x5F97;&#x5404;&#x4E2A;&#x540C;&#x4E8B;&#x7C7B;&#x4E4B;&#x95F4;&#x7684;&#x8026;&#x5408;&#x51CF;&#x5C11;&#x4E86;&#xFF0C;&#x4F7F;&#x5F97;&#x4ED6;&#x4EEC;&#x53EF;&#x4EE5;&#x72EC;&#x7ACB;&#x6539;&#x53D8;&#x548C;&#x590D;&#x7528;&#x3002;</p>
+<h2 id="&#x4F18;&#x7F3A;&#x70B9;"><a href="#&#x4F18;&#x7F3A;&#x70B9;" class="headerlink" title="&#x4F18;&#x7F3A;&#x70B9;"></a>&#x4F18;&#x7F3A;&#x70B9;</h2><h3 id="&#x4F18;&#x70B9;&#xFF1A;"><a href="#&#x4F18;&#x70B9;&#xFF1A;" class="headerlink" title="&#x4F18;&#x70B9;&#xFF1A;"></a>&#x4F18;&#x70B9;&#xFF1A;</h3><ul>
+<li>&#x7B80;&#x5316;&#x4E86;&#x5BF9;&#x8C61;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x5C06;&#x7CFB;&#x7EDF;&#x7684;&#x5404;&#x4E2A;&#x5BF9;&#x8C61;&#x4E4B;&#x95F4;&#x7684;&#x76F8;&#x4E92;&#x5173;&#x7CFB;&#x8FDB;&#x884C;&#x5C01;&#x88C5;&#xFF0C;&#x5C06;&#x5404;&#x4E2A;&#x540C;&#x4E8B;&#x7C7B;&#x89E3;&#x8026;&#xFF0C;&#x4F7F;&#x5F97;&#x7CFB;&#x7EDF;&#x53D8;&#x4E3A;&#x677E;&#x8026;&#x5408;&#x3002;</li>
+<li>&#x63D0;&#x4F9B;&#x7CFB;&#x7EDF;&#x7684;&#x7075;&#x6D3B;&#x6027;&#xFF0C;&#x4F7F;&#x5F97;&#x5404;&#x4E2A;&#x540C;&#x4E8B;&#x5BF9;&#x8C61;&#x72EC;&#x7ACB;&#x800C;&#x6613;&#x4E8E;&#x590D;&#x7528;&#x3002;</li>
+</ul>
+<h3 id="&#x7F3A;&#x70B9;&#xFF1A;"><a href="#&#x7F3A;&#x70B9;&#xFF1A;" class="headerlink" title="&#x7F3A;&#x70B9;&#xFF1A;"></a>&#x7F3A;&#x70B9;&#xFF1A;</h3><p>&#x4E2D;&#x4ECB;&#x8005;&#x6A21;&#x5F0F;&#x4E2D;&#xFF0C;&#x4E2D;&#x4ECB;&#x8005;&#x89D2;&#x8272;&#x627F;&#x62C5;&#x4E86;&#x8F83;&#x591A;&#x7684;&#x8D23;&#x4EFB;&#xFF0C;&#x6240;&#x4EE5;&#x4E00;&#x65E6;&#x8FD9;&#x4E2A;&#x4E2D;&#x4ECB;&#x8005;&#x5BF9;&#x8C61;&#x51FA;&#x73B0;&#x4E86;&#x95EE;&#x9898;&#xFF0C;&#x6574;&#x4E2A;&#x7CFB;&#x7EDF;&#x5C06;&#x4F1A;&#x53D7;&#x5230;&#x91CD;&#x5927;&#x7684;&#x5F71;&#x54CD;&#x3002;<br>&#x65B0;&#x589E;&#x52A0;&#x4E00;&#x4E2A;&#x540C;&#x4E8B;&#x7C7B;&#x65F6;&#xFF0C;&#x4E0D;&#x5F97;&#x4E0D;&#x53BB;&#x4FEE;&#x6539;&#x62BD;&#x8C61;&#x4E2D;&#x4ECB;&#x8005;&#x7C7B;&#x548C;&#x5177;&#x4F53;&#x4E2D;&#x4ECB;&#x8005;&#x7C7B;&#xFF0C;&#x6B64;&#x65F6;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x89C2;&#x5BDF;&#x8005;&#x6A21;&#x5F0F;&#x548C;&#x72B6;&#x6001;&#x6A21;&#x5F0F;&#x6765;&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x3002;</p>
+<h2 id="&#x5B9E;&#x4F8B;"><a href="#&#x5B9E;&#x4F8B;" class="headerlink" title="&#x5B9E;&#x4F8B;"></a>&#x5B9E;&#x4F8B;</h2><h3 id="&#x79DF;&#x623F;"><a href="#&#x79DF;&#x623F;" class="headerlink" title="&#x79DF;&#x623F;"></a>&#x79DF;&#x623F;</h3><p>&#x4E2D;&#x4ECB;&#x8005;&#x62BD;&#x8C61;&#x7C7B;:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * &#x4E2D;&#x4ECB;&#x8005;&#x62BD;&#x8C61;&#x7C7B;</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Mediator</span> </span>{</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">constact</span><span class="params">(String message,Person person)</span></span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x540C;&#x4E8B;&#x5BF9;&#x8C61;&#x57FA;&#x7C7B;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>{</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> String name;</div><div class="line">    <span class="keyword">protected</span> Mediator mediator;</div><div class="line"></div><div class="line">    Person(String name,Mediator mediator){</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">        <span class="keyword">this</span>.mediator = mediator;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x5177;&#x4F53;&#x540C;&#x4E8B;&#x7C7B;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * &#x623F;&#x4E1C;</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HouseOwner</span> <span class="keyword">extends</span> <span class="title">Person</span></span>{</div><div class="line"></div><div class="line">    HouseOwner(String name, Mediator mediator) {</div><div class="line">        <span class="keyword">super</span>(name, mediator);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@desc</span> &#x4E0E;&#x4E2D;&#x4ECB;&#x8005;&#x8054;&#x7CFB;</div><div class="line">     * <span class="doctag">@param</span> message</div><div class="line">     * <span class="doctag">@return</span> void</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">constact</span><span class="params">(String message)</span></span>{</div><div class="line">        mediator.constact(message, <span class="keyword">this</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@desc</span> &#x83B7;&#x53D6;&#x4FE1;&#x606F;</div><div class="line">     * <span class="doctag">@param</span> message</div><div class="line">     * <span class="doctag">@return</span> void</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getMessage</span><span class="params">(String message)</span></span>{</div><div class="line">        System.out.println(<span class="string">&quot;&#x623F;&#x4E1C;:&quot;</span> + name +<span class="string">&quot;,&#x83B7;&#x5F97;&#x4FE1;&#x606F;&#xFF1A;&quot;</span> + message);</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * &#x79DF;&#x5BA2;</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tenant</span> <span class="keyword">extends</span> <span class="title">Person</span></span>{</div><div class="line"></div><div class="line">    Tenant(String name, Mediator mediator) {</div><div class="line">        <span class="keyword">super</span>(name, mediator);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@desc</span> &#x4E0E;&#x4E2D;&#x4ECB;&#x8005;&#x8054;&#x7CFB;</div><div class="line">     * <span class="doctag">@param</span> message</div><div class="line">     * <span class="doctag">@return</span> void</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">constact</span><span class="params">(String message)</span></span>{</div><div class="line">        mediator.constact(message, <span class="keyword">this</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@desc</span> &#x83B7;&#x53D6;&#x4FE1;&#x606F;</div><div class="line">     * <span class="doctag">@param</span> message</div><div class="line">     * <span class="doctag">@return</span> void</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getMessage</span><span class="params">(String message)</span></span>{</div><div class="line">        System.out.println(<span class="string">&quot;&#x79DF;&#x5BA2;:&quot;</span> + name +<span class="string">&quot;,&#x83B7;&#x5F97;&#x4FE1;&#x606F;&#xFF1A;&quot;</span> + message);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x5177;&#x4F53;&#x4E2D;&#x4ECB;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * &#x5177;&#x4F53;&#x4E2D;&#x4ECB;</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MediatorStructure</span> <span class="keyword">extends</span> <span class="title">Mediator</span> </span>{</div><div class="line">    <span class="comment">// &#x4E2D;&#x4ECB;&#x5FC5;&#x987B;&#x77E5;&#x9053;&#x6240;&#x6709;&#x623F;&#x4E1C;&#x548C;&#x79DF;&#x5BA2;&#x7684;&#x4FE1;&#x606F;</span></div><div class="line">    <span class="keyword">private</span> HouseOwner houseOwner;</div><div class="line">    <span class="keyword">private</span> Tenant tenant;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> HouseOwner <span class="title">getHouseOwner</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> houseOwner;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setHouseOwner</span><span class="params">(HouseOwner houseOwner)</span> </span>{</div><div class="line">        <span class="keyword">this</span>.houseOwner = houseOwner;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Tenant <span class="title">getTenant</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> tenant;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTenant</span><span class="params">(Tenant tenant)</span> </span>{</div><div class="line">        <span class="keyword">this</span>.tenant = tenant;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">constact</span><span class="params">(String message, Person person)</span> </span>{</div><div class="line">        <span class="comment">//&#x5982;&#x679C;&#x662F;&#x623F;&#x4E1C;&#xFF0C;&#x5219;&#x79DF;&#x5BA2;&#x83B7;&#x5F97;&#x4FE1;&#x606F;&#x3002;&#x53CD;&#x4E4B;&#x5219;&#x662F;&#x623F;&#x4E1C;&#x83B7;&#x5F97;&#x4FE1;&#x606F;</span></div><div class="line">        <span class="keyword">if</span> (person == houseOwner) {</div><div class="line">            tenant.getMessage(message);</div><div class="line">        } <span class="keyword">else</span> {</div><div class="line">            houseOwner.getMessage(message);</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x6D4B;&#x8BD5;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</div><div class="line">    <span class="comment">//&#x4E00;&#x4E2A;&#x623F;&#x4E1C;&#x3001;&#x4E00;&#x4E2A;&#x79DF;&#x5BA2;&#x3001;&#x4E00;&#x4E2A;&#x4E2D;&#x4ECB;</span></div><div class="line">    MediatorStructure mediator = <span class="keyword">new</span> MediatorStructure();</div><div class="line">    <span class="comment">//&#x623F;&#x4E1C;&#x548C;&#x79DF;&#x5BA2;&#x53EA;&#x9700;&#x8981;&#x77E5;&#x9053;&#x4E2D;&#x4ECB;&#x5373;&#x53EF;</span></div><div class="line">    HouseOwner houseOwner = <span class="keyword">new</span> HouseOwner(<span class="string">&quot;&#x5F20;&#x8001;&#x4E09;&quot;</span>, mediator);</div><div class="line">    Tenant tenant = <span class="keyword">new</span> Tenant(<span class="string">&quot;&#x674E;&#x5C0F;&#x56DB;&quot;</span>, mediator);</div><div class="line"></div><div class="line">    <span class="comment">//&#x4E2D;&#x4ECB;&#x8981;&#x77E5;&#x9053;&#x623F;&#x4E1C;&#x548C;&#x79DF;&#x5BA2;</span></div><div class="line">    mediator.setHouseOwner(houseOwner);</div><div class="line">    mediator.setTenant(tenant);</div><div class="line"></div><div class="line">    tenant.constact(<span class="string">&quot;&#x542C;&#x8BF4;&#x4F60;&#x90A3;&#x91CC;&#x6709;&#x4E09;&#x5BA4;&#x7684;&#x623F;&#x5B50;&#x51FA;&#x79DF;.....&quot;</span>);</div><div class="line">    houseOwner.constact(<span class="string">&quot;&#x662F;&#x7684;!&#x8BF7;&#x95EE;&#x4F60;&#x9700;&#x8981;&#x79DF;&#x5417;?&quot;</span>);</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x51FA;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#x623F;&#x4E1C;:&#x5F20;&#x8001;&#x4E09;,&#x83B7;&#x5F97;&#x4FE1;&#x606F;&#xFF1A;&#x542C;&#x8BF4;&#x4F60;&#x90A3;&#x91CC;&#x6709;&#x4E09;&#x5BA4;&#x7684;&#x623F;&#x5B50;&#x51FA;&#x79DF;.....</div><div class="line">&#x79DF;&#x5BA2;:&#x674E;&#x5C0F;&#x56DB;,&#x83B7;&#x5F97;&#x4FE1;&#x606F;&#xFF1A;&#x662F;&#x7684;!&#x8BF7;&#x95EE;&#x4F60;&#x9700;&#x8981;&#x79DF;&#x5417;?</div></pre></td></tr></table></figure>
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/设计模式/后台/Java/设计模式/设计模式学习总结(二十一)--责任链模式/" class="pre-post btn btn-default" title='设计模式学习总结(二十一)--责任链模式'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">设计模式学习总结(二十一)--责任链模式</span>
+        </a>
+    
+    
+        <a href="/设计模式/后台/Java/设计模式/设计模式学习总结(十九)--命令模式/" class="next-post btn btn-default" title='设计模式学习总结(十九)--命令模式'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">设计模式学习总结(十九)--命令模式</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">23</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">49</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.77px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.77px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.54px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 10.77px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 15.38px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12.31px;">JavaScript</a> <a href="/tags/Liunx/" style="font-size: 17.69px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 13.08px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12.31px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 16.15px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16.92px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 15.38px;">Nginx</a> <a href="/tags/Quartz/" style="font-size: 12.31px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 11.54px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 16.15px;">Redis</a> <a href="/tags/SQL/" style="font-size: 14.62px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.77px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 19.23px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 16.92px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 13.85px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 14.62px;">SpringBoot</a> <a href="/tags/SpringBoots/" style="font-size: 10px;">SpringBoots</a> <a href="/tags/SpringMVC/" style="font-size: 16.15px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/Utils/" style="font-size: 10.77px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 15.38px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 15.38px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10.77px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10.77px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.77px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 10.77px;">前端</a> <a href="/tags/前端基础/" style="font-size: 13.08px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12.31px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.77px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 18.46px;">设计模式</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

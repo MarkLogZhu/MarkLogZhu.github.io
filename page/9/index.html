@@ -127,6 +127,167 @@
     <div class="post-content">
         <div class="post-head home-post-head">
             <h1 class="post-title">
+                <a href="/Vue/前端/Vue /Vue学习总结(三)-- Vue的生命周期/">Vue学习总结(三)-- Vue的生命周期</a>
+            </h1>
+            <div class="post-meta">  &bull;
+                <time class="post-date" datetime="" title="">
+                    2018年07月09日
+                </time>
+            </div>
+        </div>
+        <p class="brief">
+		 <p>&#x6BCF;&#x4E00;&#x4E2A; Vue &#x90FD;&#x662F;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x65E2;&#x7136;&#x662F;&#x5BF9;&#x8C61;&#x90A3;&#x4E48;&#x5C31;&#x4F1A;&#x6709;&#x5B83;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x4E86;&#x89E3;&#x4E0B; Vue &#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x662F;&#x600E;&#x4E48;&#x56DE;&#x4E8B;&#xFF01;</p>
+<h2 id="Vue-&#x751F;&#x547D;&#x5468;&#x671F;"><a href="#Vue-&#x751F;&#x547D;&#x5468;&#x671F;" class="headerlink" title="Vue &#x751F;&#x547D;&#x5468;&#x671F;"></a>Vue &#x751F;&#x547D;&#x5468;&#x671F;</h2><table>
+<thead>
+<tr>
+<th>&#x51FD;&#x6570;&#x540D;&#x79F0;</th>
+<th>&#x8BF4;&#x660E;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beforeCreate</td>
+<td>&#x7EC4;&#x4EF6;&#x5B9E;&#x4F8B;&#x521A;&#x88AB;&#x521B;&#x5EFA;&#xFF0C;&#x7EC4;&#x4EF6;&#x5C5E;&#x6027;&#x7ED1;&#x5B9A;&#x524D;&#xFF0C;&#x5982;data&#x5C5E;&#x6027;&#x7B49;</td>
+</tr>
+<tr>
+<td>created</td>
+<td>&#x7EC4;&#x4EF6;&#x5B9E;&#x4F8B;&#x521B;&#x5EFA;&#x5B8C;&#x6210;&#xFF0C;&#x5C5E;&#x6027;&#x7ED1;&#x5B9A;&#x5B8C;&#x6210;&#xFF0C;&#x4F46;DMO&#x672A;&#x751F;&#x6210;&#xFF0C;$el &#x5C5E;&#x6027;&#x4E0D;&#x5B58;&#x5728;</td>
+</tr>
+<tr>
+<td>beformMount</td>
+<td>&#x6A21;&#x677F;&#x7F16;&#x8BD1;/&#x6302;&#x8F7D;&#x4E4B;&#x524D;</td>
+</tr>
+<tr>
+<td>mounted</td>
+<td>&#x6A21;&#x677F;&#x7F16;&#x8BD1;/&#x6302;&#x8F7D;&#x4E4B;&#x540E;</td>
+</tr>
+<tr>
+<td>beforeUpdaate</td>
+<td>&#x7EC4;&#x4EF6;&#x66F4;&#x65B0;&#x4E4B;&#x524D;</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>&#x7EC4;&#x4EF6;&#x66F4;&#x65B0;&#x4E4B;&#x540E;</td>
+</tr>
+<tr>
+<td>activated</td>
+<td>for keep-alive&#xFF0C;&#x7EC4;&#x4EF6;&#x88AB;&#x6FC0;&#x6D3B;&#x65F6;&#x8C03;&#x7528;</td>
+</tr>
+<tr>
+<td>deactivated</td>
+<td>for keep-alive,&#x7EC4;&#x4EF6;&#x88AB;&#x79FB;&#x9664;&#x65F6;&#x8C03;&#x7528;</td>
+</tr>
+<tr>
+<td>beforeDestory</td>
+<td>&#x7EC4;&#x4EF6;&#x9500;&#x6BC1;&#x524D;&#x8C03;&#x7528;</td>
+</tr>
+<tr>
+<td>destoyed</td>
+<td>&#x7EC4;&#x4EF6;&#x9500;&#x6BC1;&#x540E;&#x8C03;&#x7528;</td>
+</tr>
+</tbody>
+</table>
+           <!-- -->
+            <!--    &amp;#x6BCF;&amp;#x4E00;&amp;#x4E2A; Vue &amp;#x90FD;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x5BF9;&amp;#x8C61;&amp;#xFF0C;&amp;#x65E2;&amp;#x7136;&amp;#x662F;&amp;#x5BF9;&amp;#x8C61;&amp;#x90A3;&amp;#x4E48;&amp;#x5C31;&amp;#x4F1A;&amp;#x6709;&amp;#x5B83;&amp;#x7684;&amp;#x751F;&amp;#x547D;&amp;#x5468;&amp;#x671F;&amp;#xFF0C;&amp;#x4ECA;&amp;#x5929;&amp;#x6211;&amp;#x4EEC;&amp;#x5C31;&amp;#x6765;&amp;#x4E86;&amp;#x89E3;&amp;#x4E0B; Vue &amp;#x7684;&amp;#x751F;&amp;#x547D;&amp;#x5468;&amp;#x671F;&amp;#x662F;&amp;#x600E;&amp;#x4E48;&amp;#x56DE;&amp;#x4E8B;&amp;#xFF01;
+Vue &amp;#x751F;&amp;#x547D;&amp;#x5468;&amp;#x671F;
+
+
+&amp;#x51FD;&amp;#x6570;&amp;#x540D;&amp;#x79F0;
+&amp;#x8BF4;&amp;#x660E;
+
+
+
+
+beforeCreate
+&amp;#x7EC4;&amp;#x4EF6;&amp;#x5B9E;&amp;#x4F8B;&amp;#x521A;&amp;#x88AB;&amp;#x521B;&amp;#x5EFA;&amp;#xFF0C;&amp;#x7EC4;&amp;#x4EF6;&amp;#x5C5E;&amp;#x6027;&amp;#x7ED1;&amp;#x5B9A;&amp;#x524D;&amp;#xFF0C;&amp;#x5982;data&amp;#x5C5E;&amp;#x6027;&amp;#x7B49;
+
+
+created
+&amp;#x7EC4;&amp;#x4EF6;&amp;#x5B9E;&amp;#x4F8B;&amp;#x521B;&amp;#x5EFA;&amp;#x5B8C;&amp;#x6210;&amp;#xFF0C;&amp;#x5C5E;&amp;#x6027;&amp;#x7ED1;&amp;#x5B9A;&amp;#x5B8C;&amp;#x6210;&amp;#xFF0C;&amp;#x4F46;DMO&amp;#x672A;&amp;#x751F;&amp;#x6210;&amp;#xFF0C;$el &amp;#x5C5E;&amp;#x6027;&amp;#x4E0D;&amp;#x5B58;&amp;#x5728;
+
+
+beformMount
+&amp;#x6A21;&amp;#x677F;&amp;#x7F16;&amp;#x8BD1;/&amp;#x6302;&amp;#x8F7D;&amp;#x4E4B;&amp;#x524D;
+
+
+mounted
+&amp;#x6A21;&amp;#x677F;&amp;#x7F16;&amp;#x8BD1;/&amp;#x6302;&amp;#x8F7D;&amp;#x4E4B;&amp;#x540E;
+
+
+beforeUpdaate
+&amp;#x7EC4;&amp;#x4EF6;&amp;#x66F4;&amp;#x65B0;&amp;#x4E4B;&amp;#x524D;
+
+
+updated
+&amp;#x7EC4;&amp;#x4EF6;&amp;#x66F4;&amp;#x65B0;&amp;#x4E4B;&amp;#x540E;
+
+
+activated
+for keep-alive&amp;#xFF0C;&amp;#x7EC4;&amp;#x4EF6;&amp;#x88AB;&amp;#x6FC0;&amp;#x6D3B;&amp;#x65F6;&amp;#x8C03;&amp;#x7528;
+
+
+deactivated
+for keep-alive,&amp;#x7EC4;&amp;#x4EF6;&amp;#x88AB;&amp;#x79FB;&amp;#x9664;&amp;#x65F6;&amp;#x8C03;&amp;#x7528;
+
+
+beforeDestory
+&amp;#x7EC4;&amp;#x4EF6;&amp;#x9500;&amp;#x6BC1;&amp;#x524D;&amp;#x8C03;&amp;#x7528;
+
+
+destoyed
+&amp;#x7EC4;&amp;#x4EF6;&amp;#x9500;&amp;#x6BC1;&amp;#x540E;&amp;#x8C03;&amp;#x7528;
+
+
+…-->
+           <!-- -->
+        </p>
+    </div>
+    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Vue">
+            Vue
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Vue" title='Vue'>
+                        Vue
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/Vue/前端/Vue /Vue学习总结(三)-- Vue的生命周期/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+</article>
+
+
+<article class="post">
+    
+    <div class="post-content">
+        <div class="post-head home-post-head">
+            <h1 class="post-title">
                 <a href="/Vue/前端/Vue /Vue学习总结(二)--Vue常用属性/">Vue学习总结(二)--Vue常用属性</a>
             </h1>
             <div class="post-meta">  &bull;
@@ -692,67 +853,6 @@ INOUT:&amp;#x8868;&amp;#x793A;&amp;#x8F93;&amp;#x5165;&amp;#x8F93;&amp;#x51FA;&a
 </article>
 
 
-<article class="post">
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/MySQL/后台/Sql/MySQL/MySQL学习总结(五)--数据类型和运算符/">MySQL学习总结(五)--数据类型和运算符</a>
-            </h1>
-            <div class="post-meta">  &bull;
-                <time class="post-date" datetime="" title="">
-                    2018年06月13日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
-		 <p>MySQL &#x652F;&#x6301;&#x591A;&#x79CD;&#x7C7B;&#x578B;&#xFF0C;&#x5927;&#x81F4;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;&#x4E09;&#x7C7B;&#xFF1A;&#x6570;&#x503C;&#x3001;&#x65E5;&#x671F;/&#x65F6;&#x95F4;&#x548C;&#x5B57;&#x7B26;&#x4E32;(&#x5B57;&#x7B26;)&#x7C7B;&#x578B;&#x3002;</p>
-           <!-- -->
-            <!--    MySQL &amp;#x652F;&amp;#x6301;&amp;#x591A;&amp;#x79CD;&amp;#x7C7B;&amp;#x578B;&amp;#xFF0C;&amp;#x5927;&amp;#x81F4;&amp;#x53EF;&amp;#x4EE5;&amp;#x5206;&amp;#x4E3A;&amp;#x4E09;&amp;#x7C7B;&amp;#xFF1A;&amp;#x6570;&amp;#x503C;&amp;#x3001;&amp;#x65E5;&amp;#x671F;/&amp;#x65F6;&amp;#x95F4;&amp;#x548C;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;(&amp;#x5B57;&amp;#x7B26;)&amp;#x7C7B;&amp;#x578B;&amp;#x3002;…-->
-           <!-- -->
-        </p>
-    </div>
-    
-        <footer class="post-footer clearfix">
-            <div class="pull-left tag-list">
-                <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/MySQL">
-            MySQL
-        </a>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-                
-                    <a href="/tags/MySQL" title='MySQL'>
-                        MySQL
-                    </a>
-                
-            
-        </span>
-    </span>
-    
-
-    
-</div>
-
-            </div>
-
-            <div class="post-permalink">
-                <a href="/MySQL/后台/Sql/MySQL/MySQL学习总结(五)--数据类型和运算符/" class="btn btn-default">阅读全文</a>
-            </div>
-        </footer>
-    
-</article>
-
-
 
 
     <nav class="pagination" role="navigation">
@@ -834,7 +934,7 @@ INOUT:&amp;#x8868;&amp;#x793A;&amp;#x8F93;&amp;#x5165;&amp;#x8F93;&amp;#x51FA;&a
         
     <div class="widget">
       <h3 class="title">归档</h3>
-        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">49</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">49</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
     </div>
 
 

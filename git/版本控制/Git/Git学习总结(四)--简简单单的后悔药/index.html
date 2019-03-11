@@ -1,0 +1,391 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Git学习总结(四)--简简单单的后悔药 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Git学习总结(四)--简简单单的后悔药">
+            
+	            Git学习总结(四)--简简单单的后悔药
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/git">
+            git
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/git" title='git'>
+                        git
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/03/11</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>Git &#x8BA9;&#x6211;&#x4EEC;&#x5403;&#x540E;&#x6094;&#x836F;&#x7684;&#x8FC7;&#x7A0B;&#x7B80;&#x7B80;&#x5355;&#x5355;&#x3002;</p>
+<h2 id="&#x64A4;&#x6D88;&#x5F53;&#x524D;-commit&#xFF08;&#x8FD8;&#x6CA1;&#x6709;&#x63D0;&#x4EA4;&#x5230;&#x8FDC;&#x7A0B;&#x4ED3;&#x5E93;&#xFF09;"><a href="#&#x64A4;&#x6D88;&#x5F53;&#x524D;-commit&#xFF08;&#x8FD8;&#x6CA1;&#x6709;&#x63D0;&#x4EA4;&#x5230;&#x8FDC;&#x7A0B;&#x4ED3;&#x5E93;&#xFF09;" class="headerlink" title="&#x64A4;&#x6D88;&#x5F53;&#x524D; commit&#xFF08;&#x8FD8;&#x6CA1;&#x6709;&#x63D0;&#x4EA4;&#x5230;&#x8FDC;&#x7A0B;&#x4ED3;&#x5E93;&#xFF09;"></a>&#x64A4;&#x6D88;&#x5F53;&#x524D; commit&#xFF08;&#x8FD8;&#x6CA1;&#x6709;&#x63D0;&#x4EA4;&#x5230;&#x8FDC;&#x7A0B;&#x4ED3;&#x5E93;&#xFF09;</h2><h3 id="1-&#x521D;&#x59CB;&#x5316;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5E76;&#x63D0;&#x4EA4;&#x5230;-Git"><a href="#1-&#x521D;&#x59CB;&#x5316;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5E76;&#x63D0;&#x4EA4;&#x5230;-Git" class="headerlink" title="1.&#x521D;&#x59CB;&#x5316;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5E76;&#x63D0;&#x4EA4;&#x5230; Git"></a>1.&#x521D;&#x59CB;&#x5316;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5E76;&#x63D0;&#x4EA4;&#x5230; Git</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line">	&lt;head&gt;	</div><div class="line">	&lt;/head&gt;</div><div class="line">	&lt;body&gt;</div><div class="line">	&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git add <span class="number">01</span>.html</div><div class="line">$ git commit -m<span class="string">&apos;init&apos;</span></div></pre></td></tr></table></figure>
+<a id="more"></a> 
+<h3 id="2-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5E76;&#x63D0;&#x4EA4;"><a href="#2-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5E76;&#x63D0;&#x4EA4;" class="headerlink" title="2.&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5E76;&#x63D0;&#x4EA4;"></a>2.&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5E76;&#x63D0;&#x4EA4;</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line">	&lt;head&gt;	</div><div class="line">	&lt;/head&gt;</div><div class="line">	&lt;body&gt;</div><div class="line">		&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x9519;&#x8BEF;&#x7684;&#x5185;&#x5BB9;</div><div class="line">	&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git add <span class="number">01</span>.html</div><div class="line">$ git commit -m<span class="string">&apos;add&apos;</span></div></pre></td></tr></table></figure>
+<h3 id="3-&#x64A4;&#x9500;&#x4E4B;&#x524D;&#x7684;-commit"><a href="#3-&#x64A4;&#x9500;&#x4E4B;&#x524D;&#x7684;-commit" class="headerlink" title="3.&#x64A4;&#x9500;&#x4E4B;&#x524D;&#x7684; commit"></a>3.&#x64A4;&#x9500;&#x4E4B;&#x524D;&#x7684; commit</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git reset --soft head^</div><div class="line">$ git status <span class="number">01</span>.html</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">On branch master</div><div class="line">Your branch is ahead of <span class="string">&apos;origin/master&apos;</span> by <span class="number">1</span> commit.</div><div class="line">  (use <span class="string">&quot;git push&quot;</span> to publish your local commits)</div><div class="line"></div><div class="line">Changes to be committed:</div><div class="line">  (use <span class="string">&quot;git reset HEAD &lt;file&gt;...&quot;</span> to unstage)</div><div class="line"></div><div class="line">        modified:   <span class="number">01</span>.html</div></pre></td></tr></table></figure>
+<p><code>git reset --soft head^</code>  &#x64A4;&#x6D88;&#x4E86;&#x672C;&#x6B21;&#x63D0;&#x4EA4;&#xFF0C;&#x5C06;&#x5DE5;&#x4F5C;&#x533A;&#x6062;&#x590D;&#x5230;&#x4E86;&#x63D0;&#x4EA4;&#x524D;&#x4F46;&#x662F;&#x5DF2;&#x7ECF; <code>add</code> &#x7684;&#x72B6;&#x6001;</p>
+<h3 id="4-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5728;&#x63D0;&#x4EA4;"><a href="#4-&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5728;&#x63D0;&#x4EA4;" class="headerlink" title="4.&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5728;&#x63D0;&#x4EA4;"></a>4.&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5728;&#x63D0;&#x4EA4;</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line">	&lt;head&gt;	</div><div class="line">	&lt;/head&gt;</div><div class="line">	&lt;body&gt;</div><div class="line">		&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x6B63;&#x786E;&#x7684;&#x5185;&#x5BB9;</div><div class="line">	&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git add <span class="number">01</span>.html</div><div class="line">$ git commit -m<span class="string">&apos;add&apos;</span></div></pre></td></tr></table></figure>
+<h3 id="5-&#x67E5;&#x770B;&#x63D0;&#x4EA4;&#x8BB0;&#x5F55;"><a href="#5-&#x67E5;&#x770B;&#x63D0;&#x4EA4;&#x8BB0;&#x5F55;" class="headerlink" title="5.&#x67E5;&#x770B;&#x63D0;&#x4EA4;&#x8BB0;&#x5F55;"></a>5.&#x67E5;&#x770B;&#x63D0;&#x4EA4;&#x8BB0;&#x5F55;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git log --pretty=oneline</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">04581</span>bd41edfdf03fb6df47abab5869e8b96862f (HEAD -&gt; master) add02</div><div class="line">c27ba847dcff5fd62000246a015e27c1a0f30c3d init</div></pre></td></tr></table></figure>
+<p>&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#x4ECE;&#x63D0;&#x4EA4;&#x8BB0;&#x5F55;&#x91CC;&#x4E5F;&#x770B;&#x4E0D;&#x5230;&#x4E4B;&#x524D;&#x7684;&#x9519;&#x8BEF;&#x63D0;&#x4EA4;&#x4E86;</p>
+<h2 id="&#x56DE;&#x9000;&#x8FDC;&#x7A0B;&#x4ED3;&#x5E93;&#xFF08;&#x56E2;&#x961F;&#x5408;&#x4F5C;&#x4E0B;&#xFF0C;&#x614E;&#x7528;&#xFF09;"><a href="#&#x56DE;&#x9000;&#x8FDC;&#x7A0B;&#x4ED3;&#x5E93;&#xFF08;&#x56E2;&#x961F;&#x5408;&#x4F5C;&#x4E0B;&#xFF0C;&#x614E;&#x7528;&#xFF09;" class="headerlink" title="&#x56DE;&#x9000;&#x8FDC;&#x7A0B;&#x4ED3;&#x5E93;&#xFF08;&#x56E2;&#x961F;&#x5408;&#x4F5C;&#x4E0B;&#xFF0C;&#x614E;&#x7528;&#xFF09;"></a>&#x56DE;&#x9000;&#x8FDC;&#x7A0B;&#x4ED3;&#x5E93;&#xFF08;&#x56E2;&#x961F;&#x5408;&#x4F5C;&#x4E0B;&#xFF0C;&#x614E;&#x7528;&#xFF09;</h2><ul>
+<li>&#x91CD;&#x590D;&#x4E0A;&#x9762;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x6E05;&#x9664;&#x672C;&#x5730; commit</li>
+<li>&#x6267;&#x884C;&#x5982;&#x4E0B;&#x547D;&#x4EE4;;<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin master --force</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>&#x5F3A;&#x5236;&#x63D0;&#x4EA4;&#x5230;&#x8FDC;&#x7A0B;&#x4ED3;&#x5E93;&#x3002;</p>
+<h2 id="&#x627E;&#x56DE;&#x4E22;&#x5931;&#x7684;&#x5386;&#x53F2;&#x8BB0;&#x5F55;"><a href="#&#x627E;&#x56DE;&#x4E22;&#x5931;&#x7684;&#x5386;&#x53F2;&#x8BB0;&#x5F55;" class="headerlink" title="&#x627E;&#x56DE;&#x4E22;&#x5931;&#x7684;&#x5386;&#x53F2;&#x8BB0;&#x5F55;"></a>&#x627E;&#x56DE;&#x4E22;&#x5931;&#x7684;&#x5386;&#x53F2;&#x8BB0;&#x5F55;</h2><p>&#x524D;&#x63D0;&#x6761;&#x4EF6;&#xFF1A;.git &#x76EE;&#x5F55;&#x6CA1;&#x6709;&#x88AB;&#x5220;&#x9664;&#x8FC7;&#xFF0C;&#x5E76;&#x4E14;&#x6587;&#x4EF6;&#x88AB;&#x6DFB;&#x52A0;&#x5230; git &#x8FC7;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">$ git reflog</div><div class="line">``` </div><div class="line">``` java</div><div class="line"><span class="number">04581</span>bd (HEAD -&gt; master) HEAD@{<span class="number">0</span>}: commit: add02</div><div class="line">c27ba84 HEAD@{<span class="number">1</span>}: reset: moving to head^</div><div class="line"><span class="number">7f</span>87850 HEAD@{<span class="number">2</span>}: reset: moving to head^</div><div class="line"><span class="number">1293820</span> HEAD@{<span class="number">3</span>}: commit: add</div><div class="line"><span class="number">7f</span>87850 HEAD@{<span class="number">4</span>}: commit: init</div><div class="line">c27ba84 HEAD@{<span class="number">5</span>}: commit: &#x4FEE;&#x6539;&#x5185;&#x5BB9;</div><div class="line">c6d7a69 (origin/master, origin/HEAD) HEAD@{<span class="number">6</span>}: reset: <span class="function">moving to HEAD</span></div><div class="line"><span class="title">c6d7a69</span> <span class="params">(origin/master, origin/HEAD)</span> HEAD@{<span class="number">7</span>}: commit (merge): &#x63D0;&#x4EA4;</div><div class="line"><span class="number">80926</span>ba HEAD@{<span class="number">8</span>}: commit: &#x4E3B;&#x5206;&#x652F;&#x63D0;&#x4EA4;</div><div class="line"><span class="number">584</span>b241 HEAD@{<span class="number">9</span>}: checkout: moving from dev to master</div><div class="line"><span class="number">382</span>b14a HEAD@{<span class="number">10</span>}: commit: &#x5206;&#x652F;&#x63D0;&#x4EA4;</div><div class="line"><span class="number">584</span>b241 HEAD@{<span class="number">11</span>}: checkout: moving from master to dev</div><div class="line"><span class="number">584</span>b241 HEAD@{<span class="number">12</span>}: checkout: moving from dev to master</div><div class="line"><span class="number">584</span>b241 HEAD@{<span class="number">13</span>}: checkout: moving from master to dev</div><div class="line"><span class="number">584</span>b241 HEAD@{<span class="number">14</span>}: clone: from git<span class="meta">@github</span>.com:MarkLogZhu/GitTest01.git</div></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x91CC;&#x8BB0;&#x5F55;&#x4E86;&#x6211;&#x4EEC;&#x7684;&#x6BCF;&#x4E00;&#x6B21;&#x8BB0;&#x5F55;&#xFF0C;&#x50CF;&#x4E4B;&#x524D;&#x4E00;&#x6837;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5982;&#x4E0B;&#x547D;&#x4EE4;&#x56DE;&#x6EDA;&#x64CD;&#x4F5C;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --hard commit_id</div></pre></td></tr></table></figure>
+<p><code>c27ba84</code> &#x8FD9;&#x79CD;&#x5C31;&#x662F; <code>commit_id</code> &#x3002;</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/git/版本控制/Git/Git学习总结(五)--其他/" class="pre-post btn btn-default" title='Git学习总结(五)--其他'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Git学习总结(五)--其他</span>
+        </a>
+    
+    
+        <a href="/git/版本控制/Git/Git学习总结(三)--分支/" class="next-post btn btn-default" title='Git学习总结(三)--分支'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Git学习总结(三)--分支</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/"><i class="fa" aria-hidden="true">UML</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/"><i class="fa" aria-hidden="true">git</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">十月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">49</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/"><i class="fa" aria-hidden="true">十一月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/"><i class="fa" aria-hidden="true">五月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.71px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.71px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.43px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/JAVA/" style="font-size: 10.71px;">JAVA</a> <a href="/tags/JAVA-WEB/" style="font-size: 15px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12.14px;">JavaScript</a> <a href="/tags/Liunx/" style="font-size: 17.86px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.86px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12.14px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 15.71px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16.43px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 15px;">Nginx</a> <a href="/tags/Quartz/" style="font-size: 12.14px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 17.14px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 15.71px;">Redis</a> <a href="/tags/SQL/" style="font-size: 14.29px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.71px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 19.29px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 16.43px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 13.57px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 14.29px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 15.71px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Utils/" style="font-size: 10.71px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 15px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 15px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/git/" style="font-size: 12.86px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 10.71px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10.71px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.71px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 11.43px;">前端</a> <a href="/tags/前端基础/" style="font-size: 12.86px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12.14px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.71px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 18.57px;">设计模式</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

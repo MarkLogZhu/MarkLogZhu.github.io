@@ -1,0 +1,408 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>设计模式学习总结(七)--装饰者模式 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="设计模式学习总结(七)--装饰者模式">
+            
+	            设计模式学习总结(七)--装饰者模式
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/设计模式">
+            设计模式
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/设计模式" title='设计模式'>
+                        设计模式
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/12/14</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="&#x5B9A;&#x4E49;"><a href="#&#x5B9A;&#x4E49;" class="headerlink" title="&#x5B9A;&#x4E49;"></a>&#x5B9A;&#x4E49;</h2><p>&#x88C5;&#x9970;&#x8005;&#x6A21;&#x5F0F;&#x53C8;&#x53EB;&#x5305;&#x88C5;(Wrapper)&#x6A21;&#x5F0F;&#x3002;&#x88C5;&#x9970;&#x8005;&#x6A21;&#x5F0F;&#x4EE5;&#x5BF9;&#x5BA2;&#x6237;&#x7AEF;&#x900F;&#x660E;&#x7684;&#x65B9;&#x5F0F;&#x6269;&#x5C55;&#x5BF9;&#x8C61;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x662F;&#x7EE7;&#x627F;&#x5173;&#x7CFB;&#x7684;&#x4E00;&#x4E2A;&#x66FF;&#x4EE3;&#x65B9;&#x6848;&#x3002;</p>
+<p>&#x88C5;&#x9970;&#x8005;&#x6A21;&#x5F0F;&#x52A8;&#x6001;&#x5730;&#x5C06;&#x8D23;&#x4EFB;&#x9644;&#x52A0;&#x5230;&#x5BF9;&#x8C61;&#x8EAB;&#x4E0A;&#x3002;&#x82E5;&#x8981;&#x6269;&#x5C55;&#x529F;&#x80FD;&#xFF0C;&#x88C5;&#x9970;&#x8005;&#x63D0;&#x4F9B;&#x4E86;&#x6BD4;&#x7EE7;&#x627F;&#x66F4;&#x6709;&#x5F39;&#x6027;&#x7684;&#x66FF;&#x4EE3;&#x65B9;&#x6848;&#x3002;</p>
+<p>&#x5728;&#x88C5;&#x9970;&#x6A21;&#x5F0F;&#x4E2D;&#x7684;&#x89D2;&#x8272;&#xFF1A;</p>
+<ul>
+<li>&#x62BD;&#x8C61;&#x6784;&#x4EF6;(Component)&#x89D2;&#x8272;&#xFF1A;&#x7ED9;&#x51FA;&#x4E00;&#x4E2A;&#x62BD;&#x8C61;&#x63A5;&#x53E3;&#xFF0C;&#x4EE5;&#x89C4;&#x8303;&#x51C6;&#x5907;&#x63A5;&#x6536;&#x9644;&#x52A0;&#x8D23;&#x4EFB;&#x7684;&#x5BF9;&#x8C61;&#x3002;</li>
+<li>&#x5177;&#x4F53;&#x6784;&#x4EF6;(ConcreteComponent)&#x89D2;&#x8272;&#xFF1A;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x5C06;&#x8981;&#x63A5;&#x6536;&#x9644;&#x52A0;&#x8D23;&#x4EFB;&#x7684;&#x7C7B;&#x3002;</li>
+<li>&#x88C5;&#x9970;(Decorator)&#x89D2;&#x8272;&#xFF1A;&#x6301;&#x6709;&#x4E00;&#x4E2A;&#x6784;&#x4EF6;(Component)&#x5BF9;&#x8C61;&#x7684;&#x5B9E;&#x4F8B;&#xFF0C;&#x5E76;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x4E0E;&#x62BD;&#x8C61;&#x6784;&#x4EF6;&#x63A5;&#x53E3;&#x4E00;&#x81F4;&#x7684;&#x63A5;&#x53E3;&#x3002;</li>
+<li>&#x5177;&#x4F53;&#x88C5;&#x9970;(ConcreteDecorator)&#x89D2;&#x8272;&#xFF1A;&#x8D1F;&#x8D23;&#x7ED9;&#x6784;&#x4EF6;&#x5BF9;&#x8C61;&#x201C;&#x8D34;&#x4E0A;&#x201D;&#x9644;&#x52A0;&#x7684;&#x8D23;&#x4EFB;&#x3002;</li>
+</ul>
+<h2 id="&#x4F18;&#x7F3A;&#x70B9;"><a href="#&#x4F18;&#x7F3A;&#x70B9;" class="headerlink" title="&#x4F18;&#x7F3A;&#x70B9;"></a>&#x4F18;&#x7F3A;&#x70B9;</h2><p>&#x4F18;&#x70B9;&#xFF1A;</p>
+<ul>
+<li><p>&#x76F8;&#x6BD4;&#x7EE7;&#x627F;&#x5173;&#x7CFB;&#x63D0;&#x4F9B;&#x66F4;&#x591A;&#x7684;&#x7075;&#x6D3B;&#x6027;</p>
+</li>
+<li><p>&#x901A;&#x8FC7;&#x4F7F;&#x7528;&#x4E0D;&#x540C;&#x7684;&#x5177;&#x4F53;&#x88C5;&#x9970;&#x7C7B;&#x4EE5;&#x53CA;&#x8FD9;&#x4E9B;&#x88C5;&#x9970;&#x7C7B;&#x7684;&#x6392;&#x5217;&#x7EC4;&#x5408;&#xFF0C;&#x8BBE;&#x8BA1;&#x5E08;&#x53EF;&#x4EE5;&#x521B;&#x9020;&#x51FA;&#x5F88;&#x591A;&#x4E0D;&#x540C;&#x884C;&#x4E3A;&#x7684;&#x7EC4;&#x5408;&#x3002;</p>
+</li>
+</ul>
+<p>&#x7F3A;&#x70B9;:</p>
+<ul>
+<li><p>&#x7C7B;&#x6570;&#x91CF;&#x5BB9;&#x6613;&#x7206;&#x70B8;</p>
+</li>
+<li><p>&#x4F1A;&#x4F7F;&#x7CFB;&#x7EDF;&#x53D8;&#x590D;&#x6742;</p>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="&#x5B9E;&#x4F8B;"><a href="#&#x5B9E;&#x4F8B;" class="headerlink" title="&#x5B9E;&#x4F8B;"></a>&#x5B9E;&#x4F8B;</h2><p>&#x9700;&#x6C42;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x5C0F;&#x660E;&#x8981;&#x4E70;&#x4E00;&#x4E2A;&#x5C71;&#x4E1C;&#x714E;&#x997C;&#xFF0C;&#x714E;&#x997C;&#x91CC;&#x9762;&#x53EF;&#x4EE5;&#x586B;&#x5145;&#x5F88;&#x591A;&#x4E1C;&#x897F;&#xFF0C;&#x5982;&#x9999;&#x80A0;&#x3001;&#x6CB9;&#x6761;&#x3001;&#x91CC;&#x810A;&#xFF0C;&#x5C0F;&#x660E;&#x6BCF;&#x5929;&#x52A0;&#x7684;&#x6599;&#x90FD;&#x4E0D;&#x540C;&#x3002;&#x8BF7;&#x6839;&#x636E;&#x4EE5;&#x4E0A;&#x6761;&#x4EF6;&#x505A;&#x4E00;&#x4E2A;&#x4EF7;&#x683C;&#x8BA1;&#x7B97;&#x7A0B;&#x5E8F;&#x3002;</div></pre></td></tr></table></figure>
+<p>&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x997C;&#x63A5;&#x53E3;&#xFF1A; </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * &#x997C;&#x63A5;&#x53E3;</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IPancake</span> </span>{</div><div class="line"></div><div class="line">    <span class="function">String <span class="title">getDesc</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="function">BigDecimal <span class="title">getPrice</span><span class="params">()</span></span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x5C71;&#x4E1C;&#x714E;&#x997C;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * &#x5C71;&#x4E1C;&#x714E;&#x997C;</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShandongPancake</span> <span class="keyword">implements</span> <span class="title">IPancake</span> </span>{</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDesc</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> <span class="string">&quot;&#x5C71;&#x4E1C;&#x714E;&#x997C;&quot;</span>;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> BigDecimal <span class="title">getPrice</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BigDecimal(<span class="number">4</span>);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x997C;&#x914D;&#x6599;&#x63A5;&#x53E3;&#xFF1A; </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * &#x997C;&#x914D;&#x6599;&#x63A5;&#x53E3;</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ICakeIngredients</span> <span class="keyword">extends</span>  <span class="title">IPancake</span></span>{</div><div class="line"></div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x5B9E;&#x73B0;&#x997C;&#x914D;&#x6599;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Egg</span> <span class="keyword">implements</span> <span class="title">ICakeIngredients</span> </span>{</div><div class="line">    <span class="keyword">private</span> IPancake pancake;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Egg</span><span class="params">(IPancake pancake)</span></span>{</div><div class="line">        <span class="keyword">this</span>.pancake = pancake;</div><div class="line">    }</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDesc</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span>  pancake.getDesc() +<span class="string">&quot; + &#x9E21;&#x86CB;&quot;</span>;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> BigDecimal <span class="title">getPrice</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> pancake.getPrice().add(<span class="keyword">new</span> BigDecimal(<span class="number">1</span>));</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sausage</span> <span class="keyword">implements</span> <span class="title">ICakeIngredients</span> </span>{</div><div class="line">    <span class="keyword">private</span> IPancake pancake;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Sausage</span><span class="params">(IPancake pancake)</span></span>{</div><div class="line">        <span class="keyword">this</span>.pancake = pancake;</div><div class="line">    }</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDesc</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span>  pancake.getDesc() +<span class="string">&quot; + &#x9999;&#x80A0;&quot;</span>;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> BigDecimal <span class="title">getPrice</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> pancake.getPrice().add(<span class="keyword">new</span> BigDecimal(<span class="number">1.5</span>));</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fritters</span> <span class="keyword">implements</span> <span class="title">ICakeIngredients</span> </span>{</div><div class="line">    <span class="keyword">private</span> IPancake pancake;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Fritters</span><span class="params">(IPancake pancake)</span></span>{</div><div class="line">        <span class="keyword">this</span>.pancake = pancake;</div><div class="line">    }</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDesc</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span>  pancake.getDesc() +<span class="string">&quot; + &#x6CB9;&#x6761;&quot;</span>;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> BigDecimal <span class="title">getPrice</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> pancake.getPrice().add(<span class="keyword">new</span> BigDecimal(<span class="number">2</span>));</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x6765;&#x6A21;&#x62DF;&#x4E0B;&#x8D2D;&#x4E70;&#x573A;&#x666F;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</div><div class="line">      <span class="comment">// &#x666E;&#x901A;&#x5C71;&#x4E1C;&#x714E;&#x997C;</span></div><div class="line">      IPancake ordinaryShandongPancake = <span class="keyword">new</span> ShandongPancake();</div><div class="line">      System.out.println(String.format(<span class="string">&quot;%s &#xFFE5;%s&quot;</span>, ordinaryShandongPancake.getDesc(),</div><div class="line">              ordinaryShandongPancake.getPrice()));</div><div class="line">      </div><div class="line"><span class="comment">// &#x52A0;&#x6599;&#x5C71;&#x4E1C;&#x714E;&#x997C;</span></div><div class="line">      IPancake feedingShandongPancake = <span class="keyword">new</span> ShandongPancake();</div><div class="line">      <span class="comment">// &#x52A0;&#x4E00;&#x4E2A;&#x9E21;&#x86CB;</span></div><div class="line">      feedingShandongPancake = <span class="keyword">new</span> Egg(feedingShandongPancake);</div><div class="line">      <span class="comment">// &#x52A0;&#x4E00;&#x4E2A;&#x9999;&#x80A0;</span></div><div class="line">      feedingShandongPancake = <span class="keyword">new</span> Sausage(feedingShandongPancake);</div><div class="line">      <span class="comment">// &#x52A0;&#x4E00;&#x4E2A;&#x6CB9;&#x6761;</span></div><div class="line">      feedingShandongPancake = <span class="keyword">new</span> Fritters(feedingShandongPancake);</div><div class="line">      <span class="comment">// &#x518D;&#x52A0;&#x4E00;&#x4E2A;&#x9E21;&#x86CB;</span></div><div class="line">      feedingShandongPancake = <span class="keyword">new</span> Egg(feedingShandongPancake);</div><div class="line">      </div><div class="line">System.out.println(String.format(<span class="string">&quot;%s &#xFFE5;%s&quot;</span>, feedingShandongPancake.getDesc(),</div><div class="line">              feedingShandongPancake.getPrice()));</div><div class="line">  }</div></pre></td></tr></table></figure>
+<p>&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x51FA;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#x5C71;&#x4E1C;&#x714E;&#x997C; &#xFFE5;<span class="number">4</span></div><div class="line">&#x5C71;&#x4E1C;&#x714E;&#x997C; + &#x9E21;&#x86CB; + &#x9999;&#x80A0; + &#x6CB9;&#x6761; + &#x9E21;&#x86CB; &#xFFE5;<span class="number">9.5</span></div></pre></td></tr></table></figure>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/设计模式/后端/Java/设计模式/设计模式学习总结(八)--适配者模式/" class="pre-post btn btn-default" title='设计模式学习总结(八)--适配者模式'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">设计模式学习总结(八)--适配者模式</span>
+        </a>
+    
+    
+        <a href="/设计模式/后端/Java/设计模式/设计模式学习总结(六)--外观模式/" class="next-post btn btn-default" title='设计模式学习总结(六)--外观模式'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">设计模式学习总结(六)--外观模式</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/"><i class="fa" aria-hidden="true">Docker</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OAuth/"><i class="fa" aria-hidden="true">OAuth</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Security/"><i class="fa" aria-hidden="true">Spring Security</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/"><i class="fa" aria-hidden="true">UML</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/"><i class="fa" aria-hidden="true">git</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><i class="fa" aria-hidden="true">五月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/"><i class="fa" aria-hidden="true">四月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">十月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JAVA-WEB/" style="font-size: 14px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 11.33px;">Lambda</a> <a href="/tags/Liunx/" style="font-size: 17.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.67px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 15.33px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px;">Nginx</a> <a href="/tags/OAuth/" style="font-size: 10px;">OAuth</a> <a href="/tags/Quartz/" style="font-size: 12px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 14.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 15.33px;">Redis</a> <a href="/tags/SQL/" style="font-size: 13.33px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.67px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 18.67px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15.33px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 18px;">Spring</a> <a href="/tags/Spring-Security/" style="font-size: 16.67px;">Spring Security</a> <a href="/tags/SpringBoot/" style="font-size: 13.33px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 10.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Utils/" style="font-size: 10.67px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 14px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 14px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/git/" style="font-size: 12.67px;">git</a> <a href="/tags/java/" style="font-size: 10.67px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.67px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 11.33px;">前端</a> <a href="/tags/前端基础/" style="font-size: 12.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 19.33px;">设计模式</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

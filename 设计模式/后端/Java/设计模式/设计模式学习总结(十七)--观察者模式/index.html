@@ -1,0 +1,417 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>设计模式学习总结(十七)--观察者模式 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="设计模式学习总结(十七)--观察者模式">
+            
+	            设计模式学习总结(十七)--观察者模式
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/设计模式">
+            设计模式
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/设计模式" title='设计模式'>
+                        设计模式
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/12/17</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="&#x5B9A;&#x4E49;"><a href="#&#x5B9A;&#x4E49;" class="headerlink" title="&#x5B9A;&#x4E49;"></a>&#x5B9A;&#x4E49;</h2><p>&#x89C2;&#x5BDF;&#x8005;&#x6A21;&#x5F0F;&#x53C8;&#x79F0;&#x4E3A;&#x53D1;&#x5E03;-&#x8BA2;&#x9605;&#x6A21;&#x5F0F;&#x3002;&#x5B9A;&#x4E49;&#x4E86;&#x5BF9;&#x8C61;&#x4E4B;&#x95F4;&#x7684;&#x4E00;&#x5BF9;&#x591A;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF0C;&#x5F53;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x6539;&#x53D8;&#x72B6;&#x6001;&#x65F6;&#xFF0C;&#x5B83;&#x7684;&#x6240;&#x6709;&#x4F9D;&#x8D56;&#x8005;&#x90FD;&#x4F1A;&#x6536;&#x5230;&#x901A;&#x77E5;&#x5E76;&#x4E14;&#x81EA;&#x52A8;&#x66F4;&#x65B0;&#x3002;</p>
+<p>&#x5728;&#x8FD9;&#x91CC;&#xFF0C;&#x53D1;&#x751F;&#x6539;&#x53D8;&#x7684;&#x5BF9;&#x8C61;&#x79F0;&#x4E4B;&#x4E3A;&#x89C2;&#x5BDF;&#x76EE;&#x6807;&#xFF0C;&#x800C;&#x88AB;&#x901A;&#x77E5;&#x7684;&#x5BF9;&#x8C61;&#x79F0;&#x4E4B;&#x4E3A;&#x89C2;&#x5BDF;&#x8005;&#x3002;&#x4E00;&#x4E2A;&#x89C2;&#x5BDF;&#x76EE;&#x6807;&#x53EF;&#x4EE5;&#x5BF9;&#x5E94;&#x591A;&#x4E2A;&#x89C2;&#x5BDF;&#x8005;&#xFF0C;&#x800C;&#x4E14;&#x8FD9;&#x4E9B;&#x89C2;&#x5BDF;&#x8005;&#x4E4B;&#x95F4;&#x6CA1;&#x6709;&#x76F8;&#x4E92;&#x8054;&#x7CFB;&#xFF0C;&#x6240;&#x4EE5;&#x4E48;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x9700;&#x8981;&#x589E;&#x52A0;&#x548C;&#x5220;&#x9664;&#x89C2;&#x5BDF;&#x8005;&#xFF0C;&#x4F7F;&#x5F97;&#x7CFB;&#x7EDF;&#x66F4;&#x6613;&#x4E8E;&#x6269;&#x5C55;&#x3002;</p>
+<h2 id="&#x89D2;&#x8272;"><a href="#&#x89D2;&#x8272;" class="headerlink" title="&#x89D2;&#x8272;"></a>&#x89D2;&#x8272;</h2><ul>
+<li><p>Subject&#xFF1A;&#x76EE;&#x6807;&#x3002;&#x4ED6;&#x628A;&#x6240;&#x6709;&#x5BF9;&#x89C2;&#x5BDF;&#x8005;&#x5BF9;&#x620F;&#x7684;&#x5F15;&#x7528;&#x4FDD;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x805A;&#x96C6;&#x91CC;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;&#x4E3B;&#x9898;&#x90FD;&#x53EF;&#x4EE5;&#x6709;&#x591A;&#x4E2A;&#x89C2;&#x5BDF;&#x8005;&#x3002;</p>
+</li>
+<li><p>Observer&#xFF1A;&#x89C2;&#x5BDF;&#x8005;&#x3002;&#x4E3A;&#x6240;&#x6709;&#x7684;&#x5177;&#x4F53;&#x89C2;&#x5BDF;&#x8005;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#xFF0C;&#x5728;&#x5F97;&#x5230;&#x4E3B;&#x9898;&#x7684;&#x901A;&#x77E5;&#x65F6;&#x80FD;&#x591F;&#x53CA;&#x65F6;&#x7684;&#x66F4;&#x65B0;&#x81EA;&#x5DF1;&#x3002;</p>
+</li>
+<li><p>ConcreteSubject&#xFF1A;&#x5177;&#x4F53;&#x4E3B;&#x9898;&#x3002;&#x5C06;&#x6709;&#x5173;&#x72B6;&#x6001;&#x5B58;&#x5165;&#x5177;&#x4F53;&#x89C2;&#x5BDF;&#x8005;&#x5BF9;&#x8C61;&#x3002;&#x5728;&#x5177;&#x4F53;&#x4E3B;&#x9898;&#x53D1;&#x751F;&#x6539;&#x53D8;&#x65F6;&#xFF0C;&#x7ED9;&#x6240;&#x6709;&#x7684;&#x89C2;&#x5BDF;&#x8005;&#x53D1;&#x51FA;&#x901A;&#x77E5;&#x3002;</p>
+</li>
+<li><p>ConcreteObserver:&#x5177;&#x4F53;&#x89C2;&#x5BDF;&#x8005;&#x3002;&#x5B9E;&#x73B0;&#x62BD;&#x8C61;&#x89C2;&#x5BDF;&#x8005;&#x89D2;&#x8272;&#x6240;&#x8981;&#x6C42;&#x7684;&#x66F4;&#x65B0;&#x63A5;&#x53E3;&#xFF0C;&#x4EE5;&#x4FBF;&#x4F7F;&#x672C;&#x8EAB;&#x7684;&#x72B6;&#x6001;&#x4E0E;&#x4E3B;&#x9898;&#x72B6;&#x6001;&#x76F8;&#x534F;&#x8C03;&#x3002;        </p>
+</li>
+</ul>
+<h2 id="&#x4F18;&#x7F3A;&#x70B9;"><a href="#&#x4F18;&#x7F3A;&#x70B9;" class="headerlink" title="&#x4F18;&#x7F3A;&#x70B9;"></a>&#x4F18;&#x7F3A;&#x70B9;</h2><p>&#x4F18;&#x70B9;&#xFF1A;</p>
+<ul>
+<li><p>&#x5BF9;&#x8C61;&#x4E4B;&#x95F4;&#x677E;&#x8026;&#x5408;</p>
+</li>
+<li><p>&#x89C2;&#x5BDF;&#x8005;&#x6A21;&#x5F0F;&#x652F;&#x6301;&#x201C;&#x5E7F;&#x64AD;&#x901A;&#x4FE1;&#x201D;&#x3002;&#x4E3B;&#x9898;&#x4F1A;&#x5411;&#x6240;&#x6709;&#x7684;&#x89C2;&#x5BDF;&#x8005;&#x53D1;&#x51FA;&#x901A;&#x77E5;&#x3002;</p>
+</li>
+<li><p>&#x89C2;&#x5BDF;&#x8005;&#x6A21;&#x5F0F;&#x7B26;&#x5408;&#x201C;&#x5F00;&#x95ED;&#x539F;&#x5219;&#x201D;&#x7684;&#x8981;&#x6C42;&#x3002;</p>
+</li>
+</ul>
+<p>&#x7F3A;&#x70B9;&#xFF1A;</p>
+<ul>
+<li><p>&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x88AB;&#x89C2;&#x5BDF;&#x8005;&#x5BF9;&#x8C61;&#x6709;&#x5F88;&#x591A;&#x7684;&#x76F4;&#x63A5;&#x548C;&#x95F4;&#x63A5;&#x7684;&#x89C2;&#x5BDF;&#x8005;&#x7684;&#x8BDD;&#xFF0C;&#x5C06;&#x6240;&#x6709;&#x7684;&#x89C2;&#x5BDF;&#x8005;&#x90FD;&#x901A;&#x77E5;&#x5230;&#x4F1A;&#x82B1;&#x8D39;&#x5F88;&#x591A;&#x65F6;&#x95F4;&#x3002;</p>
+</li>
+<li><p>&#x5982;&#x679C;&#x5728;&#x89C2;&#x5BDF;&#x8005;&#x548C;&#x89C2;&#x5BDF;&#x76EE;&#x6807;&#x4E4B;&#x95F4;&#x6709;&#x5FAA;&#x73AF;&#x4F9D;&#x8D56;&#x7684;&#x8BDD;&#xFF0C;&#x89C2;&#x5BDF;&#x76EE;&#x6807;&#x4F1A;&#x89E6;&#x53D1;&#x5B83;&#x4EEC;&#x4E4B;&#x95F4;&#x8FDB;  &#x884C;&#x5FAA;&#x73AF;&#x8C03;&#x7528;&#xFF0C;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;&#x7CFB;&#x7EDF;&#x5D29;&#x6E83;&#x3002;</p>
+</li>
+<li><p>&#x89C2;&#x5BDF;&#x8005;&#x6A21;&#x5F0F;&#x6CA1;&#x6709;&#x76F8;&#x5E94;&#x7684;&#x673A;&#x5236;&#x8BA9;&#x89C2;&#x5BDF;&#x8005;&#x77E5;&#x9053;&#x6240;&#x89C2;&#x5BDF;&#x7684;&#x76EE;&#x6807;&#x5BF9;&#x8C61;&#x662F;&#x600E;&#x4E48;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x7684;&#xFF0C;&#x800C;&#x4EC5;&#x4EC5;&#x53EA;&#x662F;&#x77E5;&#x9053;&#x89C2;&#x5BDF;&#x76EE;&#x6807;&#x53D1;&#x751F;&#x4E86;&#x53D8;&#x5316;&#x3002;</p>
+</li>
+</ul>
+<a id="more"></a> 
+<h2 id="&#x5B9E;&#x4F8B;"><a href="#&#x5B9E;&#x4F8B;" class="headerlink" title="&#x5B9E;&#x4F8B;"></a>&#x5B9E;&#x4F8B;</h2><p>&#x9700;&#x6C42;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x5728;&#x6C14;&#x8C61;&#x89C2;&#x6D4B;&#x7AD9;&#x4E2D;&#xFF0C;&#x5B83;&#x80FD;&#x591F;&#x8FFD;&#x8E2A;&#x76EE;&#x524D;&#x7684;&#x5929;&#x6C14;&#x72B6;&#x51B5;&#xFF0C;&#x5305;&#x62EC;&#x6E29;&#x5EA6;&#x3001;&#x9002;&#x5EA6;&#x3001;&#x6C14;&#x538B;&#x3002;&#x9700;&#x8981;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x5E03;&#x544A;&#x677F;&#xFF0C;&#x80FD;&#x591F;&#x5206;&#x522B;&#x663E;&#x793A;&#x76EE;&#x524D;&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x6C14;&#x8C61;&#x7EDF;&#x8BA1;&#x548C;&#x7B80;&#x5355;&#x7684;&#x9884;&#x62A5;&#x3002;&#x5F53;&#x6C14;&#x8C61;&#x7AD9;&#x4E2D;&#x83B7;&#x53D6;&#x6700;&#x65B0;&#x7684;&#x6D4B;&#x91CF;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x4E09;&#x79CD;&#x5E03;&#x544A;&#x677F;&#x5FC5;&#x987B;&#x5B9E;&#x65F6;&#x66F4;&#x65B0;&#x3002;</div></pre></td></tr></table></figure>
+<p>&#x89C2;&#x5BDF;&#x8005;&#x63A5;&#x53E3;:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * &#x89C2;&#x5BDF;&#x8005;&#x63A5;&#x53E3;</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>{</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x66F4;&#x65B0;&#x64CD;&#x4F5C;</div><div class="line">     * <span class="doctag">@param</span> temp</div><div class="line">     * <span class="doctag">@param</span> humidity</div><div class="line">     * <span class="doctag">@param</span> pressure</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">float</span> temp,<span class="keyword">float</span> humidity,<span class="keyword">float</span> pressure)</span></span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x4E3B;&#x4F53;&#x63A5;&#x53E3;:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * &#x4E3B;&#x4F53;&#x63A5;&#x53E3;</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Subject</span> </span>{</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x6CE8;&#x518C;&#x89C2;&#x5BDF;&#x8005;</div><div class="line">     * <span class="doctag">@param</span> observer</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">registerObserver</span><span class="params">(Observer observer)</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x5220;&#x9664;&#x89C2;&#x5BDF;&#x8005;</div><div class="line">     * <span class="doctag">@param</span> observer</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">removeOberver</span><span class="params">(Observer observer)</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x5F53;&#x4E3B;&#x9898;&#x72B6;&#x6001;&#x53D1;&#x751F;&#x6539;&#x53D8;&#x65F6;&#xFF0C;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x9700;&#x8981;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x4EE5;&#x901A;&#x77E5;&#x6240;&#x6709;&#x89C2;&#x5BDF;&#x8005;</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">notifyObserver</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x5E03;&#x544A;&#x677F;&#x663E;&#x793A;&#x63A5;&#x53E3;:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * &#x5E03;&#x544A;&#x677F;&#x663E;&#x793A;&#x63A5;&#x53E3;</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DisplayElement</span> </span>{</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x663E;&#x793A;</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">display</span><span class="params">()</span></span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x5929;&#x6C14;:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * &#x5929;&#x6C14;</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeatherData</span> <span class="keyword">implements</span> <span class="title">Subject</span> </span>{</div><div class="line"></div><div class="line">    <span class="keyword">private</span> List&lt;Observer&gt; observers;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> tempterature;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> pressure;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> humidity;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WeatherData</span><span class="params">()</span></span>{</div><div class="line">        observers = <span class="keyword">new</span> ArrayList&lt;Observer&gt;();</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObserver</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; observers.size();i++){</div><div class="line">            Observer observer = observers.get(i);</div><div class="line">            observer.update(tempterature, humidity, pressure);</div><div class="line">        }</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerObserver</span><span class="params">(Observer observer)</span> </span>{</div><div class="line">        observers.add(observer);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeOberver</span><span class="params">(Observer observer)</span> </span>{</div><div class="line">        <span class="keyword">int</span> i = observers.indexOf(observer);</div><div class="line">        <span class="keyword">if</span>(i &gt;= <span class="number">0</span>){</div><div class="line">            observers.remove(i);</div><div class="line">        }</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x6C14;&#x8C61;&#x7AD9;&#x5F97;&#x5230;&#x66F4;&#x65B0;&#x7684;&#x89C2;&#x6D4B;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x901A;&#x77E5;&#x89C2;&#x5BDF;&#x8005;</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">measurementChanged</span><span class="params">()</span></span>{</div><div class="line">        notifyObserver();</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMeasurements</span><span class="params">(<span class="keyword">float</span> temperature,<span class="keyword">float</span> humidity,<span class="keyword">float</span> pressure)</span></span>{</div><div class="line">        <span class="keyword">this</span>.tempterature = temperature;</div><div class="line">        <span class="keyword">this</span>.humidity = humidity;</div><div class="line">        <span class="keyword">this</span>.pressure = pressure;</div><div class="line">        measurementChanged();</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x5E03;&#x544A;&#x677F;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> *  &#x5E03;&#x544A;&#x677F;</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CurrentConditionsDisplay</span> <span class="keyword">implements</span> <span class="title">Observer</span>,<span class="title">DisplayElement</span></span>{</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> temperature;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> humidity;</div><div class="line">    <span class="keyword">private</span>    Subject weatherData;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CurrentConditionsDisplay</span><span class="params">(Subject weatherData)</span></span>{</div><div class="line">        <span class="keyword">this</span>.weatherData = weatherData;</div><div class="line">        <span class="comment">// &#x6CE8;&#x518C;&#x89C2;&#x5BDF;&#x8005;</span></div><div class="line">        weatherData.registerObserver(<span class="keyword">this</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">float</span> temp, <span class="keyword">float</span> humidity, <span class="keyword">float</span> pressure)</span> </span>{</div><div class="line">        <span class="keyword">this</span>.temperature = temp;</div><div class="line">        <span class="keyword">this</span>.humidity = humidity;</div><div class="line">        display();</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> </span>{</div><div class="line">        System.out.println(<span class="string">&quot;&#x6E29;&#x5EA6;&#xFF1A;&quot;</span>+temperature+<span class="string">&quot;F &#x6E7F;&#x5EA6;&#xFF1A;&quot;</span>+humidity+<span class="string">&quot;%&quot;</span>);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x6D4B;&#x8BD5;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</div><div class="line">    WeatherData weatherData = <span class="keyword">new</span> WeatherData();</div><div class="line">    CurrentConditionsDisplay conditionsDisplay = <span class="keyword">new</span> CurrentConditionsDisplay(weatherData);</div><div class="line"></div><div class="line">    weatherData.setMeasurements(<span class="number">80</span>, <span class="number">65</span>, <span class="number">30.4f</span>);</div><div class="line">    weatherData.setMeasurements(<span class="number">82</span>, <span class="number">70</span>, <span class="number">29.2f</span>);</div><div class="line">    weatherData.setMeasurements(<span class="number">78</span>, <span class="number">78</span>, <span class="number">40.4f</span>);</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x51FA;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#x6E29;&#x5EA6;&#xFF1A;<span class="number">80.0F</span> &#x6E7F;&#x5EA6;&#xFF1A;<span class="number">65.0</span>%</div><div class="line">&#x6E29;&#x5EA6;&#xFF1A;<span class="number">82.0F</span> &#x6E7F;&#x5EA6;&#xFF1A;<span class="number">70.0</span>%</div><div class="line">&#x6E29;&#x5EA6;&#xFF1A;<span class="number">78.0F</span> &#x6E7F;&#x5EA6;&#xFF1A;<span class="number">78.0</span>%</div></pre></td></tr></table></figure>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/设计模式/后端/Java/设计模式/设计模式学习总结(十八)--备忘录模式/" class="pre-post btn btn-default" title='设计模式学习总结(十八)--备忘录模式'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">设计模式学习总结(十八)--备忘录模式</span>
+        </a>
+    
+    
+        <a href="/设计模式/后端/Java/设计模式/设计模式学习总结(十六)--解释器模式/" class="next-post btn btn-default" title='设计模式学习总结(十六)--解释器模式'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">设计模式学习总结(十六)--解释器模式</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/"><i class="fa" aria-hidden="true">Docker</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OAuth/"><i class="fa" aria-hidden="true">OAuth</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Security/"><i class="fa" aria-hidden="true">Spring Security</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/"><i class="fa" aria-hidden="true">UML</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/"><i class="fa" aria-hidden="true">git</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><i class="fa" aria-hidden="true">五月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/"><i class="fa" aria-hidden="true">四月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">十月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JAVA-WEB/" style="font-size: 14px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 11.33px;">Lambda</a> <a href="/tags/Liunx/" style="font-size: 17.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.67px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 15.33px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px;">Nginx</a> <a href="/tags/OAuth/" style="font-size: 10px;">OAuth</a> <a href="/tags/Quartz/" style="font-size: 12px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 14.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 15.33px;">Redis</a> <a href="/tags/SQL/" style="font-size: 13.33px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.67px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 18.67px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15.33px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 18px;">Spring</a> <a href="/tags/Spring-Security/" style="font-size: 16.67px;">Spring Security</a> <a href="/tags/SpringBoot/" style="font-size: 13.33px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 10.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Utils/" style="font-size: 10.67px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 14px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 14px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/git/" style="font-size: 12.67px;">git</a> <a href="/tags/java/" style="font-size: 10.67px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.67px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 11.33px;">前端</a> <a href="/tags/前端基础/" style="font-size: 12.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 19.33px;">设计模式</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

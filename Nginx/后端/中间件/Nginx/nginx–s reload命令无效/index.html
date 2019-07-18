@@ -1,0 +1,392 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>nginx–s reload 命令无效问题 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="nginx–s reload 命令无效问题">
+            
+	            nginx–s reload 命令无效问题
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Nginx">
+            Nginx
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Nginx" title='Nginx'>
+                        Nginx
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/04/21</span>
+        </span>
+    
+</div>
+
+            
+            
+            <p class="fa fa-exclamation-triangle warning">
+                本文于<strong>452</strong>天之前发表，文中内容可能已经过时。
+            </p>
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="&#x4F7F;&#x7528;&#x573A;&#x666F;"><a href="#&#x4F7F;&#x7528;&#x573A;&#x666F;" class="headerlink" title="&#x4F7F;&#x7528;&#x573A;&#x666F;"></a>&#x4F7F;&#x7528;&#x573A;&#x666F;</h2><p>nginx &#x914D;&#x7F6E;&#x4E24;&#x4E2A;tomcat&#x5B9E;&#x73B0;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#xFF0C;&#x4EBA;&#x4E3A;&#x5C06;&#x5176;&#x4E2D;&#x4E00;&#x53F0;tomcat&#x5173;&#x95ED;&#x6D4B;&#x8BD5;nginx&#x8F6C;&#x53D1;&#x60C5;&#x51B5;&#x5E76;&#x4FEE;&#x6539;&#x8FDE;&#x63A5;&#x8D85;&#x65F6;&#x914D;&#x7F6E;</p>
+<pre><code>upstream mysvr {
+    #weigth&#x53C2;&#x6570;&#x8868;&#x793A;&#x6743;&#x503C;&#xFF0C;&#x6743;&#x503C;&#x8D8A;&#x9AD8;&#x88AB;&#x5206;&#x914D;&#x5230;&#x7684;&#x51E0;&#x7387;&#x8D8A;&#x5927;
+    #max_fails&#x6700;&#x5927;&#x8D85;&#x65F6;&#x6B21;&#x6570;
+    #fail_timeout&#x670D;&#x52A1;&#x5668;&#x4EE3;&#x7406;&#x76D1;&#x542C;&#x8D85;&#x65F6;&#x65F6;&#x95F4;  
+    server 127.0.0.3:8080 weight=1 max_fails=1 fail_timeout=60;
+    server 127.0.0.3:8090 weight=1 max_fails=1 fail_timeout=60;
+}    
+server {
+    listen       80;
+    server_name  localhost;      
+    location / {
+        proxy_pass  http://mysvr;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        # &#x8BBE;&#x7F6E;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x4E3A;1&#x79D2;
+        proxy_connect_timeout       1;
+        proxy_read_timeout          1;
+        proxy_send_timeout          1;                    
+    }
+}
+</code></pre><a id="more"></a>
+<h2 id="&#x9519;&#x8BEF;&#x73B0;&#x8C61;"><a href="#&#x9519;&#x8BEF;&#x73B0;&#x8C61;" class="headerlink" title="&#x9519;&#x8BEF;&#x73B0;&#x8C61;"></a>&#x9519;&#x8BEF;&#x73B0;&#x8C61;</h2><p>&#x8D85;&#x65F6;&#x8FDE;&#x63A5;&#x914D;&#x7F6E;&#x4FEE;&#x6539;&#x65E0;&#x6548;&#xFF0C;&#x8FD8;&#x662F;&#x9700;&#x8981;&#x9ED8;&#x8BA4;&#x7684;&#x4E00;&#x5206;&#x949F;&#x65F6;&#x95F4;&#x624D;&#x80FD;&#x8F6C;&#x53D1;&#x5230;&#x53E6;&#x4E00;&#x53F0; tomcat &#x4E0A;</p>
+<h2 id="&#x9519;&#x8BEF;&#x539F;&#x56E0;"><a href="#&#x9519;&#x8BEF;&#x539F;&#x56E0;" class="headerlink" title="&#x9519;&#x8BEF;&#x539F;&#x56E0;"></a>&#x9519;&#x8BEF;&#x539F;&#x56E0;</h2><p>&#x4ECE;&#x5B98;&#x7F51;&#x67E5;&#x8BE2;&#x5230; nginx&#x2013;s reload &#x547D;&#x4EE4;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>1. Nginx&#x7684;master&#x8FDB;&#x7A0B;&#x68C0;&#x67E5;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x6B63;&#x786E;&#x6027;&#xFF0C;&#x82E5;&#x662F;&#x9519;&#x8BEF;&#x5219;&#x8FD4;&#x56DE;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#xFF0C;nginx&#x7EE7;&#x7EED;&#x91C7;&#x7528;&#x539F;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8FDB;&#x884C;&#x5DE5;&#x4F5C;&#xFF08;&#x56E0;&#x4E3A;worker&#x672A;&#x53D7;&#x5230;&#x5F71;&#x54CD;&#xFF09;
+2. Nginx&#x542F;&#x52A8;&#x65B0;&#x7684;worker&#x8FDB;&#x7A0B;&#xFF0C;&#x91C7;&#x7528;&#x65B0;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;
+3. Nginx&#x5C06;&#x65B0;&#x7684;&#x8BF7;&#x6C42;&#x5206;&#x914D;&#x65B0;&#x7684;worker&#x8FDB;&#x7A0B;
+4. Nginx&#x7B49;&#x5F85;&#x4EE5;&#x524D;&#x7684;worker&#x8FDB;&#x7A0B;&#x7684;&#x5168;&#x90E8;&#x8BF7;&#x6C42;&#x5DF2;&#x7ECF;&#x90FD;&#x8FD4;&#x56DE;&#x540E;&#xFF0C;&#x5173;&#x95ED;&#x76F8;&#x5173;worker&#x8FDB;&#x7A0B;
+5. &#x91CD;&#x590D;&#x4E0A;&#x9762;&#x8FC7;&#x7A0B;&#xFF0C;&#x76F4;&#x5230;&#x5168;&#x90E8;&#x65E7;&#x7684;worker&#x8FDB;&#x7A0B;&#x90FD;&#x88AB;&#x5173;&#x95ED;&#x6389;
+</code></pre><p>&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E0B;&#x6587;&#x5B57;&#x8BF4;&#x660E;&#xFF1A;</p>
+<pre><code>&#x4E3A;&#x4E86;&#x8BA9;&#x4E3B;&#x8FDB;&#x7A0B;&#x91CD;&#x65B0;&#x8BFB;&#x53D6;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF0C;&#x5E94;&#x8BE5;&#x5411;&#x4E3B;&#x8FDB;&#x7A0B;&#x53D1;&#x9001;&#x4E00;&#x4E2A;HUP&#x4FE1;&#x53F7;&#xFF0C;&#x4E3B;&#x8FDB;&#x7A0B;&#x4E00;&#x65E6;&#x63A5;&#x6536;&#x5230;&#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x914D;&#x7F6E;&#x7684;&#x7684;&#x4FE1;&#x53F7;&#xFF0C;&#x5B83;&#x5C31;&#x68C0;&#x67E5;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8BED;&#x6CD5;&#x7684;&#x6709;&#x6548;&#x6027;&#xFF0C;&#x7136;&#x540E;&#x8BD5;&#x56FE;&#x5E94;&#x7528;&#x65B0;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x5373;&#x6253;&#x5F00;&#x65B0;&#x7684;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x548C;&#x65B0;&#x7684;socket &#x76D1;&#x542C;&#xFF0C;&#x5982;&#x679C;&#x5931;&#x8D25;&#xFF0C;&#x5B83;&#x5C06;&#x56DE;&#x6EDA;&#x914D;&#x7F6E;&#x66F4;&#x6539;&#x5E76;&#x7EE7;&#x7EED;&#x4F7F;&#x7528;&#x65E7;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x5982;&#x679C;&#x6210;&#x529F;&#x4E86;&#xFF0C;&#x5B83;&#x5F00;&#x542F;&#x65B0;&#x7684;&#x5DE5;&#x4F5C;&#x8FDB;&#x7A0B;&#xFF0C;&#x5E76;&#x7ED9;&#x65E7;&#x7684;&#x5DE5;&#x4F5C;&#x8FDB;&#x7A0B;&#x53D1;&#x6D88;&#x606F;&#x8BA9;&#x5B83;&#x4EEC;&#x4F18;&#x96C5;&#x7684;&#x5173;&#x95ED;&#xFF0C;&#x65E7;&#x7684;&#x5DE5;&#x4F5C;&#x8FDB;&#x7A0B;&#x63A5;&#x6536;&#x5230;&#x5173;&#x95ED;&#x4FE1;&#x53F7;&#x540E;&#xFF0C;&#x4E0D;&#x518D;&#x63A5;&#x6536;&#x65B0;&#x7684;&#x8BF7;&#x6C42;&#xFF0C;&#x5982;&#x679C;&#x5DF2;&#x6709;&#x8BF7;&#x6C42;&#x6B63;&#x5728;&#x5904;&#x7406;&#xFF0C;&#x7B49;&#x5F53;&#x524D;&#x8BF7;&#x6C42;&#x5904;&#x7406;&#x5B8C;&#x6BD5;&#x540E;&#x5173;&#x95ED;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x8BF7;&#x6C42;&#x6B63;&#x5728;&#x5904;&#x7406;&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x5173;&#x95ED;&#x3002;
+</code></pre><p>&#x6839;&#x636E;&#x4E0A;&#x6587;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5982;&#x679C;&#x51FA;&#x73B0;&#x95EE;&#x9898;&#x5C06;&#x4F1A;&#x56DE;&#x6EDA;&#x914D;&#x7F6E;&#x66F4;&#x6539;&#x5E76;&#x7EE7;&#x7EED;&#x4F7F;&#x7528;&#x65E7;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x6240;&#x4EE5;&#x4F1A;&#x51FA;&#x73B0;&#x914D;&#x7F6E;&#x4FEE;&#x6539;&#x65E0;&#x6548;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
+<h2 id="&#x89E3;&#x51B3;&#x529E;&#x6CD5;"><a href="#&#x89E3;&#x51B3;&#x529E;&#x6CD5;" class="headerlink" title="&#x89E3;&#x51B3;&#x529E;&#x6CD5;"></a>&#x89E3;&#x51B3;&#x529E;&#x6CD5;</h2><p>&#x624B;&#x5DE5;&#x5173;&#x95ED;&#x8FDB;&#x7A0B;&#xFF0C;&#x91CD;&#x65B0;&#x542F;&#x52A8; nginx</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/Velocity/后端/Java/模板引擎/Velocity实战/Velocity实战入门(一)--环境搭建/" class="pre-post btn btn-default" title='Velocity实战入门(一)--环境搭建'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Velocity实战入门(一)--环境搭建</span>
+        </a>
+    
+    
+        <a href="/svn/技能/版本控制/svn/(转)svn的使用/" class="next-post btn btn-default" title='(转)svn的使用'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">(转)svn的使用</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/"><i class="fa" aria-hidden="true">Docker</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OAuth/"><i class="fa" aria-hidden="true">OAuth</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Security/"><i class="fa" aria-hidden="true">Spring Security</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/"><i class="fa" aria-hidden="true">UML</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/"><i class="fa" aria-hidden="true">git</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><i class="fa" aria-hidden="true">五月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/"><i class="fa" aria-hidden="true">四月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">十月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JAVA-WEB/" style="font-size: 14px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 11.33px;">Lambda</a> <a href="/tags/Liunx/" style="font-size: 17.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.67px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 15.33px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px;">Nginx</a> <a href="/tags/OAuth/" style="font-size: 10px;">OAuth</a> <a href="/tags/Quartz/" style="font-size: 12px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 14.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 15.33px;">Redis</a> <a href="/tags/SQL/" style="font-size: 13.33px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.67px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 18.67px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15.33px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 18px;">Spring</a> <a href="/tags/Spring-Security/" style="font-size: 16.67px;">Spring Security</a> <a href="/tags/SpringBoot/" style="font-size: 13.33px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 10.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Utils/" style="font-size: 10.67px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 14px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 14px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/git/" style="font-size: 12.67px;">git</a> <a href="/tags/java/" style="font-size: 10.67px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.67px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 11.33px;">前端</a> <a href="/tags/前端基础/" style="font-size: 12.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 19.33px;">设计模式</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

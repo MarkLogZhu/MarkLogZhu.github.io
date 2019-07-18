@@ -1,0 +1,442 @@
+---
+layout: post
+title: "SSM 框架集成"
+date: 2018-05-03 17:40
+comments: true
+categories: java
+tags:
+	- Java 
+	- SSM框架	
+---
+
+
+
+SSM 框架由 Spring Mvc + Spring + Mybatis 组成，在日常项目开发中经常被使用到，相比于 SSH 框架，它在近几年的开发中运用的更加广泛。
+
+* SpringMVC 是 Spring 实现的一个 We b层，相当于 Struts 的框架，但是比 Struts 更加灵活和强大！
+* Spring 作为一个轻量级的框架，有很多的拓展功能，最主要的我们一般项目使用的就是 IOC 和 AOP 。
+* Mybatis 是 一个持久层的框架，在使用上相比 Hibernate 更加灵活，可以控制 sql 的编写，使用 `XML` 或 `注解` 进行相关的配置！
+
+## 项目搭建
+
+1) 通过 `maven` 创建一个 `web` 项目
+
+![](/img/01.png)
+
+![](/img/02.png)
+
+![](/img/03.png)
+
+2）编辑 `pom.xml` 文件导入依赖和 `tomcat` 插件
+
+``` xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.marklogzhu</groupId>
+  <artifactId>ssm</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>ssm Maven Webapp</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+    <org.springframework.spring.version>4.3.14.RELEASE</org.springframework.spring.version>
+    <org.mybatis.version>3.3.0</org.mybatis.version>
+    <org.mybatis.spring.version>1.2.3</org.mybatis.spring.version>
+    <mysql.version>5.1.45</mysql.version>
+    <com.alibaba.druid.version>1.1.9</com.alibaba.druid.version>
+	<jackson.version>2.5.4</jackson.version>
+  </properties>
+
+  <dependencies>
+
+    <!--spring mvc 底层自动依赖 spring-core、spring-context、spring-aop、spring-web 所以不需要在导入了 -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${org.springframework.spring.version}</version>
+    </dependency>
+
+    <!-- spring jdbc 底层自动依赖 spring-tx -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${org.springframework.spring.version}</version>
+    </dependency>
+    <!-- servlet-api -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
+      <scope>provided</scope>
+    </dependency>
+
+
+    <!-- mybatis -->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>${org.mybatis.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+      <version>${org.mybatis.spring.version}</version>
+    </dependency>
+    <!-- mysql -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql.version}</version>
+    </dependency>
+    <!-- 阿里开源数据库连接池，代替 commons-dbcp -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>${com.alibaba.druid.version}</version>
+    </dependency>
+    <!-- json -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <!-- junit -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>ssm</finalName>
+    <plugins>
+      <!-- tomcat 插件-->
+      <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <path>/</path>
+          <port>8080</port>
+          <server>tomcat7</server>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+
+```
+3) 创建如下项目结构
+
+![](/img/04.png)
+
+4) 在 `mybatis` 目录下新建 `mybatis-config.xml` 文件，基本上就是个空文件只需要带文件头信息即可
+
+``` xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    
+</configuration>
+```
+5）在 `resources` 目录下新建 `jdbc.properties` 属性文件
+
+``` xml
+# 注意使用自己的数据库跟账号信息
+url:jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8
+driverClassName:com.mysql.jdbc.Driver
+username:root
+password:sa000
+
+#------------------------------------------------------------------------------------------
+#配置扩展插件 监控统计用filters:stat 日志用filters:log4j 防御sql注入用filters:wall
+filters:stat
+
+#最大连接池数量  初始化建立物理连接的个数  获取连接时最长的等待时间  最小连接池数量  maxIdle已经弃用
+maxActive:20
+initialSize:1
+maxWait:60000
+minIdle:10
+maxIdle:15
+
+#有两个含义 1.Destroy 线程会检测连接的时间 2.testWhileIdle的判断依据
+timeBetweenEvictionRunsMillis:60000
+
+#Destory线程中如果检测到当前连接的最后活跃时间和当前时间的差值大于minEvictableIdleTimeMillis，则关闭当前连接
+minEvictableIdleTimeMillis:300000
+
+#用来检测连接是否的sql，要求是一个查询语句。在mysql中通常设置为SELECT 'X'
+validationQuery:SELECT 'x'
+
+#申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery连接是否有效
+testWhileIdle:true
+
+#申请连接时执行validationQuery检测连接是否有效 这个配置会降低性能
+testOnBorrow:false
+
+#归还连接时执行validationQuery检测连接是否有效 这个配置会降低性能
+testOnReturn:false
+
+#要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true
+maxOpenPreparedStatements:20
+
+#对于建立连接超过removeAbandonedTimeout的连接强制关闭
+removeAbandoned:true
+
+#指定连接建立多长就被强制关闭
+removeAbandonedTimeout:1800
+
+#指定发生removeabandoned时，是否记录当前线程的堆栈信息到日志中
+logAbandoned:true
+```
+
+6）在 `spring` 目录下新建 `applicationContext-dao.xml` 文件
+
+``` xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+	<!--引入数据库属性配置文件-->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="jdbc.properties"/>
+    </bean>
+
+	<!-- 数据库连接池设置 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="${initialSize}"></property>
+        <!-- 连接池最大数量 -->
+        <property name="maxActive" value="${maxActive}"></property>
+        <!-- 连接池最大空闲 -->
+        <property name="maxIdle" value="${maxIdle}"></property>
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="${minIdle}"></property>
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="${maxWait}"></property>
+    </bean>
+
+    <!-- spring 和 MyBatis 整合 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 自动扫描 mapping.xml 文件 -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
+        <!-- mybatis配置文件 -->
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
+    </bean>
+
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.marklogzhu.ssm.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+
+
+    <!-- 启用事物注解 -->
+    <tx:annotation-driven />
+    <!-- 事务管理 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="rollbackOnCommitFailure" value="true"/>
+    </bean>
+
+</beans>
+```
+7) 在 `spring` 目录下新建 `applicationContext-service.xml` 文件
+
+``` xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+
+    <!-- 扫描 service 实现类 -->
+    <context:component-scan base-package="com.marklogzhu.ssm.service"/>
+
+</beans>
+```
+8) 在 `spring` 目录下新建 `springmvc.xml` 文件
+
+``` xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mav="http://www.springframework.org/schema/tool" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool.xsd">
+
+
+    <!-- 配置Controller -->
+    <context:component-scan base-package="com.marklogzhu.ssm.controller"/>
+    <!--开启注解功能，如果不设置也会添加默认的实现类，但是该实现类已过时 -->
+    <mvc:annotation-driven/>
+    <!-- jsp 视图解析器  -->
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/jsp/"/>
+    <property name="suffix" value=".jsp"/>
+    </bean>
+</beans>
+```
+9) 编辑 `WEB-INF` 目录下 `web.xml` 文件
+
+``` xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+  <display-name>Archetype Created Web Application</display-name>
+
+  <!--加载 spring 容器-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring/applicationContext-*.xml</param-value>
+  </context-param>
+  <!--加载spring mvc -->
+  <servlet>
+    <servlet-name>springMvc</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath*:spring/springmvc.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>springMvc</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <!--编码过滤器-->
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+</web-app>
+```
+10) 在 `com.marklogzhu.ssm.controller` 包下新建 `TestController.java`
+
+``` java
+package com.marklogzhu.ssm.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+@Controller
+@RequestMapping("/test")
+public class TestController {
+
+
+    @RequestMapping("")
+    public String index(){
+        return "test";
+    }
+
+    @RequestMapping("/str")
+    @ResponseBody
+    public Map<String,Object>  jsonStr(){
+        Map<String,Object> map = new LinkedHashMap<>();
+        map.put("name","marklogzhu");
+        map.put("age",18);
+        map.put("email","marklogzhu@163.com");
+        return map;
+    }
+}
+
+
+```  
+11) 在 `WEB-INF` 目录下 新建 `jsp` 目录并在里面新建 `test.jsp` 文件
+
+``` html
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>test</title>
+</head>
+<body>
+test
+</body>
+</html>
+```
+12) 打开 `run` 菜单列表中的 `edit Configurgtion...`项并配置一个 maven 运行项目，如下图：
+
+![](/img/05.png)
+
+13) 启动项目，并在浏览器分别输入如下地址:
+
+* http://localhost:8080/
+
+![](/img/06.png)
+
+* http://localhost:8080/test
+
+![](/img/07.png)
+
+* http://localhost:8080/test/str
+
+![](/img/08.png) 

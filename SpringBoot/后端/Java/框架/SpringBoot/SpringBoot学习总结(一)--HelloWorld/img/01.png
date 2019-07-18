@@ -1,0 +1,258 @@
+---
+layout: post
+title: "SpringBoot学习总结(五)--定时任务"
+date: 2018-07-24 14:43
+comments: true
+categories: SpringBoot
+tags:
+	- SpringBoot
+---
+
+
+> 项目实际使用时定时任务功能是一个很有用的功能，今天我们就来了解下 `SpringBoot` 自带的定时任务 `Schedule`, 它是一个轻量级的 `Quartz`。
+
+## 固定定时任务组件
+
+###	1) 引入依赖
+
+``` xml
+<dependency>
+    <groupId>org.mybatis.spring.boot</groupId>
+    <artifactId>mybatis-spring-boot-starter</artifactId>
+    <version>1.1.1</version>
+</dependency>
+```
+<!-- more -->
+
+### 2) 编写定时任务实现
+
+``` java
+@Component
+public class PrintTask {
+
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+    
+    @Scheduled(fixedRate = 5000)
+    public void pringCurrentTime_01() {
+        System.out.println("现在时间_01：" + dateFormat.format(new Date()));
+    }
+
+    @Scheduled(cron = "${printTask.intervals}")
+    public void pringCurrentTime_02() {
+        System.out.println("现在时间_02：" + dateFormat.format(new Date()));
+    }
+
+}
+```
+
+### 3) application.properties 添加属性
+
+``` java
+# 打印任务间隔时间
+printTask.intervals = */5 * * * * ?
+```
+
+
+### 4) 启动类上增加启用定时注解
+
+``` java
+@SpringBootApplication
+@EnableScheduling
+public class SpringbootApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringbootApplication.class, args);
+	}
+}
+```
+
+
+
+### 5) 启动运行，观察控制台输出
+
+![](/img/01.png)
+
+
+## 参数说明
+
+* @Component:将类对象注入到 spring 容器中
+* @Scheduled:配置定时设置，它的参数可以接受两种定时的设置，一种是我们常用的 `cron="*/5 * * * * ?"`,一种是 `fixedRate = 5000`，这两种配置都表示每隔五秒打印一下内容。
+
+### fixedRate 说明
+
+* @Scheduled(fixedRate = 5000) ：上一次开始执行时间点之后五秒再执行。
+* @Scheduled(fixedDelay = 5000) ：上一次执行完毕时间点之后五秒再执行。
+* @Scheduled(initialDelay=1000, fixedRate=6000) ：第一次延迟一秒后执行，之后按fixedRate的规则每五秒执行一次。
+
+### crontab表达式资源
+
+[crontab  表达式在线生成](http://cron.qqe2.com/)
+
+上面我们完成了一个固定时间的定时任务，那怎么样做到不重启项目而可以修改定时器执行时间呢 ？
+
+
+## 可配置定时任务组件
+
+可配置定时任务组件需要实现 `SchedulingConfigurer` 接口中的 `configureTasks` 方法，该方法有两个入参 `Runnable task、 Trigger trigger`，第一个为我们任务的具体逻辑实现，第二个为触发器，动态的定时任务则意味着 `Trigger` 需要动态获取。
+
+### 1) 修改 PrintTask 
+
+``` java
+@Component
+public class PrintTask implements SchedulingConfigurer {
+
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+
+    private String cronString;
+
+    public PrintTask() {
+        cronString = "*/5 * * * * ?";
+        new Thread(new Runnable() {
+            // 开启新线程模拟外部更改了任务执行周期.
+            @Override
+            public void run() {
+                try {
+                    // 让线程睡眠 15秒.
+                    Thread.sleep(15000);
+                    cronString= "*/6 * * * * ?";
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    @Override
+    public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
+        scheduledTaskRegistrar.addTriggerTask(doTask(), getTrigger());
+    }
+
+    private Runnable doTask() {
+        return new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("现在时间：" + dateFormat.format(new Date()));
+            }
+        };
+    }
+
+    private Trigger getTrigger() {
+        return new Trigger() {
+            @Override
+            public Date nextExecutionTime(TriggerContext triggerContext) {
+                //任务触发，可修改任务的执行周期.
+                CronTrigger trigger = new CronTrigger(cronString);
+                Date nextExec = trigger.nextExecutionTime(triggerContext);
+                return nextExec;
+            }
+        };
+    }
+}
+```
+
+### 2) 启动运行，观察控制台输出
+
+![](/img/02.png)
+
+可以看到一开始是每五秒打印一次，之后就变成每六秒打印一次。在这过程中有三秒的转换停顿。
+
+## 启动、终止、修改定时任务
+
+### 原理
+
+通过线程池任务调度器 `ThreadPoolTaskScheduler`，可以实现任务的启动、终止和修改操作。
+
+### 1) 定义 TaskController
+
+``` java
+@RestController
+@RequestMapping("/task")
+public class TaskController {
+
+    @Autowired
+    private ThreadPoolTaskScheduler threadPoolTaskScheduler;
+
+    private ScheduledFuture<?> future;
+
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+    private Runnable doTask = new Runnable() {
+        @Override
+        public void run() {
+            System.out.println("现在时间：" + dateFormat.format(new Date()));
+        }
+    };
+
+    @Bean
+    public ThreadPoolTaskScheduler trPoolTaskScheduler() {
+        return new ThreadPoolTaskScheduler();
+    }
+
+
+    @RequestMapping("/start")
+    public String start() {
+        future = threadPoolTaskScheduler.schedule(doTask, new CronTrigger("0/5 * * * * *"));
+        System.out.println("启动定时任务成功");
+        return "启动定时任务成功";
+    }
+
+    @RequestMapping("/stop")
+    public String stop() {
+        if (future != null) {
+            future.cancel(true);
+        }
+        System.out.println("关闭定时任务成功");
+        return "关闭定时任务成功";
+    }
+
+    @RequestMapping("/modify")
+    public String modify() {
+        String cronString = "*/6 * * * * ?";
+        // 停止定时器
+        stop();
+        // 定义新的执行时间并启动
+        future = threadPoolTaskScheduler.schedule(doTask, new CronTrigger(cronString));
+        System.out.println("修改定时任务成功");
+        return "修改定时任务成功";
+    }
+}
+``` 
+
+### 2) 启动项目
+
+* 访问 `http://localhost:8080/task/start`，启动定时器,观察控制台输出：
+``` log
+启动定时任务成功
+现在时间：09:14:35
+现在时间：09:14:40
+现在时间：09:14:45
+```
+* 访问 `http://localhost:8080/task/stop`，关闭定时器,观察控制台输出：
+``` log
+启动定时任务成功
+现在时间：09:14:35
+现在时间：09:14:40
+现在时间：09:14:45
+关闭定时任务成功
+```
+* 访问 `http://localhost:8080/task/start`，先启动定时器，再访问 `http://localhost:8080/task/modify`，修改定时器时间,观察控制台输出：
+``` log
+启动定时任务成功
+现在时间：09:15:05
+现在时间：09:15:10
+关闭定时任务成功
+修改定时任务成功
+现在时间：09:15:18
+现在时间：09:15:24
+现在时间：09:15:30
+```
+
+从日志可以看出，定时器操作达到完美预期的效果了。
+
+
+## Scheduled 弊端
+
+`Scheduled Task` 是一种轻量级的任务定时调度器，相比于 `Quartz`,减少了很多的配置信息，但是 `Scheduled Task` 存在如下问题
+	 * 不适用于分布式集群，在分布式集群下会出现任务被多次调度执行的情况，因为集群的节点之间是不会共享任务信息的
+	 * 每个节点的定时任务都会定时执行
+
+所以在分布式集群中更推荐使用 `Quartz`。

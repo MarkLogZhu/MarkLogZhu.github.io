@@ -1,0 +1,399 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Vue学习总结(二)--Vue常用属性 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Vue学习总结(二)--Vue常用属性">
+            
+	            Vue学习总结(二)--Vue常用属性
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Vue">
+            Vue
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Vue" title='Vue'>
+                        Vue
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/07/09</span>
+        </span>
+    
+</div>
+
+            
+            
+            <p class="fa fa-exclamation-triangle warning">
+                本文于<strong>374</strong>天之前发表，文中内容可能已经过时。
+            </p>
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>&#x5728;&#x4E4B;&#x524D;&#x7684;&#x5B9E;&#x4F8B;&#x4E2D;&#x6211;&#x4EEC;&#x8BF4;&#x5230;&#x5728;&#x7533;&#x660E; Vue &#x7684;&#x65F6;&#x5019;&#x540C;&#x65F6;&#x8BBE;&#x7F6E;&#x4E86;&#x4E24;&#x4E2A;&#x5C5E;&#x6027;&#xFF0C;&#x90A3;&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x5C31;&#x6765;&#x4E86;&#x89E3;&#x4E0B; Vue &#x6709;&#x54EA;&#x4E9B;&#x5C5E;&#x6027;&#xFF0C;&#x5B83;&#x4EEC;&#x5206;&#x522B;&#x6709;&#x4EC0;&#x4E48;&#x4F5C;&#x7528;&#x3002;</p>
+<h2 id="el"><a href="#el" class="headerlink" title="el"></a>el</h2><p>el:&#x6302;&#x8F7D;&#x5143;&#x7D20;&#xFF0C;&#x8868;&#x793A; vue &#x7684;&#x4F5C;&#x7528;&#x57DF;&#xFF0C;&#x6BD4;&#x5982;&#x4E4B;&#x524D;&#x7684;&#x5B9E;&#x4F8B;&#x4E2D;&#xFF0C;<code>id=app</code> &#x7684; div &#x6807;&#x7B7E;&#x624D;&#x662F; vue &#x7684;&#x6302;&#x8F7D;&#x5143;&#x7D20;&#xFF0C;&#x6211;&#x4EEC;&#x5C1D;&#x8BD5;&#x4FEE;&#x6539;&#x4E0B;&#x4E4B;&#x524D;&#x7684;&#x5B9E;&#x4F8B;&#xFF1A;</p>
+<a id="more"></a> 
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">		</div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">h1</span>&gt;</span> {{message}} <span class="tag">&lt;/<span class="name">h1</span>&gt;</span>	</div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app2&quot;</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">h1</span>&gt;</span> {{message}} <span class="tag">&lt;/<span class="name">h1</span>&gt;</span>			</div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span>		</div><div class="line">		<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">			var app = new Vue({</div><div class="line">				el:&quot;#app&quot;,</div><div class="line">				data:{</div><div class="line">					message:&quot;Hello World!&quot;</div><div class="line">				}</div><div class="line">		});</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="&#x8FD0;&#x884C;&#x6548;&#x679C;"><a href="#&#x8FD0;&#x884C;&#x6548;&#x679C;" class="headerlink" title="&#x8FD0;&#x884C;&#x6548;&#x679C;"></a>&#x8FD0;&#x884C;&#x6548;&#x679C;</h3><p><img src="/Vue/&#x524D;&#x7AEF;/Vue/Vue&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E8C;)--Vue&#x5E38;&#x7528;&#x5C5E;&#x6027;/img/01.png" alt=""></p>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x6211;&#x4EEC;&#x62F7;&#x8D1D;&#x4E86;&#x4E00;&#x4E2A; <code>div</code> &#x6807;&#x7B7E;&#xFF0C;&#x53EA;&#x662F;&#x5C06; <code>id</code> &#x4FEE;&#x6539;&#x4E3A; <code>app2</code>&#xFF0C;&#x4F46;&#x662F; <code>id=app2</code> &#x7684;&#x8868;&#x8FBE;&#x5F0F;&#x5E76;&#x6CA1;&#x6709;&#x8BC6;&#x522B;&#x6210; <code>Hello World!</code>&#x3002;&#x7531;&#x6B64;&#x5F97;&#x51FA; el &#x5C5E;&#x6027;&#x8868;&#x793A; vue &#x7684;&#x4F5C;&#x7528;&#x57DF;&#x5BF9;&#x8C61;&#x3002;</p>
+<h2 id="data"><a href="#data" class="headerlink" title="data"></a>data</h2><p>data&#xFF1A;&#x6570;&#x636E;&#xFF0C;&#x5982;&#x4E0A;&#x9762;&#x7684;&#x793A;&#x4F8B;&#xFF0C;message &#x8868;&#x793A;&#x6587;&#x672C;&#x6570;&#x636E;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x6DFB;&#x52A0;&#x51E0;&#x4E2A;&#x4E0D;&#x540C;&#x7C7B;&#x522B;&#x7684;&#x6570;&#x636E;&#x3002;</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">		</div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">h3</span>&gt;</span> {{message}} <span class="tag">&lt;/<span class="name">h3</span>&gt;</span>	</div><div class="line">			<span class="tag">&lt;<span class="name">h3</span>&gt;</span> {{age}} <span class="tag">&lt;/<span class="name">h3</span>&gt;</span>	</div><div class="line">			<span class="tag">&lt;<span class="name">h3</span>&gt;</span> {{nameList[0].name}} <span class="tag">&lt;/<span class="name">h3</span>&gt;</span>	</div><div class="line">			<span class="tag">&lt;<span class="name">h3</span>&gt;</span> {{hobbyArray[1]}} <span class="tag">&lt;/<span class="name">h3</span>&gt;</span>	</div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span>	</div><div class="line">		<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">			var app = new Vue({</div><div class="line">				el:&quot;#app&quot;,</div><div class="line">				data:{</div><div class="line">					message:&quot;Hello World!&quot;,</div><div class="line">					age:18,</div><div class="line">					nameList:[</div><div class="line">						{</div><div class="line">							id:00001,</div><div class="line">							name:&quot;&#x5F20;&#x4E09;&quot;</div><div class="line">						},{</div><div class="line">							id:00002,</div><div class="line">							name:&quot;&#x674E;&#x56DB;&quot;</div><div class="line">						}</div><div class="line">					],					</div><div class="line">					hobbyArray:[&quot;&#x4E52;&#x4E53;&#x7403;&quot;,&quot;&#x7FBD;&#x6BDB;&#x7403;&quot;,&quot;&#x7BEE;&#x7403;&quot;]</div><div class="line">				}</div><div class="line">		});</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="&#x8FD0;&#x884C;&#x6548;&#x679C;-1"><a href="#&#x8FD0;&#x884C;&#x6548;&#x679C;-1" class="headerlink" title="&#x8FD0;&#x884C;&#x6548;&#x679C;"></a>&#x8FD0;&#x884C;&#x6548;&#x679C;</h3><p><img src="/Vue/&#x524D;&#x7AEF;/Vue/Vue&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E8C;)--Vue&#x5E38;&#x7528;&#x5C5E;&#x6027;/img/02.png" alt=""></p>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x6211;&#x4EEC;&#x7533;&#x660E;&#x4E86;&#x5B57;&#x7B26;&#x578B;&#xFF0C;&#x6570;&#x503C;&#x578B;&#xFF0C;&#x5217;&#x8868;&#x548C;&#x6570;&#x7EC4;&#x5BF9;&#x8C61;&#xFF0C;&#x90FD;&#x53EF;&#x4EE5;&#x88AB; <code>Vue</code> &#x8BC6;&#x522B;&#x5904;&#x7406;&#x3002;</p>
+<h2 id="computed"><a href="#computed" class="headerlink" title="computed"></a>computed</h2><p>&#x6211;&#x4EEC;&#x901A;&#x8FC7;&#x4E0A;&#x9762;&#x7684;&#x7533;&#x660E;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5728;&#x9875;&#x9762;&#x4E2D;&#x901A;&#x8FC7; Mustache &#x8868;&#x8FBE;&#x5F0F;&#x5C55;&#x793A;&#x3002;&#x5047;&#x5982;&#x6709;&#x4E24;&#x4E2A;&#x5B57;&#x7B26;&#x578B;&#x6570;&#x636E;&#x8981;&#x76F8;&#x8FDE;&#x8F93;&#x51FA;&#x7684;&#x8BDD;&#xFF0C;&#x867D;&#x7136;&#x53EF;&#x4EE5;&#x5728; Mustache &#x8868;&#x8FBE;&#x5F0F;&#x76F8;&#x52A0;&#x8F93;&#x51FA;&#xFF0C;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">{{name+age}}</div></pre></td></tr></table></figure>
+<p>&#x4F46;&#x8FD9;&#x6837;&#x505A;&#x7684;&#x8BDD;&#x5C31;&#x662F;&#x5C06;&#x903B;&#x8F91;&#x653E;&#x7F6E;&#x5230;&#x89C6;&#x56FE;&#x4E2D;&#xFF0C;&#x8DDF;&#x6211;&#x4EEC;&#x91C7;&#x7528; MVVM &#x6A21;&#x5F0F;&#xFF0C;&#x5206;&#x79BB;&#x903B;&#x8F91;&#x548C;&#x89C6;&#x56FE;&#x7684;&#x521D;&#x8877;&#x76F8;&#x8FDD;&#x80CC;&#x3002;&#x90A3;&#x6211;&#x4EEC;&#x4E0D;&#x662F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5728; data &#x4E2D;&#x518D;&#x7533;&#x660E;&#x4E00;&#x4E2A;&#x5B57;&#x6BB5;&#x6765;&#x5B58;&#x653E;&#x76F8;&#x52A0;&#x7684;&#x6570;&#x636E;&#x5417;&#xFF1F;</p>
+<p>&#x7B54;&#x6848;&#x5F53;&#x7136;&#x662F;&#x53EF;&#x4EE5;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x6837;&#x505A;&#x7684;&#x8BDD;&#x5B9E;&#x5728;&#x662F;&#x592A;&#x5197;&#x4F59;&#x4E86;&#x3002;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x5C31;&#x53EF;&#x4EE5;&#x5F15;&#x5165;&#x6211;&#x4EEC;&#x7684; computed &#x7684;&#x6982;&#x5FF5;&#x4E86;&#x3002;</p>
+<p>computed&#xFF1A;&#x8BA1;&#x7B97;&#x5C5E;&#x6027;&#xFF1B;&#x987E;&#x540D;&#x601D;&#x4E49;&#x5C31;&#x662F;&#x7528;&#x6765;&#x8BA1;&#x7B97;&#x7684;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E0B;&#x901A;&#x8FC7; computed &#x600E;&#x4E48;&#x5B9E;&#x73B0;&#x4E0A;&#x9762;&#x7684;&#x9700;&#x6C42;:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">		</div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">h3</span>&gt;</span>{{userInfo}}<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span>	</div><div class="line">		<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">			var app = new Vue({</div><div class="line">				el:&quot;#app&quot;,</div><div class="line">				data:{</div><div class="line">					name:&quot;marklogzhu&quot;,</div><div class="line">					age:18				</div><div class="line">				},</div><div class="line">				computed:{</div><div class="line">					userInfo:function(){</div><div class="line">						return &quot;&#x59D3;&#x540D;&#xFF1A;&quot;+this.name+&apos;&#xFF1B;&#x5E74;&#x9F84;&#xFF1A;&apos;+this.age;</div><div class="line">					}</div><div class="line">				}</div><div class="line">		});</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="&#x8FD0;&#x884C;&#x6548;&#x679C;-2"><a href="#&#x8FD0;&#x884C;&#x6548;&#x679C;-2" class="headerlink" title="&#x8FD0;&#x884C;&#x6548;&#x679C;"></a>&#x8FD0;&#x884C;&#x6548;&#x679C;</h3><p><img src="/Vue/&#x524D;&#x7AEF;/Vue/Vue&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E8C;)--Vue&#x5E38;&#x7528;&#x5C5E;&#x6027;/img/03.png" alt=""></p>
+<h3 id="&#x6CE8;&#x610F;"><a href="#&#x6CE8;&#x610F;" class="headerlink" title="&#x6CE8;&#x610F;"></a>&#x6CE8;&#x610F;</h3><p>&#x8BA1;&#x7B97;&#x5C5E;&#x6027;&#x7684;&#x7ED3;&#x679C;&#x4F1A;&#x88AB;&#x7F13;&#x5B58;&#xFF0C;&#x9664;&#x975E;&#x4F9D;&#x8D56;&#x7684;&#x54CD;&#x5E94;&#x5F0F;&#x5C5E;&#x6027;&#x53D8;&#x5316;&#x624D;&#x4F1A;&#x91CD;&#x65B0;&#x8BA1;&#x7B97;&#x3002;&#x6CE8;&#x610F;&#xFF0C;&#x5982;&#x679C;&#x67D0;&#x4E2A;&#x4F9D;&#x8D56; (&#x6BD4;&#x5982;&#x975E;&#x54CD;&#x5E94;&#x5F0F;&#x5C5E;&#x6027;) &#x5728;&#x8BE5;&#x5B9E;&#x4F8B;&#x8303;&#x7574;&#x4E4B;&#x5916;&#xFF0C;&#x5219;&#x8BA1;&#x7B97;&#x5C5E;&#x6027;&#x662F;&#x4E0D;&#x4F1A;&#x88AB;&#x66F4;&#x65B0;&#x7684;&#x3002;</p>
+<h2 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h2><p>watch&#xFF1A;&#x4FA6;&#x542C;&#x5668;&#xFF1B;&#x5F53;&#x9700;&#x8981;&#x5728;&#x6570;&#x636E;&#x53D8;&#x5316;&#x65F6;&#x6267;&#x884C;&#x5F02;&#x6B65;&#x6216;&#x5F00;&#x9500;&#x8F83;&#x5927;&#x7684;&#x64CD;&#x4F5C;&#x65F6;&#x53EF;&#x4EE5;&#x91C7;&#x53D6;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x3002;</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">		</div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></div><div class="line">				{{age}}</div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span>	</div><div class="line">		</div><div class="line">		<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">			var app = new Vue({</div><div class="line">				el:&quot;#app&quot;,		</div><div class="line">				data:{</div><div class="line">					age:18</div><div class="line">				},</div><div class="line">				watch:{</div><div class="line">					age:function(newQuestion, oldQuestion){</div><div class="line">						console.log(&quot;&#x539F;&#x6570;&#x636E;&#xFF1A;&quot;+oldQuestion+&quot;;&#x65B0;&#x6570;&#x636E;&#xFF1A;&quot;+newQuestion);</div><div class="line">					}</div><div class="line">				}</div><div class="line">				</div><div class="line">			});</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>&#x5728;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x5165; <code>app.age=5;</code> &#x4FEE;&#x6539;&#x6570;&#x636E;&#x540E;&#xFF0C;&#x67E5;&#x770B;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x51FA;&#x65E5;&#x5FD7;&#x3002;</p>
+<h3 id="&#x8FD0;&#x884C;&#x6548;&#x679C;-3"><a href="#&#x8FD0;&#x884C;&#x6548;&#x679C;-3" class="headerlink" title="&#x8FD0;&#x884C;&#x6548;&#x679C;"></a>&#x8FD0;&#x884C;&#x6548;&#x679C;</h3><p><img src="/Vue/&#x524D;&#x7AEF;/Vue/Vue&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E8C;)--Vue&#x5E38;&#x7528;&#x5C5E;&#x6027;/img/04.png" alt=""></p>
+<h2 id="methods"><a href="#methods" class="headerlink" title="methods"></a>methods</h2><p>methods&#xFF1A;&#x65B9;&#x6CD5;&#x5BF9;&#x8C61;&#xFF0C;&#x7533;&#x660E; Vue &#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x6CD5; </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span>	</div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">&quot;printName&quot;</span>&gt;</span>&#x663E;&#x793A;&#x59D3;&#x540D;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">&quot;printAge&quot;</span>&gt;</span>&#x663E;&#x793A;&#x5E74;&#x9F84;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">&quot;printUserInfo&quot;</span>&gt;</span>&#x663E;&#x793A;&#x59D3;&#x540D;&#x548C;&#x5E74;&#x9F84;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span>	</div><div class="line">		<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">			var app = new Vue({</div><div class="line">				el:&quot;#app&quot;,</div><div class="line">				data:{</div><div class="line">					name:&quot;marklogzhu&quot;,</div><div class="line">					age:18</div><div class="line">				},</div><div class="line">				methods:{</div><div class="line">					printName :function(){</div><div class="line">						 console.log(&quot;&#x59D3;&#x540D;&#xFF1A;&quot;+this.name);</div><div class="line">					},</div><div class="line">					printAge :function(){</div><div class="line">						 console.log(&quot;&#x5E74;&#x9F84;&quot;+this.age);</div><div class="line">					},</div><div class="line">					printUserInfo :function(){</div><div class="line">						 console.log(&quot;&#x59D3;&#x540D;&#xFF1A;&quot;+this.name+&apos;&#xFF1B;&#x5E74;&#x9F84;&#xFF1A;&apos;+this.age);</div><div class="line">					}</div><div class="line">				}</div><div class="line">		});</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>&#x4E0A;&#x9762;&#x7684;&#x5B9E;&#x4F8B;&#x662F;&#x901A;&#x8FC7;&#x70B9;&#x51FB;&#x6309;&#x94AE;&#x8C03;&#x7528; vue &#x7684;&#x4E0D;&#x540C;&#x65B9;&#x6CD5;&#xFF0C;&#x4E8B;&#x4EF6;&#x7684;&#x7ED1;&#x5B9A;&#x64CD;&#x4F5C;&#x6211;&#x4EEC;&#x653E;&#x5230;&#x540E;&#x9762;&#x518D;&#x8BB2;&#x3002;</p>
+<h3 id="&#x8FD0;&#x884C;&#x6548;&#x679C;-4"><a href="#&#x8FD0;&#x884C;&#x6548;&#x679C;-4" class="headerlink" title="&#x8FD0;&#x884C;&#x6548;&#x679C;"></a>&#x8FD0;&#x884C;&#x6548;&#x679C;</h3><p><img src="/Vue/&#x524D;&#x7AEF;/Vue/Vue&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E8C;)--Vue&#x5E38;&#x7528;&#x5C5E;&#x6027;/img/05.png" alt=""></p>
+<h2 id="template"><a href="#template" class="headerlink" title="template"></a>template</h2><p>template:&#x6A21;&#x7248;; &#x6709;&#x64CD;&#x4F5C;&#x8FC7; document &#x6DFB;&#x52A0;&#x63A7;&#x4EF6;&#x7684;&#x540C;&#x5B66;&#x4E00;&#x5B9A;&#x5728;JS &#x4E2D;&#x5199;&#x8FC7; HTML &#x8BED;&#x53E5;&#xFF0C;&#x800C;&#x5728; Vue &#x4E2D;&#x4E5F;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x52A8;&#x6001;&#x6DFB;&#x52A0;&#x63A7;&#x4EF6;&#x7684;&#x65B9;&#x6848;&#x3002;&#x65B9;&#x6848;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">		</div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></div><div class="line">			</div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span>	</div><div class="line">		</div><div class="line">		<span class="tag">&lt;<span class="name">template</span> <span class="attr">id</span>=<span class="string">&quot;demo02&quot;</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#x7B2C;&#x4E8C;&#x79CD;&#x5199;&#x6CD5;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;x-template&quot;</span> <span class="attr">id</span>=<span class="string">&quot;demo03&quot;</span>&gt;</span><span class="xml"></span></div><div class="line">			<span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#x7B2C;&#x4E09;&#x79CD;&#x5199;&#x6CD5;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="xml"></span></div><div class="line">			var app = new Vue({</div><div class="line">				el:&quot;#app&quot;,		</div><div class="line">				// &#x7B2C;&#x4E00;&#x79CD;&#x5199;&#x6CD5;&#xFF0C;&#x76F4;&#x63A5;&#x5728;&#x6784;&#x9020;&#x5668;&#x4E2D;&#x7F16;&#x5199;</div><div class="line">				// template:&quot;<span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#x7B2C;&#x4E00;&#x79CD;&#x5199;&#x6CD5;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>&quot;,</div><div class="line">				// &#x7B2C;&#x4E8C;&#x79CD;&#x5199;&#x6CD5;&#xFF0C;&#x901A;&#x8FC7;&#x5F15;&#x5165; template &#x6807;&#x7B7E;</div><div class="line">				// template:&quot;#demo02&quot;</div><div class="line">				// &#x7B2C;&#x4E09;&#x79CD;&#x5199;&#x6CD5;&#xFF0C;&#x901A;&#x8FC7;&#x5F15;&#x5165; script &#x6807;&#x7B7E;</div><div class="line">				template:&quot;#demo03&quot;									</div><div class="line">			});</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>&#x66F4;&#x8BE6;&#x7EC6;&#x7684;&#x5C5E;&#x6027;&#x53EF;&#x4EE5;&#x524D;&#x5F80; <a href="https://cn.vuejs.org/v2/api/#data" target="_blank" rel="external">&#x5B98;&#x7F51;</a> &#x67E5;&#x770B;</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/Vue/前端/Vue/Vue学习总结(三)-- Vue的生命周期/" class="pre-post btn btn-default" title='Vue学习总结(三)-- Vue的生命周期'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Vue学习总结(三)-- Vue的生命周期</span>
+        </a>
+    
+    
+        <a href="/Vue/前端/Vue/Vue学习总结(一)--初识Vue/" class="next-post btn btn-default" title='Vue学习总结(一)--初识Vue'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Vue学习总结(一)--初识Vue</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/"><i class="fa" aria-hidden="true">Docker</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OAuth/"><i class="fa" aria-hidden="true">OAuth</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Security/"><i class="fa" aria-hidden="true">Spring Security</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/"><i class="fa" aria-hidden="true">UML</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/"><i class="fa" aria-hidden="true">git</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><i class="fa" aria-hidden="true">五月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/"><i class="fa" aria-hidden="true">四月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">十月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JAVA-WEB/" style="font-size: 14px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 11.33px;">Lambda</a> <a href="/tags/Liunx/" style="font-size: 17.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.67px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 15.33px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px;">Nginx</a> <a href="/tags/OAuth/" style="font-size: 10px;">OAuth</a> <a href="/tags/Quartz/" style="font-size: 12px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 14.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 15.33px;">Redis</a> <a href="/tags/SQL/" style="font-size: 13.33px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.67px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 18.67px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15.33px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 18px;">Spring</a> <a href="/tags/Spring-Security/" style="font-size: 16.67px;">Spring Security</a> <a href="/tags/SpringBoot/" style="font-size: 13.33px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 10.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Utils/" style="font-size: 10.67px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 14px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 14px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/git/" style="font-size: 12.67px;">git</a> <a href="/tags/java/" style="font-size: 10.67px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.67px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 11.33px;">前端</a> <a href="/tags/前端基础/" style="font-size: 12.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 19.33px;">设计模式</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

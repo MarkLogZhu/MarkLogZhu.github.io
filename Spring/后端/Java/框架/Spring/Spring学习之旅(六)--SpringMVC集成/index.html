@@ -1,0 +1,473 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Spring学习之旅(六)--SpringMVC集成 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Spring学习之旅(六)--SpringMVC集成">
+            
+	            Spring学习之旅(六)--SpringMVC集成
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Spring">
+            Spring
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Spring" title='Spring'>
+                        Spring
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/04/09</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <blockquote>
+<p>&#x5BF9;&#x5927;&#x591A;&#x6570; Java &#x5F00;&#x53D1;&#x6765;&#x8BF4;&#xFF0C;&#x57FA;&#x4E8E; web &#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x662F;&#x6211;&#x4EEC;&#x4E3B;&#x8981;&#x7684;&#x5173;&#x6CE8;&#x70B9;&#x3002; Spring &#x4E5F;&#x63D0;&#x4F9B;&#x4E86;&#x5BF9;&#x4E8E; web &#x7684;&#x652F;&#x6301;&#xFF0C;&#x57FA;&#x4E8E; MVC &#x6A21;&#x5F0F;&#x7684; Spring MVC &#x80FD;&#x591F;&#x5E2E;&#x52A9;&#x6211;&#x4EEC;&#x7075;&#x6D3B;&#x548C;&#x677E;&#x8026;&#x5408;&#x7684;&#x5B8C;&#x6210; web &#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x3002;</p>
+</blockquote>
+<h2 id="Spring-MVC-&#x5904;&#x7406;&#x6D41;&#x7A0B;"><a href="#Spring-MVC-&#x5904;&#x7406;&#x6D41;&#x7A0B;" class="headerlink" title="Spring MVC &#x5904;&#x7406;&#x6D41;&#x7A0B;"></a>Spring MVC &#x5904;&#x7406;&#x6D41;&#x7A0B;</h2><p><img src="/Spring/&#x540E;&#x7AEF;/Java/&#x6846;&#x67B6;/Spring/Spring&#x5B66;&#x4E60;&#x4E4B;&#x65C5;(&#x516D;)--SpringMVC&#x96C6;&#x6210;/img/01.png" alt=""></p>
+<a id="more"></a>
+<ul>
+<li><p>&#x7B2C;&#x4E00;&#x6B65;&#xFF1A;&#x53D1;&#x8D77;&#x8BF7;&#x6C42;&#x5230;&#x524D;&#x7AEF;&#x63A7;&#x5236;&#x5668;(DispatcherServlet)</p>
+</li>
+<li><p>&#x7B2C;&#x4E8C;&#x6B65;&#xFF1A;&#x524D;&#x7AEF;&#x63A7;&#x5236;&#x5668;&#x8BF7;&#x6C42;HandlerMapping&#x67E5;&#x627E; Handler&#xFF08;&#x53EF;&#x4EE5;&#x6839;&#x636E;xml&#x914D;&#x7F6E;&#x3001;&#x6CE8;&#x89E3;&#x8FDB;&#x884C;&#x67E5;&#x627E;&#xFF09;          </p>
+</li>
+<li><p>&#x7B2C;&#x4E09;&#x6B65;&#xFF1A;&#x5904;&#x7406;&#x5668;&#x6620;&#x5C04;&#x5668;HandlerMapping&#x5411;&#x524D;&#x7AEF;&#x63A7;&#x5236;&#x5668;&#x8FD4;&#x56DE;Handler</p>
+</li>
+<li><p>&#x7B2C;&#x56DB;&#x6B65;&#xFF1A;&#x524D;&#x7AEF;&#x63A7;&#x5236;&#x5668;&#x8C03;&#x7528;&#x5904;&#x7406;&#x5668;&#x9002;&#x914D;&#x5668;&#xFF08;<strong>Controller</strong>&#xFF0C;&#x4E5F;&#x53EB;&#x540E;&#x7AEF;&#x63A7;&#x5236;&#x5668;&#xFF09;&#x53BB;&#x6267;&#x884C; <strong>Handler</strong></p>
+</li>
+<li><p>&#x7B2C;&#x4E94;&#x6B65;&#xFF1A;&#x5904;&#x7406;&#x5668;&#x9002;&#x914D;&#x5668;&#x53BB;&#x6267;&#x884C;Handler </p>
+</li>
+<li><p>&#x7B2C;&#x516D;&#x6B65;&#xFF1A;<strong>Handler</strong> &#x6267;&#x884C;&#x5B8C;&#x6210;&#x7ED9;&#x9002;&#x914D;&#x5668;&#x8FD4;&#x56DE;ModelAndView &#xFF08;ModelAndView&#x662F;springmvc&#x6846;&#x67B6;&#x7684;&#x4E00;&#x4E2A;&#x5E95;&#x5C42;&#x5BF9;&#x8C61;&#xFF0C;&#x5305;&#x62EC;Model&#x548C;view&#xFF09;</p>
+</li>
+<li><p>&#x7B2C;&#x4E03;&#x6B65;&#xFF1A;&#x5904;&#x7406;&#x5668;&#x9002;&#x914D;&#x5668;&#x5411;&#x524D;&#x7AEF;&#x63A7;&#x5236;&#x5668;&#x8FD4;&#x56DE;ModelAndView          </p>
+</li>
+<li><p>&#x7B2C;&#x516B;&#x6B65;&#xFF1A;&#x524D;&#x7AEF;&#x63A7;&#x5236;&#x5668;&#x8BF7;&#x6C42;&#x89C6;&#x56FE;&#x89E3;&#x6790;&#x5668;&#x53BB;&#x8FDB;&#x884C;&#x89C6;&#x56FE;&#x89E3;&#x6790; &#xFF08;&#x6839;&#x636E;&#x903B;&#x8F91;&#x89C6;&#x56FE;&#x540D;&#x89E3;&#x6790;&#x6210;&#x771F;&#x6B63;&#x7684;&#x89C6;&#x56FE;(jsp)&#xFF09;             </p>
+</li>
+<li><p>&#x7B2C;&#x4E5D;&#x6B65;&#xFF1A;&#x89C6;&#x56FE;&#x89E3;&#x6790;&#x5668;&#x5411;&#x524D;&#x7AEF;&#x63A7;&#x5236;&#x5668;&#x8FD4;&#x56DE;View</p>
+</li>
+<li><p>&#x7B2C;&#x5341;&#x6B65;&#xFF1A;&#x524D;&#x7AEF;&#x63A7;&#x5236;&#x5668;&#x8FDB;&#x884C;&#x89C6;&#x56FE;&#x6E32;&#x67D3;&#xFF08; &#x89C6;&#x56FE;&#x6E32;&#x67D3;&#x5C06;&#x6A21;&#x578B;&#x6570;&#x636E;(&#x5728;ModelAndView&#x5BF9;&#x8C61;&#x4E2D;)&#x586B;&#x5145;&#x5230;request&#x57DF;&#xFF09;</p>
+</li>
+<li><p>&#x7B2C;&#x5341;&#x4E00;&#x6B65;&#xFF1A;&#x524D;&#x7AEF;&#x63A7;&#x5236;&#x5668;&#x5411;&#x7528;&#x6237;&#x54CD;&#x5E94;&#x7ED3;&#x679C; </p>
+</li>
+</ul>
+<hr>
+<h2 id="&#x7EC4;&#x4EF6;&#x8BF4;&#x660E;"><a href="#&#x7EC4;&#x4EF6;&#x8BF4;&#x660E;" class="headerlink" title="&#x7EC4;&#x4EF6;&#x8BF4;&#x660E;"></a>&#x7EC4;&#x4EF6;&#x8BF4;&#x660E;</h2><table>
+<thead>
+<tr>
+<th>&#x7EC4;&#x4EF6;&#x540D;&#x79F0;</th>
+<th>&#x4F5C;&#x7528;</th>
+<th>&#x662F;&#x5426;&#x9700;&#x8981;&#x5F00;&#x53D1;&#x8005;&#x5B9E;&#x73B0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#x524D;&#x7AEF;&#x63A7;&#x5236;&#x5668; DispatcherServlet</td>
+<td>&#x63A5;&#x6536;&#x8BF7;&#x6C42;&#xFF0C;&#x54CD;&#x5E94;&#x7ED3;&#x679C;&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;&#x8F6C;&#x53D1;&#x5668;&#xFF0C;&#x4E2D;&#x592E;&#x5904;&#x7406;&#x5668;&#x3002;</td>
+<td>&#x5426;</td>
+</tr>
+<tr>
+<td>&#x5904;&#x7406;&#x5668;&#x6620;&#x5C04;&#x5668; HandlerMapping</td>
+<td>&#x6839;&#x636E;&#x8BF7;&#x6C42;&#x7684; url &#x67E5;&#x627E; Handler</td>
+<td>&#x5426;</td>
+</tr>
+<tr>
+<td>&#x5904;&#x7406;&#x5668;&#x9002;&#x914D;&#x5668; HandlerAdapter</td>
+<td>&#x6309;&#x7167;&#x7279;&#x5B9A;&#x89C4;&#x5219;&#xFF08;HandlerAdapter &#x8981;&#x6C42;&#x7684;&#x89C4;&#x5219;&#xFF09;&#x53BB;&#x6267;&#x884C; Handler</td>
+<td>&#x5426;</td>
+</tr>
+<tr>
+<td>&#x5904;&#x7406;&#x5668; Handler</td>
+<td>&#x6309; HandlerAdapter &#x89C4;&#x8303;&#x7F16;&#x5199;&#x7684;&#x5904;&#x7406;&#x5668;&#xFF0C;&#x5177;&#x4F53;&#x7684;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x5B9E;&#x73B0;</td>
+<td>&#x662F;</td>
+</tr>
+<tr>
+<td>&#x89C6;&#x56FE;&#x89E3;&#x6790;&#x5668; View resolver</td>
+<td>&#x8FDB;&#x884C;&#x89C6;&#x56FE;&#x89E3;&#x6790;&#xFF0C;&#x6839;&#x636E;&#x903B;&#x8F91;&#x89C6;&#x56FE;&#x540D;&#x89E3;&#x6790;&#x6210;&#x771F;&#x6B63;&#x7684;&#x89C6;&#x56FE;&#xFF08;view&#xFF09;</td>
+<td>&#x5426;</td>
+</tr>
+<tr>
+<td>&#x89C6;&#x56FE;View</td>
+<td>View&#x662F;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#xFF0C;&#x5B9E;&#x73B0;&#x7C7B;&#x652F;&#x6301;&#x4E0D;&#x540C;&#x7684;View&#x7C7B;&#x578B;&#xFF08;jsp&#x3001;freemarker&#x3001;pdf&#x2026;&#xFF09;</td>
+<td>&#x662F;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="&#x96C6;&#x6210;-SpringMVC"><a href="#&#x96C6;&#x6210;-SpringMVC" class="headerlink" title="&#x96C6;&#x6210; SpringMVC"></a>&#x96C6;&#x6210; SpringMVC</h2><p>&#x96C6;&#x6210; <strong>SpringMVC</strong> &#x7684;&#x7B2C;&#x4E00;&#x6B65;&#x5C31;&#x662F;&#x5148;&#x5C06;&#x4F9D;&#x8D56;&#x5BFC;&#x5165;&#x8FDB;&#x9879;&#x76EE;&#x4E2D;&#x6765;&#x3002;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.springframework&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;4.3.20.RELEASE&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<hr>
+<p>&#x914D;&#x7F6E; <strong>DispatcherServlet</strong> &#x7EC4;&#x4EF6;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#xFF1A;</p>
+<ul>
+<li>&#x914D;&#x7F6E;&#x5728; <strong>web.xml</strong> &#x6587;&#x4EF6;&#x4E2D;</li>
+<li>&#x901A;&#x8FC7; <strong>Java &#x7C7B;</strong> &#x7684;&#x5F62;&#x5F0F;&#x914D;&#x7F6E;&#x5230; <strong>Servlet</strong>  &#x5BB9;&#x5668;&#x4E2D;</li>
+</ul>
+<p>&#x6CE8;&#xFF1A;<strong>Java &#x7C7B;</strong> &#x65B9;&#x5F0F;&#x9700;&#x8981; <strong>tomcat</strong> &#x652F;&#x6301; <strong>Servlet3</strong> &#x89C4;&#x8303;,&#x5426;&#x5219;&#x53EA;&#x80FD;&#x91C7;&#x7528; <strong>web.xml</strong> &#x65B9;&#x5F0F;&#x3002;</p>
+<hr>
+<h3 id="Java-&#x5F62;&#x5F0F;"><a href="#Java-&#x5F62;&#x5F0F;" class="headerlink" title="Java &#x5F62;&#x5F0F;"></a>Java &#x5F62;&#x5F0F;</h3><p><strong>1.&#x914D;&#x7F6E; DispatcherServlet </strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebAppInitializer</span> <span class="keyword">extends</span> <span class="title">AbstractAnnotationConfigDispatcherServletInitializer</span> </span>{</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> String[] getServletMappings() {</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String[]{<span class="string">&quot;/&quot;</span>};</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> Class&lt;?&gt;[] getRootConfigClasses() {</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Class[]{ApplicationConfig.class};</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">protected</span> Class&lt;?&gt;[] getServletConfigClasses() {</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Class[]{WebConfig.class};</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p><strong>2.&#x914D;&#x7F6E; WebConfig </strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableWebMvc</span></div><div class="line"><span class="meta">@ComponentScan</span>(<span class="string">&quot;com.marklogzhu.web&quot;</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>{</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> ViewResolver <span class="title">viewResolver</span><span class="params">()</span></span>{</div><div class="line">        InternalResourceViewResolver  resolver = <span class="keyword">new</span> InternalResourceViewResolver();</div><div class="line">        <span class="comment">// &#x8BBE;&#x7F6E;&#x9875;&#x9762;&#x6587;&#x4EF6;&#x524D;&#x7F00;</span></div><div class="line">        resolver.setPrefix(<span class="string">&quot;/WEB-INF/views/&quot;</span>);</div><div class="line">        <span class="comment">// &#x8BBE;&#x7F6E;&#x9875;&#x9762;&#x6587;&#x4EF6;&#x540E;&#x7F00;</span></div><div class="line">        resolver.setSuffix(<span class="string">&quot;.jsp&quot;</span>);</div><div class="line">        <span class="comment">// &#x8BBE;&#x7F6E;&#x9875;&#x9762;&#x5141;&#x8BB8;&#x8BBF;&#x95EE;&#x4E0A;&#x4E0B;&#x6587;&#x5C5E;&#x6027;</span></div><div class="line">        resolver.setExposeContextBeansAsAttributes(Boolean.TRUE);</div><div class="line">        <span class="keyword">return</span> resolver;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x9ED8;&#x8BA4;&#x9759;&#x6001;&#x8D44;&#x6E90;&#x5904;&#x7406;&#x5668;</div><div class="line">     * <span class="doctag">@param</span> configurer</div><div class="line">     */</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configureDefaultServletHandling</span><span class="params">(DefaultServletHandlerConfigurer configurer)</span> </span>{</div><div class="line">        configurer.enable();</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p><strong>3.&#x914D;&#x7F6E; RootConfig </strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@ComponentScan</span>(basePackages = {<span class="string">&quot;com.marklogzhu&quot;</span>},</div><div class="line">        <span class="comment">// &#x6392;&#x9664;&#x5DF2;&#x5305;&#x542B; EnableWebMvc &#x6CE8;&#x89E3;&#x7684;&#x914D;&#x7F6E;</span></div><div class="line">        excludeFilters = {<span class="meta">@ComponentScan</span>.Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class)}</div><div class="line">)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RootConfig</span> </span>{</div><div class="line"></div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="&#x65B0;&#x5EFA;-Controller-&#x5E76;&#x6D4B;&#x8BD5;"><a href="#&#x65B0;&#x5EFA;-Controller-&#x5E76;&#x6D4B;&#x8BD5;" class="headerlink" title="&#x65B0;&#x5EFA; Controller &#x5E76;&#x6D4B;&#x8BD5;"></a>&#x65B0;&#x5EFA; Controller &#x5E76;&#x6D4B;&#x8BD5;</h3><p><strong>1. &#x65B0;&#x5EFA; HomeController</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeController</span> </span>{</div><div class="line">    </div><div class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">&quot;/&quot;</span>,method = RequestMethod.GET)</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">home</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">return</span> <span class="string">&quot;home&quot;</span>;</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<p><strong>2. &#x65B0;&#x5EFA; /WEB-INF/views/home.jsp &#x9875;&#x9762;</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line">    &lt;head&gt;&lt;/head&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h1&gt;home html&lt;/h1&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p><strong>3. &#x65B0;&#x5EFA;&#x5355;&#x5143;&#x6D4B;&#x8BD5;&#x7C7B;</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</div><div class="line"><span class="meta">@ContextConfiguration</span>(classes = ApplicationConfig.class)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeControllerTest</span> </span>{</div><div class="line"></div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testHomePage</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>{</div><div class="line">        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(<span class="keyword">new</span> HomeController()).build();</div><div class="line">        <span class="comment">// &#x5BF9; &quot;/&quot; &#x53D1;&#x8D77; GET &#x8BF7;&#x6C42;</span></div><div class="line">        mockMvc.perform(MockMvcRequestBuilders.get(<span class="string">&quot;/&quot;</span>))</div><div class="line">                <span class="comment">// &#x9884;&#x671F;&#x5F97;&#x5230; home &#x89C6;&#x56FE;</span></div><div class="line">                .andExpect(MockMvcResultMatchers.view().name(<span class="string">&quot;home&quot;</span>));</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x6CE8;&#x89E3;&#x8BF4;&#x660E;&#xFF1A;</p>
+<ul>
+<li><strong>@Controller:</strong>&#x548C; <strong>@Component</strong>&#x6CE8;&#x89E3;&#x4E00;&#x6837;&#xFF0C;&#x5B83;&#x7684;&#x4F5C;&#x7528;&#x53EA;&#x662F;&#x8F85;&#x52A9;&#x5B9E;&#x73B0;&#x7EC4;&#x4EF6;&#x626B;&#x63CF;&#x3002;</li>
+<li><strong>@RequestMapping:</strong> &#x7528;&#x6765;&#x5904;&#x7406;&#x8BF7;&#x6C42;&#x5730;&#x5740;&#x6620;&#x5C04;&#x7684;&#x6CE8;&#x89E3;&#xFF0C;&#x53EF;&#x7528;&#x4E8E;&#x7C7B;&#x6216;&#x65B9;&#x6CD5;&#x4E0A;&#x3002;&#x7528;&#x4E8E;&#x7C7B;&#x4E0A;&#xFF0C;&#x8868;&#x793A;&#x7C7B;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x54CD;&#x5E94;&#x8BF7;&#x6C42;&#x7684;&#x65B9;&#x6CD5;&#x90FD;&#x662F;&#x4EE5;&#x8BE5;&#x5730;&#x5740;&#x4F5C;&#x4E3A;&#x7236;&#x8DEF;&#x5F84;,&#x5982;&#x679C;&#x7C7B;&#x4E0A;&#x6CA1;&#x6709;&#x6620;&#x5C04;&#xFF0C;&#x90A3;&#x4E48; <strong>url</strong> &#x76F4;&#x63A5;&#x5C31;&#x662F;&#x65B9;&#x6CD5;&#x7684;&#x6620;&#x5C04;&#x3002;&#x8BE6;&#x60C5;&#x67E5;&#x770B; <a href="https://blog.marklogzhu.com/SpringMVC/%E5%90%8E%E5%8F%B0/Java/%E6%A1%86%E6%9E%B6/SpringMVC/SpringMVC%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93(%E4%BA%8C)--RequestMapping%E6%B3%A8%E8%A7%A3/" target="_blank" rel="external">SpringMVC&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E8C;)&#x2013;RequestMapping&#x6CE8;&#x89E3;</a></li>
+</ul>
+<hr>
+<h3 id="web-xml-&#x5F15;&#x7528;-Java-&#x5F62;&#x5F0F;"><a href="#web-xml-&#x5F15;&#x7528;-Java-&#x5F62;&#x5F0F;" class="headerlink" title="web.xml &#x5F15;&#x7528; Java &#x5F62;&#x5F0F;"></a>web.xml &#x5F15;&#x7528; Java &#x5F62;&#x5F0F;</h3><p>&#x6CE8;&#x610F;&#xFF1A;&#x8981;&#x5148;&#x6CE8;&#x91CA;&#x6389; <strong>WebAppInitializer</strong> &#x7C7B;</p>
+<p><strong>&#x65B0;&#x5EFA; WEB-INI/web.xml &#x6587;&#x4EF6;</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;!DOCTYPE web-app PUBLIC &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;</div><div class="line">        &quot;http://java.sun.com/dtd/web-app_2_3.dtd&quot;&gt;</div><div class="line">&lt;web-app xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot;</div><div class="line">         xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot;</div><div class="line">         version=&quot;2.5&quot;&gt;</div><div class="line"></div><div class="line">    &lt;!-- &#x4F7F;&#x7528; Java &#x914D;&#x7F6E; --&gt;</div><div class="line">    &lt;context-param&gt;</div><div class="line">        &lt;param-name&gt;contextClass&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;org.springframework.web.context.support.AnnotationConfigWebApplicationContext&lt;/param-value&gt;</div><div class="line">    &lt;/context-param&gt;</div><div class="line"></div><div class="line">    &lt;!-- &#x6307;&#x5B9A;&#x6839;&#x914D;&#x7F6E;&#x7C7B; --&gt;</div><div class="line">    &lt;context-param&gt;</div><div class="line">        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;com.marklogzhu.RootConfig&lt;/param-value&gt;</div><div class="line">    &lt;/context-param&gt;</div><div class="line"></div><div class="line">    &lt;listener&gt;</div><div class="line">        &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;</div><div class="line">    &lt;/listener&gt;</div><div class="line"></div><div class="line">    &lt;servlet&gt;</div><div class="line">        &lt;servlet-name&gt;appServlet&lt;/servlet-name&gt;</div><div class="line">        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;</div><div class="line">        &lt;!-- &#x4F7F;&#x7528; Java &#x914D;&#x7F6E; --&gt;</div><div class="line">        &lt;init-param&gt;</div><div class="line">            &lt;param-name&gt;contextClass&lt;/param-name&gt;</div><div class="line">            &lt;param-value&gt;org.springframework.web.context.support.AnnotationConfigWebApplicationContext&lt;/param-value&gt;</div><div class="line">        &lt;/init-param&gt;</div><div class="line">        &lt;!-- &#x6307;&#x5B9A; DispatcherServlet &#x914D;&#x7F6E;&#x7C7B; --&gt;</div><div class="line">        &lt;init-param&gt;</div><div class="line">            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</div><div class="line">            &lt;param-value&gt;com.marklogzhu.config.WebConfig&lt;/param-value&gt;</div><div class="line">        &lt;/init-param&gt;</div><div class="line">        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</div><div class="line">    &lt;/servlet&gt;</div><div class="line"></div><div class="line">    &lt;servlet-mapping&gt;</div><div class="line">        &lt;servlet-name&gt;appServlet&lt;/servlet-name&gt;</div><div class="line">        &lt;url-pattern&gt;/&lt;/url-pattern&gt;</div><div class="line">    &lt;/servlet-mapping&gt;</div><div class="line">&lt;/web-app&gt;</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="web-xml-&#x5F15;&#x7528;-xml-&#x5F62;&#x5F0F;"><a href="#web-xml-&#x5F15;&#x7528;-xml-&#x5F62;&#x5F0F;" class="headerlink" title="web.xml &#x5F15;&#x7528; xml &#x5F62;&#x5F0F;"></a>web.xml &#x5F15;&#x7528; xml &#x5F62;&#x5F0F;</h3><p>&#x6CE8;&#x610F;&#xFF1A;&#x8981;&#x5148;&#x6CE8;&#x91CA;&#x6389; <strong>RootConfig</strong> &#x548C; <strong>WebConfig</strong> &#x7C7B;</p>
+<p><strong>1.&#x65B0;&#x5EFA; WEB-INI/web.xml &#x6587;&#x4EF6;</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;!DOCTYPE web-app PUBLIC &quot;-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN&quot;</div><div class="line">        &quot;http://java.sun.com/dtd/web-app_2_3.dtd&quot;&gt;</div><div class="line">&lt;web-app xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot;</div><div class="line">         xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot;</div><div class="line">         version=&quot;2.5&quot;&gt;</div><div class="line"></div><div class="line">    &lt;context-param&gt;</div><div class="line">        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</div><div class="line">        &lt;param-value&gt;WEB-INF/spring/root-context.xml&lt;/param-value&gt;</div><div class="line">    &lt;/context-param&gt;</div><div class="line"></div><div class="line">    &lt;listener&gt;</div><div class="line">        &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;</div><div class="line">    &lt;/listener&gt;</div><div class="line"></div><div class="line">    &lt;servlet&gt;</div><div class="line">        &lt;servlet-name&gt;appServlet&lt;/servlet-name&gt;</div><div class="line">        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;</div><div class="line">        &lt;init-param&gt;</div><div class="line">            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</div><div class="line">            &lt;param-value&gt;WEB-INF/spring/root-context.xml&lt;/param-value&gt;</div><div class="line">        &lt;/init-param&gt;</div><div class="line">        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</div><div class="line">    &lt;/servlet&gt;</div><div class="line"></div><div class="line">    &lt;servlet-mapping&gt;</div><div class="line">        &lt;servlet-name&gt;appServlet&lt;/servlet-name&gt;</div><div class="line">        &lt;url-pattern&gt;/&lt;/url-pattern&gt;</div><div class="line">    &lt;/servlet-mapping&gt;</div><div class="line">&lt;/web-app&gt;</div></pre></td></tr></table></figure>
+<p><strong>2.&#x65B0;&#x5EFA; WEB-INI/spring/root-context.xml &#x6587;&#x4EF6;</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</div><div class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</div><div class="line">       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</div><div class="line">       xmlns:context=&quot;http://www.springframework.org/schema/context&quot; xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;</div><div class="line">       xmlns:jdbc=&quot;http://www.springframework.org/schema/jdbc&quot; xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;</div><div class="line">       xmlns:util=&quot;http://www.springframework.org/schema/util&quot;</div><div class="line">       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans</div><div class="line">                     http://www.springframework.org/schema/beans/spring-beans.xsd</div><div class="line">                     http://www.springframework.org/schema/tx</div><div class="line">                     http://www.springframework.org/schema/tx/spring-tx.xsd</div><div class="line">                     http://www.springframework.org/schema/context</div><div class="line">                     http://www.springframework.org/schema/context/spring-context.xsd</div><div class="line">                     http://www.springframework.org/schema/aop</div><div class="line">                     http://www.springframework.org/schema/aop/spring-aop.xsd</div><div class="line">                     http://www.springframework.org/schema/jdbc</div><div class="line">                     http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd</div><div class="line">                     http://www.springframework.org/schema/util</div><div class="line">                     http://www.springframework.org/schema/util/spring-util-3.2.xsd</div><div class="line">                     http://www.springframework.org/schema/mvc</div><div class="line">                     http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd&quot;&gt;</div><div class="line">    &lt;!--&#x5F00;&#x542F;&#x6CE8;&#x89E3;&#x529F;&#x80FD;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x8BBE;&#x7F6E;&#x4E5F;&#x4F1A;&#x6DFB;&#x52A0;&#x9ED8;&#x8BA4;&#x7684;&#x5B9E;&#x73B0;&#x7C7B;&#xFF0C;&#x4F46;&#x662F;&#x8BE5;&#x5B9E;&#x73B0;&#x7C7B;&#x5DF2;&#x8FC7;&#x65F6; --&gt;</div><div class="line">    &lt;mvc:annotation-driven/&gt;</div><div class="line">    &lt;!-- &#x914D;&#x7F6E;Controller --&gt;</div><div class="line">    &lt;context:component-scan base-package=&quot;com.marklogzhu&quot;/&gt;</div><div class="line"></div><div class="line">    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;</div><div class="line">        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/views/&quot;/&gt;</div><div class="line">        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line"></div><div class="line"></div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/Spring/后端/Java/框架/Spring/Spring学习之旅(七)--SpringMVC视图/" class="pre-post btn btn-default" title='Spring学习之旅(七)--SpringMVC视图'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Spring学习之旅(七)--SpringMVC视图</span>
+        </a>
+    
+    
+        <a href="/Spring/后端/Java/框架/Spring/Spring学习之旅(五)--AOP/" class="next-post btn btn-default" title='Spring学习之旅(五)--AOP'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Spring学习之旅(五)--AOP</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/"><i class="fa" aria-hidden="true">Docker</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OAuth/"><i class="fa" aria-hidden="true">OAuth</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Security/"><i class="fa" aria-hidden="true">Spring Security</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/"><i class="fa" aria-hidden="true">UML</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/"><i class="fa" aria-hidden="true">git</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><i class="fa" aria-hidden="true">五月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/"><i class="fa" aria-hidden="true">四月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">十月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JAVA-WEB/" style="font-size: 14px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 11.33px;">Lambda</a> <a href="/tags/Liunx/" style="font-size: 17.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.67px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 15.33px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px;">Nginx</a> <a href="/tags/OAuth/" style="font-size: 10px;">OAuth</a> <a href="/tags/Quartz/" style="font-size: 12px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 14.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 15.33px;">Redis</a> <a href="/tags/SQL/" style="font-size: 13.33px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.67px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 18.67px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15.33px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 18px;">Spring</a> <a href="/tags/Spring-Security/" style="font-size: 16.67px;">Spring Security</a> <a href="/tags/SpringBoot/" style="font-size: 13.33px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 10.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Utils/" style="font-size: 10.67px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 14px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 14px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/git/" style="font-size: 12.67px;">git</a> <a href="/tags/java/" style="font-size: 10.67px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.67px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 11.33px;">前端</a> <a href="/tags/前端基础/" style="font-size: 12.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 19.33px;">设计模式</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

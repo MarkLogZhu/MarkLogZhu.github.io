@@ -1,0 +1,449 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Spring学习之旅(十三)--使用NoSQL数据库 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Spring学习之旅(十三)--使用NoSQL数据库">
+            
+	            Spring学习之旅(十三)--使用NoSQL数据库
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Spring">
+            Spring
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Spring" title='Spring'>
+                        Spring
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/04/28</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>&#x9664;&#x4E86;&#x5173;&#x7CFB;&#x578B;&#x6570;&#x636E;&#x5E93;&#x4E4B;&#x5916;&#xFF0C;&#x73B0;&#x5728;&#x8FD8;&#x6709;&#x4E00;&#x79CD; <strong>NoSQL</strong> &#x6570;&#x636E;&#x5E93;&#x975E;&#x5E38;&#x6D41;&#x884C;&#xFF0C;&#x800C; <strong>Spring</strong> &#x81EA;&#x7136;&#x4E5F;&#x6CA1;&#x6709;&#x653E;&#x8FC7;&#x5BF9;&#x5B83;&#x7684;&#x652F;&#x6301;&#x3002;</p>
+<p><strong>NoSQL</strong> &#x6570;&#x636E;&#x5E93;&#x6709;&#x5F88;&#x591A;&#x79CD;&#xFF0C;&#x5982;&#xFF1A;</p>
+<ul>
+<li>MongoDBGenericJackson2JsonRedisSerializer</li>
+<li>Redis</li>
+<li>Membase</li>
+</ul>
+<p>&#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x5C31;&#x91CD;&#x70B9;&#x8BB2;&#x89E3; <strong>Redis</strong> &#x3002;</p>
+<p>&#x6CE8;&#xFF1A;&#x8FD9;&#x91CC;&#x524D;&#x7F6E;&#x8BA4;&#x4E3A;&#x5404;&#x4F4D;&#x5BF9; <strong>Redis</strong> &#x5DF2;&#x7ECF;&#x6709;&#x6240;&#x4E86;&#x89E3;&#x5E76;&#x4E14;&#x5B89;&#x88C5;&#x597D;&#x73AF;&#x5883;&#xFF0C;&#x5982;&#x679C;&#x5BF9; <strong>Redis</strong> &#x8FD8;&#x4E0D;&#x4E86;&#x89E3;&#x7684;&#x540C;&#x5B66;&#x53EF;&#x4EE5;&#x5148;&#x79FB;&#x6B65;&#x5230; <a href="https://blog.marklogzhu.com/categories/Redis/" target="_blank" rel="external">Redis&#x5B66;&#x4E60;&#x603B;&#x7ED3;&#x7CFB;&#x5217;</a>&#x3002;</p>
+<a id="more"></a>
+<h2 id="&#x5BFC;&#x5165;&#x4F9D;&#x8D56;"><a href="#&#x5BFC;&#x5165;&#x4F9D;&#x8D56;" class="headerlink" title="&#x5BFC;&#x5165;&#x4F9D;&#x8D56;"></a>&#x5BFC;&#x5165;&#x4F9D;&#x8D56;</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;!-- Redis --&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;redis.clients&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;jedis&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;2.9.0&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line"></div><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.springframework.data&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;spring-data-redis&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;2.1.3.RELEASE&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line"></div><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;commons-pool2&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;2.4.2&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<h2 id="&#x8FDE;&#x63A5;&#x5230;-Redis"><a href="#&#x8FDE;&#x63A5;&#x5230;-Redis" class="headerlink" title="&#x8FDE;&#x63A5;&#x5230; Redis"></a>&#x8FDE;&#x63A5;&#x5230; Redis</h2><p><strong>Redis</strong> &#x5BA2;&#x6237;&#x7AEF;&#x6709;&#x5F88;&#x591A;&#x79CD; <strong>Spring Data Redis </strong> &#x4E5F;&#x5BF9;&#x8FD9;&#x4E9B;&#x5BA2;&#x6237;&#x7AEF;&#x5B9E;&#x73B0;&#x5206;&#x522B;&#x63D0;&#x4F9B;&#x4E86;&#x8FDE;&#x63A5;&#x5DE5;&#x5382;&#xFF1A;</p>
+<ul>
+<li>JedisConnectionFactory</li>
+<li>JredisConnectionFactory</li>
+<li>LettuceConnectionFactory</li>
+<li>SrpConnectionFactory</li>
+</ul>
+<p>&#x5177;&#x4F53;&#x9009;&#x62E9;&#x54EA;&#x4E2A;&#x8FDE;&#x63A5;&#x5DE5;&#x5382;&#x53D6;&#x51B3;&#x4E8E;&#x9879;&#x76EE;&#x9700;&#x6C42;&#xFF0C;&#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x4EE5; <strong>JedisConnectionFactory</strong> &#x4E3A;&#x4F8B;&#x3002;</p>
+<p>&#x4ECE; <strong>Spring Data Redis 2.0</strong> &#x5F00;&#x59CB;&#x5DF2;&#x7ECF;&#x4E0D;&#x63A8;&#x8350;&#x76F4;&#x63A5;&#x663E;&#x5F0F;&#x914D;&#x7F6E;&#x8FDE;&#x63A5;&#x4FE1;&#x606F;&#x4E86;&#xFF0C;&#x4E00;&#x65B9;&#x9762;&#x4E3A;&#x4E86;&#x4F7F;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#x4E0E;&#x5EFA;&#x7ACB;&#x8FDE;&#x63A5;&#x5DE5;&#x5382;&#x89E3;&#x8026;&#xFF0C;&#x53E6;&#x4E00;&#x65B9;&#x9762;&#x62BD;&#x8C61;&#x51FA; <strong>Standalone</strong>,<strong>Sentinel</strong> &#x548C; <strong>RedisCluster</strong> &#x4E09;&#x79CD;&#x6A21;&#x5F0F;&#x7684;&#x73AF;&#x5883;&#x914D;&#x7F6E;&#x7C7B;&#x548C;&#x4E00;&#x4E2A;&#x7EDF;&#x4E00;&#x7684; <strong>jedis</strong> &#x5BA2;&#x6237;&#x7AEF;&#x8FDE;&#x63A5;&#x914D;&#x7F6E;&#x7C7B;&#xFF08;&#x7528;&#x4E8E;&#x914D;&#x7F6E;&#x8FDE;&#x63A5;&#x6C60;&#x548C;SSL&#x8FDE;&#x63A5;&#xFF09;&#xFF0C;&#x4F7F;&#x5F97;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x66F4;&#x52A0;&#x7075;&#x6D3B;&#x65B9;&#x4FBF;&#x6839;&#x636E;&#x5B9E;&#x9645;&#x4E1A;&#x52A1;&#x573A;&#x666F;&#x9700;&#x8981;&#x6765;&#x914D;&#x7F6E;&#x8FDE;&#x63A5;&#x4FE1;&#x606F;&#x3002;</p>
+<h3 id="&#x4E0D;&#x4F7F;&#x7528;&#x8FDE;&#x63A5;&#x6C60;"><a href="#&#x4E0D;&#x4F7F;&#x7528;&#x8FDE;&#x63A5;&#x6C60;" class="headerlink" title="&#x4E0D;&#x4F7F;&#x7528;&#x8FDE;&#x63A5;&#x6C60;"></a>&#x4E0D;&#x4F7F;&#x7528;&#x8FDE;&#x63A5;&#x6C60;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisConfiguration</span> </span>{</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> RedisStandaloneConfiguration <span class="title">redisStandaloneConfiguration</span><span class="params">()</span> </span>{</div><div class="line">        RedisStandaloneConfiguration redisStandaloneConfiguration =</div><div class="line">                <span class="keyword">new</span> RedisStandaloneConfiguration();</div><div class="line">        <span class="comment">// &#x8BBE;&#x7F6E;&#x4E3B;&#x673A;&#x5730;&#x5740;</span></div><div class="line">        redisStandaloneConfiguration.setHostName(<span class="string">&quot;localhost&quot;</span>);</div><div class="line">        <span class="comment">// &#x8BBE;&#x7F6E;&#x9ED8;&#x8BA4;&#x6570;&#x636E;&#x5E93;</span></div><div class="line">        redisStandaloneConfiguration.setDatabase(<span class="number">0</span>);</div><div class="line">        <span class="comment">// &#x8BBE;&#x7F6E;&#x5BC6;&#x7801;</span></div><div class="line">        <span class="comment">// redisStandaloneConfiguration.setPassword(RedisPassword.of(&quot;123456&quot;));</span></div><div class="line">        <span class="comment">// &#x8BBE;&#x7F6E;&#x7AEF;&#x53E3;</span></div><div class="line">        redisStandaloneConfiguration.setPort(<span class="number">6379</span>);</div><div class="line">        <span class="keyword">return</span> redisStandaloneConfiguration;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> RedisConnectionFactory <span class="title">redisConnectionFactory</span><span class="params">(RedisStandaloneConfiguration redisStandaloneConfiguration)</span> </span>{</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> JedisConnectionFactory(redisStandaloneConfiguration);</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="&#x4F7F;&#x7528;&#x8FDE;&#x63A5;&#x6C60;&#x5355;&#x673A;&#x7248;"><a href="#&#x4F7F;&#x7528;&#x8FDE;&#x63A5;&#x6C60;&#x5355;&#x673A;&#x7248;" class="headerlink" title="&#x4F7F;&#x7528;&#x8FDE;&#x63A5;&#x6C60;&#x5355;&#x673A;&#x7248;"></a>&#x4F7F;&#x7528;&#x8FDE;&#x63A5;&#x6C60;&#x5355;&#x673A;&#x7248;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisConfiguration</span> </span>{</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x8FDE;&#x63A5;&#x6C60;&#x914D;&#x7F6E;&#x4FE1;&#x606F;</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> JedisPoolConfig <span class="title">jedisPoolConfig</span><span class="params">()</span> </span>{</div><div class="line">        JedisPoolConfig jedisPoolConfig = <span class="keyword">new</span> JedisPoolConfig();</div><div class="line">        <span class="comment">//&#x6700;&#x5927;&#x8FDE;&#x63A5;&#x6570;</span></div><div class="line">        jedisPoolConfig.setMaxTotal(<span class="number">100</span>);</div><div class="line">        <span class="comment">//&#x6700;&#x5C0F;&#x7A7A;&#x95F2;&#x8FDE;&#x63A5;&#x6570;</span></div><div class="line">        jedisPoolConfig.setMinIdle(<span class="number">20</span>);</div><div class="line">        <span class="comment">//&#x5F53;&#x6C60;&#x5185;&#x6CA1;&#x6709;&#x53EF;&#x7528;&#x7684;&#x8FDE;&#x63A5;&#x65F6;&#xFF0C;&#x6700;&#x5927;&#x7B49;&#x5F85;&#x65F6;&#x95F4;</span></div><div class="line">        jedisPoolConfig.setMaxWaitMillis(<span class="number">10000</span>);</div><div class="line">        <span class="keyword">return</span> jedisPoolConfig;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> JedisClientConfiguration <span class="title">jedisClientConfiguration</span><span class="params">(JedisPoolConfig jedisPoolConfig)</span></span>{</div><div class="line">        <span class="comment">// &#x83B7;&#x5F97;&#x9ED8;&#x8BA4;&#x7684;&#x8FDE;&#x63A5;&#x6C60;&#x6784;&#x9020;&#x5668;</span></div><div class="line">        JedisClientConfiguration.JedisPoolingClientConfigurationBuilder jpcb =</div><div class="line">                (JedisClientConfiguration.JedisPoolingClientConfigurationBuilder) JedisClientConfiguration.builder();</div><div class="line">        <span class="comment">// &#x6307;&#x5B9A; jedisPoolConifig &#x6765;&#x4FEE;&#x6539;&#x9ED8;&#x8BA4;&#x7684;&#x8FDE;&#x63A5;&#x6C60;&#x6784;&#x9020;&#x5668;</span></div><div class="line">        jpcb.poolConfig(jedisPoolConfig);</div><div class="line">        <span class="comment">// &#x901A;&#x8FC7;&#x6784;&#x9020;&#x5668;&#x6765;&#x6784;&#x9020; jedis &#x5BA2;&#x6237;&#x7AEF;&#x914D;&#x7F6E;</span></div><div class="line">        JedisClientConfiguration jedisClientConfiguration = jpcb.build();</div><div class="line">        <span class="keyword">return</span> jedisClientConfiguration;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> RedisStandaloneConfiguration <span class="title">redisStandaloneConfiguration</span><span class="params">()</span> </span>{</div><div class="line">        RedisStandaloneConfiguration redisStandaloneConfiguration =</div><div class="line">                <span class="keyword">new</span> RedisStandaloneConfiguration();</div><div class="line">        <span class="comment">// &#x8BBE;&#x7F6E;&#x4E3B;&#x673A;&#x5730;&#x5740;</span></div><div class="line">        redisStandaloneConfiguration.setHostName(<span class="string">&quot;localhost&quot;</span>);</div><div class="line">        <span class="comment">// &#x8BBE;&#x7F6E;&#x9ED8;&#x8BA4;&#x6570;&#x636E;&#x5E93;</span></div><div class="line">        redisStandaloneConfiguration.setDatabase(<span class="number">0</span>);</div><div class="line">        <span class="comment">// &#x8BBE;&#x7F6E;&#x5BC6;&#x7801;</span></div><div class="line">        <span class="comment">// redisStandaloneConfiguration.setPassword(RedisPassword.of(&quot;123456&quot;));</span></div><div class="line">        <span class="comment">// &#x8BBE;&#x7F6E;&#x7AEF;&#x53E3;</span></div><div class="line">        redisStandaloneConfiguration.setPort(<span class="number">6379</span>);</div><div class="line">        <span class="keyword">return</span> redisStandaloneConfiguration;</div><div class="line">    }</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> RedisConnectionFactory <span class="title">redisConnectionFactory</span><span class="params">(RedisStandaloneConfiguration redisStandaloneConfiguration,</span></span></div><div class="line">                                                         JedisClientConfiguration jedisClientConfiguration) {</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> JedisConnectionFactory(redisStandaloneConfiguration, jedisClientConfiguration);</div><div class="line"></div><div class="line">    }</div><div class="line"></div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<h2 id="&#x4F7F;&#x7528;-RedisTemplate"><a href="#&#x4F7F;&#x7528;-RedisTemplate" class="headerlink" title="&#x4F7F;&#x7528; RedisTemplate"></a>&#x4F7F;&#x7528; RedisTemplate</h2><p>&#x4E0E; <strong>Spring Data</strong> &#x7C7B;&#x4F3C;&#xFF0C; <strong>Spring Data Redis</strong> &#x4EE5;&#x6A21;&#x677F;&#x7684;&#x5F62;&#x5F0F;&#x63D0;&#x4F9B;&#x4E86;&#x6570;&#x636E;&#x8BBF;&#x95EE;&#x65B9;&#x6848;&#xFF0C;&#x6A21;&#x677F;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li>RedisTemplate</li>
+<li>StringRedisTemplate</li>
+</ul>
+<p><strong>RedisTemplate</strong> &#x80FD;&#x591F;&#x8BA9;&#x6211;&#x4EEC;&#x6301;&#x4E45;&#x5316;&#x5404;&#x79CD;&#x7C7B;&#x578B;&#x7684; kye &#x548C; value &#xFF0C;&#x800C; <strong>StringRedisTemplate</strong> &#x6269;&#x5C55;&#x4E86; <strong>RedisTemplate</strong> &#x53EA;&#x5173;&#x6CE8; <strong>String</strong> &#x7C7B;&#x578B;&#x3002;</p>
+<h3 id="RedisTemplate-&#x5E38;&#x7528;&#x65B9;&#x6CD5;"><a href="#RedisTemplate-&#x5E38;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="RedisTemplate &#x5E38;&#x7528;&#x65B9;&#x6CD5;"></a>RedisTemplate &#x5E38;&#x7528;&#x65B9;&#x6CD5;</h3><table>
+<thead>
+<tr>
+<th>&#x65B9;&#x6CD5;&#x540D;</th>
+<th>&#x4F5C;&#x7528;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>opsForValue()</td>
+<td>&#x64CD;&#x4F5C;&#x5177;&#x6709;&#x7B80;&#x5355;&#x503C;&#x7684;&#x6761;&#x76EE;</td>
+</tr>
+<tr>
+<td>opsForList()</td>
+<td>&#x64CD;&#x4F5C;&#x5177;&#x6709; List &#x503C;&#x7684;&#x6761;&#x76EE;</td>
+</tr>
+<tr>
+<td>opsForSet()</td>
+<td>&#x64CD;&#x4F5C;&#x5177;&#x6709; set &#x503C;&#x7684;&#x6761;&#x76EE;</td>
+</tr>
+<tr>
+<td>opsForHash()</td>
+<td>&#x64CD;&#x4F5C;&#x5177;&#x6709; hash &#x503C;&#x7684;&#x6761;&#x76EE;</td>
+</tr>
+<tr>
+<td>boundValueOps(K)</td>
+<td>&#x4EE5;&#x7ED1;&#x5B9A;&#x6307;&#x5B9A; key &#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x64CD;&#x4F5C;&#x5177;&#x6709;&#x7B80;&#x5355;&#x503C;&#x7684;&#x6761;&#x76EE;</td>
+</tr>
+<tr>
+<td>boundListOps(K)</td>
+<td>&#x4EE5;&#x7ED1;&#x5B9A;&#x6307;&#x5B9A; key &#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x64CD;&#x4F5C;&#x5177;&#x6709; list &#x503C;&#x7684;&#x6761;&#x76EE;</td>
+</tr>
+<tr>
+<td>boundSetOps(K)</td>
+<td>&#x4EE5;&#x7ED1;&#x5B9A;&#x6307;&#x5B9A; key &#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x64CD;&#x4F5C;&#x5177;&#x6709; set &#x503C;&#x7684;&#x6761;&#x76EE;</td>
+</tr>
+<tr>
+<td>boundHashOps(K)</td>
+<td>&#x4EE5;&#x7ED1;&#x5B9A;&#x6307;&#x5B9A; key &#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x64CD;&#x4F5C;&#x5177;&#x6709; hash &#x503C;&#x7684;&#x6761;&#x76EE;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="&#x914D;&#x7F6E;&#x6A21;&#x677F;-Bean"><a href="#&#x914D;&#x7F6E;&#x6A21;&#x677F;-Bean" class="headerlink" title="&#x914D;&#x7F6E;&#x6A21;&#x677F; Bean"></a>&#x914D;&#x7F6E;&#x6A21;&#x677F; Bean</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Bean</span></div><div class="line"><span class="function"><span class="keyword">public</span> StringRedisTemplate <span class="title">stringRedisTemplate</span><span class="params">(RedisConnectionFactory redisConnectionFactory)</span></span>{</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> StringRedisTemplate(redisConnectionFactory);</div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="&#x5355;&#x5143;&#x6D4B;&#x8BD5;"><a href="#&#x5355;&#x5143;&#x6D4B;&#x8BD5;" class="headerlink" title="&#x5355;&#x5143;&#x6D4B;&#x8BD5;"></a>&#x5355;&#x5143;&#x6D4B;&#x8BD5;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</div><div class="line"><span class="meta">@ContextConfiguration</span>(classes = RootConfig.class)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisTest</span> </span>{</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x64CD;&#x4F5C;&#x7B80;&#x5355;&#x6570;&#x636E;</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSimpleValue</span><span class="params">()</span> </span>{</div><div class="line">        String kye = <span class="string">&quot;name&quot;</span>;</div><div class="line">        String value = <span class="string">&quot;MarkLogZhu&quot;</span>;</div><div class="line">        redisTemplate.opsForValue().set(kye, value);</div><div class="line">        String getValue = (String) redisTemplate.opsForValue().get(kye);</div><div class="line">        Assert.assertEquals(value,getValue);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x64CD;&#x4F5C; List &#x6570;&#x636E;</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testListValue</span><span class="params">()</span></span>{</div><div class="line">        String key = <span class="string">&quot;nameList&quot;</span>;</div><div class="line">        List&lt;String&gt; nameList = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        nameList.add(<span class="string">&quot;&#x5F20;&#x4E09;&quot;</span>);</div><div class="line">        nameList.add(<span class="string">&quot;&#x674E;&#x56DB;&quot;</span>);</div><div class="line">        nameList.add(<span class="string">&quot;&#x738B;&#x4E94;&quot;</span>);</div><div class="line">        redisTemplate.opsForList().rightPush(key,nameList);</div><div class="line">        List&lt;String&gt; getNameList =(List&lt;String&gt;) redisTemplate.opsForList().rightPop(key);</div><div class="line">        Assert.assertEquals(nameList,getNameList);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x64CD;&#x4F5C; Set &#x6570;&#x636E;</div><div class="line">     */</div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSetValue</span><span class="params">()</span></span>{</div><div class="line">        String key = <span class="string">&quot;nameSet&quot;</span>;</div><div class="line">        Set nameSet = <span class="keyword">new</span> HashSet();</div><div class="line">        nameSet.add(<span class="string">&quot;&#x5F20;&#x4E09;&quot;</span>);</div><div class="line">        nameSet.add(<span class="string">&quot;&#x674E;&#x56DB;&quot;</span>);</div><div class="line">        nameSet.add(<span class="string">&quot;&#x738B;&#x4E94;&quot;</span>);</div><div class="line">        redisTemplate.opsForSet().add(key,nameSet);</div><div class="line">        Set getNameSet =(Set) redisTemplate.opsForSet().pop(key);</div><div class="line">        Assert.assertEquals(nameSet,getNameSet);</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<h2 id="&#x5E8F;&#x5217;&#x5316;&#x5668;"><a href="#&#x5E8F;&#x5217;&#x5316;&#x5668;" class="headerlink" title="&#x5E8F;&#x5217;&#x5316;&#x5668;"></a>&#x5E8F;&#x5217;&#x5316;&#x5668;</h2><p>&#x5F53;&#x67D0;&#x4E2A;&#x6570;&#x636E;&#x9700;&#x8981;&#x4FDD;&#x5B58;&#x5230; <strong>Redis</strong> &#x7684;&#x65F6;&#x5019;&#xFF0C; <strong>key</strong> &#x548C; <strong>value</strong> &#x90FD;&#x4F1A;&#x4F7F;&#x7528; <strong>Redis</strong> &#x7684;&#x5E8F;&#x5217;&#x5668;(serializer) &#x8FDB;&#x884C;&#x5E8F;&#x5217;&#x5316;&#x3002;<strong>Spring Data Redis</strong> &#x63D0;&#x4F9B;&#x4E86;&#x591A;&#x4E2A;&#x5E8F;&#x5217;&#x5316;&#x5668;&#xFF1A;</p>
+<ul>
+<li>GenericToStringSerializer:&#x4F7F;&#x7528; <strong>Spring</strong> &#x8F6C;&#x6362;&#x670D;&#x52A1;&#x8FDB;&#x884C;&#x5E8F;&#x5217;&#x5316;</li>
+<li>JacksonJsonRedisSerializer:&#x4F7F;&#x7528; <strong>Jackson1</strong> &#x5C06;&#x5BF9;&#x8C61;&#x5E8F;&#x5217;&#x5316;&#x4E3A; <strong>JSON</strong></li>
+<li>Jackson2JsonRedisSerializer:&#x4F7F;&#x7528; <strong>Jackson2</strong> &#x5C06;&#x5BF9;&#x8C61;&#x5E8F;&#x5217;&#x5316;&#x4E3A; <strong>JSON</strong></li>
+<li>JdkSerializationRedisSerializer:&#x4F7F;&#x7528; <strong>Java</strong> &#x5E8F;&#x5217;&#x5316;</li>
+<li>OxmSerializer:&#x4F7F;&#x7528; <strong>Spring O/X </strong> &#x6620;&#x5C04;&#x7684;&#x7F16;&#x6392;&#x5668;&#x548C;&#x89E3;&#x6392;&#x5668;&#x5B9E;&#x73B0;&#x5E8F;&#x5217;&#x5316;&#xFF0C;&#x7528;&#x4E8E; <strong>XML</strong> &#x5E8F;&#x5217;&#x5316;</li>
+<li>StringRedisSerializer:&#x5E8F;&#x5217;&#x5316; <strong>String</strong> &#x7C7B;&#x578B;&#x7684; <strong>key</strong> &#x548C; <strong>value</strong></li>
+</ul>
+<p>&#x8FD9;&#x4E9B;&#x5E8F;&#x5217;&#x5316;&#x5668;&#x90FD;&#x5B9E;&#x73B0;&#x4E86; <strong>RedisSerializer</strong> &#x63A5;&#x53E3;&#xFF0C;&#x5982;&#x679C;&#x4E0A;&#x8FF0;&#x5E8F;&#x5217;&#x5316;&#x5668;&#x8FD8;&#x4E0D;&#x80FD;&#x6EE1;&#x8DB3;&#xFF0C;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x5B9E;&#x73B0;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x3002;</p>
+<p><strong>RedisTemplate</strong> &#x9ED8;&#x8BA4;&#x4F7F;&#x7528; <strong>JdkSerializationRedisSerializer</strong> , &#x800C; <strong>StringRedisTemplate</strong> &#x9ED8;&#x8BA4;&#x4F7F;&#x7528; <strong>StringRedisSerializer</strong>&#x3002;</p>
+<h3 id="&#x914D;&#x7F6E;&#x5E8F;&#x5217;&#x5316;&#x5668;"><a href="#&#x914D;&#x7F6E;&#x5E8F;&#x5217;&#x5316;&#x5668;" class="headerlink" title="&#x914D;&#x7F6E;&#x5E8F;&#x5217;&#x5316;&#x5668;"></a>&#x914D;&#x7F6E;&#x5E8F;&#x5217;&#x5316;&#x5668;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Bean</span></div><div class="line"><span class="keyword">public</span> RedisTemplate&lt;String ,?&gt; redisTemplate(RedisConnectionFactory redisConnectionFactory){</div><div class="line">    RedisTemplate redisTemplate =  <span class="keyword">new</span> RedisTemplate();</div><div class="line">    redisTemplate.setConnectionFactory(redisConnectionFactory);</div><div class="line">    redisTemplate.setKeySerializer(<span class="keyword">new</span> StringRedisSerializer());</div><div class="line">    redisTemplate.setValueSerializer(<span class="keyword">new</span> StringRedisSerializer());</div><div class="line">    <span class="keyword">return</span> redisTemplate;</div><div class="line">}</div></pre></td></tr></table></figure>
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/Spring/后端/Java/框架/Spring/Spring学习之旅(十四)--缓存/" class="pre-post btn btn-default" title='Spring学习之旅(十四)--缓存'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Spring学习之旅(十四)--缓存</span>
+        </a>
+    
+    
+        <a href="/Spring/后端/Java/框架/Spring/Spring学习之旅(十二)--持久化框架/" class="next-post btn btn-default" title='Spring学习之旅(十二)--持久化框架'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Spring学习之旅(十二)--持久化框架</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/"><i class="fa" aria-hidden="true">Docker</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OAuth/"><i class="fa" aria-hidden="true">OAuth</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Security/"><i class="fa" aria-hidden="true">Spring Security</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/"><i class="fa" aria-hidden="true">UML</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/"><i class="fa" aria-hidden="true">git</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><i class="fa" aria-hidden="true">五月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/"><i class="fa" aria-hidden="true">四月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">十月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JAVA-WEB/" style="font-size: 14px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 11.33px;">Lambda</a> <a href="/tags/Liunx/" style="font-size: 17.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.67px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 15.33px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px;">Nginx</a> <a href="/tags/OAuth/" style="font-size: 10px;">OAuth</a> <a href="/tags/Quartz/" style="font-size: 12px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 14.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 15.33px;">Redis</a> <a href="/tags/SQL/" style="font-size: 13.33px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.67px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 18.67px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15.33px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 18px;">Spring</a> <a href="/tags/Spring-Security/" style="font-size: 16.67px;">Spring Security</a> <a href="/tags/SpringBoot/" style="font-size: 13.33px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 10.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Utils/" style="font-size: 10.67px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 14px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 14px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/git/" style="font-size: 12.67px;">git</a> <a href="/tags/java/" style="font-size: 10.67px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.67px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 11.33px;">前端</a> <a href="/tags/前端基础/" style="font-size: 12.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 19.33px;">设计模式</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

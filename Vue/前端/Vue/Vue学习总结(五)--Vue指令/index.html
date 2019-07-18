@@ -1,0 +1,431 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Vue学习总结(五)--Vue指令 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Vue学习总结(五)--Vue指令">
+            
+	            Vue学习总结(五)--Vue指令
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Vue">
+            Vue
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Vue" title='Vue'>
+                        Vue
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/07/10</span>
+        </span>
+    
+</div>
+
+            
+            
+            <p class="fa fa-exclamation-triangle warning">
+                本文于<strong>373</strong>天之前发表，文中内容可能已经过时。
+            </p>
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="&#x4EC0;&#x4E48;&#x662F;&#x6307;&#x4EE4;"><a href="#&#x4EC0;&#x4E48;&#x662F;&#x6307;&#x4EE4;" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F;&#x6307;&#x4EE4;"></a>&#x4EC0;&#x4E48;&#x662F;&#x6307;&#x4EE4;</h2><p>&#x6307;&#x4EE4; (Directives) &#x662F;&#x5E26;&#x6709; <code>v-</code> &#x524D;&#x7F00;&#x7684;&#x7279;&#x6B8A;&#x7279;&#x6027;&#x3002;&#x6307;&#x4EE4;&#x7279;&#x6027;&#x7684;&#x503C;&#x9884;&#x671F;&#x662F;&#x5355;&#x4E2A; <code>JavaScript</code> &#x8868;&#x8FBE;&#x5F0F; (<code>v-for</code> &#x662F;&#x4F8B;&#x5916;&#x60C5;&#x51B5;&#xFF0C;&#x7A0D;&#x540E;&#x6211;&#x4EEC;&#x518D;&#x8BA8;&#x8BBA;)&#x3002;&#x6307;&#x4EE4;&#x7684;&#x804C;&#x8D23;&#x662F;&#xFF0C;&#x5F53;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x503C;&#x6539;&#x53D8;&#x65F6;&#xFF0C;&#x5C06;&#x5176;&#x4EA7;&#x751F;&#x7684;&#x8FDE;&#x5E26;&#x5F71;&#x54CD;&#xFF0C;&#x54CD;&#x5E94;&#x5F0F;&#x5730;&#x4F5C;&#x7528;&#x4E8E; <code>DOM</code>&#x3002;</p>
+<h2 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h2><h3 id="&#x8BED;&#x6CD5;"><a href="#&#x8BED;&#x6CD5;" class="headerlink" title="&#x8BED;&#x6CD5;"></a>&#x8BED;&#x6CD5;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">v-if=&quot;&#x8868;&#x8FBE;&#x5F0F;&quot;</div></pre></td></tr></table></figure>
+<h3 id="&#x53C2;&#x6570;"><a href="#&#x53C2;&#x6570;" class="headerlink" title="&#x53C2;&#x6570;"></a>&#x53C2;&#x6570;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8868;&#x8FBE;&#x5F0F;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="&#x4F5C;&#x7528;"><a href="#&#x4F5C;&#x7528;" class="headerlink" title="&#x4F5C;&#x7528;"></a>&#x4F5C;&#x7528;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#x6839;&#x636E;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x503C;&#x7684;&#x771F;&#x5047;&#x6761;&#x4EF6;&#x6E32;&#x67D3;&#x5143;&#x7D20;&#x3002;&#x5728;&#x5207;&#x6362;&#x65F6;&#x5143;&#x7D20;&#x53CA;&#x5B83;&#x7684;&#x6570;&#x636E;&#x7ED1;&#x5B9A; / &#x7EC4;&#x4EF6;&#x88AB;&#x9500;&#x6BC1;&#x5E76;&#x91CD;&#x5EFA;&#x3002;&#x5982;&#x679C;&#x5143;&#x7D20;&#x662F; `&lt;template&gt;` &#xFF0C;&#x5C06;&#x63D0;&#x51FA;&#x5B83;&#x7684;&#x5185;&#x5BB9;&#x4F5C;&#x4E3A;&#x6761;&#x4EF6;&#x5757;&#x3002;</div><div class="line"></div><div class="line">&#x5F53;&#x6761;&#x4EF6;&#x53D8;&#x5316;&#x65F6;&#x8BE5;&#x6307;&#x4EE4;&#x89E6;&#x53D1;&#x8FC7;&#x6E21;&#x6548;&#x679C;&#x3002;</div></pre></td></tr></table></figure>
+<h3 id="&#x6CE8;&#x610F;"><a href="#&#x6CE8;&#x610F;" class="headerlink" title="&#x6CE8;&#x610F;"></a>&#x6CE8;&#x610F;</h3><p><b> &#x5F53;&#x548C; v-if &#x4E00;&#x8D77;&#x4F7F;&#x7528;&#x65F6;&#xFF0C;v-for &#x7684;&#x4F18;&#x5148;&#x7EA7;&#x6BD4; v-if &#x66F4;&#x9AD8;&#x3002;<b></b></b></p>
+<h3 id="&#x5B9E;&#x4F8B;"><a href="#&#x5B9E;&#x4F8B;" class="headerlink" title="&#x5B9E;&#x4F8B;"></a>&#x5B9E;&#x4F8B;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span>	</div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span> &gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-if</span>=<span class="string">&quot;sex=0&quot;</span>&gt;</span>&#x7537;&#x751F;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-if</span>=<span class="string">&quot;sex=1&quot;</span>&gt;</span>&#x5973;&#x751F;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>		</div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span>			</div><div class="line">		<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">			var app = new Vue({</div><div class="line">				el:&quot;#app&quot;,		</div><div class="line">				data:{</div><div class="line">					sex:1</div><div class="line">				}			</div><div class="line">			});</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="/Vue/&#x524D;&#x7AEF;/Vue/Vue&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E94;)--Vue&#x6307;&#x4EE4;/img/01.png" alt=""></p>
+<h2 id="v-else-if"><a href="#v-else-if" class="headerlink" title="v-else-if"></a>v-else-if</h2><h3 id="&#x8BED;&#x6CD5;-1"><a href="#&#x8BED;&#x6CD5;-1" class="headerlink" title="&#x8BED;&#x6CD5;"></a>&#x8BED;&#x6CD5;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">v-else-if=&quot;&#x8868;&#x8FBE;&#x5F0F;&quot;</div></pre></td></tr></table></figure>
+<h3 id="&#x53C2;&#x6570;-1"><a href="#&#x53C2;&#x6570;-1" class="headerlink" title="&#x53C2;&#x6570;"></a>&#x53C2;&#x6570;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8868;&#x8FBE;&#x5F0F;</div></pre></td></tr></table></figure>
+<h3 id="&#x4F5C;&#x7528;-1"><a href="#&#x4F5C;&#x7528;-1" class="headerlink" title="&#x4F5C;&#x7528;"></a>&#x4F5C;&#x7528;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8868;&#x793A; v-if &#x7684; &#x201C;else if &#x5757;&#x201D;&#x3002;&#x53EF;&#x4EE5;&#x94FE;&#x5F0F;&#x8C03;&#x7528;&#x3002;</div></pre></td></tr></table></figure>
+<h3 id="&#x9650;&#x5236;"><a href="#&#x9650;&#x5236;" class="headerlink" title="&#x9650;&#x5236;"></a>&#x9650;&#x5236;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x524D;&#x4E00;&#x5144;&#x5F1F;&#x5143;&#x7D20;&#x5FC5;&#x987B;&#x6709; v-if &#x6216; v-else-if</div></pre></td></tr></table></figure>
+<h3 id="&#x5B9E;&#x4F8B;-1"><a href="#&#x5B9E;&#x4F8B;-1" class="headerlink" title="&#x5B9E;&#x4F8B;"></a>&#x5B9E;&#x4F8B;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span>		</div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span> &gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-if</span>=<span class="string">&quot;score&gt;=90&quot;</span>&gt;</span>&#x4F18;&#x79C0;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else-if</span>=<span class="string">&quot;score&gt;=80&quot;</span>&gt;</span>&#x826F;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>		</div><div class="line">			<span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else-if</span>=<span class="string">&quot;score&gt;=70&quot;</span>&gt;</span>&#x4E2D;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>		</div><div class="line">			<span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else-if</span>=<span class="string">&quot;score&gt;=60&quot;</span>&gt;</span>&#x53CA;&#x683C;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>		</div><div class="line">			<span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else-if</span>=<span class="string">&quot;score&lt;60&quot;</span>&gt;</span>&#x4E0D;&#x53CA;&#x683C;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>		</div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span>			</div><div class="line">		<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">			var app = new Vue({</div><div class="line">				el:&quot;#app&quot;,		</div><div class="line">				data:{</div><div class="line">					score:97</div><div class="line">				}			</div><div class="line">			});</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="/Vue/&#x524D;&#x7AEF;/Vue/Vue&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E94;)--Vue&#x6307;&#x4EE4;/img/02.png" alt=""></p>
+<h2 id="v-else"><a href="#v-else" class="headerlink" title="v-else"></a>v-else</h2><h3 id="&#x8BED;&#x6CD5;-2"><a href="#&#x8BED;&#x6CD5;-2" class="headerlink" title="&#x8BED;&#x6CD5;"></a>&#x8BED;&#x6CD5;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">v-else</div></pre></td></tr></table></figure>
+<h3 id="&#x53C2;&#x6570;-2"><a href="#&#x53C2;&#x6570;-2" class="headerlink" title="&#x53C2;&#x6570;"></a>&#x53C2;&#x6570;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x65E0;&#x9700;&#x53C2;&#x6570;</div></pre></td></tr></table></figure>
+<h3 id="&#x4F5C;&#x7528;-2"><a href="#&#x4F5C;&#x7528;-2" class="headerlink" title="&#x4F5C;&#x7528;"></a>&#x4F5C;&#x7528;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x4E3A; v-if &#x6216;&#x8005; v-else-if &#x6DFB;&#x52A0; &#x201C;else &#x5757;&#x201D;&#x3002;</div></pre></td></tr></table></figure>
+<h3 id="&#x9650;&#x5236;-1"><a href="#&#x9650;&#x5236;-1" class="headerlink" title="&#x9650;&#x5236;"></a>&#x9650;&#x5236;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x524D;&#x4E00;&#x5144;&#x5F1F;&#x5143;&#x7D20;&#x5FC5;&#x987B;&#x6709; v-if &#x6216; v-else-if</div></pre></td></tr></table></figure>
+<h3 id="&#x5B9E;&#x4F8B;-2"><a href="#&#x5B9E;&#x4F8B;-2" class="headerlink" title="&#x5B9E;&#x4F8B;"></a>&#x5B9E;&#x4F8B;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span>		</div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span> &gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-if</span>=<span class="string">&quot;score&gt;=90&quot;</span>&gt;</span>&#x4F18;&#x79C0;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else-if</span>=<span class="string">&quot;score&gt;=80&quot;</span>&gt;</span>&#x826F;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>		</div><div class="line">			<span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else-if</span>=<span class="string">&quot;score&gt;=70&quot;</span>&gt;</span>&#x4E2D;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>		</div><div class="line">			<span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else-if</span>=<span class="string">&quot;score&gt;=60&quot;</span>&gt;</span>&#x53CA;&#x683C;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>		</div><div class="line">			<span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else</span>&gt;</span>&#x4E0D;&#x53CA;&#x683C;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>		</div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span>			</div><div class="line">		<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">			var app = new Vue({</div><div class="line">				el:&quot;#app&quot;,		</div><div class="line">				data:{</div><div class="line">					score:44</div><div class="line">				}			</div><div class="line">			});</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="/Vue/&#x524D;&#x7AEF;/Vue/Vue&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E94;)--Vue&#x6307;&#x4EE4;/img/03.png" alt=""></p>
+<h2 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a>v-show</h2><h3 id="&#x8BED;&#x6CD5;-3"><a href="#&#x8BED;&#x6CD5;-3" class="headerlink" title="&#x8BED;&#x6CD5;"></a>&#x8BED;&#x6CD5;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">v-show = &quot;&#x8868;&#x8FBE;&#x5F0F;&quot;</div></pre></td></tr></table></figure>
+<h3 id="&#x53C2;&#x6570;-3"><a href="#&#x53C2;&#x6570;-3" class="headerlink" title="&#x53C2;&#x6570;"></a>&#x53C2;&#x6570;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8868;&#x8FBE;&#x5F0F;</div></pre></td></tr></table></figure>
+<h3 id="&#x4F5C;&#x7528;-3"><a href="#&#x4F5C;&#x7528;-3" class="headerlink" title="&#x4F5C;&#x7528;"></a>&#x4F5C;&#x7528;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#x6839;&#x636E;&#x8868;&#x8FBE;&#x5F0F;&#x4E4B;&#x771F;&#x5047;&#x503C;&#xFF0C;&#x5207;&#x6362;&#x5143;&#x7D20;&#x7684; display CSS &#x5C5E;&#x6027;&#x3002;</div><div class="line"></div><div class="line">&#x5F53;&#x6761;&#x4EF6;&#x53D8;&#x5316;&#x65F6;&#x8BE5;&#x6307;&#x4EE4;&#x89E6;&#x53D1;&#x8FC7;&#x6E21;&#x6548;&#x679C;&#x3002;</div></pre></td></tr></table></figure>
+<h3 id="&#x4E0E;-v-if-&#x7684;&#x533A;&#x522B;"><a href="#&#x4E0E;-v-if-&#x7684;&#x533A;&#x522B;" class="headerlink" title="&#x4E0E; v-if &#x7684;&#x533A;&#x522B;"></a>&#x4E0E; v-if &#x7684;&#x533A;&#x522B;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">* v-if : dom&#x5143;&#x7D20;&#x6DFB;&#x52A0;/&#x5220;&#x9664;</div><div class="line">* v-show &#xFF1A;&#x4FEE;&#x6539;display CSS &#x5C5E;&#x6027;</div><div class="line">* &#x4ECE;&#x6027;&#x80FD;&#x6BD4;&#x8F83;&#x4E0A; v-show &#x6BD4; v-if &#x597D;</div></pre></td></tr></table></figure>
+<h3 id="&#x5B9E;&#x4F8B;-3"><a href="#&#x5B9E;&#x4F8B;-3" class="headerlink" title="&#x5B9E;&#x4F8B;"></a>&#x5B9E;&#x4F8B;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span>	</div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span> &gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-show</span>=<span class="string">&quot;sex=0&quot;</span>&gt;</span>&#x7537;&#x751F;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-show</span>=<span class="string">&quot;sex=1&quot;</span>&gt;</span>&#x5973;&#x751F;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>		</div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span>			</div><div class="line">		<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">			var app = new Vue({</div><div class="line">				el:&quot;#app&quot;,		</div><div class="line">				data:{</div><div class="line">					sex:1</div><div class="line">				}			</div><div class="line">			});</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="/Vue/&#x524D;&#x7AEF;/Vue/Vue&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E94;)--Vue&#x6307;&#x4EE4;/img/04.png" alt=""></p>
+<h2 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h2><h3 id="&#x8BED;&#x6CD5;-4"><a href="#&#x8BED;&#x6CD5;-4" class="headerlink" title="&#x8BED;&#x6CD5;"></a>&#x8BED;&#x6CD5;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">v-for=&quot;item in items&quot;</div></pre></td></tr></table></figure>
+<h3 id="&#x53C2;&#x6570;-4"><a href="#&#x53C2;&#x6570;-4" class="headerlink" title="&#x53C2;&#x6570;"></a>&#x53C2;&#x6570;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x6570;&#x7EC4;&#x6216;&#x5217;&#x8868;</div></pre></td></tr></table></figure>
+<h3 id="&#x4F5C;&#x7528;-4"><a href="#&#x4F5C;&#x7528;-4" class="headerlink" title="&#x4F5C;&#x7528;"></a>&#x4F5C;&#x7528;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x57FA;&#x4E8E;&#x6E90;&#x6570;&#x636E;&#x591A;&#x6B21;&#x6E32;&#x67D3;&#x5143;&#x7D20;&#x6216;&#x6A21;&#x677F;&#x5757;&#x3002;&#x6B64;&#x6307;&#x4EE4;&#x4E4B;&#x503C;&#xFF0C;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x7279;&#x5B9A;&#x8BED;&#x6CD5; alias in expression &#xFF0C;&#x4E3A;&#x5F53;&#x524D;&#x904D;&#x5386;&#x7684;&#x5143;&#x7D20;&#x63D0;&#x4F9B;&#x522B;&#x540D;</div></pre></td></tr></table></figure>
+<h3 id="&#x5B9E;&#x4F8B;-4"><a href="#&#x5B9E;&#x4F8B;-4" class="headerlink" title="&#x5B9E;&#x4F8B;"></a>&#x5B9E;&#x4F8B;</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">&lt;html&gt;</div><div class="line">	&lt;head&gt;</div><div class="line">		&lt;title&gt;Hello World&lt;/title&gt;</div><div class="line">		&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;</div><div class="line">	&lt;/head&gt;</div><div class="line">	&lt;body&gt;	</div><div class="line">		&lt;div id=&quot;app&quot;  &gt;</div><div class="line">			&lt;ul &gt;</div><div class="line">				&lt;li v-for=&quot;city in citys&quot; :key=&quot;city.id&quot;&gt;</div><div class="line">					{{city.name}}	</div><div class="line">				&lt;/li</div><div class="line">			&lt;/ul&gt;				</div><div class="line">		&lt;/div&gt;			</div><div class="line">		&lt;script&gt;</div><div class="line">			var app = new Vue({</div><div class="line">				el:&quot;#app&quot;,		</div><div class="line">				data:{</div><div class="line">					citys:[</div><div class="line">						{</div><div class="line">							id:0001,</div><div class="line">							name:&quot;&#x5317;&#x4EAC;&quot;</div><div class="line">						},{</div><div class="line">							id:0002,</div><div class="line">							name:&quot;&#x4E0A;&#x6D77;&quot;</div><div class="line">						},{</div><div class="line">							id:0003,</div><div class="line">							name:&quot;&#x5E7F;&#x4E1C;&quot;</div><div class="line">						},{</div><div class="line">							id:0004,</div><div class="line">							name:&quot;&#x6DF1;&#x5733;&quot;</div><div class="line">						},{</div><div class="line">							id:0005,</div><div class="line">							name:&quot;&#x676D;&#x5DDE;&quot;</div><div class="line">						},{</div><div class="line">							id:0006,</div><div class="line">							name:&quot;&#x6E29;&#x5DDE;&quot;</div><div class="line">						}</div><div class="line">					]</div><div class="line">				}			</div><div class="line">			});</div><div class="line">		&lt;/script&gt;</div><div class="line">	&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p><img src="/Vue/&#x524D;&#x7AEF;/Vue/Vue&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E94;)--Vue&#x6307;&#x4EE4;/img/04.png" alt=""></p>
+<h3 id="key-&#x7684;&#x4F5C;&#x7528;"><a href="#key-&#x7684;&#x4F5C;&#x7528;" class="headerlink" title=":key &#x7684;&#x4F5C;&#x7528;"></a>:key &#x7684;&#x4F5C;&#x7528;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x76F8;&#x5F53;&#x4E8E;&#x4E3B;&#x952E;&#xFF0C;&#x7528;&#x4E8E;&#x533A;&#x5206;&#x7EC4;&#x4EF6;</div></pre></td></tr></table></figure>
+<h2 id="v-on"><a href="#v-on" class="headerlink" title="v-on"></a>v-on</h2><h3 id="&#x8BED;&#x6CD5;-5"><a href="#&#x8BED;&#x6CD5;-5" class="headerlink" title="&#x8BED;&#x6CD5;"></a>&#x8BED;&#x6CD5;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">v-on:event</div></pre></td></tr></table></figure>
+<h3 id="&#x7F29;&#x5199;"><a href="#&#x7F29;&#x5199;" class="headerlink" title="&#x7F29;&#x5199;"></a>&#x7F29;&#x5199;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@event</div></pre></td></tr></table></figure>
+<h3 id="&#x53C2;&#x6570;-5"><a href="#&#x53C2;&#x6570;-5" class="headerlink" title="&#x53C2;&#x6570;"></a>&#x53C2;&#x6570;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">event:&#x4E8B;&#x4EF6;&#x540D;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;click</div></pre></td></tr></table></figure>
+<h3 id="&#x4FEE;&#x9970;&#x7B26;"><a href="#&#x4FEE;&#x9970;&#x7B26;" class="headerlink" title="&#x4FEE;&#x9970;&#x7B26;"></a>&#x4FEE;&#x9970;&#x7B26;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">.stop - &#x8C03;&#x7528; event.stopPropagation()&#x3002;</div><div class="line">.prevent - &#x8C03;&#x7528; event.preventDefault()&#x3002;</div><div class="line">.capture - &#x6DFB;&#x52A0;&#x4E8B;&#x4EF6;&#x4FA6;&#x542C;&#x5668;&#x65F6;&#x4F7F;&#x7528; capture &#x6A21;&#x5F0F;&#x3002;</div><div class="line">.self - &#x53EA;&#x5F53;&#x4E8B;&#x4EF6;&#x662F;&#x4ECE;&#x4FA6;&#x542C;&#x5668;&#x7ED1;&#x5B9A;&#x7684;&#x5143;&#x7D20;&#x672C;&#x8EAB;&#x89E6;&#x53D1;&#x65F6;&#x624D;&#x89E6;&#x53D1;&#x56DE;&#x8C03;&#x3002;</div><div class="line">.{keyCode | keyAlias} - &#x53EA;&#x5F53;&#x4E8B;&#x4EF6;&#x662F;&#x4ECE;&#x7279;&#x5B9A;&#x952E;&#x89E6;&#x53D1;&#x65F6;&#x624D;&#x89E6;&#x53D1;&#x56DE;&#x8C03;&#x3002;</div><div class="line">.native - &#x76D1;&#x542C;&#x7EC4;&#x4EF6;&#x6839;&#x5143;&#x7D20;&#x7684;&#x539F;&#x751F;&#x4E8B;&#x4EF6;&#x3002;</div><div class="line">.once - &#x53EA;&#x89E6;&#x53D1;&#x4E00;&#x6B21;&#x56DE;&#x8C03;&#x3002;</div><div class="line">.left - (2.2.0) &#x53EA;&#x5F53;&#x70B9;&#x51FB;&#x9F20;&#x6807;&#x5DE6;&#x952E;&#x65F6;&#x89E6;&#x53D1;&#x3002;</div><div class="line">.right - (2.2.0) &#x53EA;&#x5F53;&#x70B9;&#x51FB;&#x9F20;&#x6807;&#x53F3;&#x952E;&#x65F6;&#x89E6;&#x53D1;&#x3002;</div><div class="line">.middle - (2.2.0) &#x53EA;&#x5F53;&#x70B9;&#x51FB;&#x9F20;&#x6807;&#x4E2D;&#x952E;&#x65F6;&#x89E6;&#x53D1;&#x3002;</div><div class="line">.passive - (2.3.0) &#x4EE5; { passive: true } &#x6A21;&#x5F0F;&#x6DFB;&#x52A0;&#x4FA6;&#x542C;&#x5668;</div></pre></td></tr></table></figure>
+<h3 id="&#x4F5C;&#x7528;-5"><a href="#&#x4F5C;&#x7528;-5" class="headerlink" title="&#x4F5C;&#x7528;"></a>&#x4F5C;&#x7528;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#x7ED1;&#x5B9A;&#x4E8B;&#x4EF6;&#x76D1;&#x542C;&#x5668;&#x3002;&#x4E8B;&#x4EF6;&#x7C7B;&#x578B;&#x7531;&#x53C2;&#x6570;&#x6307;&#x5B9A;&#x3002;&#x8868;&#x8FBE;&#x5F0F;&#x53EF;&#x4EE5;&#x662F;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;&#x7684;&#x540D;&#x5B57;&#x6216;&#x4E00;&#x4E2A;&#x5185;&#x8054;&#x8BED;&#x53E5;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x4FEE;&#x9970;&#x7B26;&#x4E5F;&#x53EF;&#x4EE5;&#x7701;&#x7565;&#x3002;</div><div class="line"></div><div class="line">&#x7528;&#x5728;&#x666E;&#x901A;&#x5143;&#x7D20;&#x4E0A;&#x65F6;&#xFF0C;&#x53EA;&#x80FD;&#x76D1;&#x542C;&#x539F;&#x751F; DOM &#x4E8B;&#x4EF6;&#x3002;&#x7528;&#x5728;&#x81EA;&#x5B9A;&#x4E49;&#x5143;&#x7D20;&#x7EC4;&#x4EF6;&#x4E0A;&#x65F6;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x76D1;&#x542C;&#x5B50;&#x7EC4;&#x4EF6;&#x89E6;&#x53D1;&#x7684;&#x81EA;&#x5B9A;&#x4E49;&#x4E8B;&#x4EF6;&#x3002;</div></pre></td></tr></table></figure>
+<h2 id="v-bind"><a href="#v-bind" class="headerlink" title="v-bind"></a>v-bind</h2><h3 id="&#x8BED;&#x6CD5;-6"><a href="#&#x8BED;&#x6CD5;-6" class="headerlink" title="&#x8BED;&#x6CD5;"></a>&#x8BED;&#x6CD5;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">v-bind:attrOrProp (optional)</div></pre></td></tr></table></figure>
+<h3 id="&#x7F29;&#x5199;-1"><a href="#&#x7F29;&#x5199;-1" class="headerlink" title="&#x7F29;&#x5199;"></a>&#x7F29;&#x5199;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:</div></pre></td></tr></table></figure>
+<h3 id="&#x53C2;&#x6570;-6"><a href="#&#x53C2;&#x6570;-6" class="headerlink" title="&#x53C2;&#x6570;"></a>&#x53C2;&#x6570;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">attrOrProp (optional)</div></pre></td></tr></table></figure>
+<h3 id="&#x4FEE;&#x9970;&#x7B26;-1"><a href="#&#x4FEE;&#x9970;&#x7B26;-1" class="headerlink" title="&#x4FEE;&#x9970;&#x7B26;"></a>&#x4FEE;&#x9970;&#x7B26;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.prop - &#x88AB;&#x7528;&#x4E8E;&#x7ED1;&#x5B9A; DOM &#x5C5E;&#x6027; (property)&#x3002;</div><div class="line">.camel - (2.1.0+) &#x5C06; kebab-case &#x7279;&#x6027;&#x540D;&#x8F6C;&#x6362;&#x4E3A; camelCase. (&#x4ECE; 2.1.0 &#x5F00;&#x59CB;&#x652F;&#x6301;)</div><div class="line">.sync (2.3.0+) &#x8BED;&#x6CD5;&#x7CD6;&#xFF0C;&#x4F1A;&#x6269;&#x5C55;&#x6210;&#x4E00;&#x4E2A;&#x66F4;&#x65B0;&#x7236;&#x7EC4;&#x4EF6;&#x7ED1;&#x5B9A;&#x503C;&#x7684; v-on &#x4FA6;&#x542C;&#x5668;&#x3002;</div></pre></td></tr></table></figure>
+<h3 id="&#x4F5C;&#x7528;-6"><a href="#&#x4F5C;&#x7528;-6" class="headerlink" title="&#x4F5C;&#x7528;"></a>&#x4F5C;&#x7528;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#x52A8;&#x6001;&#x5730;&#x7ED1;&#x5B9A;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x7279;&#x6027;&#xFF0C;&#x6216;&#x4E00;&#x4E2A;&#x7EC4;&#x4EF6; prop &#x5230;&#x8868;&#x8FBE;&#x5F0F;&#x3002;</div><div class="line"></div><div class="line">&#x5728;&#x7ED1;&#x5B9A; class &#x6216; style &#x7279;&#x6027;&#x65F6;&#xFF0C;&#x652F;&#x6301;&#x5176;&#x5B83;&#x7C7B;&#x578B;&#x7684;&#x503C;&#xFF0C;&#x5982;&#x6570;&#x7EC4;&#x6216;&#x5BF9;&#x8C61;</div><div class="line"></div><div class="line">&#x5728;&#x7ED1;&#x5B9A; prop &#x65F6;&#xFF0C;prop &#x5FC5;&#x987B;&#x5728;&#x5B50;&#x7EC4;&#x4EF6;&#x4E2D;&#x58F0;&#x660E;&#x3002;&#x53EF;&#x4EE5;&#x7528;&#x4FEE;&#x9970;&#x7B26;&#x6307;&#x5B9A;&#x4E0D;&#x540C;&#x7684;&#x7ED1;&#x5B9A;&#x7C7B;&#x578B;&#x3002;</div><div class="line"></div><div class="line">&#x6CA1;&#x6709;&#x53C2;&#x6570;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x7ED1;&#x5B9A;&#x5230;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x952E;&#x503C;&#x5BF9;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x6CE8;&#x610F;&#x6B64;&#x65F6; class &#x548C; style &#x7ED1;&#x5B9A;&#x4E0D;&#x652F;&#x6301;&#x6570;&#x7EC4;&#x548C;&#x5BF9;&#x8C61;&#x3002;</div></pre></td></tr></table></figure>
+<h3 id="&#x5B9E;&#x4F8B;-5"><a href="#&#x5B9E;&#x4F8B;-5" class="headerlink" title="&#x5B9E;&#x4F8B;"></a>&#x5B9E;&#x4F8B;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- &#x7ED1;&#x5B9A;&#x4E00;&#x4E2A;&#x5C5E;&#x6027; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">v-bind:src</span>=<span class="string">&quot;imageSrc&quot;</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- &#x7F29;&#x5199; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">:src</span>=<span class="string">&quot;imageSrc&quot;</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- &#x5185;&#x8054;&#x5B57;&#x7B26;&#x4E32;&#x62FC;&#x63A5; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">:src</span>=<span class="string">&quot;&apos;/path/to/images/&apos; + fileName&quot;</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- class &#x7ED1;&#x5B9A; --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">&quot;{ red: isRed }&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h2><h3 id="&#x8BED;&#x6CD5;-7"><a href="#&#x8BED;&#x6CD5;-7" class="headerlink" title="&#x8BED;&#x6CD5;"></a>&#x8BED;&#x6CD5;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">v-model=&quot;&#x5C5E;&#x6027;&quot;</div></pre></td></tr></table></figure>
+<h3 id="&#x53C2;&#x6570;-7"><a href="#&#x53C2;&#x6570;-7" class="headerlink" title="&#x53C2;&#x6570;"></a>&#x53C2;&#x6570;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x5C5E;&#x6027;</div></pre></td></tr></table></figure>
+<h3 id="&#x9650;&#x5236;-2"><a href="#&#x9650;&#x5236;-2" class="headerlink" title="&#x9650;&#x5236;"></a>&#x9650;&#x5236;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#x53EA;&#x80FD;&#x5982;&#x4E0B;&#x7EC4;&#x4EF6;&#x4F7F;&#x7528;&#xFF1A;</div><div class="line">	* <span class="tag">&lt;<span class="name">input</span>&gt;</span></div><div class="line">	* <span class="tag">&lt;<span class="name">select</span>&gt;</span></div><div class="line">	* <span class="tag">&lt;<span class="name">textarea</span>&gt;</span></div><div class="line">	* components</div></pre></td></tr></table></figure>
+<h3 id="&#x4FEE;&#x9970;&#x7B26;-2"><a href="#&#x4FEE;&#x9970;&#x7B26;-2" class="headerlink" title="&#x4FEE;&#x9970;&#x7B26;"></a>&#x4FEE;&#x9970;&#x7B26;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.lazy - &#x53D6;&#x4EE3; input &#x76D1;&#x542C; change &#x4E8B;&#x4EF6;</div><div class="line">.number - &#x8F93;&#x5165;&#x5B57;&#x7B26;&#x4E32;&#x8F6C;&#x4E3A;&#x6570;&#x5B57;</div><div class="line">.trim - &#x8F93;&#x5165;&#x9996;&#x5C3E;&#x7A7A;&#x683C;&#x8FC7;&#x6EE4;</div></pre></td></tr></table></figure>
+<h3 id="&#x4F5C;&#x7528;-7"><a href="#&#x4F5C;&#x7528;-7" class="headerlink" title="&#x4F5C;&#x7528;"></a>&#x4F5C;&#x7528;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x5728;&#x8868;&#x5355;&#x63A7;&#x4EF6;&#x6216;&#x8005;&#x7EC4;&#x4EF6;&#x4E0A;&#x521B;&#x5EFA;&#x53CC;&#x5411;&#x7ED1;&#x5B9A;</div></pre></td></tr></table></figure>
+<h3 id="&#x5B9E;&#x4F8B;-6"><a href="#&#x5B9E;&#x4F8B;-6" class="headerlink" title="&#x5B9E;&#x4F8B;"></a>&#x5B9E;&#x4F8B;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span>	</div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>  &gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">h3</span>&gt;</span>{{message}}<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;message&quot;</span>&gt;</span>	</div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span>			</div><div class="line">		<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">			var app = new Vue({</div><div class="line">				el:&quot;#app&quot;,		</div><div class="line">				data:{</div><div class="line">					message:&quot;Hello World!&quot;</div><div class="line">				}			</div><div class="line">			});</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="&#x901A;&#x8FC7;&#x63A7;&#x5236;&#x53F0;&#x4FEE;&#x6539;&#x6570;&#x636E;"><a href="#&#x901A;&#x8FC7;&#x63A7;&#x5236;&#x53F0;&#x4FEE;&#x6539;&#x6570;&#x636E;" class="headerlink" title="&#x901A;&#x8FC7;&#x63A7;&#x5236;&#x53F0;&#x4FEE;&#x6539;&#x6570;&#x636E;"></a>&#x901A;&#x8FC7;&#x63A7;&#x5236;&#x53F0;&#x4FEE;&#x6539;&#x6570;&#x636E;</h4><p><img src="/Vue/&#x524D;&#x7AEF;/Vue/Vue&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E94;)--Vue&#x6307;&#x4EE4;/img/06.png" alt=""></p>
+<h4 id="&#x901A;&#x8FC7;&#x8F93;&#x5165;&#x6846;&#x4FEE;&#x6539;&#x6570;&#x636E;"><a href="#&#x901A;&#x8FC7;&#x8F93;&#x5165;&#x6846;&#x4FEE;&#x6539;&#x6570;&#x636E;" class="headerlink" title="&#x901A;&#x8FC7;&#x8F93;&#x5165;&#x6846;&#x4FEE;&#x6539;&#x6570;&#x636E;"></a>&#x901A;&#x8FC7;&#x8F93;&#x5165;&#x6846;&#x4FEE;&#x6539;&#x6570;&#x636E;</h4><p><img src="/Vue/&#x524D;&#x7AEF;/Vue/Vue&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E94;)--Vue&#x6307;&#x4EE4;/img/07.gif" alt=""></p>
+<h2 id="v-text"><a href="#v-text" class="headerlink" title="v-text"></a>v-text</h2><h3 id="&#x8BED;&#x6CD5;-8"><a href="#&#x8BED;&#x6CD5;-8" class="headerlink" title="&#x8BED;&#x6CD5;"></a>&#x8BED;&#x6CD5;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">v-text=&quot;String&quot;</div></pre></td></tr></table></figure>
+<h3 id="&#x53C2;&#x6570;-8"><a href="#&#x53C2;&#x6570;-8" class="headerlink" title="&#x53C2;&#x6570;"></a>&#x53C2;&#x6570;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String</div></pre></td></tr></table></figure>
+<h3 id="&#x4F5C;&#x7528;-8"><a href="#&#x4F5C;&#x7528;-8" class="headerlink" title="&#x4F5C;&#x7528;"></a>&#x4F5C;&#x7528;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x66F4;&#x65B0;&#x5143;&#x7D20;&#x7684; innerHTML&#xFF0C;&#x539F;&#x6837;&#x8F93;&#x51FA;&#x3002;</div></pre></td></tr></table></figure>
+<h3 id="&#x5B9E;&#x4F8B;-7"><a href="#&#x5B9E;&#x4F8B;-7" class="headerlink" title="&#x5B9E;&#x4F8B;"></a>&#x5B9E;&#x4F8B;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span>	</div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>  &gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">h3</span> <span class="attr">v-text</span>=<span class="string">&quot;msg&quot;</span>&gt;</span>ddd<span class="tag">&lt;/<span class="name">h3</span>&gt;</span>	</div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span>			</div><div class="line">		<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">			var app = new Vue({</div><div class="line">				el:&quot;#app&quot;,		</div><div class="line">				data:{</div><div class="line">					msg:&quot;Hello World!&quot;</div><div class="line">				}			</div><div class="line">			});</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="/Vue/&#x524D;&#x7AEF;/Vue/Vue&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E94;)--Vue&#x6307;&#x4EE4;/img/08.png" alt=""></p>
+<h2 id="v-html"><a href="#v-html" class="headerlink" title="v-html"></a>v-html</h2><h3 id="&#x8BED;&#x6CD5;-9"><a href="#&#x8BED;&#x6CD5;-9" class="headerlink" title="&#x8BED;&#x6CD5;"></a>&#x8BED;&#x6CD5;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">v-html=&quot;String&quot;</div></pre></td></tr></table></figure>
+<h3 id="&#x53C2;&#x6570;-9"><a href="#&#x53C2;&#x6570;-9" class="headerlink" title="&#x53C2;&#x6570;"></a>&#x53C2;&#x6570;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String</div></pre></td></tr></table></figure>
+<h3 id="&#x4F5C;&#x7528;-9"><a href="#&#x4F5C;&#x7528;-9" class="headerlink" title="&#x4F5C;&#x7528;"></a>&#x4F5C;&#x7528;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x66F4;&#x65B0;&#x5143;&#x7D20;&#x7684; innerHTML&#xFF0C;&#x81EA;&#x52A8;&#x6E32;&#x67D3; HTML &#x6807;&#x7B7E;</div></pre></td></tr></table></figure>
+<h3 id="&#x5B9E;&#x4F8B;-8"><a href="#&#x5B9E;&#x4F8B;-8" class="headerlink" title="&#x5B9E;&#x4F8B;"></a>&#x5B9E;&#x4F8B;</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span>	</div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>  &gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">h3</span> <span class="attr">v-html</span>=<span class="string">&quot;msg&quot;</span>&gt;</span>ddd<span class="tag">&lt;/<span class="name">h3</span>&gt;</span>	</div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span>			</div><div class="line">		<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="xml"></span></div><div class="line">			var app = new Vue({</div><div class="line">				el:&quot;#app&quot;,		</div><div class="line">				data:{</div><div class="line">					msg:&quot;<span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello World!<span class="tag">&lt;<span class="name">h1</span>&gt;</span>&quot;</div><div class="line">				}			</div><div class="line">			});</div><div class="line">		<span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="/Vue/&#x524D;&#x7AEF;/Vue/Vue&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E94;)--Vue&#x6307;&#x4EE4;/img/09.png" alt=""></p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/Vue/前端/Vue/Vue学习总结(六)--Vue组件/" class="pre-post btn btn-default" title='Vue学习总结(六)--Vue组件'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Vue学习总结(六)--Vue组件</span>
+        </a>
+    
+    
+        <a href="/Vue/前端/Vue/Vue学习总结(四)--Vue事件/" class="next-post btn btn-default" title='Vue学习总结(四)--Vue事件'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Vue学习总结(四)--Vue事件</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/"><i class="fa" aria-hidden="true">Docker</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OAuth/"><i class="fa" aria-hidden="true">OAuth</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Security/"><i class="fa" aria-hidden="true">Spring Security</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/"><i class="fa" aria-hidden="true">UML</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/"><i class="fa" aria-hidden="true">git</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><i class="fa" aria-hidden="true">五月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/"><i class="fa" aria-hidden="true">四月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">十月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JAVA-WEB/" style="font-size: 14px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 11.33px;">Lambda</a> <a href="/tags/Liunx/" style="font-size: 17.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.67px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 15.33px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px;">Nginx</a> <a href="/tags/OAuth/" style="font-size: 10px;">OAuth</a> <a href="/tags/Quartz/" style="font-size: 12px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 14.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 15.33px;">Redis</a> <a href="/tags/SQL/" style="font-size: 13.33px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.67px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 18.67px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15.33px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 18px;">Spring</a> <a href="/tags/Spring-Security/" style="font-size: 16.67px;">Spring Security</a> <a href="/tags/SpringBoot/" style="font-size: 13.33px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 10.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Utils/" style="font-size: 10.67px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 14px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 14px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/git/" style="font-size: 12.67px;">git</a> <a href="/tags/java/" style="font-size: 10.67px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.67px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 11.33px;">前端</a> <a href="/tags/前端基础/" style="font-size: 12.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 19.33px;">设计模式</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

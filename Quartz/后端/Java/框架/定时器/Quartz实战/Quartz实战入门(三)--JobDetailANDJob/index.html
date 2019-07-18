@@ -1,0 +1,409 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Quartz实战入门(三)--JobDetail &amp; Job | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Quartz实战入门(三)--JobDetail &amp; Job">
+            
+	            Quartz实战入门(三)--JobDetail &amp; Job
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Quartz">
+            Quartz
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/Quartz" title='Quartz'>
+                        Quartz
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/05/04</span>
+        </span>
+    
+</div>
+
+            
+            
+            <p class="fa fa-exclamation-triangle warning">
+                本文于<strong>440</strong>天之前发表，文中内容可能已经过时。
+            </p>
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="jobDetail"><a href="#jobDetail" class="headerlink" title="jobDetail"></a>jobDetail</h2><p><code>jobDetail</code>  &#x662F;&#x4EFB;&#x52A1;&#x7684;&#x5B9A;&#x4E49;&#xFF0C;&#x800C; <code>Job</code> &#x662F;&#x4EFB;&#x52A1;&#x7684;&#x6267;&#x884C;&#x903B;&#x8F91;&#x3002;&#x5728; <code>JobDetail</code>&#x91CC;&#x4F1A;&#x5F15;&#x7528;&#x4E00;&#x4E2A; <code>Job Class</code>&#x5B9A;&#x4E49;&#x3002;&#x4E00;&#x4E2A;&#x6700;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">public class JobTest {</div><div class="line">    public static void main(String[] args) throws SchedulerException, IOException {</div><div class="line">           JobDetail job=newJob()</div><div class="line">               .ofType(DoNothingJob.class) //&#x5F15;&#x7528;Job Class</div><div class="line">               .withIdentity(&quot;job1&quot;, &quot;group1&quot;) //&#x8BBE;&#x7F6E;name/group</div><div class="line">               .withDescription(&quot;this is a test job&quot;) //&#x8BBE;&#x7F6E;&#x63CF;&#x8FF0;</div><div class="line">               .usingJobData(&quot;age&quot;, 18) //&#x52A0;&#x5165;&#x5C5E;&#x6027;&#x5230;ageJobDataMap</div><div class="line">               .build();</div><div class="line"></div><div class="line">           job.getJobDataMap().put(&quot;name&quot;, &quot;quertz&quot;); //&#x52A0;&#x5165;&#x5C5E;&#x6027;name&#x5230;JobDataMap</div><div class="line"></div><div class="line">           //&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x6BCF;&#x79D2;&#x6267;&#x884C;&#x4E00;&#x6B21;&#x7684;SimpleTrigger</div><div class="line">           Trigger trigger=newTrigger()</div><div class="line">                   .startNow()</div><div class="line">                   .withIdentity(&quot;trigger1&quot;)</div><div class="line">                   .withSchedule(simpleSchedule()</div><div class="line">                       .withIntervalInSeconds(1)</div><div class="line">                       .repeatForever())</div><div class="line">                   .build();</div><div class="line"></div><div class="line">           Scheduler sche=StdSchedulerFactory.getDefaultScheduler();</div><div class="line">           sche.scheduleJob(job, trigger);</div><div class="line"></div><div class="line">           sche.start();</div><div class="line"></div><div class="line">           System.in.read();</div><div class="line"></div><div class="line">           sche.shutdown();</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line">public class DoNothingJob implements Job {</div><div class="line">    public void execute(JobExecutionContext context) throws JobExecutionException {</div><div class="line">        System.out.println(&quot;do nothing&quot;);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x4ECE;&#x4E0A;&#x4F8B;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x8981;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x9700;&#x8981;&#x5E72;&#x51E0;&#x4EF6;&#x4E8B;&#xFF1A;</p>
+<ul>
+<li>&#x521B;&#x5EFA;&#x4E00;&#x4E2A; <code>org.quartz.Job</code> &#x7684;&#x5B9E;&#x73B0;&#x7C7B;&#xFF0C;&#x5E76;&#x5B9E;&#x73B0;&#x5B9E;&#x73B0;&#x81EA;&#x5DF1;&#x7684;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x3002;&#x6BD4;&#x5982;&#x4E0A;&#x9762;&#x7684; <code>DoNothingJob</code>&#x3002;</li>
+<li>&#x5B9A;&#x4E49;&#x4E00;&#x4E2A; <code>JobDetail</code>&#xFF0C;&#x5F15;&#x7528;&#x8FD9;&#x4E2A;&#x5B9E;&#x73B0;&#x7C7B;</li>
+<li>&#x52A0;&#x5165; <code>scheduleJob</code></li>
+</ul>
+<p>Quartz&#x8C03;&#x5EA6;&#x4E00;&#x6B21;&#x4EFB;&#x52A1;&#xFF0C;&#x4F1A;&#x5E72;&#x5982;&#x4E0B;&#x7684;&#x4E8B;&#xFF1A;</p>
+<pre><code>JobClass jobClass=JobDetail.getJobClass()
+Job jobInstance=jobClass.newInstance()&#x3002;&#x6240;&#x4EE5;Job&#x5B9E;&#x73B0;&#x7C7B;&#xFF0C;&#x5FC5;&#x987B;&#x6709;&#x4E00;&#x4E2A;public&#x7684;&#x65E0;&#x53C2;&#x6784;&#x5EFA;&#x65B9;&#x6CD5;&#x3002;
+jobInstance.execute(JobExecutionContext context)&#x3002;JobExecutionContext&#x662F;Job&#x8FD0;&#x884C;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#xFF0C;&#x53EF;&#x4EE5;&#x83B7;&#x5F97;Trigger&#x3001;Scheduler&#x3001;JobDetail&#x7684;&#x4FE1;&#x606F;&#x3002;
+</code></pre><p>&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x6BCF;&#x6B21;&#x8C03;&#x5EA6;&#x90FD;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684; <code>Job</code> &#x5B9E;&#x4F8B;&#xFF0C;&#x8FD9;&#x6837;&#x7684;&#x597D;&#x5904;&#x662F;&#x6709;&#x4E9B;&#x4EFB;&#x52A1;&#x5E76;&#x53D1;&#x6267;&#x884C;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4E0D;&#x5B58;&#x5728;&#x5BF9;&#x4E34;&#x754C;&#x8D44;&#x6E90;&#x7684;&#x8BBF;&#x95EE;&#x95EE;&#x9898;&#x2014;&#x2014;&#x5F53;&#x7136;&#xFF0C;&#x5982;&#x679C;&#x9700;&#x8981;&#x5171;&#x4EAB; <code>JobDataMap</code> &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8FD8;&#x662F;&#x5B58;&#x5728;&#x4E34;&#x754C;&#x8D44;&#x6E90;&#x7684;&#x5E76;&#x53D1;&#x8BBF;&#x95EE;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
+<h2 id="JobDataMap"><a href="#JobDataMap" class="headerlink" title="JobDataMap"></a>JobDataMap</h2><p><code>Job</code> &#x90FD;&#x6B21;&#x90FD;&#x662F; <code>newInstance</code> &#x7684;&#x5B9E;&#x4F8B;&#xFF0C;&#x90A3;&#x6211;&#x600E;&#x4E48;&#x4F20;&#x503C;&#x7ED9;&#x5B83;&#xFF1F; &#x6BD4;&#x5982;&#x6211;&#x73B0;&#x5728;&#x6709;&#x4E24;&#x4E2A;&#x53D1;&#x9001;&#x90AE;&#x4EF6;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;&#x53D1;&#x7ED9; &#x201C;liLei&#x201D; ,&#x4E00;&#x4E2A;&#x53D1;&#x7ED9; &#x201C;hanmeimei&#x201D; ,&#x4E0D;&#x80FD;&#x8BF4;&#x6211;&#x8981;&#x5199;&#x4E24;&#x4E2A; <code>Job</code> &#x5B9E;&#x73B0;&#x7C7B; <code>LiLeiSendEmailJob</code> &#x548C; <code>HanMeiMeiSendEmailJob</code>&#x3002;&#x5B9E;&#x73B0;&#x7684;&#x529E;&#x6CD5;&#x662F;&#x901A;&#x8FC7; <code>JobDataMap</code>&#x3002;</p>
+<p>&#x6BCF;&#x4E00;&#x4E2A; <code>JobDetail</code> &#x90FD;&#x4F1A;&#x6709;&#x4E00;&#x4E2A; <code>JobDataMap</code> &#x3002;<code>JobDataMap</code> &#x672C;&#x8D28;&#x5C31;&#x662F;&#x4E00;&#x4E2A; <code>Map</code> &#x7684;&#x6269;&#x5C55;&#x7C7B;&#xFF0C;&#x53EA;&#x662F;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E9B;&#x66F4;&#x4FBF;&#x6377;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x6BD4;&#x5982; <code>getString()</code> &#x4E4B;&#x7C7B;&#x7684;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x5B9A;&#x4E49; JobDetail&#xFF0C;&#x52A0;&#x5165;&#x5C5E;&#x6027;&#x503C;&#xFF0C;&#x65B9;&#x5F0F;&#x6709;&#x4E8C;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// &#x65B9;&#x6CD5;&#x4E00;</span></div><div class="line">newJob().usingJobData(<span class="string">&quot;age&quot;</span>, <span class="number">18</span>) <span class="comment">//&#x52A0;&#x5165;&#x5C5E;&#x6027;&#x5230;ageJobDataMap</span></div><div class="line"></div><div class="line"> <span class="comment">// &#x65B9;&#x6CD5;&#x4E8C;</span></div><div class="line"> job.getJobDataMap().put(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;quertz&quot;</span>); <span class="comment">//&#x52A0;&#x5165;&#x5C5E;&#x6027;name&#x5230;JobDataMap</span></div></pre></td></tr></table></figure>
+<p>&#x7136;&#x540E;&#x5728;Job&#x4E2D;&#x53EF;&#x4EE5;&#x83B7;&#x53D6;&#x8FD9;&#x4E2A;JobDataMap&#x7684;&#x503C;&#xFF0C;&#x65B9;&#x5F0F;&#x540C;&#x6837;&#x6709;&#x4E8C;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloQuartz</span> <span class="keyword">implements</span> <span class="title">Job</span> </span>{</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(JobExecutionContext context)</span> <span class="keyword">throws</span> JobExecutionException </span>{</div><div class="line">        JobDetail detail = context.getJobDetail();</div><div class="line">        JobDataMap map = detail.getJobDataMap(); <span class="comment">//&#x65B9;&#x6CD5;&#x4E00;&#xFF1A;&#x83B7;&#x5F97;JobDataMap</span></div><div class="line">        System.out.println(<span class="string">&quot;say hello to &quot;</span> + name + <span class="string">&quot;[&quot;</span> + map.getInt(<span class="string">&quot;age&quot;</span>) + <span class="string">&quot;]&quot;</span> + <span class="string">&quot; at &quot;</span></div><div class="line">                           + <span class="keyword">new</span> Date());</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">//&#x65B9;&#x6CD5;&#x4E8C;&#xFF1A;&#x5C5E;&#x6027;&#x7684;setter&#x65B9;&#x6CD5;&#xFF0C;&#x4F1A;&#x5C06;JobDataMap&#x7684;&#x5C5E;&#x6027;&#x81EA;&#x52A8;&#x6CE8;&#x5165;</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>{ </div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x5BF9;&#x4E8E;&#x540C;&#x4E00;&#x4E2A;JobDetail&#x5B9E;&#x4F8B;&#xFF0C;&#x6267;&#x884C;&#x7684;&#x591A;&#x4E2A;Job&#x5B9E;&#x4F8B;&#xFF0C;&#x662F;&#x5171;&#x4EAB;&#x540C;&#x6837;&#x7684;JobDataMap&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x5728;&#x4EFB;&#x52A1;&#x91CC;&#x4FEE;&#x6539;&#x4E86;&#x91CC;&#x9762;&#x7684;&#x503C;&#xFF0C;&#x4F1A;&#x5BF9;&#x5176;&#x4ED6;Job&#x5B9E;&#x4F8B;&#xFF08;&#x5E76;&#x53D1;&#x7684;&#x6216;&#x8005;&#x540E;&#x7EED;&#x7684;&#xFF09;&#x9020;&#x6210;&#x5F71;&#x54CD;&#x3002;</p>
+<p>&#x9664;&#x4E86;JobDetail&#xFF0C;Trigger&#x540C;&#x6837;&#x6709;&#x4E00;&#x4E2A;JobDataMap&#xFF0C;&#x5171;&#x4EAB;&#x8303;&#x56F4;&#x662F;&#x6240;&#x6709;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;Trigger&#x7684;Job&#x5B9E;&#x4F8B;&#x3002;</p>
+<p>Job&#x5E76;&#x53D1;<br>Job&#x662F;&#x6709;&#x53EF;&#x80FD;&#x5E76;&#x53D1;&#x6267;&#x884C;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x8981;&#x6267;&#x884C;10&#x79D2;&#x4E2D;&#xFF0C;&#x800C;&#x8C03;&#x5EA6;&#x7B97;&#x6CD5;&#x662F;&#x6BCF;&#x79D2;&#x4E2D;&#x89E6;&#x53D1;1&#x6B21;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x6709;&#x53EF;&#x80FD;&#x591A;&#x4E2A;&#x4EFB;&#x52A1;&#x88AB;&#x5E76;&#x53D1;&#x6267;&#x884C;&#x3002;</p>
+<p>&#x6709;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x5E76;&#x4E0D;&#x60F3;&#x4EFB;&#x52A1;&#x5E76;&#x53D1;&#x6267;&#x884C;&#xFF0C;&#x6BD4;&#x5982;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#x8981;&#x53BB;&#x201D;&#x83B7;&#x5F97;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x6240;&#x6709;&#x672A;&#x53D1;&#x9001;&#x90AE;&#x4EF6;&#x7684;&#x540D;&#x5355;&#x201C;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x5E76;&#x53D1;&#x6267;&#x884C;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#x9501;&#x53BB;&#x907F;&#x514D;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x88AB;&#x591A;&#x6B21;&#x5904;&#x7406;&#x3002;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x4E00;&#x4E2A;@DisallowConcurrentExecution&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x5C31;&#x662F;&#x8FD9;&#x6837;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public class DoNothingJob implements Job {</div><div class="line">    @DisallowConcurrentExecution</div><div class="line">    public void execute(JobExecutionContext context) throws JobExecutionException {</div><div class="line">        System.out.println(&quot;do nothing&quot;);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x6CE8;&#x610F;&#xFF0C;<code>@DisallowConcurrentExecution</code> &#x662F;&#x5BF9; <code>JobDetail</code> &#x5B9E;&#x4F8B;&#x751F;&#x6548;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x5982;&#x679C;&#x4F60;&#x5B9A;&#x4E49;&#x4E24;&#x4E2A; <code>JobDetail</code>&#xFF0C;&#x5F15;&#x7528;&#x540C;&#x4E00;&#x4E2A; <code>Job</code> &#x7C7B;&#xFF0C;&#x662F;&#x53EF;&#x4EE5;&#x5E76;&#x53D1;&#x6267;&#x884C;&#x7684;&#x3002;</p>
+<h2 id="JobExecutionException"><a href="#JobExecutionException" class="headerlink" title="JobExecutionException"></a>JobExecutionException</h2><p><code>Job.execute()</code>  &#x65B9;&#x6CD5;&#x662F;&#x4E0D;&#x5141;&#x8BB8;&#x629B;&#x51FA;&#x9664; <code>JobExecutionException</code> &#x4E4B;&#x5916;&#x7684;&#x6240;&#x6709;&#x5F02;&#x5E38;&#x7684;&#xFF08;&#x5305;&#x62EC;<code>RuntimeException</code>)&#xFF0C;&#x6240;&#x4EE5;&#x7F16;&#x7801;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6700;&#x597D;&#x662F; <code>try-catch</code> &#x6240;&#x6709;&#x7684; <code>Throwable</code>&#xFF0C;&#x5C0F;&#x5FC3;&#x5904;&#x7406;&#x3002;</p>
+<h2 id="&#x5176;&#x4ED6;&#x5C5E;&#x6027;"><a href="#&#x5176;&#x4ED6;&#x5C5E;&#x6027;" class="headerlink" title="&#x5176;&#x4ED6;&#x5C5E;&#x6027;"></a>&#x5176;&#x4ED6;&#x5C5E;&#x6027;</h2><ul>
+<li><p>Durability</p>
+<pre><code>&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x4E0D;&#x662F;durable&#xFF0C;&#x90A3;&#x4E48;&#x5F53;&#x6CA1;&#x6709;Trigger&#x5173;&#x8054;&#x5B83;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5B83;&#x5C31;&#x4F1A;&#x88AB;&#x81EA;&#x52A8;&#x5220;&#x9664;&#x3002;
+</code></pre></li>
+<li><p>RequestsRecovery</p>
+<pre><code>&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x662F;&quot;requests recovery&quot;&#xFF0C;&#x90A3;&#x4E48;&#x5F53;&#x4EFB;&#x52A1;&#x8FD0;&#x884C;&#x8FC7;&#x7A0B;&#x975E;&#x6B63;&#x5E38;&#x9000;&#x51FA;&#x65F6;&#xFF08;&#x6BD4;&#x5982;&#x8FDB;&#x7A0B;&#x5D29;&#x6E83;&#xFF0C;&#x673A;&#x5668;&#x65AD;&#x7535;&#xFF0C;&#x4F46;&#x4E0D;&#x5305;&#x62EC;&#x629B;&#x51FA;&#x5F02;&#x5E38;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#xFF09;&#xFF0C;Quartz&#x518D;&#x6B21;&#x542F;&#x52A8;&#x65F6;&#xFF0C;&#x4F1A;&#x91CD;&#x65B0;&#x8FD0;&#x884C;&#x4E00;&#x6B21;&#x8FD9;&#x4E2A;&#x4EFB;&#x52A1;&#x5B9E;&#x4F8B;&#x3002;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;JobExecutionContext.isRecovering()&#x67E5;&#x8BE2;&#x4EFB;&#x52A1;&#x662F;&#x5426;&#x662F;&#x88AB;&#x6062;&#x590D;&#x7684;&#x3002;
+</code></pre></li>
+</ul>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/Quartz/后端/Java/框架/定时器/Quartz实战/Quartz实战入门(四)--Scheduler/" class="pre-post btn btn-default" title='Quartz实战入门(四)--Scheduler'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Quartz实战入门(四)--Scheduler</span>
+        </a>
+    
+    
+        <a href="/Quartz/后端/Java/框架/定时器/Quartz实战/Quartz实战入门(二)--Trigger/" class="next-post btn btn-default" title='Quartz实战入门(二)--Trigger'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Quartz实战入门(二)--Trigger</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/"><i class="fa" aria-hidden="true">Docker</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OAuth/"><i class="fa" aria-hidden="true">OAuth</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Security/"><i class="fa" aria-hidden="true">Spring Security</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/"><i class="fa" aria-hidden="true">UML</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/"><i class="fa" aria-hidden="true">git</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><i class="fa" aria-hidden="true">五月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/"><i class="fa" aria-hidden="true">四月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">十月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JAVA-WEB/" style="font-size: 14px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 11.33px;">Lambda</a> <a href="/tags/Liunx/" style="font-size: 17.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.67px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 15.33px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px;">Nginx</a> <a href="/tags/OAuth/" style="font-size: 10px;">OAuth</a> <a href="/tags/Quartz/" style="font-size: 12px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 14.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 15.33px;">Redis</a> <a href="/tags/SQL/" style="font-size: 13.33px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.67px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 18.67px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15.33px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 18px;">Spring</a> <a href="/tags/Spring-Security/" style="font-size: 16.67px;">Spring Security</a> <a href="/tags/SpringBoot/" style="font-size: 13.33px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 10.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Utils/" style="font-size: 10.67px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 14px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 14px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/git/" style="font-size: 12.67px;">git</a> <a href="/tags/java/" style="font-size: 10.67px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.67px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 11.33px;">前端</a> <a href="/tags/前端基础/" style="font-size: 12.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 19.33px;">设计模式</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

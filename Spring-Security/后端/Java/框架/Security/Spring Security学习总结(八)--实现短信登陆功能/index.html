@@ -1,0 +1,396 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Spring Security学习总结(八)--实现短信登陆功能 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Spring Security学习总结(八)--实现短信登陆功能">
+            
+	            Spring Security学习总结(八)--实现短信登陆功能
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Spring Security">
+            Spring Security
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Spring Security" title='Spring Security'>
+                        Spring Security
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/05/02</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <blockquote>
+<p>&#x5728;&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x4E86;&#x89E3;&#x4E86;&#x8868;&#x5355;&#x767B;&#x9646;&#x7684;&#x6D41;&#x7A0B;&#xFF0C;&#x6211;&#x4EEC;&#x4ECA;&#x5929;&#x6765;&#x5B9E;&#x73B0;&#x4E0B;&#x77ED;&#x4FE1;&#x767B;&#x9646;&#x529F;&#x80FD;&#x3002;</p>
+</blockquote>
+<h3 id="&#x77ED;&#x4FE1;&#x767B;&#x9646;&#x6D41;&#x7A0B;"><a href="#&#x77ED;&#x4FE1;&#x767B;&#x9646;&#x6D41;&#x7A0B;" class="headerlink" title="&#x77ED;&#x4FE1;&#x767B;&#x9646;&#x6D41;&#x7A0B;"></a>&#x77ED;&#x4FE1;&#x767B;&#x9646;&#x6D41;&#x7A0B;</h3><p><img src="/Spring-Security/&#x540E;&#x7AEF;/Java/&#x6846;&#x67B6;/Security/Spring Security&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x516B;)--&#x5B9E;&#x73B0;&#x77ED;&#x4FE1;&#x767B;&#x9646;&#x529F;&#x80FD;/img/01.png" alt=""></p>
+<a id="more"></a> 
+<h3 id="&#x521B;&#x5EFA;&#x77ED;&#x4FE1;&#x767B;&#x9646;&#x9875;&#x9762;"><a href="#&#x521B;&#x5EFA;&#x77ED;&#x4FE1;&#x767B;&#x9646;&#x9875;&#x9762;" class="headerlink" title="&#x521B;&#x5EFA;&#x77ED;&#x4FE1;&#x767B;&#x9646;&#x9875;&#x9762;"></a>&#x521B;&#x5EFA;&#x77ED;&#x4FE1;&#x767B;&#x9646;&#x9875;&#x9762;</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line">&lt;html lang=&quot;en&quot;&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset=&quot;utf-8&quot;&gt;</div><div class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, shrink-to-fit=no&quot;&gt;</div><div class="line">    &lt;meta name=&quot;description&quot; content=&quot;&quot;&gt;</div><div class="line">    &lt;meta name=&quot;author&quot; content=&quot;&quot;&gt;</div><div class="line">    &lt;title&gt;&#x77ED;&#x4FE1;&#x767B;&#x5F55;&#x754C;&#x9762;&lt;/title&gt;</div><div class="line">    &lt;link href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;</div><div class="line">          integrity=&quot;sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M&quot; crossorigin=&quot;anonymous&quot;&gt;</div><div class="line">    &lt;link href=&quot;https://getbootstrap.com/docs/4.0/examples/signin/signin.css&quot; rel=&quot;stylesheet&quot; crossorigin=&quot;anonymous&quot;/&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;div class=&quot;container&quot;&gt;</div><div class="line">    &lt;form class=&quot;form-signin&quot; method=&quot;post&quot; action=&quot;/authentication/mobile&quot;&gt;</div><div class="line">        &lt;h2 class=&quot;form-signin-heading&quot;&gt;&#x77ED;&#x4FE1;&#x767B;&#x5F55;&#x754C;&#x9762;&lt;/h2&gt;</div><div class="line">        &lt;p&gt;</div><div class="line">            &lt;label for=&quot;mobile&quot; class=&quot;sr-only&quot;&gt;&#x624B;&#x673A;&#x53F7;&#xFF1A;&lt;/label&gt;</div><div class="line">            &lt;input type=&quot;text&quot; id=&quot;mobile&quot; name=&quot;mobile&quot; class=&quot;form-control&quot; placeholder=&quot;&#x624B;&#x673A;&#x53F7;&quot; required autofocus&gt;</div><div class="line">        &lt;/p&gt;</div><div class="line">        &lt;p&gt;</div><div class="line">            &lt;label for=&quot;smsCode&quot; class=&quot;sr-only&quot;&gt;&#x77ED;&#x4FE1;&#x9A8C;&#x8BC1;&#x7801;&#xFF1A;&lt;/label&gt;</div><div class="line">            &lt;input type=&quot;text&quot; id=&quot;smsCode&quot; name=&quot;smsCode&quot; class=&quot;form-control&quot; placeholder=&quot;&#x9A8C;&#x8BC1;&#x7801;&quot; required&gt;</div><div class="line">        &lt;/p&gt;</div><div class="line">        &lt;a href=&quot;/code/sms&quot; &gt;&#x53D1;&#x9001;&#x77ED;&#x4FE1;&#x9A8C;&#x8BC1;&#x7801;&lt;/a&gt;</div><div class="line">        &lt;button class=&quot;btn btn-lg btn-primary btn-block&quot; type=&quot;submit&quot;&gt;&#x767B;&#x5F55;&lt;/button&gt;</div><div class="line">    &lt;/form&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div><div class="line">``` </div><div class="line">### &#x521B;&#x5EFA;&#x53D1;&#x9001;&#x77ED;&#x4FE1;&#x9A8C;&#x8BC1;&#x7801;&#x63A5;&#x53E3;</div><div class="line"></div><div class="line">``` java</div><div class="line">@RestController</div><div class="line">public class ValidateCodeController {</div><div class="line">	......</div><div class="line">	private static final int SMS_EXPIREIN = 360;</div><div class="line">    public static final String SESSION_SMS_KEY = &quot;SESSION_KEY_SMS_CODE&quot;;</div><div class="line">	private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();</div><div class="line"></div><div class="line"></div><div class="line"> 	@GetMapping(&quot;/code/sms&quot;)</div><div class="line">    public void createSmsCode(HttpServletRequest request, HttpServletResponse response) throws IOException {</div><div class="line">        ValidateCode validateCode = createSmsCode(request);</div><div class="line">        sessionStrategy.setAttribute(new ServletWebRequest(request), SESSION_SMS_KEY, validateCode);</div><div class="line">        // &#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x5C31;&#x4E0D;&#x5B9E;&#x73B0;&#x77ED;&#x4FE1;&#x529F;&#x80FD;&#xFF0C;&#x76F4;&#x63A5;&#x8F93;&#x51FA;&#x5230;&#x63A7;&#x5236;&#x53F0;&#x4E0A;</div><div class="line">        System.out.println(validateCode.getCode());</div><div class="line"></div><div class="line">    }</div><div class="line"></div><div class="line">	 /**</div><div class="line">     * &#x521B;&#x5EFA;&#x77ED;&#x4FE1;&#x9A8C;&#x8BC1;&#x7801;&#xFF0C;&#x6B64;&#x5904;&#x4F2A;&#x4EE3;&#x7801;&#x5B9E;&#x73B0;</div><div class="line">     * @param request</div><div class="line">     * @return</div><div class="line">     */</div><div class="line">    private ValidateCode createSmsCode(HttpServletRequest request) {</div><div class="line">        return new ValidateCode(&quot;666&quot;,SMS_EXPIREIN);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p><strong>ValidateCode</strong> &#x5BF9;&#x8C61;&#x5B9A;&#x4E49;&#xFF1A; </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValidateCode</span> </span>{</div><div class="line">    <span class="keyword">private</span> String code;</div><div class="line">    <span class="keyword">private</span> LocalDateTime expireTime;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ValidateCode</span><span class="params">(String code, <span class="keyword">int</span> expireIn)</span></span>{</div><div class="line">        <span class="keyword">this</span>.code = code;</div><div class="line">        <span class="keyword">this</span>.expireTime = LocalDateTime.now().plusSeconds(expireIn);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ValidateCode</span><span class="params">(String code,LocalDateTime expireTime)</span></span>{</div><div class="line">        <span class="keyword">this</span>.code = code;</div><div class="line">        <span class="keyword">this</span>.expireTime = expireTime;</div><div class="line">    }</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCode</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> code;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCode</span><span class="params">(String code)</span> </span>{</div><div class="line">        <span class="keyword">this</span>.code = code;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> LocalDateTime <span class="title">getExpireTime</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> expireTime;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setExpireTime</span><span class="params">(LocalDateTime expireTime)</span> </span>{</div><div class="line">        <span class="keyword">this</span>.expireTime = expireTime;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isExpried</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> LocalDateTime.now().isAfter(expireTime);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x4EFF;&#x7167;&#x8868;&#x5355;&#x8BA4;&#x8BC1;&#x6D41;&#x7A0B;&#x6765;&#x5B9E;&#x73B0;&#x77ED;&#x4FE1;&#x8BA4;&#x8BC1;&#x529F;&#x80FD;</p>
+<h3 id="&#x521B;&#x5EFA;-SmsCodeAuthenticationToken-&#x5BF9;&#x8C61;"><a href="#&#x521B;&#x5EFA;-SmsCodeAuthenticationToken-&#x5BF9;&#x8C61;" class="headerlink" title="&#x521B;&#x5EFA; SmsCodeAuthenticationToken &#x5BF9;&#x8C61;"></a>&#x521B;&#x5EFA; SmsCodeAuthenticationToken &#x5BF9;&#x8C61;</h3><p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x590D;&#x5236; <strong>UsernamePasswordAuthenticationToken</strong> &#x7136;&#x540E;&#x8FDB;&#x884C;&#x6539;&#x9020;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmsCodeAuthenticationToken</span> <span class="keyword">extends</span> <span class="title">AbstractAuthenticationToken</span> </span>{</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;</div><div class="line">    </div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object principal;</div><div class="line"></div><div class="line">   </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SmsCodeAuthenticationToken</span><span class="params">(String mobile)</span> </span>{</div><div class="line">        <span class="keyword">super</span>(<span class="keyword">null</span>);</div><div class="line">        <span class="keyword">this</span>.principal = mobile;</div><div class="line">        setAuthenticated(<span class="keyword">false</span>);</div><div class="line">    }</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SmsCodeAuthenticationToken</span><span class="params">(Object principal,</span></span></div><div class="line">                                               Collection&lt;? extends GrantedAuthority&gt; authorities) {</div><div class="line">        <span class="keyword">super</span>(authorities);</div><div class="line">        <span class="keyword">this</span>.principal = principal;</div><div class="line">        <span class="keyword">super</span>.setAuthenticated(<span class="keyword">true</span>); </div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getCredentials</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getPrincipal</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.principal;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAuthenticated</span><span class="params">(<span class="keyword">boolean</span> isAuthenticated)</span> <span class="keyword">throws</span> IllegalArgumentException </span>{</div><div class="line">        <span class="keyword">if</span> (isAuthenticated) {</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(</div><div class="line">                    <span class="string">&quot;Cannot set this token to trusted - use constructor which takes a GrantedAuthority list instead&quot;</span>);</div><div class="line">        }</div><div class="line"></div><div class="line">        <span class="keyword">super</span>.setAuthenticated(<span class="keyword">false</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eraseCredentials</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">super</span>.eraseCredentials();</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x6211;&#x4EEC;&#x53EA;&#x4FEE;&#x6539;&#x4E86;&#x4EE5;&#x4E0B;&#x51E0;&#x70B9;&#xFF1A;</p>
+<ul>
+<li>&#x5C06;  <strong>credentials</strong> &#x5C5E;&#x6027;&#x53BB;&#x9664;&#xFF0C;&#x6211;&#x4EEC;&#x4E0D;&#x9700;&#x8981;&#x5BC6;&#x7801;&#x4E86;</li>
+<li>&#x5C06;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x6784;&#x9020;&#x65B9;&#x6CD5;&#x7684;&#x53C2;&#x6570;&#x660E;&#x786E;&#x6307;&#x5B9A;&#x4E3A;&#x624B;&#x673A;&#x53F7;</li>
+</ul>
+<h3 id="&#x521B;&#x5EFA;-SmsCodeAuthentionFilter-&#x8FC7;&#x6EE4;&#x5668;"><a href="#&#x521B;&#x5EFA;-SmsCodeAuthentionFilter-&#x8FC7;&#x6EE4;&#x5668;" class="headerlink" title="&#x521B;&#x5EFA; SmsCodeAuthentionFilter &#x8FC7;&#x6EE4;&#x5668;"></a>&#x521B;&#x5EFA; SmsCodeAuthentionFilter &#x8FC7;&#x6EE4;&#x5668;</h3><p>&#x6211;&#x4EEC;&#x540C;&#x6837;&#x53C2;&#x7167; <strong>UsernamePasswordAuthenticationFilter</strong> &#x6765;&#x5B9E;&#x73B0;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmsCodeAuthentionFilter</span> <span class="keyword">extends</span> <span class="title">AbstractAuthenticationProcessingFilter</span> </span>{</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String FORM_MOBILE_KEY = <span class="string">&quot;mobile&quot;</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> String mobileParameter = FORM_MOBILE_KEY;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> postOnly = <span class="keyword">true</span>;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SmsCodeAuthentionFilter</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">super</span>(<span class="keyword">new</span> AntPathRequestMatcher(<span class="string">&quot;/authentication/mobile&quot;</span>, <span class="string">&quot;POST&quot;</span>));</div><div class="line">    }</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Authentication <span class="title">attemptAuthentication</span><span class="params">(HttpServletRequest request,</span></span></div><div class="line">                                                HttpServletResponse response) <span class="keyword">throws</span> AuthenticationException {</div><div class="line">        <span class="keyword">if</span> (postOnly &amp;&amp; !request.getMethod().equals(<span class="string">&quot;POST&quot;</span>)) {</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> AuthenticationServiceException(</div><div class="line">                    <span class="string">&quot;Authentication method not supported: &quot;</span> + request.getMethod());</div><div class="line">        }</div><div class="line"></div><div class="line">        String mobile = obtainMobile(request);</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (mobile == <span class="keyword">null</span>) {</div><div class="line">            mobile = <span class="string">&quot;&quot;</span>;</div><div class="line">        }</div><div class="line"></div><div class="line"></div><div class="line">        mobile = mobile.trim();</div><div class="line"></div><div class="line">        SmsCodeAuthenticationToken authRequest = <span class="keyword">new</span> SmsCodeAuthenticationToken(mobile);</div><div class="line"></div><div class="line">        setDetails(request, authRequest);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.getAuthenticationManager().authenticate(authRequest);</div><div class="line">    }</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * &#x83B7;&#x53D6;&#x624B;&#x673A;&#x53F7;</div><div class="line">     * <span class="doctag">@param</span> request</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">protected</span> String <span class="title">obtainMobile</span><span class="params">(HttpServletRequest request)</span> </span>{</div><div class="line">        <span class="keyword">return</span> request.getParameter(mobileParameter);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Provided so that subclasses may configure what is put into the authentication</div><div class="line">     * request&apos;s details property.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> request that an authentication request is being created for</div><div class="line">     * <span class="doctag">@param</span> authRequest the authentication request object that should have its details</div><div class="line">     * set</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setDetails</span><span class="params">(HttpServletRequest request,</span></span></div><div class="line">                              SmsCodeAuthenticationToken authRequest) {</div><div class="line">        authRequest.setDetails(authenticationDetailsSource.buildDetails(request));</div><div class="line">    }</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Defines whether only HTTP POST requests will be allowed by this filter. If set to</div><div class="line">     * true, and an authentication request is received which is not a POST request, an</div><div class="line">     * exception will be raised immediately and authentication will not be attempted. The</div><div class="line">     * &lt;tt&gt;unsuccessfulAuthentication()&lt;/tt&gt; method will be called as if handling a failed</div><div class="line">     * authentication.</div><div class="line">     * &lt;p&gt;</div><div class="line">     * Defaults to &lt;tt&gt;true&lt;/tt&gt; but may be overridden by subclasses.</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPostOnly</span><span class="params">(<span class="keyword">boolean</span> postOnly)</span> </span>{</div><div class="line">        <span class="keyword">this</span>.postOnly = postOnly;</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x4FEE;&#x6539;&#x70B9;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li>&#x5C06; <strong>key</strong> &#x66FF;&#x6362;&#x4E3A; <strong>mobile</strong></li>
+<li>&#x5C06;&#x83B7;&#x53D6; <strong>username</strong> &#x548C; <strong>password</strong> &#x503C;&#x66FF;&#x6362;&#x4E3A;&#x83B7;&#x53D6; <strong>mobile</strong></li>
+<li>&#x5C06; <strong>UsernamePasswordAuthenticationToken</strong> &#x66FF;&#x6362;&#x4E3A; <strong>SmsCodeAuthenticationToken</strong></li>
+</ul>
+<h3 id="&#x5B9E;&#x73B0;-AuthenticationProvider-&#x63A5;&#x53E3;"><a href="#&#x5B9E;&#x73B0;-AuthenticationProvider-&#x63A5;&#x53E3;" class="headerlink" title="&#x5B9E;&#x73B0; AuthenticationProvider &#x63A5;&#x53E3;"></a>&#x5B9E;&#x73B0; AuthenticationProvider &#x63A5;&#x53E3;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmsCodeAuthenticationProvider</span> <span class="keyword">implements</span> <span class="title">AuthenticationProvider</span> </span>{</div><div class="line"></div><div class="line">    <span class="keyword">private</span> UserDetailsService userDetailsService;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Authentication <span class="title">authenticate</span><span class="params">(Authentication authentication)</span> <span class="keyword">throws</span> AuthenticationException </span>{</div><div class="line">        SmsCodeAuthenticationToken authenticationToken = (SmsCodeAuthenticationToken) authentication;</div><div class="line">        UserDetails userDetails = userDetailsService.loadUserByUsername((String) authenticationToken.getPrincipal());</div><div class="line">        <span class="keyword">if</span> (userDetails == <span class="keyword">null</span>) {</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> InternalAuthenticationServiceException(<span class="string">&quot;&#x672A;&#x83B7;&#x53D6;&#x5230;&#x7528;&#x6237;&#x4FE1;&#x606F;&quot;</span>);</div><div class="line">        }</div><div class="line">        SmsCodeAuthenticationToken authenticationResult =</div><div class="line">                <span class="keyword">new</span> SmsCodeAuthenticationToken(userDetails, userDetails.getAuthorities());</div><div class="line">        authenticationResult.setDetails(authenticationToken.getDetails());</div><div class="line">        <span class="keyword">return</span> authenticationResult;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">supports</span><span class="params">(Class&lt;?&gt; authentication)</span> </span>{</div><div class="line">        <span class="keyword">return</span> SmsCodeAuthenticationToken.class.isAssignableFrom(authentication);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> UserDetailsService <span class="title">getUserDetailsService</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> userDetailsService;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserDetailsService</span><span class="params">(UserDetailsService userDetailsService)</span> </span>{</div><div class="line">        <span class="keyword">this</span>.userDetailsService = userDetailsService;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="&#x589E;&#x52A0;&#x77ED;&#x4FE1;&#x9A8C;&#x8BC1;&#x7801;&#x9A8C;&#x8BC1;&#x8FC7;&#x6EE4;&#x5668;"><a href="#&#x589E;&#x52A0;&#x77ED;&#x4FE1;&#x9A8C;&#x8BC1;&#x7801;&#x9A8C;&#x8BC1;&#x8FC7;&#x6EE4;&#x5668;" class="headerlink" title="&#x589E;&#x52A0;&#x77ED;&#x4FE1;&#x9A8C;&#x8BC1;&#x7801;&#x9A8C;&#x8BC1;&#x8FC7;&#x6EE4;&#x5668;"></a>&#x589E;&#x52A0;&#x77ED;&#x4FE1;&#x9A8C;&#x8BC1;&#x7801;&#x9A8C;&#x8BC1;&#x8FC7;&#x6EE4;&#x5668;</h3><p>&#x62F7;&#x8D1D;&#x6211;&#x4EEC;&#x4E4B;&#x524D;&#x7684;&#x56FE;&#x5F62;&#x9A8C;&#x8BC1;&#x7801;&#x8FC7;&#x6EE4;&#x5668;&#x5E76;&#x6539;&#x9020;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValidateSmsCodeFilter</span> <span class="keyword">extends</span> <span class="title">OncePerRequestFilter</span> </span>{</div><div class="line"></div><div class="line">    <span class="keyword">private</span> AuthenticationFailureHandler authenticationFailureHandler;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> SessionStrategy sessionStrategy = <span class="keyword">new</span> HttpSessionSessionStrategy();</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doFilterInternal</span><span class="params">(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)</span> <span class="keyword">throws</span> ServletException, IOException </span>{</div><div class="line">        <span class="keyword">if</span> (StringUtils.equals(<span class="string">&quot;/authentication/mobile&quot;</span>, request.getRequestURI())</div><div class="line">                &amp;&amp; StringUtils.equalsIgnoreCase(request.getMethod(), <span class="string">&quot;post&quot;</span>)) {</div><div class="line">            <span class="keyword">try</span>{</div><div class="line">                validate(<span class="keyword">new</span> ServletWebRequest(request));</div><div class="line">            }<span class="keyword">catch</span> (ValidateCodeException e){</div><div class="line">                authenticationFailureHandler.onAuthenticationFailure(request,response,e);</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            }</div><div class="line">        }</div><div class="line">        filterChain.doFilter(request,response);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">validate</span><span class="params">(ServletWebRequest request)</span> <span class="keyword">throws</span> ServletRequestBindingException </span>{</div><div class="line">        ValidateCode codeInSession = (ValidateCode) sessionStrategy.getAttribute(request,ValidateCodeController.SESSION_SMS_KEY);</div><div class="line">        String codeInRequest = ServletRequestUtils.getStringParameter(request.getRequest(),<span class="string">&quot;smsCode&quot;</span>);</div><div class="line">        <span class="keyword">if</span>(StringUtils.isBlank(codeInRequest)){</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ValidateCodeException(<span class="string">&quot;&#x9A8C;&#x8BC1;&#x7801;&#x4E0D;&#x80FD;&#x4E3A;&#x7A7A;&quot;</span>);</div><div class="line">        }</div><div class="line">        <span class="keyword">if</span>(codeInSession == <span class="keyword">null</span>){</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ValidateCodeException(<span class="string">&quot;&#x9A8C;&#x8BC1;&#x7801;&#x4E0D;&#x5B58;&#x5728;&quot;</span>);</div><div class="line">        }</div><div class="line">        <span class="keyword">if</span>(codeInSession.isExpried()){</div><div class="line">            sessionStrategy.removeAttribute(request,ValidateCodeController.SESSION_SMS_KEY);</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ValidateCodeException(<span class="string">&quot;&#x9A8C;&#x8BC1;&#x7801;&#x5DF2;&#x8FC7;&#x671F;&quot;</span>);</div><div class="line">        }</div><div class="line">        <span class="keyword">if</span>(!StringUtils.equalsIgnoreCase(codeInSession.getCode(),codeInRequest)){</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ValidateCodeException(<span class="string">&quot;&#x9A8C;&#x8BC1;&#x7801;&#x4E0D;&#x5339;&#x914D;&quot;</span>);</div><div class="line">        }</div><div class="line">        sessionStrategy.removeAttribute(request,ValidateCodeController.SESSION_SMS_KEY);</div><div class="line">    }</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAuthenticationFailureHandler</span><span class="params">(AuthenticationFailureHandler authenticationFailureHandler)</span> </span>{</div><div class="line">        <span class="keyword">this</span>.authenticationFailureHandler = authenticationFailureHandler;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="&#x521B;&#x5EFA;-SmsCodeAuthenticationSecurityConfig-&#x5BF9;&#x8C61;&#xFF0C;&#x7EC4;&#x88C5;&#x8BA4;&#x8BC1;&#x6D41;&#x7A0B;&#x914D;&#x7F6E;"><a href="#&#x521B;&#x5EFA;-SmsCodeAuthenticationSecurityConfig-&#x5BF9;&#x8C61;&#xFF0C;&#x7EC4;&#x88C5;&#x8BA4;&#x8BC1;&#x6D41;&#x7A0B;&#x914D;&#x7F6E;" class="headerlink" title="&#x521B;&#x5EFA; SmsCodeAuthenticationSecurityConfig &#x5BF9;&#x8C61;&#xFF0C;&#x7EC4;&#x88C5;&#x8BA4;&#x8BC1;&#x6D41;&#x7A0B;&#x914D;&#x7F6E;"></a>&#x521B;&#x5EFA; SmsCodeAuthenticationSecurityConfig &#x5BF9;&#x8C61;&#xFF0C;&#x7EC4;&#x88C5;&#x8BA4;&#x8BC1;&#x6D41;&#x7A0B;&#x914D;&#x7F6E;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmsCodeAuthenticationSecurityConfig</span></span></div><div class="line">        <span class="keyword">extends</span> <span class="title">SecurityConfigurerAdapter</span>&lt;<span class="title">DefaultSecurityFilterChain</span>, <span class="title">HttpSecurity</span>&gt; {</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> AuthenticationSuccessHandler myAuthenticationSuccessHandler;</div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> AuthenticationFailureHandler myAuthenticationFailureHandler;</div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> UserDetailsService userDetailsService;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>{</div><div class="line">        SmsCodeAuthentionFilter smsCodeAuthentionFilter = <span class="keyword">new</span> SmsCodeAuthentionFilter();</div><div class="line">        smsCodeAuthentionFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));</div><div class="line">        smsCodeAuthentionFilter.setAuthenticationSuccessHandler(myAuthenticationSuccessHandler);</div><div class="line">        smsCodeAuthentionFilter.setAuthenticationFailureHandler(myAuthenticationFailureHandler);</div><div class="line"></div><div class="line">        SmsCodeAuthenticationProvider smsCodeAuthenticationProvider = <span class="keyword">new</span> SmsCodeAuthenticationProvider();</div><div class="line">        smsCodeAuthenticationProvider.setUserDetailsService(userDetailsService);</div><div class="line"></div><div class="line">        http.authenticationProvider(smsCodeAuthenticationProvider)</div><div class="line">                .addFilterAfter(smsCodeAuthentionFilter,UsernamePasswordAuthenticationFilter.class);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="&#x5C06;&#x914D;&#x7F6E;&#x52A0;&#x8F7D;&#x5230;-SecurityConfig-&#x914D;&#x7F6E;&#x91CC;"><a href="#&#x5C06;&#x914D;&#x7F6E;&#x52A0;&#x8F7D;&#x5230;-SecurityConfig-&#x914D;&#x7F6E;&#x91CC;" class="headerlink" title="&#x5C06;&#x914D;&#x7F6E;&#x52A0;&#x8F7D;&#x5230; SecurityConfig &#x914D;&#x7F6E;&#x91CC;"></a>&#x5C06;&#x914D;&#x7F6E;&#x52A0;&#x8F7D;&#x5230; SecurityConfig &#x914D;&#x7F6E;&#x91CC;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SecurityConfig</span> <span class="keyword">extends</span> <span class="title">WebSecurityConfigurerAdapter</span> </span>{</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> DataSource dataSource;</div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> UserDetailsService userDetailsService;</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> AuthenticationFailureHandler myAuthenticationFailureHandler;</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;</div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> PasswordEncoder <span class="title">passwordEncoder</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BCryptPasswordEncoder();</div><div class="line">    }</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> PersistentTokenRepository <span class="title">persistentTokenRepository</span><span class="params">()</span></span>{</div><div class="line">        JdbcTokenRepositoryImpl tokenRepository = <span class="keyword">new</span> JdbcTokenRepositoryImpl();</div><div class="line">        tokenRepository.setDataSource(dataSource);</div><div class="line">        <span class="comment">// &#x5E94;&#x7528;&#x542F;&#x52A8;&#x65F6;&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#x8868;,&#x4E0D;&#x5EFA;&#x8BAE;&#x901A;&#x8FC7;&#x6B64;&#x65B9;&#x6CD5;&#x521B;&#x5EFA;&#x8868;&#xFF0C;&#x56E0;&#x4E3A;&#x4F1A;&#x91CD;&#x65B0;&#x521B;&#x8868;&#x5BFC;&#x81F4;&#x9519;&#x8BEF;</span></div><div class="line">        <span class="comment">//tokenRepository.setCreateTableOnStartup(Boolean.TRUE);</span></div><div class="line">        <span class="keyword">return</span> tokenRepository;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>{</div><div class="line">        ValidateSmsCodeFilter validateSmsFilter = <span class="keyword">new</span> ValidateSmsCodeFilter();</div><div class="line">        validateSmsFilter.setAuthenticationFailureHandler(myAuthenticationFailureHandler);</div><div class="line">        http</div><div class="line">				<span class="comment">// &#x6DFB;&#x52A0;&#x77ED;&#x4FE1;&#x9A8C;&#x8BC1;&#x7801;&#x8FC7;&#x6EE4;&#x5668;</span></div><div class="line">                .addFilterBefore(validateSmsFilter,UsernamePasswordAuthenticationFilter.class)</div><div class="line">                <span class="comment">// &#x8BBE;&#x7F6E;&#x8868;&#x5355;&#x767B;&#x5F55;</span></div><div class="line">                .formLogin()</div><div class="line">                .loginPage(<span class="string">&quot;/mobile_login.html&quot;</span>)</div><div class="line">                .and()</div><div class="line">                .rememberMe()</div><div class="line">                .tokenRepository(persistentTokenRepository())</div><div class="line">                <span class="comment">// &#x8BBE;&#x7F6E;&#x8FC7;&#x671F;&#x65F6;&#x95F4;&#x4E3A;&#x4E00;&#x5C0F;&#x65F6;</span></div><div class="line">                .tokenValiditySeconds(<span class="number">3600</span>)</div><div class="line">                .userDetailsService(userDetailsService)</div><div class="line">                .and()</div><div class="line">                .authorizeRequests()</div><div class="line">                <span class="comment">// &#x5F53;&#x524D;&#x6240;&#x5217;&#x7684;&#x8BF7;&#x6C42;&#x4E0D;&#x9700;&#x8981;&#x8EAB;&#x4EFD;&#x8BA4;&#x8BC1;</span></div><div class="line">                .antMatchers(<span class="string">&quot;/mobile_login.html&quot;</span>, <span class="string">&quot;/user/authentication&quot;</span>,<span class="string">&quot;/code/image&quot;</span>,<span class="string">&quot;/code/sms&quot;</span>).permitAll()</div><div class="line">                <span class="comment">// &#x5176;&#x4ED6;&#x6240;&#x6709;&#x8BF7;&#x6C42;&#x90FD;&#x9700;&#x8981;&#x8EAB;&#x4EFD;&#x8BA4;&#x8BC1;</span></div><div class="line">                .anyRequest().authenticated()</div><div class="line">                .and()</div><div class="line">                <span class="comment">// &#x5173;&#x95ED; csrf &#x4FDD;&#x62A4;</span></div><div class="line">                .csrf().disable()</div><div class="line">				<span class="comment">// &#x52A0;&#x8F7D;&#x521A;&#x521A;&#x5B9A;&#x4E49;&#x7684;&#x914D;&#x7F6E;</span></div><div class="line">                .apply(smsCodeAuthenticationSecurityConfig);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x4EE5;&#x4E0A;&#x5C31;&#x5B8C;&#x6210;&#x4E86;&#x77ED;&#x4FE1;&#x767B;&#x9646;&#x529F;&#x80FD;&#x3002;</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/OAuth/原理/协议/OAuth/OAuth协议/" class="pre-post btn btn-default" title='OAuth协议'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">OAuth协议</span>
+        </a>
+    
+    
+        <a href="/Spring-Security/后端/Java/框架/Security/Spring Security学习总结(七)--表单验证流程源码解析/" class="next-post btn btn-default" title='Spring Security学习总结(七)--表单验证流程源码解析'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Spring Security学习总结(七)--表单验证流程源码解析</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/"><i class="fa" aria-hidden="true">Docker</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OAuth/"><i class="fa" aria-hidden="true">OAuth</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Security/"><i class="fa" aria-hidden="true">Spring Security</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/"><i class="fa" aria-hidden="true">UML</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/"><i class="fa" aria-hidden="true">git</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><i class="fa" aria-hidden="true">五月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/"><i class="fa" aria-hidden="true">四月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">十月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JAVA-WEB/" style="font-size: 14px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 11.33px;">Lambda</a> <a href="/tags/Liunx/" style="font-size: 17.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.67px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 15.33px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px;">Nginx</a> <a href="/tags/OAuth/" style="font-size: 10px;">OAuth</a> <a href="/tags/Quartz/" style="font-size: 12px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 14.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 15.33px;">Redis</a> <a href="/tags/SQL/" style="font-size: 13.33px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.67px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 18.67px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15.33px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 18px;">Spring</a> <a href="/tags/Spring-Security/" style="font-size: 16.67px;">Spring Security</a> <a href="/tags/SpringBoot/" style="font-size: 13.33px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 10.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Utils/" style="font-size: 10.67px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 14px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 14px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/git/" style="font-size: 12.67px;">git</a> <a href="/tags/java/" style="font-size: 10.67px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.67px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 11.33px;">前端</a> <a href="/tags/前端基础/" style="font-size: 12.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 19.33px;">设计模式</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

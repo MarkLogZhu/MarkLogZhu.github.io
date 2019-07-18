@@ -1,0 +1,393 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Spring学习之旅(十一)--JDBC | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Spring学习之旅(十一)--JDBC">
+            
+	            Spring学习之旅(十一)--JDBC
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Spring">
+            Spring
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Spring" title='Spring'>
+                        Spring
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/04/18</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p><strong>JDBC</strong> &#x662F;&#x6570;&#x636E;&#x6301;&#x4E45;&#x5316;&#x7684;&#x4E00;&#x79CD;&#x6BD4;&#x8F83;&#x5E38;&#x89C1;&#x7684;&#x65B9;&#x6848;&#xFF0C;<strong>Spring</strong> &#x4E5F;&#x5BF9;&#x5B83;&#x8FDB;&#x884C;&#x4E86;&#x652F;&#x6301;&#x3002;</p>
+<p>&#x5728;&#x5F00;&#x59CB; <strong>JDBC</strong> &#x7684;&#x4F7F;&#x7528;&#x4E4B;&#x524D;&#xFF0C;&#x6211;&#x4EEC;&#x8981;&#x5148;&#x505A;&#x4E0B;&#x4E00;&#x4E9B;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;&#x3002;</p>
+<h2 id="&#x914D;&#x7F6E;&#x6570;&#x636E;&#x6E90;"><a href="#&#x914D;&#x7F6E;&#x6570;&#x636E;&#x6E90;" class="headerlink" title="&#x914D;&#x7F6E;&#x6570;&#x636E;&#x6E90;"></a>&#x914D;&#x7F6E;&#x6570;&#x636E;&#x6E90;</h2><p>&#x5728; <strong>Spring</strong> &#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#x53EF;&#x4EE5;&#x6570;&#x636E;&#x6E90; <strong>Bean</strong> &#x6709;&#x5982;&#x4E0B;&#x591A;&#x79CD;&#x65B9;&#x5F0F;&#xFF1A;</p>
+<ul>
+<li>&#x901A;&#x8FC7; <strong>JDBC</strong> &#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x5B9A;&#x4E49;&#x7684;&#x6570;&#x636E;&#x6E90;;</li>
+<li>&#x901A;&#x8FC7; <strong>JNDI</strong> &#x67E5;&#x627E;&#x7684;&#x6570;&#x636E;&#x6E90;;</li>
+<li>&#x8FDE;&#x63A5;&#x6C60;&#x7684;&#x6570;&#x636E;&#x6E90; </li>
+</ul>
+<a id="more"></a>
+<p>&#x6211;&#x4EEC;&#x901A;&#x5E38;&#x4F7F;&#x7528; <strong>&#x8FDE;&#x63A5;&#x6C60;</strong> &#x7684;&#x65B9;&#x5F0F;&#x6765;&#x914D;&#x7F6E;&#xFF0C;&#x8FD9;&#x91CC;&#x4E5F;&#x53EA;&#x8BB2;&#x89E3;&#x8FD9;&#x79CD;&#x65B9;&#x6848;&#xFF0C;&#x5176;&#x4ED6;&#x4E24;&#x79CD;&#x53EF;&#x4EE5;&#x81EA;&#x884C;&#x6478;&#x7D22;&#x3002;</p>
+<p><strong>Spirng</strong> &#x5E76;&#x6CA1;&#x6709;&#x76F4;&#x63A5;&#x63D0;&#x4F9B;&#x6570;&#x636E;&#x6E90;&#x8FDE;&#x63A5;&#x6C60;&#x5B9E;&#x73B0;&#xFF0C;&#x4F46;&#x662F;&#x6709;&#x591A;&#x79CD;&#x5F00;&#x6E90;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x5982;&#xFF1A;</p>
+<ul>
+<li><a href="http://jakarta.apache.org/commons/dbcp" target="_blank" rel="external">Apache Commons DBCP</a> </li>
+<li><a href="http://sourceforge.net/projects/c3p0" target="_blank" rel="external">C3P0</a></li>
+<li><a href="https://github.com/alibaba/druid" target="_blank" rel="external">&#x6765;&#x81EA;&#x963F;&#x91CC;&#x7684; druid</a></li>
+</ul>
+<p>&#x6211;&#x4EEC;&#x8FD9;&#x91CC;&#x91C7;&#x7528;&#x963F;&#x91CC;&#x7684; <strong>druid</strong> &#x8FDE;&#x63A5;&#x6C60;&#x3002;</p>
+<h3 id="&#x5F15;&#x5165;&#x4F9D;&#x8D56;"><a href="#&#x5F15;&#x5165;&#x4F9D;&#x8D56;" class="headerlink" title="&#x5F15;&#x5165;&#x4F9D;&#x8D56;"></a>&#x5F15;&#x5165;&#x4F9D;&#x8D56;</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.springframework&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;4.3.20.RELEASE&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line"></div><div class="line">&lt;!-- druid&#x8FDE;&#x63A5;&#x6C60; --&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;druid&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;1.1.16&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;!-- mysql&#x8FDE;&#x63A5;&#x9A71;&#x52A8; --&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;mysql&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;5.1.47&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<h3 id="&#x914D;&#x7F6E;&#x8FDE;&#x63A5;&#x6C60;&#x5BF9;&#x8C61;"><a href="#&#x914D;&#x7F6E;&#x8FDE;&#x63A5;&#x6C60;&#x5BF9;&#x8C61;" class="headerlink" title="&#x914D;&#x7F6E;&#x8FDE;&#x63A5;&#x6C60;&#x5BF9;&#x8C61;"></a>&#x914D;&#x7F6E;&#x8FDE;&#x63A5;&#x6C60;&#x5BF9;&#x8C61;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataBaseConfig</span> </span>{</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span> </span>{</div><div class="line">        DruidDataSource dataSource = <span class="keyword">new</span> DruidDataSource();</div><div class="line">        <span class="comment">// &#x8BBE;&#x7F6E;&#x9A71;&#x52A8;</span></div><div class="line">        dataSource.setDriverClassName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</div><div class="line">        <span class="comment">// &#x8BBE;&#x7F6E;&#x8FDE;&#x63A5; URL</span></div><div class="line">        dataSource.setUrl(<span class="string">&quot;jdbc:mysql://127.0.0.1:3306/learn?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull&amp;allowMultiQueries=true&quot;</span>);</div><div class="line">        <span class="comment">// &#x8BBE;&#x7F6E;&#x8FDE;&#x63A5;&#x8D26;&#x53F7;</span></div><div class="line">        dataSource.setUsername(<span class="string">&quot;root&quot;</span>);</div><div class="line">        <span class="comment">// &#x8BBE;&#x7F6E;&#x8FDE;&#x63A5;&#x5BC6;&#x7801;</span></div><div class="line">        dataSource.setPassword(<span class="string">&quot;sa000&quot;</span>);</div><div class="line">        <span class="comment">// &#x8BBE;&#x7F6E;&#x8FDE;&#x63A5;&#x6C60;&#x521D;&#x59CB;&#x8FDE;&#x63A5;&#x6570;&#x91CF;</span></div><div class="line">        dataSource.setInitialSize(<span class="number">5</span>);</div><div class="line">        <span class="comment">// &#x8BBE;&#x7F6E;&#x8FDE;&#x63A5;&#x6C60;&#x6700;&#x5927;&#x8FDE;&#x63A5;&#x6570;&#x91CF;</span></div><div class="line">        dataSource.setMaxActive(<span class="number">10</span>);</div><div class="line">        <span class="keyword">return</span> dataSource;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h2 id="&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#x5E93;"><a href="#&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#x5E93;" class="headerlink" title="&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#x5E93;"></a>&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#x5E93;</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">-- &#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;</div><div class="line">DROP DATABASE IF EXISTS learn;</div><div class="line">CREATE DATABASE IF NOT EXISTS learn DEFAULT CHARSET utf8 COLLATE utf8_general_ci;</div><div class="line">-- &#x9009;&#x62E9;&#x6570;&#x636E;&#x5E93;</div><div class="line">USE sugar;</div><div class="line"></div><div class="line">SET FOREIGN_KEY_CHECKS=<span class="number">0</span>;</div><div class="line">-- &#x521B;&#x5EFA;&#x7528;&#x6237;&#x8868;</div><div class="line">DROP TABLE IF EXISTS `sys_user`;</div><div class="line">CREATE TABLE `sys_user` (</div><div class="line">  `id` <span class="keyword">int</span>(<span class="number">11</span>) NOT NULL AUTO_INCREMENT COMMENT <span class="string">&apos;&#x4E3B;&#x952E;id&apos;</span>,</div><div class="line">  `avatar` varchar(<span class="number">255</span>) DEFAULT NULL COMMENT <span class="string">&apos;&#x5934;&#x50CF;&apos;</span>,</div><div class="line">  `account` varchar(<span class="number">45</span>) DEFAULT NULL COMMENT <span class="string">&apos;&#x8D26;&#x53F7;&apos;</span>,</div><div class="line">  `password` varchar(<span class="number">45</span>) DEFAULT NULL COMMENT <span class="string">&apos;&#x5BC6;&#x7801;&apos;</span>,</div><div class="line">  `salt` varchar(<span class="number">45</span>) DEFAULT NULL COMMENT <span class="string">&apos;md5&#x5BC6;&#x7801;&#x76D0;&apos;</span>,</div><div class="line">  `name` varchar(<span class="number">45</span>) DEFAULT NULL COMMENT <span class="string">&apos;&#x540D;&#x5B57;&apos;</span>,</div><div class="line">  `birthday` datetime DEFAULT NULL COMMENT <span class="string">&apos;&#x751F;&#x65E5;&apos;</span>,</div><div class="line">  `sex` <span class="keyword">int</span>(<span class="number">11</span>) DEFAULT NULL COMMENT <span class="string">&apos;&#x6027;&#x522B;&#xFF08;1&#xFF1A;&#x7537; 2&#xFF1A;&#x5973;&#xFF09;&apos;</span>,</div><div class="line">  `email` varchar(<span class="number">45</span>) DEFAULT NULL COMMENT <span class="string">&apos;&#x7535;&#x5B50;&#x90AE;&#x4EF6;&apos;</span>,</div><div class="line">  `phone` varchar(<span class="number">45</span>) DEFAULT NULL COMMENT <span class="string">&apos;&#x7535;&#x8BDD;&apos;</span>,</div><div class="line">  `role_id` varchar(<span class="number">255</span>) DEFAULT NULL COMMENT <span class="string">&apos;&#x89D2;&#x8272;id&apos;</span>,</div><div class="line">  `dept_id` <span class="keyword">int</span>(<span class="number">11</span>) DEFAULT NULL COMMENT <span class="string">&apos;&#x90E8;&#x95E8;id&apos;</span>,</div><div class="line">  `status` <span class="keyword">int</span>(<span class="number">11</span>) DEFAULT NULL COMMENT <span class="string">&apos;&#x72B6;&#x6001;(1&#xFF1A;&#x542F;&#x7528;  2&#xFF1A;&#x51BB;&#x7ED3;  3&#xFF1A;&#x5220;&#x9664;&#xFF09;&apos;</span>,</div><div class="line">  `createtime` datetime DEFAULT NULL COMMENT <span class="string">&apos;&#x521B;&#x5EFA;&#x65F6;&#x95F4;&apos;</span>,</div><div class="line">  `version` <span class="keyword">int</span>(<span class="number">11</span>) DEFAULT NULL COMMENT <span class="string">&apos;&#x4FDD;&#x7559;&#x5B57;&#x6BB5;&apos;</span>,</div><div class="line">  <span class="function">PRIMARY <span class="title">KEY</span> <span class="params">(`id`)</span></span></div><div class="line">) ENGINE=InnoDB AUTO_INCREMENT=<span class="number">47</span> DEFAULT CHARSET=utf8 COMMENT=<span class="string">&apos;&#x7BA1;&#x7406;&#x5458;&#x8868;&apos;</span>;</div><div class="line"></div><div class="line">-- &#x63D2;&#x5165;</div><div class="line">INSERT INTO `sys_user` VALUES (<span class="string">&apos;1&apos;</span>, <span class="string">&apos;girl.gif&apos;</span>, <span class="string">&apos;admin&apos;</span>, <span class="string">&apos;871e11b8f4ce630ef302a79265fd4887&apos;</span>, <span class="string">&apos;8pgby&apos;</span>, <span class="string">&apos;admin&apos;</span>, <span class="string">&apos;2018-05-05 00:00:00&apos;</span>, <span class="string">&apos;2&apos;</span>, <span class="string">&apos;sn93@qq.com&apos;</span>, <span class="string">&apos;18200000000&apos;</span>, <span class="string">&apos;1&apos;</span>, <span class="string">&apos;27&apos;</span>, <span class="string">&apos;1&apos;</span>, <span class="string">&apos;2018-01-29 08:49:53&apos;</span>, <span class="string">&apos;25&apos;</span>);</div><div class="line"></div><div class="line">SET FOREIGN_KEY_CHECKS = <span class="number">1</span>;</div></pre></td></tr></table></figure>
+<h2 id="&#x5B9E;&#x4F53;&#x5BF9;&#x8C61;"><a href="#&#x5B9E;&#x4F53;&#x5BF9;&#x8C61;" class="headerlink" title="&#x5B9E;&#x4F53;&#x5BF9;&#x8C61;"></a>&#x5B9E;&#x4F53;&#x5BF9;&#x8C61;</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>{</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> Long id;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> String avatar;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> String account;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> String password;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> String salt;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> String birthday;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> Integer sex;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> String email;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> String phone;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> String roleId;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> Long deptId;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> Integer status;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> Date createtime;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> Long version;</div><div class="line">	</div><div class="line">	<span class="comment">// get/set......</span></div><div class="line">}</div></pre></td></tr></table></figure>
+<h2 id="&#x539F;&#x59CB;-JDBC"><a href="#&#x539F;&#x59CB;-JDBC" class="headerlink" title="&#x539F;&#x59CB; JDBC"></a>&#x539F;&#x59CB; JDBC</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">@RunWith(SpringJUnit4ClassRunner.class)</div><div class="line">@ContextConfiguration(classes = RootConfig.class)</div><div class="line">public class DaoTest {</div><div class="line"></div><div class="line">    @Autowired</div><div class="line">    private DataSource dataSource;</div><div class="line"></div><div class="line"></div><div class="line">    @Test</div><div class="line">    public void testJDBC() {</div><div class="line">        String sql = &quot;select id,account from sys_user where id = ? &quot;;</div><div class="line">        Connection connection = null;</div><div class="line">        PreparedStatement statement = null;</div><div class="line">        ResultSet resultSet = null;</div><div class="line">        try {</div><div class="line">            connection = dataSource.getConnection();</div><div class="line">            statement = connection.prepareCall(sql);</div><div class="line">            statement.setLong(1, 1);</div><div class="line">            resultSet = statement.executeQuery();</div><div class="line">            if (resultSet.next()) {</div><div class="line">                Long id  = resultSet.getLong(&quot;id&quot;);</div><div class="line">                String account = resultSet.getString(&quot;account&quot;);</div><div class="line">                Assert.assertEquals(new Long(1), id);</div><div class="line">                Assert.assertEquals(&quot;admin&quot;, account);</div><div class="line">            }</div><div class="line">        } catch (SQLException e) {</div><div class="line">            System.out.println(&quot;&#x5F02;&#x5E38;&#xFF1A;&quot;+ e.getMessage());</div><div class="line">        } finally {</div><div class="line">            if(resultSet!=null){</div><div class="line">                try {</div><div class="line">                    resultSet.close();</div><div class="line">                } catch (SQLException e) {</div><div class="line">                    e.printStackTrace();</div><div class="line">                }</div><div class="line">            }</div><div class="line">            if(statement !=null){</div><div class="line">                try {</div><div class="line">                    statement.close();</div><div class="line">                } catch (SQLException e) {</div><div class="line">                    e.printStackTrace();</div><div class="line">                }</div><div class="line">            }</div><div class="line">            if(connection !=null){</div><div class="line">                try {</div><div class="line">                    connection.close();</div><div class="line">                } catch (SQLException e) {</div><div class="line">                    e.printStackTrace();</div><div class="line">                }</div><div class="line">            }</div><div class="line">        }</div><div class="line"></div><div class="line">    }</div><div class="line"></div><div class="line">}</div><div class="line">``` </div><div class="line"></div><div class="line">&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5927;&#x90E8;&#x5206;&#x7684;&#x4EE3;&#x7801;&#x90FD;&#x662F;&#x7528;&#x6765;&#x8FDB;&#x884C; **&#x8D44;&#x6E90;&#x7BA1;&#x7406;** &#x548C; **&#x5F02;&#x5E38;&#x5904;&#x7406;**&#xFF0C;&#x5B9E;&#x9645;&#x7684;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x5C31;&#x53EA;&#x6709;&#x51E0;&#x884C;&#x3002;</div><div class="line"></div><div class="line">## JDBC &#x6A21;&#x677F;</div><div class="line"></div><div class="line">**Spring** &#x4E3A;&#x6211;&#x4EEC;&#x63D0;&#x4F9B;&#x4E86; **JDBC &#x6A21;&#x677F;** &#xFF0C;&#x7531;&#x5B83;&#x6765;&#x8FDB;&#x884C;&#x8D44;&#x6E90;&#x7BA1;&#x7406;&#x548C;&#x5F02;&#x5E38;&#x5904;&#x7406;&#x7684;&#x5DE5;&#x4F5C;&#xFF0C;&#x4ECE;&#x800C;&#x7B80;&#x5316;&#x4E86; **JDBC** &#x4EE3;&#x7801;&#x3002;**Spring** &#x63D0;&#x4F9B;&#x4E86;&#x4E09;&#x79CD;&#x6A21;&#x677F;&#x7C7B;&#x4F9B;&#x6211;&#x4EEC;&#x9009;&#x62E9;&#xFF1A;</div><div class="line">* **JdbcTemplate:** &#x6700;&#x57FA;&#x672C;&#x7684; **Spring JDBC** &#x6A21;&#x677F;&#xFF0C;&#x8FD9;&#x4E2A;&#x6A21;&#x677F;&#x652F;&#x6301;&#x7B80;&#x5355;&#x7684; **JDBC** &#x6570;&#x636E;&#x5E93;&#x8BBF;&#x95EE;&#x529F;&#x80FD;&#x4EE5;&#x53CA;&#x57FA;&#x4E8E;&#x7D22;&#x5F15;&#x53C2;&#x6570;&#x7684;&#x67E5;&#x8BE2;&#x3002;</div><div class="line">* **NamedParameterJdbcTemplate:** &#x4F7F;&#x7528;&#x8BE5;&#x6A21;&#x677F;&#x7C7B;&#x6267;&#x884C;&#x67E5;&#x8BE2;&#x65F6;&#x53EF;&#x4EE5;&#x5C06;&#x503C;&#x4EE5;&#x547D;&#x540D;&#x53C2;&#x6570;&#x7684;&#x5F62;&#x5F0F;&#x7ED1;&#x5B9A;&#x5230; SQL &#x4E2D;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4F7F;&#x7528;&#x7B80;&#x5355;&#x7684;&#x7D22;&#x5F15;&#x53C2;&#x6570;</div><div class="line">* **SimpleJdbcTemplate:** &#x8BE5;&#x6A21;&#x677F;&#x7C7B;&#x5229;&#x7528; **Java5** &#x7684;&#x4E00;&#x4E9B;&#x7279;&#x6027;&#x5982;&#x81EA;&#x52A8;&#x88C5;&#x7BB1;&#x3001;&#x6CDB;&#x578B;&#x4EE5;&#x53CA;&#x53EF;&#x53D8;&#x53C2;&#x6570;&#x6765;&#x7B80;&#x5316; **JDBC** &#x6A21;&#x677F;&#x7684;&#x4F7F;&#x7528; </div><div class="line"></div><div class="line">&#x4ECE; **Spirng 3.1** &#x5F00;&#x59CB; **SimpleJdbcTemplate** &#x5DF2;&#x7ECF;&#x88AB;&#x5E9F;&#x5F03;&#x4E86;&#xFF0C;&#x5176; **Java 5** &#x7684;&#x7279;&#x6027;&#x88AB;&#x8F6C;&#x79FB;&#x5230;&#x4E86; **JdbcTemplate** &#x4E2D;&#x3002;&#x6240;&#x4EE5;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x6211;&#x4EEC;&#x76F4;&#x63A5;&#x4F7F;&#x7528; **JdbcTemplate** &#x5373;&#x53EF;&#x3002;</div><div class="line"></div><div class="line"></div><div class="line">### &#x914D;&#x7F6E; JDBC &#x6A21;&#x677F;&#x5BF9;&#x8C61;</div><div class="line"></div><div class="line">``` java</div><div class="line">@Configuration</div><div class="line">public class DataBaseConfig {</div><div class="line"></div><div class="line">	......</div><div class="line"></div><div class="line">    @Bean</div><div class="line">    public JdbcTemplate jdbcTemplate(DataSource dataSource) {</div><div class="line">        return new JdbcTemplate(dataSource);</div><div class="line">    } </div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="&#x5355;&#x5143;&#x6D4B;&#x8BD5;"><a href="#&#x5355;&#x5143;&#x6D4B;&#x8BD5;" class="headerlink" title="&#x5355;&#x5143;&#x6D4B;&#x8BD5;"></a>&#x5355;&#x5143;&#x6D4B;&#x8BD5;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Autowired</span></div><div class="line"><span class="keyword">private</span> JdbcTemplate jdbcTemplate;</div><div class="line"></div><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testJdbcTemplate</span><span class="params">()</span> </span>{</div><div class="line">    String sql = <span class="string">&quot;select  id,account,birthday from sys_user where id = ?&quot;</span>;</div><div class="line">    User user = jdbcTemplate.queryForObject(sql, <span class="keyword">new</span> UserRowMapper(),<span class="number">1</span>);</div><div class="line">    Assert.assertEquals(<span class="keyword">new</span> Long(<span class="number">1</span>), user.getId());</div><div class="line">    Assert.assertEquals(<span class="string">&quot;admin&quot;</span>, user.getAccount());</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">UserRowMapper</span> <span class="keyword">implements</span> <span class="title">RowMa</span> <span class="title">pper</span>&lt;<span class="title">User</span>&gt;</span>{</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">mapRow</span><span class="params">(ResultSet resultSet, <span class="keyword">int</span> i)</span> <span class="keyword">throws</span> SQLException </span>{</div><div class="line">        User user = <span class="keyword">new</span> User();</div><div class="line">        user.setId(resultSet.getLong(<span class="string">&quot;id&quot;</span>));</div><div class="line">        user.setAccount(resultSet.getString(<span class="string">&quot;account&quot;</span>));</div><div class="line">        <span class="keyword">return</span> user;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x4F7F;&#x7528;&#x6A21;&#x677F;&#x540E;&#x4EE3;&#x7801;&#x91CF;&#x5927;&#x5E45;&#x5EA6;&#x51CF;&#x5C11;&#xFF0C;&#x53EA;&#x6709;&#x4E1A;&#x52A1;&#x4EE3;&#x7801;&#x5B58;&#x5728;&#x4E86;&#x3002;</p>
+<p>&#x9664;&#x4E86;&#x4F7F;&#x7528; <strong>RowMapper</strong> &#x5916;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x7528; <strong>Lambda</strong> &#x8868;&#x8FBE;&#x5F0F;:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testJdbcTemplate2</span><span class="params">()</span> </span>{</div><div class="line">    String sql = <span class="string">&quot;select  id,account,birthday from sys_user where id = ?&quot;</span>;</div><div class="line">    User user = jdbcTemplate.queryForObject(sql, (resultSet,i)-&gt;{</div><div class="line">        User u = <span class="keyword">new</span> User();</div><div class="line">        u.setId(resultSet.getLong(<span class="string">&quot;id&quot;</span>));</div><div class="line">        u.setAccount(resultSet.getString(<span class="string">&quot;account&quot;</span>));</div><div class="line">        <span class="keyword">return</span> u;</div><div class="line">    },<span class="number">1</span>);</div><div class="line">    Assert.assertEquals(<span class="keyword">new</span> Long(<span class="number">1</span>), user.getId());</div><div class="line">    Assert.assertEquals(<span class="string">&quot;admin&quot;</span>, user.getAccount());</div><div class="line">}</div></pre></td></tr></table></figure>
+<p><strong>Lambda</strong> &#x8868;&#x8FBE;&#x5F0F;&#x6BD4;&#x8D77;&#x7533;&#x660E;&#x4E00;&#x4E2A; <strong>RowMapper</strong> &#x5BF9;&#x8C61;&#x6765;&#x66F4;&#x76F4;&#x89C2;&#xFF0C;&#x4F46;&#x662F;&#x9700;&#x8981; <strong>JDK 8</strong> &#x4EE5;&#x4E0A;&#x7684;&#x652F;&#x6301;&#x3002;</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/Spring/后端/Java/框架/Spring/Spring学习之旅(十二)--持久化框架/" class="pre-post btn btn-default" title='Spring学习之旅(十二)--持久化框架'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Spring学习之旅(十二)--持久化框架</span>
+        </a>
+    
+    
+        <a href="/Spring/后端/Java/框架/Spring/Spring学习之旅(十)--MockMvc/" class="next-post btn btn-default" title='Spring学习之旅(十)--MockMvc'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Spring学习之旅(十)--MockMvc</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/"><i class="fa" aria-hidden="true">Docker</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OAuth/"><i class="fa" aria-hidden="true">OAuth</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Security/"><i class="fa" aria-hidden="true">Spring Security</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/"><i class="fa" aria-hidden="true">UML</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/"><i class="fa" aria-hidden="true">git</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><i class="fa" aria-hidden="true">五月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/"><i class="fa" aria-hidden="true">四月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">十月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JAVA-WEB/" style="font-size: 14px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 11.33px;">Lambda</a> <a href="/tags/Liunx/" style="font-size: 17.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.67px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 15.33px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px;">Nginx</a> <a href="/tags/OAuth/" style="font-size: 10px;">OAuth</a> <a href="/tags/Quartz/" style="font-size: 12px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 14.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 15.33px;">Redis</a> <a href="/tags/SQL/" style="font-size: 13.33px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.67px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 18.67px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15.33px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 18px;">Spring</a> <a href="/tags/Spring-Security/" style="font-size: 16.67px;">Spring Security</a> <a href="/tags/SpringBoot/" style="font-size: 13.33px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 10.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Utils/" style="font-size: 10.67px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 14px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 14px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/git/" style="font-size: 12.67px;">git</a> <a href="/tags/java/" style="font-size: 10.67px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.67px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 11.33px;">前端</a> <a href="/tags/前端基础/" style="font-size: 12.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 19.33px;">设计模式</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Liunx学习总结(二)--目录和文件管理 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Liunx学习总结(二)--目录和文件管理">
+            
+	            Liunx学习总结(二)--目录和文件管理
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Liunx">
+            Liunx
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Liunx" title='Liunx'>
+                        Liunx
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/08/01</span>
+        </span>
+    
+</div>
+
+            
+            
+            <p class="fa fa-exclamation-triangle warning">
+                本文于<strong>350</strong>天之前发表，文中内容可能已经过时。
+            </p>
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <blockquote>
+<p>&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x4E86;&#x89E3;&#x4E86;&#x4EC0;&#x4E48;&#x662F; liunx &#xFF0C;&#x5E76;&#x4E14;&#x8BA4;&#x8BC6;&#x4E86;&#x5B83;&#x7684;&#x76EE;&#x5F55;&#x7ED3;&#x6784;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x5B66;&#x4E60;&#x4E0B;&#x5982;&#x4F55;&#x8FDB;&#x884C;&#x76EE;&#x5F55;&#x548C;&#x6587;&#x4EF6;&#x7684;&#x7BA1;&#x7406;&#x3002;</p>
+</blockquote>
+<h2 id="&#x521B;&#x5EFA;&#x76EE;&#x5F55;"><a href="#&#x521B;&#x5EFA;&#x76EE;&#x5F55;" class="headerlink" title="&#x521B;&#x5EFA;&#x76EE;&#x5F55;"></a>&#x521B;&#x5EFA;&#x76EE;&#x5F55;</h2><h3 id="&#x8BED;&#x6CD5;&#xFF1A;"><a href="#&#x8BED;&#x6CD5;&#xFF1A;" class="headerlink" title="&#x8BED;&#x6CD5;&#xFF1A;"></a>&#x8BED;&#x6CD5;&#xFF1A;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir [-mp] &#x76EE;&#x5F55;&#x540D;&#x79F0;</div></pre></td></tr></table></figure>
+<h3 id="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;"><a href="#&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;" class="headerlink" title="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;"></a>&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-m &#xFF1A;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x6743;&#x9650;&#x5594;&#xFF01;&#x76F4;&#x63A5;&#x914D;&#x7F6E;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x770B;&#x9ED8;&#x8BA4;&#x6743;&#x9650; (umask) &#x7684;&#x8138;&#x8272;&#xFF5E;</div><div class="line">-p &#xFF1A;&#x5E2E;&#x52A9;&#x4F60;&#x76F4;&#x63A5;&#x5C06;&#x6240;&#x9700;&#x8981;&#x7684;&#x76EE;&#x5F55;(&#x5305;&#x542B;&#x4E0A;&#x4E00;&#x7EA7;&#x76EE;&#x5F55;)&#x9012;&#x5F52;&#x521B;&#x5EFA;&#x8D77;&#x6765;&#xFF01;</div></pre></td></tr></table></figure>
+<a id="more"></a> 
+<h3 id="&#x5B9E;&#x4F8B;"><a href="#&#x5B9E;&#x4F8B;" class="headerlink" title="&#x5B9E;&#x4F8B;"></a>&#x5B9E;&#x4F8B;</h3><p>1) &#x521B;&#x5EFA;&#x591A;&#x5C42;&#x7EA7;&#x76EE;&#x5F55;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p test/test1/test2/test3</div></pre></td></tr></table></figure></p>
+<p>2) &#x901A;&#x8FC7; <code>tree</code> &#x547D;&#x4EE4;&#x67E5;&#x770B;</p>
+<p><img src="/Liunx/&#x7CFB;&#x7EDF;/Liunx/&#x57FA;&#x7840;&#x77E5;&#x8BC6;/Liunx&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E8C;)--&#x76EE;&#x5F55;&#x548C;&#x6587;&#x4EF6;&#x7BA1;&#x7406;/img/01.png" alt=""></p>
+<h2 id="&#x5220;&#x9664;&#x76EE;&#x5F55;"><a href="#&#x5220;&#x9664;&#x76EE;&#x5F55;" class="headerlink" title="&#x5220;&#x9664;&#x76EE;&#x5F55;"></a>&#x5220;&#x9664;&#x76EE;&#x5F55;</h2><h3 id="&#x8BED;&#x6CD5;&#xFF1A;-1"><a href="#&#x8BED;&#x6CD5;&#xFF1A;-1" class="headerlink" title="&#x8BED;&#x6CD5;&#xFF1A;"></a>&#x8BED;&#x6CD5;&#xFF1A;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rmdir [-p] &#x76EE;&#x5F55;&#x540D;&#x79F0;</div></pre></td></tr></table></figure>
+<h3 id="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-1"><a href="#&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-1" class="headerlink" title="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;"></a>&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-p &#xFF1A;&#x8FDE;&#x540C;&#x4E0A;&#x4E00;&#x7EA7;&#x300E;&#x7A7A;&#x7684;&#x300F;&#x76EE;&#x5F55;&#x4E5F;&#x4E00;&#x8D77;&#x5220;&#x9664;</div></pre></td></tr></table></figure>
+<p>1) &#x521B;&#x5EFA;&#x591A;&#x5C42;&#x7EA7;&#x76EE;&#x5F55;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rmdir -p test1/test2/test3</div></pre></td></tr></table></figure></p>
+<p>2) &#x901A;&#x8FC7; <code>tree</code> &#x547D;&#x4EE4;&#x67E5;&#x770B;</p>
+<p><img src="/Liunx/&#x7CFB;&#x7EDF;/Liunx/&#x57FA;&#x7840;&#x77E5;&#x8BC6;/Liunx&#x5B66;&#x4E60;&#x603B;&#x7ED3;(&#x4E8C;)--&#x76EE;&#x5F55;&#x548C;&#x6587;&#x4EF6;&#x7BA1;&#x7406;/img/02.png" alt=""></p>
+<p>&#x6CE8;&#xFF1A;<code>rmdir</code> &#x4EC5;&#x80FD;&#x5220;&#x9664;&#x7A7A;&#x7684;&#x76EE;&#x5F55;&#xFF0C;&#x975E;&#x7A7A;&#x76EE;&#x5F55;&#x9700;&#x8981;&#x4F7F;&#x7528; <code>rm</code> &#x547D;&#x4EE4;&#x6765;&#x5220;&#x9664;&#x3002;</p>
+<h3 id="&#x8BED;&#x6CD5;&#xFF1A;-2"><a href="#&#x8BED;&#x6CD5;&#xFF1A;-2" class="headerlink" title="&#x8BED;&#x6CD5;&#xFF1A;"></a>&#x8BED;&#x6CD5;&#xFF1A;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm [-fir] &#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;</div></pre></td></tr></table></figure>
+<h3 id="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-2"><a href="#&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-2" class="headerlink" title="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;"></a>&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-f &#xFF1A;&#x5C31;&#x662F; force &#x7684;&#x610F;&#x601D;&#xFF0C;&#x5FFD;&#x7565;&#x4E0D;&#x5B58;&#x5728;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x4E0D;&#x4F1A;&#x51FA;&#x73B0;&#x8B66;&#x544A;&#x4FE1;&#x606F;&#xFF1B;</div><div class="line">-i &#xFF1A;&#x4E92;&#x52A8;&#x6A21;&#x5F0F;&#xFF0C;&#x5728;&#x5220;&#x9664;&#x524D;&#x4F1A;&#x8BE2;&#x95EE;&#x4F7F;&#x7528;&#x8005;&#x662F;&#x5426;&#x52A8;&#x4F5C;</div><div class="line">-r &#xFF1A;&#x9012;&#x5F52;&#x5220;&#x9664;&#x554A;&#xFF01;&#x6700;&#x5E38;&#x7528;&#x5728;&#x76EE;&#x5F55;&#x5220;&#x9664;&#x4E86;&#xFF01;&#x8FD9;&#x662F;&#x975E;&#x5E38;&#x5371;&#x9669;&#x7684;&#x9009;&#x9879;&#xFF01;&#xFF01;&#xFF01;</div></pre></td></tr></table></figure>
+<p>&#x9664;&#x4E86;&#x76EE;&#x5F55;&#x5916;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5220;&#x9664;&#x6587;&#x4EF6;&#x54E6;&#xFF01;</p>
+<h2 id="&#x521B;&#x5EFA;&#x6587;&#x4EF6;"><a href="#&#x521B;&#x5EFA;&#x6587;&#x4EF6;" class="headerlink" title="&#x521B;&#x5EFA;&#x6587;&#x4EF6;"></a>&#x521B;&#x5EFA;&#x6587;&#x4EF6;</h2><h3 id="&#x8BED;&#x6CD5;&#xFF1A;-3"><a href="#&#x8BED;&#x6CD5;&#xFF1A;-3" class="headerlink" title="&#x8BED;&#x6CD5;&#xFF1A;"></a>&#x8BED;&#x6CD5;&#xFF1A;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">touch fileName</div></pre></td></tr></table></figure>
+<h3 id="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-3"><a href="#&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-3" class="headerlink" title="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;"></a>&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-c&#xFF1A;&#x5F3A;&#x5236;&#x4E0D;&#x521B;&#x5EFA;&#x6587;&#x4EF6;</div><div class="line">-a&#xFF1A;&#x4FEE;&#x6539;&#x6587;&#x4EF6;access time(atime)</div><div class="line">-m&#xFF1A;&#x4FEE;&#x6539;&#x6587;&#x4EF6;modification time(mtime)</div><div class="line">-t&#xFF1A;&#x4F7F;&#x7528;&quot;[[CC]YY]MMDDhhmm[.ss]&quot;&#x683C;&#x5F0F;&#x7684;&#x65F6;&#x95F4;&#x66FF;&#x4EE3;&#x5F53;&#x524D;&#x65F6;&#x95F4;</div><div class="line">-d&#xFF1A;&#x4F7F;&#x7528;&#x5B57;&#x7B26;&#x4E32;&#x63CF;&#x8FF0;&#x7684;&#x65F6;&#x95F4;&#x683C;&#x5F0F;&#x66FF;&#x4EE3;&#x5F53;&#x524D;&#x65F6;&#x95F4;</div></pre></td></tr></table></figure>
+<h3 id="&#x793A;&#x4F8B;"><a href="#&#x793A;&#x4F8B;" class="headerlink" title="&#x793A;&#x4F8B;"></a>&#x793A;&#x4F8B;</h3><p>&#x521B;&#x5EFA;&#x6587;&#x4EF6;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@VM_0_15_centos test]# touch a.txt</div><div class="line">[root@VM_0_15_centos test]# touch {a,b}_{d,c}</div></pre></td></tr></table></figure></p>
+<p>&#x67E5;&#x770B;&#x6587;&#x4EF6;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@VM_0_15_centos test]# ll</div><div class="line">total 0</div><div class="line">-rw-r--r-- 1 root root 0 Aug  1 08:59 a_c</div><div class="line">-rw-r--r-- 1 root root 0 Aug  1 08:59 a_d</div><div class="line">-rw-r--r-- 1 root root 0 Aug  1 08:58 a.txt</div><div class="line">-rw-r--r-- 1 root root 0 Aug  1 08:59 b_c</div><div class="line">-rw-r--r-- 1 root root 0 Aug  1 08:59 b_d</div></pre></td></tr></table></figure></p>
+<h2 id="&#x6587;&#x4EF6;-&#x76EE;&#x5F55;&#x590D;&#x5236;"><a href="#&#x6587;&#x4EF6;-&#x76EE;&#x5F55;&#x590D;&#x5236;" class="headerlink" title="&#x6587;&#x4EF6;/&#x76EE;&#x5F55;&#x590D;&#x5236;"></a>&#x6587;&#x4EF6;/&#x76EE;&#x5F55;&#x590D;&#x5236;</h2><h3 id="&#x8BED;&#x6CD5;&#xFF1A;-4"><a href="#&#x8BED;&#x6CD5;&#xFF1A;-4" class="headerlink" title="&#x8BED;&#x6CD5;&#xFF1A;"></a>&#x8BED;&#x6CD5;&#xFF1A;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cp [-apdriulfs] src dest # &#x590D;&#x5236;&#x5355;&#x6587;&#x4EF6;&#x6216;&#x5355;&#x76EE;&#x5F55;</div><div class="line">cp [-apdriuslf] src1 src2 src3......dest_dir # &#x590D;&#x5236;&#x591A;&#x6587;&#x4EF6;&#x3001;&#x76EE;&#x5F55;&#x5230;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;&#x4E0B;</div></pre></td></tr></table></figure>
+<h3 id="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-4"><a href="#&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-4" class="headerlink" title="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;"></a>&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">-p&#xFF1A; &#x6587;&#x4EF6;&#x7684;&#x5C5E;&#x6027;(&#x6743;&#x9650;&#x3001;&#x5C5E;&#x7EC4;&#x3001;&#x65F6;&#x95F4;&#x6233;)&#x4E5F;&#x590D;&#x5236;&#x8FC7;&#x53BB;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x6307;&#x5B9A;p&#x9009;&#x9879;&#xFF0C;&#x8C01;&#x6267;&#x884C;&#x590D;&#x5236;&#x52A8;&#x4F5C;&#xFF0C;&#x6587;&#x4EF6;&#x6240;&#x6709;&#x8005;&#x548C;&#x7EC4;&#x5C31;&#x662F;&#x8C01;&#x3002;</div><div class="line">-r&#x6216;-R&#xFF1A;&#x9012;&#x5F52;&#x590D;&#x5236;&#xFF0C;&#x5E38;&#x7528;&#x4E8E;&#x590D;&#x5236;&#x975E;&#x7A7A;&#x76EE;&#x5F55;&#x3002;</div><div class="line">-d&#xFF1A;&#x590D;&#x5236;&#x7684;&#x6E90;&#x6587;&#x4EF6;&#x5982;&#x679C;&#x662F;&#x94FE;&#x63A5;&#x6587;&#x4EF6;&#xFF0C;&#x5219;&#x590D;&#x5236;&#x94FE;&#x63A5;&#x6587;&#x4EF6;&#x800C;&#x4E0D;&#x662F;&#x6307;&#x5411;&#x7684;&#x6587;&#x4EF6;&#x672C;&#x8EAB;&#x3002;&#x5373;&#x4FDD;&#x6301;&#x94FE;&#x63A5;&#x5C5E;&#x6027;&#xFF0C;&#x590D;&#x5236;&#x5FEB;&#x6377;&#x65B9;&#x5F0F;&#x672C;&#x8EAB;&#x3002;&#x5982;&#x679C;&#x4E0D;&#x6307;&#x5B9A;-d&#xFF0C;&#x5219;&#x590D;&#x5236;&#x7684;&#x662F;&#x94FE;&#x63A5;&#x6240;&#x6307;&#x5411;&#x7684;&#x6587;&#x4EF6;&#x3002;</div><div class="line">-a&#xFF1A;a=pdr&#x4E09;&#x4E2A;&#x9009;&#x9879;&#x3002;&#x5F52;&#x6863;&#x62F7;&#x8D1D;&#xFF0C;&#x5E38;&#x7528;&#x4E8E;&#x5907;&#x4EFD;&#x3002;</div><div class="line">-i&#xFF1A;&#x590D;&#x5236;&#x65F6;&#x5982;&#x679C;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#xFF0C;&#x8BE2;&#x95EE;&#x662F;&#x5426;&#x66FF;&#x6362;&#x3002;</div><div class="line">-u&#xFF1A;(update)&#x82E5;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x548C;&#x6E90;&#x6587;&#x4EF6;&#x540C;&#x540D;&#xFF0C;&#x4F46;&#x5C5E;&#x6027;&#x4E0D;&#x4E00;&#x6837;(&#x5982;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#xFF0C;&#x5927;&#x5C0F;&#x7B49;)&#xFF0C;&#x5219;&#x8986;&#x76D6;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x3002;</div><div class="line">-f&#xFF1A;&#x5F3A;&#x5236;&#x590D;&#x5236;&#xFF0C;&#x5982;&#x679C;&#x76EE;&#x6807;&#x5B58;&#x5728;&#xFF0C;&#x4E0D;&#x4F1A;&#x8FDB;&#x884C;-i&#x9009;&#x9879;&#x7684;&#x8BE2;&#x95EE;&#x548C;-u&#x9009;&#x9879;&#x7684;&#x8003;&#x8651;&#xFF0C;&#x76F4;&#x63A5;&#x8986;&#x76D6;&#x3002;</div><div class="line">-l&#xFF1A;&#x5728;&#x76EE;&#x6807;&#x4F4D;&#x7F6E;&#x5EFA;&#x7ACB;&#x786C;&#x94FE;&#x63A5;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x590D;&#x5236;&#x6587;&#x4EF6;&#x672C;&#x8EAB;&#x3002;</div><div class="line">-s&#xFF1A;&#x5728;&#x76EE;&#x6807;&#x4F4D;&#x7F6E;&#x5EFA;&#x7ACB;&#x8F6F;&#x94FE;&#x63A5;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x590D;&#x5236;&#x6587;&#x4EF6;&#x672C;&#x8EAB;(&#x8F6F;&#x94FE;&#x63A5;&#x6216;&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#x76F8;&#x5F53;&#x4E8E;windows&#x7684;&#x5FEB;&#x6377;&#x65B9;&#x5F0F;)&#x3002;</div></pre></td></tr></table></figure>
+<h2 id="&#x6587;&#x4EF6;-&#x76EE;&#x5F55;&#x79FB;&#x52A8;"><a href="#&#x6587;&#x4EF6;-&#x76EE;&#x5F55;&#x79FB;&#x52A8;" class="headerlink" title="&#x6587;&#x4EF6;/&#x76EE;&#x5F55;&#x79FB;&#x52A8;"></a>&#x6587;&#x4EF6;/&#x76EE;&#x5F55;&#x79FB;&#x52A8;</h2><h3 id="&#x8BED;&#x6CD5;"><a href="#&#x8BED;&#x6CD5;" class="headerlink" title="&#x8BED;&#x6CD5;"></a>&#x8BED;&#x6CD5;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mv [-iuf] src dest # &#x79FB;&#x52A8;&#x5355;&#x4E2A;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;</div><div class="line">mv [-iuf] src1 src2 src3 dest_dir # &#x79FB;&#x52A8;&#x591A;&#x4E2A;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;</div></pre></td></tr></table></figure>
+<h3 id="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-5"><a href="#&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-5" class="headerlink" title="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;"></a>&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">--backup[=CONTROL]&#xFF1A;&#x5982;&#x679C;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x5DF2;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x5BF9;&#x8BE5;&#x6587;&#x4EF6;&#x505A;&#x4E00;&#x4E2A;&#x5907;&#x4EFD;&#xFF0C;&#x9ED8;&#x8BA4;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x662F;&#x5728;&#x6587;&#x4EF6;&#x540D;&#x540E;&#x52A0;&#x4E0A;&#x6CE2;&#x6D6A;&#x7EBF;&#xFF0C;&#x5982;/b.txt~</div><div class="line">-b&#xFF1A;&#x7C7B;&#x4F3C;&#x4E8E;--backup&#xFF0C;&#x4F46;&#x4E0D;&#x63A5;&#x53D7;&#x53C2;&#x6570;, &#x9ED8;&#x8BA4;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x662F;&#x5728;&#x6587;&#x4EF6;&#x540D;&#x540E;&#x52A0;&#x4E0A;&#x6CE2;&#x6D6A;&#x7EBF;&#xFF0C;&#x5982;/b.txt~</div><div class="line">-f&#xFF1A;&#x5982;&#x679C;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x5DF2;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x5F3A;&#x5236;&#x8986;&#x76D6;&#x6587;&#x4EF6;</div><div class="line">-i&#xFF1A;&#x5982;&#x679C;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x5DF2;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x63D0;&#x793A;&#x662F;&#x5426;&#x8981;&#x8986;&#x76D6;&#xFF0C;&#x8FD9;&#x662F;alias mv&#x7684;&#x9ED8;&#x8BA4;&#x9009;&#x9879;</div><div class="line">-n&#xFF1A;&#x5982;&#x679C;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x5DF2;&#x5B58;&#x5728;&#xFF0C;&#x5219;&#x4E0D;&#x8986;&#x76D6;&#x5DF2;&#x5B58;&#x5728;&#x7684;&#x6587;&#x4EF6;,&#x5982;&#x679C;&#x540C;&#x65F6;&#x6307;&#x5B9A;&#x4E86;-f/-i/-n&#xFF0C;&#x5219;&#x540E;&#x6307;&#x5B9A;&#x7684;&#x751F;&#x6548;</div><div class="line">-u&#xFF1A;(update)&#x5982;&#x679C;&#x6E90;&#x6587;&#x4EF6;&#x548C;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x4E0D;&#x540C;&#xFF0C;&#x5219;&#x79FB;&#x52A8;&#xFF0C;&#x5426;&#x5219;&#x4E0D;&#x79FB;&#x52A8;</div></pre></td></tr></table></figure>
+<p><code>mv</code> &#x9ED8;&#x8BA4;&#x5DF2;&#x7ECF;&#x662F;&#x9012;&#x5F52;&#x79FB;&#x52A8;,&#x4E0D;&#x9700;&#x8981; <code>-r</code> &#x53C2;&#x6570;&#x3002;</p>
+<h2 id="&#x67E5;&#x770B;&#x6587;&#x4EF6;&#x5185;&#x5BB9;"><a href="#&#x67E5;&#x770B;&#x6587;&#x4EF6;&#x5185;&#x5BB9;" class="headerlink" title="&#x67E5;&#x770B;&#x6587;&#x4EF6;&#x5185;&#x5BB9;"></a>&#x67E5;&#x770B;&#x6587;&#x4EF6;&#x5185;&#x5BB9;</h2><h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h3><h4 id="&#x4F5C;&#x7528;"><a href="#&#x4F5C;&#x7528;" class="headerlink" title="&#x4F5C;&#x7528;"></a>&#x4F5C;&#x7528;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x6B63;&#x5E8F;&#x8F93;&#x51FA;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#x3002;</div></pre></td></tr></table></figure>
+<h4 id="&#x8BED;&#x6CD5;-1"><a href="#&#x8BED;&#x6CD5;-1" class="headerlink" title="&#x8BED;&#x6CD5;"></a>&#x8BED;&#x6CD5;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat [OPTION]... [FILE]...</div></pre></td></tr></table></figure>
+<h4 id="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-6"><a href="#&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-6" class="headerlink" title="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;"></a>&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-n&#xFF1A;&#x663E;&#x793A;&#x6240;&#x6709;&#x884C;&#x7684;&#x884C;&#x53F7;</div><div class="line">-b&#xFF1A;&#x663E;&#x793A;&#x975E;&#x7A7A;&#x884C;&#x7684;&#x884C;&#x53F7;</div><div class="line">-E&#xFF1A;&#x5728;&#x6BCF;&#x884C;&#x884C;&#x5C3E;&#x52A0;&#x4E0A;$&#x7B26;&#x53F7;</div><div class="line">-T&#xFF1A;&#x5C06;TAB&#x7B26;&#x53F7;&#x8F93;&#x51FA;&#x4E3A;&quot;^I&quot;</div><div class="line">-s&#xFF1A;&#x538B;&#x7F29;&#x8FDE;&#x7EED;&#x7A7A;&#x884C;&#x4E3A;&#x5355;&#x4E2A;&#x7A7A;&#x884C;</div></pre></td></tr></table></figure>
+<h3 id="tac"><a href="#tac" class="headerlink" title="tac"></a>tac</h3><h4 id="&#x4F5C;&#x7528;-1"><a href="#&#x4F5C;&#x7528;-1" class="headerlink" title="&#x4F5C;&#x7528;"></a>&#x4F5C;&#x7528;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x5012;&#x5E8F;&#x8F93;&#x51FA;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#x3002;</div></pre></td></tr></table></figure>
+<h4 id="&#x8BED;&#x6CD5;-2"><a href="#&#x8BED;&#x6CD5;-2" class="headerlink" title="&#x8BED;&#x6CD5;"></a>&#x8BED;&#x6CD5;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tac [OPTION]... [FILE]...</div></pre></td></tr></table></figure>
+<h3 id="head"><a href="#head" class="headerlink" title="head"></a>head</h3><h4 id="&#x4F5C;&#x7528;-2"><a href="#&#x4F5C;&#x7528;-2" class="headerlink" title="&#x4F5C;&#x7528;"></a>&#x4F5C;&#x7528;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x6253;&#x5370;&#x524D;&#x9762;&#x7684;&#x51E0;&#x884C;&#x5185;&#x5BB9;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F;&#x524D;&#x5341;&#x884C;&#x3002;</div></pre></td></tr></table></figure>
+<h4 id="&#x8BED;&#x6CD5;-3"><a href="#&#x8BED;&#x6CD5;-3" class="headerlink" title="&#x8BED;&#x6CD5;"></a>&#x8BED;&#x6CD5;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">head [-n num] | [-num] [-v] filename</div></pre></td></tr></table></figure>
+<h4 id="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-7"><a href="#&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-7" class="headerlink" title="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;"></a>&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-n&#xFF1A;&#x663E;&#x793A;&#x524D;num&#x884C;&#xFF1B;&#x5982;&#x679C;num&#x662F;&#x8D1F;&#x6570;&#xFF0C;&#x5219;&#x663E;&#x793A;&#x9664;&#x4E86;&#x6700;&#x540E;|num|(&#x7EDD;&#x5BF9;&#x503C;)&#x884C;&#x7684;&#x5176;&#x4F59;&#x6240;&#x6709;&#x884C;&#xFF0C;&#x5373;&#x663E;&#x793A;&#x524D;&quot;&#x603B;&#x884C;&#x6570; - |num|&quot;</div><div class="line">-v&#xFF1A;&#x4F1A;&#x663E;&#x793A;&#x51FA;&#x6587;&#x4EF6;&#x540D;</div></pre></td></tr></table></figure>
+<h3 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h3><h4 id="&#x4F5C;&#x7528;-3"><a href="#&#x4F5C;&#x7528;-3" class="headerlink" title="&#x4F5C;&#x7528;"></a>&#x4F5C;&#x7528;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tail &#x4E0E; head &#x521A;&#x597D;&#x76F8;&#x53CD;&#xFF0C;&#x663E;&#x793A;&#x540E;&#x9762;&#x7684;&#x884C;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F;&#x540E;&#x5341;&#x884C;&#x3002;</div></pre></td></tr></table></figure>
+<h4 id="&#x8BED;&#x6CD5;-4"><a href="#&#x8BED;&#x6CD5;-4" class="headerlink" title="&#x8BED;&#x6CD5;"></a>&#x8BED;&#x6CD5;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tail [OPTION]... [FILE]...</div></pre></td></tr></table></figure>
+<h4 id="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-8"><a href="#&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-8" class="headerlink" title="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;"></a>&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-n&#xFF1A;&#x8F93;&#x51FA;&#x6700;&#x540E;num&#x884C;&#xFF0C;&#x5982;&#x679C;&#x4F7F;&#x7528;-n +num&#x5219;&#x8868;&#x793A;&#x8F93;&#x51FA;&#x4ECE;&#x7B2C;num&#x884C;&#x5F00;&#x59CB;&#x7684;&#x6240;&#x6709;&#x884C;</div><div class="line">-f&#xFF1A;&#x76D1;&#x63A7;&#x6587;&#x4EF6;&#x53D8;&#x5316;</div><div class="line">--pid=PID&#xFF1A;&#x548C;-f&#x4E00;&#x8D77;&#x4F7F;&#x7528;&#xFF0C;&#x5728;&#x7ED9;&#x5B9A;PID&#x7684;&#x8FDB;&#x7A0B;&#x6B7B;&#x4EA1;&#x540E;&#xFF0C;&#x7EC8;&#x6B62;&#x6587;&#x4EF6;&#x76D1;&#x63A7;</div><div class="line">-v&#xFF1A;&#x663E;&#x793A;&#x6587;&#x4EF6;&#x540D;</div></pre></td></tr></table></figure>
+<h3 id="less"><a href="#less" class="headerlink" title="less"></a>less</h3><h4 id="&#x4F5C;&#x7528;-4"><a href="#&#x4F5C;&#x7528;-4" class="headerlink" title="&#x4F5C;&#x7528;"></a>&#x4F5C;&#x7528;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x5BF9;&#x6587;&#x4EF6;&#x6216;&#x5176;&#x5B83;&#x8F93;&#x51FA;&#x8FDB;&#x884C;&#x5206;&#x9875;&#x663E;&#x793A;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; [pageup] [pagedown] &#x7B49;&#x6309; &#x952E;&#x7684;&#x529F;&#x80FD;&#x6765;&#x5F80;&#x524D;&#x5F80;&#x540E;&#x7FFB;&#x770B;&#x6587;&#x4EF6;&#xFF0C;&#x66F4;&#x5BB9;&#x6613;&#x7528;&#x6765;&#x67E5;&#x770B;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x7684;&#x5185;&#x5BB9;&#xFF01;&#x9664;&#x6B64;&#x4E4B;&#x5916;&#xFF0C;&#x5728; less &#x91CC;&#x5934;&#x53EF;&#x4EE5;&#x62E5;&#x6709;&#x66F4;&#x591A;&#x7684;&#x641C;&#x7D22;&#x529F;&#x80FD;&#xFF0C;&#x4E0D;&#x6B62;&#x53EF;&#x4EE5;&#x5411;&#x4E0B;&#x641C;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5411;&#x4E0A;&#x641C;&#x3002;</div></pre></td></tr></table></figure>
+<h4 id="&#x8BED;&#x6CD5;-5"><a href="#&#x8BED;&#x6CD5;-5" class="headerlink" title="&#x8BED;&#x6CD5;"></a>&#x8BED;&#x6CD5;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">less [&#x53C2;&#x6570;]  &#x6587;&#x4EF6;</div></pre></td></tr></table></figure>
+<h4 id="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-9"><a href="#&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-9" class="headerlink" title="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;"></a>&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">-b &lt;&#x7F13;&#x51B2;&#x533A;&#x5927;&#x5C0F;&gt; &#x8BBE;&#x7F6E;&#x7F13;&#x51B2;&#x533A;&#x7684;&#x5927;&#x5C0F;</div><div class="line">-e  &#x5F53;&#x6587;&#x4EF6;&#x663E;&#x793A;&#x7ED3;&#x675F;&#x540E;&#xFF0C;&#x81EA;&#x52A8;&#x79BB;&#x5F00;</div><div class="line">-f  &#x5F3A;&#x8FEB;&#x6253;&#x5F00;&#x7279;&#x6B8A;&#x6587;&#x4EF6;&#xFF0C;&#x4F8B;&#x5982;&#x5916;&#x56F4;&#x8BBE;&#x5907;&#x4EE3;&#x53F7;&#x3001;&#x76EE;&#x5F55;&#x548C;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;</div><div class="line">-g  &#x53EA;&#x6807;&#x5FD7;&#x6700;&#x540E;&#x641C;&#x7D22;&#x7684;&#x5173;&#x952E;&#x8BCD;</div><div class="line">-i  &#x5FFD;&#x7565;&#x641C;&#x7D22;&#x65F6;&#x7684;&#x5927;&#x5C0F;&#x5199;</div><div class="line">-m  &#x663E;&#x793A;&#x7C7B;&#x4F3C;more&#x547D;&#x4EE4;&#x7684;&#x767E;&#x5206;&#x6BD4;</div><div class="line">-N  &#x663E;&#x793A;&#x6BCF;&#x884C;&#x7684;&#x884C;&#x53F7;</div><div class="line">-o &lt;&#x6587;&#x4EF6;&#x540D;&gt; &#x5C06;less &#x8F93;&#x51FA;&#x7684;&#x5185;&#x5BB9;&#x5728;&#x6307;&#x5B9A;&#x6587;&#x4EF6;&#x4E2D;&#x4FDD;&#x5B58;&#x8D77;&#x6765;</div><div class="line">-Q  &#x4E0D;&#x4F7F;&#x7528;&#x8B66;&#x544A;&#x97F3;</div><div class="line">-s  &#x663E;&#x793A;&#x8FDE;&#x7EED;&#x7A7A;&#x884C;&#x4E3A;&#x4E00;&#x884C;</div><div class="line">-S  &#x884C;&#x8FC7;&#x957F;&#x65F6;&#x95F4;&#x5C06;&#x8D85;&#x51FA;&#x90E8;&#x5206;&#x820D;&#x5F03;</div><div class="line">-x &lt;&#x6570;&#x5B57;&gt; &#x5C06;&#x201C;tab&#x201D;&#x952E;&#x663E;&#x793A;&#x4E3A;&#x89C4;&#x5B9A;&#x7684;&#x6570;&#x5B57;&#x7A7A;&#x683C;</div><div class="line">/&#x5B57;&#x7B26;&#x4E32;&#xFF1A;&#x5411;&#x4E0B;&#x641C;&#x7D22;&#x201C;&#x5B57;&#x7B26;&#x4E32;&#x201D;&#x7684;&#x529F;&#x80FD;</div><div class="line">?&#x5B57;&#x7B26;&#x4E32;&#xFF1A;&#x5411;&#x4E0A;&#x641C;&#x7D22;&#x201C;&#x5B57;&#x7B26;&#x4E32;&#x201D;&#x7684;&#x529F;&#x80FD;</div><div class="line">n&#xFF1A;&#x91CD;&#x590D;&#x524D;&#x4E00;&#x4E2A;&#x641C;&#x7D22;&#xFF08;&#x4E0E; / &#x6216; ? &#x6709;&#x5173;&#xFF09;</div><div class="line">N&#xFF1A;&#x53CD;&#x5411;&#x91CD;&#x590D;&#x524D;&#x4E00;&#x4E2A;&#x641C;&#x7D22;&#xFF08;&#x4E0E; / &#x6216; ? &#x6709;&#x5173;&#xFF09;</div><div class="line">b  &#x5411;&#x540E;&#x7FFB;&#x4E00;&#x9875;</div><div class="line">d  &#x5411;&#x540E;&#x7FFB;&#x534A;&#x9875;</div><div class="line">h  &#x663E;&#x793A;&#x5E2E;&#x52A9;&#x754C;&#x9762;</div><div class="line">Q  &#x9000;&#x51FA;less &#x547D;&#x4EE4;</div><div class="line">u  &#x5411;&#x524D;&#x6EDA;&#x52A8;&#x534A;&#x9875;</div><div class="line">y  &#x5411;&#x524D;&#x6EDA;&#x52A8;&#x4E00;&#x884C;</div><div class="line">&#x7A7A;&#x683C;&#x952E; &#x6EDA;&#x52A8;&#x4E00;&#x884C;</div><div class="line">&#x56DE;&#x8F66;&#x952E; &#x6EDA;&#x52A8;&#x4E00;&#x9875;</div><div class="line">[pagedown]&#xFF1A; &#x5411;&#x4E0B;&#x7FFB;&#x52A8;&#x4E00;&#x9875;</div><div class="line">[pageup]&#xFF1A;   &#x5411;&#x4E0A;&#x7FFB;&#x52A8;&#x4E00;&#x9875;</div></pre></td></tr></table></figure>
+<h2 id="&#x6587;&#x4EF6;&#x6BD4;&#x8F83;"><a href="#&#x6587;&#x4EF6;&#x6BD4;&#x8F83;" class="headerlink" title="&#x6587;&#x4EF6;&#x6BD4;&#x8F83;"></a>&#x6587;&#x4EF6;&#x6BD4;&#x8F83;</h2><h3 id="diff"><a href="#diff" class="headerlink" title="diff"></a>diff</h3><h4 id="&#x4F5C;&#x7528;-5"><a href="#&#x4F5C;&#x7528;-5" class="headerlink" title="&#x4F5C;&#x7528;"></a>&#x4F5C;&#x7528;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x9010;&#x884C;&#x5BF9;&#x6BD4;,&#x4EE5;&#x6587;&#x672C;&#x7684;&#x5F62;&#x5F0F;&#x663E;&#x793A;&#x4E0D;&#x540C;&#x5185;&#x5BB9;</div></pre></td></tr></table></figure>
+<h4 id="&#x547D;&#x4EE4;&#x683C;&#x5F0F;"><a href="#&#x547D;&#x4EE4;&#x683C;&#x5F0F;" class="headerlink" title="&#x547D;&#x4EE4;&#x683C;&#x5F0F;"></a>&#x547D;&#x4EE4;&#x683C;&#x5F0F;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">diff file_01 file_02</div></pre></td></tr></table></figure>
+<h3 id="vimdiff"><a href="#vimdiff" class="headerlink" title="vimdiff"></a>vimdiff</h3><h4 id="&#x4F5C;&#x7528;-6"><a href="#&#x4F5C;&#x7528;-6" class="headerlink" title="&#x4F5C;&#x7528;"></a>&#x4F5C;&#x7528;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x9010;&#x884C;&#x5BF9;&#x6BD4;,&#x4EE5;&#x56FE;&#x5F62;&#x7684;&#x5F62;&#x5F0F;&#x663E;&#x793A;&#x4E0D;&#x540C;&#x5185;&#x5BB9;</div></pre></td></tr></table></figure>
+<h4 id="&#x547D;&#x4EE4;&#x683C;&#x5F0F;-1"><a href="#&#x547D;&#x4EE4;&#x683C;&#x5F0F;-1" class="headerlink" title="&#x547D;&#x4EE4;&#x683C;&#x5F0F;"></a>&#x547D;&#x4EE4;&#x683C;&#x5F0F;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vimdiff  file_01 file_02</div></pre></td></tr></table></figure>
+<h4 id="&#x9000;&#x51FA;"><a href="#&#x9000;&#x51FA;" class="headerlink" title="&#x9000;&#x51FA;"></a>&#x9000;&#x51FA;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">:qa! 	//&#x4E0D;&#x4FDD;&#x5B58;&#x6587;&#x4EF6;&#x9000;&#x51FA;</div><div class="line">wqa!	// &#x4FDD;&#x5B58;&#x6587;&#x4EF6;&#x9000;&#x51FA;</div></pre></td></tr></table></figure>
+<h2 id="&#x6587;&#x4EF6;&#x67E5;&#x627E;"><a href="#&#x6587;&#x4EF6;&#x67E5;&#x627E;" class="headerlink" title="&#x6587;&#x4EF6;&#x67E5;&#x627E;"></a>&#x6587;&#x4EF6;&#x67E5;&#x627E;</h2><h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><h4 id="&#x4F5C;&#x7528;-7"><a href="#&#x4F5C;&#x7528;-7" class="headerlink" title="&#x4F5C;&#x7528;"></a>&#x4F5C;&#x7528;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x67E5;&#x627E;&#x6307;&#x5B9A;&#x6587;&#x4EF6;</div></pre></td></tr></table></figure>
+<h4 id="&#x547D;&#x4EE4;&#x683C;&#x5F0F;-2"><a href="#&#x547D;&#x4EE4;&#x683C;&#x5F0F;-2" class="headerlink" title="&#x547D;&#x4EE4;&#x683C;&#x5F0F;"></a>&#x547D;&#x4EE4;&#x683C;&#x5F0F;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find(&#x9009;&#x9879;) &#x8D77;&#x59CB;&#x76EE;&#x5F55; &#x6587;&#x4EF6;&#x540D;</div></pre></td></tr></table></figure>
+<h4 id="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-10"><a href="#&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;-10" class="headerlink" title="&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;"></a>&#x9009;&#x9879;&#x4E0E;&#x53C2;&#x6570;</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">-amin&lt;&#x5206;&#x949F;&gt;&#xFF1A;&#x67E5;&#x627E;&#x5728;&#x6307;&#x5B9A;&#x65F6;&#x95F4;&#x66FE;&#x88AB;&#x5B58;&#x53D6;&#x8FC7;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF0C;&#x5355;&#x4F4D;&#x4EE5;&#x5206;&#x949F;&#x8BA1;&#x7B97;&#xFF1B;</div><div class="line">-anewer&lt;&#x53C2;&#x8003;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&gt;&#xFF1A;&#x67E5;&#x627E;&#x5176;&#x5B58;&#x53D6;&#x65F6;&#x95F4;&#x8F83;&#x6307;&#x5B9A;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x7684;&#x5B58;&#x53D6;&#x65F6;&#x95F4;&#x66F4;&#x63A5;&#x8FD1;&#x73B0;&#x5728;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF1B;</div><div class="line">-atime&lt;24&#x5C0F;&#x65F6;&#x6570;&gt;&#xFF1A;&#x67E5;&#x627E;&#x5728;&#x6307;&#x5B9A;&#x65F6;&#x95F4;&#x66FE;&#x88AB;&#x5B58;&#x53D6;&#x8FC7;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF0C;&#x5355;&#x4F4D;&#x4EE5;24&#x5C0F;&#x65F6;&#x8BA1;&#x7B97;&#xFF1B;</div><div class="line">-cmin&lt;&#x5206;&#x949F;&gt;&#xFF1A;&#x67E5;&#x627E;&#x5728;&#x6307;&#x5B9A;&#x65F6;&#x95F4;&#x4E4B;&#x65F6;&#x88AB;&#x66F4;&#x6539;&#x8FC7;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF1B;</div><div class="line">-cnewer&lt;&#x53C2;&#x8003;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&gt;&#x67E5;&#x627E;&#x5176;&#x66F4;&#x6539;&#x65F6;&#x95F4;&#x8F83;&#x6307;&#x5B9A;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x7684;&#x66F4;&#x6539;&#x65F6;&#x95F4;&#x66F4;&#x63A5;&#x8FD1;&#x73B0;&#x5728;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF1B;</div><div class="line">-ctime&lt;24&#x5C0F;&#x65F6;&#x6570;&gt;&#xFF1A;&#x67E5;&#x627E;&#x5728;&#x6307;&#x5B9A;&#x65F6;&#x95F4;&#x4E4B;&#x65F6;&#x88AB;&#x66F4;&#x6539;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF0C;&#x5355;&#x4F4D;&#x4EE5;24&#x5C0F;&#x65F6;&#x8BA1;&#x7B97;&#xFF1B;</div><div class="line">-daystart&#xFF1A;&#x4ECE;&#x672C;&#x65E5;&#x5F00;&#x59CB;&#x8BA1;&#x7B97;&#x65F6;&#x95F4;&#xFF1B;</div><div class="line">-depth&#xFF1A;&#x4ECE;&#x6307;&#x5B9A;&#x76EE;&#x5F55;&#x4E0B;&#x6700;&#x6DF1;&#x5C42;&#x7684;&#x5B50;&#x76EE;&#x5F55;&#x5F00;&#x59CB;&#x67E5;&#x627E;&#xFF1B;</div><div class="line">-expty&#xFF1A;&#x5BFB;&#x627E;&#x6587;&#x4EF6;&#x5927;&#x5C0F;&#x4E3A;0 Byte&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x6216;&#x76EE;&#x5F55;&#x4E0B;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x5B50;&#x76EE;&#x5F55;&#x6216;&#x6587;&#x4EF6;&#x7684;&#x7A7A;&#x76EE;&#x5F55;&#xFF1B;</div><div class="line">-exec&lt;&#x6267;&#x884C;&#x6307;&#x4EE4;&gt;&#xFF1A;&#x5047;&#x8BBE;find&#x6307;&#x4EE4;&#x7684;&#x56DE;&#x4F20;&#x503C;&#x4E3A;True&#xFF0C;&#x5C31;&#x6267;&#x884C;&#x8BE5;&#x6307;&#x4EE4;&#xFF1B;</div><div class="line">-false&#xFF1A;&#x5C06;find&#x6307;&#x4EE4;&#x7684;&#x56DE;&#x4F20;&#x503C;&#x7686;&#x8BBE;&#x4E3A;False&#xFF1B;</div><div class="line">-fls&lt;&#x5217;&#x8868;&#x6587;&#x4EF6;&gt;&#xFF1A;&#x6B64;&#x53C2;&#x6570;&#x7684;&#x6548;&#x679C;&#x548C;&#x6307;&#x5B9A;&#x201C;-ls&#x201D;&#x53C2;&#x6570;&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x4F1A;&#x628A;&#x7ED3;&#x679C;&#x4FDD;&#x5B58;&#x4E3A;&#x6307;&#x5B9A;&#x7684;&#x5217;&#x8868;&#x6587;&#x4EF6;&#xFF1B;</div><div class="line">-follow&#xFF1A;&#x6392;&#x9664;&#x7B26;&#x53F7;&#x8FDE;&#x63A5;&#xFF1B;</div><div class="line">-fprint&lt;&#x5217;&#x8868;&#x6587;&#x4EF6;&gt;&#xFF1A;&#x6B64;&#x53C2;&#x6570;&#x7684;&#x6548;&#x679C;&#x548C;&#x6307;&#x5B9A;&#x201C;-print&#x201D;&#x53C2;&#x6570;&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x4F1A;&#x628A;&#x7ED3;&#x679C;&#x4FDD;&#x5B58;&#x6210;&#x6307;&#x5B9A;&#x7684;&#x5217;&#x8868;&#x6587;&#x4EF6;&#xFF1B;</div><div class="line">-fprint0&lt;&#x5217;&#x8868;&#x6587;&#x4EF6;&gt;&#xFF1A;&#x6B64;&#x53C2;&#x6570;&#x7684;&#x6548;&#x679C;&#x548C;&#x6307;&#x5B9A;&#x201C;-print0&#x201D;&#x53C2;&#x6570;&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x4F1A;&#x628A;&#x7ED3;&#x679C;&#x4FDD;&#x5B58;&#x6210;&#x6307;&#x5B9A;&#x7684;&#x5217;&#x8868;&#x6587;&#x4EF6;&#xFF1B;</div><div class="line">-fprintf&lt;&#x5217;&#x8868;&#x6587;&#x4EF6;&gt;&lt;&#x8F93;&#x51FA;&#x683C;&#x5F0F;&gt;&#xFF1A;&#x6B64;&#x53C2;&#x6570;&#x7684;&#x6548;&#x679C;&#x548C;&#x6307;&#x5B9A;&#x201C;-printf&#x201D;&#x53C2;&#x6570;&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x4F1A;&#x628A;&#x7ED3;&#x679C;&#x4FDD;&#x5B58;&#x6210;&#x6307;&#x5B9A;&#x7684;&#x5217;&#x8868;&#x6587;&#x4EF6;&#xFF1B;</div><div class="line">-fstype&lt;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x7C7B;&#x578B;&gt;&#xFF1A;&#x53EA;&#x5BFB;&#x627E;&#x8BE5;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x7C7B;&#x578B;&#x4E0B;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF1B;</div><div class="line">-gid&lt;&#x7FA4;&#x7EC4;&#x8BC6;&#x522B;&#x7801;&gt;&#xFF1A;&#x67E5;&#x627E;&#x7B26;&#x5408;&#x6307;&#x5B9A;&#x4E4B;&#x7FA4;&#x7EC4;&#x8BC6;&#x522B;&#x7801;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF1B;</div><div class="line">-group&lt;&#x7FA4;&#x7EC4;&#x540D;&#x79F0;&gt;&#xFF1A;&#x67E5;&#x627E;&#x7B26;&#x5408;&#x6307;&#x5B9A;&#x4E4B;&#x7FA4;&#x7EC4;&#x540D;&#x79F0;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF1B;</div><div class="line">-help&#x6216;&#x2014;&#x2014;help&#xFF1A;&#x5728;&#x7EBF;&#x5E2E;&#x52A9;&#xFF1B;</div><div class="line">-ilname&lt;&#x8303;&#x672C;&#x6837;&#x5F0F;&gt;&#xFF1A;&#x6B64;&#x53C2;&#x6570;&#x7684;&#x6548;&#x679C;&#x548C;&#x6307;&#x5B9A;&#x201C;-lname&#x201D;&#x53C2;&#x6570;&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x5FFD;&#x7565;&#x5B57;&#x7B26;&#x5927;&#x5C0F;&#x5199;&#x7684;&#x5DEE;&#x522B;&#xFF1B;</div><div class="line">-iname&lt;&#x8303;&#x672C;&#x6837;&#x5F0F;&gt;&#xFF1A;&#x6B64;&#x53C2;&#x6570;&#x7684;&#x6548;&#x679C;&#x548C;&#x6307;&#x5B9A;&#x201C;-name&#x201D;&#x53C2;&#x6570;&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x5FFD;&#x7565;&#x5B57;&#x7B26;&#x5927;&#x5C0F;&#x5199;&#x7684;&#x5DEE;&#x522B;&#xFF1B;</div><div class="line">-inum&lt;inode&#x7F16;&#x53F7;&gt;&#xFF1A;&#x67E5;&#x627E;&#x7B26;&#x5408;&#x6307;&#x5B9A;&#x7684;inode&#x7F16;&#x53F7;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF1B;</div><div class="line">-ipath&lt;&#x8303;&#x672C;&#x6837;&#x5F0F;&gt;&#xFF1A;&#x6B64;&#x53C2;&#x6570;&#x7684;&#x6548;&#x679C;&#x548C;&#x6307;&#x5B9A;&#x201C;-path&#x201D;&#x53C2;&#x6570;&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x5FFD;&#x7565;&#x5B57;&#x7B26;&#x5927;&#x5C0F;&#x5199;&#x7684;&#x5DEE;&#x522B;&#xFF1B;</div><div class="line">-iregex&lt;&#x8303;&#x672C;&#x6837;&#x5F0F;&gt;&#xFF1A;&#x6B64;&#x53C2;&#x6570;&#x7684;&#x6548;&#x679C;&#x548C;&#x6307;&#x5B9A;&#x201C;-regexe&#x201D;&#x53C2;&#x6570;&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x5FFD;&#x7565;&#x5B57;&#x7B26;&#x5927;&#x5C0F;&#x5199;&#x7684;&#x5DEE;&#x522B;&#xFF1B;</div><div class="line">-links&lt;&#x8FDE;&#x63A5;&#x6570;&#x76EE;&gt;&#xFF1A;&#x67E5;&#x627E;&#x7B26;&#x5408;&#x6307;&#x5B9A;&#x7684;&#x786C;&#x8FDE;&#x63A5;&#x6570;&#x76EE;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF1B;</div><div class="line">-iname&lt;&#x8303;&#x672C;&#x6837;&#x5F0F;&gt;&#xFF1A;&#x6307;&#x5B9A;&#x5B57;&#x7B26;&#x4E32;&#x4F5C;&#x4E3A;&#x5BFB;&#x627E;&#x7B26;&#x53F7;&#x8FDE;&#x63A5;&#x7684;&#x8303;&#x672C;&#x6837;&#x5F0F;&#xFF1B;</div><div class="line">-ls&#xFF1A;&#x5047;&#x8BBE;find&#x6307;&#x4EE4;&#x7684;&#x56DE;&#x4F20;&#x503C;&#x4E3A;Ture&#xFF0C;&#x5C31;&#x5C06;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x540D;&#x79F0;&#x5217;&#x51FA;&#x5230;&#x6807;&#x51C6;&#x8F93;&#x51FA;&#xFF1B;</div><div class="line">-maxdepth&lt;&#x76EE;&#x5F55;&#x5C42;&#x7EA7;&gt;&#xFF1A;&#x8BBE;&#x7F6E;&#x6700;&#x5927;&#x76EE;&#x5F55;&#x5C42;&#x7EA7;&#xFF1B;</div><div class="line">-mindepth&lt;&#x76EE;&#x5F55;&#x5C42;&#x7EA7;&gt;&#xFF1A;&#x8BBE;&#x7F6E;&#x6700;&#x5C0F;&#x76EE;&#x5F55;&#x5C42;&#x7EA7;&#xFF1B;</div><div class="line">-mmin&lt;&#x5206;&#x949F;&gt;&#xFF1A;&#x67E5;&#x627E;&#x5728;&#x6307;&#x5B9A;&#x65F6;&#x95F4;&#x66FE;&#x88AB;&#x66F4;&#x6539;&#x8FC7;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF0C;&#x5355;&#x4F4D;&#x4EE5;&#x5206;&#x949F;&#x8BA1;&#x7B97;&#xFF1B;</div><div class="line">-mount&#xFF1A;&#x6B64;&#x53C2;&#x6570;&#x7684;&#x6548;&#x679C;&#x548C;&#x6307;&#x5B9A;&#x201C;-xdev&#x201D;&#x76F8;&#x540C;&#xFF1B;</div><div class="line">-mtime&lt;24&#x5C0F;&#x65F6;&#x6570;&gt;&#xFF1A;&#x67E5;&#x627E;&#x5728;&#x6307;&#x5B9A;&#x65F6;&#x95F4;&#x66FE;&#x88AB;&#x66F4;&#x6539;&#x8FC7;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF0C;&#x5355;&#x4F4D;&#x4EE5;24&#x5C0F;&#x65F6;&#x8BA1;&#x7B97;&#xFF1B;</div><div class="line">-name&lt;&#x8303;&#x672C;&#x6837;&#x5F0F;&gt;&#xFF1A;&#x6307;&#x5B9A;&#x5B57;&#x7B26;&#x4E32;&#x4F5C;&#x4E3A;&#x5BFB;&#x627E;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x7684;&#x8303;&#x672C;&#x6837;&#x5F0F;&#xFF1B;</div><div class="line">-newer&lt;&#x53C2;&#x8003;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&gt;&#xFF1A;&#x67E5;&#x627E;&#x5176;&#x66F4;&#x6539;&#x65F6;&#x95F4;&#x8F83;&#x6307;&#x5B9A;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x7684;&#x66F4;&#x6539;&#x65F6;&#x95F4;&#x66F4;&#x63A5;&#x8FD1;&#x73B0;&#x5728;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF1B;</div><div class="line">-nogroup&#xFF1A;&#x627E;&#x51FA;&#x4E0D;&#x5C5E;&#x4E8E;&#x672C;&#x5730;&#x4E3B;&#x673A;&#x7FA4;&#x7EC4;&#x8BC6;&#x522B;&#x7801;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF1B;</div><div class="line">-noleaf&#xFF1A;&#x4E0D;&#x53BB;&#x8003;&#x8651;&#x76EE;&#x5F55;&#x81F3;&#x5C11;&#x9700;&#x62E5;&#x6709;&#x4E24;&#x4E2A;&#x786C;&#x8FDE;&#x63A5;&#x5B58;&#x5728;&#xFF1B;</div><div class="line">-nouser&#xFF1A;&#x627E;&#x51FA;&#x4E0D;&#x5C5E;&#x4E8E;&#x672C;&#x5730;&#x4E3B;&#x673A;&#x7528;&#x6237;&#x8BC6;&#x522B;&#x7801;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF1B;</div><div class="line">-ok&lt;&#x6267;&#x884C;&#x6307;&#x4EE4;&gt;&#xFF1A;&#x6B64;&#x53C2;&#x6570;&#x7684;&#x6548;&#x679C;&#x548C;&#x6307;&#x5B9A;&#x201C;-exec&#x201D;&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x5728;&#x6267;&#x884C;&#x6307;&#x4EE4;&#x4E4B;&#x524D;&#x4F1A;&#x5148;&#x8BE2;&#x95EE;&#x7528;&#x6237;&#xFF0C;&#x82E5;&#x56DE;&#x7B54;&#x201C;y&#x201D;&#x6216;&#x201C;Y&#x201D;&#xFF0C;&#x5219;&#x653E;&#x5F03;&#x6267;&#x884C;&#x547D;&#x4EE4;&#xFF1B;</div><div class="line">-path&lt;&#x8303;&#x672C;&#x6837;&#x5F0F;&gt;&#xFF1A;&#x6307;&#x5B9A;&#x5B57;&#x7B26;&#x4E32;&#x4F5C;&#x4E3A;&#x5BFB;&#x627E;&#x76EE;&#x5F55;&#x7684;&#x8303;&#x672C;&#x6837;&#x5F0F;&#xFF1B;</div><div class="line">-perm&lt;&#x6743;&#x9650;&#x6570;&#x503C;&gt;&#xFF1A;&#x67E5;&#x627E;&#x7B26;&#x5408;&#x6307;&#x5B9A;&#x7684;&#x6743;&#x9650;&#x6570;&#x503C;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF1B;</div><div class="line">-print&#xFF1A;&#x5047;&#x8BBE;find&#x6307;&#x4EE4;&#x7684;&#x56DE;&#x4F20;&#x503C;&#x4E3A;Ture&#xFF0C;&#x5C31;&#x5C06;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x540D;&#x79F0;&#x5217;&#x51FA;&#x5230;&#x6807;&#x51C6;&#x8F93;&#x51FA;&#x3002;&#x683C;&#x5F0F;&#x4E3A;&#x6BCF;&#x5217;&#x4E00;&#x4E2A;&#x540D;&#x79F0;&#xFF0C;&#x6BCF;&#x4E2A;&#x540D;&#x79F0;&#x524D;&#x7686;&#x6709;&#x201C;./&#x201D;&#x5B57;&#x7B26;&#x4E32;&#xFF1B;</div><div class="line">-print0&#xFF1A;&#x5047;&#x8BBE;find&#x6307;&#x4EE4;&#x7684;&#x56DE;&#x4F20;&#x503C;&#x4E3A;Ture&#xFF0C;&#x5C31;&#x5C06;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x540D;&#x79F0;&#x5217;&#x51FA;&#x5230;&#x6807;&#x51C6;&#x8F93;&#x51FA;&#x3002;&#x683C;&#x5F0F;&#x4E3A;&#x5168;&#x90E8;&#x7684;&#x540D;&#x79F0;&#x7686;&#x5728;&#x540C;&#x4E00;&#x884C;&#xFF1B;</div><div class="line">-printf&lt;&#x8F93;&#x51FA;&#x683C;&#x5F0F;&gt;&#xFF1A;&#x5047;&#x8BBE;find&#x6307;&#x4EE4;&#x7684;&#x56DE;&#x4F20;&#x503C;&#x4E3A;Ture&#xFF0C;&#x5C31;&#x5C06;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x540D;&#x79F0;&#x5217;&#x51FA;&#x5230;&#x6807;&#x51C6;&#x8F93;&#x51FA;&#x3002;&#x683C;&#x5F0F;&#x53EF;&#x4EE5;&#x81EA;&#x884C;&#x6307;&#x5B9A;&#xFF1B;</div><div class="line">-prune&#xFF1A;&#x4E0D;&#x5BFB;&#x627E;&#x5B57;&#x7B26;&#x4E32;&#x4F5C;&#x4E3A;&#x5BFB;&#x627E;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x7684;&#x8303;&#x672C;&#x6837;&#x5F0F;;</div><div class="line">-regex&lt;&#x8303;&#x672C;&#x6837;&#x5F0F;&gt;&#xFF1A;&#x6307;&#x5B9A;&#x5B57;&#x7B26;&#x4E32;&#x4F5C;&#x4E3A;&#x5BFB;&#x627E;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x7684;&#x8303;&#x672C;&#x6837;&#x5F0F;&#xFF1B;</div><div class="line">-size&lt;&#x6587;&#x4EF6;&#x5927;&#x5C0F;&gt;&#xFF1A;&#x67E5;&#x627E;&#x7B26;&#x5408;&#x6307;&#x5B9A;&#x7684;&#x6587;&#x4EF6;&#x5927;&#x5C0F;&#x7684;&#x6587;&#x4EF6;&#xFF1B;</div><div class="line">-true&#xFF1A;&#x5C06;find&#x6307;&#x4EE4;&#x7684;&#x56DE;&#x4F20;&#x503C;&#x7686;&#x8BBE;&#x4E3A;True&#xFF1B;</div><div class="line">-typ&lt;&#x6587;&#x4EF6;&#x7C7B;&#x578B;&gt;&#xFF1A;&#x53EA;&#x5BFB;&#x627E;&#x7B26;&#x5408;&#x6307;&#x5B9A;&#x7684;&#x6587;&#x4EF6;&#x7C7B;&#x578B;&#x7684;&#x6587;&#x4EF6;&#xFF1B;</div><div class="line">-uid&lt;&#x7528;&#x6237;&#x8BC6;&#x522B;&#x7801;&gt;&#xFF1A;&#x67E5;&#x627E;&#x7B26;&#x5408;&#x6307;&#x5B9A;&#x7684;&#x7528;&#x6237;&#x8BC6;&#x522B;&#x7801;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF1B;</div><div class="line">-used&lt;&#x65E5;&#x6570;&gt;&#xFF1A;&#x67E5;&#x627E;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x88AB;&#x66F4;&#x6539;&#x4E4B;&#x540E;&#x5728;&#x6307;&#x5B9A;&#x65F6;&#x95F4;&#x66FE;&#x88AB;&#x5B58;&#x53D6;&#x8FC7;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF0C;&#x5355;&#x4F4D;&#x4EE5;&#x65E5;&#x8BA1;&#x7B97;&#xFF1B;</div><div class="line">-user&lt;&#x62E5;&#x6709;&#x8005;&#x540D;&#x79F0;&gt;&#xFF1A;&#x67E5;&#x627E;&#x7B26;&#x548C;&#x6307;&#x5B9A;&#x7684;&#x62E5;&#x6709;&#x8005;&#x540D;&#x79F0;&#x7684;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#xFF1B;</div><div class="line">-version&#x6216;&#x2014;&#x2014;version&#xFF1A;&#x663E;&#x793A;&#x7248;&#x672C;&#x4FE1;&#x606F;&#xFF1B;</div><div class="line">-xdev&#xFF1A;&#x5C06;&#x8303;&#x56F4;&#x5C40;&#x9650;&#x5728;&#x5148;&#x884C;&#x7684;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x4E2D;&#xFF1B;</div><div class="line">-xtype&lt;&#x6587;&#x4EF6;&#x7C7B;&#x578B;&gt;&#xFF1A;&#x6B64;&#x53C2;&#x6570;&#x7684;&#x6548;&#x679C;&#x548C;&#x6307;&#x5B9A;&#x201C;-type&#x201D;&#x53C2;&#x6570;&#x7C7B;&#x4F3C;&#xFF0C;&#x5DEE;&#x522B;&#x5728;&#x4E8E;&#x5B83;&#x9488;&#x5BF9;&#x7B26;&#x53F7;&#x8FDE;&#x63A5;&#x68C0;&#x67E5;&#x3002;</div></pre></td></tr></table></figure>
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/Liunx/系统/Liunx/基础知识/Liunx学习总结(三)--用户和用户组管理/" class="pre-post btn btn-default" title='Liunx学习总结(三)--用户和用户组管理'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Liunx学习总结(三)--用户和用户组管理</span>
+        </a>
+    
+    
+        <a href="/Liunx/系统/Liunx/基础知识/Liunx学习总结(一)--初识Liunx/" class="next-post btn btn-default" title='Liunx学习总结(一)--初识 Liunx'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Liunx学习总结(一)--初识 Liunx</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/"><i class="fa" aria-hidden="true">Docker</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OAuth/"><i class="fa" aria-hidden="true">OAuth</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Security/"><i class="fa" aria-hidden="true">Spring Security</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/"><i class="fa" aria-hidden="true">UML</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/"><i class="fa" aria-hidden="true">git</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><i class="fa" aria-hidden="true">五月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/"><i class="fa" aria-hidden="true">四月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">十月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JAVA-WEB/" style="font-size: 14px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 11.33px;">Lambda</a> <a href="/tags/Liunx/" style="font-size: 17.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.67px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 15.33px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px;">Nginx</a> <a href="/tags/OAuth/" style="font-size: 10px;">OAuth</a> <a href="/tags/Quartz/" style="font-size: 12px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 14.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 15.33px;">Redis</a> <a href="/tags/SQL/" style="font-size: 13.33px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.67px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 18.67px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15.33px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 18px;">Spring</a> <a href="/tags/Spring-Security/" style="font-size: 16.67px;">Spring Security</a> <a href="/tags/SpringBoot/" style="font-size: 13.33px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 10.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Utils/" style="font-size: 10.67px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 14px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 14px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/git/" style="font-size: 12.67px;">git</a> <a href="/tags/java/" style="font-size: 10.67px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.67px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 11.33px;">前端</a> <a href="/tags/前端基础/" style="font-size: 12.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 19.33px;">设计模式</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

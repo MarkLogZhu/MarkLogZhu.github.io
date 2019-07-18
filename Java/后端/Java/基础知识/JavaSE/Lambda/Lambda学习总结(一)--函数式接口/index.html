@@ -1,0 +1,476 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>“Lambda学习总结(一)--函数式接口” | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="“Lambda学习总结(一)--函数式接口”">
+            
+	            “Lambda学习总结(一)--函数式接口”
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Java">
+            Java
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/Lambda" title='Lambda'>
+                        Lambda
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/07/11</span>
+        </span>
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <blockquote>
+<p>Lambda &#x8868;&#x8FBE;&#x5F0F;&#x662F; <code>JDK</code> 1.8 &#x91CC;&#x9762;&#x7684;&#x4E00;&#x4E2A;&#x91CD;&#x8981;&#x66F4;&#x65B0;&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740; Java &#x4E5F;&#x5F00;&#x59CB;&#x627F;&#x8BA4;&#x4E86;&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;&#xFF0C;&#x5E76;&#x4E14;&#x5C1D;&#x8BD5;&#x5F15;&#x5165;&#x5176;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4ECA;&#x5929;&#x5C31;&#x6765;&#x4E86;&#x89E3;&#x4E0B;&#x5B83;&#x7684;&#x4F7F;&#x7528;&#x3002;</p>
+</blockquote>
+<h2 id="&#x4E00;&#x3001;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;"><a href="#&#x4E00;&#x3001;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;" class="headerlink" title="&#x4E00;&#x3001;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;"></a>&#x4E00;&#x3001;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;</h2><h3 id="1-1-&#x6982;&#x5FF5;"><a href="#1-1-&#x6982;&#x5FF5;" class="headerlink" title="1.1 &#x6982;&#x5FF5;"></a>1.1 &#x6982;&#x5FF5;</h3><p>&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#x5728; Java &#x4E2D;&#x662F;&#x6307;&#xFF1A;<strong>&#x6709;&#x4E14;&#x4EC5;&#x6709;&#x4E00;&#x4E2A;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#x7684;&#x63A5;&#x53E3;</strong>&#x3002;</p>
+<h3 id="1-2-&#x683C;&#x5F0F;"><a href="#1-2-&#x683C;&#x5F0F;" class="headerlink" title="1.2 &#x683C;&#x5F0F;"></a>1.2 &#x683C;&#x5F0F;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#x4FEE;&#x9970;&#x7B26; <span class="class"><span class="keyword">interface</span> &#x63A5;&#x53E3;&#x540D;&#x79F0; </span>{</div><div class="line">    &#x8FD4;&#x56DE;&#x503C;&#x7C7B;&#x578B; &#x65B9;&#x6CD5;&#x540D;&#x79F0;(&#x53EF;&#x9009;&#x53C2;&#x6570;&#x4FE1;&#x606F;);</div><div class="line">    <span class="comment">// &#x5176;&#x4ED6;&#x975E;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;&#x5185;&#x5BB9;</span></div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x4F8B;&#x5982;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MyFunctionalInterface</span> </span>{</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">myMethod</span><span class="params">()</span></span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="1-3-FunctionalInterface-&#x6CE8;&#x89E3;"><a href="#1-3-FunctionalInterface-&#x6CE8;&#x89E3;" class="headerlink" title="1.3 @FunctionalInterface &#x6CE8;&#x89E3;"></a>1.3 @FunctionalInterface &#x6CE8;&#x89E3;</h3><p>&#x4E0E; <code>@Override</code> &#x6CE8;&#x89E3;&#x7684;&#x4F5C;&#x7528;&#x7C7B;&#x4F3C;&#xFF0C;&#x4E3A;&#x4E86;&#x4FDD;&#x8BC1;&#x63A5;&#x53E3; <strong>&#x6709;&#x4E14;&#x4EC5;&#x6709;&#x4E00;&#x4E2A;&#x62BD;&#x8C61;&#x65B9;&#x6CD5;</strong>&#xFF0C;Java 8 &#x4E2D;&#x4E13;&#x95E8;&#x4E3A;&#x5176;&#x5F15;&#x5165;&#x4E86;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x6CE8;&#x89E3;: <code>@FunctionalInterface</code>&#x3002;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FunctionalInterface</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MyFunctionalInterface</span> </span>{</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">myMethod</span><span class="params">()</span></span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x5373;&#x4F7F;&#x4E0D;&#x4F7F;&#x7528;&#x8BE5;&#x6CE8;&#x89E3;&#xFF0C;&#x53EA;&#x8981;&#x6EE1;&#x8DB3;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#x7684;&#x5B9A;&#x4E49;&#x4E5F;&#x8BA4;&#x4E3A;&#x8BE5;&#x63A5;&#x53E3;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#x4E0D;&#x5F71;&#x54CD;&#x5176;&#x4F7F;&#x7528;&#x3002;        </p>
+<h3 id="1-4-&#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#x7684;&#x4F7F;&#x7528;"><a href="#1-4-&#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#x7684;&#x4F7F;&#x7528;" class="headerlink" title="1.4 &#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#x7684;&#x4F7F;&#x7528;"></a>1.4 &#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#x7684;&#x4F7F;&#x7528;</h3><p> &#x81EA;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#x7684;&#x5178;&#x578B;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x5C31;&#x662F;&#x4F5C;&#x4E3A;&#x65B9;&#x6CD5;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoFunctionalInterface</span> </span>{</div><div class="line">    <span class="comment">// &#x4F7F;&#x7528;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#x4F5C;&#x4E3A;&#x65B9;&#x6CD5;&#x53C2;&#x6570;</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(MyFunctionalInterface inter)</span> </span>{</div><div class="line">        <span class="comment">// &#x4F7F;&#x7528;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#x65B9;&#x6CD5;</span></div><div class="line">        inter.myMethod();</div><div class="line">    }</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</div><div class="line">        <span class="comment">// &#x8C03;&#x7528;&#x65B9;&#x6CD5;</span></div><div class="line">        print(() -&gt; System.out.println(<span class="string">&quot;&#x6267;&#x884C; Lambda &#x51FD;&#x6570;&#x65B9;&#x6CD5;&quot;</span>));</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h2 id="&#x4E8C;&#x3001;&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;"><a href="#&#x4E8C;&#x3001;&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;" class="headerlink" title="&#x4E8C;&#x3001;&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;"></a>&#x4E8C;&#x3001;&#x51FD;&#x6570;&#x5F0F;&#x7F16;&#x7A0B;</h2><h3 id="2-1-Lambda-&#x5EF6;&#x8FDF;&#x6267;&#x884C;"><a href="#2-1-Lambda-&#x5EF6;&#x8FDF;&#x6267;&#x884C;" class="headerlink" title="2.1 Lambda &#x5EF6;&#x8FDF;&#x6267;&#x884C;"></a>2.1 Lambda &#x5EF6;&#x8FDF;&#x6267;&#x884C;</h3><p>&#x5728;&#x8BB2; <strong>Lambda &#x5EF6;&#x8FDF;&#x6267;&#x884C;</strong> &#x4E4B;&#x524D;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x6765;&#x770B;&#x4E00;&#x4E2A;&#x65E5;&#x5FD7;&#x6253;&#x5370;&#x7684;&#x6848;&#x4F8B;:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoLogger</span> </span>{</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">log</span><span class="params">(<span class="keyword">int</span> lever,String msg)</span> </span>{</div><div class="line">        <span class="keyword">if</span>(lever == <span class="number">1</span>){</div><div class="line">            System.out.println(msg);</div><div class="line">        }</div><div class="line">    }</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</div><div class="line">        String msgA = <span class="string">&quot;Hello&quot;</span>;</div><div class="line">        String msgB = <span class="string">&quot;World&quot;</span>;</div><div class="line">        String msgC = <span class="string">&quot;Java&quot;</span>;</div><div class="line">        log(<span class="number">1</span>,msgA + msgB + msgC);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x4E0A;&#x9762;&#x7684;&#x6848;&#x4F8B;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x65E0;&#x8BBA;&#x65E5;&#x5FD7;&#x7EA7;&#x522B;&#x662F;&#x5426;&#x6EE1;&#x8DB3;&#x8981;&#x6C42;&#xFF0C;&#x4F5C;&#x4E3A; <code>log</code> &#x65B9;&#x6CD5;&#x7684;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x4E09;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x4E00;&#x5B9A;&#x4F1A;&#x5148;&#x88AB;&#x62FC;&#x63A5;&#x7136;&#x540E;&#x4F20;&#x5165;&#x65B9;&#x6CD5;&#x5185;&#x3002;&#x5982;&#x679C;&#x7EA7;&#x522B;&#x4E0D;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#x7684;&#x8BDD;&#xFF0C;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x62FC;&#x63A5;&#x64CD;&#x4F5C;&#x5C31;&#x767D;&#x505A;&#x4E86;&#xFF0C;&#x5B58;&#x5728;&#x7740;&#x6027;&#x80FD;&#x4E0A;&#x7684;&#x6D6A;&#x8D39;&#x3002;&#x800C; <code>Lambda</code> &#x8868;&#x8FBE;&#x5F0F;&#x662F;&#x5EF6;&#x8FDF;&#x6267;&#x884C;&#x7684;&#xFF0C;&#x6B63;&#x597D;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF0C;&#x7528;&#x4EE5;&#x63D0;&#x5347;&#x6027;&#x80FD;&#x3002;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FunctionalInterface</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MessageBuilder</span> </span>{  </div><div class="line">    <span class="function">String <span class="title">builderMessage</span><span class="params">()</span></span>;    </div><div class="line">}</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoLogger</span> </span>{</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">log</span><span class="params">(<span class="keyword">int</span> lever,MessageBuilder builder)</span> </span>{</div><div class="line">        <span class="keyword">if</span>(lever == <span class="number">1</span>){</div><div class="line">            System.out.println(builder.builderMessage());</div><div class="line">        }</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</div><div class="line">        String msgA = <span class="string">&quot;Hello&quot;</span>;</div><div class="line">        String msgB = <span class="string">&quot;World&quot;</span>;</div><div class="line">        String msgC = <span class="string">&quot;Java&quot;</span>;</div><div class="line"></div><div class="line">        log(<span class="number">1</span>,() -&gt; {</div><div class="line">            System.out.println(<span class="string">&quot;&#x7EA7;&#x522B;&#x4E3A;1&#x65F6;&#x6267;&#x884C;&quot;</span>);</div><div class="line">            <span class="keyword">return</span> msgA+msgB+msgC;</div><div class="line">        });</div><div class="line"></div><div class="line">        log(<span class="number">2</span>,() -&gt; {</div><div class="line">            System.out.println(<span class="string">&quot;&#x7EA7;&#x522B;&#x4E0D;&#x4E3A;1&#x65F6;&#x6267;&#x884C;&quot;</span>);</div><div class="line">            <span class="keyword">return</span> msgA+msgB+msgC;</div><div class="line">        });</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x4E0B;&#x63A7;&#x5236;&#x53F0;&#x7684;&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#x7EA7;&#x522B;&#x4E3A;<span class="number">1</span>&#x65F6;&#x6267;&#x884C;</div><div class="line">HelloWorldJava</div></pre></td></tr></table></figure>
+<p>&#x4ECE;&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#x4E0A;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x7B26;&#x5408;&#x65E5;&#x5FD7;&#x7EA7;&#x522B;&#x8981;&#x6C42;&#x7684;&#x8BDD;&#xFF0C;<code>Lambda</code> &#x5C06;&#x4E0D;&#x4F1A;&#x88AB;&#x6267;&#x884C;&#xFF0C;&#x8FDB;&#x800C;&#x8FBE;&#x5230;&#x8282;&#x7701;&#x6027;&#x80FD;&#x7684;&#x6548;&#x679C;&#x3002;</p>
+<h3 id="2-2-&#x4F7F;&#x7528;-Lambda-&#x4F5C;&#x4E3A;&#x53C2;&#x6570;"><a href="#2-2-&#x4F7F;&#x7528;-Lambda-&#x4F5C;&#x4E3A;&#x53C2;&#x6570;" class="headerlink" title="2.2 &#x4F7F;&#x7528; Lambda &#x4F5C;&#x4E3A;&#x53C2;&#x6570;"></a>2.2 &#x4F7F;&#x7528; Lambda &#x4F5C;&#x4E3A;&#x53C2;&#x6570;</h3><p>&#x5411;&#x4E0A;&#x9762;&#x7684;&#x65E5;&#x5FD7;&#x6253;&#x5370;&#x6848;&#x4F8B;&#x5B9E;&#x9645;&#x4E0A;&#x5C31;&#x662F;&#x5C06; <code>Lambda</code> &#x5F53;&#x4F5C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x6765;&#x4F7F;&#x7528;&#xFF0C;&#x53EA;&#x8981;&#x65B9;&#x6CD5;&#x7684;&#x53C2;&#x6570;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#x7C7B;&#x578B;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>Lambda</code> &#x8868;&#x8FBE;&#x5F0F;&#x8FDB;&#x884C;&#x66FF;&#x4EE3;&#x3002;&#x4F8B;&#x5982; <code>Runnable</code> &#x63A5;&#x53E3;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoParameter</span> </span>{</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">startRunnable</span><span class="params">(Runnable task)</span> </span>{</div><div class="line">        <span class="keyword">new</span> Thread(task).start();</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</div><div class="line">        startRunnable(() -&gt; System.out.println(<span class="string">&quot;&#x7EBF;&#x7A0B;&#x6267;&#x884C;&#x4E2D;&quot;</span>));</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="2-3&#x4F7F;&#x7528;-Lambda-&#x4F5C;&#x4E3A;&#x8FD4;&#x56DE;&#x503C;"><a href="#2-3&#x4F7F;&#x7528;-Lambda-&#x4F5C;&#x4E3A;&#x8FD4;&#x56DE;&#x503C;" class="headerlink" title="2.3&#x4F7F;&#x7528; Lambda &#x4F5C;&#x4E3A;&#x8FD4;&#x56DE;&#x503C;"></a>2.3&#x4F7F;&#x7528; Lambda &#x4F5C;&#x4E3A;&#x8FD4;&#x56DE;&#x503C;</h3><p>&#x540C;&#x7406;&#xFF0C;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x65B9;&#x6CD5;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x7C7B;&#x578B;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; <code>Lambda</code> &#x8868;&#x8FBE;&#x5F0F;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoResult</span> </span>{</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Comparator&lt;Integer&gt; <span class="title">newComparator</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">return</span> (a, b) -&gt; b - a;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</div><div class="line">        Integer[] array = <span class="keyword">new</span> Integer[]{<span class="number">0</span>, -<span class="number">5</span>, <span class="number">33</span>, <span class="number">100</span>, <span class="number">88</span>, -<span class="number">40</span>};</div><div class="line">        <span class="comment">// &#x6392;&#x5E8F;&#x524D;</span></div><div class="line">        System.out.println(Arrays.toString(array));</div><div class="line">        Arrays.sort(array,newComparator());</div><div class="line">        <span class="comment">// &#x6392;&#x5E8F;&#x540E;</span></div><div class="line">        System.out.println(Arrays.toString(array));</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<h2 id="&#x4E09;&#x3001;Lambda-&#x56DB;&#x5927;&#x6838;&#x5FC3;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;"><a href="#&#x4E09;&#x3001;Lambda-&#x56DB;&#x5927;&#x6838;&#x5FC3;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;" class="headerlink" title="&#x4E09;&#x3001;Lambda &#x56DB;&#x5927;&#x6838;&#x5FC3;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;"></a>&#x4E09;&#x3001;Lambda &#x56DB;&#x5927;&#x6838;&#x5FC3;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;</h2><p>&#x9664;&#x4E86;&#x6211;&#x4EEC;&#x81EA;&#x5DF1;&#x5B9A;&#x4E49;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#x5916;&#xFF0C;<code>JDK</code> &#x4E5F;&#x63D0;&#x4F9B;&#x4E86;&#x5927;&#x91CF;&#x7684;&#x5E38;&#x7528;&#x51FD;&#x6570;&#x5F0F;&#x63A5;&#x53E3;&#x7528;&#x4EE5;&#x4E30;&#x5BCC; <code>Lambda</code> &#x7684;&#x4F7F;&#x7528;&#x573A;&#x666F;&#xFF0C;&#x5B83;&#x4EEC;&#x4E3B;&#x8981;&#x5728; <code>java.util.function</code> &#x5305;&#x4E2D;&#x88AB;&#x63D0;&#x4F9B;&#x3002;</p>
+<h3 id="3-1-Supplier-&#x63A5;&#x53E3;"><a href="#3-1-Supplier-&#x63A5;&#x53E3;" class="headerlink" title="3.1 Supplier &#x63A5;&#x53E3;"></a>3.1 Supplier &#x63A5;&#x53E3;</h3><p><code>java.util.function.Supplier&lt;T&gt;</code> &#x63A5;&#x53E3;&#x4EC5;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x65E0;&#x53C2;&#x65B9;&#x6CD5;: <code>T get()</code>&#x3002;&#x7528;&#x6765;&#x83B7;&#x53D6;&#x4E00;&#x4E2A;&#x6CDB;&#x578B;&#x53C2;&#x6570;&#x6307;&#x5B9A;&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#x6570;&#x636E;&#x3002;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoSupplier</span> </span>{</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">getString</span><span class="params">(Supplier&lt;String&gt; supplier)</span> </span>{</div><div class="line">        <span class="keyword">return</span> supplier.get();</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</div><div class="line">        String msgA = <span class="string">&quot;Hello &quot;</span>;</div><div class="line">        String msgB = <span class="string">&quot;World &quot;</span>;</div><div class="line">        System.out.println(getString(() -&gt; msgA + msgB));</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="3-2-Consumer-&#x63A5;&#x53E3;"><a href="#3-2-Consumer-&#x63A5;&#x53E3;" class="headerlink" title="3.2 Consumer &#x63A5;&#x53E3;"></a>3.2 Consumer &#x63A5;&#x53E3;</h3><p><code>java.util.function.Consumer&lt;T&gt;</code> &#x63A5;&#x53E3;&#x4E0E; <code>Supplier</code> &#x63A5;&#x53E3;&#x6B63;&#x597D;&#x76F8;&#x53CD;&#xFF0C;&#x5B83;&#x4E0D;&#x662F;&#x7528;&#x4E8E;&#x751F;&#x4EA7;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#xFF0C;&#x800C;&#x662F;&#x6D88;&#x8D39;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#xFF0C;&#x5B83;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x7531;&#x6CDB;&#x578B;&#x51B3;&#x5B9A;&#x3002;</p>
+<p><code>Consumer</code> &#x63A5;&#x53E3;&#x6709;&#x4E24;&#x4E2A;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x65B9;&#x6CD5;&#x540D;&#x79F0;</th>
+<th>&#x65B9;&#x6CD5;&#x7C7B;&#x578B;</th>
+<th>&#x65B9;&#x6CD5;&#x542B;&#x4E49;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>accept</td>
+<td>&#x62BD;&#x8C61;&#x65B9;&#x6CD5;</td>
+<td>&#x7528;&#x4E8E;&#x6D88;&#x8D39;&#x4E00;&#x4E2A;&#x6570;&#x636E;</td>
+</tr>
+<tr>
+<td>andThen</td>
+<td>&#x9ED8;&#x8BA4;&#x65B9;&#x6CD5;</td>
+<td>&#x7EC4;&#x5408;&#x6D88;&#x8D39;&#x4E00;&#x4E2A;&#x6570;&#x636E;</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-2-1-accept-&#x65B9;&#x6CD5;"><a href="#3-2-1-accept-&#x65B9;&#x6CD5;" class="headerlink" title="3.2.1 accept &#x65B9;&#x6CD5;"></a>3.2.1 accept &#x65B9;&#x6CD5;</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoConsumer</span> </span>{</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">consumerString</span><span class="params">(Consumer&lt;String&gt; one)</span></span>{</div><div class="line">        one.accept(<span class="string">&quot;Hello&quot;</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</div><div class="line">        consumerString((s)-&gt;System.out.println(s));</div><div class="line">    }</div><div class="line">    </div><div class="line">}</div></pre></td></tr></table></figure>
+<h4 id="3-2-2-andThen-&#x65B9;&#x6CD5;"><a href="#3-2-2-andThen-&#x65B9;&#x6CD5;" class="headerlink" title="3.2.2 andThen &#x65B9;&#x6CD5;"></a>3.2.2 andThen &#x65B9;&#x6CD5;</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoConsumer</span> </span>{</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">consumerString</span><span class="params">(Consumer&lt;String&gt; one,Consumer&lt;String&gt; two)</span></span>{</div><div class="line">        one.andThen(two).accept(<span class="string">&quot;Hello&quot;</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</div><div class="line">        consumerString(</div><div class="line">                (s)-&gt;System.out.println(s.toUpperCase()),</div><div class="line">                (s)-&gt;System.out.println(s.toLowerCase())</div><div class="line">        );</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="3-3-Predicate-&#x63A5;&#x53E3;"><a href="#3-3-Predicate-&#x63A5;&#x53E3;" class="headerlink" title="3.3 Predicate &#x63A5;&#x53E3;"></a>3.3 Predicate &#x63A5;&#x53E3;</h3><p>&#x5F53;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5BF9;&#x67D0;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x5224;&#x65AD;&#xFF0C;&#x4ECE;&#x800C;&#x5F97;&#x5230;&#x4E00;&#x4E2A;&#x5E03;&#x5C14;&#x503C;&#x7C7B;&#x578B;&#x7684;&#x7ED3;&#x679C;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>java.util.function.Predicate</code> &#x63A5;&#x53E3;&#x3002;</p>
+<p><code>Predicate</code> &#x63A5;&#x53E3;&#x6709;&#x5982;&#x4E0B;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x65B9;&#x6CD5;&#x540D;&#x79F0;</th>
+<th>&#x65B9;&#x6CD5;&#x7C7B;&#x578B;</th>
+<th>&#x65B9;&#x6CD5;&#x542B;&#x4E49;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>test</td>
+<td>&#x62BD;&#x8C61;&#x65B9;&#x6CD5;</td>
+<td>&#x7528;&#x4E8E;&#x6761;&#x4EF6;&#x5224;&#x65AD;</td>
+</tr>
+<tr>
+<td>and</td>
+<td>&#x9ED8;&#x8BA4;&#x65B9;&#x6CD5;</td>
+<td>&#x7EC4;&#x5408;&#x6761;&#x4EF6;&#x5224;&#x65AD;&#xFF0C;&#x8868;&#x793A; &#x4E0E; &#x5173;&#x7CFB;</td>
+</tr>
+<tr>
+<td>or</td>
+<td>&#x9ED8;&#x8BA4;&#x65B9;&#x6CD5;</td>
+<td>&#x7EC4;&#x5408;&#x6761;&#x4EF6;&#x5224;&#x65AD;&#xFF0C;&#x8868;&#x793A; &#x6216; &#x5173;&#x7CFB;</td>
+</tr>
+<tr>
+<td>negate</td>
+<td>&#x9ED8;&#x8BA4;&#x65B9;&#x6CD5;</td>
+<td>&#x7EC4;&#x5408;&#x6761;&#x4EF6;&#x5224;&#x65AD;&#xFF0C;&#x8868;&#x793A; &#x975E; &#x5173;&#x7CFB;</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-3-1-test-&#x65B9;&#x6CD5;"><a href="#3-3-1-test-&#x65B9;&#x6CD5;" class="headerlink" title="3.3.1  test &#x65B9;&#x6CD5;"></a>3.3.1  test &#x65B9;&#x6CD5;</h4><p>&#x6761;&#x4EF6;&#x5224;&#x65AD;&#x7684;&#x6761;&#x4EF6;&#x662F;&#x6839;&#x636E;&#x4F20;&#x5165;&#x7684; <strong>Lambda</strong> &#x8868;&#x8FBE;&#x5F0F;&#x903B;&#x8F91; &#xFF0C;&#x4E0B;&#x9762;&#x7684;&#x793A;&#x4F8B;&#x7684;&#x5224;&#x65AD;&#x903B;&#x8F91;&#x662F;&#x4F20;&#x5165;&#x7684;&#x503C;&#x662F;&#x5426;&#x5927;&#x4E8E;0&#x3002;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoTest</span> </span>{</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(Predicate&lt;Integer&gt; predicate)</span> </span>{</div><div class="line">        <span class="keyword">boolean</span> result = predicate.test(<span class="number">5</span>);</div><div class="line">        System.out.println(result);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</div><div class="line">        method((s) -&gt; s &gt; <span class="number">0</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<h4 id="3-3-2-and-&#x65B9;&#x6CD5;"><a href="#3-3-2-and-&#x65B9;&#x6CD5;" class="headerlink" title="3.3.2 and &#x65B9;&#x6CD5;"></a>3.3.2 and &#x65B9;&#x6CD5;</h4><p>&#x5982;&#x679C;&#x8981;&#x5224;&#x65AD;&#x5B57;&#x7B26;&#x4E32;&#x65E2;&#x5305;&#x542B;&#x5B57;&#x6BCD; <code>a</code> &#x53C8;&#x8981;&#x5305;&#x542B;&#x5B57;&#x6BCD; <code>e&#xFF0C;</code>&#x90A3;&#x4E48;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <strong>and</strong> &#x65B9;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoAnd</span> </span>{</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(Predicate&lt;String&gt; one,Predicate&lt;String&gt; two)</span> </span>{</div><div class="line">        <span class="keyword">boolean</span> result = one.and(two).test(<span class="string">&quot;abcd&quot;</span>);</div><div class="line">        System.out.println(result);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</div><div class="line">        method((s) -&gt; s.contains(<span class="string">&quot;a&quot;</span>),(s) -&gt; s.contains(<span class="string">&quot;e&quot;</span>));</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<h4 id="3-3-3-or-&#x65B9;&#x6CD5;"><a href="#3-3-3-or-&#x65B9;&#x6CD5;" class="headerlink" title="3.3.3 or &#x65B9;&#x6CD5;"></a>3.3.3 or &#x65B9;&#x6CD5;</h4><p>&#x5982;&#x679C;&#x53EA;&#x9700;&#x8981;&#x6EE1;&#x8DB3;&#x4E00;&#x4E2A;&#x6761;&#x4EF6;&#x5373;&#x53EF;&#xFF0C;&#x90A3;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <strong>or</strong> &#x65B9;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoOr</span> </span>{</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(Predicate&lt;String&gt; one,Predicate&lt;String&gt; two)</span> </span>{</div><div class="line">        <span class="keyword">boolean</span> result = one.or(two).test(<span class="string">&quot;abcd&quot;</span>);</div><div class="line">        System.out.println(result);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</div><div class="line">        method((s) -&gt; s.contains(<span class="string">&quot;a&quot;</span>),(s) -&gt; s.contains(<span class="string">&quot;e&quot;</span>));</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<h4 id="3-3-4-negate-&#x65B9;&#x6CD5;"><a href="#3-3-4-negate-&#x65B9;&#x6CD5;" class="headerlink" title="3.3.4 negate &#x65B9;&#x6CD5;"></a>3.3.4 negate &#x65B9;&#x6CD5;</h4><p>&#x5269;&#x4E0B;&#x7684;&#x5C31;&#x53EA;&#x6709;&#x53D6;&#x53CD;&#x7684;&#x903B;&#x8F91;&#x4E86;&#xFF0C;&#x5224;&#x65AD;&#x503C;&#x4E0D;&#x80FD;&#x5927;&#x4E8E;0&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoNegate</span> </span>{</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(Predicate&lt;Integer&gt; predicate)</span> </span>{</div><div class="line">        <span class="keyword">boolean</span> result = predicate.negate().test(<span class="number">5</span>);</div><div class="line">        System.out.println(result);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</div><div class="line">        method((s) -&gt; s &gt; <span class="number">0</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="3-4-Function-&#x63A5;&#x53E3;"><a href="#3-4-Function-&#x63A5;&#x53E3;" class="headerlink" title="3.4 Function &#x63A5;&#x53E3;"></a>3.4 Function &#x63A5;&#x53E3;</h3><p><code>java.util.function.Function&lt;T,R&gt;</code> &#x63A5;&#x53E3;&#x7528;&#x6765;&#x6839;&#x636E;&#x4E00;&#x4E2A;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x636E;&#x5F97;&#x5230;&#x53E6;&#x4E00;&#x4E2A;&#x7C7B;&#x578B;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x524D;&#x8005;&#x79F0;&#x4E3A;&#x524D;&#x7F6E;&#x6761;&#x4EF6;&#xFF0C;&#x540E;&#x8005;&#x79F0;&#x4E3A;&#x540E;&#x7F6E;&#x6761;&#x4EF6;&#x3002;</p>
+<table>
+<thead>
+<tr>
+<th>&#x65B9;&#x6CD5;&#x540D;&#x79F0;</th>
+<th>&#x65B9;&#x6CD5;&#x7C7B;&#x578B;</th>
+<th>&#x65B9;&#x6CD5;&#x542B;&#x4E49;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>apply(T t)</td>
+<td>&#x62BD;&#x8C61;&#x65B9;&#x6CD5;</td>
+<td>&#x6839;&#x636E;&#x7C7B;&#x578B; T &#x53C2;&#x6570;&#x83B7;&#x53D6;&#x7C7B;&#x578B; R &#x7684;&#x7ED3;&#x679C;</td>
+</tr>
+<tr>
+<td>andThen</td>
+<td>&#x9ED8;&#x8BA4;&#x65B9;&#x6CD5;</td>
+<td>&#x7528;&#x6765;&#x8FDB;&#x884C;&#x7EC4;&#x5408;&#x64CD;&#x4F5C;</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-4-1-apply-&#x65B9;&#x6CD5;"><a href="#3-4-1-apply-&#x65B9;&#x6CD5;" class="headerlink" title="3.4.1 apply &#x65B9;&#x6CD5;"></a>3.4.1 apply &#x65B9;&#x6CD5;</h4><p>&#x4F7F;&#x7528;&#x573A;&#x666F;&#x5982;&#xFF1A;&#x5C06; <code>String</code> &#x7C7B;&#x578B;&#x8F6C;&#x6362;&#x4E3A; <code>Integer</code> &#x7C7B;&#x578B;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoFunctionApply</span> </span>{</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(Function&lt;String,Integer&gt; function)</span></span>{</div><div class="line">        Integer apply = function.apply(<span class="string">&quot;10&quot;</span>);</div><div class="line">        System.out.println(apply + <span class="number">0</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</div><div class="line">        method(s -&gt; Integer.parseInt(s));</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h4 id="3-4-2-andThen-&#x65B9;&#x6CD5;"><a href="#3-4-2-andThen-&#x65B9;&#x6CD5;" class="headerlink" title="3.4.2 andThen &#x65B9;&#x6CD5;"></a>3.4.2 andThen &#x65B9;&#x6CD5;</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoFunctionAndThen</span> </span>{</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(Function&lt;String,Integer&gt; one,</span></span></div><div class="line">                               Function&lt;Integer,Integer&gt; two){</div><div class="line">        Integer apply = one.andThen(two).apply(<span class="string">&quot;10&quot;</span>);</div><div class="line">        System.out.println(apply + <span class="number">0</span>);</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</div><div class="line">        method(s -&gt; Integer.parseInt(s),i -&gt; i *= <span class="number">10</span>);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/Docker/系统/Docker/Docker学习总结(一)--Docker简介/" class="pre-post btn btn-default" title='Docker学习总结(一)--Docker简介'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Docker学习总结(一)--Docker简介</span>
+        </a>
+    
+    
+        <a href="/Spring-Security/后端/Java/框架/Security/Spring Security学习总结(一)--/" class="next-post btn btn-default" title='Security使用(一)--入门'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Security使用(一)--入门</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/"><i class="fa" aria-hidden="true">Docker</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OAuth/"><i class="fa" aria-hidden="true">OAuth</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Security/"><i class="fa" aria-hidden="true">Spring Security</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/"><i class="fa" aria-hidden="true">UML</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/"><i class="fa" aria-hidden="true">git</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><i class="fa" aria-hidden="true">五月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/"><i class="fa" aria-hidden="true">四月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">十月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JAVA-WEB/" style="font-size: 14px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 11.33px;">Lambda</a> <a href="/tags/Liunx/" style="font-size: 17.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.67px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 15.33px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px;">Nginx</a> <a href="/tags/OAuth/" style="font-size: 10px;">OAuth</a> <a href="/tags/Quartz/" style="font-size: 12px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 14.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 15.33px;">Redis</a> <a href="/tags/SQL/" style="font-size: 13.33px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.67px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 18.67px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15.33px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 18px;">Spring</a> <a href="/tags/Spring-Security/" style="font-size: 16.67px;">Spring Security</a> <a href="/tags/SpringBoot/" style="font-size: 13.33px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 10.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Utils/" style="font-size: 10.67px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 14px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 14px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/git/" style="font-size: 12.67px;">git</a> <a href="/tags/java/" style="font-size: 10.67px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.67px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 11.33px;">前端</a> <a href="/tags/前端基础/" style="font-size: 12.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 19.33px;">设计模式</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

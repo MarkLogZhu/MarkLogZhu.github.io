@@ -1,0 +1,902 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>分类: Docker | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content ">
+                    <h3> 
+    
+        Docker 
+    
+</h3>
+
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/Docker/系统/Docker/Docker学习总结(七)--Docker私有仓库/">Docker学习总结(七)--Docker私有仓库</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2019年07月12日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<h2 id="&#x521B;&#x5EFA;&#x79C1;&#x6709;&#x4ED3;&#x5E93;"><a href="#&#x521B;&#x5EFA;&#x79C1;&#x6709;&#x4ED3;&#x5E93;" class="headerlink" title="&#x521B;&#x5EFA;&#x79C1;&#x6709;&#x4ED3;&#x5E93;"></a>&#x521B;&#x5EFA;&#x79C1;&#x6709;&#x4ED3;&#x5E93;</h2><p>1) &#x62C9;&#x53D6;&#x79C1;&#x6709;&#x4ED3;&#x5E93;&#x955C;&#x50CF;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull registry</div></pre></td></tr></table></figure>
+<p>2&#xFF09;&#x542F;&#x52A8;&#x79C1;&#x6709;&#x4ED3;&#x5E93;&#x5BB9;&#x5668;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -di --name-registry -p <span class="number">5000</span>:<span class="number">5000</span> registry</div></pre></td></tr></table></figure>
+<p>3) &#x6253;&#x5F00;&#x6D4F;&#x89C8;&#x5668;&#x8F93;&#x5165;&#x5730;&#x5740; <code>http://&#x5BBF;&#x4E3B;&#x673A;IP&#x5730;&#x5740;:5000/v2/_catalog</code> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">    <span class="string">&quot;repositories&quot;</span>:[]</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x8868;&#x793A;&#x79C1;&#x6709;&#x4ED3;&#x5E93;&#x642D;&#x5EFA;&#x6210;&#x529F;&#x5E76;&#x4E14;&#x5185;&#x5BB9;&#x4E3A;&#x7A7A;&#x3002;</p>
+              <!--   -->
+              <!--      &amp;#x521B;&amp;#x5EFA;&amp;#x79C1;&amp;#x6709;&amp;#x4ED3;&amp;#x5E93;1) &amp;#x62C9;&amp;#x53D6;&amp;#x79C1;&amp;#x6709;&amp;#x4ED3;&amp;#x5E93;&amp;#x955C;&amp;#x50CF;
+1docker pull registry
+2&amp;#xFF09;&amp;#x542F;&amp;#x52A8;&amp;#x79C1;&amp;#x6709;&amp;#x4ED3;&amp;#x5E93;&amp;#x5BB9;&amp;#x5668;
+1docker run -di --name-registry -p 5000:5000 registry
+3) &amp;#x6253;&amp;#x5F00;&amp;#x6D4F;&amp;#x89C8;&amp;#x5668;&amp;#x8F93;&amp;#x5165;&amp;#x5730;&amp;#x5740; http://&amp;#x5BBF;&amp;#x4E3B;&amp;#x673A;IP&amp;#x5730;&amp;#x5740;:5000/v2/_catalog 
+123{    &amp;quot;repositories&amp;quot;:[]}
+&amp;#x8868;&amp;#x793A;&amp;#x79C1;&amp;#x6709;&amp;#x4ED3;&amp;#x5E93;&amp;#x642D;&amp;#x5EFA;&amp;#x6210;&amp;#x529F;&amp;#x5E76;&amp;#x4E14;&amp;#x5185;&amp;#x5BB9;&amp;#x4E3A;&amp;#x7A7A;&amp;#x3002;… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Docker" title='Docker'>
+                        Docker
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/Docker/系统/Docker/Docker学习总结(七)--Docker私有仓库/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/Docker/系统/Docker/Docker学习总结汇总/">Docker学习总结汇总</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2019年07月12日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<h2 id="&#x4E00;&#x3001;Docker-&#x7B80;&#x4ECB;"><a href="#&#x4E00;&#x3001;Docker-&#x7B80;&#x4ECB;" class="headerlink" title="&#x4E00;&#x3001;Docker &#x7B80;&#x4ECB;"></a>&#x4E00;&#x3001;Docker &#x7B80;&#x4ECB;</h2><h3 id="1-1-&#x4EC0;&#x4E48;&#x662F;&#x865A;&#x62DF;&#x5316;"><a href="#1-1-&#x4EC0;&#x4E48;&#x662F;&#x865A;&#x62DF;&#x5316;" class="headerlink" title="1.1 &#x4EC0;&#x4E48;&#x662F;&#x865A;&#x62DF;&#x5316;"></a>1.1 &#x4EC0;&#x4E48;&#x662F;&#x865A;&#x62DF;&#x5316;</h3><p>&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x4E2D;&#xFF0C;&#x865A;&#x62DF;&#x5316;&#x662F;&#x4E00;&#x79CD;&#x8D44;&#x6E90;&#x7BA1;&#x7406;&#x6280;&#x672F;&#xFF0C;&#x662F;&#x5C06;&#x8BA1;&#x7B97;&#x673A;&#x7684;&#x5404;&#x79CD;&#x5B9E;&#x4F53;&#x8D44;&#x6E90;&#xFF0C;&#x5982;&#x670D;&#x52A1;&#x5668;&#x3001;&#x7F51;&#x7EDC;&#x3001;&#x5185;&#x5B58;&#x7B49;&#xFF0C;&#x4EE5;&#x62BD;&#x8C61;&#x3001;&#x8F6C;&#x6362;&#x540E;&#x5448;&#x73B0;&#x51FA;&#x6765;&#xFF0C;&#x6253;&#x7834;&#x5B9E;&#x4F53;&#x7ED3;&#x6784;&#x95F4;&#x7684;&#x4E0D;&#x53EF;&#x5207;&#x5272;&#x7684;&#x969C;&#x788D;&#xFF0C;&#x4F7F;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x6BD4;&#x4E4B;&#x524D;&#x66F4;&#x597D;&#x7684;&#x5E94;&#x7528;&#x8FD9;&#x4E9B;&#x8D44;&#x6E90;&#x3002;</p>
+<p>&#x5728;&#x5B9E;&#x9645;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E2D;&#xFF0C;&#x865A;&#x62DF;&#x5316;&#x6280;&#x672F;&#x4E3B;&#x8981;&#x7528;&#x6765;&#x89E3;&#x51B3;&#x9AD8;&#x6027;&#x80FD;&#x7684;&#x7269;&#x7406;&#x786C;&#x4EF6;&#x4EA7;&#x80FD;&#x8FC7;&#x5269;&#x548C;&#x8001;&#x65E7;&#x786C;&#x4EF6;&#x4EA7;&#x80FD;&#x8FC7;&#x4F4E;&#x7684;&#x91CD;&#x7EC4;&#x91CD;&#x7528;&#xFF0C;&#x900F;&#x660E;&#x5316;&#x5E95;&#x5C42;&#x7269;&#x7406;&#x786C;&#x4EF6;&#xFF0C;&#x4ECE;&#x800C;&#x6700;&#x5927;&#x5316;&#x7684;&#x5229;&#x7528;&#x7269;&#x7406;&#x786C;&#x4EF6;&#x5BF9;&#x8D44;&#x6E90;&#x5145;&#x5206;&#x5229;&#x7528;&#x3002;</p>
+<p>&#x865A;&#x62DF;&#x5316;&#x6280;&#x672F;&#x79CD;&#x7C7B;&#x5F88;&#x591A;&#xFF0C;&#x5982;&#xFF1A;&#x8F6F;&#x4EF6;&#x865A;&#x62DF;&#x5316;&#x3001;&#x786C;&#x4EF6;&#x865A;&#x62DF;&#x5316;&#x3001;&#x5185;&#x5B58;&#x865A;&#x62DF;&#x5316;&#x3001;&#x7F51;&#x7EDC;&#x865A;&#x62DF;&#x5316;&#x3001;&#x865A;&#x62DF;&#x673A;&#x7B49;&#x3002;</p>
+<h3 id="1-2-&#x4EC0;&#x4E48;&#x662F;-Docker"><a href="#1-2-&#x4EC0;&#x4E48;&#x662F;-Docker" class="headerlink" title="1.2 &#x4EC0;&#x4E48;&#x662F; Docker"></a>1.2 &#x4EC0;&#x4E48;&#x662F; Docker</h3><p>Docker &#x662F; PaaS &#x63D0;&#x4F9B;&#x5546; dotCloud &#x5F00;&#x6E90;&#x7684;&#x4E00;&#x4E2A;&#x57FA;&#x4E8E; LXC &#x7684;&#x9AD8;&#x7EA7;&#x5BB9;&#x5668;&#x5F15;&#x64CE;&#xFF0C;&#x57FA;&#x4E8E; go &#x8BED;&#x8A00;&#x5E76;&#x9075;&#x5FAA;  Apache2.0 &#x534F;&#x8BAE;&#xFF0C;&#x6E90;&#x7801;&#x6258;&#x7BA1;&#x4E8E; <a href="https://link.jianshu.com/?t=https%3A%2F%2Fgithub.com%2Fmoby%2Fmoby">GitHub</a>&#x3002;</p>
+              <!--   -->
+              <!--      &amp;#x4E00;&amp;#x3001;Docker &amp;#x7B80;&amp;#x4ECB;1.1 &amp;#x4EC0;&amp;#x4E48;&amp;#x662F;&amp;#x865A;&amp;#x62DF;&amp;#x5316;&amp;#x5728;&amp;#x8BA1;&amp;#x7B97;&amp;#x673A;&amp;#x4E2D;&amp;#xFF0C;&amp;#x865A;&amp;#x62DF;&amp;#x5316;&amp;#x662F;&amp;#x4E00;&amp;#x79CD;&amp;#x8D44;&amp;#x6E90;&amp;#x7BA1;&amp;#x7406;&amp;#x6280;&amp;#x672F;&amp;#xFF0C;&amp;#x662F;&amp;#x5C06;&amp;#x8BA1;&amp;#x7B97;&amp;#x673A;&amp;#x7684;&amp;#x5404;&amp;#x79CD;&amp;#x5B9E;&amp;#x4F53;&amp;#x8D44;&amp;#x6E90;&amp;#xFF0C;&amp;#x5982;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x3001;&amp;#x7F51;&amp;#x7EDC;&amp;#x3001;&amp;#x5185;&amp;#x5B58;&amp;#x7B49;&amp;#xFF0C;&amp;#x4EE5;&amp;#x62BD;&amp;#x8C61;&amp;#x3001;&amp;#x8F6C;&amp;#x6362;&amp;#x540E;&amp;#x5448;&amp;#x73B0;&amp;#x51FA;&amp;#x6765;&amp;#xFF0C;&amp;#x6253;&amp;#x7834;&amp;#x5B9E;&amp;#x4F53;&amp;#x7ED3;&amp;#x6784;&amp;#x95F4;&amp;#x7684;&amp;#x4E0D;&amp;#x53EF;&amp;#x5207;&amp;#x5272;&amp;#x7684;&amp;#x969C;&amp;#x788D;&amp;#xFF0C;&amp;#x4F7F;&amp;#x7528;&amp;#x6237;&amp;#x53EF;&amp;#x4EE5;&amp;#x6BD4;&amp;#x4E4B;&amp;#x524D;&amp;#x66F4;&amp;#x597D;&amp;#x7684;&amp;#x5E94;&amp;#x7528;&amp;#x8FD9;&amp;#x4E9B;&amp;#x8D44;&amp;#x6E90;&amp;#x3002;
+&amp;#x5728;&amp;#x5B9E;&amp;#x9645;&amp;#x751F;&amp;#x4EA7;&amp;#x73AF;&amp;#x5883;&amp;#x4E2D;&amp;#xFF0C;&amp;#x865A;&amp;#x62DF;&amp;#x5316;&amp;#x6280;&amp;#x672F;&amp;#x4E3B;&amp;#x8981;&amp;#x7528;&amp;#x6765;&amp;#x89E3;&amp;#x51B3;&amp;#x9AD8;&amp;#x6027;&amp;#x80FD;&amp;#x7684;&amp;#x7269;&amp;#x7406;&amp;#x786C;&amp;#x4EF6;&amp;#x4EA7;&amp;#x80FD;&amp;#x8FC7;&amp;#x5269;&amp;#x548C;&amp;#x8001;&amp;#x65E7;&amp;#x786C;&amp;#x4EF6;&amp;#x4EA7;&amp;#x80FD;&amp;#x8FC7;&amp;#x4F4E;&amp;#x7684;&amp;#x91CD;&amp;#x7EC4;&amp;#x91CD;&amp;#x7528;&amp;#xFF0C;&amp;#x900F;&amp;#x660E;&amp;#x5316;&amp;#x5E95;&amp;#x5C42;&amp;#x7269;&amp;#x7406;&amp;#x786C;&amp;#x4EF6;&amp;#xFF0C;&amp;#x4ECE;&amp;#x800C;&amp;#x6700;&amp;#x5927;&amp;#x5316;&amp;#x7684;&amp;#x5229;&amp;#x7528;&amp;#x7269;&amp;#x7406;&amp;#x786C;&amp;#x4EF6;&amp;#x5BF9;&amp;#x8D44;&amp;#x6E90;&amp;#x5145;&amp;#x5206;&amp;#x5229;&amp;#x7528;&amp;#x3002;
+&amp;#x865A;&amp;#x62DF;&amp;#x5316;&amp;#x6280;&amp;#x672F;&amp;#x79CD;&amp;#x7C7B;&amp;#x5F88;&amp;#x591A;&amp;#xFF0C;&amp;#x5982;&amp;#xFF1A;&amp;#x8F6F;&amp;#x4EF6;&amp;#x865A;&amp;#x62DF;&amp;#x5316;&amp;#x3001;&amp;#x786C;&amp;#x4EF6;&amp;#x865A;&amp;#x62DF;&amp;#x5316;&amp;#x3001;&amp;#x5185;&amp;#x5B58;&amp;#x865A;&amp;#x62DF;&amp;#x5316;&amp;#x3001;&amp;#x7F51;&amp;#x7EDC;&amp;#x865A;&amp;#x62DF;&amp;#x5316;&amp;#x3001;&amp;#x865A;&amp;#x62DF;&amp;#x673A;&amp;#x7B49;&amp;#x3002;
+1.2 &amp;#x4EC0;&amp;#x4E48;&amp;#x662F; DockerDocker &amp;#x662F; PaaS &amp;#x63D0;&amp;#x4F9B;&amp;#x5546; dotCloud &amp;#x5F00;&amp;#x6E90;&amp;#x7684;&amp;#x4E00;&amp;#x4E2A;&amp;#x57FA;&amp;#x4E8E; LXC &amp;#x7684;&amp;#x9AD8;&amp;#x7EA7;&amp;#x5BB9;&amp;#x5668;&amp;#x5F15;&amp;#x64CE;&amp;#xFF0C;&amp;#x57FA;&amp;#x4E8E; go &amp;#x8BED;&amp;#x8A00;&amp;#x5E76;&amp;#x9075;&amp;#x5FAA;  Apache2.0 &amp;#x534F;&amp;#x8BAE;&amp;#xFF0C;&amp;#x6E90;&amp;#x7801;&amp;#x6258;&amp;#x7BA1;&amp;#x4E8E; GitHub&amp;#x3002;… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Docker" title='Docker'>
+                        Docker
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/Docker/系统/Docker/Docker学习总结汇总/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/Docker/系统/Docker/Docker学习总结(六)--Dockerfile/">Docker学习总结(六)--Dockerfile</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2019年07月12日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<h2 id="&#x4EC0;&#x4E48;&#x662F;-Dockerfile"><a href="#&#x4EC0;&#x4E48;&#x662F;-Dockerfile" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F; Dockerfile"></a>&#x4EC0;&#x4E48;&#x662F; Dockerfile</h2><p>Dockerfile  &#x662F;&#x7531;&#x4E00;&#x7CFB;&#x5217;&#x547D;&#x4EE4;&#x548C;&#x53C2;&#x6570;&#x6784;&#x6210;&#x7684;&#x811A;&#x672C;&#xFF0C;&#x8FD9;&#x4E9B;&#x547D;&#x4EE4;&#x5E94;&#x7528;&#x4E8E;&#x57FA;&#x7840;&#x955C;&#x50CF;&#x5E76;&#x6700;&#x7EC8;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x955C;&#x50CF;&#x3002;</p>
+<ul>
+<li>&#x5BF9;&#x4E8E;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#xFF1A;&#x53EF;&#x4EE5;&#x4E3A;&#x5F00;&#x53D1;&#x56E2;&#x961F;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x5B8C;&#x5168;&#x4E00;&#x81F4;&#x7684;&#x5F00;&#x53D1;&#x73AF;&#x5883;;</li>
+<li>&#x5BF9;&#x4E8E;&#x6D4B;&#x8BD5;&#x4EBA;&#x5458;&#xFF1A;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x62FF;&#x5F00;&#x53D1;&#x65F6;&#x6240;&#x6784;&#x5EFA;&#x7684;&#x955C;&#x50CF;&#x6216;&#x901A;&#x8FC7; Dockerfile &#x6587;&#x4EF6;&#x6784;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x955C;&#x50CF;&#x8FDB;&#x884C;&#x6D4B;&#x8BD5;;</li>
+<li>&#x5BF9;&#x4E8E;&#x8FD0;&#x7EF4;&#x4EBA;&#x5458;&#xFF1A;&#x5728;&#x90E8;&#x7F72;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x5E94;&#x7528;&#x7684;&#x65E0;&#x7F1D;&#x79FB;&#x690D;&#x3002;</li>
+</ul>
+              <!--   -->
+              <!--      &amp;#x4EC0;&amp;#x4E48;&amp;#x662F; DockerfileDockerfile  &amp;#x662F;&amp;#x7531;&amp;#x4E00;&amp;#x7CFB;&amp;#x5217;&amp;#x547D;&amp;#x4EE4;&amp;#x548C;&amp;#x53C2;&amp;#x6570;&amp;#x6784;&amp;#x6210;&amp;#x7684;&amp;#x811A;&amp;#x672C;&amp;#xFF0C;&amp;#x8FD9;&amp;#x4E9B;&amp;#x547D;&amp;#x4EE4;&amp;#x5E94;&amp;#x7528;&amp;#x4E8E;&amp;#x57FA;&amp;#x7840;&amp;#x955C;&amp;#x50CF;&amp;#x5E76;&amp;#x6700;&amp;#x7EC8;&amp;#x521B;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;&amp;#x65B0;&amp;#x7684;&amp;#x955C;&amp;#x50CF;&amp;#x3002;
+
+&amp;#x5BF9;&amp;#x4E8E;&amp;#x5F00;&amp;#x53D1;&amp;#x4EBA;&amp;#x5458;&amp;#xFF1A;&amp;#x53EF;&amp;#x4EE5;&amp;#x4E3A;&amp;#x5F00;&amp;#x53D1;&amp;#x56E2;&amp;#x961F;&amp;#x63D0;&amp;#x4F9B;&amp;#x4E00;&amp;#x4E2A;&amp;#x5B8C;&amp;#x5168;&amp;#x4E00;&amp;#x81F4;&amp;#x7684;&amp;#x5F00;&amp;#x53D1;&amp;#x73AF;&amp;#x5883;;
+&amp;#x5BF9;&amp;#x4E8E;&amp;#x6D4B;&amp;#x8BD5;&amp;#x4EBA;&amp;#x5458;&amp;#xFF1A;&amp;#x53EF;&amp;#x4EE5;&amp;#x76F4;&amp;#x63A5;&amp;#x62FF;&amp;#x5F00;&amp;#x53D1;&amp;#x65F6;&amp;#x6240;&amp;#x6784;&amp;#x5EFA;&amp;#x7684;&amp;#x955C;&amp;#x50CF;&amp;#x6216;&amp;#x901A;&amp;#x8FC7; Dockerfile &amp;#x6587;&amp;#x4EF6;&amp;#x6784;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;&amp;#x65B0;&amp;#x7684;&amp;#x955C;&amp;#x50CF;&amp;#x8FDB;&amp;#x884C;&amp;#x6D4B;&amp;#x8BD5;;
+&amp;#x5BF9;&amp;#x4E8E;&amp;#x8FD0;&amp;#x7EF4;&amp;#x4EBA;&amp;#x5458;&amp;#xFF1A;&amp;#x5728;&amp;#x90E8;&amp;#x7F72;&amp;#x65F6;&amp;#xFF0C;&amp;#x53EF;&amp;#x4EE5;&amp;#x5B9E;&amp;#x73B0;&amp;#x5E94;&amp;#x7528;&amp;#x7684;&amp;#x65E0;&amp;#x7F1D;&amp;#x79FB;&amp;#x690D;&amp;#x3002;
+… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Docker" title='Docker'>
+                        Docker
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/Docker/系统/Docker/Docker学习总结(六)--Dockerfile/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/Docker/系统/Docker/Docker学习总结(五)--迁移与备份/">Docker学习总结(五)--迁移与备份</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2019年07月12日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<h2 id="&#x5C06;&#x5BB9;&#x5668;&#x4FDD;&#x5B58;&#x4E3A;&#x955C;&#x50CF;"><a href="#&#x5C06;&#x5BB9;&#x5668;&#x4FDD;&#x5B58;&#x4E3A;&#x955C;&#x50CF;" class="headerlink" title="&#x5C06;&#x5BB9;&#x5668;&#x4FDD;&#x5B58;&#x4E3A;&#x955C;&#x50CF;"></a>&#x5C06;&#x5BB9;&#x5668;&#x4FDD;&#x5B58;&#x4E3A;&#x955C;&#x50CF;</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker commit myNginx mynginx_i</div></pre></td></tr></table></figure>
+<h2 id="&#x955C;&#x50CF;&#x5907;&#x4EFD;"><a href="#&#x955C;&#x50CF;&#x5907;&#x4EFD;" class="headerlink" title="&#x955C;&#x50CF;&#x5907;&#x4EFD;"></a>&#x955C;&#x50CF;&#x5907;&#x4EFD;</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker save -o myNginx.tar myNginx_i</div></pre></td></tr></table></figure>
+<h2 id="&#x955C;&#x50CF;&#x6062;&#x590D;"><a href="#&#x955C;&#x50CF;&#x6062;&#x590D;" class="headerlink" title="&#x955C;&#x50CF;&#x6062;&#x590D;"></a>&#x955C;&#x50CF;&#x6062;&#x590D;</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker load -i myNginx.tar</div></pre></td></tr></table></figure>
+              <!--   -->
+              <!--      &amp;#x5C06;&amp;#x5BB9;&amp;#x5668;&amp;#x4FDD;&amp;#x5B58;&amp;#x4E3A;&amp;#x955C;&amp;#x50CF;1docker commit myNginx mynginx_i
+&amp;#x955C;&amp;#x50CF;&amp;#x5907;&amp;#x4EFD;1docker save -o myNginx.tar myNginx_i
+&amp;#x955C;&amp;#x50CF;&amp;#x6062;&amp;#x590D;1docker load -i myNginx.tar… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Docker" title='Docker'>
+                        Docker
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/Docker/系统/Docker/Docker学习总结(五)--迁移与备份/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/Docker/系统/Docker/Docker学习总结(四)--应用部署/">Docker学习总结(四)--应用部署</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2019年07月12日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<h2 id="MySQL&#x90E8;&#x7F72;"><a href="#MySQL&#x90E8;&#x7F72;" class="headerlink" title="MySQL&#x90E8;&#x7F72;"></a>MySQL&#x90E8;&#x7F72;</h2><p>1) &#x62C9;&#x53D6; mysql &#x955C;&#x50CF;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull centos/mysql-<span class="number">57</span>-centos7</div></pre></td></tr></table></figure>
+<p>2) &#x521B;&#x5EFA;&#x5BB9;&#x5668;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -di --name=mysql -p <span class="number">33306</span>:<span class="number">3306</span> -e MYSQL_ROOT_PASSWORD=<span class="number">123456</span> mysql</div></pre></td></tr></table></figure>
+<ul>
+<li>-p&#xFF1A;&#x4EE3;&#x8868;&#x7AEF;&#x53E3;&#x6620;&#x5C04;&#xFF0C;&#x683C;&#x5F0F;&#x4E3A; &#x5BBF;&#x4E3B;&#x673A;&#x6620;&#x5C04;&#x7AEF;&#x53E3;:&#x5BB9;&#x5668;&#x8FD0;&#x884C;&#x7AEF;&#x53E3;</li>
+<li>-e&#xFF1A;&#x4EE3;&#x7801;&#x6DFB;&#x52A0;&#x73AF;&#x5883;&#x53D8;&#x91CF; MYSQL_ROOT_PASSWORD &#x662F; root &#x7528;&#x6237;&#x7684;&#x767B;&#x5F55;&#x5BC6;&#x7801;</li>
+</ul>
+<p>3&#xFF09;&#x8FDC;&#x7A0B;&#x767B;&#x5F55; mysql</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x8FDE;&#x63A5;&#x5BBF;&#x4E3B;&#x673A; IP ,&#x6307;&#x5B9A;&#x7AEF;&#x53E3;&#x4E3A; <span class="number">33306</span></div></pre></td></tr></table></figure>
+              <!--   -->
+              <!--      MySQL&amp;#x90E8;&amp;#x7F72;1) &amp;#x62C9;&amp;#x53D6; mysql &amp;#x955C;&amp;#x50CF;
+1docker pull centos/mysql-57-centos7
+2) &amp;#x521B;&amp;#x5EFA;&amp;#x5BB9;&amp;#x5668;
+1docker run -di --name=mysql -p 33306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql
+
+-p&amp;#xFF1A;&amp;#x4EE3;&amp;#x8868;&amp;#x7AEF;&amp;#x53E3;&amp;#x6620;&amp;#x5C04;&amp;#xFF0C;&amp;#x683C;&amp;#x5F0F;&amp;#x4E3A; &amp;#x5BBF;&amp;#x4E3B;&amp;#x673A;&amp;#x6620;&amp;#x5C04;&amp;#x7AEF;&amp;#x53E3;:&amp;#x5BB9;&amp;#x5668;&amp;#x8FD0;&amp;#x884C;&amp;#x7AEF;&amp;#x53E3;
+-e&amp;#xFF1A;&amp;#x4EE3;&amp;#x7801;&amp;#x6DFB;&amp;#x52A0;&amp;#x73AF;&amp;#x5883;&amp;#x53D8;&amp;#x91CF; MYSQL_ROOT_PASSWORD &amp;#x662F; root &amp;#x7528;&amp;#x6237;&amp;#x7684;&amp;#x767B;&amp;#x5F55;&amp;#x5BC6;&amp;#x7801;
+
+3&amp;#xFF09;&amp;#x8FDC;&amp;#x7A0B;&amp;#x767B;&amp;#x5F55; mysql
+1&amp;#x8FDE;&amp;#x63A5;&amp;#x5BBF;&amp;#x4E3B;&amp;#x673A; IP ,&amp;#x6307;&amp;#x5B9A;&amp;#x7AEF;&amp;#x53E3;&amp;#x4E3A; 33306… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Docker" title='Docker'>
+                        Docker
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/Docker/系统/Docker/Docker学习总结(四)--应用部署/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/Docker/系统/Docker/Docker学习总结(三)--常用命令/">Docker学习总结(三)--常用命令</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2019年07月12日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<h2 id="&#x955C;&#x50CF;&#x76F8;&#x5173;&#x547D;&#x4EE4;"><a href="#&#x955C;&#x50CF;&#x76F8;&#x5173;&#x547D;&#x4EE4;" class="headerlink" title="&#x955C;&#x50CF;&#x76F8;&#x5173;&#x547D;&#x4EE4;"></a>&#x955C;&#x50CF;&#x76F8;&#x5173;&#x547D;&#x4EE4;</h2><h3 id="&#x67E5;&#x770B;&#x955C;&#x50CF;"><a href="#&#x67E5;&#x770B;&#x955C;&#x50CF;" class="headerlink" title="&#x67E5;&#x770B;&#x955C;&#x50CF;"></a>&#x67E5;&#x770B;&#x955C;&#x50CF;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker images</div></pre></td></tr></table></figure>
+<p>&#x8FD4;&#x56DE;&#x5217;&#x8868;&#x5B57;&#x6BB5;&#x542B;&#x4E49;&#x5982;&#x4E0B;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x5B57;&#x6BB5;&#x540D;&#x79F0;</th>
+<th>&#x5B57;&#x6BB5;&#x542B;&#x4E49;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>REPOSITORY</td>
+<td>&#x955C;&#x50CF;&#x540D;&#x79F0;</td>
+</tr>
+<tr>
+<td>TAG</td>
+<td>&#x955C;&#x50CF;&#x6807;&#x7B7E;</td>
+</tr>
+<tr>
+<td>IMAGE ID</td>
+<td>&#x955C;&#x50CF; ID</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>&#x955C;&#x50CF;&#x521B;&#x5EFA;&#x65E5;&#x671F;</td>
+</tr>
+<tr>
+<td>ZISE</td>
+<td>&#x955C;&#x50CF;&#x5927;&#x5C0F;</td>
+</tr>
+</tbody>
+</table>
+<p>&#x6CE8;&#xFF1A;&#x955C;&#x50CF;&#x6587;&#x4EF6;&#x90FD;&#x5B58;&#x50A8;&#x5728;&#x5BBF;&#x4E3B;&#x673A;&#x7684; <code>/var/lib/docker</code> &#x76EE;&#x5F55;&#x4E0B;</p>
+<h3 id="&#x641C;&#x7D22;&#x955C;&#x50CF;"><a href="#&#x641C;&#x7D22;&#x955C;&#x50CF;" class="headerlink" title="&#x641C;&#x7D22;&#x955C;&#x50CF;"></a>&#x641C;&#x7D22;&#x955C;&#x50CF;</h3><p>&#x4ECE;&#x7F51;&#x7EDC;&#x4E2D;&#x641C;&#x7D22;&#x955C;&#x50CF;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker search &#x955C;&#x50CF;&#x540D;&#x79F0;</div></pre></td></tr></table></figure>
+<p>&#x8FD4;&#x56DE;&#x5217;&#x8868;&#x5B57;&#x6BB5;&#x542B;&#x4E49;&#x5982;&#x4E0B;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x5B57;&#x6BB5;&#x540D;&#x79F0;</th>
+<th>&#x5B57;&#x6BB5;&#x542B;&#x4E49;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td>
+<td>&#x955C;&#x50CF;&#x540D;&#x79F0;</td>
+</tr>
+<tr>
+<td>DESCRIPTION</td>
+<td>&#x955C;&#x50CF;&#x63CF;&#x8FF0;</td>
+</tr>
+<tr>
+<td>STARS</td>
+<td>&#x7528;&#x6237;&#x8BC4;&#x4EF7;</td>
+</tr>
+<tr>
+<td>OFFICIAL</td>
+<td>&#x662F;&#x5426;&#x5B98;&#x65B9;</td>
+</tr>
+<tr>
+<td>AUTOMATED</td>
+<td>&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#xFF0C;&#x8868;&#x793A;&#x8BE5;&#x955C;&#x50CF;&#x7531; Docker Hub &#x81EA;&#x52A8;&#x6784;&#x5EFA;&#x6D41;&#x7A0B;&#x521B;&#x5EFA;&#x7684;</td>
+</tr>
+</tbody>
+</table>
+              <!--   -->
+              <!--      &amp;#x955C;&amp;#x50CF;&amp;#x76F8;&amp;#x5173;&amp;#x547D;&amp;#x4EE4;&amp;#x67E5;&amp;#x770B;&amp;#x955C;&amp;#x50CF;1docker images
+&amp;#x8FD4;&amp;#x56DE;&amp;#x5217;&amp;#x8868;&amp;#x5B57;&amp;#x6BB5;&amp;#x542B;&amp;#x4E49;&amp;#x5982;&amp;#x4E0B;&amp;#xFF1A;
+
+
+
+&amp;#x5B57;&amp;#x6BB5;&amp;#x540D;&amp;#x79F0;
+&amp;#x5B57;&amp;#x6BB5;&amp;#x542B;&amp;#x4E49;
+
+
+
+
+REPOSITORY
+&amp;#x955C;&amp;#x50CF;&amp;#x540D;&amp;#x79F0;
+
+
+TAG
+&amp;#x955C;&amp;#x50CF;&amp;#x6807;&amp;#x7B7E;
+
+
+IMAGE ID
+&amp;#x955C;&amp;#x50CF; ID
+
+
+CREATED
+&amp;#x955C;&amp;#x50CF;&amp;#x521B;&amp;#x5EFA;&amp;#x65E5;&amp;#x671F;
+
+
+ZISE
+&amp;#x955C;&amp;#x50CF;&amp;#x5927;&amp;#x5C0F;
+
+
+
+&amp;#x6CE8;&amp;#xFF1A;&amp;#x955C;&amp;#x50CF;&amp;#x6587;&amp;#x4EF6;&amp;#x90FD;&amp;#x5B58;&amp;#x50A8;&amp;#x5728;&amp;#x5BBF;&amp;#x4E3B;&amp;#x673A;&amp;#x7684; /var/lib/docker &amp;#x76EE;&amp;#x5F55;&amp;#x4E0B;
+&amp;#x641C;&amp;#x7D22;&amp;#x955C;&amp;#x50CF;&amp;#x4ECE;&amp;#x7F51;&amp;#x7EDC;&amp;#x4E2D;&amp;#x641C;&amp;#x7D22;&amp;#x955C;&amp;#x50CF;&amp;#xFF1A;
+1docker search &amp;#x955C;&amp;#x50CF;&amp;#x540D;&amp;#x79F0;
+&amp;#x8FD4;&amp;#x56DE;&amp;#x5217;&amp;#x8868;&amp;#x5B57;&amp;#x6BB5;&amp;#x542B;&amp;#x4E49;&amp;#x5982;&amp;#x4E0B;&amp;#xFF1A;
+
+
+
+&amp;#x5B57;&amp;#x6BB5;&amp;#x540D;&amp;#x79F0;
+&amp;#x5B57;&amp;#x6BB5;&amp;#x542B;&amp;#x4E49;
+
+
+
+
+NAME
+&amp;#x955C;&amp;#x50CF;&amp;#x540D;&amp;#x79F0;
+
+
+DESCRIPTION
+&amp;#x955C;&amp;#x50CF;&amp;#x63CF;&amp;#x8FF0;
+
+
+STARS
+&amp;#x7528;&amp;#x6237;&amp;#x8BC4;&amp;#x4EF7;
+
+
+OFFICIAL
+&amp;#x662F;&amp;#x5426;&amp;#x5B98;&amp;#x65B9;
+
+
+AUTOMATED
+&amp;#x81EA;&amp;#x52A8;&amp;#x521B;&amp;#x5EFA;&amp;#xFF0C;&amp;#x8868;&amp;#x793A;&amp;#x8BE5;&amp;#x955C;&amp;#x50CF;&amp;#x7531; Docker Hub &amp;#x81EA;&amp;#x52A8;&amp;#x6784;&amp;#x5EFA;&amp;#x6D41;&amp;#x7A0B;&amp;#x521B;&amp;#x5EFA;&amp;#x7684;
+
+
+… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Docker" title='Docker'>
+                        Docker
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/Docker/系统/Docker/Docker学习总结(三)--常用命令/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/Docker/系统/Docker/Docker学习总结(二)--Docker安装与启动/">Docker学习总结(二)--Docker安装与启动</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2019年07月12日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<blockquote>
+<p>&#x6CE8;&#xFF1A;&#x7B14;&#x8005;&#x4F7F;&#x7528;&#x7684;&#x73AF;&#x5883;&#x4E3A; CentOS 7.6&#xFF0C;&#x5982;&#x679C;&#x7248;&#x672C;&#x4E0D;&#x4E00;&#x81F4;&#x53EF;&#x80FD;&#x4F1A;&#x51FA;&#x73B0;&#x4E00;&#x4E9B;&#x9519;&#x8BEF;&#x3002;</p>
+</blockquote>
+<h2 id="&#x5B89;&#x88C5;-Docker"><a href="#&#x5B89;&#x88C5;-Docker" class="headerlink" title="&#x5B89;&#x88C5; Docker"></a>&#x5B89;&#x88C5; Docker</h2><p>1&#xFF09;&#x5C06; yum &#x5305;&#x66F4;&#x65B0;&#x5230;&#x6700;&#x65B0;&#x7248;&#x672C;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo yum update</div></pre></td></tr></table></figure>
+<p>2) &#x5B89;&#x88C5;&#x9700;&#x8981;&#x7684;&#x8F6F;&#x4EF6;&#x5305;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo yum install -y yum-utils device-mapper-persistent-data lvm2</div></pre></td></tr></table></figure>
+<ul>
+<li>yum-util &#x63D0;&#x4F9B; yum-config-manager &#x529F;&#x80FD;</li>
+<li>device-mapper-persistent-data &#x548C; lvm2 &#x662F; devicemapper &#x7684;&#x9A71;&#x52A8;&#x4F9D;&#x8D56;</li>
+</ul>
+<p>3)  &#x8BBE;&#x7F6E; yum &#x6E90;&#x4E3A;&#x963F;&#x91CC;&#x4E91;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo yum-config-manager --add-repo http:<span class="comment">//mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span></div></pre></td></tr></table></figure>
+              <!--   -->
+              <!--      
+&amp;#x6CE8;&amp;#xFF1A;&amp;#x7B14;&amp;#x8005;&amp;#x4F7F;&amp;#x7528;&amp;#x7684;&amp;#x73AF;&amp;#x5883;&amp;#x4E3A; CentOS 7.6&amp;#xFF0C;&amp;#x5982;&amp;#x679C;&amp;#x7248;&amp;#x672C;&amp;#x4E0D;&amp;#x4E00;&amp;#x81F4;&amp;#x53EF;&amp;#x80FD;&amp;#x4F1A;&amp;#x51FA;&amp;#x73B0;&amp;#x4E00;&amp;#x4E9B;&amp;#x9519;&amp;#x8BEF;&amp;#x3002;
+
+&amp;#x5B89;&amp;#x88C5; Docker1&amp;#xFF09;&amp;#x5C06; yum &amp;#x5305;&amp;#x66F4;&amp;#x65B0;&amp;#x5230;&amp;#x6700;&amp;#x65B0;&amp;#x7248;&amp;#x672C;
+1sudo yum update
+2) &amp;#x5B89;&amp;#x88C5;&amp;#x9700;&amp;#x8981;&amp;#x7684;&amp;#x8F6F;&amp;#x4EF6;&amp;#x5305;
+1sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+
+yum-util &amp;#x63D0;&amp;#x4F9B; yum-config-manager &amp;#x529F;&amp;#x80FD;
+device-mapper-persistent-data &amp;#x548C; lvm2 &amp;#x662F; devicemapper &amp;#x7684;&amp;#x9A71;&amp;#x52A8;&amp;#x4F9D;&amp;#x8D56;
+
+3)  &amp;#x8BBE;&amp;#x7F6E; yum &amp;#x6E90;&amp;#x4E3A;&amp;#x963F;&amp;#x91CC;&amp;#x4E91;
+1sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Docker" title='Docker'>
+                        Docker
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/Docker/系统/Docker/Docker学习总结(二)--Docker安装与启动/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/Docker/系统/Docker/Docker学习总结(一)--Docker简介/">Docker学习总结(一)--Docker简介</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2019年07月12日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<h2 id="&#x4EC0;&#x4E48;&#x662F;&#x865A;&#x62DF;&#x5316;"><a href="#&#x4EC0;&#x4E48;&#x662F;&#x865A;&#x62DF;&#x5316;" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F;&#x865A;&#x62DF;&#x5316;"></a>&#x4EC0;&#x4E48;&#x662F;&#x865A;&#x62DF;&#x5316;</h2><p>&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x4E2D;&#xFF0C;&#x865A;&#x62DF;&#x5316;&#x662F;&#x4E00;&#x79CD;&#x8D44;&#x6E90;&#x7BA1;&#x7406;&#x6280;&#x672F;&#xFF0C;&#x662F;&#x5C06;&#x8BA1;&#x7B97;&#x673A;&#x7684;&#x5404;&#x79CD;&#x5B9E;&#x4F53;&#x8D44;&#x6E90;&#xFF0C;&#x5982;&#x670D;&#x52A1;&#x5668;&#x3001;&#x7F51;&#x7EDC;&#x3001;&#x5185;&#x5B58;&#x7B49;&#xFF0C;&#x4EE5;&#x62BD;&#x8C61;&#x3001;&#x8F6C;&#x6362;&#x540E;&#x5448;&#x73B0;&#x51FA;&#x6765;&#xFF0C;&#x6253;&#x7834;&#x5B9E;&#x4F53;&#x7ED3;&#x6784;&#x95F4;&#x7684;&#x4E0D;&#x53EF;&#x5207;&#x5272;&#x7684;&#x969C;&#x788D;&#xFF0C;&#x4F7F;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x6BD4;&#x4E4B;&#x524D;&#x66F4;&#x597D;&#x7684;&#x5E94;&#x7528;&#x8FD9;&#x4E9B;&#x8D44;&#x6E90;&#x3002;</p>
+<p>&#x5728;&#x5B9E;&#x9645;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E2D;&#xFF0C;&#x865A;&#x62DF;&#x5316;&#x6280;&#x672F;&#x4E3B;&#x8981;&#x7528;&#x6765;&#x89E3;&#x51B3;&#x9AD8;&#x6027;&#x80FD;&#x7684;&#x7269;&#x7406;&#x786C;&#x4EF6;&#x4EA7;&#x80FD;&#x8FC7;&#x5269;&#x548C;&#x8001;&#x65E7;&#x786C;&#x4EF6;&#x4EA7;&#x80FD;&#x8FC7;&#x4F4E;&#x7684;&#x91CD;&#x7EC4;&#x91CD;&#x7528;&#xFF0C;&#x900F;&#x660E;&#x5316;&#x5E95;&#x5C42;&#x7269;&#x7406;&#x786C;&#x4EF6;&#xFF0C;&#x4ECE;&#x800C;&#x6700;&#x5927;&#x5316;&#x7684;&#x5229;&#x7528;&#x7269;&#x7406;&#x786C;&#x4EF6;&#x5BF9;&#x8D44;&#x6E90;&#x5145;&#x5206;&#x5229;&#x7528;&#x3002;</p>
+<p>&#x865A;&#x62DF;&#x5316;&#x6280;&#x672F;&#x79CD;&#x7C7B;&#x5F88;&#x591A;&#xFF0C;&#x5982;&#xFF1A;&#x8F6F;&#x4EF6;&#x865A;&#x62DF;&#x5316;&#x3001;&#x786C;&#x4EF6;&#x865A;&#x62DF;&#x5316;&#x3001;&#x5185;&#x5B58;&#x865A;&#x62DF;&#x5316;&#x3001;&#x7F51;&#x7EDC;&#x865A;&#x62DF;&#x5316;&#x3001;&#x865A;&#x62DF;&#x673A;&#x7B49;&#x3002;</p>
+<h2 id="&#x4EC0;&#x4E48;&#x662F;-Docker"><a href="#&#x4EC0;&#x4E48;&#x662F;-Docker" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F; Docker"></a>&#x4EC0;&#x4E48;&#x662F; Docker</h2><p>Docker &#x662F; PaaS &#x63D0;&#x4F9B;&#x5546; dotCloud &#x5F00;&#x6E90;&#x7684;&#x4E00;&#x4E2A;&#x57FA;&#x4E8E; LXC &#x7684;&#x9AD8;&#x7EA7;&#x5BB9;&#x5668;&#x5F15;&#x64CE;&#xFF0C;&#x57FA;&#x4E8E; go &#x8BED;&#x8A00;&#x5E76;&#x9075;&#x5FAA;  Apache2.0 &#x534F;&#x8BAE;&#xFF0C;&#x6E90;&#x7801;&#x6258;&#x7BA1;&#x4E8E; <a href="https://link.jianshu.com/?t=https%3A%2F%2Fgithub.com%2Fmoby%2Fmoby">GitHub</a>&#x3002;</p>
+              <!--   -->
+              <!--      &amp;#x4EC0;&amp;#x4E48;&amp;#x662F;&amp;#x865A;&amp;#x62DF;&amp;#x5316;&amp;#x5728;&amp;#x8BA1;&amp;#x7B97;&amp;#x673A;&amp;#x4E2D;&amp;#xFF0C;&amp;#x865A;&amp;#x62DF;&amp;#x5316;&amp;#x662F;&amp;#x4E00;&amp;#x79CD;&amp;#x8D44;&amp;#x6E90;&amp;#x7BA1;&amp;#x7406;&amp;#x6280;&amp;#x672F;&amp;#xFF0C;&amp;#x662F;&amp;#x5C06;&amp;#x8BA1;&amp;#x7B97;&amp;#x673A;&amp;#x7684;&amp;#x5404;&amp;#x79CD;&amp;#x5B9E;&amp;#x4F53;&amp;#x8D44;&amp;#x6E90;&amp;#xFF0C;&amp;#x5982;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x3001;&amp;#x7F51;&amp;#x7EDC;&amp;#x3001;&amp;#x5185;&amp;#x5B58;&amp;#x7B49;&amp;#xFF0C;&amp;#x4EE5;&amp;#x62BD;&amp;#x8C61;&amp;#x3001;&amp;#x8F6C;&amp;#x6362;&amp;#x540E;&amp;#x5448;&amp;#x73B0;&amp;#x51FA;&amp;#x6765;&amp;#xFF0C;&amp;#x6253;&amp;#x7834;&amp;#x5B9E;&amp;#x4F53;&amp;#x7ED3;&amp;#x6784;&amp;#x95F4;&amp;#x7684;&amp;#x4E0D;&amp;#x53EF;&amp;#x5207;&amp;#x5272;&amp;#x7684;&amp;#x969C;&amp;#x788D;&amp;#xFF0C;&amp;#x4F7F;&amp;#x7528;&amp;#x6237;&amp;#x53EF;&amp;#x4EE5;&amp;#x6BD4;&amp;#x4E4B;&amp;#x524D;&amp;#x66F4;&amp;#x597D;&amp;#x7684;&amp;#x5E94;&amp;#x7528;&amp;#x8FD9;&amp;#x4E9B;&amp;#x8D44;&amp;#x6E90;&amp;#x3002;
+&amp;#x5728;&amp;#x5B9E;&amp;#x9645;&amp;#x751F;&amp;#x4EA7;&amp;#x73AF;&amp;#x5883;&amp;#x4E2D;&amp;#xFF0C;&amp;#x865A;&amp;#x62DF;&amp;#x5316;&amp;#x6280;&amp;#x672F;&amp;#x4E3B;&amp;#x8981;&amp;#x7528;&amp;#x6765;&amp;#x89E3;&amp;#x51B3;&amp;#x9AD8;&amp;#x6027;&amp;#x80FD;&amp;#x7684;&amp;#x7269;&amp;#x7406;&amp;#x786C;&amp;#x4EF6;&amp;#x4EA7;&amp;#x80FD;&amp;#x8FC7;&amp;#x5269;&amp;#x548C;&amp;#x8001;&amp;#x65E7;&amp;#x786C;&amp;#x4EF6;&amp;#x4EA7;&amp;#x80FD;&amp;#x8FC7;&amp;#x4F4E;&amp;#x7684;&amp;#x91CD;&amp;#x7EC4;&amp;#x91CD;&amp;#x7528;&amp;#xFF0C;&amp;#x900F;&amp;#x660E;&amp;#x5316;&amp;#x5E95;&amp;#x5C42;&amp;#x7269;&amp;#x7406;&amp;#x786C;&amp;#x4EF6;&amp;#xFF0C;&amp;#x4ECE;&amp;#x800C;&amp;#x6700;&amp;#x5927;&amp;#x5316;&amp;#x7684;&amp;#x5229;&amp;#x7528;&amp;#x7269;&amp;#x7406;&amp;#x786C;&amp;#x4EF6;&amp;#x5BF9;&amp;#x8D44;&amp;#x6E90;&amp;#x5145;&amp;#x5206;&amp;#x5229;&amp;#x7528;&amp;#x3002;
+&amp;#x865A;&amp;#x62DF;&amp;#x5316;&amp;#x6280;&amp;#x672F;&amp;#x79CD;&amp;#x7C7B;&amp;#x5F88;&amp;#x591A;&amp;#xFF0C;&amp;#x5982;&amp;#xFF1A;&amp;#x8F6F;&amp;#x4EF6;&amp;#x865A;&amp;#x62DF;&amp;#x5316;&amp;#x3001;&amp;#x786C;&amp;#x4EF6;&amp;#x865A;&amp;#x62DF;&amp;#x5316;&amp;#x3001;&amp;#x5185;&amp;#x5B58;&amp;#x865A;&amp;#x62DF;&amp;#x5316;&amp;#x3001;&amp;#x7F51;&amp;#x7EDC;&amp;#x865A;&amp;#x62DF;&amp;#x5316;&amp;#x3001;&amp;#x865A;&amp;#x62DF;&amp;#x673A;&amp;#x7B49;&amp;#x3002;
+&amp;#x4EC0;&amp;#x4E48;&amp;#x662F; DockerDocker &amp;#x662F; PaaS &amp;#x63D0;&amp;#x4F9B;&amp;#x5546; dotCloud &amp;#x5F00;&amp;#x6E90;&amp;#x7684;&amp;#x4E00;&amp;#x4E2A;&amp;#x57FA;&amp;#x4E8E; LXC &amp;#x7684;&amp;#x9AD8;&amp;#x7EA7;&amp;#x5BB9;&amp;#x5668;&amp;#x5F15;&amp;#x64CE;&amp;#xFF0C;&amp;#x57FA;&amp;#x4E8E; go &amp;#x8BED;&amp;#x8A00;&amp;#x5E76;&amp;#x9075;&amp;#x5FAA;  Apache2.0 &amp;#x534F;&amp;#x8BAE;&amp;#xFF0C;&amp;#x6E90;&amp;#x7801;&amp;#x6258;&amp;#x7BA1;&amp;#x4E8E; GitHub&amp;#x3002;… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Docker" title='Docker'>
+                        Docker
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/Docker/系统/Docker/Docker学习总结(一)--Docker简介/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+
+
+
+
+
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/"><i class="fa" aria-hidden="true">Docker</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OAuth/"><i class="fa" aria-hidden="true">OAuth</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Security/"><i class="fa" aria-hidden="true">Spring Security</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/"><i class="fa" aria-hidden="true">UML</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/"><i class="fa" aria-hidden="true">git</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><i class="fa" aria-hidden="true">五月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/"><i class="fa" aria-hidden="true">四月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">十月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JAVA-WEB/" style="font-size: 14px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 11.33px;">Lambda</a> <a href="/tags/Liunx/" style="font-size: 17.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.67px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 15.33px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px;">Nginx</a> <a href="/tags/OAuth/" style="font-size: 10px;">OAuth</a> <a href="/tags/Quartz/" style="font-size: 12px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 14.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 15.33px;">Redis</a> <a href="/tags/SQL/" style="font-size: 13.33px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.67px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 18.67px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15.33px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 18px;">Spring</a> <a href="/tags/Spring-Security/" style="font-size: 16.67px;">Spring Security</a> <a href="/tags/SpringBoot/" style="font-size: 13.33px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 10.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Utils/" style="font-size: 10.67px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 14px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 14px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/git/" style="font-size: 12.67px;">git</a> <a href="/tags/java/" style="font-size: 10.67px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.67px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 11.33px;">前端</a> <a href="/tags/前端基础/" style="font-size: 12.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 19.33px;">设计模式</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

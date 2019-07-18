@@ -1,0 +1,416 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="且听风吟的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="https://marklogzhu.github.io">
+    <!--SEO-->
+
+<meta name="description" content="会点皮毛技术,立志于往深处扎根。"/>
+
+
+
+<meta name="keywords" content="前端,js,jquery,javascript,html5,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,html,css,css3,用户体验"/>
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Shiro学习总结(五)--Shiro动态加载权限 | 且听风吟的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="且听风吟的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash.css">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='且听风吟'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 且听风吟 </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/关于/about/"><i class="fa "></i>关于</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Shiro学习总结(五)--Shiro动态加载权限">
+            
+	            Shiro学习总结(五)--Shiro动态加载权限
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Shiro">
+            Shiro
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Java" title='Java'>
+                        Java
+                    </a>
+                
+                    <a href="/tags/Shiro" title='Shiro'>
+                        Shiro
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/05/23</span>
+        </span>
+    
+</div>
+
+            
+            
+            <p class="fa fa-exclamation-triangle warning">
+                本文于<strong>421</strong>天之前发表，文中内容可能已经过时。
+            </p>
+        
+    </div>
+    
+    <div class="post-body post-content">
+        <p>&#x5728;&#x4E0A;&#x4E00;&#x7AE0;&#x8282;&#x4E2D;&#x6211;&#x4EEC;&#x662F;&#x5728;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x914D;&#x7F6E;&#x6743;&#x9650;&#x7684;&#xFF0C;&#x5B9E;&#x9645;&#x9879;&#x76EE;&#x4E2D;&#x91C7;&#x7528;&#x8FD9;&#x79CD;&#x5F62;&#x5F0F;&#x914D;&#x7F6E;&#x5F88;&#x4E0D;&#x7075;&#x6D3B;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x5B9E;&#x73B0;&#x4E0B;&#x52A8;&#x6001;&#x52A0;&#x8F7D;&#x6743;&#x9650;&#x3002;</p>
+<a id="more"></a> 
+<h3 id="&#x9996;&#x5148;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x770B;&#x4E4B;&#x524D;&#x662F;&#x600E;&#x4E48;&#x52A0;&#x8F7D;&#x7684;"><a href="#&#x9996;&#x5148;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x770B;&#x4E4B;&#x524D;&#x662F;&#x600E;&#x4E48;&#x52A0;&#x8F7D;&#x7684;" class="headerlink" title="&#x9996;&#x5148;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x770B;&#x4E4B;&#x524D;&#x662F;&#x600E;&#x4E48;&#x52A0;&#x8F7D;&#x7684;"></a>&#x9996;&#x5148;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x770B;&#x4E4B;&#x524D;&#x662F;&#x600E;&#x4E48;&#x52A0;&#x8F7D;&#x7684;</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;shiroFilter&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.apache.shiro.spring.web.ShiroFilterFactoryBean&quot;</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--shiro &#x6838;&#x5FC3;&#x5B89;&#x5168;&#x63A5;&#x53E3;  --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;securityManager&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;securityManager&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--&#x767B;&#x5F55;&#x65F6;&#x7684;&#x8FDE;&#x63A5;  --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;loginUrl&quot;</span> <span class="attr">value</span>=<span class="string">&quot;/login&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">	<span class="comment">&lt;!--&#x767B;&#x5F55;&#x6210;&#x529F;&#x8DF3;&#x8F6C;&#x7684;&#x5730;&#x5740;--&gt;</span></div><div class="line">	<span class="comment">&lt;!--&lt;property name=&quot;successUrl&quot; value=&quot;/&quot;&gt;--&gt;</span></div><div class="line">    <span class="comment">&lt;!--&#x672A;&#x6388;&#x6743;&#x65F6;&#x8DF3;&#x8F6C;&#x7684;&#x8FDE;&#x63A5;  --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;unauthorizedUrl&quot;</span> <span class="attr">value</span>=<span class="string">&quot;/unauthorized.jsp&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- &#x5176;&#x4ED6;&#x8FC7;&#x6EE4;&#x5668; --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;filters&quot;</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">map</span>&gt;</span></div><div class="line">            <span class="comment">&lt;!-- &lt;entry key=&quot;rememberMe&quot; value-ref=&quot;RememberMeFilter&quot;&gt;&lt;/entry&gt; --&gt;</span>         </div><div class="line">        <span class="tag">&lt;/<span class="name">map</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="comment">&lt;!-- &#x8BFB;&#x53D6;&#x521D;&#x59CB;&#x81EA;&#x5B9A;&#x4E49;&#x6743;&#x9650;&#x5185;&#x5BB9;--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;filterChainDefinitions&quot;</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span></div><div class="line">            /js/**=anon</div><div class="line">            /css/**=anon</div><div class="line">            /images/**=anon</div><div class="line">            /skin/**=anon</div><div class="line">            /lib/**=anon</div><div class="line">            /nodel/**=anon</div><div class="line">            /WEB-INF/jsp/**=anon</div><div class="line">            /adminUserLogin/**=anon</div><div class="line">            /test/login=anon</div><div class="line">            /test/logout=anon</div><div class="line">            /test/isLogin=anon</div><div class="line">            /**/submitLogin.do=anon</div><div class="line">            /**=user</div><div class="line">        <span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x914D;&#x7F6E;&#x5C5E;&#x6027;&#x7684;&#x5BF9;&#x8C61;&#x662F; <code>ShiroFilterFactoryBean</code>&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x770B; <code>ShiroFilterFactoryBean</code> &#x91CC;&#x9762;&#x662F;&#x600E;&#x4E48;&#x8BBE;&#x7F6E;&#x503C;&#x7684;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setFilterChainDefinitions</span><span class="params">(String definitions)</span> </span>{</div><div class="line">    Ini ini = <span class="keyword">new</span> Ini();</div><div class="line">    ini.load(definitions);</div><div class="line">    Section section = ini.getSection(<span class="string">&quot;urls&quot;</span>);</div><div class="line">    <span class="keyword">if</span> (CollectionUtils.isEmpty(section)) {</div><div class="line">        section = ini.getSection(<span class="string">&quot;&quot;</span>);</div><div class="line">    }</div><div class="line">    <span class="keyword">this</span>.setFilterChainDefinitionMap(section);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setFilterChainDefinitionMap</span><span class="params">(Map&lt;String, String&gt; filterChainDefinitionMap)</span> </span>{</div><div class="line">    <span class="keyword">this</span>.filterChainDefinitionMap = filterChainDefinitionMap;</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x662F;&#x901A;&#x8FC7;&#x8C03;&#x7528; <code>setFilterChainDefinitionMap</code> &#x65B9;&#x6CD5;&#x6765;&#x521D;&#x59CB;&#x5316;&#x6743;&#x9650;&#x914D;&#x7F6E;&#x7684;&#xFF0C;&#x90A3;&#x4E48;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x7EE7;&#x627F;  <code>ShiroFilterFactoryBean</code> &#x5B9E;&#x73B0; <code>setFilterChainDefinitionMap</code> &#x65B9;&#x6CD5;&#x6765;&#x8FBE;&#x5230;&#x52A8;&#x6001;&#x52A0;&#x8F7D;&#x6743;&#x9650;&#x7684;&#x9700;&#x6C42;&#x3002;</p>
+<h2 id="&#x52A8;&#x6001;&#x521D;&#x59CB;&#x5316;&#x6743;&#x9650;"><a href="#&#x52A8;&#x6001;&#x521D;&#x59CB;&#x5316;&#x6743;&#x9650;" class="headerlink" title="&#x52A8;&#x6001;&#x521D;&#x59CB;&#x5316;&#x6743;&#x9650;"></a>&#x52A8;&#x6001;&#x521D;&#x59CB;&#x5316;&#x6743;&#x9650;</h2><h3 id="&#x81EA;&#x5B9A;&#x4E49;-MyShiroFilterFactoryBean"><a href="#&#x81EA;&#x5B9A;&#x4E49;-MyShiroFilterFactoryBean" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49; MyShiroFilterFactoryBean"></a>&#x81EA;&#x5B9A;&#x4E49; MyShiroFilterFactoryBean</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyShiroFilterFactoryBean</span> <span class="keyword">extends</span> <span class="title">ShiroFilterFactoryBean</span> </span>{</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setFilterChainDefinitionMap</span><span class="params">(Map&lt;String, String&gt; filterChainDefinitionMap)</span> </span>{</div><div class="line">        LinkedHashMap&lt;String, String&gt; filterMap = <span class="keyword">new</span> LinkedHashMap&lt;&gt;();</div><div class="line">        <span class="comment">// &#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x91C7;&#x7528;&#x786C;&#x7F16;&#x7801;&#x5F62;&#x5F0F;&#x6F14;&#x793A;&#xFF0C;&#x5B9E;&#x9645;&#x9879;&#x76EE;&#x4E2D;&#x5E94;&#x8BE5;&#x8C03;&#x7528;service &#x65B9;&#x6CD5;&#x901A;&#x8FC7;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#x5E93; for &#x62FC;&#x63A5;</span></div><div class="line">        filterMap.put(<span class="string">&quot;/js/**&quot;</span>,<span class="string">&quot;anon&quot;</span>);</div><div class="line">        filterMap.put(<span class="string">&quot;/css/**&quot;</span>,<span class="string">&quot;anon&quot;</span>);</div><div class="line">        filterMap.put(<span class="string">&quot;/images/**&quot;</span>,<span class="string">&quot;anon&quot;</span>);</div><div class="line">        filterMap.put(<span class="string">&quot;/lib/**&quot;</span>,<span class="string">&quot;anon&quot;</span>);</div><div class="line">        filterMap.put(<span class="string">&quot;/WEB-INF/jsp/**&quot;</span>,<span class="string">&quot;anon&quot;</span>);</div><div class="line">        filterMap.put(<span class="string">&quot;/test/login&quot;</span>,<span class="string">&quot;anon&quot;</span>);</div><div class="line">        filterMap.put(<span class="string">&quot;/test/logout*&quot;</span>,<span class="string">&quot;anon&quot;</span>);</div><div class="line">        filterMap.put(<span class="string">&quot;/test/isLogin&quot;</span>,<span class="string">&quot;anon&quot;</span>);</div><div class="line">        filterMap.put(<span class="string">&quot;/**&quot;</span>,<span class="string">&quot;user&quot;</span>);</div><div class="line">        <span class="keyword">super</span>.setFilterChainDefinitionMap(filterMap);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h3 id="&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#x6587;&#x4EF6;"><a href="#&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#x6587;&#x4EF6;" class="headerlink" title="&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#x6587;&#x4EF6;"></a>&#x4FEE;&#x6539;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;shiroFilter&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.marklogzhu.ssm.shiro.MyShiroFilterFactoryBean&quot;</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!--shiro &#x6838;&#x5FC3;&#x5B89;&#x5168;&#x63A5;&#x53E3;  --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;securityManager&quot;</span> <span class="attr">ref</span>=<span class="string">&quot;securityManager&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!--&#x767B;&#x5F55;&#x65F6;&#x7684;&#x8FDE;&#x63A5;  --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;loginUrl&quot;</span> <span class="attr">value</span>=<span class="string">&quot;/login&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!--&#x672A;&#x6388;&#x6743;&#x65F6;&#x8DF3;&#x8F6C;&#x7684;&#x8FDE;&#x63A5;  --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;unauthorizedUrl&quot;</span> <span class="attr">value</span>=<span class="string">&quot;/unauthorized.jsp&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- &#x5176;&#x4ED6;&#x8FC7;&#x6EE4;&#x5668; --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;filters&quot;</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">map</span>&gt;</span></div><div class="line">              <span class="comment">&lt;!-- &lt;entry key=&quot;rememberMe&quot; value-ref=&quot;RememberMeFilter&quot;&gt;&lt;/entry&gt; --&gt;</span>               </div><div class="line">          <span class="tag">&lt;/<span class="name">map</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="comment">&lt;!--&#x8FD8;&#x662F;&#x9700;&#x8981;&#x4FDD;&#x7559;&#x8FD9;&#x4E00;&#x5C5E;&#x6027;&#xFF0C;&#x5426;&#x5219;&#x4E0D;&#x4F1A;&#x8C03;&#x7528; setFilterChainDefinitionMap &#x65B9;&#x6CD5;--&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;filterChainDefinitions&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&quot;</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="&#x542F;&#x52A8;&#x8FD0;&#x884C;&#x9879;&#x76EE;"><a href="#&#x542F;&#x52A8;&#x8FD0;&#x884C;&#x9879;&#x76EE;" class="headerlink" title="&#x542F;&#x52A8;&#x8FD0;&#x884C;&#x9879;&#x76EE;"></a>&#x542F;&#x52A8;&#x8FD0;&#x884C;&#x9879;&#x76EE;</h3><ul>
+<li><p>&#x8BBF;&#x95EE; <code>http://localhost:8080/test/print</code><br>&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x53D1;&#x73B0;url &#x8DF3;&#x8F6C;&#x5230; http://localhost:8080/login, &#x4F46;&#x662F;&#x56E0;&#x4E3A;&#x6CA1;&#x6709;&#x9879;&#x76EE;&#x4E2D;&#x6CA1;&#x6709;&#x914D;&#x7F6E;&#x5BFC;&#x81F4;&#x62A5; 404 &#x9519;&#x8BEF;</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x8BBF;&#x95EE; <code>http://localhost:8080/test/isLogin?userName=&#x5F20;&#x4E09;</code><br>&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">	status: 0,</div><div class="line">	msg: null,</div><div class="line">	data: &quot;&#x5F20;&#x4E09;&#x672A;&#x767B;&#x5F55;&quot;</div><div class="line">}</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x8BBF;&#x95EE; <code>http://localhost:8080/test/login?userName=&#x5F20;&amp;password=123456</code><br>&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">	status: 500216,</div><div class="line">	msg: &quot;&#x767B;&#x5F55;&#x5931;&#x8D25;&#xFF0C;&#x9519;&#x8BEF;&#x539F;&#x56E0;&#xFF1A;&#x5E10;&#x53F7;&#x6216;&#x5BC6;&#x7801;&#x9519;&#x8BEF;!&quot;,</div><div class="line">	data: null</div><div class="line">}</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x8BBF;&#x95EE; <code>http://localhost:8080/test/login?userName=&#x5F20;&#x4E09;&amp;password=123456</code><br>&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">	status: 0,</div><div class="line">	msg: &quot;&#x767B;&#x5F55;&#x6210;&#x529F;&quot;,</div><div class="line">	data: null</div><div class="line">}</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x8BBF;&#x95EE; <code>http://localhost:8080/test/isLogin?userName=&#x5F20;&#x4E09;</code><br>&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">	status: 0,</div><div class="line">	msg: null,</div><div class="line">	data: &quot;&#x5F20;&#x4E09;&#x5DF2;&#x767B;&#x5F55;&quot;</div><div class="line">}</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x8BBF;&#x95EE; <code>http://localhost:8080/test/print</code><br>&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">	status: 0,</div><div class="line">	msg: null,</div><div class="line">	data: null</div><div class="line">}</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x8BBF;&#x95EE; <code>http://localhost:8080/test/logout?userName=&#x5F20;&#x4E09;</code><br>&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">	status: 0,</div><div class="line">	msg: null,</div><div class="line">	data: &quot;&#x5F20;&#x4E09;&#x5DF2;&#x767B;&#x51FA;&quot;</div><div class="line">}</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x7ED3;&#x679C;&#x8DDF;&#x5728;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x52A0;&#x8F7D;&#x662F;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x8BF4;&#x660E;&#x52A8;&#x6001;&#x52A0;&#x8F7D;&#x6743;&#x9650;&#x6210;&#x529F;&#x4E86;&#x3002;&#x90A3;&#x6211;&#x4EEC;&#x5C1D;&#x8BD5;&#x4E0B;&#x5728;&#x9879;&#x76EE;&#x8FD0;&#x884C;&#x8FC7;&#x7A0B;&#x4E2D;&#x52A8;&#x6001;&#x52A0;&#x8F7D;&#x6743;&#x9650;&#x914D;&#x7F6E;&#x3002;</p>
+<h2 id="&#x52A8;&#x6001;&#x52A0;&#x8F7D;&#x6743;&#x9650;"><a href="#&#x52A8;&#x6001;&#x52A0;&#x8F7D;&#x6743;&#x9650;" class="headerlink" title="&#x52A8;&#x6001;&#x52A0;&#x8F7D;&#x6743;&#x9650;"></a>&#x52A8;&#x6001;&#x52A0;&#x8F7D;&#x6743;&#x9650;</h2><h3 id="&#x5728;-TestController-&#x4E2D;&#x589E;&#x52A0;&#x5982;&#x4E0B;&#x4EE3;&#x7801;"><a href="#&#x5728;-TestController-&#x4E2D;&#x589E;&#x52A0;&#x5982;&#x4E0B;&#x4EE3;&#x7801;" class="headerlink" title="&#x5728; TestController &#x4E2D;&#x589E;&#x52A0;&#x5982;&#x4E0B;&#x4EE3;&#x7801;"></a>&#x5728; TestController &#x4E2D;&#x589E;&#x52A0;&#x5982;&#x4E0B;&#x4EE3;&#x7801;</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line">@Autowired</div><div class="line">private MyShiroFilterFactoryBean myShiroFilterFactoryBean;</div><div class="line"></div><div class="line">@RequestMapping(&quot;/change&quot;)</div><div class="line">@ResponseBody</div><div class="line">public Map&lt;String, String&gt; updateFilter() {</div><div class="line">    Map&lt;String, String&gt; filterMap = new LinkedHashMap&lt;&gt;();</div><div class="line">    filterMap.put(&quot;/js/**&quot;, &quot;anon&quot;);</div><div class="line">    filterMap.put(&quot;/css/**&quot;, &quot;anon&quot;);</div><div class="line">    filterMap.put(&quot;/images/**&quot;, &quot;anon&quot;);</div><div class="line">    filterMap.put(&quot;/lib/**&quot;, &quot;anon&quot;);</div><div class="line">    filterMap.put(&quot;/WEB-INF/jsp/**&quot;, &quot;anon&quot;);</div><div class="line">    filterMap.put(&quot;/test/login&quot;, &quot;anon&quot;);</div><div class="line">    filterMap.put(&quot;/test/logout*&quot;, &quot;anon&quot;);</div><div class="line">    filterMap.put(&quot;/test/isLogin&quot;, &quot;anon&quot;);</div><div class="line">    filterMap.put(&quot;/test/change&quot;, &quot;anon&quot;);</div><div class="line">    filterMap.put(&quot;/test/print&quot;, &quot;anon&quot;); //  &#x628A; print &#x65B9;&#x6CD5;&#x8BBE;&#x7F6E;&#x4E3A;&#x4E0D;&#x9700;&#x8981;&#x7528;&#x6237;&#x767B;&#x5F55;</div><div class="line">    filterMap.put(&quot;/**&quot;, &quot;user&quot;);</div><div class="line">    updatePermission(filterMap);</div><div class="line">    return myShiroFilterFactoryBean.getFilterChainDefinitionMap();</div><div class="line">}</div><div class="line"></div><div class="line">/**</div><div class="line"> * &#x52A8;&#x6001;&#x66F4;&#x65B0;&#x65B0;&#x7684;&#x6743;&#x9650;</div><div class="line"> *</div><div class="line"> * @param filterMap</div><div class="line"> */</div><div class="line">private synchronized void updatePermission(Map&lt;String, String&gt; filterMap) {</div><div class="line"></div><div class="line">    AbstractShiroFilter shiroFilter = null;</div><div class="line">    try {</div><div class="line">        shiroFilter = (AbstractShiroFilter) myShiroFilterFactoryBean.getObject();</div><div class="line"></div><div class="line">        // &#x83B7;&#x53D6;&#x8FC7;&#x6EE4;&#x7BA1;&#x7406;&#x5668;</div><div class="line">        PathMatchingFilterChainResolver filterChainResolver = (PathMatchingFilterChainResolver) shiroFilter</div><div class="line">                .getFilterChainResolver();</div><div class="line">        DefaultFilterChainManager filterManager = (DefaultFilterChainManager) filterChainResolver.getFilterChainManager();</div><div class="line"></div><div class="line">        //&#x6E05;&#x7A7A;&#x62E6;&#x622A;&#x7BA1;&#x7406;&#x5668;&#x4E2D;&#x7684;&#x5B58;&#x50A8;</div><div class="line">        filterManager.getFilterChains().clear();</div><div class="line">        /*</div><div class="line">        &#x6E05;&#x7A7A;&#x62E6;&#x622A;&#x5DE5;&#x5382;&#x4E2D;&#x7684;&#x5B58;&#x50A8;,&#x5982;&#x679C;&#x4E0D;&#x6E05;&#x7A7A;&#x8FD9;&#x91CC;,&#x8FD8;&#x4F1A;&#x628A;&#x4E4B;&#x524D;&#x7684;&#x5E26;&#x8FDB;&#x53BB;</div><div class="line">        ps:&#x5982;&#x679C;&#x4EC5;&#x4EC5;&#x662F;&#x66F4;&#x65B0;&#x7684;&#x8BDD;,&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x8FD9;&#x91CC;&#x7684; map &#x904D;&#x5386;&#x6570;&#x636E;&#x4FEE;&#x6539;,&#x91CD;&#x65B0;&#x6574;&#x7406;&#x597D;&#x6743;&#x9650;&#x518D;&#x4E00;&#x8D77;&#x6DFB;&#x52A0;</div><div class="line">         */</div><div class="line">        myShiroFilterFactoryBean.getFilterChainDefinitionMap().clear();</div><div class="line"></div><div class="line">        // &#x76F8;&#x5F53;&#x4E8E;&#x65B0;&#x5EFA;&#x7684; map, &#x56E0;&#x4E3A;&#x5DF2;&#x7ECF;&#x6E05;&#x7A7A;&#x4E86;</div><div class="line">        Map&lt;String, String&gt; chains = myShiroFilterFactoryBean.getFilterChainDefinitionMap();</div><div class="line">        //&#x628A;&#x4FEE;&#x6539;&#x540E;&#x7684; map &#x653E;&#x8FDB;&#x53BB;</div><div class="line">        chains.putAll(filterMap);</div><div class="line"></div><div class="line">        //&#x8FD9;&#x4E2A;&#x76F8;&#x5F53;&#x4E8E;&#x662F;&#x5168;&#x91CF;&#x6DFB;&#x52A0;</div><div class="line">        for (Map.Entry&lt;String, String&gt; entry : filterMap.entrySet()) {</div><div class="line">            //&#x8981;&#x62E6;&#x622A;&#x7684;&#x5730;&#x5740;</div><div class="line">            String url = entry.getKey().trim().replace(&quot; &quot;, &quot;&quot;);</div><div class="line">            //&#x5730;&#x5740;&#x6301;&#x6709;&#x7684;&#x6743;&#x9650;</div><div class="line">            String chainDefinition = entry.getValue().trim().replace(&quot; &quot;, &quot;&quot;);</div><div class="line">            //&#x751F;&#x6210;&#x62E6;&#x622A;</div><div class="line">            filterManager.createChain(url, chainDefinition);</div><div class="line">        }</div><div class="line">    } catch (Exception e) {</div><div class="line">        log.error(&quot;updatePermission error,filterMap=&quot; + filterMap, e);</div><div class="line">    }</div><div class="line">}</div><div class="line">``` </div><div class="line">### &#x4FEE;&#x6539; MyShiroFilterFactoryBean &#x589E;&#x52A0;&#x4E00;&#x4E2A; URL</div><div class="line"></div><div class="line">``` java</div><div class="line">filterMap.put(&quot;/test/change&quot;,&quot;anon&quot;);</div><div class="line">``` </div><div class="line"></div><div class="line">### &#x542F;&#x52A8;&#x9879;&#x76EE;&#x5E76;&#x8FD0;&#x884C;</div><div class="line"></div><div class="line">* &#x8BBF;&#x95EE; `http://localhost:8080/test/print`</div><div class="line">&#x7ED3;&#x679C;&#xFF1A;</div><div class="line">``` </div><div class="line">&#x53D1;&#x73B0;url &#x8DF3;&#x8F6C;&#x5230; http://localhost:8080/login, &#x4F46;&#x662F;&#x56E0;&#x4E3A;&#x6CA1;&#x6709;&#x9879;&#x76EE;&#x4E2D;&#x6CA1;&#x6709;&#x914D;&#x7F6E;&#x5BFC;&#x81F4;&#x62A5; 404 &#x9519;&#x8BEF;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>&#x8BBF;&#x95EE; <code>http://localhost:8080/test/change</code><br>&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">	/js/**: &quot;anon&quot;,</div><div class="line">	/css/**: &quot;anon&quot;,</div><div class="line">	/images/**: &quot;anon&quot;,</div><div class="line">	/lib/**: &quot;anon&quot;,</div><div class="line">	/WEB-INF/jsp/**: &quot;anon&quot;,</div><div class="line">	/test/login: &quot;anon&quot;,</div><div class="line">	/test/logout*: &quot;anon&quot;,</div><div class="line">	/test/isLogin: &quot;anon&quot;,</div><div class="line">	/test/change: &quot;anon&quot;,</div><div class="line">	/test/print: &quot;anon&quot;,</div><div class="line">	/**: &quot;user&quot;</div><div class="line">}</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x8BBF;&#x95EE; <code>http://localhost:8080/test/print</code><br>&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">{</div><div class="line">	status: 0,</div><div class="line">	msg: null,</div><div class="line">	data: null</div><div class="line">}</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>&#x53D1;&#x73B0;&#x7B2C;&#x4E00;&#x6B21;&#x8BBF;&#x95EE; <code>/test/print</code> &#x7684;&#x65F6;&#x5019;&#x65E0;&#x6CD5;&#x8BBF;&#x95EE;&#xFF0C;&#x8C03;&#x7528; <code>/test/change</code> &#x65B9;&#x6CD5;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#x4E86;&#xFF0C;&#x8BF4;&#x660E;&#x66F4;&#x6539;&#x6743;&#x9650;&#x6210;&#x529F;&#x3002;</p>
+
+    </div>
+
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">marklogzhu</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/Shiro/后端/Java/框架/Shiro/Shiro学习总结(六)--Shiro并发登录/" class="pre-post btn btn-default" title='Shiro学习总结(六)--Shiro并发登录'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Shiro学习总结(六)--Shiro并发登录</span>
+        </a>
+    
+    
+        <a href="/Shiro/后端/Java/框架/Shiro/Shiro学习总结(四)--Shiro+SSM整合/" class="next-post btn btn-default" title='Shiro学习总结(四)--Shiro+SSM整合'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Shiro学习总结(四)--Shiro+SSM整合</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+   </div>
+<!---->
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytzM5r8g';var conf='prod_8552e06806aa03156574f207bfc97b8f';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+
+    </div>
+<!---->
+
+
+
+
+                </main>
+                
+    <aside class="col-md-4 sidebar">
+        
+        
+    <div class="widget">    
+        <h3 class="title">搜索</h3>
+        <div id="search-form">
+            <div id="result-mask" class="hide"></div>
+            <div class="search-area">
+                
+                    <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
+                
+                
+            </div>
+            <div id="result-wrap" class="hide">
+                <div id="search-result"></div>
+            </div>
+            <div class="hide">
+                <template id="search-tpl">
+                    <div class="item">
+                        <a href="/{path}" title="{title}">
+                            <div class="title">{title}</div>
+                            <div class="content">{content}</div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget notification">
+        <h3 class="title">网站公告</h3>
+        <div>
+            <p>欢迎光临  <b>且听风吟</b>  的博客</p>
+        </div>
+    </div>
+
+        
+        
+    <div class="widget">
+      <h3 class="title">社交</h3> 
+        <div class="content social">
+            
+	            <a href="//github.com/MarkLogZhu" rel="external nofollow" title="Github" target="_blank">
+			    	<i class="git fa fa-git"></i>
+			    </a>
+            
+	            <a href="mailto:marklogzhu@163.com" rel="external nofollow" title="邮箱" target="_blank">
+			    	<i class="envelope-o fa fa-envelope-o"></i>
+			    </a>
+            
+        </div>
+    </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">分类</h3>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/"><i class="fa" aria-hidden="true">Docker</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OAuth/"><i class="fa" aria-hidden="true">OAuth</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Security/"><i class="fa" aria-hidden="true">Spring Security</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/"><i class="fa" aria-hidden="true">UML</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/"><i class="fa" aria-hidden="true">git</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
+    </div>
+
+
+        
+        
+    <div class="widget">
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><i class="fa" aria-hidden="true">五月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/"><i class="fa" aria-hidden="true">四月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">十月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+    </div>
+
+
+        
+        
+  <div class="widget">
+    <h3 class="title">标签云</h3>
+    <div class="content tag-cloud">
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JAVA-WEB/" style="font-size: 14px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 11.33px;">Lambda</a> <a href="/tags/Liunx/" style="font-size: 17.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.67px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 15.33px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px;">Nginx</a> <a href="/tags/OAuth/" style="font-size: 10px;">OAuth</a> <a href="/tags/Quartz/" style="font-size: 12px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 14.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 15.33px;">Redis</a> <a href="/tags/SQL/" style="font-size: 13.33px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.67px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 18.67px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15.33px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 18px;">Spring</a> <a href="/tags/Spring-Security/" style="font-size: 16.67px;">Spring Security</a> <a href="/tags/SpringBoot/" style="font-size: 13.33px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 10.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Utils/" style="font-size: 10.67px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 14px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 14px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/git/" style="font-size: 12.67px;">git</a> <a href="/tags/java/" style="font-size: 10.67px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.67px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 11.33px;">前端</a> <a href="/tags/前端基础/" style="font-size: 12.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 19.33px;">设计模式</a>
+    </div>
+  </div>
+
+
+        
+        
+    <div class="widget">
+        <h3 class="title">友链</h3>
+        <div class="content friends-link">
+        
+            <a href="https://marklogzhu.github.io" class="fa" target="_blank">个人博客</a>
+        
+            <a href="http://www.shejidaren.com/" class="fa" target="_blank">设计达人</a>
+        
+        </div>
+    </div>
+
+
+        
+    </aside>
+
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+	<script src="/js/search.js?rev=@@hash.js"></script>
+
+
+<script src="/js/app.js?rev=@@hash.js"></script>
+
+
+</body>
+</html>

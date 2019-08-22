@@ -125,6 +125,331 @@
         <div class="post-content">
             <div class="post-head home-post-head">
                 <h1 class="post-title"> 
+                    <a href="/SQL/后端/数据库/MySQL/Xtrabackup的使用/">Xtrabackup的使用</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2019年08月22日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<h2 id="&#x4E00;&#x3001;Xtrabackup&#x4ECB;&#x7ECD;"><a href="#&#x4E00;&#x3001;Xtrabackup&#x4ECB;&#x7ECD;" class="headerlink" title="&#x4E00;&#x3001;Xtrabackup&#x4ECB;&#x7ECD;"></a>&#x4E00;&#x3001;Xtrabackup&#x4ECB;&#x7ECD;</h2><p>XtraBackup(PXB) &#x5DE5;&#x5177;&#x662F; <code>Percona</code> &#x516C;&#x53F8;&#x7528; <code>perl</code> &#x8BED;&#x8A00;&#x5F00;&#x53D1;&#x7684;&#x4E00;&#x4E2A;&#x7528;&#x4E8E; <code>MySQL</code> &#x6570;&#x636E;&#x5E93;&#x7269;&#x7406;&#x70ED;&#x5907;&#x7684;&#x5907;&#x4EFD;&#x5DE5;&#x5177;&#xFF0C;&#x652F;&#x6301; <code>MySQl&#xFF08;Oracle&#xFF09;</code>&#x3001;<code>Percona Server</code> &#x548C; <code>MariaDB</code>&#xFF0C;&#x5E76;&#x4E14;&#x5168;&#x90E8;&#x5F00;&#x6E90;&#x3002;</p>
+<p><strong>1.1 Xtrabackup &#x4F18;&#x70B9;</strong></p>
+<p>1&#xFF09;&#x5907;&#x4EFD;&#x901F;&#x5EA6;&#x5FEB;&#xFF0C;&#x7269;&#x7406;&#x5907;&#x4EFD;&#x53EF;&#x9760;<br>2&#xFF09;&#x5907;&#x4EFD;&#x8FC7;&#x7A0B;&#x4E0D;&#x4F1A;&#x6253;&#x65AD;&#x6B63;&#x5728;&#x6267;&#x884C;&#x7684;&#x4E8B;&#x52A1;&#xFF08;&#x65E0;&#x9700;&#x9501;&#x8868;&#xFF09;<br>3&#xFF09;&#x80FD;&#x591F;&#x57FA;&#x4E8E;&#x538B;&#x7F29;&#x7B49;&#x529F;&#x80FD;&#x8282;&#x7EA6;&#x78C1;&#x76D8;&#x7A7A;&#x95F4;&#x548C;&#x6D41;&#x91CF;<br>4&#xFF09;&#x81EA;&#x52A8;&#x5907;&#x4EFD;&#x6821;&#x9A8C;<br>5&#xFF09;&#x8FD8;&#x539F;&#x901F;&#x5EA6;&#x5FEB;<br>6&#xFF09;&#x53EF;&#x4EE5;&#x6D41;&#x4F20;&#x5C06;&#x5907;&#x4EFD;&#x4F20;&#x8F93;&#x5230;&#x53E6;&#x5916;&#x4E00;&#x53F0;&#x673A;&#x5668;&#x4E0A;<br>7&#xFF09;&#x5728;&#x4E0D;&#x589E;&#x52A0;&#x670D;&#x52A1;&#x5668;&#x8D1F;&#x8F7D;&#x7684;&#x60C5;&#x51B5;&#x5907;&#x4EFD;&#x6570;&#x636E;</p>
+              <!--   -->
+              <!--      &amp;#x4E00;&amp;#x3001;Xtrabackup&amp;#x4ECB;&amp;#x7ECD;XtraBackup(PXB) &amp;#x5DE5;&amp;#x5177;&amp;#x662F; Percona &amp;#x516C;&amp;#x53F8;&amp;#x7528; perl &amp;#x8BED;&amp;#x8A00;&amp;#x5F00;&amp;#x53D1;&amp;#x7684;&amp;#x4E00;&amp;#x4E2A;&amp;#x7528;&amp;#x4E8E; MySQL &amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x7269;&amp;#x7406;&amp;#x70ED;&amp;#x5907;&amp;#x7684;&amp;#x5907;&amp;#x4EFD;&amp;#x5DE5;&amp;#x5177;&amp;#xFF0C;&amp;#x652F;&amp;#x6301; MySQl&amp;#xFF08;Oracle&amp;#xFF09;&amp;#x3001;Percona Server &amp;#x548C; MariaDB&amp;#xFF0C;&amp;#x5E76;&amp;#x4E14;&amp;#x5168;&amp;#x90E8;&amp;#x5F00;&amp;#x6E90;&amp;#x3002;
+1.1 Xtrabackup &amp;#x4F18;&amp;#x70B9;
+1&amp;#xFF09;&amp;#x5907;&amp;#x4EFD;&amp;#x901F;&amp;#x5EA6;&amp;#x5FEB;&amp;#xFF0C;&amp;#x7269;&amp;#x7406;&amp;#x5907;&amp;#x4EFD;&amp;#x53EF;&amp;#x9760;2&amp;#xFF09;&amp;#x5907;&amp;#x4EFD;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4E0D;&amp;#x4F1A;&amp;#x6253;&amp;#x65AD;&amp;#x6B63;&amp;#x5728;&amp;#x6267;&amp;#x884C;&amp;#x7684;&amp;#x4E8B;&amp;#x52A1;&amp;#xFF08;&amp;#x65E0;&amp;#x9700;&amp;#x9501;&amp;#x8868;&amp;#xFF09;3&amp;#xFF09;&amp;#x80FD;&amp;#x591F;&amp;#x57FA;&amp;#x4E8E;&amp;#x538B;&amp;#x7F29;&amp;#x7B49;&amp;#x529F;&amp;#x80FD;&amp;#x8282;&amp;#x7EA6;&amp;#x78C1;&amp;#x76D8;&amp;#x7A7A;&amp;#x95F4;&amp;#x548C;&amp;#x6D41;&amp;#x91CF;4&amp;#xFF09;&amp;#x81EA;&amp;#x52A8;&amp;#x5907;&amp;#x4EFD;&amp;#x6821;&amp;#x9A8C;5&amp;#xFF09;&amp;#x8FD8;&amp;#x539F;&amp;#x901F;&amp;#x5EA6;&amp;#x5FEB;6&amp;#xFF09;&amp;#x53EF;&amp;#x4EE5;&amp;#x6D41;&amp;#x4F20;&amp;#x5C06;&amp;#x5907;&amp;#x4EFD;&amp;#x4F20;&amp;#x8F93;&amp;#x5230;&amp;#x53E6;&amp;#x5916;&amp;#x4E00;&amp;#x53F0;&amp;#x673A;&amp;#x5668;&amp;#x4E0A;7&amp;#xFF09;&amp;#x5728;&amp;#x4E0D;&amp;#x589E;&amp;#x52A0;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x8D1F;&amp;#x8F7D;&amp;#x7684;&amp;#x60C5;&amp;#x51B5;&amp;#x5907;&amp;#x4EFD;&amp;#x6570;&amp;#x636E;… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/SQL">
+            SQL
+        </a>
+    </span>
+    
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/SQL/后端/数据库/MySQL/Xtrabackup的使用/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/SQL/后端/数据库/MySQL/MySQL之修改默认引擎和字符集/">MySQL之修改默认引擎和字符集</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2019年08月21日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<h2 id="&#x4E00;&#x3001;&#x6570;&#x636E;&#x5E93;&#x5F15;&#x64CE;"><a href="#&#x4E00;&#x3001;&#x6570;&#x636E;&#x5E93;&#x5F15;&#x64CE;" class="headerlink" title="&#x4E00;&#x3001;&#x6570;&#x636E;&#x5E93;&#x5F15;&#x64CE;"></a>&#x4E00;&#x3001;&#x6570;&#x636E;&#x5E93;&#x5F15;&#x64CE;</h2><h3 id="1-&#x67E5;&#x770B;&#x6570;&#x636E;&#x5E93;&#x5F15;&#x64CE;"><a href="#1-&#x67E5;&#x770B;&#x6570;&#x636E;&#x5E93;&#x5F15;&#x64CE;" class="headerlink" title="1.&#x67E5;&#x770B;&#x6570;&#x636E;&#x5E93;&#x5F15;&#x64CE;"></a>1.&#x67E5;&#x770B;&#x6570;&#x636E;&#x5E93;&#x5F15;&#x64CE;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">mysql&gt; show engines;</div><div class="line">+--------------------+---------+----------------------------------------------------------------+--------------+------+------------+</div><div class="line">| Engine             | Support | Comment                                                        | Transactions | XA   | Savepoints |</div><div class="line">+--------------------+---------+----------------------------------------------------------------+--------------+------+------------+</div><div class="line">| InnoDB             | DEFAULT | Supports transactions, row-level locking, and foreign keys     | YES          | YES  | YES        |</div><div class="line">| MRG_MYISAM         | YES     | Collection of identical MyISAM tables                          | NO           | NO   | NO         |</div><div class="line">| MEMORY             | YES     | Hash based, stored in memory, useful <span class="keyword">for</span> temporary tables      | NO           | NO   | NO         |</div><div class="line">| BLACKHOLE          | YES     | /dev/<span class="function"><span class="keyword">null</span> storage <span class="title">engine</span> <span class="params">(anything you write to it disappears)</span> | NO           | NO   | NO         |</span></div><div class="line">| MyISAM             | YES     | MyISAM storage engine                                          | NO           | NO   | NO         |</div><div class="line">| CSV                | YES     | CSV storage engine                                             | NO           | NO   | NO         |</div><div class="line">| ARCHIVE            | YES     | Archive storage engine                                         | NO           | NO   | NO         |</div><div class="line">| PERFORMANCE_SCHEMA | YES     | Performance Schema                                             | NO           | NO   | NO         |</div><div class="line">| FEDERATED          | NO      | Federated MySQL storage engine                                 | NULL         | NULL | NULL       |</div><div class="line">+--------------------+---------+----------------------------------------------------------------+--------------+------+------------+</div><div class="line">9 rows in <span class="title">set</span> <span class="params">(<span class="number">0.00</span> sec)</span></div></pre></td></tr></table></figure>
+              <!--   -->
+              <!--      &amp;#x4E00;&amp;#x3001;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x5F15;&amp;#x64CE;1.&amp;#x67E5;&amp;#x770B;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x5F15;&amp;#x64CE;123456789101112131415mysql&amp;gt; show engines;+--------------------+---------+----------------------------------------------------------------+--------------+------+------------+| Engine             | Support | Comment                                                        | Transactions | XA   | Savepoints |+--------------------+---------+----------------------------------------------------------------+--------------+------+------------+| InnoDB             | DEFAULT | Supports transactions, row-level locking, and foreign keys     | YES          | YES  | YES        || MRG_MYISAM         | YES     | Collection of identical MyISAM tables                          | NO           | NO   | NO         || MEMORY             | YES     | Hash based, stored in memory, useful for temporary tables      | NO           | NO   | NO         || BLACKHOLE          | YES     | /dev/null storage engine (anything you write to it disappears) | NO           | NO   | NO         || MyISAM             | YES     | MyISAM storage engine                                          | NO           | NO   | NO         || CSV                | YES     | CSV storage engine                                             | NO           | NO   | NO         || ARCHIVE            | YES     | Archive storage engine                                         | NO           | NO   | NO         || PERFORMANCE_SCHEMA | YES     | Performance Schema                                             | NO           | NO   | NO         || FEDERATED          | NO      | Federated MySQL storage engine                                 | NULL         | NULL | NULL       |+--------------------+---------+----------------------------------------------------------------+--------------+------+------------+9 rows in set (0.00 sec)… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/SQL">
+            SQL
+        </a>
+    </span>
+    
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/SQL/后端/数据库/MySQL/MySQL之修改默认引擎和字符集/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/SQL/后端/数据库/MySQL/MySQL之mysqldump命令说明/">MySQL之mysqldump命令说明</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2019年08月20日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<h2 id="&#x4E00;&#x3001;mysqldump-&#x7B80;&#x4ECB;"><a href="#&#x4E00;&#x3001;mysqldump-&#x7B80;&#x4ECB;" class="headerlink" title="&#x4E00;&#x3001;mysqldump &#x7B80;&#x4ECB;"></a>&#x4E00;&#x3001;mysqldump &#x7B80;&#x4ECB;</h2><p><code>mysqldump</code> &#x662F; <code>MySQL</code> &#x81EA;&#x5E26;&#x7684;&#x903B;&#x8F91;&#x5907;&#x4EFD;&#x5DE5;&#x5177;&#x3002;</p>
+<p>&#x5B83;&#x7684;&#x5907;&#x4EFD;&#x539F;&#x7406;&#x662F;&#x901A;&#x8FC7;&#x534F;&#x8BAE;&#x8FDE;&#x63A5;&#x5230; <code>MySQL</code> &#x6570;&#x636E;&#x5E93;&#xFF0C;&#x5C06;&#x9700;&#x8981;&#x5907;&#x4EFD;&#x7684;&#x6570;&#x636E;&#x67E5;&#x8BE2;&#x51FA;&#x6765;&#xFF0C;&#x5C06;&#x67E5;&#x8BE2;&#x51FA;&#x7684;&#x6570;&#x636E;&#x8F6C;&#x6362;&#x6210;&#x5BF9;&#x5E94;&#x7684;<code>insert</code> &#x8BED;&#x53E5;&#xFF0C;&#x5F53;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x8FD8;&#x539F;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x53EA;&#x8981;&#x6267;&#x884C;&#x8FD9;&#x4E9B; <code>insert</code> &#x8BED;&#x53E5;&#xFF0C;&#x5373;&#x53EF;&#x5C06;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;&#x8FD8;&#x539F;&#x3002;</p>
+<h2 id="&#x4E8C;&#x3001;&#x5907;&#x4EFD;&#x547D;&#x4EE4;"><a href="#&#x4E8C;&#x3001;&#x5907;&#x4EFD;&#x547D;&#x4EE4;" class="headerlink" title="&#x4E8C;&#x3001;&#x5907;&#x4EFD;&#x547D;&#x4EE4;"></a>&#x4E8C;&#x3001;&#x5907;&#x4EFD;&#x547D;&#x4EE4;</h2><h3 id="2-1-&#x547D;&#x4EE4;&#x683C;&#x5F0F;"><a href="#2-1-&#x547D;&#x4EE4;&#x683C;&#x5F0F;" class="headerlink" title="2.1 &#x547D;&#x4EE4;&#x683C;&#x5F0F;"></a>2.1 &#x547D;&#x4EE4;&#x683C;&#x5F0F;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysqldump [&#x9009;&#x9879;] &#x6570;&#x636E;&#x5E93;&#x540D; [&#x8868;&#x540D;] &gt; &#x811A;&#x672C;&#x540D;</div></pre></td></tr></table></figure>
+<p>&#x6216;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysqldump [&#x9009;&#x9879;] --&#x6570;&#x636E;&#x5E93;&#x540D; [&#x9009;&#x9879; &#x8868;&#x540D;] &gt; &#x811A;&#x672C;&#x540D;</div></pre></td></tr></table></figure>
+<p>&#x6216;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysqldump [&#x9009;&#x9879;] --all-databases [&#x9009;&#x9879;]  &gt; &#x811A;&#x672C;&#x540D;</div></pre></td></tr></table></figure>
+              <!--   -->
+              <!--      &amp;#x4E00;&amp;#x3001;mysqldump &amp;#x7B80;&amp;#x4ECB;mysqldump &amp;#x662F; MySQL &amp;#x81EA;&amp;#x5E26;&amp;#x7684;&amp;#x903B;&amp;#x8F91;&amp;#x5907;&amp;#x4EFD;&amp;#x5DE5;&amp;#x5177;&amp;#x3002;
+&amp;#x5B83;&amp;#x7684;&amp;#x5907;&amp;#x4EFD;&amp;#x539F;&amp;#x7406;&amp;#x662F;&amp;#x901A;&amp;#x8FC7;&amp;#x534F;&amp;#x8BAE;&amp;#x8FDE;&amp;#x63A5;&amp;#x5230; MySQL &amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#xFF0C;&amp;#x5C06;&amp;#x9700;&amp;#x8981;&amp;#x5907;&amp;#x4EFD;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x67E5;&amp;#x8BE2;&amp;#x51FA;&amp;#x6765;&amp;#xFF0C;&amp;#x5C06;&amp;#x67E5;&amp;#x8BE2;&amp;#x51FA;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x8F6C;&amp;#x6362;&amp;#x6210;&amp;#x5BF9;&amp;#x5E94;&amp;#x7684;insert &amp;#x8BED;&amp;#x53E5;&amp;#xFF0C;&amp;#x5F53;&amp;#x6211;&amp;#x4EEC;&amp;#x9700;&amp;#x8981;&amp;#x8FD8;&amp;#x539F;&amp;#x8FD9;&amp;#x4E9B;&amp;#x6570;&amp;#x636E;&amp;#x65F6;&amp;#xFF0C;&amp;#x53EA;&amp;#x8981;&amp;#x6267;&amp;#x884C;&amp;#x8FD9;&amp;#x4E9B; insert &amp;#x8BED;&amp;#x53E5;&amp;#xFF0C;&amp;#x5373;&amp;#x53EF;&amp;#x5C06;&amp;#x5BF9;&amp;#x5E94;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x8FD8;&amp;#x539F;&amp;#x3002;
+&amp;#x4E8C;&amp;#x3001;&amp;#x5907;&amp;#x4EFD;&amp;#x547D;&amp;#x4EE4;2.1 &amp;#x547D;&amp;#x4EE4;&amp;#x683C;&amp;#x5F0F;1mysqldump [&amp;#x9009;&amp;#x9879;] &amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x540D; [&amp;#x8868;&amp;#x540D;] &amp;gt; &amp;#x811A;&amp;#x672C;&amp;#x540D;
+&amp;#x6216;
+1mysqldump [&amp;#x9009;&amp;#x9879;] --&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x540D; [&amp;#x9009;&amp;#x9879; &amp;#x8868;&amp;#x540D;] &amp;gt; &amp;#x811A;&amp;#x672C;&amp;#x540D;
+&amp;#x6216;
+1mysqldump [&amp;#x9009;&amp;#x9879;] --all-databases [&amp;#x9009;&amp;#x9879;]  &amp;gt; &amp;#x811A;&amp;#x672C;&amp;#x540D;… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/SQL">
+            SQL
+        </a>
+    </span>
+    
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/SQL/后端/数据库/MySQL/MySQL之mysqldump命令说明/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/SQL/后端/数据库/MySQL/MySQL之备份和还原/">MySQL之备份和还原</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2019年08月20日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<blockquote>
+<p>&#x5728;&#x5B9E;&#x9645;&#x9879;&#x76EE;&#x4E2D;&#x5BF9;&#x4E8E;&#x6570;&#x636E;&#x5E93;&#x7684;&#x5B89;&#x5168;&#x662F;&#x91CD;&#x4E2D;&#x4E4B;&#x91CD;&#xFF0C;&#x4E3A;&#x9632;&#x4E07;&#x4E00;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x505A;&#x597D;&#x5907;&#x4EFD;&#x5DE5;&#x4F5C;&#x3002;&#x5907;&#x4EFD;&#x5206;&#x4E3A;&#x5168;&#x91CF;&#x5907;&#x4EFD;&#x548C;&#x589E;&#x91CF;&#x5907;&#x4EFD;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x5B9E;&#x8DF5;&#x4E0B;&#x5907;&#x4EFD;&#x548C;&#x8FD8;&#x539F;&#x64CD;&#x4F5C;&#x3002;</p>
+</blockquote>
+<h2 id="&#x4E00;&#x3001;&#x4E3A;&#x4EC0;&#x4E48;&#x9700;&#x8981;&#x5907;&#x4EFD;"><a href="#&#x4E00;&#x3001;&#x4E3A;&#x4EC0;&#x4E48;&#x9700;&#x8981;&#x5907;&#x4EFD;" class="headerlink" title="&#x4E00;&#x3001;&#x4E3A;&#x4EC0;&#x4E48;&#x9700;&#x8981;&#x5907;&#x4EFD;"></a>&#x4E00;&#x3001;&#x4E3A;&#x4EC0;&#x4E48;&#x9700;&#x8981;&#x5907;&#x4EFD;</h2><p>&#x5728;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E2D;&#x6570;&#x636E;&#x5E93;&#x53EF;&#x80FD;&#x4F1A;&#x906D;&#x9047;&#x5230;&#x5404;&#x79CD;&#x5404;&#x6837;&#x7684;&#x4E0D;&#x6D4B;&#x4ECE;&#x800C;&#x5BFC;&#x81F4;&#x6570;&#x636E;&#x4E22;&#x5931;, &#x5927;&#x81F4;&#x4E0A;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;&#xFF1A;</p>
+<ul>
+<li>&#x786C;&#x4EF6;&#x6545;&#x969C;</li>
+<li>&#x8F6F;&#x4EF6;&#x6545;&#x969C;</li>
+<li>&#x81EA;&#x7136;&#x707E;&#x5BB3;</li>
+<li>&#x9ED1;&#x5BA2;&#x653B;&#x51FB;</li>
+<li>&#x8BEF;&#x64CD;&#x4F5C; (&#x5360;&#x6BD4;&#x6700;&#x5927;)</li>
+</ul>
+<p>&#x6240;&#x4EE5;, &#x4E3A;&#x4E86;&#x5728;&#x6570;&#x636E;&#x4E22;&#x5931;&#x4E4B;&#x540E;&#x80FD;&#x591F;&#x6709;&#x6548;&#x5730;&#x6062;&#x590D;&#x6570;&#x636E;, &#x6211;&#x4EEC;&#x5C31;&#x9700;&#x8981;&#x5B9A;&#x671F;&#x7684;&#x5907;&#x4EFD;&#x6570;&#x636E;&#x3002;&#x5907;&#x4EFD;&#x6570;&#x636E;&#x7684;&#x7B56;&#x7565;&#x9700;&#x8981;&#x6839;&#x636E;&#x4E0D;&#x540C;&#x7684;&#x5E94;&#x7528;&#x573A;&#x666F;&#x8FDB;&#x884C;&#x5B9A;&#x5236;, &#x5927;&#x81F4;&#x6709;&#x5982;&#x4E0B;&#x51E0;&#x4E2A;&#x53C2;&#x8003;&#x4E8B;&#x9879;&#xFF1A;</p>
+<ul>
+<li>&#x5907;&#x4EFD;&#x9700;&#x8981;&#x9501;&#x5B9A;&#x6570;&#x636E;&#x5E93;&#x8D44;&#x6E90;&#x591A;&#x957F;&#x65F6;&#x95F4;&#xFF1F;&#xFF08;&#x662F;&#x5426;&#x5F71;&#x54CD;&#x4E1A;&#x52A1;&#xFF09;</li>
+<li>&#x5907;&#x4EFD;&#x6240;&#x9700;&#x8981;&#x7684;&#x65F6;&#x957F;?</li>
+<li>&#x5907;&#x4EFD;&#x65F6;&#x670D;&#x52A1;&#x5668;&#x7684;&#x8D1F;&#x8F7D;&#x60C5;&#x51B5;&#x5982;&#x4F55;&#xFF1F;</li>
+<li><p>&#x6570;&#x636E;&#x6062;&#x590D;&#x6240;&#x9700;&#x8981;&#x7684;&#x65F6;&#x957F;&#xFF1F;</p>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x8FD9;&#x4E9B;&#x53C2;&#x8003;&#x4E8B;&#x9879;&#x5B9A;&#x5236;&#x7B26;&#x5408;&#x7279;&#x5B9A;&#x73AF;&#x5883;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x5907;&#x4EFD;&#x7B56;&#x7565;&#x3002;</p>
+</li>
+</ul>
+<h2 id="&#x4E8C;&#x3001;&#x5907;&#x4EFD;&#x65B9;&#x5F0F;&#x5206;&#x7C7B;"><a href="#&#x4E8C;&#x3001;&#x5907;&#x4EFD;&#x65B9;&#x5F0F;&#x5206;&#x7C7B;" class="headerlink" title="&#x4E8C;&#x3001;&#x5907;&#x4EFD;&#x65B9;&#x5F0F;&#x5206;&#x7C7B;"></a>&#x4E8C;&#x3001;&#x5907;&#x4EFD;&#x65B9;&#x5F0F;&#x5206;&#x7C7B;</h2><p>MySQL &#x7684;&#x5907;&#x4EFD;&#x65B9;&#x5F0F;&#x591A;&#x79CD;&#x591A;&#x6837;&#xFF0C;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x5907;&#x4EFD;&#x624B;&#x6BB5;&#x3001;&#x5907;&#x4EFD;&#x7684;&#x6570;&#x636E;&#x8303;&#x56F4;&#x53CA;&#x5907;&#x4EFD;&#x65F6;&#x6570;&#x636E;&#x670D;&#x52A1;&#x662F;&#x5426;&#x5728;&#x7EBF;&#x7B49;&#x6765;&#x5212;&#x5206;&#x3002;</p>
+<h3 id="2-1-&#x5907;&#x4EFD;&#x624B;&#x6BB5;"><a href="#2-1-&#x5907;&#x4EFD;&#x624B;&#x6BB5;" class="headerlink" title="2.1 &#x5907;&#x4EFD;&#x624B;&#x6BB5;"></a>2.1 &#x5907;&#x4EFD;&#x624B;&#x6BB5;</h3><ul>
+<li><p>&#x7269;&#x7406;&#x5907;&#x4EFD;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x662F;&#x6307;&#x5907;&#x4EFD;&#x65F6;&#x76F4;&#x63A5;&#x590D;&#x5236;&#x5907;&#x4EFD;&#x6570;&#x636E;&#x5E93;&#x7684;&#x6570;&#x636E;&#x6587;&#x4EF6;&#x3002;</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x903B;&#x8F91;&#x5907;&#x4EFD;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x662F;&#x6307;&#x5907;&#x4EFD;&#x65F6;&#xFF0C;&#x662F;&#x4F7F;&#x7528;&#x5907;&#x4EFD;&#x5DE5;&#x5177;&#x4ECE;&#x6570;&#x636E;&#x5E93;&#x5BFC;&#x51FA;&#x6570;&#x636E;&#x5E93;&#x7684;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x5907;&#x4EFD;&#x6587;&#x4EF6;&#x3002;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+              <!--   -->
+              <!--      
+&amp;#x5728;&amp;#x5B9E;&amp;#x9645;&amp;#x9879;&amp;#x76EE;&amp;#x4E2D;&amp;#x5BF9;&amp;#x4E8E;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x7684;&amp;#x5B89;&amp;#x5168;&amp;#x662F;&amp;#x91CD;&amp;#x4E2D;&amp;#x4E4B;&amp;#x91CD;&amp;#xFF0C;&amp;#x4E3A;&amp;#x9632;&amp;#x4E07;&amp;#x4E00;&amp;#x6211;&amp;#x4EEC;&amp;#x9700;&amp;#x8981;&amp;#x505A;&amp;#x597D;&amp;#x5907;&amp;#x4EFD;&amp;#x5DE5;&amp;#x4F5C;&amp;#x3002;&amp;#x5907;&amp;#x4EFD;&amp;#x5206;&amp;#x4E3A;&amp;#x5168;&amp;#x91CF;&amp;#x5907;&amp;#x4EFD;&amp;#x548C;&amp;#x589E;&amp;#x91CF;&amp;#x5907;&amp;#x4EFD;&amp;#xFF0C;&amp;#x4ECA;&amp;#x5929;&amp;#x6211;&amp;#x4EEC;&amp;#x5C31;&amp;#x6765;&amp;#x5B9E;&amp;#x8DF5;&amp;#x4E0B;&amp;#x5907;&amp;#x4EFD;&amp;#x548C;&amp;#x8FD8;&amp;#x539F;&amp;#x64CD;&amp;#x4F5C;&amp;#x3002;
+
+&amp;#x4E00;&amp;#x3001;&amp;#x4E3A;&amp;#x4EC0;&amp;#x4E48;&amp;#x9700;&amp;#x8981;&amp;#x5907;&amp;#x4EFD;&amp;#x5728;&amp;#x751F;&amp;#x4EA7;&amp;#x73AF;&amp;#x5883;&amp;#x4E2D;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x53EF;&amp;#x80FD;&amp;#x4F1A;&amp;#x906D;&amp;#x9047;&amp;#x5230;&amp;#x5404;&amp;#x79CD;&amp;#x5404;&amp;#x6837;&amp;#x7684;&amp;#x4E0D;&amp;#x6D4B;&amp;#x4ECE;&amp;#x800C;&amp;#x5BFC;&amp;#x81F4;&amp;#x6570;&amp;#x636E;&amp;#x4E22;&amp;#x5931;, &amp;#x5927;&amp;#x81F4;&amp;#x4E0A;&amp;#x53EF;&amp;#x4EE5;&amp;#x5206;&amp;#x4E3A;&amp;#x4EE5;&amp;#x4E0B;&amp;#x51E0;&amp;#x79CD;&amp;#xFF1A;
+
+&amp;#x786C;&amp;#x4EF6;&amp;#x6545;&amp;#x969C;
+&amp;#x8F6F;&amp;#x4EF6;&amp;#x6545;&amp;#x969C;
+&amp;#x81EA;&amp;#x7136;&amp;#x707E;&amp;#x5BB3;
+&amp;#x9ED1;&amp;#x5BA2;&amp;#x653B;&amp;#x51FB;
+&amp;#x8BEF;&amp;#x64CD;&amp;#x4F5C; (&amp;#x5360;&amp;#x6BD4;&amp;#x6700;&amp;#x5927;)
+
+&amp;#x6240;&amp;#x4EE5;, &amp;#x4E3A;&amp;#x4E86;&amp;#x5728;&amp;#x6570;&amp;#x636E;&amp;#x4E22;&amp;#x5931;&amp;#x4E4B;&amp;#x540E;&amp;#x80FD;&amp;#x591F;&amp;#x6709;&amp;#x6548;&amp;#x5730;&amp;#x6062;&amp;#x590D;&amp;#x6570;&amp;#x636E;, &amp;#x6211;&amp;#x4EEC;&amp;#x5C31;&amp;#x9700;&amp;#x8981;&amp;#x5B9A;&amp;#x671F;&amp;#x7684;&amp;#x5907;&amp;#x4EFD;&amp;#x6570;&amp;#x636E;&amp;#x3002;&amp;#x5907;&amp;#x4EFD;&amp;#x6570;&amp;#x636E;&amp;#x7684;&amp;#x7B56;&amp;#x7565;&amp;#x9700;&amp;#x8981;&amp;#x6839;&amp;#x636E;&amp;#x4E0D;&amp;#x540C;&amp;#x7684;&amp;#x5E94;&amp;#x7528;&amp;#x573A;&amp;#x666F;&amp;#x8FDB;&amp;#x884C;&amp;#x5B9A;&amp;#x5236;, &amp;#x5927;&amp;#x81F4;&amp;#x6709;&amp;#x5982;&amp;#x4E0B;&amp;#x51E0;&amp;#x4E2A;&amp;#x53C2;&amp;#x8003;&amp;#x4E8B;&amp;#x9879;&amp;#xFF1A;
+
+&amp;#x5907;&amp;#x4EFD;&amp;#x9700;&amp;#x8981;&amp;#x9501;&amp;#x5B9A;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x8D44;&amp;#x6E90;&amp;#x591A;&amp;#x957F;&amp;#x65F6;&amp;#x95F4;&amp;#xFF1F;&amp;#xFF08;&amp;#x662F;&amp;#x5426;&amp;#x5F71;&amp;#x54CD;&amp;#x4E1A;&amp;#x52A1;&amp;#xFF09;
+&amp;#x5907;&amp;#x4EFD;&amp;#x6240;&amp;#x9700;&amp;#x8981;&amp;#x7684;&amp;#x65F6;&amp;#x957F;?
+&amp;#x5907;&amp;#x4EFD;&amp;#x65F6;&amp;#x670D;&amp;#x52A1;&amp;#x5668;&amp;#x7684;&amp;#x8D1F;&amp;#x8F7D;&amp;#x60C5;&amp;#x51B5;&amp;#x5982;&amp;#x4F55;&amp;#xFF1F;
+&amp;#x6570;&amp;#x636E;&amp;#x6062;&amp;#x590D;&amp;#x6240;&amp;#x9700;&amp;#x8981;&amp;#x7684;&amp;#x65F6;&amp;#x957F;&amp;#xFF1F;
+&amp;#x6211;&amp;#x4EEC;&amp;#x53EF;&amp;#x4EE5;&amp;#x6839;&amp;#x636E;&amp;#x8FD9;&amp;#x4E9B;&amp;#x53C2;&amp;#x8003;&amp;#x4E8B;&amp;#x9879;&amp;#x5B9A;&amp;#x5236;&amp;#x7B26;&amp;#x5408;&amp;#x7279;&amp;#x5B9A;&amp;#x73AF;&amp;#x5883;&amp;#x4E2D;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x5907;&amp;#x4EFD;&amp;#x7B56;&amp;#x7565;&amp;#x3002;
+
+
+&amp;#x4E8C;&amp;#x3001;&amp;#x5907;&amp;#x4EFD;&amp;#x65B9;&amp;#x5F0F;&amp;#x5206;&amp;#x7C7B;MySQL &amp;#x7684;&amp;#x5907;&amp;#x4EFD;&amp;#x65B9;&amp;#x5F0F;&amp;#x591A;&amp;#x79CD;&amp;#x591A;&amp;#x6837;&amp;#xFF0C;&amp;#x53EF;&amp;#x4EE5;&amp;#x6839;&amp;#x636E;&amp;#x5907;&amp;#x4EFD;&amp;#x624B;&amp;#x6BB5;&amp;#x3001;&amp;#x5907;&amp;#x4EFD;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x8303;&amp;#x56F4;&amp;#x53CA;&amp;#x5907;&amp;#x4EFD;&amp;#x65F6;&amp;#x6570;&amp;#x636E;&amp;#x670D;&amp;#x52A1;&amp;#x662F;&amp;#x5426;&amp;#x5728;&amp;#x7EBF;&amp;#x7B49;&amp;#x6765;&amp;#x5212;&amp;#x5206;&amp;#x3002;
+2.1 &amp;#x5907;&amp;#x4EFD;&amp;#x624B;&amp;#x6BB5;
+&amp;#x7269;&amp;#x7406;&amp;#x5907;&amp;#x4EFD;
+1&amp;#x662F;&amp;#x6307;&amp;#x5907;&amp;#x4EFD;&amp;#x65F6;&amp;#x76F4;&amp;#x63A5;&amp;#x590D;&amp;#x5236;&amp;#x5907;&amp;#x4EFD;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x6587;&amp;#x4EF6;&amp;#x3002;
+
+&amp;#x903B;&amp;#x8F91;&amp;#x5907;&amp;#x4EFD;
+1&amp;#x662F;&amp;#x6307;&amp;#x5907;&amp;#x4EFD;&amp;#x65F6;&amp;#xFF0C;&amp;#x662F;&amp;#x4F7F;&amp;#x7528;&amp;#x5907;&amp;#x4EFD;&amp;#x5DE5;&amp;#x5177;&amp;#x4ECE;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x5BFC;&amp;#x51FA;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x7684;&amp;#x4E00;&amp;#x4E2A;&amp;#x6216;&amp;#x591A;&amp;#x4E2A;&amp;#x5907;&amp;#x4EFD;&amp;#x6587;&amp;#x4EF6;&amp;#x3002;
+
+… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/SQL">
+            SQL
+        </a>
+    </span>
+    
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/SQL/后端/数据库/MySQL/MySQL之备份和还原/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
+                    <a href="/SQL/后端/数据库/SQL语言分类之DDL、DML、DCL、DQL/">SQL语言分类之DDL、DML、DCL、DQL</a>
+                </h1>
+                <div class="post-meta">  &bull;
+                    <time class="post-date" datetime="" title="">
+                        2019年08月19日
+                    </time>
+                </div>
+            </div>
+            <p class="brief">
+			<p>SQL &#x8BED;&#x8A00;&#x5171;&#x5206;&#x4E3A;&#x56DB;&#x5927;&#x7C7B;&#xFF1A;</p>
+<ul>
+<li>&#x6570;&#x636E;&#x63A7;&#x5236;&#x8BED;&#x8A00; DCL</li>
+<li>&#x6570;&#x636E;&#x5B9A;&#x4E49;&#x8BED;&#x8A00; DDL</li>
+<li>&#x6570;&#x636E;&#x64CD;&#x7EB5;&#x8BED;&#x8A00; DML</li>
+<li>&#x6570;&#x636E;&#x67E5;&#x8BE2;&#x8BED;&#x8A00; DQL</li>
+</ul>
+<h2 id="&#x4E00;&#x3001;&#x6570;&#x636E;&#x63A7;&#x5236;&#x8BED;&#x8A00;-DCL"><a href="#&#x4E00;&#x3001;&#x6570;&#x636E;&#x63A7;&#x5236;&#x8BED;&#x8A00;-DCL" class="headerlink" title="&#x4E00;&#x3001;&#x6570;&#x636E;&#x63A7;&#x5236;&#x8BED;&#x8A00; DCL"></a>&#x4E00;&#x3001;&#x6570;&#x636E;&#x63A7;&#x5236;&#x8BED;&#x8A00; DCL</h2><h3 id="1-&#x4F5C;&#x7528;"><a href="#1-&#x4F5C;&#x7528;" class="headerlink" title="1.&#x4F5C;&#x7528;"></a>1.&#x4F5C;&#x7528;</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x7528;&#x6765;&#x8BBE;&#x7F6E;&#x6216;&#x66F4;&#x6539;&#x6570;&#x636E;&#x5E93;&#x7528;&#x6237;&#x6216;&#x89D2;&#x8272;&#x6743;&#x9650;&#x7684;&#x8BED;&#x53E5;&#xFF0C;&#x5E76;&#x63A7;&#x5236;&#x6570;&#x636E;&#x5E93;&#x64CD;&#x7EB5;&#x4E8B;&#x52A1;&#x53D1;&#x751F;&#x7684;&#x65F6;&#x95F4;&#x53CA;&#x6548;&#x679C;&#xFF0C;&#x5BF9;&#x6570;&#x636E;&#x5E93;&#x5B9E;&#x884C;&#x76D1;&#x89C6;&#x7B49;&#x3002;</div></pre></td></tr></table></figure>
+<h3 id="2-&#x5B9E;&#x4F8B;"><a href="#2-&#x5B9E;&#x4F8B;" class="headerlink" title="2.&#x5B9E;&#x4F8B;"></a>2.&#x5B9E;&#x4F8B;</h3><h4 id="2-1-&#x521B;&#x5EFA;&#x7528;&#x6237;"><a href="#2-1-&#x521B;&#x5EFA;&#x7528;&#x6237;" class="headerlink" title="2.1 &#x521B;&#x5EFA;&#x7528;&#x6237;"></a>2.1 &#x521B;&#x5EFA;&#x7528;&#x6237;</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">user</span> &#x2018;&#x7528;&#x6237;&#x540D;&#x2019;@&#x2019;&#x5141;&#x8BB8;&#x5176;&#x767B;&#x5F55;&#x7684;&#x5730;&#x5740;&#x2019; <span class="keyword">identified</span> <span class="keyword">by</span> &#x2018;&#x5BC6;&#x7801;&#x2019;;</div></pre></td></tr></table></figure>
+<h4 id="2-2-&#x5220;&#x9664;&#x7528;&#x6237;"><a href="#2-2-&#x5220;&#x9664;&#x7528;&#x6237;" class="headerlink" title="2.2 &#x5220;&#x9664;&#x7528;&#x6237;"></a>2.2 &#x5220;&#x9664;&#x7528;&#x6237;</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">drop</span> <span class="keyword">user</span> &#x2018;&#x7528;&#x6237;&#x540D;&#x2019;@&#x2019;&#x5141;&#x8BB8;&#x5176;&#x767B;&#x5F55;&#x7684;&#x5730;&#x5740;&#x2019;&#xFF1B;</div></pre></td></tr></table></figure>
+              <!--   -->
+              <!--      SQL &amp;#x8BED;&amp;#x8A00;&amp;#x5171;&amp;#x5206;&amp;#x4E3A;&amp;#x56DB;&amp;#x5927;&amp;#x7C7B;&amp;#xFF1A;
+
+&amp;#x6570;&amp;#x636E;&amp;#x63A7;&amp;#x5236;&amp;#x8BED;&amp;#x8A00; DCL
+&amp;#x6570;&amp;#x636E;&amp;#x5B9A;&amp;#x4E49;&amp;#x8BED;&amp;#x8A00; DDL
+&amp;#x6570;&amp;#x636E;&amp;#x64CD;&amp;#x7EB5;&amp;#x8BED;&amp;#x8A00; DML
+&amp;#x6570;&amp;#x636E;&amp;#x67E5;&amp;#x8BE2;&amp;#x8BED;&amp;#x8A00; DQL
+
+&amp;#x4E00;&amp;#x3001;&amp;#x6570;&amp;#x636E;&amp;#x63A7;&amp;#x5236;&amp;#x8BED;&amp;#x8A00; DCL1.&amp;#x4F5C;&amp;#x7528;1&amp;#x7528;&amp;#x6765;&amp;#x8BBE;&amp;#x7F6E;&amp;#x6216;&amp;#x66F4;&amp;#x6539;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x7528;&amp;#x6237;&amp;#x6216;&amp;#x89D2;&amp;#x8272;&amp;#x6743;&amp;#x9650;&amp;#x7684;&amp;#x8BED;&amp;#x53E5;&amp;#xFF0C;&amp;#x5E76;&amp;#x63A7;&amp;#x5236;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x64CD;&amp;#x7EB5;&amp;#x4E8B;&amp;#x52A1;&amp;#x53D1;&amp;#x751F;&amp;#x7684;&amp;#x65F6;&amp;#x95F4;&amp;#x53CA;&amp;#x6548;&amp;#x679C;&amp;#xFF0C;&amp;#x5BF9;&amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x5B9E;&amp;#x884C;&amp;#x76D1;&amp;#x89C6;&amp;#x7B49;&amp;#x3002;
+2.&amp;#x5B9E;&amp;#x4F8B;2.1 &amp;#x521B;&amp;#x5EFA;&amp;#x7528;&amp;#x6237;1create user &amp;#x2018;&amp;#x7528;&amp;#x6237;&amp;#x540D;&amp;#x2019;@&amp;#x2019;&amp;#x5141;&amp;#x8BB8;&amp;#x5176;&amp;#x767B;&amp;#x5F55;&amp;#x7684;&amp;#x5730;&amp;#x5740;&amp;#x2019; identified by &amp;#x2018;&amp;#x5BC6;&amp;#x7801;&amp;#x2019;;
+2.2 &amp;#x5220;&amp;#x9664;&amp;#x7528;&amp;#x6237;1drop user &amp;#x2018;&amp;#x7528;&amp;#x6237;&amp;#x540D;&amp;#x2019;@&amp;#x2019;&amp;#x5141;&amp;#x8BB8;&amp;#x5176;&amp;#x767B;&amp;#x5F55;&amp;#x7684;&amp;#x5730;&amp;#x5740;&amp;#x2019;&amp;#xFF1B;… -->
+                <!---->
+            </p> 
+        </div>
+		    
+        <footer class="post-footer clearfix">
+            <div class="pull-left tag-list">
+                <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/SQL">
+            SQL
+        </a>
+    </span>
+    
+    
+
+    
+</div>
+
+            </div>
+
+            <div class="post-permalink">
+                <a href="/SQL/后端/数据库/SQL语言分类之DDL、DML、DCL、DQL/" class="btn btn-default">阅读全文</a>
+            </div>
+        </footer>
+    
+    </article>
+ 
+    <article class="post">
+        
+        <div class="post-content">
+            <div class="post-head home-post-head">
+                <h1 class="post-title"> 
                     <a href="/Liunx/系统/Liunx/软件安装/Liunx软件安装(一)--安装MySQL/">Liunx软件安装(一)--安装MySQL</a>
                 </h1>
                 <div class="post-meta">  &bull;
@@ -356,267 +681,6 @@ INOUT:&amp;#x8868;&amp;#x793A;&amp;#x8F93;&amp;#x5165;&amp;#x8F93;&amp;#x51FA;&a
     
     </article>
  
-    <article class="post">
-        
-        <div class="post-content">
-            <div class="post-head home-post-head">
-                <h1 class="post-title"> 
-                    <a href="/MySQL/后端/数据库/MySQL/MySQL学习总结(七)--查询操作/">MySQL学习总结(七)--查询操作</a>
-                </h1>
-                <div class="post-meta">  &bull;
-                    <time class="post-date" datetime="" title="">
-                        2018年06月26日
-                    </time>
-                </div>
-            </div>
-            <p class="brief">
-			<p>&#x6570;&#x636E;&#x5E93;&#x6700;&#x91CD;&#x8981;&#x7684;&#x4E00;&#x4E2A;&#x529F;&#x80FD;&#x5C31;&#x662F;&#x6570;&#x636E;&#x67E5;&#x8BE2;&#xFF0C;&#x6570;&#x636E;&#x67E5;&#x8BE2;&#x4E0D;&#x4EC5;&#x9700;&#x8981;&#x5BF9;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x7B5B;&#x9009;&#xFF0C;&#x800C;&#x4E14;&#x8981;&#x786E;&#x5B9A;&#x6570;&#x636E;&#x4EE5;&#x4EC0;&#x4E48;&#x683C;&#x5F0F;&#x663E;&#x793A;&#xFF0C;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C31;&#x6765;&#x4E86;&#x89E3;&#x4E0B;&#x67E5;&#x8BE2;&#x64CD;&#x4F5C;&#x3002;</p>
-              <!--   -->
-              <!--      &amp;#x6570;&amp;#x636E;&amp;#x5E93;&amp;#x6700;&amp;#x91CD;&amp;#x8981;&amp;#x7684;&amp;#x4E00;&amp;#x4E2A;&amp;#x529F;&amp;#x80FD;&amp;#x5C31;&amp;#x662F;&amp;#x6570;&amp;#x636E;&amp;#x67E5;&amp;#x8BE2;&amp;#xFF0C;&amp;#x6570;&amp;#x636E;&amp;#x67E5;&amp;#x8BE2;&amp;#x4E0D;&amp;#x4EC5;&amp;#x9700;&amp;#x8981;&amp;#x5BF9;&amp;#x6570;&amp;#x636E;&amp;#x8FDB;&amp;#x884C;&amp;#x7B5B;&amp;#x9009;&amp;#xFF0C;&amp;#x800C;&amp;#x4E14;&amp;#x8981;&amp;#x786E;&amp;#x5B9A;&amp;#x6570;&amp;#x636E;&amp;#x4EE5;&amp;#x4EC0;&amp;#x4E48;&amp;#x683C;&amp;#x5F0F;&amp;#x663E;&amp;#x793A;&amp;#xFF0C;&amp;#x4ECA;&amp;#x5929;&amp;#x6211;&amp;#x4EEC;&amp;#x5C31;&amp;#x6765;&amp;#x4E86;&amp;#x89E3;&amp;#x4E0B;&amp;#x67E5;&amp;#x8BE2;&amp;#x64CD;&amp;#x4F5C;&amp;#x3002;… -->
-                <!---->
-            </p> 
-        </div>
-		    
-        <footer class="post-footer clearfix">
-            <div class="pull-left tag-list">
-                <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/MySQL">
-            MySQL
-        </a>
-    </span>
-    
-    
-
-    
-</div>
-
-            </div>
-
-            <div class="post-permalink">
-                <a href="/MySQL/后端/数据库/MySQL/MySQL学习总结(七)--查询操作/" class="btn btn-default">阅读全文</a>
-            </div>
-        </footer>
-    
-    </article>
- 
-    <article class="post">
-        
-        <div class="post-content">
-            <div class="post-head home-post-head">
-                <h1 class="post-title"> 
-                    <a href="/MySQL/后端/数据库/MySQL/MySQL学习总结(六)--函数/">MySQL学习总结(六)--函数</a>
-                </h1>
-                <div class="post-meta">  &bull;
-                    <time class="post-date" datetime="" title="">
-                        2018年06月14日
-                    </time>
-                </div>
-            </div>
-            <p class="brief">
-			<h2 id="&#x51FD;&#x6570;"><a href="#&#x51FD;&#x6570;" class="headerlink" title="&#x51FD;&#x6570;"></a>&#x51FD;&#x6570;</h2><p>&#x51FD;&#x6570;&#x8868;&#x793A;&#x5BF9;&#x8F93;&#x5165;&#x53C2;&#x6570;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5177;&#x6709;&#x7279;&#x5B9A;&#x5173;&#x7CFB;&#x7684;&#x503C;&#x3002;MySQL &#x63D0;&#x4F9B;&#x4E86;&#x5927;&#x91CF;&#x51FD;&#x6570;&#xFF0C;&#x4ECE;&#x529F;&#x80FD;&#x533A;&#x5206;&#x6709;&#x5982;&#x4E0B;&#x51E0;&#x7C7B;&#xFF1A;</p>
-<ul>
-<li>&#x6570;&#x5B66;&#x51FD;&#x6570;</li>
-<li>&#x5B57;&#x7B26;&#x4E32;&#x51FD;&#x6570;</li>
-<li>&#x65E5;&#x671F;&#x548C;&#x65F6;&#x95F4;&#x51FD;&#x6570;</li>
-<li>&#x6761;&#x4EF6;&#x5224;&#x65AD;&#x51FD;&#x6570;</li>
-<li>&#x7CFB;&#x7EDF;&#x51FD;&#x6570;</li>
-<li>&#x52A0;&#x89E3;&#x5BC6;&#x51FD;&#x6570;</li>
-</ul>
-              <!--   -->
-              <!--      &amp;#x51FD;&amp;#x6570;&amp;#x51FD;&amp;#x6570;&amp;#x8868;&amp;#x793A;&amp;#x5BF9;&amp;#x8F93;&amp;#x5165;&amp;#x53C2;&amp;#x6570;&amp;#x8FD4;&amp;#x56DE;&amp;#x4E00;&amp;#x4E2A;&amp;#x5177;&amp;#x6709;&amp;#x7279;&amp;#x5B9A;&amp;#x5173;&amp;#x7CFB;&amp;#x7684;&amp;#x503C;&amp;#x3002;MySQL &amp;#x63D0;&amp;#x4F9B;&amp;#x4E86;&amp;#x5927;&amp;#x91CF;&amp;#x51FD;&amp;#x6570;&amp;#xFF0C;&amp;#x4ECE;&amp;#x529F;&amp;#x80FD;&amp;#x533A;&amp;#x5206;&amp;#x6709;&amp;#x5982;&amp;#x4E0B;&amp;#x51E0;&amp;#x7C7B;&amp;#xFF1A;
-
-&amp;#x6570;&amp;#x5B66;&amp;#x51FD;&amp;#x6570;
-&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x51FD;&amp;#x6570;
-&amp;#x65E5;&amp;#x671F;&amp;#x548C;&amp;#x65F6;&amp;#x95F4;&amp;#x51FD;&amp;#x6570;
-&amp;#x6761;&amp;#x4EF6;&amp;#x5224;&amp;#x65AD;&amp;#x51FD;&amp;#x6570;
-&amp;#x7CFB;&amp;#x7EDF;&amp;#x51FD;&amp;#x6570;
-&amp;#x52A0;&amp;#x89E3;&amp;#x5BC6;&amp;#x51FD;&amp;#x6570;
-… -->
-                <!---->
-            </p> 
-        </div>
-		    
-        <footer class="post-footer clearfix">
-            <div class="pull-left tag-list">
-                <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/MySQL">
-            MySQL
-        </a>
-    </span>
-    
-    
-
-    
-</div>
-
-            </div>
-
-            <div class="post-permalink">
-                <a href="/MySQL/后端/数据库/MySQL/MySQL学习总结(六)--函数/" class="btn btn-default">阅读全文</a>
-            </div>
-        </footer>
-    
-    </article>
- 
-    <article class="post">
-        
-        <div class="post-content">
-            <div class="post-head home-post-head">
-                <h1 class="post-title"> 
-                    <a href="/MySQL/后端/数据库/MySQL/MySQL学习总结(五)--数据类型和运算符/">MySQL学习总结(五)--数据类型和运算符</a>
-                </h1>
-                <div class="post-meta">  &bull;
-                    <time class="post-date" datetime="" title="">
-                        2018年06月13日
-                    </time>
-                </div>
-            </div>
-            <p class="brief">
-			<p>MySQL &#x652F;&#x6301;&#x591A;&#x79CD;&#x7C7B;&#x578B;&#xFF0C;&#x5927;&#x81F4;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;&#x4E09;&#x7C7B;&#xFF1A;&#x6570;&#x503C;&#x3001;&#x65E5;&#x671F;/&#x65F6;&#x95F4;&#x548C;&#x5B57;&#x7B26;&#x4E32;(&#x5B57;&#x7B26;)&#x7C7B;&#x578B;&#x3002;</p>
-              <!--   -->
-              <!--      MySQL &amp;#x652F;&amp;#x6301;&amp;#x591A;&amp;#x79CD;&amp;#x7C7B;&amp;#x578B;&amp;#xFF0C;&amp;#x5927;&amp;#x81F4;&amp;#x53EF;&amp;#x4EE5;&amp;#x5206;&amp;#x4E3A;&amp;#x4E09;&amp;#x7C7B;&amp;#xFF1A;&amp;#x6570;&amp;#x503C;&amp;#x3001;&amp;#x65E5;&amp;#x671F;/&amp;#x65F6;&amp;#x95F4;&amp;#x548C;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;(&amp;#x5B57;&amp;#x7B26;)&amp;#x7C7B;&amp;#x578B;&amp;#x3002;… -->
-                <!---->
-            </p> 
-        </div>
-		    
-        <footer class="post-footer clearfix">
-            <div class="pull-left tag-list">
-                <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/MySQL">
-            MySQL
-        </a>
-    </span>
-    
-    
-
-    
-</div>
-
-            </div>
-
-            <div class="post-permalink">
-                <a href="/MySQL/后端/数据库/MySQL/MySQL学习总结(五)--数据类型和运算符/" class="btn btn-default">阅读全文</a>
-            </div>
-        </footer>
-    
-    </article>
- 
-    <article class="post">
-        
-        <div class="post-content">
-            <div class="post-head home-post-head">
-                <h1 class="post-title"> 
-                    <a href="/MySQL/后端/数据库/MySQL/MySQL学习总结(四)--约束/">MySQL学习总结(四)--约束</a>
-                </h1>
-                <div class="post-meta">  &bull;
-                    <time class="post-date" datetime="" title="">
-                        2018年06月12日
-                    </time>
-                </div>
-            </div>
-            <p class="brief">
-			<h2 id="&#x4E3B;&#x952E;&#x7EA6;&#x675F;"><a href="#&#x4E3B;&#x952E;&#x7EA6;&#x675F;" class="headerlink" title="&#x4E3B;&#x952E;&#x7EA6;&#x675F;"></a>&#x4E3B;&#x952E;&#x7EA6;&#x675F;</h2><p>&#x4E3B;&#x952E;&#x662F;&#x8868;&#x4E2D;&#x4E00;&#x5217;&#x6216;&#x591A;&#x5217;&#x7684;&#x7EC4;&#x5408;&#x3002;&#x4E3B;&#x952E;&#x7EA6;&#x675F;&#x8981;&#x6C42;&#x4E3B;&#x952E;&#x5217;&#x7684;&#x6570;&#x636E;&#x552F;&#x4E00;&#x5E76;&#x4E14;&#x4E0D;&#x5141;&#x8BB8;&#x4E3A;&#x7A7A;&#x3002;&#x4E3B;&#x952E;&#x80FD;&#x591F;&#x552F;&#x4E00;&#x5730;&#x6807;&#x8BC6;&#x8868;&#x4E2D;&#x7684;&#x4E00;&#x6761;&#x8BB0;&#x5F55;&#xFF0C;&#x4E0E;&#x8BB0;&#x5F55;&#x7684;&#x5173;&#x7CFB;&#x662F;&#x4E00;&#x4E00;&#x5BF9;&#x5E94;&#x7684;&#x3002;&#x4E3B;&#x952E;&#x5206;&#x4E3A;&#x4E24;&#x79CD;&#x7C7B;&#x578B;&#xFF1A;&#x5355;&#x5B57;&#x6BB5;&#x4E3B;&#x952E;&#x5F88;&#x591A;&#x5B57;&#x6BB5;&#x8054;&#x5408;&#x4E3B;&#x952E;&#x3002;</p>
-<h3 id="&#x5355;&#x5B57;&#x6BB5;&#x4E3B;&#x952E;"><a href="#&#x5355;&#x5B57;&#x6BB5;&#x4E3B;&#x952E;" class="headerlink" title="&#x5355;&#x5B57;&#x6BB5;&#x4E3B;&#x952E;"></a>&#x5355;&#x5B57;&#x6BB5;&#x4E3B;&#x952E;</h3><p>&#x8BED;&#x6CD5;&#xFF1A;</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#x5B57;&#x6BB5;&#x540D; &#x6570;&#x636E;&#x7C7B;&#x578B; PRIMARY KEY [&#x9ED8;&#x8BA4;&#x503C;]</div></pre></td></tr></table></figure>
-<p>&#x5B9E;&#x4F8B;:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> TABEL tb_01(</div><div class="line">	<span class="keyword">id</span> INI(<span class="number">11</span>) PRIMARY <span class="keyword">KEY</span>,</div><div class="line">	<span class="keyword">name</span> <span class="built_in">VARCHAR</span>(<span class="number">25</span>)</div><div class="line">);</div></pre></td></tr></table></figure></p>
-              <!--   -->
-              <!--      &amp;#x4E3B;&amp;#x952E;&amp;#x7EA6;&amp;#x675F;&amp;#x4E3B;&amp;#x952E;&amp;#x662F;&amp;#x8868;&amp;#x4E2D;&amp;#x4E00;&amp;#x5217;&amp;#x6216;&amp;#x591A;&amp;#x5217;&amp;#x7684;&amp;#x7EC4;&amp;#x5408;&amp;#x3002;&amp;#x4E3B;&amp;#x952E;&amp;#x7EA6;&amp;#x675F;&amp;#x8981;&amp;#x6C42;&amp;#x4E3B;&amp;#x952E;&amp;#x5217;&amp;#x7684;&amp;#x6570;&amp;#x636E;&amp;#x552F;&amp;#x4E00;&amp;#x5E76;&amp;#x4E14;&amp;#x4E0D;&amp;#x5141;&amp;#x8BB8;&amp;#x4E3A;&amp;#x7A7A;&amp;#x3002;&amp;#x4E3B;&amp;#x952E;&amp;#x80FD;&amp;#x591F;&amp;#x552F;&amp;#x4E00;&amp;#x5730;&amp;#x6807;&amp;#x8BC6;&amp;#x8868;&amp;#x4E2D;&amp;#x7684;&amp;#x4E00;&amp;#x6761;&amp;#x8BB0;&amp;#x5F55;&amp;#xFF0C;&amp;#x4E0E;&amp;#x8BB0;&amp;#x5F55;&amp;#x7684;&amp;#x5173;&amp;#x7CFB;&amp;#x662F;&amp;#x4E00;&amp;#x4E00;&amp;#x5BF9;&amp;#x5E94;&amp;#x7684;&amp;#x3002;&amp;#x4E3B;&amp;#x952E;&amp;#x5206;&amp;#x4E3A;&amp;#x4E24;&amp;#x79CD;&amp;#x7C7B;&amp;#x578B;&amp;#xFF1A;&amp;#x5355;&amp;#x5B57;&amp;#x6BB5;&amp;#x4E3B;&amp;#x952E;&amp;#x5F88;&amp;#x591A;&amp;#x5B57;&amp;#x6BB5;&amp;#x8054;&amp;#x5408;&amp;#x4E3B;&amp;#x952E;&amp;#x3002;
-&amp;#x5355;&amp;#x5B57;&amp;#x6BB5;&amp;#x4E3B;&amp;#x952E;&amp;#x8BED;&amp;#x6CD5;&amp;#xFF1A;
-1&amp;#x5B57;&amp;#x6BB5;&amp;#x540D; &amp;#x6570;&amp;#x636E;&amp;#x7C7B;&amp;#x578B; PRIMARY KEY [&amp;#x9ED8;&amp;#x8BA4;&amp;#x503C;]
-&amp;#x5B9E;&amp;#x4F8B;:1234CREATE TABEL tb_01(	id INI(11) PRIMARY KEY,	name VARCHAR(25));… -->
-                <!---->
-            </p> 
-        </div>
-		    
-        <footer class="post-footer clearfix">
-            <div class="pull-left tag-list">
-                <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/MySQL">
-            MySQL
-        </a>
-    </span>
-    
-    
-
-    
-</div>
-
-            </div>
-
-            <div class="post-permalink">
-                <a href="/MySQL/后端/数据库/MySQL/MySQL学习总结(四)--约束/" class="btn btn-default">阅读全文</a>
-            </div>
-        </footer>
-    
-    </article>
- 
-    <article class="post">
-        
-        <div class="post-content">
-            <div class="post-head home-post-head">
-                <h1 class="post-title"> 
-                    <a href="/MySQL/后端/数据库/MySQL/MySQL学习总结(三)--表的基本操作/">MySQL学习总结(三)--表的基本操作</a>
-                </h1>
-                <div class="post-meta">  &bull;
-                    <time class="post-date" datetime="" title="">
-                        2018年06月12日
-                    </time>
-                </div>
-            </div>
-            <p class="brief">
-			<h2 id="&#x65B0;&#x5EFA;&#x8868;"><a href="#&#x65B0;&#x5EFA;&#x8868;" class="headerlink" title="&#x65B0;&#x5EFA;&#x8868;"></a>&#x65B0;&#x5EFA;&#x8868;</h2><p>&#x8BED;&#x6CD5;&#xFF1A;<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> TABEL &#x8868;&#x540D;(</div><div class="line">	&#x5B57;&#x6BB5;&#x540D;<span class="number">1</span> &#x6570;&#x636E;&#x7C7B;&#x578B; [&#x957F;&#x5EA6;] [&#x5217;&#x7EA7;&#x522B;&#x7EA6;&#x675F;&#x6761;&#x4EF6;] [&#x9ED8;&#x8BA4;&#x503C;],</div><div class="line">	&#x5B57;&#x6BB5;&#x540D;<span class="number">2</span> &#x6570;&#x636E;&#x7C7B;&#x578B; [&#x957F;&#x5EA6;] [&#x5217;&#x7EA7;&#x522B;&#x7EA6;&#x675F;&#x6761;&#x4EF6;] [&#x9ED8;&#x8BA4;&#x503C;],</div><div class="line">	......,</div><div class="line">	&#x5B57;&#x6BB5;&#x540D;N &#x6570;&#x636E;&#x7C7B;&#x578B; [&#x957F;&#x5EA6;] [&#x5217;&#x7EA7;&#x522B;&#x7EA6;&#x675F;&#x6761;&#x4EF6;] [&#x9ED8;&#x8BA4;&#x503C;],</div><div class="line">	[&#x8868;&#x7EA7;&#x522B;&#x7EA6;&#x675F;&#x6761;&#x4EF6;]</div><div class="line">);</div></pre></td></tr></table></figure></p>
-<h2 id="&#x67E5;&#x770B;&#x8868;&#x7ED3;&#x6784;"><a href="#&#x67E5;&#x770B;&#x8868;&#x7ED3;&#x6784;" class="headerlink" title="&#x67E5;&#x770B;&#x8868;&#x7ED3;&#x6784;"></a>&#x67E5;&#x770B;&#x8868;&#x7ED3;&#x6784;</h2><p>&#x8BED;&#x6CD5;&#xFF1A;</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DESCRIBE</span> &#x8868;&#x540D;;</div><div class="line"><span class="comment">-- &#x7B80;&#x5199;</span></div><div class="line">DESC &#x8868;&#x540D;;</div></pre></td></tr></table></figure>
-              <!--   -->
-              <!--      &amp;#x65B0;&amp;#x5EFA;&amp;#x8868;&amp;#x8BED;&amp;#x6CD5;&amp;#xFF1A;1234567CREATE TABEL &amp;#x8868;&amp;#x540D;(	&amp;#x5B57;&amp;#x6BB5;&amp;#x540D;1 &amp;#x6570;&amp;#x636E;&amp;#x7C7B;&amp;#x578B; [&amp;#x957F;&amp;#x5EA6;] [&amp;#x5217;&amp;#x7EA7;&amp;#x522B;&amp;#x7EA6;&amp;#x675F;&amp;#x6761;&amp;#x4EF6;] [&amp;#x9ED8;&amp;#x8BA4;&amp;#x503C;],	&amp;#x5B57;&amp;#x6BB5;&amp;#x540D;2 &amp;#x6570;&amp;#x636E;&amp;#x7C7B;&amp;#x578B; [&amp;#x957F;&amp;#x5EA6;] [&amp;#x5217;&amp;#x7EA7;&amp;#x522B;&amp;#x7EA6;&amp;#x675F;&amp;#x6761;&amp;#x4EF6;] [&amp;#x9ED8;&amp;#x8BA4;&amp;#x503C;],	......,	&amp;#x5B57;&amp;#x6BB5;&amp;#x540D;N &amp;#x6570;&amp;#x636E;&amp;#x7C7B;&amp;#x578B; [&amp;#x957F;&amp;#x5EA6;] [&amp;#x5217;&amp;#x7EA7;&amp;#x522B;&amp;#x7EA6;&amp;#x675F;&amp;#x6761;&amp;#x4EF6;] [&amp;#x9ED8;&amp;#x8BA4;&amp;#x503C;],	[&amp;#x8868;&amp;#x7EA7;&amp;#x522B;&amp;#x7EA6;&amp;#x675F;&amp;#x6761;&amp;#x4EF6;]);
-&amp;#x67E5;&amp;#x770B;&amp;#x8868;&amp;#x7ED3;&amp;#x6784;&amp;#x8BED;&amp;#x6CD5;&amp;#xFF1A;
-123DESCRIBE &amp;#x8868;&amp;#x540D;;-- &amp;#x7B80;&amp;#x5199;DESC &amp;#x8868;&amp;#x540D;;… -->
-                <!---->
-            </p> 
-        </div>
-		    
-        <footer class="post-footer clearfix">
-            <div class="pull-left tag-list">
-                <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/MySQL">
-            MySQL
-        </a>
-    </span>
-    
-    
-
-    
-</div>
-
-            </div>
-
-            <div class="post-permalink">
-                <a href="/MySQL/后端/数据库/MySQL/MySQL学习总结(三)--表的基本操作/" class="btn btn-default">阅读全文</a>
-            </div>
-        </footer>
-    
-    </article>
- 
 
 
     <nav class="pagination" role="navigation">
@@ -693,7 +757,7 @@ INOUT:&amp;#x8868;&amp;#x793A;&amp;#x8F93;&amp;#x5165;&amp;#x8F93;&amp;#x51FA;&a
         
     <div class="widget">
         <h3 class="title">分类</h3>
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/"><i class="fa" aria-hidden="true">Docker</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OAuth/"><i class="fa" aria-hidden="true">OAuth</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Security/"><i class="fa" aria-hidden="true">Spring Security</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/"><i class="fa" aria-hidden="true">UML</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/"><i class="fa" aria-hidden="true">git</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Beetl/"><i class="fa" aria-hidden="true">Beetl</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link current" href="/categories/Docker/"><i class="fa" aria-hidden="true">Docker</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/"><i class="fa" aria-hidden="true">Java</i></a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Liunx/"><i class="fa" aria-hidden="true">Liunx</i></a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Logback/"><i class="fa" aria-hidden="true">Logback</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Lombok/"><i class="fa" aria-hidden="true">Lombok</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Maven/"><i class="fa" aria-hidden="true">Maven</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MyBatis/"><i class="fa" aria-hidden="true">MyBatis</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/"><i class="fa" aria-hidden="true">MySQL</i></a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NET/"><i class="fa" aria-hidden="true">NET</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/"><i class="fa" aria-hidden="true">Nginx</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/OAuth/"><i class="fa" aria-hidden="true">OAuth</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Quartz/"><i class="fa" aria-hidden="true">Quartz</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/"><i class="fa" aria-hidden="true">RabbitMQ</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/"><i class="fa" aria-hidden="true">Redis</i></a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SQL/"><i class="fa" aria-hidden="true">SQL</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SSM/"><i class="fa" aria-hidden="true">SSM</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shiro/"><i class="fa" aria-hidden="true">Shiro</i></a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring/"><i class="fa" aria-hidden="true">Spring</i></a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-Security/"><i class="fa" aria-hidden="true">Spring Security</i></a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringBoot/"><i class="fa" aria-hidden="true">SpringBoot</i></a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SpringMVC/"><i class="fa" aria-hidden="true">SpringMVC</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Swagger2/"><i class="fa" aria-hidden="true">Swagger2</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/UML/"><i class="fa" aria-hidden="true">UML</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utils/"><i class="fa" aria-hidden="true">Utils</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Velocity/"><i class="fa" aria-hidden="true">Velocity</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/"><i class="fa" aria-hidden="true">Vue</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/"><i class="fa" aria-hidden="true">git</i></a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/svn/"><i class="fa" aria-hidden="true">svn</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍读后感/"><i class="fa" aria-hidden="true">书籍读后感</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/关于/"><i class="fa" aria-hidden="true">关于</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/实战项目/"><i class="fa" aria-hidden="true">实战项目</i></a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作中的问题/"><i class="fa" aria-hidden="true">工作中的问题</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/"><i class="fa" aria-hidden="true">工具</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/"><i class="fa" aria-hidden="true">数据库</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/"><i class="fa" aria-hidden="true">设计模式</i></a><span class="category-list-count">23</span></li></ul>
     </div>
 
 
@@ -701,7 +765,7 @@ INOUT:&amp;#x8868;&amp;#x793A;&amp;#x8F93;&amp;#x5165;&amp;#x8F93;&amp;#x51FA;&a
         
     <div class="widget">
       <h3 class="title">归档</h3>
-        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><i class="fa" aria-hidden="true">五月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/"><i class="fa" aria-hidden="true">四月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">十月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/"><i class="fa" aria-hidden="true">八月 2019</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/"><i class="fa" aria-hidden="true">七月 2019</i></a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/"><i class="fa" aria-hidden="true">五月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/"><i class="fa" aria-hidden="true">四月 2019</i></a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/"><i class="fa" aria-hidden="true">三月 2019</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/"><i class="fa" aria-hidden="true">一月 2019</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/"><i class="fa" aria-hidden="true">十二月 2018</i></a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">十月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">15</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/"><i class="fa" aria-hidden="true">七月 2018</i></a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">34</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/"><i class="fa" aria-hidden="true">四月 2018</i></a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/"><i class="fa" aria-hidden="true">一月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/"><i class="fa" aria-hidden="true">十二月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/"><i class="fa" aria-hidden="true">九月 2017</i></a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/"><i class="fa" aria-hidden="true">八月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/"><i class="fa" aria-hidden="true">七月 2017</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/"><i class="fa" aria-hidden="true">六月 2017</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/"><i class="fa" aria-hidden="true">四月 2017</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/"><i class="fa" aria-hidden="true">三月 2017</i></a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">八月 2016</i></a><span class="archive-list-count">1</span></li></ul>
     </div>
 
 
@@ -710,7 +774,7 @@ INOUT:&amp;#x8868;&amp;#x793A;&amp;#x8F93;&amp;#x5165;&amp;#x8F93;&amp;#x51FA;&a
   <div class="widget">
     <h3 class="title">标签云</h3>
     <div class="content tag-cloud">
-        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JAVA-WEB/" style="font-size: 14px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 11.33px;">Lambda</a> <a href="/tags/Liunx/" style="font-size: 17.33px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.67px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 15.33px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 16px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px;">Nginx</a> <a href="/tags/OAuth/" style="font-size: 10px;">OAuth</a> <a href="/tags/Quartz/" style="font-size: 12px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 14.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 15.33px;">Redis</a> <a href="/tags/SQL/" style="font-size: 13.33px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.67px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 18.67px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15.33px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 18px;">Spring</a> <a href="/tags/Spring-Security/" style="font-size: 16.67px;">Spring Security</a> <a href="/tags/SpringBoot/" style="font-size: 13.33px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 10.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Utils/" style="font-size: 10.67px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 14px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 14px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/git/" style="font-size: 12.67px;">git</a> <a href="/tags/java/" style="font-size: 10.67px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.67px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 11.33px;">前端</a> <a href="/tags/前端基础/" style="font-size: 12.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/模板引擎/" style="font-size: 10.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 19.33px;">设计模式</a>
+        <a href="/tags/AJAX/" style="font-size: 10px;">AJAX</a> <a href="/tags/BOM/" style="font-size: 10px;">BOM</a> <a href="/tags/Beetl/" style="font-size: 10.67px;">Beetl</a> <a href="/tags/C/" style="font-size: 10.67px;">C#</a> <a href="/tags/CSS/" style="font-size: 11.33px;">CSS</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/Docker/" style="font-size: 14px;">Docker</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/JAVA-WEB/" style="font-size: 14px;">JAVA WEB</a> <a href="/tags/JSP/" style="font-size: 10px;">JSP</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12px;">JavaScript</a> <a href="/tags/Lambda/" style="font-size: 11.33px;">Lambda</a> <a href="/tags/Liunx/" style="font-size: 16.67px;">Liunx</a> <a href="/tags/Liunx软件安装/" style="font-size: 12.67px;">Liunx软件安装</a> <a href="/tags/Logback/" style="font-size: 10px;">Logback</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Maven/" style="font-size: 12px;">Maven</a> <a href="/tags/MyBatis/" style="font-size: 15.33px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 18px;">MySQL</a> <a href="/tags/Nginx/" style="font-size: 14px;">Nginx</a> <a href="/tags/OAuth/" style="font-size: 10px;">OAuth</a> <a href="/tags/Quartz/" style="font-size: 12px;">Quartz</a> <a href="/tags/RabbitMQ/" style="font-size: 14.67px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 15.33px;">Redis</a> <a href="/tags/SQL/" style="font-size: 16px;">SQL</a> <a href="/tags/SQL-Server/" style="font-size: 10.67px;">SQL Server</a> <a href="/tags/SSM/" style="font-size: 18.67px;">SSM</a> <a href="/tags/SSM框架/" style="font-size: 10px;">SSM框架</a> <a href="/tags/Shiro/" style="font-size: 15.33px;">Shiro</a> <a href="/tags/Spring/" style="font-size: 17.33px;">Spring</a> <a href="/tags/Spring-Security/" style="font-size: 16px;">Spring Security</a> <a href="/tags/SpringBoot/" style="font-size: 13.33px;">SpringBoot</a> <a href="/tags/SpringMVC/" style="font-size: 10.67px;">SpringMVC</a> <a href="/tags/Swagger2/" style="font-size: 10px;">Swagger2</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UML/" style="font-size: 10px;">UML</a> <a href="/tags/Utils/" style="font-size: 10.67px;">Utils</a> <a href="/tags/Velocity/" style="font-size: 14px;">Velocity</a> <a href="/tags/Vue/" style="font-size: 14px;">Vue</a> <a href="/tags/Zabbix/" style="font-size: 10px;">Zabbix</a> <a href="/tags/git/" style="font-size: 12.67px;">git</a> <a href="/tags/java/" style="font-size: 10.67px;">java</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/tool/" style="font-size: 10px;">tool</a> <a href="/tags/书籍读后感/" style="font-size: 10.67px;">书籍读后感</a> <a href="/tags/前端/" style="font-size: 11.33px;">前端</a> <a href="/tags/前端基础/" style="font-size: 12.67px;">前端基础</a> <a href="/tags/工作中遇到的问题/" style="font-size: 12px;">工作中遇到的问题</a> <a href="/tags/打印机/" style="font-size: 10px;">打印机</a> <a href="/tags/数据库备份/" style="font-size: 10px;">数据库备份</a> <a href="/tags/模板引擎/" style="font-size: 10.67px;">模板引擎</a> <a href="/tags/版本控制/" style="font-size: 10px;">版本控制</a> <a href="/tags/考勤统计/" style="font-size: 10px;">考勤统计</a> <a href="/tags/设计模式/" style="font-size: 19.33px;">设计模式</a>
     </div>
   </div>
 
